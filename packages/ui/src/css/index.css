@@ -1,5 +1,7 @@
 /* Starting Point UI */
 
+@import "./button.css";
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
