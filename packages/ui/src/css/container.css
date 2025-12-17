@@ -1,0 +1,11 @@
+@utility container {
+  @apply px-6 w-full max-w-3xl lg:max-w-7xl mx-auto;
+}
+
+@utility container-wide {
+  @apply px-6 w-full max-w-7xl mx-auto;
+}
+
+@utility container-fluid {
+  @apply px-6 w-full;
+}
