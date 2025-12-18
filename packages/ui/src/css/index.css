@@ -1,6 +1,7 @@
 /* Starting Point UI - Styles */
 
 @import "./button.css";
+@import "./container.css";
 @import "./dialog.css";
 
 @custom-variant dark (&:is(.dark *));
