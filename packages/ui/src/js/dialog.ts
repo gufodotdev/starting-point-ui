@@ -1,0 +1,118 @@
+// Starting Point UI Dialog Module
+
+function getAnimatableElements(dialog: HTMLDialogElement): HTMLElement[] {
+  return [
+    ...dialog.querySelectorAll<HTMLElement>(".dialog-backdrop, .dialog-panel"),
+  ];
+}
+
+function setDataState(
+  elements: HTMLElement[],
+  state: "open" | "closed" | null
+) {
+  for (const el of elements) {
+    if (state === null) {
+      el.removeAttribute("data-state");
+    } else {
+      el.setAttribute("data-state", state);
+    }
+  }
+}
+
+async function waitForAnimations(elements: HTMLElement[]): Promise<void> {
+  const animations = elements.flatMap((el) => el.getAnimations());
+  if (animations.length === 0) return;
+  await Promise.all(animations.map((a) => a.finished));
+}
+
+export function open(dialog: HTMLDialogElement) {
+  dialog.show();
+  const elements = getAnimatableElements(dialog);
+  setDataState(elements, "open");
+}
+
+export async function close(dialog: HTMLDialogElement) {
+  const elements = getAnimatableElements(dialog);
+  setDataState(elements, "closed");
+
+  await waitForAnimations(elements);
+
+  dialog.close();
+  setDataState(elements, null);
+}
+
+export function toggle(dialog: HTMLDialogElement) {
+  if (dialog.open) {
+    close(dialog);
+  } else {
+    open(dialog);
+  }
+}
+
+// Handle keydown to intercept Escape before cancel event fires
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key !== "Escape") return;
+  const dialogEl = (e.target as HTMLElement).closest<HTMLDialogElement>(
+    "dialog"
+  );
+  if (!dialogEl?.open) return;
+
+  e.preventDefault();
+  // Static backdrop prevents closing via Escape
+  const isStatic = dialogEl.dataset.spBackdrop === "static";
+  if (!isStatic) {
+    close(dialogEl);
+  }
+}
+
+// Global click handler for data attributes
+function handleClick(e: MouseEvent) {
+  const target = e.target as HTMLElement;
+
+  // Handle toggle buttons
+  const toggleBtn = target.closest<HTMLElement>("[data-sp-toggle='dialog']");
+  if (toggleBtn) {
+    const selector = toggleBtn.dataset.spTarget;
+    if (selector) {
+      const dialogEl = document.querySelector<HTMLDialogElement>(selector);
+      if (dialogEl) {
+        open(dialogEl);
+      }
+    }
+    return;
+  }
+
+  // Handle dismiss buttons
+  const dismissBtn = target.closest<HTMLElement>("[data-sp-dismiss='dialog']");
+  if (dismissBtn) {
+    const dialogEl = dismissBtn.closest<HTMLDialogElement>("dialog");
+    if (dialogEl) {
+      close(dialogEl);
+    }
+    return;
+  }
+
+  // Handle backdrop clicks
+  const backdrop = target.closest<HTMLElement>(".dialog-backdrop");
+  if (backdrop) {
+    const dialogEl = backdrop.closest<HTMLDialogElement>("dialog");
+    if (dialogEl) {
+      // Static backdrop prevents closing via click
+      const isStatic = dialogEl.dataset.spBackdrop === "static";
+      if (!isStatic) {
+        close(dialogEl);
+      }
+    }
+  }
+}
+
+// Initialize global listeners
+let initialized = false;
+
+(function init() {
+  if (typeof document === "undefined" || initialized) return;
+  initialized = true;
+
+  document.addEventListener("click", handleClick);
+  document.addEventListener("keydown", handleKeydown);
+})();

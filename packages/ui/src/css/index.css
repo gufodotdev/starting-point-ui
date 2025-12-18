@@ -1,6 +1,7 @@
-/* Starting Point UI */
+/* Starting Point UI - Styles */
 
 @import "./button.css";
+@import "./dialog.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -79,6 +80,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  html:has(dialog[open] .dialog-backdrop) {
+    @apply overflow-hidden;
+  }
+
   body,
   .dark {
     @apply bg-background text-foreground;
