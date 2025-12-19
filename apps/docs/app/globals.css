@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @import "starting-point-ui";
+
+:root {
+  --navbar-height: 4rem;
+}
