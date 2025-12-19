@@ -2,7 +2,7 @@
 
 @layer components {
   .dialog {
-    @apply isolate pointer-events-none fixed inset-0 w-full h-dvh p-0 bg-transparent border-none max-w-none max-h-none overflow-hidden;
+    @apply isolate pointer-events-none fixed inset-0 z-999 w-full h-dvh p-0 bg-transparent border-none max-w-none max-h-none overflow-hidden;
   }
 
   .dialog::backdrop {
