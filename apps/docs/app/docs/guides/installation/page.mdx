@@ -1,0 +1,131 @@
+export const metadata = {
+  title: "Installation",
+  description: "Learn how to install Starting Point UI in your project.",
+};
+
+# Installation
+
+Starting Point UI is a component library built on Tailwind CSS that provides useful class names for common patterns while staying framework agnostic. Learn more in the [Introduction](/docs/guides/introduction).
+
+---
+
+## Prerequisites
+
+- A project using Tailwind CSS v4+
+
+---
+
+## Install the package
+
+```bash
+npm install starting-point-ui
+```
+
+The examples on this site use the [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) package for animations. This is completely optional. You can use other animation libraries or write your own:
+
+```bash
+npm install tw-animate-css
+```
+
+---
+
+## Import the styles
+
+Add the import to your main CSS file:
+
+```css label="app/globals.css"
+@import "tailwindcss";
+@import "starting-point-ui";
+@import "tw-animate-css"; /* optional */
+```
+
+---
+
+## Add the JavaScript (optional)
+
+For interactive components like dialogs and dropdowns, you can include the JavaScript. This is completely optional. You can use just the styles and pair them with your own JavaScript or a headless UI library like [Radix UI](https://www.radix-ui.com) or [Headless UI](https://headlessui.com).
+
+### Using a CDN
+
+```html label="index.html"
+<script
+  src="https://cdn.jsdelivr.net/npm/starting-point-ui"
+  type="module"
+></script>
+```
+
+### Using a bundler
+
+For client-side bundlers like Vite, you can import directly in your entry file:
+
+```ts label="main.ts"
+import "starting-point-ui";
+```
+
+### SSR frameworks
+
+If you're using a framework with server-side rendering, you may need to ensure the script only runs on the client after the DOM is ready. This is how it's loaded on this site, which is a Next.js App Router project:
+
+```tsx label="components/StartingPointUI.tsx"
+"use client";
+
+import { useEffect } from "react";
+
+export function StartingPointUI() {
+  useEffect(() => {
+    import("starting-point-ui");
+  }, []);
+
+  return null;
+}
+```
+
+Then include it in your root layout:
+
+```tsx label="app/layout.tsx"
+import { StartingPointUI } from "@/components/StartingPointUI";
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <StartingPointUI />
+      </body>
+    </html>
+  );
+}
+```
+
+---
+
+## Font (optional)
+
+The examples on this site use [Inter](https://rsms.me/inter/) as the font. If you want the same look and feel, you can add it to your project. Here's an example using a CDN:
+
+```html
+<head>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+</head>
+```
+
+Or load it directly in your CSS:
+
+```css
+@import url("https://fonts.bunny.net/css?family=inter:400,500,600,700");
+```
+
+Then set it as the default font:
+
+```css
+@theme inline {
+  --font-sans: "Inter", sans-serif;
+}
+```
+
+---
+
+## You're all set
+
+You're now ready to start using Starting Point UI in your project. Explore the components in the sidebar to see what's available. If you run into any issues, check out the [Help](/docs/guides/help) section.
