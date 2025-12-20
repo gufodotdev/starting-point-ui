@@ -20,7 +20,7 @@ export function Navbar() {
         </div>
         <div className="flex items-center gap-1">
           <a
-            href="/docs/guides/installation"
+            href="/docs/guides/introduction"
             className="btn btn-ghost btn-sm max-lg:hidden"
           >
             Docs
