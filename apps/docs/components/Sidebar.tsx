@@ -7,7 +7,10 @@ import { SectionHeading } from "./SectionHeading";
 const navigation = [
   {
     title: "Guides",
-    items: [{ title: "Installation", href: "/docs/guides/installation" }],
+    items: [
+      { title: "Introduction", href: "/docs/guides/introduction" },
+      { title: "Installation", href: "/docs/guides/installation" },
+    ],
   },
 ];
 
