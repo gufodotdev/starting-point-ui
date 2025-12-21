@@ -2,6 +2,7 @@ import createMDX from "@next/mdx";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
+import { rehypeLucideIcons } from "./lib/rehype-lucide-icons.mjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -41,7 +42,7 @@ const prettyCodeOptions = {
 const withMDX = createMDX({
   options: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeSlug, [rehypePrettyCode, prettyCodeOptions]],
+    rehypePlugins: [rehypeSlug, rehypeLucideIcons, [rehypePrettyCode, prettyCodeOptions]],
   },
 });
 
