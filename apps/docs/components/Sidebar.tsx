@@ -13,6 +13,10 @@ const navigation = [
       { title: "Help", href: "/docs/guides/help" },
     ],
   },
+  {
+    title: "Components",
+    items: [{ title: "Button", href: "/docs/components/button" }],
+  },
 ];
 
 export function Sidebar() {

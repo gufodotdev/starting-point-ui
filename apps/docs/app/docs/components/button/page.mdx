@@ -1,0 +1,114 @@
+export const metadata = {
+  title: "Button",
+  description:
+    "A Tailwind CSS button component with multiple variants, sizes, and icon support.",
+};
+
+# Button
+
+A Tailwind CSS button component with multiple variants, sizes, and icon support.
+
+```html preview
+<button class="btn">Button</button>
+```
+
+---
+
+## Variants
+
+Use different variants to communicate intent and hierarchy.
+
+```html preview
+<button class="btn">Default</button>
+<button class="btn btn-destructive">Destructive</button>
+<button class="btn btn-outline">Outline</button>
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-ghost">Ghost</button>
+<button class="btn btn-link">Link</button>
+```
+
+---
+
+## Sizes
+
+Use different sizes to fit various contexts and layouts.
+
+```html preview
+<button class="btn btn-outline btn-sm">Small</button>
+<button class="btn btn-outline">Base</button>
+<button class="btn btn-outline btn-lg">Large</button>
+<button class="btn btn-outline btn-icon-lg" aria-label="Add item">
+  <icon-plus />
+</button>
+<button class="btn btn-outline btn-icon" aria-label="Add item">
+  <icon-plus />
+</button>
+<button class="btn btn-outline btn-icon-sm" aria-label="Add item">
+  <icon-plus />
+</button>
+```
+
+---
+
+## With icons
+
+Buttons can include icons alongside text or as the only content. For icon-only buttons, always include an `aria-label` for accessibility.
+
+```html preview
+<button class="btn btn-outline btn-icon" aria-label="More options">
+  <icon-ellipsis />
+</button>
+<button class="btn btn-outline"><icon-download /> Export</button>
+<button class="btn btn-outline">Open <icon-chevron-down /></button>
+<button class="btn btn-ghost btn-icon" aria-label="Close">
+  <icon-x />
+</button>
+```
+
+---
+
+## Disabled
+
+Disable buttons to prevent interaction, such as while processing a request.
+
+```html preview
+<button class="btn btn-outline" disabled>
+  <icon-loader-circle class="animate-spin" /> Processing
+</button>
+```
+
+---
+
+## Custom overrides
+
+You can combine button classes with Tailwind utilities for custom styling.
+
+```html preview
+<button
+  class="btn bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 text-white border-0 px-6 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+>
+  Gradient Button
+</button>
+```
+
+---
+
+## Class reference
+
+All available classes for the button component.
+
+| Class             | Description                                 |
+| ----------------- | ------------------------------------------- |
+| `btn`             | Base button styles                          |
+| `btn-default`     | Default filled button style (default)       |
+| `btn-destructive` | Red destructive/danger button               |
+| `btn-outline`     | Outlined button with transparent background |
+| `btn-secondary`   | Secondary muted button style                |
+| `btn-ghost`       | Transparent button with hover background    |
+| `btn-link`        | Link-styled button with underline           |
+| `btn-sm`          | Small button size                           |
+| `btn-base`        | Base button size (default)                  |
+| `btn-lg`          | Large button size                           |
+| `btn-icon-sm`     | Small square icon button                    |
+| `btn-icon`        | Square button for icons (base size)         |
+| `btn-icon-lg`     | Large square icon button                    |
