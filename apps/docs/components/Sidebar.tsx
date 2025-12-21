@@ -10,6 +10,7 @@ const navigation = [
     items: [
       { title: "Introduction", href: "/docs/guides/introduction" },
       { title: "Installation", href: "/docs/guides/installation" },
+      { title: "Help", href: "/docs/guides/help" },
     ],
   },
 ];
