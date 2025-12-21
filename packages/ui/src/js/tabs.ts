@@ -1,6 +1,8 @@
 // Starting Point UI Tabs Module
 
 export function select(tab: HTMLElement) {
+  if (tab.hasAttribute("disabled")) return;
+
   const tabList = tab.closest(".tab-list");
   if (!tabList) return;
 
@@ -35,6 +37,21 @@ function handleClick(e: MouseEvent) {
   }
 }
 
+function findNextEnabledTab(
+  tabs: HTMLElement[],
+  startIndex: number,
+  direction: 1 | -1
+): HTMLElement | null {
+  const len = tabs.length;
+  for (let i = 1; i <= len; i++) {
+    const index = (startIndex + i * direction + len) % len;
+    if (!tabs[index].hasAttribute("disabled")) {
+      return tabs[index];
+    }
+  }
+  return null;
+}
+
 function handleKeydown(e: KeyboardEvent) {
   const target = e.target as HTMLElement;
   if (!target.classList.contains("tab")) return;
@@ -45,29 +62,27 @@ function handleKeydown(e: KeyboardEvent) {
   const tabs = [...tabList.querySelectorAll<HTMLElement>(".tab")];
   const currentIndex = tabs.indexOf(target);
 
-  let nextIndex: number | null = null;
+  let nextTab: HTMLElement | null = null;
 
   switch (e.key) {
     case "ArrowLeft":
-      nextIndex = currentIndex - 1;
-      if (nextIndex < 0) nextIndex = tabs.length - 1;
+      nextTab = findNextEnabledTab(tabs, currentIndex, -1);
       break;
     case "ArrowRight":
-      nextIndex = currentIndex + 1;
-      if (nextIndex >= tabs.length) nextIndex = 0;
+      nextTab = findNextEnabledTab(tabs, currentIndex, 1);
       break;
     case "Home":
-      nextIndex = 0;
+      nextTab = tabs.find((t) => !t.hasAttribute("disabled")) ?? null;
       break;
     case "End":
-      nextIndex = tabs.length - 1;
+      nextTab = [...tabs].reverse().find((t) => !t.hasAttribute("disabled")) ?? null;
       break;
   }
 
-  if (nextIndex !== null) {
+  if (nextTab) {
     e.preventDefault();
-    tabs[nextIndex].focus();
-    select(tabs[nextIndex]);
+    nextTab.focus();
+    select(nextTab);
   }
 }
 
