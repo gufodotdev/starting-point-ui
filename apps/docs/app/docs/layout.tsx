@@ -1,6 +1,6 @@
-import { Sidebar } from "@/components/Sidebar";
-import { TableOfContents } from "@/components/TableOfContents";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Sidebar } from "@/components/sidebar";
+import { TableOfContents } from "@/components/table-of-contents";
+import { SectionHeading } from "@/components/section-heading";
 
 export default function DocsLayout({
   children,

@@ -1,5 +1,5 @@
 import type { MDXComponents } from "mdx/types";
-import { CodeBlock } from "@/components/CodeBlock";
+import { CodeBlock } from "@/components/code-block";
 import { hashCode } from "@/lib/utils";
 
 const components: MDXComponents = {

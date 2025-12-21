@@ -1,7 +1,7 @@
 import { Github, Menu, PanelLeftClose } from "lucide-react";
-import { Logo } from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
-import { Sidebar } from "./Sidebar";
+import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Sidebar } from "@/components/sidebar";
 
 export function Navbar() {
   return (

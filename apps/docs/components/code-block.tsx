@@ -1,4 +1,4 @@
-import { CopyButton } from "./CopyButton";
+import { CopyButton } from "@/components/copy-button";
 
 interface BaseCodeBlockProps {
   children: React.ReactNode;

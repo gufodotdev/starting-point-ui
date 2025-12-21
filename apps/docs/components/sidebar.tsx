@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SectionHeading } from "./SectionHeading";
+import { SectionHeading } from "@/components/section-heading";
 
 const navigation = [
   {

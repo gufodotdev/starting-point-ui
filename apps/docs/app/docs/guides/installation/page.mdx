@@ -66,7 +66,7 @@ import "starting-point-ui";
 
 If you're using a framework with server-side rendering, you may need to ensure the script only runs on the client after the DOM is ready. This is how it's loaded on this site, which is a Next.js App Router project:
 
-```tsx label="components/StartingPointUI.tsx"
+```tsx label="components/starting-point-ui.tsx"
 "use client";
 
 import { useEffect } from "react";
@@ -83,7 +83,7 @@ export function StartingPointUI() {
 Then include it in your root layout:
 
 ```tsx label="app/layout.tsx"
-import { StartingPointUI } from "@/components/StartingPointUI";
+import { StartingPointUI } from "@/components/starting-point-ui";
 
 export default function RootLayout({ children }) {
   return (
