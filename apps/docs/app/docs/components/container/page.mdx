@@ -1,0 +1,61 @@
+export const metadata = {
+  title: "Container",
+  description:
+    "Tailwind CSS container utilities for constraining content width.",
+};
+
+# Container
+
+Tailwind CSS container utilities for constraining content width.
+
+```html
+<div class="container">
+  <p>Your content here</p>
+</div>
+```
+
+---
+
+## Container
+
+The default container is responsive - narrower on mobile for better readability, wider on large screens.
+
+```html
+<div class="container">
+  <p>Responsive container content</p>
+</div>
+```
+
+---
+
+## Container Wide
+
+A fixed-width container that stays wide regardless of screen size.
+
+```html
+<div class="container-wide">
+  <p>Wide container content</p>
+</div>
+```
+
+---
+
+## Container Fluid
+
+A full-width container with only horizontal padding.
+
+```html
+<div class="container-fluid">
+  <p>Fluid container content</p>
+</div>
+```
+
+---
+
+## Class reference
+
+| Class             | Description                                                      |
+| ----------------- | ---------------------------------------------------------------- |
+| `container`       | Responsive width (max-w-3xl on mobile, max-w-7xl on lg), centered with padding |
+| `container-wide`  | Fixed max-w-7xl at all breakpoints, centered with padding        |
+| `container-fluid` | Full width with horizontal padding only                          |
