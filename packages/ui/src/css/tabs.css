@@ -15,7 +15,7 @@
   }
 
   .tab-panel {
-    @apply hidden flex-1 min-w-0 outline-none;
+    @apply hidden w-full min-w-0 outline-none;
   }
 
   .tab-panel.active {
