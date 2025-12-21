@@ -18,6 +18,7 @@ const navigation = [
     items: [
       { title: "Button", href: "/docs/components/button" },
       { title: "Dialog", href: "/docs/components/dialog" },
+      { title: "Tabs", href: "/docs/components/tabs" },
     ],
   },
 ];
