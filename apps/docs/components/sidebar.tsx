@@ -15,7 +15,10 @@ const navigation = [
   },
   {
     title: "Components",
-    items: [{ title: "Button", href: "/docs/components/button" }],
+    items: [
+      { title: "Button", href: "/docs/components/button" },
+      { title: "Dialog", href: "/docs/components/dialog" },
+    ],
   },
 ];
 
