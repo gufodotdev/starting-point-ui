@@ -1,5 +1,7 @@
 // Starting Point UI Dialog Module
 
+import { getFocusableElements } from "./utils";
+
 function getAnimatableElements(dialog: HTMLDialogElement): HTMLElement[] {
   return [
     ...dialog.querySelectorAll<HTMLElement>(".dialog-backdrop, .dialog-panel"),
@@ -25,10 +27,22 @@ async function waitForAnimations(elements: HTMLElement[]): Promise<void> {
   await Promise.all(animations.map((a) => a.finished));
 }
 
+function isModal(dialog: HTMLDialogElement): boolean {
+  return dialog.querySelector(".dialog-backdrop") !== null;
+}
+
 export function open(dialog: HTMLDialogElement) {
   dialog.show();
   const elements = getAnimatableElements(dialog);
   setDataState(elements, "open");
+
+  // Focus first focusable element in modal dialogs
+  if (isModal(dialog)) {
+    const focusable = getFocusableElements(dialog);
+    if (focusable.length > 0) {
+      focusable[0].focus();
+    }
+  }
 }
 
 export async function close(dialog: HTMLDialogElement) {
@@ -49,19 +63,38 @@ export function toggle(dialog: HTMLDialogElement) {
   }
 }
 
-// Handle keydown to intercept Escape before cancel event fires
+// Handle keydown for Escape and focus trapping
 function handleKeydown(e: KeyboardEvent) {
-  if (e.key !== "Escape") return;
   const dialogEl = (e.target as HTMLElement).closest<HTMLDialogElement>(
     "dialog"
   );
   if (!dialogEl?.open) return;
 
-  e.preventDefault();
-  // Static backdrop prevents closing via Escape
-  const isStatic = dialogEl.dataset.spBackdrop === "static";
-  if (!isStatic) {
-    close(dialogEl);
+  // Handle Escape key
+  if (e.key === "Escape") {
+    e.preventDefault();
+    const isStatic = dialogEl.dataset.spBackdrop === "static";
+    if (!isStatic) {
+      close(dialogEl);
+    }
+    return;
+  }
+
+  // Handle Tab key for focus trapping in modals
+  if (e.key === "Tab" && isModal(dialogEl)) {
+    const focusable = getFocusableElements(dialogEl);
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 }
 
