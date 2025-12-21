@@ -10,10 +10,10 @@
   }
 
   .dialog-backdrop {
-    @apply fixed inset-0 bg-black/50 -z-1 pointer-events-auto;
+    @apply fixed inset-0 bg-black/50 -z-1 pointer-events-auto fill-mode-forwards!;
   }
 
   .dialog-panel {
-    @apply fixed pointer-events-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg p-6 max-w-md w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] overflow-y-auto;
+    @apply fixed pointer-events-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg p-6 max-w-md w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] overflow-y-auto fill-mode-forwards!;
   }
 }
