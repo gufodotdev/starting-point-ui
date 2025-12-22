@@ -25,6 +25,7 @@ const navigation = [
   {
     title: "Forms",
     items: [
+      { title: "Checkbox", href: "/docs/forms/checkbox" },
       { title: "Input", href: "/docs/forms/input" },
       { title: "Label", href: "/docs/forms/label" },
     ],
