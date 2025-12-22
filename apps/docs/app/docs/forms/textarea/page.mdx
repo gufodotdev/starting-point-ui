@@ -1,0 +1,57 @@
+export const metadata = {
+  title: "Textarea",
+  description: "A Tailwind CSS textarea component for forms.",
+};
+
+# Textarea
+
+A Tailwind CSS textarea component for forms.
+
+```html preview
+<div class="space-y-2 w-full max-w-64">
+  <label class="label" for="message">Message</label>
+  <textarea class="textarea" id="message" placeholder="Enter your message..."></textarea>
+</div>
+```
+
+---
+
+## Auto-sizing
+
+Textareas automatically grow based on content using `field-sizing: content`.
+
+```html preview
+<textarea class="textarea w-full max-w-64" placeholder="Type something and watch it grow..."></textarea>
+```
+
+---
+
+## Disabled
+
+Disabled textareas appear faded and cannot be edited.
+
+```html preview
+<textarea class="textarea w-full max-w-64" placeholder="Disabled textarea" disabled></textarea>
+```
+
+---
+
+## Invalid state
+
+Textareas show a red ring when marked as invalid.
+
+```html preview
+<div class="space-y-2 w-full max-w-64">
+  <label class="label" for="bio">Bio</label>
+  <textarea class="textarea" id="bio" aria-invalid="true" aria-describedby="bio-error">This bio is too long...</textarea>
+  <p id="bio-error" class="text-sm text-destructive">Bio must be under 200 characters</p>
+</div>
+```
+
+---
+
+## Class reference
+
+| Class | Description |
+| --- | --- |
+| `textarea` | Multi-line text input with auto-sizing and focus states |

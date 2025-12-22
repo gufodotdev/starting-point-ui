@@ -28,6 +28,7 @@ const navigation = [
       { title: "Checkbox", href: "/docs/forms/checkbox" },
       { title: "Input", href: "/docs/forms/input" },
       { title: "Label", href: "/docs/forms/label" },
+      { title: "Textarea", href: "/docs/forms/textarea" },
     ],
   },
 ];
