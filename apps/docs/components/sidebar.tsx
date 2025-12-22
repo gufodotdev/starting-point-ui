@@ -24,7 +24,10 @@ const navigation = [
   },
   {
     title: "Forms",
-    items: [{ title: "Label", href: "/docs/forms/label" }],
+    items: [
+      { title: "Input", href: "/docs/forms/input" },
+      { title: "Label", href: "/docs/forms/label" },
+    ],
   },
 ];
 
