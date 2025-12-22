@@ -1,6 +1,7 @@
 /* Starting Point UI - Styles */
 
 @import "./button.css";
+@import "./checkbox.css";
 @import "./container.css";
 @import "./dialog.css";
 @import "./input.css";
