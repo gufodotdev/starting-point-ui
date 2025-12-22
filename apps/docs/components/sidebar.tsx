@@ -22,6 +22,10 @@ const navigation = [
       { title: "Tabs", href: "/docs/components/tabs" },
     ],
   },
+  {
+    title: "Forms",
+    items: [{ title: "Label", href: "/docs/forms/label" }],
+  },
 ];
 
 export function Sidebar() {
