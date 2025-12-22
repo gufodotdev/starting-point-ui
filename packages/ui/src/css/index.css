@@ -3,6 +3,7 @@
 @import "./button.css";
 @import "./container.css";
 @import "./dialog.css";
+@import "./label.css";
 @import "./tabs.css";
 
 @custom-variant dark (&:is(.dark *));
