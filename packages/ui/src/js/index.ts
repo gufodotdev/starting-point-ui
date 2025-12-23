@@ -5,6 +5,12 @@ import * as tabs from "./tabs";
 
 export { dialog, tabs };
 
+declare global {
+  interface Window {
+    sp: { dialog: typeof dialog; tabs: typeof tabs };
+  }
+}
+
 if (typeof window !== "undefined") {
-  (window as any).sp = { dialog, tabs };
+  window.sp = { dialog, tabs };
 }
