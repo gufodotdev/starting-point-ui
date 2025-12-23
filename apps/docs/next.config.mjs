@@ -7,6 +7,14 @@ import { rehypeLucideIcons } from "./lib/rehype-lucide-icons.mjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  async rewrites() {
+    return [
+      {
+        source: "/starting-point-ui-analytics/:match*",
+        destination: "https://www.startingpointui.com/_vercel/insights/:match*",
+      },
+    ];
+  },
 };
 
 /** @type {import('rehype-pretty-code').Options} */
