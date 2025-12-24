@@ -1,0 +1,31 @@
+/* Starting Point UI Table Styles */
+
+@layer components {
+  .table {
+    @apply w-max min-w-full caption-bottom text-sm;
+  }
+
+  .table-header {
+    @apply [&_tr]:border-b;
+  }
+
+  .table-body {
+    @apply [&_tr:last-child]:border-0;
+  }
+
+  .table-footer {
+    @apply bg-muted/50 border-t font-medium [&>tr]:last:border-b-0;
+  }
+
+  .table-row {
+    @apply border-b transition-colors hover:bg-muted/50;
+  }
+
+  .table-head {
+    @apply px-4 py-3 text-left align-middle font-medium text-foreground whitespace-nowrap;
+  }
+
+  .table-cell {
+    @apply px-4 py-3 align-middle whitespace-nowrap;
+  }
+}
