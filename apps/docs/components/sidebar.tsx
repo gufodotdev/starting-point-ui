@@ -1,8 +1,5 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { SectionHeading } from "@/components/section-heading";
+import { SidebarLink } from "@/components/sidebar-link";
 
 const navigation = [
   {
@@ -37,8 +34,6 @@ const navigation = [
 ];
 
 export function Sidebar() {
-  const pathname = usePathname();
-
   return (
     <nav className="space-y-6">
       {navigation.map((category) => (
@@ -48,15 +43,9 @@ export function Sidebar() {
           </SectionHeading>
           <div className="flex flex-col gap-0.5">
             {category.items.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`btn btn-ghost btn-sm justify-start text-[0.8rem] ${
-                  pathname === item.href ? "bg-accent" : ""
-                }`}
-              >
+              <SidebarLink key={item.href} href={item.href}>
                 {item.title}
-              </Link>
+              </SidebarLink>
             ))}
           </div>
         </div>
