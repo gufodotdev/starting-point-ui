@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Github, Menu, PanelLeftClose } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -21,12 +22,12 @@ export function Navbar() {
             <Logo />
           </div>
           <div className="flex items-center gap-1">
-            <a
+            <Link
               href="/docs/guides/introduction"
               className="btn btn-ghost btn-sm max-lg:hidden"
             >
               Docs
-            </a>
+            </Link>
             <a
               href="https://github.com/gufodotdev/starting-point-ui"
               target="_blank"
