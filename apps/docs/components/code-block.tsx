@@ -20,7 +20,7 @@ export function CodeBlock(props: CodeBlockProps) {
     const codeId = `code-${props.id}`;
 
     return (
-      <div className="my-4 overflow-hidden rounded-lg">
+      <div className="my-4 rounded-lg">
         <Header code={code}>
           <div className="tab-list" role="tablist">
             <button

@@ -1,0 +1,564 @@
+export const metadata = {
+  title: "Dropdown",
+  description:
+    "A Tailwind CSS dropdown component for displaying a list of actions or options.",
+};
+
+# Dropdown
+
+A Tailwind CSS dropdown component for displaying a list of actions or options.
+
+```html preview
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Options
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">New file</a>
+    <a href="#" class="dropdown-item">Copy link</a>
+    <div class="dropdown-separator"></div>
+    <a href="#" class="dropdown-item">Edit</a>
+    <a href="#" class="dropdown-item">Rename</a>
+    <div class="dropdown-separator"></div>
+    <a href="#" class="dropdown-item">Delete</a>
+  </div>
+</div>
+```
+
+### How it works
+
+Use `data-sp-toggle="dropdown"` on a button inside a `.dropdown` wrapper to toggle the menu:
+
+- Add `data-sp-toggle="dropdown"` to the trigger button
+- The `.dropdown-menu` will appear when the button is clicked
+- Clicking outside or pressing Escape closes the dropdown
+- Clicking an item closes the dropdown
+
+### JavaScript API
+
+For programmatic control, use the global `sp.dropdown` module:
+
+```js
+const dropdown = document.querySelector("#my-dropdown");
+
+sp.dropdown.open(dropdown);
+sp.dropdown.close(dropdown);
+sp.dropdown.toggle(dropdown);
+```
+
+---
+
+## With icons
+
+Add icons to dropdown items for better visual hierarchy.
+
+```html preview
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Options
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">
+      <icon-file-plus />
+      New file
+    </a>
+    <a href="#" class="dropdown-item">
+      <icon-link />
+      Copy link
+    </a>
+    <div class="dropdown-separator"></div>
+    <a href="#" class="dropdown-item">
+      <icon-pencil />
+      Edit
+    </a>
+    <a href="#" class="dropdown-item">
+      <icon-text-cursor-input />
+      Rename
+    </a>
+    <div class="dropdown-separator"></div>
+    <a href="#" class="dropdown-item">
+      <icon-trash />
+      Delete
+    </a>
+  </div>
+</div>
+```
+
+---
+
+## With labels
+
+Use `.dropdown-label` to group items with a heading.
+
+```html preview
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    My Account
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <div class="dropdown-label">Settings</div>
+    <a href="#" class="dropdown-item">
+      <icon-user />
+      Profile
+    </a>
+    <a href="#" class="dropdown-item">
+      <icon-credit-card />
+      Billing
+    </a>
+    <a href="#" class="dropdown-item">
+      <icon-bell />
+      Notifications
+    </a>
+    <div class="dropdown-separator"></div>
+    <div class="dropdown-label">Help</div>
+    <a href="#" class="dropdown-item">
+      <icon-book-open />
+      Documentation
+    </a>
+    <a href="#" class="dropdown-item">
+      <icon-headphones />
+      Support
+    </a>
+  </div>
+</div>
+```
+
+---
+
+## Disabled items
+
+Use `aria-disabled="true"` to disable an item. Add `tabindex="-1"` to prevent tab navigation to the item.
+
+```html preview
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Actions
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Edit</a>
+    <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1"
+      >Duplicate</a
+    >
+    <a href="#" class="dropdown-item">Archive</a>
+    <div class="dropdown-separator"></div>
+    <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1"
+      >Delete</a
+    >
+  </div>
+</div>
+```
+
+---
+
+## Animation
+
+The dropdown sets `data-state="open"` on the menu element when opened, which you can use to trigger CSS animations.
+
+The examples on this site use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) for animation utilities, but you can use any animation library or write your own CSS.
+
+```html preview
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    No Animation
+  </button>
+  <div class="dropdown-menu">
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+    <a href="#" class="dropdown-item">Logout</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Fade + Zoom
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+    <a href="#" class="dropdown-item">Logout</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Slide from Top
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+    <a href="#" class="dropdown-item">Logout</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Open + Close
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+    <a href="#" class="dropdown-item">Logout</a>
+  </div>
+</div>
+```
+
+---
+
+## Placement
+
+Use `data-sp-placement` to control the dropdown position (default is `bottom-end`).
+
+```html preview
+<div class="dropdown" data-sp-placement="bottom-start">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    bottom-start
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="bottom">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    bottom
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="bottom-end">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    bottom-end
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="top-start">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    top-start
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="top">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    top
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="top-end">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    top-end
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="left-start">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    left-start
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="left">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    left
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="left-end">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    left-end
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="right-start">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    right-start
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="right">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    right
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-placement="right-end">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    right-end
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+```
+
+---
+
+## Offset
+
+Use `data-sp-offset` to control the distance between the trigger and the menu (default is `4`).
+
+```html preview
+<div class="dropdown" data-sp-offset="0">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    No Offset
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Default (4)
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+
+<div class="dropdown" data-sp-offset="12">
+  <button
+    class="btn btn-outline"
+    type="button"
+    data-sp-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Offset 12
+  </button>
+  <div
+    class="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+  >
+    <a href="#" class="dropdown-item">Profile</a>
+    <a href="#" class="dropdown-item">Settings</a>
+  </div>
+</div>
+```
+
+---
+
+## Class reference
+
+| Class                | Description                           |
+| -------------------- | ------------------------------------- |
+| `dropdown`           | Container for the dropdown            |
+| `dropdown-menu`      | The menu panel that appears on toggle |
+| `dropdown-item`      | Individual menu item                  |
+| `dropdown-label`     | Label/heading for grouping items      |
+| `dropdown-separator` | Horizontal divider between items      |
+
+---
+
+## Data attributes
+
+| Attribute                   | Element     | Description                                    |
+| --------------------------- | ----------- | ---------------------------------------------- |
+| `data-sp-toggle="dropdown"` | Button      | Toggles the dropdown                           |
+| `data-sp-placement`         | `.dropdown` | Menu position (default: `bottom-end`)          |
+| `data-sp-offset`            | `.dropdown` | Distance from trigger in pixels (default: `4`) |
+| `aria-disabled="true"`      | Item        | Disables the item                              |
+
+---
+
+## Keyboard navigation
+
+| Key               | Action                                        |
+| ----------------- | --------------------------------------------- |
+| `Enter` / `Space` | Opens/closes dropdown when trigger is focused |
+| `Escape`          | Closes the dropdown                           |
+| `ArrowDown`       | Move focus to next item                       |
+| `ArrowUp`         | Move focus to previous item                   |
+| `Home`            | Move focus to first item                      |
+| `End`             | Move focus to last item                       |
