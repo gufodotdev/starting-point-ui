@@ -1,5 +1,6 @@
 /* Starting Point UI - Styles */
 
+@import "./badge.css";
 @import "./button.css";
 @import "./card.css";
 @import "./checkbox.css";
