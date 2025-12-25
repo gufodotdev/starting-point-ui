@@ -1,6 +1,6 @@
 // Starting Point UI Dialog Module
 
-import { getFocusableElements } from "./utils";
+import { getFocusableElements, waitForAnimations } from "./utils";
 
 function getAnimatableElements(dialog: HTMLDialogElement): HTMLElement[] {
   return [
@@ -19,12 +19,6 @@ function setDataState(
       el.setAttribute("data-state", state);
     }
   }
-}
-
-async function waitForAnimations(elements: HTMLElement[]): Promise<void> {
-  const animations = elements.flatMap((el) => el.getAnimations());
-  if (animations.length === 0) return;
-  await Promise.all(animations.map((a) => a.finished));
 }
 
 function isModal(dialog: HTMLDialogElement): boolean {
