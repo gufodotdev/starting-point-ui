@@ -1,6 +1,6 @@
 {
   "name": "starting-point-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A component library built on top of Tailwind CSS. Framework agnostic, easy to customize, open source, and works in any project.",
   "type": "module",
   "main": "./dist/index.js",
