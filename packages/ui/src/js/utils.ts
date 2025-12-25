@@ -15,7 +15,15 @@ const FOCUSABLE_SELECTOR = [
 ].join(", ");
 
 export function getFocusableElements(container: HTMLElement): HTMLElement[] {
-  return [...container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)].filter(
-    (el) => el.offsetParent !== null
-  );
+  return [
+    ...container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+  ].filter((el) => el.offsetParent !== null);
+}
+
+export async function waitForAnimations(
+  elements: HTMLElement[]
+): Promise<void> {
+  const animations = elements.flatMap((el) => el.getAnimations());
+  if (animations.length === 0) return;
+  await Promise.all(animations.map((a) => a.finished));
 }
