@@ -45,3 +45,17 @@ code[data-theme] span {
 pre {
   @apply text-sm/6;
 }
+
+.gradient-text {
+  --text-gradient: linear-gradient(180deg, #52525b, #09090b);
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @apply font-extrabold;
+}
+
+.dark {
+  .gradient-text {
+    --text-gradient: linear-gradient(180deg, #ffffff, #f4f4f5);
+  }
+}
