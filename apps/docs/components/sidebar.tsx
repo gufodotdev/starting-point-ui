@@ -35,6 +35,10 @@ const navigation = [
       { title: "Textarea", href: "/docs/forms/textarea" },
     ],
   },
+  {
+    title: "Resources",
+    items: [{ title: "Changelog", href: "/docs/resources/changelog" }],
+  },
 ];
 
 export function Sidebar() {
