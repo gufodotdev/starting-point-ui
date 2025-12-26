@@ -10,7 +10,7 @@ export default function DocsLayout({
   return (
     <div className="container-wide flex gap-12">
       {/* Desktop sidebar */}
-      <aside className="hidden lg:block w-(--sidebar-width) border-r sticky top-(--navbar-height) h-[calc(100vh-var(--navbar-height))] py-12 pr-6 -ml-3">
+      <aside className="hidden lg:block w-(--sidebar-width) border-r sticky top-(--navbar-height) h-[calc(100vh-var(--navbar-height))] py-12 pr-6 -ml-3 overflow-y-auto">
         <Sidebar />
       </aside>
 
