@@ -11,6 +11,7 @@
 @import "./input.css";
 @import "./label.css";
 @import "./select.css";
+@import "./sheet.css";
 @import "./table.css";
 @import "./tabs.css";
 @import "./textarea.css";
@@ -95,7 +96,7 @@
     scrollbar-gutter: stable;
   }
 
-  html:has(dialog[open] .dialog-backdrop) {
+  html:has(dialog[open] :is(.dialog-backdrop, .sheet-backdrop)) {
     @apply overflow-hidden;
   }
 

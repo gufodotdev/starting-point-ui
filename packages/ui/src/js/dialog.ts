@@ -2,9 +2,14 @@
 
 import { getFocusableElements, waitForAnimations } from "./utils";
 
+const BACKDROP_SELECTOR = ".dialog-backdrop, .sheet-backdrop";
+const PANEL_SELECTOR = ".dialog-panel, .sheet-panel";
+
 function getAnimatableElements(dialog: HTMLDialogElement): HTMLElement[] {
   return [
-    ...dialog.querySelectorAll<HTMLElement>(".dialog-backdrop, .dialog-panel"),
+    ...dialog.querySelectorAll<HTMLElement>(
+      `${BACKDROP_SELECTOR}, ${PANEL_SELECTOR}`
+    ),
   ];
 }
 
@@ -22,7 +27,7 @@ function setDataState(
 }
 
 function isModal(dialog: HTMLDialogElement): boolean {
-  return dialog.querySelector(".dialog-backdrop") !== null;
+  return dialog.querySelector(BACKDROP_SELECTOR) !== null;
 }
 
 export function open(dialog: HTMLDialogElement) {
@@ -120,7 +125,7 @@ function handleClick(e: MouseEvent) {
   }
 
   // Handle backdrop clicks
-  const backdrop = target.closest<HTMLElement>(".dialog-backdrop");
+  const backdrop = target.closest<HTMLElement>(BACKDROP_SELECTOR);
   if (backdrop) {
     const dialogEl = backdrop.closest<HTMLDialogElement>("dialog");
     if (dialogEl) {

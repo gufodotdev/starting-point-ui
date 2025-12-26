@@ -1,0 +1,30 @@
+/* Starting Point UI Sheet Styles */
+
+@layer components {
+  .sheet-backdrop {
+    @apply fixed inset-0 bg-black/50 -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
+  }
+
+  .sheet-panel {
+    @apply fixed pointer-events-auto bg-background shadow-lg p-6 [animation-fill-mode:forwards]!;
+    /* Default to left */
+    @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-left;
+  }
+}
+
+/* Directions */
+@utility sheet-left {
+  @apply top-0 bottom-0 left-0 h-full w-3/4 max-w-sm border-r;
+}
+
+@utility sheet-right {
+  @apply top-0 bottom-0 right-0 h-full w-3/4 max-w-sm border-l;
+}
+
+@utility sheet-top {
+  @apply top-0 left-0 right-0 w-full border-b;
+}
+
+@utility sheet-bottom {
+  @apply bottom-0 left-0 right-0 w-full border-t;
+}
