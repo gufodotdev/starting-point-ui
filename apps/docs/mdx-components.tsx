@@ -5,7 +5,7 @@ import { hashCode } from "@/lib/utils";
 const components: MDXComponents = {
   h1: ({ children, ...props }) => (
     <h1
-      className="text-2xl font-semibold tracking-tight mb-3 scroll-mt-20"
+      className="text-2xl font-bold tracking-tight mb-4 scroll-mt-20"
       {...props}
     >
       {children}
@@ -13,7 +13,7 @@ const components: MDXComponents = {
   ),
   h2: ({ children, ...props }) => (
     <h2
-      className="text-lg font-semibold tracking-tight mt-12 mb-3 scroll-mt-20"
+      className="text-lg font-semibold tracking-tight mt-6 sm:mt-12 mb-4 scroll-mt-20"
       {...props}
     >
       {children}
@@ -21,14 +21,14 @@ const components: MDXComponents = {
   ),
   h3: ({ children, ...props }) => (
     <h3
-      className="text-base font-semibold tracking-tight mt-8 mb-3 scroll-mt-20"
+      className="text-base font-semibold tracking-tight mt-3 sm:mt-6 mb-4 scroll-mt-20"
       {...props}
     >
       {children}
     </h3>
   ),
   p: ({ children }) => (
-    <p className="text-base/7 leading-relaxed mb-6 text-muted-foreground">
+    <p className="text-base/7 mb-3 sm:mb-6 text-muted-foreground [figure+&]:mt-3 sm:[figure+&]:mt-6">
       {children}
     </p>
   ),
@@ -49,7 +49,7 @@ const components: MDXComponents = {
   ol: ({ children }) => (
     <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
   ),
-  hr: () => <hr className="my-12" />,
+  hr: () => <hr className="my-6 sm:my-12" />,
   code: ({ children, ...props }) => {
     const isCodeBlock = "data-theme" in props || "data-language" in props;
     if (isCodeBlock) {
@@ -88,9 +88,7 @@ const components: MDXComponents = {
       <table className="w-full text-sm whitespace-nowrap">{children}</table>
     </div>
   ),
-  thead: ({ children }) => (
-    <thead className="border-b">{children}</thead>
-  ),
+  thead: ({ children }) => <thead className="border-b">{children}</thead>,
   th: ({ children }) => (
     <th className="text-left font-medium py-3 pr-4 first:w-64">{children}</th>
   ),

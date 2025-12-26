@@ -20,7 +20,7 @@ export function CodeBlock(props: CodeBlockProps) {
     const codeId = `code-${props.id}`;
 
     return (
-      <div className="my-4 rounded-lg">
+      <div className="my-4 rounded-lg border">
         <Header code={code}>
           <div className="tab-list" role="tablist">
             <button
@@ -48,7 +48,7 @@ export function CodeBlock(props: CodeBlockProps) {
 
         <div
           id={previewId}
-          className="tab-panel active p-4 border-x border-b rounded-b-lg"
+          className="tab-panel active p-4 sm:p-12"
           role="tabpanel"
         >
           <div
@@ -66,7 +66,7 @@ export function CodeBlock(props: CodeBlockProps) {
 
   if (header === "label") {
     return (
-      <div className="my-4 overflow-hidden rounded-lg">
+      <div className="my-4 overflow-hidden rounded-lg border">
         <Header code={code}>
           <span className="text-sm font-medium">{props.label}</span>
         </Header>
@@ -76,7 +76,7 @@ export function CodeBlock(props: CodeBlockProps) {
   }
 
   return (
-    <div className="relative my-4 overflow-hidden rounded-lg">
+    <div className="relative my-4 overflow-hidden rounded-lg border">
       <Pre>{children}</Pre>
       <CopyButton code={code} className="absolute top-2" adjustForScrollbar />
     </div>
@@ -85,7 +85,7 @@ export function CodeBlock(props: CodeBlockProps) {
 
 function Pre({ children }: { children: React.ReactNode }) {
   return (
-    <pre className="overflow-auto max-h-125 bg-muted/50 p-4 text-sm">
+    <pre className="overflow-auto max-h-125 bg-muted/50 p-4 text-sm rounded-b-lg">
       {children}
     </pre>
   );
@@ -99,7 +99,7 @@ function Header({
   code: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-b bg-muted/50 px-4 py-2">
+    <div className="flex items-center justify-between border-b bg-muted/50 px-4 py-2 rounded-t-lg">
       {children}
       <div className="-mr-2">
         <CopyButton code={code} />
