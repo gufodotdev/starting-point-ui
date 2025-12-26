@@ -12,8 +12,6 @@ export default function Home() {
     <>
       <section className="relative min-h-[calc(100vh-4rem)] py-16">
         <div className="container">
-          <div className="absolute z-[-1] inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-
           <div className="text-center">
             <div className="hidden sm:inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground mb-6">
               <span className="relative flex h-2 w-2">
@@ -57,14 +55,14 @@ export default function Home() {
           <div className="mt-4">
             <div className="grid gap-6">
               <div className="grid gap-6 md:grid-cols-3">
-                <div className="card">
+                <div className="card card-outline">
                   <div className="card-content sm:card-content-lg flex items-center justify-center gap-4">
                     <button className="btn">Button</button>
                     <button className="btn btn-outline">Button</button>
                   </div>
                 </div>
 
-                <div className="card">
+                <div className="card card-outline">
                   <div className="card-content sm:card-content-lg flex items-center justify-center">
                     <button
                       className="btn btn-outline"
@@ -106,7 +104,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="card">
+                <div className="card card-outline">
                   <div className="card-content sm:card-content-lg flex items-center justify-center">
                     <button
                       className="btn btn-outline"
@@ -136,7 +134,7 @@ export default function Home() {
               </div>
 
               <div className="grid gap-6 lg:grid-cols-12">
-                <div className="card lg:col-span-4">
+                <div className="card card-outline lg:col-span-4">
                   <form className="card-content sm:card-content-lg grid gap-8">
                     <div className="grid gap-3">
                       <h3 className="font-semibold leading-none">
@@ -189,7 +187,7 @@ export default function Home() {
                   </form>
                 </div>
 
-                <div className="card lg:col-span-8">
+                <div className="card card-outline lg:col-span-8">
                   <div className="card-content sm:card-content-lg grid gap-6">
                     <div className="grid gap-3">
                       <h3 className="font-semibold leading-none">
