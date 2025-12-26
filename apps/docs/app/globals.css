@@ -14,7 +14,7 @@
 }
 
 .toc-list {
-  @apply flex flex-col gap-2 text-muted-foreground border-l border-dashed;
+  @apply flex flex-col gap-2 text-muted-foreground border-l;
 }
 
 .toc-list-item {

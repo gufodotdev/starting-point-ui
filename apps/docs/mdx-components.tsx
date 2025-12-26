@@ -49,7 +49,7 @@ const components: MDXComponents = {
   ol: ({ children }) => (
     <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
   ),
-  hr: () => <hr className="my-12 border-dashed" />,
+  hr: () => <hr className="my-12" />,
   code: ({ children, ...props }) => {
     const isCodeBlock = "data-theme" in props || "data-language" in props;
     if (isCodeBlock) {
@@ -89,7 +89,7 @@ const components: MDXComponents = {
     </div>
   ),
   thead: ({ children }) => (
-    <thead className="border-b border-dashed">{children}</thead>
+    <thead className="border-b">{children}</thead>
   ),
   th: ({ children }) => (
     <th className="text-left font-medium py-3 pr-4 first:w-64">{children}</th>

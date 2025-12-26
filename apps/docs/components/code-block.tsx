@@ -48,7 +48,7 @@ export function CodeBlock(props: CodeBlockProps) {
 
         <div
           id={previewId}
-          className="tab-panel active p-4 border-x border-b border-dashed rounded-b-lg"
+          className="tab-panel active p-4 border-x border-b rounded-b-lg"
           role="tabpanel"
         >
           <div
@@ -99,7 +99,7 @@ function Header({
   code: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-b border-dashed bg-muted/50 px-4 py-2">
+    <div className="flex items-center justify-between border-b bg-muted/50 px-4 py-2">
       {children}
       <div className="-mr-2">
         <CopyButton code={code} />

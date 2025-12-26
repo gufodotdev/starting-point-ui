@@ -7,7 +7,7 @@ import { Sidebar } from "@/components/sidebar";
 export function Navbar() {
   return (
     <>
-      <nav className="sticky top-0 h-(--navbar-height) border-b border-dashed bg-background z-10">
+      <nav className="sticky top-0 h-(--navbar-height) border-b bg-background z-10">
         <div className="container-wide h-full flex items-center justify-between">
           <div className="flex items-center gap-1">
             <button
