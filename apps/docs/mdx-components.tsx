@@ -44,7 +44,7 @@ const components: MDXComponents = {
     <blockquote className="mt-6 border-l-2 pl-6 italic">{children}</blockquote>
   ),
   ul: ({ children }) => (
-    <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
+    <ul className="my-6 ml-6 list-disc [&>li]:mt-2 [&_ul]:my-2 [&_ul]:list-[circle] [&_ul]:text-muted-foreground [&_ul]:text-sm">{children}</ul>
   ),
   ol: ({ children }) => (
     <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
