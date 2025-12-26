@@ -13,6 +13,7 @@ const navigation = [
   {
     title: "Components",
     items: [
+      { title: "Avatar", href: "/docs/components/avatar" },
       { title: "Button", href: "/docs/components/button" },
       { title: "Card", href: "/docs/components/card" },
       { title: "Container", href: "/docs/components/container" },
