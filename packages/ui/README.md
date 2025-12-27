@@ -1,14 +1,18 @@
 # Starting Point UI
 
-A component library built on top of Tailwind CSS. Framework agnostic, easy to customize, open source, and works in any project. Inspired by [shadcn/ui](https://ui.shadcn.com).
+An open-source component library built for Tailwind CSS. Inspired by [Shadcn UI](https://ui.shadcn.com).
+
+## Documentation
+
+Visit [startingpointui.com](https://www.startingpointui.com) for full documentation, component examples, and guides.
 
 ## Getting Started
 
 Visit [startingpointui.com/docs/guides/installation](https://www.startingpointui.com/docs/guides/installation) to get started.
 
-## Documentation
+## Changelog
 
-Visit [startingpointui.com](https://www.startingpointui.com) for full documentation, component examples, and guides.
+Visit [startingpointui.com/docs/resources/changelog](https://www.startingpointui.com/docs/resources/changelog) to see what's new.
 
 ## Community
 
