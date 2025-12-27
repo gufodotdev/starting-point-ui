@@ -25,6 +25,8 @@
   "devDependencies": {
     "@eslint/js": "^9",
     "eslint": "^9",
+    "postcss": "^8.5.6",
+    "postcss-import": "^16.1.1",
     "tsup": "^8.3.5",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8"
