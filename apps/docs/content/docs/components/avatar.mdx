@@ -112,7 +112,7 @@ Avatar groups work with different sizes.
 
 ---
 
-## Custom overrides
+## Customization
 
 Combine avatar classes with Tailwind utilities for custom styling.
 
@@ -136,15 +136,47 @@ Combine avatar classes with Tailwind utilities for custom styling.
 
 ---
 
-## Class reference
+## How it works
+
+The avatar component is a CSS-only component that styles images and fallback content. It includes size variants and an avatar group for displaying multiple avatars in a stacked layout.
+
+### Structure
+
+An avatar can be either an image or a fallback element:
+
+```html
+<!-- Image avatar -->
+<img class="avatar" src="..." alt="User" />
+
+<!-- Fallback avatar -->
+<span class="avatar-fallback">JD</span>
+```
+
+For groups of avatars, wrap them in an `.avatar-group` container:
+
+```html
+<div class="avatar-group">
+  <img class="avatar" src="..." alt="User 1" />
+  <img class="avatar" src="..." alt="User 2" />
+  <span class="avatar-fallback">+3</span>
+</div>
+```
+
+### Class reference
 
 All available classes for the avatar component.
 
-| Class             | Description                              |
-| ----------------- | ---------------------------------------- |
-| `avatar`          | Base avatar styles                       |
-| `avatar-fallback` | Fallback content when no image available |
-| `avatar-sm`       | Small avatar                             |
-| `avatar-base`     | Base avatar size (default)               |
-| `avatar-lg`       | Large avatar                             |
-| `avatar-group`    | Container for stacked avatar group       |
+| Class             | Description                                                                       |
+| ----------------- | --------------------------------------------------------------------------------- |
+| `avatar`          | Add to `<img>` element to apply base avatar styles                                |
+| `avatar-fallback` | Add to `<span>` element to display initials or an icon when no image is available |
+| `avatar-sm`       | Add to `.avatar` or `.avatar-fallback` for small size                             |
+| `avatar-base`     | Add to `.avatar` or `.avatar-fallback` for base size (default)                    |
+| `avatar-lg`       | Add to `.avatar` or `.avatar-fallback` for large size                             |
+| `avatar-group`    | Add to container element to stack avatars with overlapping edges                  |
+
+```html
+<img class="avatar avatar-lg" src="..." alt="User" />
+<span class="avatar-fallback avatar-sm">AB</span>
+<div class="avatar-group">...</div>
+```
