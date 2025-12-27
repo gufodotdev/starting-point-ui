@@ -10,13 +10,14 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
   Open Dialog
 </button>
 
-<dialog id="demo-modal" class="dialog">
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
-  ></div>
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
-  >
+<dialog
+  id="demo-modal"
+  class="dialog"
+  aria-labelledby="demo-title"
+  aria-describedby="demo-desc"
+>
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
     <button
       class="btn btn-ghost btn-icon absolute top-2 right-2"
       aria-label="Close"
@@ -24,8 +25,8 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
     >
       <icon-x />
     </button>
-    <h2 class="text-lg font-semibold mb-2">Dialog Title</h2>
-    <p class="text-muted-foreground mb-4">
+    <h2 id="demo-title" class="text-lg font-semibold mb-2">Dialog Title</h2>
+    <p id="demo-desc" class="text-muted-foreground mb-4">
       This is a modal dialog. Click the backdrop or press Escape to close.
     </p>
     <div class="flex gap-2 justify-end">
@@ -35,132 +36,6 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
   </div>
 </dialog>
 ```
-
-### How it works
-
-Use `data-sp-toggle="dialog"` with `data-sp-target` to open a dialog, and `data-sp-dismiss="dialog"` to close it:
-
-- Add `data-sp-toggle="dialog"` and `data-sp-target="#dialog-id"` to any button to open a dialog
-- Add `data-sp-dismiss="dialog"` to buttons inside the dialog to close it
-- Clicking the backdrop or pressing Escape also closes the dialog (unless using static backdrop)
-- The [`open`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#open) attribute controls the visibility of the dialog. You can manually add it if you need the dialog to be open on page load.
-
-### JavaScript API
-
-For programmatic control, use the global `StartingPointUI.dialog` module:
-
-```js
-const dialog = document.querySelector("#my-dialog");
-
-StartingPointUI.dialog.open(dialog);
-StartingPointUI.dialog.close(dialog);
-StartingPointUI.dialog.toggle(dialog);
-```
-
----
-
-## Animation
-
-The dialog sets `data-state="open"` or `data-state="closed"` on the backdrop and panel elements, which you can use to trigger CSS animations.
-
-The examples on this site use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) for animation utilities, but you can use any animation library or write your own CSS.
-
-```html preview
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-none"
->
-  None
-</button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-zoom"
->
-  Fade + Zoom
-</button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-slide-bottom"
->
-  Slide from Bottom
-</button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-slow"
->
-  Slow (500ms)
-</button>
-
-<dialog id="anim-none" class="dialog">
-  <div class="dialog-backdrop"></div>
-  <div class="dialog-panel">
-    <h2 class="text-lg font-semibold mb-2">No Animation</h2>
-    <p class="text-muted-foreground mb-4">
-      This is the default behavior. It's up to you to add the animations you
-      want.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
-  </div>
-</dialog>
-
-<dialog id="anim-zoom" class="dialog">
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
-  ></div>
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
-  >
-    <h2 class="text-lg font-semibold mb-2">Fade + Zoom</h2>
-    <p class="text-muted-foreground mb-4">
-      The backdrop fades while the panel fades and zooms.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
-  </div>
-</dialog>
-
-<dialog id="anim-slide-bottom" class="dialog">
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 duration-300"
-  ></div>
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom duration-300"
-  >
-    <h2 class="text-lg font-semibold mb-2">Slide from Bottom</h2>
-    <p class="text-muted-foreground mb-4">
-      This panel slides up from the bottom.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
-  </div>
-</dialog>
-
-<dialog id="anim-slow" class="dialog">
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 duration-500"
-  ></div>
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-500"
-  >
-    <h2 class="text-lg font-semibold mb-2">Slow Animation</h2>
-    <p class="text-muted-foreground mb-4">
-      This dialog uses a 500ms animation duration.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
-  </div>
-</dialog>
-```
-
-### How it works
-
-Use `data-[state=open]` and `data-[state=closed]` selectors to apply different animations for entering and exiting:
-
-- `data-[state=open]:animate-in` — triggers the enter animation
-- `data-[state=closed]:animate-out` — triggers the exit animation
-
-See the [tw-animate-css documentation](https://github.com/Wombosvideo/tw-animate-css) for all available animation utilities.
 
 ---
 
@@ -184,27 +59,31 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
   Open Non-modal
 </button>
 
-<dialog id="modal-example" class="dialog">
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
-  ></div>
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
-  >
-    <h2 class="text-lg font-semibold mb-2">Modal</h2>
-    <p class="text-muted-foreground mb-4">
+<dialog
+  id="modal-example"
+  class="dialog"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-desc"
+>
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <h2 id="modal-title" class="text-lg font-semibold mb-2">Modal</h2>
+    <p id="modal-desc" class="text-muted-foreground mb-4">
       Background is blocked. Click backdrop or press Escape to close.
     </p>
     <button class="btn" data-sp-dismiss="dialog">Close</button>
   </div>
 </dialog>
 
-<dialog id="nonmodal-example" class="dialog">
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
-  >
-    <h2 class="text-lg font-semibold mb-2">Non-modal</h2>
-    <p class="text-muted-foreground mb-4">
+<dialog
+  id="nonmodal-example"
+  class="dialog"
+  aria-labelledby="nonmodal-title"
+  aria-describedby="nonmodal-desc"
+>
+  <div class="dialog-panel">
+    <h2 id="nonmodal-title" class="text-lg font-semibold mb-2">Non-modal</h2>
+    <p id="nonmodal-desc" class="text-muted-foreground mb-4">
       You can interact with the page behind this dialog.
     </p>
     <button class="btn" data-sp-dismiss="dialog">Close</button>
@@ -227,15 +106,17 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
   Delete
 </button>
 
-<dialog id="static-modal" class="dialog" data-sp-backdrop="static">
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
-  ></div>
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
-  >
-    <h2 class="text-lg font-semibold mb-2">Are you sure?</h2>
-    <p class="text-muted-foreground mb-4">
+<dialog
+  id="static-modal"
+  class="dialog"
+  data-sp-backdrop="static"
+  aria-labelledby="static-title"
+  aria-describedby="static-desc"
+>
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <h2 id="static-title" class="text-lg font-semibold mb-2">Are you sure?</h2>
+    <p id="static-desc" class="text-muted-foreground mb-4">
       This action cannot be undone. Backdrop clicks and Escape are disabled.
     </p>
     <div class="flex gap-2 justify-end">
@@ -250,7 +131,7 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 
 ---
 
-## Custom overrides
+## Customization
 
 Override positioning, sizing, and styles to create custom dialog variants like sheets, fullscreen modals, or custom backdrops.
 
@@ -277,12 +158,15 @@ Override positioning, sizing, and styles to create custom dialog variants like s
   Gradient Backdrop
 </button>
 
-<dialog id="sheet-example" class="dialog">
+<dialog
+  id="sheet-example"
+  class="dialog"
+  aria-labelledby="sheet-title"
+  aria-describedby="sheet-desc"
+>
+  <div class="dialog-backdrop"></div>
   <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
-  ></div>
-  <div
-    class="dialog-panel top-0 left-0 h-dvh w-72 max-h-none rounded-none translate-x-0 translate-y-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300"
+    class="dialog-panel no-animation top-0 left-0 h-dvh w-72 max-h-none rounded-none translate-x-0 translate-y-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300"
   >
     <button
       class="btn btn-ghost btn-icon absolute top-2 right-2"
@@ -291,23 +175,26 @@ Override positioning, sizing, and styles to create custom dialog variants like s
     >
       <icon-x />
     </button>
-    <h2 class="text-lg font-semibold mb-2">Sheet</h2>
-    <p class="text-muted-foreground">
+    <h2 id="sheet-title" class="text-lg font-semibold mb-2">Sheet</h2>
+    <p id="sheet-desc" class="text-muted-foreground">
       This sheet slides in from the left. Great for navigation menus or
       sidebars.
     </p>
   </div>
 </dialog>
 
-<dialog id="fullscreen-example" class="dialog">
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
-  ></div>
-  <div
-    class="dialog-panel max-w-none h-screen data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
-  >
+<dialog
+  id="fullscreen-example"
+  class="dialog"
+  aria-labelledby="fullscreen-title"
+  aria-describedby="fullscreen-desc"
+>
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel max-w-none h-screen">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-semibold">Fullscreen Modal</h2>
+      <h2 id="fullscreen-title" class="text-lg font-semibold">
+        Fullscreen Modal
+      </h2>
       <button
         class="btn btn-ghost btn-icon"
         aria-label="Close"
@@ -316,16 +203,23 @@ Override positioning, sizing, and styles to create custom dialog variants like s
         <icon-x />
       </button>
     </div>
-    <p class="text-muted-foreground">This modal takes up the entire screen.</p>
+    <p id="fullscreen-desc" class="text-muted-foreground">
+      This modal takes up the entire screen.
+    </p>
   </div>
 </dialog>
 
-<dialog id="gradient-example" class="dialog">
+<dialog
+  id="gradient-example"
+  class="dialog"
+  aria-labelledby="gradient-title"
+  aria-describedby="gradient-desc"
+>
   <div
-    class="dialog-backdrop bg-linear-to-br from-pink-500/60 via-purple-500/60 to-cyan-500/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
+    class="dialog-backdrop bg-linear-to-br from-pink-500/60 via-purple-500/60 to-cyan-500/60 backdrop-blur-sm"
   ></div>
   <div
-    class="dialog-panel bg-linear-to-br from-purple-950 to-slate-900 text-white border border-purple-500/30 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
+    class="dialog-panel bg-linear-to-br from-purple-950 to-slate-900 text-white border border-purple-500/30"
   >
     <button
       class="btn btn-ghost btn-icon absolute top-2 right-2 text-white hover:bg-white/10"
@@ -334,8 +228,10 @@ Override positioning, sizing, and styles to create custom dialog variants like s
     >
       <icon-x />
     </button>
-    <h2 class="text-lg font-semibold mb-2">Custom Styles</h2>
-    <p class="text-purple-200 mb-4">
+    <h2 id="gradient-title" class="text-lg font-semibold mb-2">
+      Custom Styles
+    </h2>
+    <p id="gradient-desc" class="text-purple-200 mb-4">
       Override the backdrop and panel with gradients, blur, or any custom
       styles.
     </p>
@@ -351,78 +247,250 @@ Override positioning, sizing, and styles to create custom dialog variants like s
 
 ---
 
-## Accessibility
+## How it works
 
-This component uses the native `<dialog>` element, which provides built-in accessibility features like focus trapping, Escape key handling, and proper screen reader announcements.
+This component uses the native HTML [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element with a small JavaScript module that handles opening, closing, animations, and focus management.
+
+### Structure
+
+A dialog consists of three parts:
+
+1. **`<dialog class="dialog">`** - The native dialog element, styled to be a fixed fullscreen container
+2. **`.dialog-backdrop`** - An overlay that blocks interaction with the page (optional, omit for non-modal)
+3. **`.dialog-panel`** - The content panel that holds your dialog content
+
+```html
+<dialog id="my-dialog" class="dialog">
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <!-- Your content here -->
+  </div>
+</dialog>
+```
+
+### Opening and closing
+
+Use data attributes to control the dialog without writing JavaScript.
+
+To open a dialog, add `data-sp-toggle="dialog"` and `data-sp-target` to a button:
+
+```html
+<button data-sp-toggle="dialog" data-sp-target="#my-dialog">Open Dialog</button>
+```
+
+To close from inside the dialog, add `data-sp-dismiss="dialog"` to any button. The JavaScript will find the closest parent `<dialog>` element and close it:
+
+```html
+<button data-sp-dismiss="dialog">Close</button>
+```
+
+Clicking the backdrop or pressing Escape also closes the dialog. To prevent this, add `data-sp-backdrop="static"` to the dialog element:
+
+```html
+<dialog id="confirm-dialog" class="dialog" data-sp-backdrop="static">
+  <!-- User must click a button to close -->
+</dialog>
+```
+
+The component uses `dialog.show()` rather than `dialog.showModal()`, which allows more flexible backdrop styling. Modal behavior (blocking page interaction) comes from the `.dialog-backdrop` element instead.
+
+For programmatic control, use the global `StartingPointUI.dialog` module:
+
+```js
+const dialog = document.querySelector("#my-dialog");
+
+StartingPointUI.dialog.open(dialog);
+StartingPointUI.dialog.close(dialog);
+StartingPointUI.dialog.toggle(dialog);
+```
+
+### Animation
+
+The dialog includes default fade and zoom animations. When opened, the JavaScript sets `data-state="open"` on the backdrop and panel. When closing, it sets `data-state="closed"` and waits for animations to complete before calling `dialog.close()`.
+
+To customize animations, add `no-animation` to disable the defaults and use your own classes with `data-[state=open]:` and `data-[state=closed]:` selectors:
+
+```html
+<div
+  class="dialog-panel no-animation
+  data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom
+  data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom"
+>
+  <!-- Slides in from bottom instead of zooming -->
+</div>
+```
 
 ```html preview
 <button
   class="btn btn-outline"
   data-sp-toggle="dialog"
-  data-sp-target="#accessible-dialog"
+  data-sp-target="#anim-default"
 >
-  Open Accessible Dialog
+  Default
+</button>
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-none"
+>
+  No Animation
+</button>
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-slide"
+>
+  Slide from Bottom
+</button>
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-slow"
+>
+  Slow (500ms)
 </button>
 
 <dialog
-  id="accessible-dialog"
+  id="anim-default"
   class="dialog"
-  aria-labelledby="dialog-title"
-  aria-describedby="dialog-description"
+  aria-labelledby="anim-default-title"
+  aria-describedby="anim-default-desc"
 >
-  <div
-    class="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
-  ></div>
-  <div
-    class="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200"
-  >
-    <button
-      class="btn btn-ghost btn-icon absolute top-2 right-2"
-      aria-label="Close dialog"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="dialog-title" class="text-lg font-semibold mb-2">
-      Accessible Dialog
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <h2 id="anim-default-title" class="text-lg font-semibold mb-2">
+      Default Animation
     </h2>
-    <p id="dialog-description" class="text-muted-foreground mb-4">
-      This dialog uses ARIA attributes to improve screen reader support.
+    <p id="anim-default-desc" class="text-muted-foreground mb-4">
+      The backdrop fades while the panel fades and zooms.
     </p>
-    <button class="btn w-full" data-sp-dismiss="dialog">Close</button>
+    <button class="btn" data-sp-dismiss="dialog">Close</button>
+  </div>
+</dialog>
+
+<dialog
+  id="anim-none"
+  class="dialog"
+  aria-labelledby="anim-none-title"
+  aria-describedby="anim-none-desc"
+>
+  <div class="dialog-backdrop no-animation"></div>
+  <div class="dialog-panel no-animation">
+    <h2 id="anim-none-title" class="text-lg font-semibold mb-2">
+      No Animation
+    </h2>
+    <p id="anim-none-desc" class="text-muted-foreground mb-4">
+      Add the `no-animation` class to disable the default animations.
+    </p>
+    <button class="btn" data-sp-dismiss="dialog">Close</button>
+  </div>
+</dialog>
+
+<dialog
+  id="anim-slide"
+  class="dialog"
+  aria-labelledby="anim-slide-title"
+  aria-describedby="anim-slide-desc"
+>
+  <div class="dialog-backdrop"></div>
+  <div
+    class="dialog-panel no-animation data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom duration-300"
+  >
+    <h2 id="anim-slide-title" class="text-lg font-semibold mb-2">
+      Slide from Bottom
+    </h2>
+    <p id="anim-slide-desc" class="text-muted-foreground mb-4">
+      Use `no-animation` and add your own animation classes.
+    </p>
+    <button class="btn" data-sp-dismiss="dialog">Close</button>
+  </div>
+</dialog>
+
+<dialog
+  id="anim-slow"
+  class="dialog"
+  aria-labelledby="anim-slow-title"
+  aria-describedby="anim-slow-desc"
+>
+  <div class="dialog-backdrop duration-500"></div>
+  <div class="dialog-panel duration-500">
+    <h2 id="anim-slow-title" class="text-lg font-semibold mb-2">
+      Slow Animation
+    </h2>
+    <p id="anim-slow-desc" class="text-muted-foreground mb-4">
+      Override the duration with utility classes like `duration-500`.
+    </p>
+    <button class="btn" data-sp-dismiss="dialog">Close</button>
   </div>
 </dialog>
 ```
 
-### Additional recommended attributes
+The component uses [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities under the hood.
 
-| Attribute                    | Element  | Description                                 |
-| ---------------------------- | -------- | ------------------------------------------- |
-| `aria-labelledby="title-id"` | `dialog` | References the dialog's title element       |
-| `aria-describedby="desc-id"` | `dialog` | References the dialog's description         |
-| `aria-label="Close"`         | `button` | Labels icon-only buttons for screen readers |
+### Accessibility
 
----
+This component uses the native `<dialog>` element for proper screen reader announcements. The dialog JavaScript module provides Escape key handling for all dialogs, and focus trapping (Tab cycles through focusable elements) for modal dialogs.
 
-## Class reference
+For proper screen reader support, add these attributes to your dialogs:
+
+| Attribute                    | Description                                       |
+| ---------------------------- | ------------------------------------------------- |
+| `aria-labelledby="title-id"` | Add to `dialog` to reference the title element    |
+| `aria-describedby="desc-id"` | Add to `dialog` to reference the description      |
+| `aria-label="Close"`         | Add to icon-only buttons for screen reader labels |
+
+```html
+<dialog aria-labelledby="title" aria-describedby="desc">
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <button aria-label="Close" data-sp-dismiss="dialog">
+      <icon-x />
+    </button>
+    <h2 id="title">Title</h2>
+    <p id="desc">Description</p>
+  </div>
+</dialog>
+```
+
+### Class reference
 
 All available classes for the dialog component.
 
 | Class             | Description                                             |
 | ----------------- | ------------------------------------------------------- |
-| `dialog`          | Base dialog container                                   |
+| `dialog`          | Base class for the `dialog` element                     |
 | `dialog-backdrop` | Overlay that blocks interaction with the page behind it |
-| `dialog-panel`    | The dialog content panel                                |
+| `dialog-panel`    | The content panel inside the dialog                     |
+| `no-animation`    | Disables default animations on backdrop or panel        |
 
----
+```html
+<dialog class="dialog">
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <!-- Content -->
+  </div>
+</dialog>
+```
 
-## Data attributes
+### Data attributes
 
-| Attribute                   | Element                                | Description                                    |
-| --------------------------- | -------------------------------------- | ---------------------------------------------- |
-| `data-sp-toggle="dialog"`   | `button`                               | Opens the dialog specified by `data-sp-target` |
-| `data-sp-target="#id"`      | `button`                               | The ID of the dialog to open                   |
-| `data-sp-dismiss="dialog"`  | `button`                               | Closes the parent dialog                       |
-| `data-sp-backdrop="static"` | `dialog`                               | Prevents closing on backdrop click or Escape   |
-| `data-state="open"`         | `.dialog-backdrop`<br/>`.dialog-panel` | Set when the dialog is open                    |
-| `data-state="closed"`       | `.dialog-backdrop`<br/>`.dialog-panel` | Set when the dialog is closing                 |
+All data attributes for the dialog component.
+
+| Attribute                   | Description                                              |
+| --------------------------- | -------------------------------------------------------- |
+| `data-sp-toggle="dialog"`   | Add to a button to open the dialog in `data-sp-target`   |
+| `data-sp-target="#id"`      | Specifies which dialog to open                           |
+| `data-sp-dismiss="dialog"`  | Add to a button inside the dialog to close it            |
+| `data-sp-backdrop="static"` | Add to `dialog` to prevent closing on backdrop or Escape |
+| `data-state`                | Set to `open` or `closed` on backdrop and panel          |
+
+```html
+<button data-sp-toggle="dialog" data-sp-target="#my-dialog">Open</button>
+
+<dialog id="my-dialog" class="dialog" data-sp-backdrop="static">
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <button data-sp-dismiss="dialog">Close</button>
+  </div>
+</dialog>
+```
