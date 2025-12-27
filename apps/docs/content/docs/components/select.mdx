@@ -92,11 +92,56 @@ Selects show a red ring when marked as invalid, such as when a required selectio
 
 ---
 
-## Class reference
+## How it works
 
-| Class         | Description                                  |
-| ------------- | -------------------------------------------- |
-| `select`      | Styled select with built-in chevron icon     |
-| `select-sm`   | Small select, matches btn-sm                 |
-| `select-base` | Base select size (default), matches btn-base |
-| `select-lg`   | Large select, matches btn-lg                 |
+The select component is a CSS-only styled native select element. It includes a built-in chevron icon and supports size variants, disabled and invalid states.
+
+### Structure
+
+A select is a native `<select>` element with the `.select` class:
+
+```html
+<select class="select">
+  <option value="">Select an option</option>
+  <option value="1">Option 1</option>
+</select>
+```
+
+### Accessibility
+
+For proper screen reader support, pair selects with labels using matching `id` and `for` attributes:
+
+```html
+<label class="label" for="country">Country</label>
+<select class="select" id="country">
+  <option value="">Select a country</option>
+  <option value="us">United States</option>
+</select>
+```
+
+Additional accessibility attributes:
+
+| Attribute                    | Description                                                       |
+| ---------------------------- | ----------------------------------------------------------------- |
+| `id`                         | Add to `.select` to associate with a label                        |
+| `aria-invalid="true"`        | Add to `.select` to indicate the select has an error              |
+| `aria-describedby="id"`      | Add to `.select` to associate with an error message or hint       |
+| `disabled`                   | Add to `.select` to prevent interaction                           |
+| `required`                   | Add to `.select` to indicate a selection is required              |
+
+### Class reference
+
+All available classes for the select component.
+
+| Class         | Description                                               |
+| ------------- | --------------------------------------------------------- |
+| `select`      | Add to `<select>` element for styled select with chevron  |
+| `select-sm`   | Add to `.select` for small size (matches btn-sm)          |
+| `select-base` | Add to `.select` for base size (default, matches btn-base)|
+| `select-lg`   | Add to `.select` for large size (matches btn-lg)          |
+
+```html
+<select class="select">...</select>
+<select class="select select-sm">...</select>
+<select class="select select-lg">...</select>
+```
