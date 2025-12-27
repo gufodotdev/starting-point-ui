@@ -1,0 +1,224 @@
+---
+title: Sheet
+description: A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
+---
+
+A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
+
+```html preview
+<button class="btn" data-sp-toggle="dialog" data-sp-target="#sheet-demo">
+  Open Sheet
+</button>
+
+<dialog id="sheet-demo" class="dialog">
+  <div
+    class="sheet-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
+  ></div>
+  <div
+    class="sheet-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300"
+  >
+    <button
+      class="btn btn-ghost btn-icon absolute top-4 right-4"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <icon-x />
+    </button>
+    <h2 class="text-lg font-semibold">Sheet Title</h2>
+    <p class="text-muted-foreground text-sm">
+      This sheet slides in from the left. Great for navigation menus or
+      sidebars.
+    </p>
+  </div>
+</dialog>
+```
+
+### How it works
+
+The sheet component is custom styling on top of the [Dialog](/docs/components/dialog) component. See the dialog documentation for detailed information on opening, closing, static backdrops, and accessibility.
+
+- Use `.sheet-panel` with an optional direction utility (`.sheet-left`, `.sheet-right`, `.sheet-top`, `.sheet-bottom`)
+- The default direction is left
+
+---
+
+## Directions
+
+Use direction utilities to control which edge the sheet slides in from.
+
+```html preview
+<div class="flex flex-wrap gap-2">
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-left"
+  >
+    Left
+  </button>
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-right"
+  >
+    Right
+  </button>
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-top"
+  >
+    Top
+  </button>
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-bottom"
+  >
+    Bottom
+  </button>
+</div>
+
+<dialog id="sheet-left" class="dialog">
+  <div
+    class="sheet-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
+  ></div>
+  <div
+    class="sheet-panel sheet-left data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300"
+  >
+    <button
+      class="btn btn-ghost btn-icon absolute top-4 right-4"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <icon-x />
+    </button>
+    <h2 class="text-lg font-semibold">Left Sheet</h2>
+    <p class="text-muted-foreground text-sm">
+      Great for navigation menus or sidebars.
+    </p>
+  </div>
+</dialog>
+
+<dialog id="sheet-right" class="dialog">
+  <div
+    class="sheet-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
+  ></div>
+  <div
+    class="sheet-panel sheet-right data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right duration-300"
+  >
+    <button
+      class="btn btn-ghost btn-icon absolute top-4 right-4"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <icon-x />
+    </button>
+    <h2 class="text-lg font-semibold">Right Sheet</h2>
+    <p class="text-muted-foreground text-sm">
+      Great for detail views, settings, or cart panels.
+    </p>
+  </div>
+</dialog>
+
+<dialog id="sheet-top" class="dialog">
+  <div
+    class="sheet-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
+  ></div>
+  <div
+    class="sheet-panel sheet-top data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top duration-300"
+  >
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Top Sheet</h2>
+      <button
+        class="btn btn-ghost btn-icon"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+    </div>
+    <p class="text-muted-foreground text-sm">
+      Great for notifications, alerts, or search bars.
+    </p>
+  </div>
+</dialog>
+
+<dialog id="sheet-bottom" class="dialog">
+  <div
+    class="sheet-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
+  ></div>
+  <div
+    class="sheet-panel sheet-bottom data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom duration-300"
+  >
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Bottom Sheet</h2>
+      <button
+        class="btn btn-ghost btn-icon"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+    </div>
+    <p class="text-muted-foreground text-sm">
+      Great for mobile actions, share menus, or quick forms.
+    </p>
+  </div>
+</dialog>
+```
+
+---
+
+## Custom width
+
+Override the default width using Tailwind utilities.
+
+```html preview
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#sheet-wide"
+>
+  Wide Sheet
+</button>
+
+<dialog id="sheet-wide" class="dialog">
+  <div
+    class="sheet-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"
+  ></div>
+  <div
+    class="sheet-panel max-w-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300"
+  >
+    <button
+      class="btn btn-ghost btn-icon absolute top-4 right-4"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <icon-x />
+    </button>
+    <h2 class="text-lg font-semibold">Wide Sheet</h2>
+    <p class="text-muted-foreground text-sm">
+      This sheet uses `max-w-lg` to override the default width.
+    </p>
+  </div>
+</dialog>
+```
+
+---
+
+## Class reference
+
+| Class            | Description                               |
+| ---------------- | ----------------------------------------- |
+| `sheet-backdrop` | Sheet backdrop overlay                    |
+| `sheet-panel`    | Base sheet panel (defaults to left)       |
+| `sheet-left`     | Sheet that slides from the left (default) |
+| `sheet-right`    | Sheet that slides from the right          |
+| `sheet-top`      | Sheet that slides from the top            |
+| `sheet-bottom`   | Sheet that slides from the bottom         |
+
+---
+
+## Data attributes
+
+See the [Dialog](/docs/components/dialog#data-attributes) documentation for all available data attributes.

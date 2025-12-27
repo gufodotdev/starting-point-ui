@@ -1,0 +1,202 @@
+---
+title: Card
+description: A Tailwind CSS card component for grouping content.
+---
+
+A Tailwind CSS card component for grouping content.
+
+```html preview
+<div class="card w-full max-w-sm">
+  <form class="card-content grid gap-8">
+    <div class="grid gap-2">
+      <h3 class="font-semibold leading-none">Welcome Back</h3>
+      <p class="text-muted-foreground text-sm">
+        Enter your credentials to continue.
+      </p>
+    </div>
+    <div class="grid gap-6">
+      <div class="grid gap-3">
+        <label class="label" for="email">Email</label>
+        <input
+          class="input"
+          type="email"
+          id="email"
+          placeholder="you@example.com"
+        />
+      </div>
+      <div class="grid gap-3">
+        <div class="flex items-center justify-between">
+          <label class="label" for="password">Password</label>
+          <a
+            href="#"
+            class="text-sm font-medium text-muted-foreground hover:underline underline-offset-4"
+            >Forgot password?</a
+          >
+        </div>
+        <input
+          class="input"
+          type="password"
+          id="password"
+          placeholder="Enter password"
+        />
+      </div>
+    </div>
+    <div class="grid gap-3">
+      <button class="btn">Sign In</button>
+      <a href="#" class="btn btn-ghost">Sign up for new account</a>
+    </div>
+  </form>
+</div>
+```
+
+---
+
+## Sizes
+
+Card content comes in three sizes for different use cases.
+
+```html preview
+<div class="grid gap-6 w-full max-w-sm">
+  <div class="card">
+    <div class="card-content card-content-sm flex items-center gap-4">
+      <icon-credit-card class="size-5 text-muted-foreground" />
+      <div class="flex-1 grid gap-1">
+        <h3 class="font-semibold text-sm leading-none">Payment Method</h3>
+        <p class="text-muted-foreground text-sm">Visa ending in 4242</p>
+      </div>
+      <a href="#" class="btn btn-ghost btn-sm">Edit</a>
+    </div>
+  </div>
+  <div class="card">
+    <img
+      src="https://images.pexels.com/photos/26954381/pexels-photo-26954381.jpeg?auto=compress&cs=tinysrgb&w=600"
+      alt="Leather handbag"
+      class="aspect-square object-cover rounded-t-xl"
+    />
+    <div class="card-content grid gap-4">
+      <div class="grid gap-2">
+        <h3 class="font-semibold leading-none">Leather Handbag</h3>
+        <p class="text-muted-foreground text-sm">Premium Italian leather</p>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="font-semibold">$48.00</span>
+        <button class="btn btn-sm">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-content sm:card-content-lg grid gap-8">
+      <div class="grid gap-3">
+        <h3 class="font-semibold text-xl leading-none">Pro Plan</h3>
+        <p class="text-muted-foreground text-sm">
+          Everything you need to grow.
+        </p>
+      </div>
+      <div class="grid gap-2">
+        <span class="text-4xl font-bold">$29</span>
+        <span class="text-muted-foreground text-sm">per month</span>
+      </div>
+      <ul class="grid gap-3 text-sm">
+        <li class="flex items-center gap-2">
+          <icon-check class="size-4 text-green-500" />
+          Unlimited projects
+        </li>
+        <li class="flex items-center gap-2">
+          <icon-check class="size-4 text-green-500" />
+          Priority support
+        </li>
+        <li class="flex items-center gap-2">
+          <icon-check class="size-4 text-green-500" />
+          Advanced analytics
+        </li>
+      </ul>
+      <button class="btn btn-lg">Purchase Plan</button>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Variants
+
+Cards come in three variants for different contexts.
+
+```html preview
+<div class="grid gap-6 w-full max-w-sm">
+  <div class="card">
+    <div class="card-content card-content-sm flex items-center gap-4">
+      <icon-credit-card class="size-5 text-muted-foreground" />
+      <div class="flex-1 grid gap-1">
+        <h3 class="font-semibold text-sm leading-none">Payment Method</h3>
+        <p class="text-muted-foreground text-sm">Visa ending in 4242</p>
+      </div>
+      <a href="#" class="btn btn-ghost btn-sm">Edit</a>
+    </div>
+  </div>
+  <div class="card card-outline">
+    <div class="card-content card-content-sm flex items-center gap-4">
+      <icon-mail class="size-5 text-muted-foreground" />
+      <div class="flex-1 grid gap-1">
+        <h3 class="font-semibold text-sm leading-none">Email Notifications</h3>
+        <p class="text-muted-foreground text-sm">Receive updates via email</p>
+      </div>
+      <a href="#" class="btn btn-ghost btn-sm">Edit</a>
+    </div>
+  </div>
+  <div class="card card-muted">
+    <div class="card-content card-content-sm flex items-center gap-4">
+      <icon-info class="size-5 text-muted-foreground" />
+      <div class="flex-1 grid gap-1">
+        <h3 class="font-semibold text-sm leading-none">Quick Tip</h3>
+        <p class="text-muted-foreground text-sm">Press ⌘K to open search</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Custom overrides
+
+You can combine card classes with Tailwind utilities for custom styling.
+
+```html preview
+<div
+  class="card bg-linear-to-br from-pink-500 via-purple-500 to-indigo-500 border-0 text-white w-full max-w-sm shadow-xl"
+>
+  <div class="card-content grid gap-6">
+    <div class="flex items-center justify-between">
+      <icon-sparkles class="size-6" />
+      <span class="text-xs font-medium bg-white/20 px-2 py-1 rounded-full"
+        >Limited</span
+      >
+    </div>
+    <div class="grid gap-2">
+      <h3 class="font-semibold text-xl">Early Access</h3>
+      <p class="text-white/80 text-sm">
+        Be among the first to try our new AI-powered features.
+      </p>
+    </div>
+    <button class="btn bg-white text-purple-600 hover:bg-white/90 border-0">
+      Join Waitlist
+    </button>
+  </div>
+</div>
+```
+
+---
+
+## Class reference
+
+| Class               | Description                           |
+| ------------------- | ------------------------------------- |
+| `card`              | Card container with rounded corners   |
+| `card-default`      | Border and shadow (default)           |
+| `card-outline`      | Border only, no shadow                |
+| `card-muted`        | Muted background, no border or shadow |
+| `card-content`      | Content section with padding          |
+| `card-content-sm`   | Small content padding                 |
+| `card-content-base` | Base content padding (default)        |
+| `card-content-lg`   | Large content padding                 |

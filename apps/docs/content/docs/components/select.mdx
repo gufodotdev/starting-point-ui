@@ -1,0 +1,102 @@
+---
+title: Select
+description: A Tailwind CSS select component for forms.
+---
+
+A Tailwind CSS select component for forms.
+
+```html preview
+<div class="space-y-2 w-full max-w-64">
+  <label class="label" for="option">Option</label>
+  <select class="select" id="option">
+    <option value="">Select an option</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </select>
+</div>
+```
+
+---
+
+## Sizes
+
+Selects come in three sizes that match button heights.
+
+```html preview
+<div class="space-y-6 w-full max-w-64">
+  <div class="space-y-2">
+    <label class="label" for="select-sm">Small</label>
+    <select class="select select-sm" id="select-sm">
+      <option>Small</option>
+      <option>Base</option>
+      <option>Large</option>
+    </select>
+  </div>
+  <div class="space-y-2">
+    <label class="label" for="select-base">Base</label>
+    <select class="select" id="select-base">
+      <option>Small</option>
+      <option selected>Base</option>
+      <option>Large</option>
+    </select>
+  </div>
+  <div class="space-y-2">
+    <label class="label" for="select-lg">Large</label>
+    <select class="select select-lg" id="select-lg">
+      <option>Small</option>
+      <option>Base</option>
+      <option selected>Large</option>
+    </select>
+  </div>
+</div>
+```
+
+---
+
+## Disabled
+
+Disabled selects appear faded and cannot be interacted with.
+
+```html preview
+<select class="select max-w-64" disabled>
+  <option>Disabled select</option>
+</select>
+```
+
+---
+
+## Invalid state
+
+Selects show a red ring when marked as invalid, such as when a required selection hasn't been made.
+
+```html preview
+<div class="space-y-2 w-full max-w-64">
+  <label class="label" for="country">Country</label>
+  <select
+    class="select"
+    id="country"
+    aria-invalid="true"
+    aria-describedby="country-error"
+  >
+    <option value="">Select a country</option>
+    <option value="us">United States</option>
+    <option value="uk">United Kingdom</option>
+    <option value="ca">Canada</option>
+  </select>
+  <p id="country-error" class="text-sm text-destructive">
+    Please select a country
+  </p>
+</div>
+```
+
+---
+
+## Class reference
+
+| Class         | Description                                  |
+| ------------- | -------------------------------------------- |
+| `select`      | Styled select with built-in chevron icon     |
+| `select-sm`   | Small select, matches btn-sm                 |
+| `select-base` | Base select size (default), matches btn-base |
+| `select-lg`   | Large select, matches btn-lg                 |
