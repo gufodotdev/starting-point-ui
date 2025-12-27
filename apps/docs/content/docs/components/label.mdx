@@ -37,8 +37,55 @@ Labels work well inline with checkboxes.
 
 ---
 
-## Class reference
+## Disabled state
 
-| Class   | Description                                        |
-| ------- | -------------------------------------------------- |
-| `label` | Styled form label with proper font size and weight |
+Labels automatically dim when paired with a disabled input using the `peer` class.
+
+```html preview
+<div class="flex items-center gap-2">
+  <input class="checkbox peer" type="checkbox" id="disabled-terms" disabled />
+  <label class="label" for="disabled-terms">This option is disabled</label>
+</div>
+```
+
+---
+
+## How it works
+
+The label component is a CSS-only styled label element. It automatically dims when associated with a disabled form control.
+
+### Structure
+
+A label is a native `<label>` element with the `.label` class:
+
+```html
+<label class="label" for="input-id">Label text</label>
+```
+
+### Accessibility
+
+Always use the `for` attribute to associate labels with form controls:
+
+```html
+<label class="label" for="username">Username</label>
+<input class="input" type="text" id="username" />
+```
+
+For disabled inputs, add the `peer` class to the input so the label dims automatically:
+
+```html
+<input class="checkbox peer" type="checkbox" id="option" disabled />
+<label class="label" for="option">Disabled option</label>
+```
+
+### Class reference
+
+All available classes for the label component.
+
+| Class   | Description                                              |
+| ------- | -------------------------------------------------------- |
+| `label` | Add to `<label>` element for styled form label           |
+
+```html
+<label class="label" for="name">Name</label>
+```
