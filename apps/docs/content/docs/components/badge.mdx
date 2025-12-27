@@ -56,7 +56,7 @@ Use badges to display notification counts or status indicators.
 
 ---
 
-## Custom overrides
+## Customization
 
 Combine badge classes with Tailwind utilities for custom styling.
 
@@ -82,14 +82,39 @@ You can also use solid colors for higher contrast.
 
 ---
 
-## Class reference
+## How it works
+
+The badge component is a CSS-only component for displaying short labels, statuses, or counts. It includes variant classes for different visual styles.
+
+### Structure
+
+A badge is typically a `<span>` element with the `.badge` class:
+
+```html
+<span class="badge">Label</span>
+```
+
+Badges can also be used as links:
+
+```html
+<a href="#" class="badge">Clickable</a>
+```
+
+### Class reference
 
 All available classes for the badge component.
 
-| Class               | Description                                |
-| ------------------- | ------------------------------------------ |
-| `badge`             | Base badge styles                          |
-| `badge-default`     | Default filled badge style (default)       |
-| `badge-secondary`   | Secondary muted badge style                |
-| `badge-destructive` | Red destructive/danger badge               |
-| `badge-outline`     | Outlined badge with transparent background |
+| Class               | Description                                                       |
+| ------------------- | ----------------------------------------------------------------- |
+| `badge`             | Add to `<span>` or `<a>` element to apply base badge styles       |
+| `badge-default`     | Add to `.badge` for primary filled style (default)                |
+| `badge-secondary`   | Add to `.badge` for secondary muted style                         |
+| `badge-destructive` | Add to `.badge` for red destructive/danger style                  |
+| `badge-outline`     | Add to `.badge` for outlined style with transparent background    |
+
+```html
+<span class="badge">Default</span>
+<span class="badge badge-secondary">Secondary</span>
+<span class="badge badge-destructive">Destructive</span>
+<span class="badge badge-outline">Outline</span>
+```
