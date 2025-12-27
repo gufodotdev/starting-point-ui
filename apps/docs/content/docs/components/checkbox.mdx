@@ -80,8 +80,35 @@ Checkboxes show a red ring when marked as invalid.
 
 ---
 
-## Class reference
+## How it works
 
-| Class      | Description                                  |
-| ---------- | -------------------------------------------- |
-| `checkbox` | Styled native checkbox with custom checkmark |
+The checkbox component is a CSS-only styled native checkbox input. It uses a custom SVG checkmark that appears when checked, and supports disabled and invalid states.
+
+### Structure
+
+A checkbox is a native `<input type="checkbox">` element with the `.checkbox` class:
+
+```html
+<input class="checkbox" type="checkbox" />
+```
+
+For accessibility, pair checkboxes with labels using matching `id` and `for` attributes:
+
+```html
+<div class="flex items-center gap-2">
+  <input class="checkbox" type="checkbox" id="option" />
+  <label class="label" for="option">Option label</label>
+</div>
+```
+
+### Class reference
+
+All available classes for the checkbox component.
+
+| Class      | Description                                               |
+| ---------- | --------------------------------------------------------- |
+| `checkbox` | Add to `<input type="checkbox">` for styled checkbox      |
+
+```html
+<input class="checkbox" type="checkbox" id="example" />
+```
