@@ -76,7 +76,7 @@ Disable buttons to prevent interaction, such as while processing a request.
 
 ---
 
-## Custom overrides
+## Customization
 
 You can combine button classes with Tailwind utilities for custom styling.
 
@@ -90,22 +90,45 @@ You can combine button classes with Tailwind utilities for custom styling.
 
 ---
 
-## Class reference
+## How it works
+
+The button component is a CSS-only component with variant and size classes. It supports icons, disabled states, and can be used on `<button>` or `<a>` elements.
+
+### Structure
+
+A button uses the `.btn` class as its base:
+
+```html
+<button class="btn">Button</button>
+```
+
+Buttons can also be links:
+
+```html
+<a href="#" class="btn">Link Button</a>
+```
+
+### Class reference
 
 All available classes for the button component.
 
-| Class             | Description                                 |
-| ----------------- | ------------------------------------------- |
-| `btn`             | Base button styles                          |
-| `btn-default`     | Default filled button style (default)       |
-| `btn-destructive` | Red destructive/danger button               |
-| `btn-outline`     | Outlined button with transparent background |
-| `btn-secondary`   | Secondary muted button style                |
-| `btn-ghost`       | Transparent button with hover background    |
-| `btn-link`        | Link-styled button with underline           |
-| `btn-sm`          | Small button size                           |
-| `btn-base`        | Base button size (default)                  |
-| `btn-lg`          | Large button size                           |
-| `btn-icon-sm`     | Small square icon button                    |
-| `btn-icon`        | Square button for icons (base size)         |
-| `btn-icon-lg`     | Large square icon button                    |
+| Class             | Description                                                          |
+| ----------------- | -------------------------------------------------------------------- |
+| `btn`             | Add to `<button>` or `<a>` element to apply base button styles       |
+| `btn-default`     | Add to `.btn` for primary filled style (default)                     |
+| `btn-destructive` | Add to `.btn` for red destructive/danger style                       |
+| `btn-outline`     | Add to `.btn` for outlined style with transparent background         |
+| `btn-secondary`   | Add to `.btn` for secondary muted style                              |
+| `btn-ghost`       | Add to `.btn` for transparent style with hover background            |
+| `btn-link`        | Add to `.btn` for link style with underline on hover                 |
+| `btn-sm`          | Add to `.btn` for small size                                         |
+| `btn-base`        | Add to `.btn` for base size (default)                                |
+| `btn-lg`          | Add to `.btn` for large size                                         |
+| `btn-icon-sm`     | Add to `.btn` for small square icon button                           |
+| `btn-icon`        | Add to `.btn` for square icon button (base size)                     |
+| `btn-icon-lg`     | Add to `.btn` for large square icon button                           |
+
+```html
+<button class="btn btn-outline btn-lg">Large Outline</button>
+<button class="btn btn-ghost btn-icon" aria-label="Close"><icon-x /></button>
+```
