@@ -7,6 +7,7 @@
 
   .dropdown-menu {
     @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md whitespace-nowrap;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
   }
 
   .dropdown-menu.open {
