@@ -49,7 +49,7 @@ const components = {
   ),
   h3: ({ children, ...props }: React.ComponentProps<"h3">) => (
     <h3
-      className="text-base font-semibold tracking-tight mt-3 sm:mt-6 mb-4 scroll-mt-20"
+      className="text-base font-semibold tracking-tight mt-6 sm:mt-12 mb-4 scroll-mt-20"
       {...props}
     >
       {children}
@@ -135,7 +135,9 @@ const components = {
     <th className="text-left font-medium py-3 pr-4 first:w-64">{children}</th>
   ),
   td: ({ children }: React.ComponentProps<"td">) => (
-    <td className="py-3 pr-4 text-muted-foreground text-sm">{children}</td>
+    <td className="py-3 pr-4 text-muted-foreground text-sm first:w-64">
+      {children}
+    </td>
   ),
 };
 
