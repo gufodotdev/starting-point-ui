@@ -158,7 +158,7 @@ Cards come in three variants for different contexts.
 
 ---
 
-## Custom overrides
+## Customization
 
 You can combine card classes with Tailwind utilities for custom styling.
 
@@ -188,15 +188,49 @@ You can combine card classes with Tailwind utilities for custom styling.
 
 ---
 
-## Class reference
+## How it works
 
-| Class               | Description                           |
-| ------------------- | ------------------------------------- |
-| `card`              | Card container with rounded corners   |
-| `card-default`      | Border and shadow (default)           |
-| `card-outline`      | Border only, no shadow                |
-| `card-muted`        | Muted background, no border or shadow |
-| `card-content`      | Content section with padding          |
-| `card-content-sm`   | Small content padding                 |
-| `card-content-base` | Base content padding (default)        |
-| `card-content-lg`   | Large content padding                 |
+The card component is a CSS-only component for grouping related content. It includes variant and size classes for different visual styles and padding options.
+
+### Structure
+
+A card consists of a container and content sections:
+
+```html
+<div class="card">
+  <div class="card-content">
+    <h3>Title</h3>
+    <p>Content goes here.</p>
+  </div>
+</div>
+```
+
+Cards can include images or other elements alongside content:
+
+```html
+<div class="card">
+  <img src="..." alt="..." class="rounded-t-xl" />
+  <div class="card-content">...</div>
+</div>
+```
+
+### Class reference
+
+All available classes for the card component.
+
+| Class               | Description                                                     |
+| ------------------- | --------------------------------------------------------------- |
+| `card`              | Add to container element for base card styles with rounded corners |
+| `card-default`      | Add to `.card` for border and shadow style (default)            |
+| `card-outline`      | Add to `.card` for border only, no shadow                       |
+| `card-muted`        | Add to `.card` for muted background, no border or shadow        |
+| `card-content`      | Add to inner element for content section with padding           |
+| `card-content-sm`   | Add to `.card-content` for small padding                        |
+| `card-content-base` | Add to `.card-content` for base padding (default)               |
+| `card-content-lg`   | Add to `.card-content` for large padding                        |
+
+```html
+<div class="card card-outline">
+  <div class="card-content card-content-sm">...</div>
+</div>
+```
