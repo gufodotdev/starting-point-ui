@@ -130,11 +130,92 @@ Inputs show a red ring when marked as invalid. Use `aria-describedby` to associa
 
 ---
 
-## Class reference
+## Customization
 
-| Class        | Description                                             |
-| ------------ | ------------------------------------------------------- |
-| `input`      | Base input styles with focus ring and validation states |
-| `input-sm`   | Small input, matches btn-sm                             |
-| `input-base` | Base input size (default), matches btn-base             |
-| `input-lg`   | Large input, matches btn-lg                             |
+Combine input classes with Tailwind utilities for custom styling.
+
+```html preview
+<div class="space-y-6 w-full max-w-64">
+  <div class="relative">
+    <icon-search class="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+    <input class="input pl-9" type="text" placeholder="Search..." />
+  </div>
+  <div class="relative">
+    <input class="input pr-9" type="email" placeholder="Email address" />
+    <icon-mail class="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+  </div>
+  <div class="flex">
+    <span class="inline-flex items-center px-3 text-sm text-muted-foreground bg-muted border border-input border-r-0 rounded-l-md">https://</span>
+    <input class="input rounded-l-none" type="text" placeholder="example.com" />
+  </div>
+</div>
+```
+
+---
+
+## How it works
+
+The input component is a CSS-only styled native input element. It supports various input types, size variants, and disabled and invalid states.
+
+### Structure
+
+An input is a native `<input>` element with the `.input` class:
+
+```html
+<input class="input" type="text" placeholder="Enter text" />
+```
+
+### Accessibility
+
+For proper screen reader support, pair inputs with labels using matching `id` and `for` attributes:
+
+```html
+<div class="space-y-2">
+  <label class="label" for="email">Email</label>
+  <input class="input" type="email" id="email" placeholder="you@example.com" />
+</div>
+```
+
+Additional accessibility attributes:
+
+| Attribute                    | Description                                                      |
+| ---------------------------- | ---------------------------------------------------------------- |
+| `id`                         | Add to `.input` to associate with a label                        |
+| `aria-invalid="true"`        | Add to `.input` to indicate the input has an error               |
+| `aria-describedby="id"`      | Add to `.input` to associate with an error message or hint       |
+| `disabled`                   | Add to `.input` to prevent interaction                           |
+| `required`                   | Add to `.input` to indicate the field is required                |
+
+```html
+<div class="space-y-2">
+  <label class="label" for="email">Email</label>
+  <input
+    class="input"
+    type="email"
+    id="email"
+    aria-invalid="true"
+    aria-describedby="email-error"
+    required
+  />
+  <p id="email-error" class="text-sm text-destructive">
+    Please enter a valid email address
+  </p>
+</div>
+```
+
+### Class reference
+
+All available classes for the input component.
+
+| Class        | Description                                                    |
+| ------------ | -------------------------------------------------------------- |
+| `input`      | Add to `<input>` element for styled input with focus ring      |
+| `input-sm`   | Add to `.input` for small size (matches btn-sm)                |
+| `input-base` | Add to `.input` for base size (default, matches btn-base)      |
+| `input-lg`   | Add to `.input` for large size (matches btn-lg)                |
+
+```html
+<input class="input" type="text" />
+<input class="input input-sm" type="text" />
+<input class="input input-lg" type="text" />
+```
