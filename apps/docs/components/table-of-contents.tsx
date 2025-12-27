@@ -11,7 +11,7 @@ export function TableOfContents() {
     tocbot.init({
       tocSelector: ".toc",
       contentSelector: "#content",
-      headingSelector: "#content > h1, #content > h2, #content > h3",
+      headingSelector: "#introduction, #content > h2, #content > h3",
       headingsOffset: 80,
       scrollSmoothOffset: -80,
       collapseDepth: 6,
