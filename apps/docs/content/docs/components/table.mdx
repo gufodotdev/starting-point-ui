@@ -161,7 +161,7 @@ Add `even:bg-muted/50` to table rows for alternating row backgrounds.
 
 ---
 
-## Custom overrides
+## Customization
 
 Combine table classes with Tailwind utilities and other components for custom styling. This example uses the [Card](/docs/components/card) component to create a GitHub-style file browser.
 
@@ -284,14 +284,64 @@ Combine table classes with Tailwind utilities and other components for custom st
 
 ---
 
-## Class reference
+## How it works
 
-| Class          | Element | Description                |
-| -------------- | ------- | -------------------------- |
-| `table`        | `table` | Base table styles          |
-| `table-header` | `thead` | Table header section       |
-| `table-body`   | `tbody` | Table body section         |
-| `table-footer` | `tfoot` | Table footer section       |
-| `table-row`    | `tr`    | Table row with hover state |
-| `table-head`   | `th`    | Table header cell          |
-| `table-cell`   | `td`    | Table data cell            |
+The table component is a CSS-only set of classes for styling native HTML tables. It includes hover states on rows and consistent spacing for cells.
+
+### Structure
+
+A table uses native HTML table elements with corresponding classes:
+
+```html
+<table class="table">
+  <thead class="table-header">
+    <tr class="table-row">
+      <th class="table-head">Header</th>
+    </tr>
+  </thead>
+  <tbody class="table-body">
+    <tr class="table-row">
+      <td class="table-cell">Cell</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+For horizontal scrolling on small screens, wrap the table in a container with `overflow-x-auto`:
+
+```html
+<div class="overflow-x-auto">
+  <table class="table">...</table>
+</div>
+```
+
+### Class reference
+
+All available classes for the table component.
+
+| Class          | Description                                              |
+| -------------- | -------------------------------------------------------- |
+| `table`        | Add to `<table>` element for base table styles           |
+| `table-header` | Add to `<thead>` element for header section styles       |
+| `table-body`   | Add to `<tbody>` element for body section styles         |
+| `table-footer` | Add to `<tfoot>` element for footer section styles       |
+| `table-row`    | Add to `<tr>` element for row styles with hover state    |
+| `table-head`   | Add to `<th>` element for header cell styles             |
+| `table-cell`   | Add to `<td>` element for data cell styles               |
+
+```html
+<table class="table">
+  <thead class="table-header">
+    <tr class="table-row">
+      <th class="table-head">Name</th>
+      <th class="table-head">Email</th>
+    </tr>
+  </thead>
+  <tbody class="table-body">
+    <tr class="table-row">
+      <td class="table-cell">John</td>
+      <td class="table-cell">john@example.com</td>
+    </tr>
+  </tbody>
+</table>
+```
