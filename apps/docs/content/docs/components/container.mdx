@@ -25,7 +25,7 @@ The default container is responsive - narrower on mobile for better readability,
 
 ---
 
-## Container Wide
+## Container wide
 
 A fixed-width container that stays wide regardless of screen size.
 
@@ -37,7 +37,7 @@ A fixed-width container that stays wide regardless of screen size.
 
 ---
 
-## Container Fluid
+## Container fluid
 
 A full-width container with only horizontal padding.
 
@@ -49,10 +49,33 @@ A full-width container with only horizontal padding.
 
 ---
 
-## Class reference
+## How it works
 
-| Class             | Description                                                                    |
-| ----------------- | ------------------------------------------------------------------------------ |
-| `container`       | Responsive width (max-w-3xl on mobile, max-w-7xl on lg), centered with padding |
-| `container-wide`  | Fixed max-w-7xl at all breakpoints, centered with padding                      |
-| `container-fluid` | Full width with horizontal padding only                                        |
+The container utilities are CSS-only classes that constrain content width and center it horizontally. They provide consistent horizontal padding and different max-width options.
+
+### Structure
+
+Apply a container class to any element to constrain its content:
+
+```html
+<div class="container">
+  <h1>Page Title</h1>
+  <p>Page content goes here.</p>
+</div>
+```
+
+### Class reference
+
+All available classes for the container component.
+
+| Class             | Description                                                                              |
+| ----------------- | ---------------------------------------------------------------------------------------- |
+| `container`       | Add to element for responsive width (max-w-3xl on mobile, max-w-7xl on lg), centered    |
+| `container-wide`  | Add to element for fixed max-w-7xl at all breakpoints, centered                          |
+| `container-fluid` | Add to element for full width with horizontal padding only                               |
+
+```html
+<div class="container">...</div>
+<div class="container-wide">...</div>
+<div class="container-fluid">...</div>
+```
