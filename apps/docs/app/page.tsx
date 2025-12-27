@@ -72,8 +72,8 @@ export default function Home() {
                       Open Dialog
                     </button>
                     <dialog id="showcase-dialog" className="dialog">
-                      <div className="dialog-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"></div>
-                      <div className="dialog-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-200">
+                      <div className="dialog-backdrop"></div>
+                      <div className="dialog-panel">
                         <button
                           className="btn btn-ghost btn-icon absolute top-2 right-2"
                           aria-label="Close"
@@ -114,8 +114,8 @@ export default function Home() {
                       Open Sheet
                     </button>
                     <dialog id="showcase-sheet" className="dialog">
-                      <div className="sheet-backdrop data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0"></div>
-                      <div className="sheet-panel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300">
+                      <div className="sheet-backdrop"></div>
+                      <div className="sheet-panel">
                         <button
                           className="btn btn-ghost btn-icon absolute top-4 right-4"
                           aria-label="Close"
@@ -242,7 +242,7 @@ export default function Home() {
                                 >
                                   <MoreHorizontal className="size-4" />
                                 </button>
-                                <div className="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95">
+                                <div className="dropdown-menu">
                                   <a href="#" className="dropdown-item">
                                     View order
                                   </a>
@@ -292,7 +292,7 @@ export default function Home() {
                                 >
                                   <MoreHorizontal className="size-4" />
                                 </button>
-                                <div className="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95">
+                                <div className="dropdown-menu">
                                   <a href="#" className="dropdown-item">
                                     View order
                                   </a>
@@ -340,7 +340,7 @@ export default function Home() {
                                 >
                                   <MoreHorizontal className="size-4" />
                                 </button>
-                                <div className="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95">
+                                <div className="dropdown-menu">
                                   <a href="#" className="dropdown-item">
                                     View order
                                   </a>
@@ -388,7 +388,7 @@ export default function Home() {
                                 >
                                   <MoreHorizontal className="size-4" />
                                 </button>
-                                <div className="dropdown-menu data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95">
+                                <div className="dropdown-menu">
                                   <a href="#" className="dropdown-item">
                                     View order
                                   </a>

@@ -26,7 +26,6 @@
     "starting-point-ui": "*",
     "tailwind-merge": "^3.4.0",
     "tocbot": "^4.36.4",
-    "tw-animate-css": "^1.4.0",
     "unist-util-visit": "^5.0.0",
     "zod": "^4.2.1"
   },
