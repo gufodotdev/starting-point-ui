@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "hast-util-to-string": "^3.0.1",

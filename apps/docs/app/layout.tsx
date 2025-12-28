@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { StartingPointUI } from "@/components/starting-point-ui";
 import { Navbar } from "@/components/navbar";
@@ -28,15 +28,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <StartingPointUI />
-        <Script id="va-init" strategy="beforeInteractive">
-          {`window.va = window.va || function() { (window.vaq = window.vaq || []).push(arguments) }`}
-        </Script>
-        <Script
-          async
-          src="/starting-point-ui-analytics/script.js"
-          data-endpoint="/starting-point-ui-analytics"
-          strategy="afterInteractive"
-        />
+        <Analytics basePath="/starting-point-ui-analytics" />
       </body>
     </html>
   );
