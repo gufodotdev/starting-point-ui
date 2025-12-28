@@ -1,26 +1,18 @@
 # Starting Point UI
 
-A component library built on top of Tailwind CSS.
+An open-source component library built for Tailwind CSS. Inspired by [Shadcn UI](https://ui.shadcn.com).
 
-## Installation
+## Documentation
 
-```sh
-npm install starting-point-ui
-```
+Visit [startingpointui.com](https://www.startingpointui.com) for full documentation, component examples, and guides.
 
-## Usage
+## Getting Started
 
-**CSS** - Add to your stylesheet:
+Visit [startingpointui.com/docs/guides/installation](https://www.startingpointui.com/docs/guides/installation) to get started.
 
-```css
-@import "starting-point-ui";
-```
+## Changelog
 
-**JavaScript** - Add to your HTML:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/starting-point-ui" type="module"></script>
-```
+Visit [startingpointui.com/docs/resources/changelog](https://www.startingpointui.com/docs/resources/changelog) to see what's new.
 
 ## Development
 
@@ -28,3 +20,12 @@ npm install starting-point-ui
 npm install
 npm run dev
 ```
+
+## Community
+
+- [GitHub Discussions](https://github.com/gufodotdev/starting-point-ui/discussions) - Ask questions or suggest features
+- [GitHub Issues](https://github.com/gufodotdev/starting-point-ui/issues) - Report bugs
+
+## License
+
+MIT
