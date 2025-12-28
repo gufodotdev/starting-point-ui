@@ -4,7 +4,7 @@ import { ArrowDown, MoreHorizontal, X } from "lucide-react";
 export const metadata = {
   title: "Starting Point UI",
   description:
-    "A component library built for Tailwind CSS. Copy, paste, and customize. Fully responsive, accessible, open source, and works in any project.",
+    "A component library built for Tailwind CSS. Copy, paste, and customize. Beautiful, accessible, open source, and works in any project.",
 };
 
 export default function Home() {
@@ -27,8 +27,8 @@ export default function Home() {
 
             <p className="mx-auto max-w-3xl text-base sm:text-lg/8 text-muted-foreground mt-6">
               A component library built for Tailwind CSS. Copy, paste, and
-              customize. Fully responsive, accessible, open source, and works in
-              any project.
+              customize. Beautiful, accessible, open source, and works in any
+              project.
             </p>
 
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row mt-8">
