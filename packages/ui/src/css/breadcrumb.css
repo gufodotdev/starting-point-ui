@@ -1,0 +1,24 @@
+/* Starting Point UI Breadcrumb Styles */
+
+@layer components {
+  .breadcrumb {
+    @apply text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5;
+  }
+
+  .breadcrumb-link,
+  .breadcrumb-page {
+    @apply inline-flex items-center gap-1.5 text-foreground;
+  }
+
+  .breadcrumb-link {
+    @apply hover:text-foreground transition-colors;
+  }
+
+  .breadcrumb-separator {
+    @apply [&>svg]:size-3.5;
+  }
+
+  .breadcrumb-collapsed {
+    @apply flex size-9 items-center justify-center;
+  }
+}
