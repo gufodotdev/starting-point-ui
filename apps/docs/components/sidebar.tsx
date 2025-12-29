@@ -17,6 +17,7 @@ const navigation = [
       { title: "Badge", href: "/docs/components/badge" },
       { title: "Breadcrumb", href: "/docs/components/breadcrumb" },
       { title: "Button", href: "/docs/components/button" },
+      { title: "Button Group", href: "/docs/components/button-group" },
       { title: "Card", href: "/docs/components/card" },
       { title: "Checkbox", href: "/docs/components/checkbox" },
       { title: "Container", href: "/docs/components/container" },
