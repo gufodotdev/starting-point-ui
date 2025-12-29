@@ -1,0 +1,32 @@
+/* Starting Point UI Input Group Styles */
+
+@layer components {
+  .input-group {
+    @apply relative flex w-full items-center rounded-md border border-input bg-transparent shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30;
+    @apply has-[:focus-visible]:border-ring has-[:focus-visible]:ring-ring/50 has-[:focus-visible]:ring-[3px];
+    @apply has-[[aria-invalid=true]]:ring-destructive/20 has-[[aria-invalid=true]]:border-destructive dark:has-[[aria-invalid=true]]:ring-destructive/40;
+    @apply has-[:disabled]:opacity-50;
+    @apply [&>.input]:flex-1 [&>.input]:min-w-0 [&>.input]:border-0 [&>.input]:shadow-none [&>.input]:rounded-none [&>.input]:focus-visible:ring-0 [&>.input]:dark:bg-transparent;
+    @apply has-[>.input-group-addon:first-child]:[&>.input]:pl-0 has-[>.input-group-addon:last-child]:[&>.input]:pr-0;
+    /* Default size */
+    @apply [&:where(&:not(.input-group-sm,.input-group-base,.input-group-lg))]:input-group-base;
+  }
+
+  .input-group-addon {
+    @apply flex items-center justify-center gap-2 px-3 shrink-0 text-sm text-muted-foreground select-none cursor-text;
+    @apply [&_svg:not([class*='size-'])]:size-4;
+  }
+}
+
+/* Sizes */
+@utility input-group-sm {
+  @apply h-8;
+}
+
+@utility input-group-base {
+  @apply h-9;
+}
+
+@utility input-group-lg {
+  @apply h-10;
+}
