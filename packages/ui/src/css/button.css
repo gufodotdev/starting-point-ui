@@ -38,7 +38,7 @@
 
 /* Sizes */
 @utility btn-sm {
-  @apply h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5;
+  @apply h-8 gap-1.5 px-3 has-[>svg]:px-2.5;
 }
 
 @utility btn-base {
@@ -46,7 +46,7 @@
 }
 
 @utility btn-lg {
-  @apply h-10 rounded-md px-6 has-[>svg]:px-4;
+  @apply h-10 px-6 has-[>svg]:px-4;
 }
 
 @utility btn-icon-sm {
