@@ -48,9 +48,61 @@ Tailwind CSS form components including inputs, textareas, selects, checkboxes, a
 
 ---
 
+## Input groups
+
+Decorate inputs with icons, text, or other addons using input groups.
+
+```html preview
+<div class="grid gap-6 w-full max-w-sm">
+  <div class="input-group">
+    <span class="input-group-addon"><icon-search /></span>
+    <input class="input" placeholder="Search..." />
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon"><icon-mail /></span>
+    <input class="input" type="email" placeholder="Enter your email" />
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon"><icon-credit-card /></span>
+    <input class="input" placeholder="Card number" />
+    <span class="input-group-addon"><icon-check /></span>
+  </div>
+  <div class="input-group">
+    <input class="input" placeholder="Rate this" />
+    <span class="input-group-addon">
+      <icon-star />
+      <icon-info />
+    </span>
+  </div>
+</div>
+```
+
+Input groups can include text addons for prefixes, suffixes, or units.
+
+```html preview
+<div class="grid gap-6 w-full max-w-sm">
+  <div class="input-group">
+    <span class="input-group-addon">$</span>
+    <input class="input" placeholder="0.00" />
+    <span class="input-group-addon">USD</span>
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon">https://</span>
+    <input class="input" placeholder="example" />
+    <span class="input-group-addon">.com</span>
+  </div>
+  <div class="input-group">
+    <input class="input" placeholder="Enter your username" />
+    <span class="input-group-addon">@company.com</span>
+  </div>
+</div>
+```
+
+---
+
 ## Sizes
 
-Inputs and selects come in three sizes that match button heights.
+Form elements come in three sizes that match button heights.
 
 ```html preview
 <div class="flex flex-col gap-6 w-full max-w-sm">
@@ -59,18 +111,30 @@ Inputs and selects come in three sizes that match button heights.
     <select class="select select-sm flex-1">
       <option>Small</option>
     </select>
+    <div class="input-group input-group-sm flex-1">
+      <span class="input-group-addon"><icon-search /></span>
+      <input class="input" placeholder="Small" />
+    </div>
   </div>
   <div class="flex gap-4 items-end">
     <input class="input flex-1" type="text" placeholder="Base" />
     <select class="select flex-1">
       <option>Base</option>
     </select>
+    <div class="input-group flex-1">
+      <span class="input-group-addon"><icon-search /></span>
+      <input class="input" placeholder="Base" />
+    </div>
   </div>
   <div class="flex gap-4 items-end">
     <input class="input input-lg flex-1" type="text" placeholder="Large" />
     <select class="select select-lg flex-1">
       <option>Large</option>
     </select>
+    <div class="input-group input-group-lg flex-1">
+      <span class="input-group-addon"><icon-search /></span>
+      <input class="input" placeholder="Large" />
+    </div>
   </div>
 </div>
 ```
@@ -83,6 +147,13 @@ Disabled form elements appear faded and cannot be interacted with. Add `peer` to
 
 ```html preview
 <div class="flex flex-col gap-6 w-full max-w-sm">
+  <div class="input-group">
+    <span class="input-group-addon"><icon-search /></span>
+    <input class="input" placeholder="Searching..." disabled />
+    <span class="input-group-addon">
+      <icon-loader-circle class="animate-spin" />
+    </span>
+  </div>
   <input class="input" type="text" placeholder="Disabled input" disabled />
   <select class="select" disabled>
     <option>Disabled select</option>
@@ -136,6 +207,23 @@ Form elements show a red ring when marked as invalid. Use `aria-describedby` to 
     <input class="checkbox" type="checkbox" id="invalid-cb" aria-invalid="true" />
     <label class="label" for="invalid-cb">You must accept the terms</label>
   </div>
+  <div class="grid gap-2">
+    <label class="label" for="amount-invalid">Amount</label>
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <input
+        class="input"
+        id="amount-invalid"
+        value="-50"
+        aria-invalid="true"
+        aria-describedby="amount-error"
+      />
+      <span class="input-group-addon">USD</span>
+    </div>
+    <p id="amount-error" class="text-sm text-destructive">
+      Amount must be positive
+    </p>
+  </div>
 </div>
 ```
 
@@ -143,7 +231,7 @@ Form elements show a red ring when marked as invalid. Use `aria-describedby` to 
 
 ## How it works
 
-Form components are CSS-only styled native HTML elements. They support disabled and invalid states, and follow accessibility best practices.
+Form components are CSS-only styled native HTML elements.
 
 ### Structure
 
@@ -177,23 +265,37 @@ For checkboxes, use an inline layout:
 </div>
 ```
 
+For input groups, wrap the input with addons:
+
+```html
+<div class="input-group">
+  <span class="input-group-addon"><icon-search /></span>
+  <input class="input" placeholder="Search..." />
+</div>
+```
+
 ### Class reference
 
 All available classes for form components.
 
-| Class         | Description                                                      |
-| ------------- | ---------------------------------------------------------------- |
-| `input`       | Add to `<input>` element for styled input                        |
-| `input-sm`    | Add to `.input` for small size                                   |
-| `input-base`  | Add to `.input` for base size (default)                          |
-| `input-lg`    | Add to `.input` for large size                                   |
-| `textarea`    | Add to `<textarea>` element for styled textarea with auto-sizing |
-| `select`      | Add to `<select>` element for styled select with chevron         |
-| `select-sm`   | Add to `.select` for small size                                  |
-| `select-base` | Add to `.select` for base size (default)                         |
-| `select-lg`   | Add to `.select` for large size                                  |
-| `checkbox`    | Add to `<input type="checkbox">` for styled checkbox             |
-| `label`       | Add to `<label>` element for styled form label                   |
+| Class               | Description                                              |
+| ------------------- | -------------------------------------------------------- |
+| `input`             | Add to `<input>` element for styled input                |
+| `input-sm`          | Add to `.input` for small size                           |
+| `input-base`        | Add to `.input` for base size (default)                  |
+| `input-lg`          | Add to `.input` for large size                           |
+| `textarea`          | Add to `<textarea>` element for styled textarea          |
+| `select`            | Add to `<select>` element for styled select with chevron |
+| `select-sm`         | Add to `.select` for small size                          |
+| `select-base`       | Add to `.select` for base size (default)                 |
+| `select-lg`         | Add to `.select` for large size                          |
+| `checkbox`          | Add to `<input type="checkbox">` for styled checkbox     |
+| `label`             | Add to `<label>` element for styled form label           |
+| `input-group`       | Add to container for grouped input styling               |
+| `input-group-sm`    | Add to `.input-group` for small size                     |
+| `input-group-base`  | Add to `.input-group` for base size (default)            |
+| `input-group-lg`    | Add to `.input-group` for large size                     |
+| `input-group-addon` | Add to addon elements (icons, text)                      |
 
 ```html
 <input class="input" type="text" />
@@ -235,4 +337,12 @@ A comprehensive reference of all form elements, variants, and sizes.
 
 <!-- Label -->
 <label class="label">Label</label>
+
+<!-- Input group -->
+<div class="input-group">
+  <span class="input-group-addon"><icon-search /></span>
+  <input class="input" placeholder="Search..." />
+</div>
+<div class="input-group input-group-sm">...</div>
+<div class="input-group input-group-lg">...</div>
 ```
