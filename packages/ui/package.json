@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
+    "dev": "tsup --watch src/css/**/*.css",
     "check-types": "tsc --noEmit",
     "lint": "eslint src/"
   },
