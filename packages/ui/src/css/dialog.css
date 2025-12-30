@@ -1,21 +1,19 @@
 /* Starting Point UI Dialog Styles */
 
-@layer components {
-  .dialog {
-    @apply isolate pointer-events-none fixed inset-0 z-999 w-full h-dvh p-0 bg-transparent border-none max-w-none max-h-none overflow-hidden;
-  }
+@utility dialog {
+  @apply isolate pointer-events-none fixed inset-0 z-999 w-full h-dvh p-0 bg-transparent border-none max-w-none max-h-none overflow-hidden;
 
-  .dialog::backdrop {
+  &::backdrop {
     @apply hidden;
   }
+}
 
-  .dialog-backdrop {
-    @apply fixed inset-0 bg-black/50 -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
-  }
+@utility dialog-backdrop {
+  @apply fixed inset-0 bg-black/50 -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
+  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
+}
 
-  .dialog-panel {
-    @apply fixed pointer-events-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg p-6 max-w-md w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] overflow-y-auto [animation-fill-mode:forwards]!;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:data-[state=closed]:zoom-out-95 [&:not(.no-animation)]:duration-200;
-  }
+@utility dialog-panel {
+  @apply fixed pointer-events-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg p-6 max-w-md w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] overflow-y-auto [animation-fill-mode:forwards]!;
+  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:data-[state=closed]:zoom-out-95 [&:not(.no-animation)]:duration-200;
 }

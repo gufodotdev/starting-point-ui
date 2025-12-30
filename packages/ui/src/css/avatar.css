@@ -1,20 +1,15 @@
 /* Starting Point UI Avatar Styles */
 
-@layer components {
-  .avatar {
-    @apply aspect-square shrink-0 rounded-full object-cover;
-    /* Default Size */
-    @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
-  }
-
-  .avatar-fallback {
-    @apply inline-flex items-center justify-center rounded-full bg-muted text-muted-foreground font-medium;
-    /* Default Size */
-    @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
-  }
+@utility avatar {
+  @apply aspect-square shrink-0 rounded-full object-cover;
+  @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
 }
 
-/* Sizes */
+@utility avatar-fallback {
+  @apply inline-flex items-center justify-center rounded-full bg-muted text-muted-foreground font-medium;
+  @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
+}
+
 @utility avatar-sm {
   @apply size-8 text-xs;
 }
@@ -25,16 +20,4 @@
 
 @utility avatar-lg {
   @apply size-10 text-base;
-}
-
-/* Avatar Group */
-@layer components {
-  .avatar-group {
-    @apply flex -space-x-2;
-  }
-
-  .avatar-group .avatar,
-  .avatar-group .avatar-fallback {
-    @apply ring-2 ring-background;
-  }
 }

@@ -1,0 +1,9 @@
+/* Starting Point UI Avatar Group Styles */
+
+@utility avatar-group {
+  @apply flex -space-x-2;
+}
+
+@utility avatar-group-item {
+  @apply ring-2 ring-background;
+}

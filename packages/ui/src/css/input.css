@@ -1,21 +1,17 @@
 /* Starting Point UI Input Styles */
 
-@layer components {
-  .input {
-    @apply border-input w-full min-w-0 rounded-md border bg-transparent px-3 text-sm shadow-xs transition-[color,box-shadow] outline-none;
-    @apply placeholder:text-muted-foreground;
-    @apply dark:bg-input/30;
-    @apply file:text-foreground file:inline-flex file:border-0 file:bg-transparent file:text-sm file:font-medium;
-    @apply selection:bg-primary selection:text-primary-foreground;
-    @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
-    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
-    /* Default Size */
-    @apply [&:where(&:not(.input-sm,.input-base,.input-lg))]:input-base;
-  }
+@utility input {
+  @apply border-input w-full min-w-0 rounded-md border bg-transparent px-3 text-sm shadow-xs transition-[color,box-shadow] outline-none;
+  @apply placeholder:text-muted-foreground;
+  @apply dark:bg-input/30;
+  @apply file:text-foreground file:inline-flex file:border-0 file:bg-transparent file:text-sm file:font-medium;
+  @apply selection:bg-primary selection:text-primary-foreground;
+  @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+  @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+  @apply [&:where(&:not(.input-sm,.input-base,.input-lg))]:input-base;
 }
 
-/* Sizes */
 @utility input-sm {
   @apply h-8 file:h-8;
 }

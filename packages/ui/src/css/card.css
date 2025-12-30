@@ -1,17 +1,10 @@
 /* Starting Point UI Card Styles */
 
-@layer components {
-  .card {
-    @apply text-card-foreground rounded-xl;
-    @apply [&:where(&:not(.card-default,.card-outline,.card-muted))]:card-default;
-  }
-
-  .card-content {
-    @apply [&:where(&:not(.card-content-sm,.card-content-base,.card-content-lg))]:card-content-base;
-  }
+@utility card {
+  @apply text-card-foreground rounded-xl;
+  @apply [&:where(&:not(.card-default,.card-outline,.card-muted))]:card-default;
 }
 
-/* Variants */
 @utility card-default {
   @apply bg-card border shadow-sm;
 }
@@ -24,7 +17,10 @@
   @apply bg-muted;
 }
 
-/* Sizes */
+@utility card-content {
+  @apply [&:where(&:not(.card-content-sm,.card-content-base,.card-content-lg))]:card-content-base;
+}
+
 @utility card-content-sm {
   @apply p-4;
 }

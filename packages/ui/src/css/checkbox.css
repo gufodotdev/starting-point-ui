@@ -1,23 +1,21 @@
 /* Starting Point UI Checkbox Styles */
 
-@layer components {
-  .checkbox {
-    @apply border-input size-4 shrink-0 rounded-[4px] border shadow-xs transition-[box-shadow,background-color,border-color] outline-none appearance-none cursor-pointer;
-    @apply dark:bg-input/30;
-    @apply checked:bg-primary checked:border-primary;
-    @apply disabled:cursor-not-allowed disabled:opacity-50;
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
-    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
-  }
+@utility checkbox {
+  @apply border-input size-4 shrink-0 rounded-[4px] border shadow-xs transition-[box-shadow,background-color,border-color] outline-none appearance-none cursor-pointer;
+  @apply dark:bg-input/30;
+  @apply checked:bg-primary checked:border-primary;
+  @apply disabled:cursor-not-allowed disabled:opacity-50;
+  @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+  @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
 
-  .checkbox:checked {
+  &:checked {
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
   }
 
-  .dark .checkbox:checked {
+  :is(.dark *) &:checked {
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='black' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
   }
 }

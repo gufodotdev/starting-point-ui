@@ -1,34 +1,32 @@
 /* Starting Point UI Dropdown Styles */
 
-@layer components {
-  .dropdown {
-    @apply relative inline-block;
-  }
+@utility dropdown {
+  @apply relative inline-block;
+}
 
-  .dropdown-menu {
-    @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md whitespace-nowrap;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
-  }
+@utility dropdown-menu {
+  @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md whitespace-nowrap;
+  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
 
-  .dropdown-menu.open {
+  &.open {
     @apply block;
   }
+}
 
-  .dropdown-item {
-    @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors;
-    @apply hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground;
-    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
-  }
+@utility dropdown-item {
+  @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors;
+  @apply hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground;
+  @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
 
-  .dropdown-item[aria-disabled="true"] {
+  &[aria-disabled="true"] {
     @apply pointer-events-none opacity-50;
   }
+}
 
-  .dropdown-label {
-    @apply px-2.5 py-1.5 text-sm font-medium;
-  }
+@utility dropdown-label {
+  @apply px-2.5 py-1.5 text-sm font-medium;
+}
 
-  .dropdown-separator {
-    @apply -mx-1 my-1 h-px bg-border;
-  }
+@utility dropdown-separator {
+  @apply -mx-1 my-1 h-px bg-border;
 }
