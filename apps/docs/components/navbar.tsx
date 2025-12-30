@@ -3,6 +3,7 @@ import { Github, Menu, PanelLeftClose } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Sidebar } from "@/components/sidebar";
+import { MobileNavCloser } from "@/components/mobile-nav-closer";
 
 export function Navbar() {
   return (
@@ -56,6 +57,7 @@ export function Navbar() {
           <Sidebar />
         </div>
       </dialog>
+      <MobileNavCloser />
     </>
   );
 }
