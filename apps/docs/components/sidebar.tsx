@@ -8,6 +8,7 @@ const navigation = [
       { title: "Introduction", href: "/docs/guides/introduction" },
       { title: "Installation", href: "/docs/guides/installation" },
       { title: "Theming", href: "/docs/guides/theming" },
+      { title: "Customization", href: "/docs/guides/customization" },
       { title: "Help", href: "/docs/guides/help" },
     ],
   },
