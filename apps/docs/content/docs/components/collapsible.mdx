@@ -1,0 +1,176 @@
+---
+title: Collapsible
+description: A Tailwind CSS collapsible component for showing and hiding content.
+---
+
+A Tailwind CSS collapsible component for showing and hiding content.
+
+```html preview
+<div class="flex w-full max-w-sm flex-col gap-2">
+  <div class="flex items-center justify-between gap-4">
+    <h4 class="text-sm font-semibold">@gufodev starred 3 repositories</h4>
+    <button
+      class="btn btn-ghost btn-icon btn-sm"
+      type="button"
+      data-sp-toggle="collapsible"
+      data-sp-target="#demo-collapsible"
+      aria-expanded="false"
+      aria-controls="demo-collapsible"
+    >
+      <icon-chevrons-up-down class="size-4 in-aria-expanded:hidden" />
+      <icon-x class="size-4 hidden in-aria-expanded:block" />
+      <span class="sr-only">Toggle</span>
+    </button>
+  </div>
+  <div class="rounded-md border px-4 py-2 font-mono text-sm">
+    tailwindlabs/tailwindcss
+  </div>
+  <div id="demo-collapsible" class="collapsible-panel">
+    <div class="collapsible-content">
+      <div class="rounded-md border px-4 py-2 font-mono text-sm">
+        twbs/bootstrap
+      </div>
+      <div class="rounded-md border px-4 py-2 font-mono text-sm">
+        shadcn-ui/ui
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Initially open
+
+Add the `open` class to the `.collapsible-panel` element to show the panel by default.
+
+```html preview
+<div class="flex w-full max-w-sm flex-col gap-2">
+  <div class="flex items-center justify-between gap-4">
+    <h4 class="text-sm font-semibold">@gufodev starred 3 repositories</h4>
+    <button
+      class="btn btn-ghost btn-icon btn-sm"
+      type="button"
+      data-sp-toggle="collapsible"
+      data-sp-target="#open-collapsible"
+      aria-expanded="true"
+      aria-controls="open-collapsible"
+    >
+      <icon-chevrons-up-down class="size-4 in-aria-expanded:hidden" />
+      <icon-x class="size-4 hidden in-aria-expanded:block" />
+      <span class="sr-only">Toggle</span>
+    </button>
+  </div>
+  <div class="rounded-md border px-4 py-2 font-mono text-sm">
+    tailwindlabs/tailwindcss
+  </div>
+  <div id="open-collapsible" class="collapsible-panel open">
+    <div class="collapsible-content">
+      <div class="rounded-md border px-4 py-2 font-mono text-sm">
+        twbs/bootstrap
+      </div>
+      <div class="rounded-md border px-4 py-2 font-mono text-sm">
+        shadcn-ui/ui
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## How it works
+
+The collapsible component uses a small JavaScript module that handles opening and closing content panels.
+
+### Structure
+
+A collapsible consists of three parts:
+
+1. **Trigger** - A button with `data-sp-toggle="collapsible"` and `data-sp-target`
+2. **`.collapsible-panel`** - Panel wrapper that controls visibility and animations
+3. **`.collapsible-content`** - Flex column container for collapsed items
+
+```html
+<button data-sp-toggle="collapsible" data-sp-target="#my-collapsible">
+  Toggle
+</button>
+<div id="my-collapsible" class="collapsible-panel">
+  <div class="collapsible-content">
+    <div>Item 1</div>
+    <div>Item 2</div>
+  </div>
+</div>
+```
+
+### Opening and closing
+
+Use data attributes to control the collapsible without writing JavaScript.
+
+Add `data-sp-toggle="collapsible"` to the trigger button and `data-sp-target` to specify which panel to toggle:
+
+```html
+<button data-sp-toggle="collapsible" data-sp-target="#my-collapsible">
+  Toggle
+</button>
+```
+
+For programmatic control, use the global `sp.collapsible` module:
+
+```js
+const collapsible = document.querySelector("#my-collapsible");
+
+sp.collapsible.open(collapsible);
+sp.collapsible.close(collapsible);
+sp.collapsible.toggle(collapsible);
+```
+
+### Animation
+
+The collapsible includes a smooth height animation using CSS keyframes.
+
+To disable animations, add `no-animation` to the panel:
+
+```html
+<div class="collapsible-panel no-animation">...</div>
+```
+
+### Accessibility
+
+For proper accessibility, add `aria-expanded` and `aria-controls` to the trigger button:
+
+```html
+<button
+  data-sp-toggle="collapsible"
+  data-sp-target="#my-collapsible"
+  aria-expanded="false"
+  aria-controls="my-collapsible"
+>
+  Toggle
+</button>
+```
+
+The JavaScript will automatically update `aria-expanded` when the collapsible opens and closes.
+
+#### Keyboard navigation
+
+| Key               | Action                                         |
+| ----------------- | ---------------------------------------------- |
+| `Enter` / `Space` | Opens/closes the panel when trigger is focused |
+
+### Class reference
+
+| Class                 | Description                                           |
+| --------------------- | ----------------------------------------------------- |
+| `collapsible-panel`   | Panel wrapper that controls visibility and animations |
+| `collapsible-content` | Flex column container for collapsed items             |
+| `open`                | Add to `.collapsible-panel` to show by default        |
+| `no-animation`        | Add to `.collapsible-panel` to disable animations     |
+
+### Data attributes
+
+| Attribute                      | Description                                                        |
+| ------------------------------ | ------------------------------------------------------------------ |
+| `data-sp-toggle="collapsible"` | Add to trigger button to toggle the collapsible panel              |
+| `data-sp-target="#id"`         | Add to trigger button to specify which panel to toggle             |
+| `data-state`                   | Set on `.collapsible-panel` to `open` or `closed` during animation |

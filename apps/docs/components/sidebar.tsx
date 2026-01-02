@@ -20,6 +20,7 @@ const navigation = [
       { title: "Breadcrumb", href: "/docs/components/breadcrumb" },
       { title: "Button", href: "/docs/components/button" },
       { title: "Card", href: "/docs/components/card" },
+      { title: "Collapsible", href: "/docs/components/collapsible" },
       { title: "Container", href: "/docs/components/container" },
       { title: "Dialog", href: "/docs/components/dialog" },
       { title: "Dropdown", href: "/docs/components/dropdown" },
