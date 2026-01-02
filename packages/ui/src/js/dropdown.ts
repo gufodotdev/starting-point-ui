@@ -7,7 +7,7 @@ import {
   offset,
   type Placement,
 } from "@floating-ui/dom";
-import { waitForAnimations } from "./utils";
+import { findNextEnabled, isDisabled, waitForAnimations } from "./utils";
 
 function getMenu(dropdown: HTMLElement): HTMLElement | null {
   return dropdown.querySelector(".dropdown-menu");
@@ -102,7 +102,7 @@ function handleClick(e: MouseEvent) {
   const item = target.closest<HTMLElement>(".dropdown-item");
   if (item) {
     // Ignore disabled items
-    if (item.getAttribute("aria-disabled") === "true") {
+    if (isDisabled(item)) {
       e.preventDefault();
       return;
     }
@@ -150,11 +150,7 @@ function handleKeydown(e: KeyboardEvent) {
   const menu = dropdown ? getMenu(dropdown) : null;
   if (!menu?.classList.contains("open")) return;
 
-  const items = [
-    ...menu.querySelectorAll<HTMLElement>(
-      ".dropdown-item:not([aria-disabled='true'])"
-    ),
-  ];
+  const items = [...menu.querySelectorAll<HTMLElement>(".dropdown-item")];
   const currentIndex = items.indexOf(target);
 
   let nextItem: HTMLElement | null = null;
@@ -163,26 +159,28 @@ function handleKeydown(e: KeyboardEvent) {
     case "ArrowDown":
       e.preventDefault();
       if (currentIndex < 0) {
-        nextItem = items[0];
+        nextItem = items.find((item) => !isDisabled(item)) ?? null;
       } else {
-        nextItem = items[(currentIndex + 1) % items.length];
+        nextItem = findNextEnabled(items, currentIndex, 1);
       }
       break;
     case "ArrowUp":
       e.preventDefault();
       if (currentIndex < 0) {
-        nextItem = items[items.length - 1];
+        nextItem =
+          [...items].reverse().find((item) => !isDisabled(item)) ?? null;
       } else {
-        nextItem = items[(currentIndex - 1 + items.length) % items.length];
+        nextItem = findNextEnabled(items, currentIndex, -1);
       }
       break;
     case "Home":
       e.preventDefault();
-      nextItem = items[0];
+      nextItem = items.find((item) => !isDisabled(item)) ?? null;
       break;
     case "End":
       e.preventDefault();
-      nextItem = items[items.length - 1];
+      nextItem =
+        [...items].reverse().find((item) => !isDisabled(item)) ?? null;
       break;
   }
 
