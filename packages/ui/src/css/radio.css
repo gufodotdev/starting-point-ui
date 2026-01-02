@@ -1,0 +1,21 @@
+/* Starting Point UI Radio Styles */
+
+@utility radio {
+  @apply border-input text-primary size-4 shrink-0 rounded-full border shadow-xs outline-none appearance-none cursor-pointer;
+  @apply transition-[color,box-shadow];
+  @apply dark:bg-input/30;
+  @apply disabled:cursor-not-allowed disabled:opacity-50;
+  @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+  @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+
+  &:checked {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3' fill='%23171717'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  :is(.dark *) &:checked {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3' fill='%23fafafa'/%3e%3c/svg%3e");
+  }
+}
