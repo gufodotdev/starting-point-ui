@@ -15,6 +15,7 @@ const navigation = [
   {
     title: "Components",
     items: [
+      { title: "Accordion", href: "/docs/components/accordion" },
       { title: "Avatar", href: "/docs/components/avatar" },
       { title: "Badge", href: "/docs/components/badge" },
       { title: "Breadcrumb", href: "/docs/components/breadcrumb" },
