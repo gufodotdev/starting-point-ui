@@ -1,0 +1,66 @@
+/* Starting Point UI Accordion Styles */
+
+@utility accordion {
+  @apply w-full divide-y;
+}
+
+@utility accordion-trigger {
+  @apply flex w-full flex-1 items-center gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
+  @apply [&:where(&:not(.accordion-trigger-icon-arrow,.accordion-trigger-icon-plus,.accordion-trigger-icon-none))]:accordion-trigger-icon-arrow;
+  @apply [&:where(&:not(.accordion-trigger-icon-start,.accordion-trigger-icon-end))]:accordion-trigger-icon-end;
+
+  &::after {
+    @apply shrink-0 size-4 transition-transform duration-200;
+    content: "";
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+}
+
+@utility accordion-trigger-icon-arrow {
+  &::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
+  }
+
+  &[aria-expanded="true"]::after {
+    @apply rotate-180;
+  }
+}
+
+@utility accordion-trigger-icon-plus {
+  &::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M5 12h14'/%3e%3cpath d='M12 5v14'/%3e%3c/svg%3e");
+  }
+
+  &[aria-expanded="true"]::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M5 12h14'/%3e%3c/svg%3e");
+  }
+}
+
+@utility accordion-trigger-icon-none {
+  &::after {
+    @apply hidden;
+  }
+}
+
+@utility accordion-trigger-icon-end {
+  @apply justify-between;
+}
+
+@utility accordion-trigger-icon-start {
+  @apply flex-row-reverse justify-end;
+}
+
+@utility accordion-panel {
+  @apply invisible h-0 overflow-hidden;
+  @apply [&:not(.no-animation)]:data-[state=open]:animate-accordion-down;
+  @apply [&:not(.no-animation)]:data-[state=closed]:animate-accordion-up;
+
+  &.open {
+    @apply visible h-auto;
+  }
+}
+
+@utility accordion-content {
+  @apply pb-4 text-sm/6 text-muted-foreground;
+}

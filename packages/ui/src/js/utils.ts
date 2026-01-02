@@ -27,3 +27,24 @@ export async function waitForAnimations(
   if (animations.length === 0) return;
   await Promise.all(animations.map((a) => a.finished));
 }
+
+export function isDisabled(el: HTMLElement): boolean {
+  return (
+    el.hasAttribute("disabled") || el.getAttribute("aria-disabled") === "true"
+  );
+}
+
+export function findNextEnabled(
+  items: HTMLElement[],
+  startIndex: number,
+  direction: 1 | -1
+): HTMLElement | null {
+  const len = items.length;
+  for (let i = 1; i <= len; i++) {
+    const index = (startIndex + i * direction + len) % len;
+    if (!isDisabled(items[index])) {
+      return items[index];
+    }
+  }
+  return null;
+}

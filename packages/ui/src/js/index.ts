@@ -1,15 +1,17 @@
 // Starting Point UI - JavaScript
 
+import * as accordion from "./accordion";
 import * as collapsible from "./collapsible";
 import * as dialog from "./dialog";
 import * as dropdown from "./dropdown";
 import * as tabs from "./tabs";
 
-export { collapsible, dialog, dropdown, tabs };
+export { accordion, collapsible, dialog, dropdown, tabs };
 
 declare global {
   interface Window {
     sp: {
+      accordion: typeof accordion;
       collapsible: typeof collapsible;
       dialog: typeof dialog;
       dropdown: typeof dropdown;
@@ -19,5 +21,5 @@ declare global {
 }
 
 if (typeof window !== "undefined") {
-  window.sp = { collapsible, dialog, dropdown, tabs };
+  window.sp = { accordion, collapsible, dialog, dropdown, tabs };
 }
