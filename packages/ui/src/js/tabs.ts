@@ -1,7 +1,9 @@
 // Starting Point UI Tabs Module
 
+import { findNextEnabled, isDisabled } from "./utils";
+
 export function select(tab: HTMLElement) {
-  if (tab.hasAttribute("disabled")) return;
+  if (isDisabled(tab)) return;
 
   const tabList = tab.closest(".tab-list");
   if (!tabList) return;
@@ -37,21 +39,6 @@ function handleClick(e: MouseEvent) {
   }
 }
 
-function findNextEnabledTab(
-  tabs: HTMLElement[],
-  startIndex: number,
-  direction: 1 | -1
-): HTMLElement | null {
-  const len = tabs.length;
-  for (let i = 1; i <= len; i++) {
-    const index = (startIndex + i * direction + len) % len;
-    if (!tabs[index].hasAttribute("disabled")) {
-      return tabs[index];
-    }
-  }
-  return null;
-}
-
 function handleKeydown(e: KeyboardEvent) {
   const target = e.target as HTMLElement;
   if (!target.classList.contains("tab")) return;
@@ -66,16 +53,16 @@ function handleKeydown(e: KeyboardEvent) {
 
   switch (e.key) {
     case "ArrowLeft":
-      nextTab = findNextEnabledTab(tabs, currentIndex, -1);
+      nextTab = findNextEnabled(tabs, currentIndex, -1);
       break;
     case "ArrowRight":
-      nextTab = findNextEnabledTab(tabs, currentIndex, 1);
+      nextTab = findNextEnabled(tabs, currentIndex, 1);
       break;
     case "Home":
-      nextTab = tabs.find((t) => !t.hasAttribute("disabled")) ?? null;
+      nextTab = tabs.find((t) => !isDisabled(t)) ?? null;
       break;
     case "End":
-      nextTab = [...tabs].reverse().find((t) => !t.hasAttribute("disabled")) ?? null;
+      nextTab = [...tabs].reverse().find((t) => !isDisabled(t)) ?? null;
       break;
   }
 
