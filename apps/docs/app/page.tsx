@@ -74,30 +74,32 @@ export default function Home() {
                     <dialog id="showcase-dialog" className="dialog">
                       <div className="dialog-backdrop"></div>
                       <div className="dialog-panel">
-                        <button
-                          className="btn btn-ghost btn-icon absolute top-2 right-2"
-                          aria-label="Close"
-                          data-sp-dismiss="dialog"
-                        >
-                          <X />
-                        </button>
-                        <h2 className="text-lg font-semibold mb-2">
-                          Dialog Title
-                        </h2>
-                        <p className="text-muted-foreground mb-4">
-                          This is a modal dialog. Click the backdrop or press
-                          Escape to close.
-                        </p>
-                        <div className="flex gap-2 justify-end">
+                        <div className="dialog-content">
                           <button
-                            className="btn btn-outline"
+                            className="btn btn-ghost btn-icon absolute top-2 right-2"
+                            aria-label="Close"
                             data-sp-dismiss="dialog"
                           >
-                            Cancel
+                            <X />
                           </button>
-                          <button className="btn" data-sp-dismiss="dialog">
-                            Confirm
-                          </button>
+                          <h2 className="text-lg font-semibold mb-2">
+                            Dialog Title
+                          </h2>
+                          <p className="text-muted-foreground mb-4">
+                            This is a modal dialog. Click the backdrop or press
+                            Escape to close.
+                          </p>
+                          <div className="flex gap-2 justify-end">
+                            <button
+                              className="btn btn-outline"
+                              data-sp-dismiss="dialog"
+                            >
+                              Cancel
+                            </button>
+                            <button className="btn" data-sp-dismiss="dialog">
+                              Confirm
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </dialog>
