@@ -1,9 +1,9 @@
 ---
 title: Forms
-description: Tailwind CSS form components including inputs, textareas, selects, checkboxes, and labels.
+description: Tailwind CSS form components including inputs, textareas, selects, checkboxes, radios, switches, and labels.
 ---
 
-Tailwind CSS form components including inputs, textareas, selects, checkboxes, and labels.
+Tailwind CSS form components including inputs, textareas, selects, checkboxes, radios, switches, and labels.
 
 ```html preview
 <form class="grid gap-8 max-w-sm">
@@ -13,7 +13,12 @@ Tailwind CSS form components including inputs, textareas, selects, checkboxes, a
   </div>
   <div class="grid gap-3">
     <label class="label" for="email">Email</label>
-    <input class="input" type="email" id="email" placeholder="john@example.com" />
+    <input
+      class="input"
+      type="email"
+      id="email"
+      placeholder="john@example.com"
+    />
   </div>
   <div class="grid gap-3">
     <label class="label" for="event-date">Event date</label>
@@ -36,11 +41,38 @@ Tailwind CSS form components including inputs, textareas, selects, checkboxes, a
   </div>
   <div class="grid gap-3">
     <label class="label" for="details">Additional details</label>
-    <textarea class="textarea" id="details" placeholder="Tell us about your event, dietary requirements, venue details..."></textarea>
+    <textarea
+      class="textarea"
+      id="details"
+      placeholder="Tell us about your event, dietary requirements, venue details..."
+    ></textarea>
+  </div>
+  <div class="grid gap-3">
+    <span class="label">Payment method</span>
+    <div class="grid gap-3">
+      <div class="flex items-center gap-2">
+        <input class="radio" type="radio" name="payment" id="card" checked />
+        <label class="label" for="card">Credit card</label>
+      </div>
+      <div class="flex items-center gap-2">
+        <input class="radio" type="radio" name="payment" id="paypal" />
+        <label class="label" for="paypal">PayPal</label>
+      </div>
+      <div class="flex items-center gap-2">
+        <input class="radio" type="radio" name="payment" id="bank" />
+        <label class="label" for="bank">Bank transfer</label>
+      </div>
+    </div>
   </div>
   <div class="flex items-center gap-2">
     <input class="checkbox" type="checkbox" id="newsletter" />
-    <label class="label" for="newsletter">Send me news and special offers</label>
+    <label class="label" for="newsletter"
+      >Send me news and special offers</label
+    >
+  </div>
+  <div class="flex items-center gap-2">
+    <input class="switch" type="checkbox" id="notifications" role="switch" />
+    <label class="label" for="notifications">Enable notifications</label>
   </div>
   <button class="btn" type="submit">Submit Request</button>
 </form>
@@ -167,10 +199,29 @@ Disabled form elements appear faded and cannot be interacted with. Add `peer` to
   <select class="select" disabled>
     <option>Disabled select</option>
   </select>
-  <textarea class="textarea" placeholder="Disabled textarea" disabled></textarea>
+  <textarea
+    class="textarea"
+    placeholder="Disabled textarea"
+    disabled
+  ></textarea>
   <div class="flex items-center gap-2">
-    <input class="checkbox peer" type="checkbox" id="disabled-checkbox" disabled />
+    <input
+      class="checkbox peer"
+      type="checkbox"
+      id="disabled-checkbox"
+      disabled
+    />
     <label class="label" for="disabled-checkbox">Disabled checkbox</label>
+  </div>
+  <div class="flex items-center gap-2">
+    <input
+      class="switch peer"
+      type="checkbox"
+      id="disabled-switch"
+      role="switch"
+      disabled
+    />
+    <label class="label" for="disabled-switch">Disabled switch</label>
   </div>
 </div>
 ```
@@ -213,7 +264,12 @@ Form elements show a red ring when marked as invalid. Use `aria-describedby` to 
     </p>
   </div>
   <div class="flex items-center gap-2">
-    <input class="checkbox" type="checkbox" id="invalid-cb" aria-invalid="true" />
+    <input
+      class="checkbox"
+      type="checkbox"
+      id="invalid-cb"
+      aria-invalid="true"
+    />
     <label class="label" for="invalid-cb">You must accept the terms</label>
   </div>
   <div class="grid gap-2">
@@ -287,30 +343,34 @@ For input groups, wrap the input with addons:
 
 All available classes for form components.
 
-| Class               | Description                                              |
-| ------------------- | -------------------------------------------------------- |
-| `input`             | Add to `<input>` element for styled input                |
-| `input-sm`          | Add to `.input` for small size                           |
-| `input-base`        | Add to `.input` for base size (default)                  |
-| `input-lg`          | Add to `.input` for large size                           |
-| `textarea`          | Add to `<textarea>` element for styled textarea          |
-| `select`            | Add to `<select>` element for styled select with chevron |
-| `select-sm`         | Add to `.select` for small size                          |
-| `select-base`       | Add to `.select` for base size (default)                 |
-| `select-lg`         | Add to `.select` for large size                          |
-| `checkbox`          | Add to `<input type="checkbox">` for styled checkbox     |
-| `label`             | Add to `<label>` element for styled form label           |
-| `input-group`       | Add to container for grouped input styling               |
-| `input-group-sm`    | Add to `.input-group` for small size                     |
-| `input-group-base`  | Add to `.input-group` for base size (default)            |
-| `input-group-lg`    | Add to `.input-group` for large size                     |
-| `input-group-addon` | Add to addon elements (icons, text)                      |
+| Class               | Description                                               |
+| ------------------- | --------------------------------------------------------- |
+| `input`             | Add to `<input>` element for styled input                 |
+| `input-sm`          | Add to `.input` for small size                            |
+| `input-base`        | Add to `.input` for base size (default)                   |
+| `input-lg`          | Add to `.input` for large size                            |
+| `textarea`          | Add to `<textarea>` element for styled textarea           |
+| `select`            | Add to `<select>` element for styled select with chevron  |
+| `select-sm`         | Add to `.select` for small size                           |
+| `select-base`       | Add to `.select` for base size (default)                  |
+| `select-lg`         | Add to `.select` for large size                           |
+| `checkbox`          | Add to `<input type="checkbox">` for styled checkbox      |
+| `radio`             | Add to `<input type="radio">` for styled radio button     |
+| `switch`            | Add to `<input type="checkbox">` for styled toggle switch |
+| `label`             | Add to `<label>` element for styled form label            |
+| `input-group`       | Add to container for grouped input styling                |
+| `input-group-sm`    | Add to `.input-group` for small size                      |
+| `input-group-base`  | Add to `.input-group` for base size (default)             |
+| `input-group-lg`    | Add to `.input-group` for large size                      |
+| `input-group-addon` | Add to addon elements (icons, text)                       |
 
 ```html
 <input class="input" type="text" />
 <input class="input input-sm" type="text" />
 <textarea class="textarea"></textarea>
-<select class="select">...</select>
+<select class="select">
+  ...
+</select>
 <input class="checkbox" type="checkbox" />
 <label class="label">Label</label>
 ```
@@ -337,12 +397,24 @@ A comprehensive reference of all form elements, variants, and sizes.
 <textarea class="textarea"></textarea>
 
 <!-- Select and sizes -->
-<select class="select">...</select>
-<select class="select select-sm">...</select>
-<select class="select select-lg">...</select>
+<select class="select">
+  ...
+</select>
+<select class="select select-sm">
+  ...
+</select>
+<select class="select select-lg">
+  ...
+</select>
 
 <!-- Checkbox -->
 <input class="checkbox" type="checkbox" />
+
+<!-- Radio -->
+<input class="radio" type="radio" name="example" />
+
+<!-- Switch -->
+<input class="switch" type="checkbox" role="switch" />
 
 <!-- Label -->
 <label class="label">Label</label>
