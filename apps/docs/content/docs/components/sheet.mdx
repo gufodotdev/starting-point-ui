@@ -18,18 +18,20 @@ A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel">
-    <button
-      class="btn btn-ghost btn-icon absolute top-4 right-4"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="sheet-demo-title" class="text-lg font-semibold">Sheet Title</h2>
-    <p id="sheet-demo-desc" class="text-muted-foreground text-sm">
-      This sheet slides in from the left. Great for navigation menus or
-      sidebars.
-    </p>
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-demo-title" class="text-lg font-semibold">Sheet Title</h2>
+      <p id="sheet-demo-desc" class="text-muted-foreground text-sm">
+        This sheet slides in from the left. Great for navigation menus or
+        sidebars.
+      </p>
+    </div>
   </div>
 </dialog>
 ```
@@ -64,11 +66,13 @@ The backdrop is what creates the modal behavior. Add `.sheet-backdrop` to block 
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel">
-    <h2 id="sheet-modal-title" class="text-lg font-semibold mb-2">Modal</h2>
-    <p id="sheet-modal-desc" class="text-muted-foreground text-sm mb-4">
-      Background is blocked. Click backdrop or press Escape to close.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="sheet-content">
+      <h2 id="sheet-modal-title" class="text-lg font-semibold mb-2">Modal</h2>
+      <p id="sheet-modal-desc" class="text-muted-foreground text-sm mb-4">
+        Background is blocked. Click backdrop or press Escape to close.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 
@@ -79,11 +83,15 @@ The backdrop is what creates the modal behavior. Add `.sheet-backdrop` to block 
   aria-describedby="sheet-nonmodal-desc"
 >
   <div class="sheet-panel">
-    <h2 id="sheet-nonmodal-title" class="text-lg font-semibold mb-2">Non-modal</h2>
-    <p id="sheet-nonmodal-desc" class="text-muted-foreground text-sm mb-4">
-      You can interact with the page behind this sheet.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="sheet-content">
+      <h2 id="sheet-nonmodal-title" class="text-lg font-semibold mb-2">
+        Non-modal
+      </h2>
+      <p id="sheet-nonmodal-desc" class="text-muted-foreground text-sm mb-4">
+        You can interact with the page behind this sheet.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 ```
@@ -134,17 +142,19 @@ Use direction utilities to control which edge the sheet slides in from.
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel sheet-left">
-    <button
-      class="btn btn-ghost btn-icon absolute top-4 right-4"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="sheet-left-title" class="text-lg font-semibold">Left Sheet</h2>
-    <p id="sheet-left-desc" class="text-muted-foreground text-sm">
-      Great for navigation menus or sidebars.
-    </p>
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-left-title" class="text-lg font-semibold">Left Sheet</h2>
+      <p id="sheet-left-desc" class="text-muted-foreground text-sm">
+        Great for navigation menus or sidebars.
+      </p>
+    </div>
   </div>
 </dialog>
 
@@ -156,17 +166,19 @@ Use direction utilities to control which edge the sheet slides in from.
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel sheet-right">
-    <button
-      class="btn btn-ghost btn-icon absolute top-4 right-4"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="sheet-right-title" class="text-lg font-semibold">Right Sheet</h2>
-    <p id="sheet-right-desc" class="text-muted-foreground text-sm">
-      Great for detail views, settings, or cart panels.
-    </p>
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-right-title" class="text-lg font-semibold">Right Sheet</h2>
+      <p id="sheet-right-desc" class="text-muted-foreground text-sm">
+        Great for detail views, settings, or cart panels.
+      </p>
+    </div>
   </div>
 </dialog>
 
@@ -178,19 +190,21 @@ Use direction utilities to control which edge the sheet slides in from.
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel sheet-top">
-    <div class="flex items-center justify-between">
-      <h2 id="sheet-top-title" class="text-lg font-semibold">Top Sheet</h2>
-      <button
-        class="btn btn-ghost btn-icon"
-        aria-label="Close"
-        data-sp-dismiss="dialog"
-      >
-        <icon-x />
-      </button>
+    <div class="sheet-content">
+      <div class="flex items-center justify-between">
+        <h2 id="sheet-top-title" class="text-lg font-semibold">Top Sheet</h2>
+        <button
+          class="btn btn-ghost btn-icon"
+          aria-label="Close"
+          data-sp-dismiss="dialog"
+        >
+          <icon-x />
+        </button>
+      </div>
+      <p id="sheet-top-desc" class="text-muted-foreground text-sm">
+        Great for notifications, alerts, or search bars.
+      </p>
     </div>
-    <p id="sheet-top-desc" class="text-muted-foreground text-sm">
-      Great for notifications, alerts, or search bars.
-    </p>
   </div>
 </dialog>
 
@@ -202,19 +216,23 @@ Use direction utilities to control which edge the sheet slides in from.
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel sheet-bottom">
-    <div class="flex items-center justify-between">
-      <h2 id="sheet-bottom-title" class="text-lg font-semibold">Bottom Sheet</h2>
-      <button
-        class="btn btn-ghost btn-icon"
-        aria-label="Close"
-        data-sp-dismiss="dialog"
-      >
-        <icon-x />
-      </button>
+    <div class="sheet-content">
+      <div class="flex items-center justify-between">
+        <h2 id="sheet-bottom-title" class="text-lg font-semibold">
+          Bottom Sheet
+        </h2>
+        <button
+          class="btn btn-ghost btn-icon"
+          aria-label="Close"
+          data-sp-dismiss="dialog"
+        >
+          <icon-x />
+        </button>
+      </div>
+      <p id="sheet-bottom-desc" class="text-muted-foreground text-sm">
+        Great for mobile actions, share menus, or quick forms.
+      </p>
     </div>
-    <p id="sheet-bottom-desc" class="text-muted-foreground text-sm">
-      Great for mobile actions, share menus, or quick forms.
-    </p>
   </div>
 </dialog>
 ```
@@ -243,15 +261,19 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel sheet-right">
-    <h2 id="sheet-static-title" class="text-lg font-semibold mb-2">Are you sure?</h2>
-    <p id="sheet-static-desc" class="text-muted-foreground text-sm mb-4">
-      This action cannot be undone. Backdrop clicks and Escape are disabled.
-    </p>
-    <div class="flex gap-2">
-      <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
-      <button class="btn btn-destructive" data-sp-dismiss="dialog">
-        Delete
-      </button>
+    <div class="sheet-content">
+      <h2 id="sheet-static-title" class="text-lg font-semibold mb-2">
+        Are you sure?
+      </h2>
+      <p id="sheet-static-desc" class="text-muted-foreground text-sm mb-4">
+        This action cannot be undone. Backdrop clicks and Escape are disabled.
+      </p>
+      <div class="flex gap-2">
+        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn btn-destructive" data-sp-dismiss="dialog">
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </dialog>
@@ -280,17 +302,19 @@ Override the default width using Tailwind utilities.
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel max-w-lg">
-    <button
-      class="btn btn-ghost btn-icon absolute top-4 right-4"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="sheet-wide-title" class="text-lg font-semibold">Wide Sheet</h2>
-    <p id="sheet-wide-desc" class="text-muted-foreground text-sm">
-      This sheet uses `max-w-lg` to override the default width.
-    </p>
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-wide-title" class="text-lg font-semibold">Wide Sheet</h2>
+      <p id="sheet-wide-desc" class="text-muted-foreground text-sm">
+        This sheet uses `max-w-lg` to override the default width.
+      </p>
+    </div>
   </div>
 </dialog>
 ```
@@ -303,17 +327,20 @@ The sheet component is a stylistic variant of the [Dialog](/docs/components/dial
 
 ### Structure
 
-A sheet consists of three parts:
+A sheet consists of these parts:
 
 1. **`<dialog class="dialog">`** - The native dialog element, styled to be a fixed fullscreen container
 2. **`.sheet-backdrop`** - An overlay that blocks interaction with the page
 3. **`.sheet-panel`** - The content panel (defaults to left positioning)
+4. **`.sheet-content`** - Inner wrapper with padding
 
 ```html
 <dialog id="my-sheet" class="dialog">
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel">
-    <!-- Your content here -->
+    <div class="sheet-content">
+      <!-- Your content here -->
+    </div>
   </div>
 </dialog>
 ```
@@ -401,13 +428,18 @@ To customize animations, add `no-animation` to disable the defaults and use your
 >
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel">
-    <h2 id="anim-default-sheet-title" class="text-lg font-semibold mb-2">
-      Default Animation
-    </h2>
-    <p id="anim-default-sheet-desc" class="text-muted-foreground text-sm mb-4">
-      The backdrop fades while the panel slides in from the left.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="sheet-content">
+      <h2 id="anim-default-sheet-title" class="text-lg font-semibold mb-2">
+        Default Animation
+      </h2>
+      <p
+        id="anim-default-sheet-desc"
+        class="text-muted-foreground text-sm mb-4"
+      >
+        The backdrop fades while the panel slides in from the left.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 
@@ -419,13 +451,15 @@ To customize animations, add `no-animation` to disable the defaults and use your
 >
   <div class="sheet-backdrop no-animation"></div>
   <div class="sheet-panel no-animation">
-    <h2 id="anim-none-sheet-title" class="text-lg font-semibold mb-2">
-      No Animation
-    </h2>
-    <p id="anim-none-sheet-desc" class="text-muted-foreground text-sm mb-4">
-      Add the `no-animation` class to disable the default animations.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="sheet-content">
+      <h2 id="anim-none-sheet-title" class="text-lg font-semibold mb-2">
+        No Animation
+      </h2>
+      <p id="anim-none-sheet-desc" class="text-muted-foreground text-sm mb-4">
+        Add the `no-animation` class to disable the default animations.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 
@@ -437,13 +471,15 @@ To customize animations, add `no-animation` to disable the defaults and use your
 >
   <div class="sheet-backdrop duration-500"></div>
   <div class="sheet-panel duration-500">
-    <h2 id="anim-slow-sheet-title" class="text-lg font-semibold mb-2">
-      Slow Animation
-    </h2>
-    <p id="anim-slow-sheet-desc" class="text-muted-foreground text-sm mb-4">
-      Override the duration with utility classes like `duration-500`.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="sheet-content">
+      <h2 id="anim-slow-sheet-title" class="text-lg font-semibold mb-2">
+        Slow Animation
+      </h2>
+      <p id="anim-slow-sheet-desc" class="text-muted-foreground text-sm mb-4">
+        Override the duration with utility classes like `duration-500`.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 ```
@@ -466,11 +502,13 @@ For proper screen reader support, add these attributes to your sheets:
 <dialog aria-labelledby="title" aria-describedby="desc">
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel">
-    <button aria-label="Close" data-sp-dismiss="dialog">
-      <icon-x />
-    </button>
-    <h2 id="title">Title</h2>
-    <p id="desc">Description</p>
+    <div class="sheet-content">
+      <button aria-label="Close" data-sp-dismiss="dialog">
+        <icon-x />
+      </button>
+      <h2 id="title">Title</h2>
+      <p id="desc">Description</p>
+    </div>
   </div>
 </dialog>
 ```
@@ -484,6 +522,7 @@ All available classes for the sheet component.
 | `dialog`         | Base class for the `dialog` element              |
 | `sheet-backdrop` | Overlay that blocks interaction with the page    |
 | `sheet-panel`    | The content panel (defaults to left direction)   |
+| `sheet-content`  | Inner wrapper with padding                       |
 | `sheet-left`     | Add to `.sheet-panel` to slide from the left     |
 | `sheet-right`    | Add to `.sheet-panel` to slide from the right    |
 | `sheet-top`      | Add to `.sheet-panel` to slide from the top      |
@@ -494,7 +533,9 @@ All available classes for the sheet component.
 <dialog class="dialog">
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel sheet-right">
-    <!-- Content -->
+    <div class="sheet-content">
+      <!-- Content -->
+    </div>
   </div>
 </dialog>
 ```
@@ -517,7 +558,9 @@ All data attributes for the sheet component.
 <dialog id="my-sheet" class="dialog" data-sp-backdrop="static">
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel">
-    <button data-sp-dismiss="dialog">Close</button>
+    <div class="sheet-content">
+      <button data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 ```

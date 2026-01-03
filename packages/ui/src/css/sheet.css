@@ -6,8 +6,12 @@
 }
 
 @utility sheet-panel {
-  @apply fixed pointer-events-auto bg-background shadow-lg p-6 [animation-fill-mode:forwards]!;
+  @apply fixed pointer-events-auto bg-background shadow-lg [animation-fill-mode:forwards]!;
   @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-left;
+}
+
+@utility sheet-content {
+  @apply p-6;
 }
 
 @utility sheet-left {
