@@ -29,6 +29,7 @@ const navigation = [
       { title: "Pagination", href: "/docs/components/pagination" },
       { title: "Separator", href: "/docs/components/separator" },
       { title: "Sheet", href: "/docs/components/sheet" },
+      { title: "Sidebar", href: "/docs/components/sidebar" },
       { title: "Table", href: "/docs/components/table" },
       { title: "Tabs", href: "/docs/components/tabs" },
     ],
