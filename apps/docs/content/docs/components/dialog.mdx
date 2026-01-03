@@ -18,20 +18,22 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <button
-      class="btn btn-ghost btn-icon absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="demo-title" class="text-lg font-semibold mb-2">Dialog Title</h2>
-    <p id="demo-desc" class="text-muted-foreground mb-4">
-      This is a modal dialog. Click the backdrop or press Escape to close.
-    </p>
-    <div class="flex gap-2 justify-end">
-      <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
-      <button class="btn" data-sp-dismiss="dialog">Confirm</button>
+    <div class="dialog-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-2 right-2"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="demo-title" class="text-lg font-semibold mb-2">Dialog Title</h2>
+      <p id="demo-desc" class="text-muted-foreground mb-4">
+        This is a modal dialog. Click the backdrop or press Escape to close.
+      </p>
+      <div class="flex gap-2 justify-end">
+        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn" data-sp-dismiss="dialog">Confirm</button>
+      </div>
     </div>
   </div>
 </dialog>
@@ -67,11 +69,13 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <h2 id="modal-title" class="text-lg font-semibold mb-2">Modal</h2>
-    <p id="modal-desc" class="text-muted-foreground mb-4">
-      Background is blocked. Click backdrop or press Escape to close.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="dialog-content">
+      <h2 id="modal-title" class="text-lg font-semibold mb-2">Modal</h2>
+      <p id="modal-desc" class="text-muted-foreground mb-4">
+        Background is blocked. Click backdrop or press Escape to close.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 
@@ -82,11 +86,13 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
   aria-describedby="nonmodal-desc"
 >
   <div class="dialog-panel">
-    <h2 id="nonmodal-title" class="text-lg font-semibold mb-2">Non-modal</h2>
-    <p id="nonmodal-desc" class="text-muted-foreground mb-4">
-      You can interact with the page behind this dialog.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="dialog-content">
+      <h2 id="nonmodal-title" class="text-lg font-semibold mb-2">Non-modal</h2>
+      <p id="nonmodal-desc" class="text-muted-foreground mb-4">
+        You can interact with the page behind this dialog.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 ```
@@ -115,15 +121,17 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <h2 id="static-title" class="text-lg font-semibold mb-2">Are you sure?</h2>
-    <p id="static-desc" class="text-muted-foreground mb-4">
-      This action cannot be undone. Backdrop clicks and Escape are disabled.
-    </p>
-    <div class="flex gap-2 justify-end">
-      <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
-      <button class="btn btn-destructive" data-sp-dismiss="dialog">
-        Delete
-      </button>
+    <div class="dialog-content">
+      <h2 id="static-title" class="text-lg font-semibold mb-2">Are you sure?</h2>
+      <p id="static-desc" class="text-muted-foreground mb-4">
+        This action cannot be undone. Backdrop clicks and Escape are disabled.
+      </p>
+      <div class="flex gap-2 justify-end">
+        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn btn-destructive" data-sp-dismiss="dialog">
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </dialog>
@@ -168,18 +176,20 @@ Override positioning, sizing, and styles to create custom dialog variants like s
   <div
     class="dialog-panel no-animation top-0 left-0 h-dvh w-72 max-h-none rounded-none translate-x-0 translate-y-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300"
   >
-    <button
-      class="btn btn-ghost btn-icon absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="sheet-title" class="text-lg font-semibold mb-2">Sheet</h2>
-    <p id="sheet-desc" class="text-muted-foreground">
-      This sheet slides in from the left. Great for navigation menus or
-      sidebars.
-    </p>
+    <div class="dialog-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-2 right-2"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-title" class="text-lg font-semibold mb-2">Sheet</h2>
+      <p id="sheet-desc" class="text-muted-foreground">
+        This sheet slides in from the left. Great for navigation menus or
+        sidebars.
+      </p>
+    </div>
   </div>
 </dialog>
 
@@ -191,21 +201,23 @@ Override positioning, sizing, and styles to create custom dialog variants like s
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel max-w-none h-screen">
-    <div class="flex justify-between items-center mb-4">
-      <h2 id="fullscreen-title" class="text-lg font-semibold">
-        Fullscreen Modal
-      </h2>
-      <button
-        class="btn btn-ghost btn-icon"
-        aria-label="Close"
-        data-sp-dismiss="dialog"
-      >
-        <icon-x />
-      </button>
+    <div class="dialog-content">
+      <div class="flex justify-between items-center mb-4">
+        <h2 id="fullscreen-title" class="text-lg font-semibold">
+          Fullscreen Modal
+        </h2>
+        <button
+          class="btn btn-ghost btn-icon"
+          aria-label="Close"
+          data-sp-dismiss="dialog"
+        >
+          <icon-x />
+        </button>
+      </div>
+      <p id="fullscreen-desc" class="text-muted-foreground">
+        This modal takes up the entire screen.
+      </p>
     </div>
-    <p id="fullscreen-desc" class="text-muted-foreground">
-      This modal takes up the entire screen.
-    </p>
   </div>
 </dialog>
 
@@ -221,26 +233,28 @@ Override positioning, sizing, and styles to create custom dialog variants like s
   <div
     class="dialog-panel bg-linear-to-br from-purple-950 to-slate-900 text-white border border-purple-500/30"
   >
-    <button
-      class="btn btn-ghost btn-icon absolute top-2 right-2 text-white hover:bg-white/10"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <icon-x />
-    </button>
-    <h2 id="gradient-title" class="text-lg font-semibold mb-2">
-      Custom Styles
-    </h2>
-    <p id="gradient-desc" class="text-purple-200 mb-4">
-      Override the backdrop and panel with gradients, blur, or any custom
-      styles.
-    </p>
-    <button
-      class="btn w-full bg-purple-600 hover:bg-purple-700 text-white"
-      data-sp-dismiss="dialog"
-    >
-      Got it
-    </button>
+    <div class="dialog-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-2 right-2 text-white hover:bg-white/10"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="gradient-title" class="text-lg font-semibold mb-2">
+        Custom Styles
+      </h2>
+      <p id="gradient-desc" class="text-purple-200 mb-4">
+        Override the backdrop and panel with gradients, blur, or any custom
+        styles.
+      </p>
+      <button
+        class="btn w-full bg-purple-600 hover:bg-purple-700 text-white"
+        data-sp-dismiss="dialog"
+      >
+        Got it
+      </button>
+    </div>
   </div>
 </dialog>
 ```
@@ -253,17 +267,20 @@ This component uses the native HTML [`<dialog>`](https://developer.mozilla.org/e
 
 ### Structure
 
-A dialog consists of three parts:
+A dialog consists of these parts:
 
 1. **`<dialog class="dialog">`** - The native dialog element, styled to be a fixed fullscreen container
 2. **`.dialog-backdrop`** - An overlay that blocks interaction with the page (optional, omit for non-modal)
 3. **`.dialog-panel`** - The content panel that holds your dialog content
+4. **`.dialog-content`** - Inner wrapper with padding
 
 ```html
 <dialog id="my-dialog" class="dialog">
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <!-- Your content here -->
+    <div class="dialog-content">
+      <!-- Your content here -->
+    </div>
   </div>
 </dialog>
 ```
@@ -358,13 +375,15 @@ To customize animations, add `no-animation` to disable the defaults and use your
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <h2 id="anim-default-title" class="text-lg font-semibold mb-2">
-      Default Animation
-    </h2>
-    <p id="anim-default-desc" class="text-muted-foreground mb-4">
-      The backdrop fades while the panel fades and zooms.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="dialog-content">
+      <h2 id="anim-default-title" class="text-lg font-semibold mb-2">
+        Default Animation
+      </h2>
+      <p id="anim-default-desc" class="text-muted-foreground mb-4">
+        The backdrop fades while the panel fades and zooms.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 
@@ -376,13 +395,15 @@ To customize animations, add `no-animation` to disable the defaults and use your
 >
   <div class="dialog-backdrop no-animation"></div>
   <div class="dialog-panel no-animation">
-    <h2 id="anim-none-title" class="text-lg font-semibold mb-2">
-      No Animation
-    </h2>
-    <p id="anim-none-desc" class="text-muted-foreground mb-4">
-      Add the `no-animation` class to disable the default animations.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="dialog-content">
+      <h2 id="anim-none-title" class="text-lg font-semibold mb-2">
+        No Animation
+      </h2>
+      <p id="anim-none-desc" class="text-muted-foreground mb-4">
+        Add the `no-animation` class to disable the default animations.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 
@@ -396,13 +417,15 @@ To customize animations, add `no-animation` to disable the defaults and use your
   <div
     class="dialog-panel no-animation data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom duration-300"
   >
-    <h2 id="anim-slide-title" class="text-lg font-semibold mb-2">
-      Slide from Bottom
-    </h2>
-    <p id="anim-slide-desc" class="text-muted-foreground mb-4">
-      Use `no-animation` and add your own animation classes.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="dialog-content">
+      <h2 id="anim-slide-title" class="text-lg font-semibold mb-2">
+        Slide from Bottom
+      </h2>
+      <p id="anim-slide-desc" class="text-muted-foreground mb-4">
+        Use `no-animation` and add your own animation classes.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 
@@ -414,13 +437,15 @@ To customize animations, add `no-animation` to disable the defaults and use your
 >
   <div class="dialog-backdrop duration-500"></div>
   <div class="dialog-panel duration-500">
-    <h2 id="anim-slow-title" class="text-lg font-semibold mb-2">
-      Slow Animation
-    </h2>
-    <p id="anim-slow-desc" class="text-muted-foreground mb-4">
-      Override the duration with utility classes like `duration-500`.
-    </p>
-    <button class="btn" data-sp-dismiss="dialog">Close</button>
+    <div class="dialog-content">
+      <h2 id="anim-slow-title" class="text-lg font-semibold mb-2">
+        Slow Animation
+      </h2>
+      <p id="anim-slow-desc" class="text-muted-foreground mb-4">
+        Override the duration with utility classes like `duration-500`.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 ```
@@ -443,11 +468,13 @@ For proper screen reader support, add these attributes to your dialogs:
 <dialog aria-labelledby="title" aria-describedby="desc">
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <button aria-label="Close" data-sp-dismiss="dialog">
-      <icon-x />
-    </button>
-    <h2 id="title">Title</h2>
-    <p id="desc">Description</p>
+    <div class="dialog-content">
+      <button aria-label="Close" data-sp-dismiss="dialog">
+        <icon-x />
+      </button>
+      <h2 id="title">Title</h2>
+      <p id="desc">Description</p>
+    </div>
   </div>
 </dialog>
 ```
@@ -461,13 +488,16 @@ All available classes for the dialog component.
 | `dialog`          | Base class for the `dialog` element                     |
 | `dialog-backdrop` | Overlay that blocks interaction with the page behind it |
 | `dialog-panel`    | The content panel inside the dialog                     |
+| `dialog-content`  | Inner wrapper with padding                              |
 | `no-animation`    | Disables default animations on backdrop or panel        |
 
 ```html
 <dialog class="dialog">
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <!-- Content -->
+    <div class="dialog-content">
+      <!-- Content -->
+    </div>
   </div>
 </dialog>
 ```
@@ -490,7 +520,9 @@ All data attributes for the dialog component.
 <dialog id="my-dialog" class="dialog" data-sp-backdrop="static">
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <button data-sp-dismiss="dialog">Close</button>
+    <div class="dialog-content">
+      <button data-sp-dismiss="dialog">Close</button>
+    </div>
   </div>
 </dialog>
 ```
