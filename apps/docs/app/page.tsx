@@ -116,17 +116,19 @@ export default function Home() {
                     <dialog id="showcase-sheet" className="dialog">
                       <div className="sheet-backdrop"></div>
                       <div className="sheet-panel">
-                        <button
-                          className="btn btn-ghost btn-icon absolute top-4 right-4"
-                          aria-label="Close"
-                          data-sp-dismiss="dialog"
-                        >
-                          <X />
-                        </button>
-                        <h2 className="text-lg font-semibold">Sheet</h2>
-                        <p className="text-muted-foreground text-sm">
-                          A sheet slides in from any edge of the screen.
-                        </p>
+                        <div className="sheet-content">
+                          <button
+                            className="btn btn-ghost btn-icon absolute top-4 right-4"
+                            aria-label="Close"
+                            data-sp-dismiss="dialog"
+                          >
+                            <X />
+                          </button>
+                          <h2 className="text-lg font-semibold">Sheet</h2>
+                          <p className="text-muted-foreground text-sm">
+                            A sheet slides in from any edge of the screen.
+                          </p>
+                        </div>
                       </div>
                     </dialog>
                   </div>

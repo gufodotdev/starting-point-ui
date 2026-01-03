@@ -46,15 +46,17 @@ export function Navbar() {
       <dialog id="mobile-nav" className="dialog">
         <div className="sheet-backdrop"></div>
         <div className="sheet-panel w-(--sidebar-width) rounded-none overflow-y-auto">
-          <button
-            type="button"
-            className="btn btn-ghost btn-icon-sm mb-6 text-muted-foreground"
-            aria-label="Close navigation menu"
-            data-sp-dismiss="dialog"
-          >
-            <PanelLeftClose />
-          </button>
-          <Sidebar />
+          <div className="sheet-content">
+            <button
+              type="button"
+              className="btn btn-ghost btn-icon-sm mb-6 text-muted-foreground"
+              aria-label="Close navigation menu"
+              data-sp-dismiss="dialog"
+            >
+              <PanelLeftClose />
+            </button>
+            <Sidebar />
+          </div>
         </div>
       </dialog>
       <MobileNavCloser />
