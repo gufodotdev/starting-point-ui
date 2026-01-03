@@ -1,0 +1,53 @@
+/* Starting Point UI Sidebar Styles */
+
+@utility sidebar {
+  @apply flex min-h-dvh w-full overflow-x-clip;
+}
+
+@utility sidebar-panel {
+  @apply bg-sidebar text-sidebar-foreground fixed inset-y-0 z-50 w-(--sidebar-width) hidden;
+  @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0;
+  @apply [&:not(.no-animation)]:sidebar:transition-[margin] [&:not(.no-animation)]:sidebar:duration-200 [&:not(.no-animation)]:sidebar:ease-linear;
+  /* Mobile animations */
+  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+  /* Desktop: no animations */
+  @apply sidebar:translate-x-0 sidebar:animate-none!;
+  /* Default to left */
+  @apply [&:where(&:not(.sidebar-left,.sidebar-right))]:sidebar-left;
+
+  &.open {
+    @apply block;
+  }
+}
+
+@utility sidebar-left {
+  @apply left-0 border-r;
+  @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left;
+
+  &.collapsed {
+    @apply sidebar:-ml-(--sidebar-width);
+  }
+}
+
+@utility sidebar-right {
+  @apply right-0 border-l;
+  @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right;
+
+  &.collapsed {
+    @apply sidebar:-mr-(--sidebar-width);
+  }
+}
+
+@utility sidebar-content {
+  @apply p-4 h-full overflow-y-auto sidebar:h-auto sidebar:sticky sidebar:top-0 sidebar:max-h-dvh;
+}
+
+@utility sidebar-backdrop {
+  /* Hidden by default, always hidden on desktop */
+  @apply fixed inset-0 z-40 bg-black/50 hidden sidebar:hidden;
+  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+
+  &.open {
+    @apply block pointer-events-auto;
+  }
+}
