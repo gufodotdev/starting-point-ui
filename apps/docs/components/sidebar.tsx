@@ -27,6 +27,7 @@ const navigation = [
       { title: "Dropdown", href: "/docs/components/dropdown" },
       { title: "Forms", href: "/docs/components/forms" },
       { title: "Pagination", href: "/docs/components/pagination" },
+      { title: "Resizable", href: "/docs/components/resizable" },
       { title: "Separator", href: "/docs/components/separator" },
       { title: "Sheet", href: "/docs/components/sheet" },
       { title: "Sidebar", href: "/docs/components/sidebar" },
