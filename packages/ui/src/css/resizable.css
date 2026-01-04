@@ -1,0 +1,25 @@
+/* Starting Point UI Resizable Styles */
+
+@utility resizable {
+  @apply flex h-full w-full isolate;
+
+  &[data-direction="vertical"] {
+    @apply flex-col;
+  }
+}
+
+@utility resizable-panel {
+  @apply relative overflow-hidden;
+}
+
+@utility resizable-handle {
+  @apply relative flex shrink-0 items-center justify-center overflow-visible bg-border transition-colors outline-none;
+  @apply hover:bg-ring/50 active:bg-ring/70 data-[dragging]:bg-ring/70;
+  @apply w-px cursor-col-resize after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2;
+  @apply [[data-direction=vertical]_&]:h-px [[data-direction=vertical]_&]:w-full [[data-direction=vertical]_&]:cursor-row-resize;
+  @apply [[data-direction=vertical]_&]:after:left-0 [[data-direction=vertical]_&]:after:h-1 [[data-direction=vertical]_&]:after:w-full [[data-direction=vertical]_&]:after:translate-x-0 [[data-direction=vertical]_&]:after:-translate-y-1/2 [[data-direction=vertical]_&]:after:inset-y-auto [[data-direction=vertical]_&]:after:inset-x-0;
+}
+
+@utility resizable-handle-icon {
+  @apply z-10 h-8 w-1.5 shrink-0 rounded-full bg-border [[data-direction=vertical]_&]:h-1.5 [[data-direction=vertical]_&]:w-8;
+}
