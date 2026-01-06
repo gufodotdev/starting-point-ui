@@ -755,7 +755,7 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
-                    <label className="flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                    <label className="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
                       <input
                         type="radio"
                         className="sr-only"
@@ -778,7 +778,7 @@ export default function Home() {
                       </svg>
                       <span className="text-sm font-medium">Card</span>
                     </label>
-                    <label className="flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                    <label className="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
                       <input
                         type="radio"
                         className="sr-only"
@@ -794,7 +794,7 @@ export default function Home() {
                       </svg>
                       <span className="text-sm font-medium">PayPal</span>
                     </label>
-                    <label className="flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+                    <label className="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
                       <input
                         type="radio"
                         className="sr-only"
