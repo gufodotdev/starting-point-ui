@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export function Logo() {
   return (
-    <Link href="/" className="text-base whitespace-nowrap">
-      <span className="font-semibold tracking-tight">Starting Point </span>
-      <span className="font-normal text-muted-foreground tracking-wide">
-        UI
-      </span>
+    <Link href="/" className="flex items-center gap-2">
+      <div className="flex items-center justify-center size-6 rounded-sm overflow-hidden shrink-0 bg-primary text-primary-foreground text-sm font-bold">
+        ui
+      </div>
+      <div className="text-sm font-medium truncate">Starting Point</div>
     </Link>
   );
 }
