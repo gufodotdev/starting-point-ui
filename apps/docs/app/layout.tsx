@@ -11,6 +11,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.startingpointui.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Starting Point UI",
   description: "Stop building from scratch",
 };
