@@ -51,7 +51,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full lg:w-auto overflow-x-auto lg:overflow-visible lg:absolute lg:top-6 lg:left-1/2 lg:pl-6 lg:rotate-2">
+        <div className="w-full lg:w-auto overflow-x-auto lg:overflow-visible lg:absolute lg:top-0 lg:left-1/2 lg:pl-6">
           <div className="px-6 pb-12 lg:pb-12 lg:px-0 columns-3 gap-6 w-max *:w-sm *:mb-6 *:break-inside-avoid">
             {/* 1 */}
             <div>
