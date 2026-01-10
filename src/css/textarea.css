@@ -1,7 +1,7 @@
 /* Starting Point UI Textarea Styles */
 
 @utility textarea {
-  @apply border-input w-full rounded-md border bg-transparent shadow-xs transition-[color,box-shadow] outline-none;
+  @apply border-input w-full rounded-md border bg-transparent shadow-xs transition-[color,box-shadow] outline-none appearance-none;
   @apply placeholder:text-muted-foreground;
   @apply dark:bg-input/30;
   @apply field-sizing-content min-h-16 px-3 py-2 text-sm;

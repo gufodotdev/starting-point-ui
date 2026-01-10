@@ -1,7 +1,7 @@
 /* Starting Point UI Input Styles */
 
 @utility input {
-  @apply border-input w-full min-w-0 rounded-md border bg-transparent px-3 text-sm shadow-xs transition-[color,box-shadow] outline-none;
+  @apply border-input w-full min-w-0 rounded-md border bg-transparent px-3 text-sm shadow-xs transition-[color,box-shadow] outline-none appearance-none;
   @apply placeholder:text-muted-foreground;
   @apply dark:bg-input/30;
   @apply file:text-foreground file:inline-flex file:border-0 file:bg-transparent file:text-sm file:font-medium;
