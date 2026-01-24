@@ -139,8 +139,11 @@
     @apply overflow-hidden;
   }
 
-  body,
-  .dark {
+  body {
     @apply bg-background text-foreground;
+  }
+
+  .dark {
+    @apply text-foreground;
   }
 }
