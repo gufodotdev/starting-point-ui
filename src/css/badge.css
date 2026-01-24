@@ -19,5 +19,5 @@
 }
 
 @utility badge-outline {
-  @apply text-foreground [&:is(a)]:hover:bg-accent [&:is(a)]:hover:text-accent-foreground;
+  @apply text-foreground [&:is(a)]:hover:bg-secondary [&:is(a)]:hover:text-secondary-foreground;
 }
