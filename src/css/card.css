@@ -6,7 +6,7 @@
 }
 
 @utility card-default {
-  @apply bg-card border shadow-sm;
+  @apply bg-card border shadow-xs;
 }
 
 @utility card-outline {
@@ -14,7 +14,7 @@
 }
 
 @utility card-muted {
-  @apply bg-muted;
+  @apply bg-muted/50;
 }
 
 @utility card-content {
