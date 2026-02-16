@@ -44,7 +44,34 @@
 }
 
 @utility sidebar-content {
-  @apply p-4 h-full overflow-y-auto sidebar:h-auto sidebar:sticky sidebar:top-0 sidebar:max-h-dvh;
+  @apply flex flex-col h-dvh;
+}
+
+@utility sidebar-header {
+  @apply flex flex-col gap-2 p-4;
+}
+
+@utility sidebar-footer {
+  @apply flex flex-col gap-2 p-4 mt-auto;
+}
+
+@utility sidebar-menu {
+  @apply flex-1 flex flex-col overflow-y-auto;
+}
+
+@utility sidebar-menu-group {
+  @apply flex flex-col p-2;
+}
+
+@utility sidebar-menu-item {
+  @apply flex items-center gap-2 overflow-hidden rounded-md p-2 h-8 text-sm;
+  @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+  @apply [&.active]:bg-sidebar-accent [&.active]:font-medium [&.active]:text-sidebar-accent-foreground;
+  @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+}
+
+@utility sidebar-menu-label {
+  @apply text-sidebar-foreground/70 h-8 shrink-0 rounded-md px-2 text-xs font-medium flex items-center;
 }
 
 @utility sidebar-backdrop {
