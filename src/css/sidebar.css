@@ -1,11 +1,11 @@
 /* Starting Point UI Sidebar Styles */
 
 @utility sidebar {
-  @apply flex min-h-dvh w-full overflow-x-clip;
+  @apply flex min-h-dvh w-full overflow-x-clip bg-sidebar;
 }
 
 @utility sidebar-panel {
-  @apply bg-sidebar text-sidebar-foreground fixed inset-y-0 z-50 w-(--sidebar-width) hidden;
+  @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 w-(--sidebar-width) hidden;
   @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0;
   @apply [&:not(.no-animation)]:sidebar:transition-[margin] [&:not(.no-animation)]:sidebar:duration-200 [&:not(.no-animation)]:sidebar:ease-linear;
   /* Mobile animations */
@@ -36,6 +36,10 @@
   &.collapsed {
     @apply sidebar:-mr-(--sidebar-width);
   }
+}
+
+@utility sidebar-page {
+  @apply flex-1 bg-background;
 }
 
 @utility sidebar-content {
