@@ -21,7 +21,7 @@
 }
 
 @utility sidebar-left {
-  @apply left-0 border-r;
+  @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
   @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left;
 
   &.collapsed {
@@ -30,7 +30,7 @@
 }
 
 @utility sidebar-right {
-  @apply right-0 border-l;
+  @apply right-0 border-l in-[.sidebar-inset]:border-l-0;
   @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right;
 
   &.collapsed {
@@ -40,6 +40,7 @@
 
 @utility sidebar-page {
   @apply flex-1 bg-background;
+  @apply sidebar:in-[.sidebar-inset]:m-2 sidebar:in-[.sidebar-inset]:shadow-sm sidebar:in-[.sidebar-inset]:rounded-xl;
 }
 
 @utility sidebar-content {
