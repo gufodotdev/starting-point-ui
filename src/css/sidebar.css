@@ -48,11 +48,23 @@
 }
 
 @utility sidebar-header {
-  @apply flex flex-col gap-2 p-4;
+  @apply flex flex-col gap-2 p-2;
+}
+
+@utility sidebar-header-item {
+  @apply flex items-center gap-2 overflow-hidden rounded-md p-2 h-8 text-sm;
+  @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+  @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
 }
 
 @utility sidebar-footer {
-  @apply flex flex-col gap-2 p-4 mt-auto;
+  @apply flex flex-col gap-2 p-2 mt-auto;
+}
+
+@utility sidebar-footer-item {
+  @apply flex items-center gap-2 overflow-hidden rounded-md p-2 h-8 text-sm;
+  @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+  @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
 }
 
 @utility sidebar-menu {
