@@ -1,0 +1,154 @@
+---
+title: Breadcrumb
+description: A Tailwind CSS breadcrumb component for displaying navigation hierarchy.
+---
+
+A Tailwind CSS breadcrumb component for displaying navigation hierarchy.
+
+```html preview
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-link">Home</a>
+  <span class="breadcrumb-separator" aria-hidden="true">
+    <icon-chevron-right />
+  </span>
+  <a href="#" class="breadcrumb-link">Components</a>
+  <span class="breadcrumb-separator" aria-hidden="true">
+    <icon-chevron-right />
+  </span>
+  <span class="breadcrumb-page">Breadcrumb</span>
+</nav>
+```
+
+---
+
+## With collapsed items
+
+Use a [dropdown](/docs/components/dropdown) to show collapsed breadcrumb items.
+
+```html preview
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-link">Home</a>
+  <span class="breadcrumb-separator" aria-hidden="true">
+    <icon-chevron-right />
+  </span>
+  <div class="dropdown flex items-center">
+    <button
+      type="button"
+      class="breadcrumb-collapsed"
+      data-sp-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <icon-more-horizontal class="size-4" />
+      <span class="sr-only">More</span>
+    </button>
+    <div class="dropdown-menu">
+      <a href="#" class="dropdown-item">Documentation</a>
+      <a href="#" class="dropdown-item">Guides</a>
+    </div>
+  </div>
+  <span class="breadcrumb-separator" aria-hidden="true">
+    <icon-chevron-right />
+  </span>
+  <a href="#" class="breadcrumb-link">Components</a>
+  <span class="breadcrumb-separator" aria-hidden="true">
+    <icon-chevron-right />
+  </span>
+  <span class="breadcrumb-page">Breadcrumb</span>
+</nav>
+```
+
+---
+
+## With icons
+
+Add icons to breadcrumb links for additional visual context.
+
+```html preview
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-link">
+    <icon-home class="size-3.5" />
+    Home
+  </a>
+  <span class="breadcrumb-separator" aria-hidden="true">
+    <icon-chevron-right />
+  </span>
+  <a href="#" class="breadcrumb-link">Settings</a>
+  <span class="breadcrumb-separator" aria-hidden="true">
+    <icon-chevron-right />
+  </span>
+  <span class="breadcrumb-page">Profile</span>
+</nav>
+```
+
+---
+
+## Custom separator
+
+Use any separator by replacing the icon with text or another character.
+
+```html preview
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-link">Home</a>
+  <span class="breadcrumb-separator" aria-hidden="true">/</span>
+  <a href="#" class="breadcrumb-link">Components</a>
+  <span class="breadcrumb-separator" aria-hidden="true">/</span>
+  <span class="breadcrumb-page">Breadcrumb</span>
+</nav>
+```
+
+---
+
+## How it works
+
+The breadcrumb component is a CSS-only component for displaying navigation hierarchy.
+
+### Structure
+
+A breadcrumb is a nav element containing links and separators:
+
+```html
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-link">Home</a>
+  <span class="breadcrumb-separator" aria-hidden="true">/</span>
+  <span class="breadcrumb-page">Current Page</span>
+</nav>
+```
+
+### Accessibility
+
+For proper screen reader support, add these attributes:
+
+| Attribute      | Description                                                   |
+| -------------- | ------------------------------------------------------------- |
+| `aria-hidden`  | Add to separators to hide them from screen readers            |
+| `aria-current` | Add to the current page to indicate it's the current location |
+
+Separators are purely decorative - screen readers don't need to announce them.
+
+```html
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-link">Home</a>
+  <span class="breadcrumb-separator" aria-hidden="true">/</span>
+  <span class="breadcrumb-page" aria-current="page">Current Page</span>
+</nav>
+```
+
+### Class reference
+
+All available classes for the breadcrumb component.
+
+| Class                  | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| `breadcrumb`           | Add to `<nav>` element as the wrapper                 |
+| `breadcrumb-link`      | Add to `<a>` element for clickable links              |
+| `breadcrumb-page`      | Add to `<span>` element for the current page          |
+| `breadcrumb-separator` | Add to `<span>` element for separators between items  |
+| `breadcrumb-collapsed` | Add to `<button>` element for collapsed items trigger |
+
+```html
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-link">Link</a>
+  <span class="breadcrumb-separator" aria-hidden="true">/</span>
+  <span class="breadcrumb-page">Page</span>
+</nav>
+```

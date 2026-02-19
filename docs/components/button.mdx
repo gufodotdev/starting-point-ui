@@ -1,0 +1,234 @@
+---
+title: Button
+description: A Tailwind CSS button component with multiple variants, sizes, and icon support.
+---
+
+A Tailwind CSS button component with multiple variants, sizes, and icon support.
+
+```html preview
+<button class="btn">Button</button>
+```
+
+---
+
+## Variants
+
+Use different variants to communicate intent and hierarchy.
+
+```html preview
+<button class="btn">Default</button>
+<button class="btn btn-destructive">Destructive</button>
+<button class="btn btn-outline">Outline</button>
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-ghost">Ghost</button>
+<button class="btn btn-link">Link</button>
+```
+
+---
+
+## Sizes
+
+Use different sizes to fit various contexts and layouts.
+
+```html preview
+<button class="btn btn-outline btn-sm">Small</button>
+<button class="btn btn-outline">Base</button>
+<button class="btn btn-outline btn-lg">Large</button>
+<button class="btn btn-outline btn-icon-lg" aria-label="Add item">
+  <icon-plus />
+</button>
+<button class="btn btn-outline btn-icon" aria-label="Add item">
+  <icon-plus />
+</button>
+<button class="btn btn-outline btn-icon-sm" aria-label="Add item">
+  <icon-plus />
+</button>
+```
+
+---
+
+## With icons
+
+Buttons can include icons alongside text or as the only content. For icon-only buttons, always include an `aria-label` for accessibility.
+
+```html preview
+<button class="btn btn-outline btn-icon" aria-label="More options">
+  <icon-ellipsis />
+</button>
+<button class="btn btn-outline"><icon-download /> Export</button>
+<button class="btn btn-outline">Open <icon-chevron-down /></button>
+<button class="btn btn-ghost btn-icon" aria-label="Close">
+  <icon-x />
+</button>
+```
+
+---
+
+## Disabled
+
+Disable buttons to prevent interaction, such as while processing a request.
+
+```html preview
+<button class="btn btn-outline" disabled>
+  <icon-loader-circle class="animate-spin" /> Processing
+</button>
+```
+
+---
+
+## Button group
+
+Group related buttons together with horizontal or vertical layouts using `.btn-group`.
+
+```html preview
+<div class="btn-group">
+  <button class="btn btn-outline">Left</button>
+  <button class="btn btn-outline">Center</button>
+  <button class="btn btn-outline">Right</button>
+</div>
+```
+
+---
+
+## Button group sizes
+
+Button groups work with all button sizes.
+
+```html preview
+<div class="flex flex-col gap-4">
+  <div class="btn-group">
+    <button class="btn btn-outline btn-sm">Left</button>
+    <button class="btn btn-outline btn-sm">Center</button>
+    <button class="btn btn-outline btn-sm">Right</button>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-outline">Left</button>
+    <button class="btn btn-outline">Center</button>
+    <button class="btn btn-outline">Right</button>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-outline btn-lg">Left</button>
+    <button class="btn btn-outline btn-lg">Center</button>
+    <button class="btn btn-outline btn-lg">Right</button>
+  </div>
+</div>
+```
+
+---
+
+## Vertical button group
+
+Stack buttons vertically using `btn-group-vertical`.
+
+```html preview
+<div class="btn-group btn-group-vertical">
+  <button class="btn btn-outline btn-icon" aria-label="Increase">
+    <icon-plus />
+  </button>
+  <button class="btn btn-outline btn-icon" aria-label="Decrease">
+    <icon-minus />
+  </button>
+</div>
+```
+
+---
+
+## Button group with separator
+
+Add visual separation between buttons using `btn-group-separator`. This is recommended for variants without borders like `btn-secondary` to improve visual hierarchy.
+
+```html preview
+<div class="btn-group">
+  <button class="btn btn-secondary">Save</button>
+  <div class="btn-group-separator"></div>
+  <button class="btn btn-secondary btn-icon" aria-label="More options">
+    <icon-chevron-down />
+  </button>
+</div>
+```
+
+---
+
+## Button group with text addon
+
+Use `btn-group-text` for non-interactive text labels.
+
+```html preview
+<div class="btn-group">
+  <span class="btn-group-text">https://</span>
+  <input class="input" placeholder="example.com" />
+</div>
+```
+
+---
+
+## Customization
+
+You can combine button classes with Tailwind utilities for custom styling.
+
+```html preview
+<button
+  class="btn bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 text-white border-0 px-6 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+>
+  Gradient Button
+</button>
+```
+
+---
+
+## How it works
+
+The button component is a CSS-only component with variant and size classes. It supports icons, disabled states, and can be used on `<button>` or `<a>` elements.
+
+### Structure
+
+A button uses the `.btn` class as its base:
+
+```html
+<button class="btn">Button</button>
+```
+
+Buttons can also be links:
+
+```html
+<a href="#" class="btn">Link Button</a>
+```
+
+Button groups use `.btn-group` as a container:
+
+```html
+<div class="btn-group">
+  <button class="btn btn-outline">Left</button>
+  <button class="btn btn-outline">Right</button>
+</div>
+```
+
+### Class reference
+
+All available classes for the button component.
+
+| Class                  | Description                                                          |
+| ---------------------- | -------------------------------------------------------------------- |
+| `btn`                  | Add to `<button>` or `<a>` element to apply base button styles       |
+| `btn-default`          | Add to `.btn` for primary filled style (default)                     |
+| `btn-destructive`      | Add to `.btn` for red destructive/danger style                       |
+| `btn-outline`          | Add to `.btn` for outlined style with transparent background         |
+| `btn-secondary`        | Add to `.btn` for secondary muted style                              |
+| `btn-ghost`            | Add to `.btn` for transparent style with hover background            |
+| `btn-link`             | Add to `.btn` for link style with underline on hover                 |
+| `btn-sm`               | Add to `.btn` for small size                                         |
+| `btn-base`             | Add to `.btn` for base size (default)                                |
+| `btn-lg`               | Add to `.btn` for large size                                         |
+| `btn-icon-sm`          | Add to `.btn` for small square icon button                           |
+| `btn-icon`             | Add to `.btn` for square icon button (base size)                     |
+| `btn-icon-lg`          | Add to `.btn` for large square icon button                           |
+| `btn-group`            | Container for grouping buttons together                              |
+| `btn-group-horizontal` | Horizontal layout for button group (default)                         |
+| `btn-group-vertical`   | Vertical layout for button group                                     |
+| `btn-group-text`       | Text addon element for button groups                                 |
+| `btn-group-separator`  | Visual separator between grouped buttons                             |
+
+```html
+<button class="btn btn-outline btn-lg">Large Outline</button>
+<button class="btn btn-ghost btn-icon" aria-label="Close"><icon-x /></button>
+```

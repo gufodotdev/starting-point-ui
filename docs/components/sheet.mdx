@@ -1,0 +1,566 @@
+---
+title: Sheet
+description: A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
+---
+
+A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
+
+```html preview
+<button class="btn" data-sp-toggle="dialog" data-sp-target="#sheet-demo">
+  Open Sheet
+</button>
+
+<dialog
+  id="sheet-demo"
+  class="dialog"
+  aria-labelledby="sheet-demo-title"
+  aria-describedby="sheet-demo-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-demo-title" class="text-lg font-semibold">Sheet Title</h2>
+      <p id="sheet-demo-desc" class="text-muted-foreground text-sm">
+        This sheet slides in from the left. Great for navigation menus or
+        sidebars.
+      </p>
+    </div>
+  </div>
+</dialog>
+```
+
+---
+
+## Modal vs Non-modal
+
+The backdrop is what creates the modal behavior. Add `.sheet-backdrop` to block interaction with the page behind it, or omit it for a non-modal sheet.
+
+```html preview
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#sheet-modal-example"
+>
+  Open Modal
+</button>
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#sheet-nonmodal-example"
+>
+  Open Non-modal
+</button>
+
+<dialog
+  id="sheet-modal-example"
+  class="dialog"
+  aria-labelledby="sheet-modal-title"
+  aria-describedby="sheet-modal-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-content">
+      <h2 id="sheet-modal-title" class="text-lg font-semibold mb-2">Modal</h2>
+      <p id="sheet-modal-desc" class="text-muted-foreground text-sm mb-4">
+        Background is blocked. Click backdrop or press Escape to close.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog
+  id="sheet-nonmodal-example"
+  class="dialog"
+  aria-labelledby="sheet-nonmodal-title"
+  aria-describedby="sheet-nonmodal-desc"
+>
+  <div class="sheet-panel">
+    <div class="sheet-content">
+      <h2 id="sheet-nonmodal-title" class="text-lg font-semibold mb-2">
+        Non-modal
+      </h2>
+      <p id="sheet-nonmodal-desc" class="text-muted-foreground text-sm mb-4">
+        You can interact with the page behind this sheet.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
+---
+
+## Directions
+
+Use direction utilities to control which edge the sheet slides in from.
+
+```html preview
+<div class="flex flex-wrap gap-2">
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-left"
+  >
+    Left
+  </button>
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-right"
+  >
+    Right
+  </button>
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-top"
+  >
+    Top
+  </button>
+  <button
+    class="btn btn-outline"
+    data-sp-toggle="dialog"
+    data-sp-target="#sheet-bottom"
+  >
+    Bottom
+  </button>
+</div>
+
+<dialog
+  id="sheet-left"
+  class="dialog"
+  aria-labelledby="sheet-left-title"
+  aria-describedby="sheet-left-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel sheet-left">
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-left-title" class="text-lg font-semibold">Left Sheet</h2>
+      <p id="sheet-left-desc" class="text-muted-foreground text-sm">
+        Great for navigation menus or sidebars.
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog
+  id="sheet-right"
+  class="dialog"
+  aria-labelledby="sheet-right-title"
+  aria-describedby="sheet-right-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel sheet-right">
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-right-title" class="text-lg font-semibold">Right Sheet</h2>
+      <p id="sheet-right-desc" class="text-muted-foreground text-sm">
+        Great for detail views, settings, or cart panels.
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog
+  id="sheet-top"
+  class="dialog"
+  aria-labelledby="sheet-top-title"
+  aria-describedby="sheet-top-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel sheet-top">
+    <div class="sheet-content">
+      <div class="flex items-center justify-between">
+        <h2 id="sheet-top-title" class="text-lg font-semibold">Top Sheet</h2>
+        <button
+          class="btn btn-ghost btn-icon"
+          aria-label="Close"
+          data-sp-dismiss="dialog"
+        >
+          <icon-x />
+        </button>
+      </div>
+      <p id="sheet-top-desc" class="text-muted-foreground text-sm">
+        Great for notifications, alerts, or search bars.
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<dialog
+  id="sheet-bottom"
+  class="dialog"
+  aria-labelledby="sheet-bottom-title"
+  aria-describedby="sheet-bottom-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel sheet-bottom">
+    <div class="sheet-content">
+      <div class="flex items-center justify-between">
+        <h2 id="sheet-bottom-title" class="text-lg font-semibold">
+          Bottom Sheet
+        </h2>
+        <button
+          class="btn btn-ghost btn-icon"
+          aria-label="Close"
+          data-sp-dismiss="dialog"
+        >
+          <icon-x />
+        </button>
+      </div>
+      <p id="sheet-bottom-desc" class="text-muted-foreground text-sm">
+        Great for mobile actions, share menus, or quick forms.
+      </p>
+    </div>
+  </div>
+</dialog>
+```
+
+---
+
+## Static backdrop
+
+Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or pressing Escape.
+
+```html preview
+<button
+  class="btn btn-destructive"
+  data-sp-toggle="dialog"
+  data-sp-target="#sheet-static"
+>
+  Delete Account
+</button>
+
+<dialog
+  id="sheet-static"
+  class="dialog"
+  data-sp-backdrop="static"
+  aria-labelledby="sheet-static-title"
+  aria-describedby="sheet-static-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel sheet-right">
+    <div class="sheet-content">
+      <h2 id="sheet-static-title" class="text-lg font-semibold mb-2">
+        Are you sure?
+      </h2>
+      <p id="sheet-static-desc" class="text-muted-foreground text-sm mb-4">
+        This action cannot be undone. Backdrop clicks and Escape are disabled.
+      </p>
+      <div class="flex gap-2">
+        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn btn-destructive" data-sp-dismiss="dialog">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+```
+
+---
+
+## Customization
+
+Override the default width using Tailwind utilities.
+
+```html preview
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#sheet-wide"
+>
+  Wide Sheet
+</button>
+
+<dialog
+  id="sheet-wide"
+  class="dialog"
+  aria-labelledby="sheet-wide-title"
+  aria-describedby="sheet-wide-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel max-w-lg">
+    <div class="sheet-content">
+      <button
+        class="btn btn-ghost btn-icon absolute top-4 right-4"
+        aria-label="Close"
+        data-sp-dismiss="dialog"
+      >
+        <icon-x />
+      </button>
+      <h2 id="sheet-wide-title" class="text-lg font-semibold">Wide Sheet</h2>
+      <p id="sheet-wide-desc" class="text-muted-foreground text-sm">
+        This sheet uses `max-w-lg` to override the default width.
+      </p>
+    </div>
+  </div>
+</dialog>
+```
+
+---
+
+## How it works
+
+The sheet component is a stylistic variant of the [Dialog](/docs/components/dialog) component. It uses the same JavaScript module and data attributes, but with different CSS classes that position the panel at the edge of the screen with slide animations instead of centered with zoom animations.
+
+### Structure
+
+A sheet consists of these parts:
+
+1. **`<dialog class="dialog">`** - The native dialog element, styled to be a fixed fullscreen container
+2. **`.sheet-backdrop`** - An overlay that blocks interaction with the page
+3. **`.sheet-panel`** - The content panel (defaults to left positioning)
+4. **`.sheet-content`** - Inner wrapper with padding
+
+```html
+<dialog id="my-sheet" class="dialog">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-content">
+      <!-- Your content here -->
+    </div>
+  </div>
+</dialog>
+```
+
+### Opening and closing
+
+Use data attributes to control the sheet without writing JavaScript.
+
+To open a sheet, add `data-sp-toggle="dialog"` and `data-sp-target` to a button:
+
+```html
+<button data-sp-toggle="dialog" data-sp-target="#my-sheet">Open Sheet</button>
+```
+
+To close from inside the sheet, add `data-sp-dismiss="dialog"` to any button. The JavaScript will find the closest parent `<dialog>` element and close it:
+
+```html
+<button data-sp-dismiss="dialog">Close</button>
+```
+
+Clicking the backdrop or pressing Escape also closes the sheet. To prevent this, add `data-sp-backdrop="static"` to the dialog element:
+
+```html
+<dialog id="confirm-sheet" class="dialog" data-sp-backdrop="static">
+  <!-- User must click a button to close -->
+</dialog>
+```
+
+The component uses `dialog.show()` rather than `dialog.showModal()`, which allows more flexible backdrop styling. Modal behavior (blocking page interaction) comes from the `.sheet-backdrop` element instead.
+
+For programmatic control, use the global `StartingPointUI.dialog` module:
+
+```js
+const sheet = document.querySelector("#my-sheet");
+
+StartingPointUI.dialog.open(sheet);
+StartingPointUI.dialog.close(sheet);
+StartingPointUI.dialog.toggle(sheet);
+```
+
+### Animation
+
+The sheet includes default slide animations based on direction. When opened, the JavaScript sets `data-state="open"` on the backdrop and panel. When closing, it sets `data-state="closed"` and waits for animations to complete before calling `dialog.close()`.
+
+To customize animations, add `no-animation` to disable the defaults and use your own classes with `data-[state=open]:` and `data-[state=closed]:` selectors:
+
+```html
+<div
+  class="sheet-panel sheet-right no-animation
+  data-[state=open]:animate-in data-[state=open]:slide-in-from-right
+  data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right duration-500"
+>
+  <!-- Slower slide animation -->
+</div>
+```
+
+```html preview
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-default-sheet"
+>
+  Default
+</button>
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-none-sheet"
+>
+  No Animation
+</button>
+<button
+  class="btn btn-outline"
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-slow-sheet"
+>
+  Slow (500ms)
+</button>
+
+<dialog
+  id="anim-default-sheet"
+  class="dialog"
+  aria-labelledby="anim-default-sheet-title"
+  aria-describedby="anim-default-sheet-desc"
+>
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-content">
+      <h2 id="anim-default-sheet-title" class="text-lg font-semibold mb-2">
+        Default Animation
+      </h2>
+      <p
+        id="anim-default-sheet-desc"
+        class="text-muted-foreground text-sm mb-4"
+      >
+        The backdrop fades while the panel slides in from the left.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog
+  id="anim-none-sheet"
+  class="dialog"
+  aria-labelledby="anim-none-sheet-title"
+  aria-describedby="anim-none-sheet-desc"
+>
+  <div class="sheet-backdrop no-animation"></div>
+  <div class="sheet-panel no-animation">
+    <div class="sheet-content">
+      <h2 id="anim-none-sheet-title" class="text-lg font-semibold mb-2">
+        No Animation
+      </h2>
+      <p id="anim-none-sheet-desc" class="text-muted-foreground text-sm mb-4">
+        Add the `no-animation` class to disable the default animations.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog
+  id="anim-slow-sheet"
+  class="dialog"
+  aria-labelledby="anim-slow-sheet-title"
+  aria-describedby="anim-slow-sheet-desc"
+>
+  <div class="sheet-backdrop duration-500"></div>
+  <div class="sheet-panel duration-500">
+    <div class="sheet-content">
+      <h2 id="anim-slow-sheet-title" class="text-lg font-semibold mb-2">
+        Slow Animation
+      </h2>
+      <p id="anim-slow-sheet-desc" class="text-muted-foreground text-sm mb-4">
+        Override the duration with utility classes like `duration-500`.
+      </p>
+      <button class="btn" data-sp-dismiss="dialog">Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
+The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. You can customize or replace these with your own animations.
+
+### Accessibility
+
+This component uses the native `<dialog>` element for proper screen reader announcements. The JavaScript module provides Escape key handling for all sheets, and focus trapping (Tab cycles through focusable elements) for modal sheets.
+
+For proper screen reader support, add these attributes to your sheets:
+
+| Attribute                    | Description                                       |
+| ---------------------------- | ------------------------------------------------- |
+| `aria-labelledby="title-id"` | Add to `dialog` to reference the title element    |
+| `aria-describedby="desc-id"` | Add to `dialog` to reference the description      |
+| `aria-label="Close"`         | Add to icon-only buttons for screen reader labels |
+
+```html
+<dialog aria-labelledby="title" aria-describedby="desc">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-content">
+      <button aria-label="Close" data-sp-dismiss="dialog">
+        <icon-x />
+      </button>
+      <h2 id="title">Title</h2>
+      <p id="desc">Description</p>
+    </div>
+  </div>
+</dialog>
+```
+
+### Class reference
+
+All available classes for the sheet component.
+
+| Class            | Description                                      |
+| ---------------- | ------------------------------------------------ |
+| `dialog`         | Base class for the `dialog` element              |
+| `sheet-backdrop` | Overlay that blocks interaction with the page    |
+| `sheet-panel`    | The content panel (defaults to left direction)   |
+| `sheet-content`  | Inner wrapper with padding                       |
+| `sheet-left`     | Add to `.sheet-panel` to slide from the left     |
+| `sheet-right`    | Add to `.sheet-panel` to slide from the right    |
+| `sheet-top`      | Add to `.sheet-panel` to slide from the top      |
+| `sheet-bottom`   | Add to `.sheet-panel` to slide from the bottom   |
+| `no-animation`   | Disables default animations on backdrop or panel |
+
+```html
+<dialog class="dialog">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel sheet-right">
+    <div class="sheet-content">
+      <!-- Content -->
+    </div>
+  </div>
+</dialog>
+```
+
+### Data attributes
+
+All data attributes for the sheet component.
+
+| Attribute                   | Description                                              |
+| --------------------------- | -------------------------------------------------------- |
+| `data-sp-toggle="dialog"`   | Add to a button to open the sheet in `data-sp-target`    |
+| `data-sp-target="#id"`      | Specifies which sheet to open                            |
+| `data-sp-dismiss="dialog"`  | Add to a button inside the sheet to close it             |
+| `data-sp-backdrop="static"` | Add to `dialog` to prevent closing on backdrop or Escape |
+| `data-state`                | Set to `open` or `closed` on backdrop and panel          |
+
+```html
+<button data-sp-toggle="dialog" data-sp-target="#my-sheet">Open</button>
+
+<dialog id="my-sheet" class="dialog" data-sp-backdrop="static">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-content">
+      <button data-sp-dismiss="dialog">Close</button>
+    </div>
+  </div>
+</dialog>
+```

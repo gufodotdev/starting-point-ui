@@ -1,0 +1,347 @@
+---
+title: Table
+description: A Tailwind CSS table component for displaying tabular data.
+---
+
+A Tailwind CSS table component for displaying tabular data.
+
+```html preview
+<div class="w-full overflow-x-auto">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head">Product</th>
+        <th class="table-head">Status</th>
+        <th class="table-head text-right">Price</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <img
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80&h=80&fit=crop"
+              alt="Watch"
+              class="size-10 rounded-md object-cover"
+            />
+            <div>
+              <div class="font-medium">Classic Watch</div>
+              <div class="text-muted-foreground text-sm">SKU: WCH-001</div>
+            </div>
+          </div>
+        </td>
+        <td class="table-cell">
+          <span class="badge bg-green-500/10 text-green-500 border-transparent"
+            >Delivered</span
+          >
+        </td>
+        <td class="table-cell text-right font-medium">$249.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <img
+              src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=80&h=80&fit=crop"
+              alt="Perfume"
+              class="size-10 rounded-md object-cover"
+            />
+            <div>
+              <div class="font-medium">Eau de Parfum</div>
+              <div class="text-muted-foreground text-sm">SKU: PRF-042</div>
+            </div>
+          </div>
+        </td>
+        <td class="table-cell">
+          <span
+            class="badge bg-yellow-500/10 text-yellow-500 border-transparent"
+            >Shipping</span
+          >
+        </td>
+        <td class="table-cell text-right font-medium">$89.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <img
+              src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=80&h=80&fit=crop"
+              alt="Phone"
+              class="size-10 rounded-md object-cover"
+            />
+            <div>
+              <div class="font-medium">Smartphone Pro</div>
+              <div class="text-muted-foreground text-sm">SKU: PHN-128</div>
+            </div>
+          </div>
+        </td>
+        <td class="table-cell">
+          <span class="badge bg-blue-500/10 text-blue-500 border-transparent"
+            >Processing</span
+          >
+        </td>
+        <td class="table-cell text-right font-medium">$999.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <img
+              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&h=80&fit=crop"
+              alt="Headphones"
+              class="size-10 rounded-md object-cover"
+            />
+            <div>
+              <div class="font-medium">Wireless Headphones</div>
+              <div class="text-muted-foreground text-sm">SKU: HPH-256</div>
+            </div>
+          </div>
+        </td>
+        <td class="table-cell">
+          <span class="badge bg-red-500/10 text-red-500 border-transparent"
+            >Cancelled</span
+          >
+        </td>
+        <td class="table-cell text-right font-medium">$349.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+---
+
+## Striped rows
+
+Add `even:bg-muted/50` to table rows for alternating row backgrounds.
+
+```html preview
+<div class="w-full overflow-x-auto">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head">Invoice</th>
+        <th class="table-head">Status</th>
+        <th class="table-head text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row even:bg-muted/50">
+        <td class="table-cell font-medium">INV-001</td>
+        <td class="table-cell text-muted-foreground">Paid</td>
+        <td class="table-cell text-right">$250.00</td>
+      </tr>
+      <tr class="table-row even:bg-muted/50">
+        <td class="table-cell font-medium">INV-002</td>
+        <td class="table-cell text-muted-foreground">Pending</td>
+        <td class="table-cell text-right">$150.00</td>
+      </tr>
+      <tr class="table-row even:bg-muted/50">
+        <td class="table-cell font-medium">INV-003</td>
+        <td class="table-cell text-muted-foreground">Paid</td>
+        <td class="table-cell text-right">$350.00</td>
+      </tr>
+      <tr class="table-row even:bg-muted/50">
+        <td class="table-cell font-medium">INV-004</td>
+        <td class="table-cell text-muted-foreground">Unpaid</td>
+        <td class="table-cell text-right">$450.00</td>
+      </tr>
+      <tr class="table-row even:bg-muted/50">
+        <td class="table-cell font-medium">INV-005</td>
+        <td class="table-cell text-muted-foreground">Paid</td>
+        <td class="table-cell text-right">$550.00</td>
+      </tr>
+    </tbody>
+    <tfoot class="table-footer">
+      <tr class="table-row">
+        <td class="table-cell font-medium" colspan="2">Total</td>
+        <td class="table-cell text-right font-medium">$1,750.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+```
+
+---
+
+## Customization
+
+Combine table classes with Tailwind utilities and other components for custom styling. This example uses the [Card](/docs/components/card) component to create a GitHub-style file browser.
+
+```html preview
+<div class="card w-full overflow-x-auto">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row bg-muted/30">
+        <th class="table-head" colspan="3">
+          <div class="flex items-center gap-2">
+            <img
+              src="https://github.com/gufodotdev.png"
+              alt="gufodotdev"
+              class="size-6 rounded-full"
+            />
+            <span class="font-semibold">gufodotdev</span>
+            <span class="text-muted-foreground font-normal"
+              >chore: release v0.0.2</span
+            >
+          </div>
+        </th>
+        <th class="table-head text-right">
+          <span
+            class="font-mono text-xs text-muted-foreground bg-muted px-2 py-1 rounded"
+            >300cd92</span
+          >
+          <span class="text-muted-foreground font-normal ml-2"
+            >2 hours ago</span
+          >
+        </th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <icon-folder class="size-4 text-blue-400 fill-blue-400" />
+            <a href="#" class="hover:underline hover:text-blue-500"
+              >apps/docs</a
+            >
+          </div>
+        </td>
+        <td class="table-cell text-muted-foreground" colspan="2">
+          chore: add vercel analytics
+        </td>
+        <td class="table-cell text-muted-foreground text-right">3 hours ago</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <icon-folder class="size-4 text-blue-400 fill-blue-400" />
+            <a href="#" class="hover:underline hover:text-blue-500"
+              >packages/ui</a
+            >
+          </div>
+        </td>
+        <td class="table-cell text-muted-foreground" colspan="2">
+          chore: release v0.0.2
+        </td>
+        <td class="table-cell text-muted-foreground text-right">2 hours ago</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <icon-file class="size-4 text-muted-foreground" />
+            <a href="#" class="hover:underline hover:text-blue-500"
+              >.gitignore</a
+            >
+          </div>
+        </td>
+        <td class="table-cell text-muted-foreground" colspan="2">
+          initial setup
+        </td>
+        <td class="table-cell text-muted-foreground text-right">last week</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <icon-file class="size-4 text-muted-foreground" />
+            <a href="#" class="hover:underline hover:text-blue-500">LICENSE</a>
+          </div>
+        </td>
+        <td class="table-cell text-muted-foreground" colspan="2">
+          chore: prepare package for npm publishing
+        </td>
+        <td class="table-cell text-muted-foreground text-right">3 hours ago</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <icon-file class="size-4 text-muted-foreground" />
+            <a href="#" class="hover:underline hover:text-blue-500"
+              >README.md</a
+            >
+          </div>
+        </td>
+        <td class="table-cell text-muted-foreground" colspan="2">
+          initial setup
+        </td>
+        <td class="table-cell text-muted-foreground text-right">last week</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <div class="flex items-center gap-3">
+            <icon-file class="size-4 text-muted-foreground" />
+            <a href="#" class="hover:underline hover:text-blue-500"
+              >package.json</a
+            >
+          </div>
+        </td>
+        <td class="table-cell text-muted-foreground" colspan="2">
+          initial setup
+        </td>
+        <td class="table-cell text-muted-foreground text-right">last week</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+---
+
+## How it works
+
+The table component is a CSS-only set of classes for styling native HTML tables. It includes hover states on rows and consistent spacing for cells.
+
+### Structure
+
+A table uses native HTML table elements with corresponding classes:
+
+```html
+<table class="table">
+  <thead class="table-header">
+    <tr class="table-row">
+      <th class="table-head">Header</th>
+    </tr>
+  </thead>
+  <tbody class="table-body">
+    <tr class="table-row">
+      <td class="table-cell">Cell</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+For horizontal scrolling on small screens, wrap the table in a container with `overflow-x-auto`:
+
+```html
+<div class="overflow-x-auto">
+  <table class="table">...</table>
+</div>
+```
+
+### Class reference
+
+All available classes for the table component.
+
+| Class          | Description                                              |
+| -------------- | -------------------------------------------------------- |
+| `table`        | Add to `<table>` element for base table styles           |
+| `table-header` | Add to `<thead>` element for header section styles       |
+| `table-body`   | Add to `<tbody>` element for body section styles         |
+| `table-footer` | Add to `<tfoot>` element for footer section styles       |
+| `table-row`    | Add to `<tr>` element for row styles with hover state    |
+| `table-head`   | Add to `<th>` element for header cell styles             |
+| `table-cell`   | Add to `<td>` element for data cell styles               |
+
+```html
+<table class="table">
+  <thead class="table-header">
+    <tr class="table-row">
+      <th class="table-head">Name</th>
+      <th class="table-head">Email</th>
+    </tr>
+  </thead>
+  <tbody class="table-body">
+    <tr class="table-row">
+      <td class="table-cell">John</td>
+      <td class="table-cell">john@example.com</td>
+    </tr>
+  </tbody>
+</table>
+```

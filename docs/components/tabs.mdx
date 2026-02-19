@@ -1,0 +1,310 @@
+---
+title: Tabs
+description: A Tailwind CSS tabs component for organizing content into switchable panels.
+---
+
+A Tailwind CSS tabs component for organizing content into switchable panels.
+
+```html preview
+<div class="w-96">
+  <div class="tab-list" role="tablist" aria-label="Example tabs">
+    <button
+      type="button"
+      class="tab active"
+      role="tab"
+      aria-selected="true"
+      data-sp-toggle="tab"
+      data-sp-target="#panel-1"
+      tabindex="0"
+    >
+      Account
+    </button>
+    <button
+      type="button"
+      class="tab"
+      role="tab"
+      aria-selected="false"
+      data-sp-toggle="tab"
+      data-sp-target="#panel-2"
+      tabindex="-1"
+    >
+      Password
+    </button>
+    <button
+      type="button"
+      class="tab"
+      role="tab"
+      aria-selected="false"
+      data-sp-toggle="tab"
+      data-sp-target="#panel-3"
+      tabindex="-1"
+    >
+      Settings
+    </button>
+  </div>
+  <div id="panel-1" class="tab-panel active mt-2" role="tabpanel">
+    <div class="card">
+      <div class="card-content">
+        <h3 class="font-medium mb-2">Account</h3>
+        <p class="text-sm text-muted-foreground">
+          Manage your account settings and preferences.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="panel-2" class="tab-panel mt-2" role="tabpanel">
+    <div class="card">
+      <div class="card-content">
+        <h3 class="font-medium mb-2">Password</h3>
+        <p class="text-sm text-muted-foreground">
+          Change your password and security options.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="panel-3" class="tab-panel mt-2" role="tabpanel">
+    <div class="card">
+      <div class="card-content">
+        <h3 class="font-medium mb-2">Settings</h3>
+        <p class="text-sm text-muted-foreground">
+          Configure application settings.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Disabled tabs
+
+Use the `disabled` attribute to prevent a tab from being selected. Disabled tabs are skipped during keyboard navigation.
+
+```html preview
+<div class="w-96">
+  <div class="tab-list" role="tablist" aria-label="Tabs with disabled">
+    <button
+      type="button"
+      class="tab active"
+      role="tab"
+      aria-selected="true"
+      data-sp-toggle="tab"
+      data-sp-target="#disabled-panel-1"
+      tabindex="0"
+    >
+      Active
+    </button>
+    <button
+      type="button"
+      class="tab"
+      role="tab"
+      aria-selected="false"
+      data-sp-toggle="tab"
+      data-sp-target="#disabled-panel-2"
+      tabindex="-1"
+      disabled
+    >
+      Disabled
+    </button>
+    <button
+      type="button"
+      class="tab"
+      role="tab"
+      aria-selected="false"
+      data-sp-toggle="tab"
+      data-sp-target="#disabled-panel-3"
+      tabindex="-1"
+    >
+      Settings
+    </button>
+  </div>
+  <div id="disabled-panel-1" class="tab-panel active mt-2" role="tabpanel">
+    <div class="card">
+      <div class="card-content">
+        <h3 class="font-medium mb-2">Active Tab</h3>
+        <p class="text-sm text-muted-foreground">This tab is active.</p>
+      </div>
+    </div>
+  </div>
+  <div id="disabled-panel-2" class="tab-panel mt-2" role="tabpanel">
+    <div class="card">
+      <div class="card-content">
+        <h3 class="font-medium mb-2">Disabled Tab</h3>
+        <p class="text-sm text-muted-foreground">This tab is disabled.</p>
+      </div>
+    </div>
+  </div>
+  <div id="disabled-panel-3" class="tab-panel mt-2" role="tabpanel">
+    <div class="card">
+      <div class="card-content">
+        <h3 class="font-medium mb-2">Settings</h3>
+        <p class="text-sm text-muted-foreground">Settings content.</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Styling panels
+
+Avoid applying `display` properties directly to `.tab-panel` since the `.active` class controls visibility with `display: block`. If you need flex or grid layouts, use a wrapper inside the panel:
+
+```html
+<!-- Don't do this -->
+<div class="tab-panel active flex gap-4">...</div>
+
+<!-- Do this instead -->
+<div class="tab-panel active">
+  <div class="flex gap-4">...</div>
+</div>
+```
+
+---
+
+## How it works
+
+The tabs component uses a small JavaScript module that handles tab switching and keyboard navigation.
+
+### Structure
+
+A tabs component consists of three parts:
+
+1. **`.tab-list`** - Container that holds all tab buttons
+2. **`.tab`** - Individual tab button with `data-sp-toggle="tab"`
+3. **`.tab-panel`** - Content panel associated with each tab
+
+```html
+<div class="tab-list" role="tablist">
+  <button class="tab active" data-sp-toggle="tab" data-sp-target="#panel-1">
+    Tab 1
+  </button>
+  <button class="tab" data-sp-toggle="tab" data-sp-target="#panel-2">
+    Tab 2
+  </button>
+</div>
+<div id="panel-1" class="tab-panel active" role="tabpanel">Panel 1</div>
+<div id="panel-2" class="tab-panel" role="tabpanel">Panel 2</div>
+```
+
+### Switching tabs
+
+Use data attributes to control tab switching without writing JavaScript.
+
+Add `data-sp-toggle="tab"` and `data-sp-target="#panel-id"` to each tab button. The `data-sp-target` value should match the ID of the corresponding panel:
+
+```html
+<button data-sp-toggle="tab" data-sp-target="#my-panel">Tab</button>
+<div id="my-panel" class="tab-panel">Content</div>
+```
+
+Add the `.active` class to the initially selected tab and its panel. Clicking a tab removes `.active` from all tabs and panels, then adds it to the clicked tab and its target panel.
+
+For programmatic control, use the global `StartingPointUI.tabs` module:
+
+```js
+const tab = document.querySelector("#my-tab");
+
+StartingPointUI.tabs.select(tab);
+```
+
+### Accessibility
+
+The tabs JavaScript module provides full keyboard navigation following the WAI-ARIA tabs pattern.
+
+For proper screen reader support, add these attributes to your tabs:
+
+| Attribute                     | Description                                                        |
+| ----------------------------- | ------------------------------------------------------------------ |
+| `role="tablist"`              | Add to `.tab-list` to identify the container as a tablist          |
+| `role="tab"`                  | Add to `.tab` to identify the button as a tab                      |
+| `role="tabpanel"`             | Add to `.tab-panel` to identify the content as a tabpanel          |
+| `aria-label`                  | Add to `.tab-list` to provide an accessible name                   |
+| `aria-selected="true\|false"` | Add to `.tab` to indicate the selected state                       |
+| `aria-controls="panel-id"`    | Add to `.tab` to reference the controlled panel                    |
+| `aria-labelledby="tab-id"`    | Add to `.tab-panel` to reference the tab that controls this panel  |
+| `tabindex="0\|-1"`            | Add to `.tab` - only the active tab should be in tab order         |
+
+```html
+<div class="tab-list" role="tablist" aria-label="Settings">
+  <button
+    class="tab active"
+    role="tab"
+    id="tab-1"
+    aria-selected="true"
+    aria-controls="panel-1"
+    data-sp-toggle="tab"
+    data-sp-target="#panel-1"
+    tabindex="0"
+  >
+    General
+  </button>
+  <button
+    class="tab"
+    role="tab"
+    id="tab-2"
+    aria-selected="false"
+    aria-controls="panel-2"
+    data-sp-toggle="tab"
+    data-sp-target="#panel-2"
+    tabindex="-1"
+  >
+    Notifications
+  </button>
+</div>
+<div id="panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-1">
+  General settings.
+</div>
+<div id="panel-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-2">
+  Notification preferences.
+</div>
+```
+
+The JavaScript automatically updates `aria-selected` and `tabindex` when tabs are switched.
+
+#### Keyboard navigation
+
+| Key          | Action                   |
+| ------------ | ------------------------ |
+| `ArrowLeft`  | Move to the previous tab |
+| `ArrowRight` | Move to the next tab     |
+| `Home`       | Move to the first tab    |
+| `End`        | Move to the last tab     |
+
+Navigation wraps around - pressing `ArrowRight` on the last tab moves to the first tab, and vice versa. Disabled tabs are skipped during keyboard navigation.
+
+### Class reference
+
+All available classes for the tabs component.
+
+| Class       | Description                                                            |
+| ----------- | ---------------------------------------------------------------------- |
+| `tab-list`  | Container element that holds all tab buttons                           |
+| `tab`       | Individual tab button element                                          |
+| `tab-panel` | Content panel element associated with a tab                            |
+| `active`    | Add to `.tab` and `.tab-panel` to mark as selected and show the panel  |
+
+```html
+<div class="tab-list">
+  <button class="tab active" data-sp-toggle="tab" data-sp-target="#panel">
+    Tab
+  </button>
+</div>
+<div id="panel" class="tab-panel active">Content</div>
+```
+
+### Data attributes
+
+All data attributes for the tabs component.
+
+| Attribute              | Description                                                        |
+| ---------------------- | ------------------------------------------------------------------ |
+| `data-sp-toggle="tab"` | Add to `.tab` to enable tab switching on click                     |
+| `data-sp-target="#id"` | Add to `.tab` to specify the panel to show when this tab is active |
+
+```html
+<button class="tab" data-sp-toggle="tab" data-sp-target="#my-panel">Tab</button>
+<div id="my-panel" class="tab-panel">Content</div>
+```
