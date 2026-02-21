@@ -8,60 +8,9 @@
 
 @utility accordion-trigger {
   @layer l1.l2 {
-    @apply flex w-full flex-1 items-center gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
-    @apply [&:where(&:not(.accordion-trigger-icon-arrow,.accordion-trigger-icon-plus,.accordion-trigger-icon-none))]:accordion-trigger-icon-arrow;
-    @apply [&:where(&:not(.accordion-trigger-icon-start,.accordion-trigger-icon-end))]:accordion-trigger-icon-end;
-
-    &::after {
-      @apply shrink-0 size-4 transition-transform duration-200;
-      content: "";
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-  }
-}
-
-@utility accordion-trigger-icon-arrow {
-  @layer l1 {
-    &::after {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
-    }
-
-    &[aria-expanded="true"]::after {
-      @apply rotate-180;
-    }
-  }
-}
-
-@utility accordion-trigger-icon-plus {
-  @layer l1 {
-    &::after {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M5 12h14'/%3e%3cpath d='M12 5v14'/%3e%3c/svg%3e");
-    }
-
-    &[aria-expanded="true"]::after {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M5 12h14'/%3e%3c/svg%3e");
-    }
-  }
-}
-
-@utility accordion-trigger-icon-none {
-  @layer l1 {
-    &::after {
-      @apply hidden;
-    }
-  }
-}
-
-@utility accordion-trigger-icon-end {
-  @layer l1 {
-    @apply justify-between;
-  }
-}
-
-@utility accordion-trigger-icon-start {
-  @layer l1 {
-    @apply flex-row-reverse justify-end;
+    @apply flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
+    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply [&:not(.no-animation)_svg]:transition-transform [&:not(.no-animation)_svg]:duration-200;
   }
 }
 

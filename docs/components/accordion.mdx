@@ -17,6 +17,7 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       aria-controls="accordion-panel-1"
     >
       Is it accessible?
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="accordion-panel-1" class="accordion-panel open">
       <div class="accordion-content">
@@ -34,6 +35,7 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       aria-controls="accordion-panel-2"
     >
       Is it styled?
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="accordion-panel-2" class="accordion-panel">
       <div class="accordion-content">
@@ -51,6 +53,7 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       aria-controls="accordion-panel-3"
     >
       Is it animated?
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="accordion-panel-3" class="accordion-panel">
       <div class="accordion-content">
@@ -79,6 +82,7 @@ Add `data-sp-multiple` to the accordion to allow multiple sections to be open at
       aria-controls="multi-panel-1"
     >
       First section
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="multi-panel-1" class="accordion-panel open">
       <div class="accordion-content">
@@ -96,6 +100,7 @@ Add `data-sp-multiple` to the accordion to allow multiple sections to be open at
       aria-controls="multi-panel-2"
     >
       Second section
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="multi-panel-2" class="accordion-panel open">
       <div class="accordion-content">
@@ -108,85 +113,64 @@ Add `data-sp-multiple` to the accordion to allow multiple sections to be open at
 
 ---
 
-## Plus/minus icon
+## Icons
 
-Add `accordion-trigger-icon-plus` to use plus/minus icons instead of the chevron.
-
-```html preview
-<div class="accordion max-w-lg">
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger accordion-trigger-icon-plus"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#plus-panel-1"
-      aria-expanded="true"
-      aria-controls="plus-panel-1"
-    >
-      Expanded section
-    </button>
-    <div id="plus-panel-1" class="accordion-panel open">
-      <div class="accordion-content">
-        This section shows the minus icon when expanded.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger accordion-trigger-icon-plus"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#plus-panel-2"
-      aria-expanded="false"
-      aria-controls="plus-panel-2"
-    >
-      Collapsed section
-    </button>
-    <div id="plus-panel-2" class="accordion-panel">
-      <div class="accordion-content">
-        This section shows the plus icon when collapsed.
-      </div>
-    </div>
-  </div>
-</div>
-```
-
----
-
-## Icon position
-
-Add `accordion-trigger-icon-start` to position the icon before the text. This can be combined with `accordion-trigger-icon-plus`.
+Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control icon behavior.
 
 ```html preview
 <div class="accordion max-w-lg">
   <div class="accordion-item">
     <button
-      class="accordion-trigger accordion-trigger-icon-start"
+      class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#start-panel-1"
+      data-sp-target="#icon-panel-1"
       aria-expanded="true"
-      aria-controls="start-panel-1"
+      aria-controls="icon-panel-1"
     >
-      Chevron at start
+      Rotating chevron
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
-    <div id="start-panel-1" class="accordion-panel open">
-      <div class="accordion-content">The icon appears before the text.</div>
+    <div id="icon-panel-1" class="accordion-panel open">
+      <div class="accordion-content">
+        The chevron rotates 180° when expanded.
+      </div>
     </div>
   </div>
   <div class="accordion-item">
     <button
-      class="accordion-trigger accordion-trigger-icon-start accordion-trigger-icon-plus"
+      class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#start-panel-2"
+      data-sp-target="#icon-panel-2"
       aria-expanded="false"
-      aria-controls="start-panel-2"
+      aria-controls="icon-panel-2"
     >
-      Plus/minus at start
+      Plus/minus swap
+      <icon-plus class="[[aria-expanded=true]>&]:hidden" />
+      <icon-minus class="hidden [[aria-expanded=true]>&]:block" />
     </button>
-    <div id="start-panel-2" class="accordion-panel">
-      <div class="accordion-content">Combining both modifiers.</div>
+    <div id="icon-panel-2" class="accordion-panel">
+      <div class="accordion-content">
+        Swap between plus and minus icons.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <button
+      class="accordion-trigger"
+      type="button"
+      data-sp-toggle="accordion"
+      data-sp-target="#icon-panel-3"
+      aria-expanded="false"
+      aria-controls="icon-panel-3"
+    >
+      No icon
+    </button>
+    <div id="icon-panel-3" class="accordion-panel">
+      <div class="accordion-content">
+        You can also omit the icon entirely.
+      </div>
     </div>
   </div>
 </div>
@@ -210,6 +194,7 @@ Add `disabled` to the trigger button to prevent interaction.
       aria-controls="disabled-panel-1"
     >
       Enabled section
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="disabled-panel-1" class="accordion-panel open">
       <div class="accordion-content">This section can be toggled.</div>
@@ -226,6 +211,7 @@ Add `disabled` to the trigger button to prevent interaction.
       aria-controls="disabled-panel-2"
     >
       Disabled section
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="disabled-panel-2" class="accordion-panel">
       <div class="accordion-content">This section cannot be opened.</div>
@@ -241,6 +227,7 @@ Add `disabled` to the trigger button to prevent interaction.
       aria-controls="disabled-panel-3"
     >
       Another enabled section
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="disabled-panel-3" class="accordion-panel">
       <div class="accordion-content">This section can also be toggled.</div>
@@ -274,6 +261,7 @@ An accordion consists of five parts:
       data-sp-target="#panel-1"
     >
       Section title
+      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
     </button>
     <div id="panel-1" class="accordion-panel">
       <div class="accordion-content">Section content</div>
@@ -306,12 +294,27 @@ sp.accordion.toggle(panel);
 
 ### Animation
 
-The accordion includes a smooth height animation using CSS keyframes.
+The accordion includes a smooth height animation using CSS keyframes. Icons inside the trigger also animate by default.
 
-To disable animations, add `no-animation` to the panel:
+To disable all animations, add `no-animation` to the trigger:
 
 ```html
+<button class="accordion-trigger no-animation">
+  Section title
+  <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+</button>
 <div class="accordion-panel no-animation">...</div>
+```
+
+To animate icons, use `aria-expanded` selectors. Icons have a default transition that matches the height animation:
+
+```html
+<!-- Rotate icon -->
+<svg class="[[aria-expanded=true]>&]:rotate-180" ...></svg>
+
+<!-- Swap icons -->
+<svg class="[[aria-expanded=true]>&]:hidden" ...></svg>
+<svg class="hidden [[aria-expanded=true]>&]:block" ...></svg>
 ```
 
 ### Accessibility
@@ -344,20 +347,15 @@ The JavaScript will automatically update `aria-expanded` when the panel opens an
 
 ### Class reference
 
-| Class                          | Description                                           |
-| ------------------------------ | ----------------------------------------------------- |
-| `accordion`                    | Container that groups accordion items                 |
-| `accordion-item`               | Individual collapsible section                        |
-| `accordion-trigger`            | Button that toggles the section                       |
-| `accordion-trigger-icon-arrow` | Chevron icon that rotates (default)                   |
-| `accordion-trigger-icon-plus`  | Plus/minus icon                                       |
-| `accordion-trigger-icon-none`  | Hide the icon                                         |
-| `accordion-trigger-icon-start` | Position icon before the text                         |
-| `accordion-trigger-icon-end`   | Position icon after the text (default)                |
-| `accordion-panel`              | Panel wrapper that controls visibility and animations |
-| `accordion-content`            | Content container with padding and text styles        |
-| `open`                         | Add to `.accordion-panel` to show by default          |
-| `no-animation`                 | Add to `.accordion-panel` to disable animations       |
+| Class               | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `accordion`         | Container that groups accordion items                 |
+| `accordion-item`    | Individual collapsible section                        |
+| `accordion-trigger` | Button that toggles the section                       |
+| `accordion-panel`   | Panel wrapper that controls visibility and animations |
+| `accordion-content` | Content container with padding and text styles        |
+| `open`              | Add to `.accordion-panel` to show by default          |
+| `no-animation`      | Add to `.accordion-trigger` or `.accordion-panel` to disable animations |
 
 ### Data attributes
 
