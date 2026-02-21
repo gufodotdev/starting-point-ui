@@ -1,22 +1,32 @@
 /* Starting Point UI Breadcrumb Styles */
 
 @utility breadcrumb {
-  @apply text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5;
+  @layer l1.l2 {
+    @apply text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5;
+  }
 }
 
 @utility breadcrumb-link {
-  @apply inline-flex items-center gap-1.5 text-foreground;
-  @apply hover:text-foreground transition-colors;
+  @layer l1.l2 {
+    @apply inline-flex items-center gap-1.5 text-foreground;
+    @apply hover:text-foreground transition-colors;
+  }
 }
 
 @utility breadcrumb-page {
-  @apply inline-flex items-center gap-1.5 text-foreground;
+  @layer l1.l2 {
+    @apply inline-flex items-center gap-1.5 text-foreground;
+  }
 }
 
 @utility breadcrumb-separator {
-  @apply [&>svg]:size-3.5;
+  @layer l1.l2 {
+    @apply [&>svg]:size-3.5;
+  }
 }
 
 @utility breadcrumb-collapsed {
-  @apply flex size-9 items-center justify-center;
+  @layer l1.l2 {
+    @apply flex size-9 items-center justify-center;
+  }
 }
