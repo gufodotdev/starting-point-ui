@@ -1,21 +1,23 @@
 /* Starting Point UI Switch Styles */
 
 @utility switch {
-  @apply h-[1.15rem] w-8 shrink-0 rounded-full border border-transparent shadow-xs outline-none appearance-none cursor-pointer;
-  @apply transition-[color,box-shadow,background-color];
-  @apply bg-input dark:bg-input/80;
-  @apply checked:bg-primary;
-  @apply disabled:cursor-not-allowed disabled:opacity-50;
-  @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
-  @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+  @layer l1.l2 {
+    @apply h-[1.15rem] w-8 shrink-0 rounded-full border border-transparent shadow-xs outline-none appearance-none cursor-pointer;
+    @apply transition-[color,box-shadow,background-color];
+    @apply bg-input dark:bg-input/80;
+    @apply checked:bg-primary;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
 
-  &::before {
-    content: "";
-    @apply block size-4 rounded-full shadow-xs transition-transform;
-    @apply bg-background dark:bg-foreground;
-  }
+    &::before {
+      content: "";
+      @apply block size-4 rounded-full shadow-xs transition-transform;
+      @apply bg-background dark:bg-foreground;
+    }
 
-  &:checked::before {
-    @apply translate-x-[calc(100%-2px)] bg-background dark:bg-primary-foreground;
+    &:checked::before {
+      @apply translate-x-[calc(100%-2px)] bg-background dark:bg-primary-foreground;
+    }
   }
 }
