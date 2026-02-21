@@ -182,7 +182,7 @@ Card content comes in three sizes for different use cases.
 
 ## Variants
 
-Cards come in three variants for different contexts.
+Cards come in two variants for different contexts.
 
 ```html preview
 <div class="grid gap-6 w-full max-w-sm">
@@ -192,16 +192,6 @@ Cards come in three variants for different contexts.
       <div class="flex-1 grid gap-1">
         <h3 class="font-semibold text-sm leading-none">Payment Method</h3>
         <p class="text-muted-foreground text-sm">Visa ending in 4242</p>
-      </div>
-      <a href="#" class="btn btn-ghost btn-sm">Edit</a>
-    </div>
-  </div>
-  <div class="card card-outline">
-    <div class="card-content card-content-sm flex items-center gap-4">
-      <icon-mail class="size-5 text-muted-foreground" />
-      <div class="flex-1 grid gap-1">
-        <h3 class="font-semibold text-sm leading-none">Email Notifications</h3>
-        <p class="text-muted-foreground text-sm">Receive updates via email</p>
       </div>
       <a href="#" class="btn btn-ghost btn-sm">Edit</a>
     </div>
@@ -283,16 +273,15 @@ All available classes for the card component.
 | Class               | Description                                                        |
 | ------------------- | ------------------------------------------------------------------ |
 | `card`              | Add to container element for base card styles with rounded corners |
-| `card-default`      | Add to `.card` for border and shadow style (default)               |
-| `card-outline`      | Add to `.card` for border only, no shadow                          |
-| `card-muted`        | Add to `.card` for muted background, no border or shadow           |
+| `card-default`      | Add to `.card` for border style (default)                          |
+| `card-muted`        | Add to `.card` for muted background, no border                     |
 | `card-content`      | Add to inner element for content section with padding              |
 | `card-content-sm`   | Add to `.card-content` for small padding                           |
 | `card-content-base` | Add to `.card-content` for base padding (default)                  |
 | `card-content-lg`   | Add to `.card-content` for large padding                           |
 
 ```html
-<div class="card card-outline">
+<div class="card card-muted">
   <div class="card-content card-content-sm">...</div>
 </div>
 ```

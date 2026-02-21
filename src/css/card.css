@@ -3,17 +3,11 @@
 @utility card {
   @layer l1.l2 {
     @apply text-card-foreground rounded-xl;
-    @apply [&:where(&:not(.card-default,.card-outline,.card-muted))]:card-default;
+    @apply [&:where(&:not(.card-default,.card-muted))]:card-default;
   }
 }
 
 @utility card-default {
-  @layer l1 {
-    @apply bg-card border shadow-xs;
-  }
-}
-
-@utility card-outline {
   @layer l1 {
     @apply bg-card border;
   }
