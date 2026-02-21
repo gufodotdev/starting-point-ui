@@ -127,7 +127,7 @@
 @utility sidebar-backdrop {
   @layer l1.l2 {
     /* Hidden by default, always hidden on desktop */
-    @apply fixed inset-0 z-40 bg-black/50 hidden sidebar:hidden;
+    @apply fixed inset-0 z-40 bg-black/30 backdrop-blur-xs hidden sidebar:hidden;
     @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
 
     &.open {
