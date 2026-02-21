@@ -95,6 +95,7 @@
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
     @apply [&.active]:bg-sidebar-accent [&.active]:font-medium [&.active]:text-sidebar-accent-foreground;
     @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-[1.125rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
     @apply [&:where(&:not(.menu-btn-sm,.menu-btn-lg))]:menu-btn-base;
   }
 }
