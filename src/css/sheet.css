@@ -1,35 +1,49 @@
 /* Starting Point UI Sheet Styles */
 
 @utility sheet-backdrop {
-  @apply fixed inset-0 bg-black/50 -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
+  @layer l1.l2 {
+    @apply fixed inset-0 bg-black/50 -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
+  }
 }
 
 @utility sheet-panel {
-  @apply fixed pointer-events-auto bg-background shadow-lg [animation-fill-mode:forwards]!;
-  @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-left;
+  @layer l1.l2 {
+    @apply fixed pointer-events-auto bg-background shadow-lg [animation-fill-mode:forwards]!;
+    @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-left;
+  }
 }
 
 @utility sheet-content {
-  @apply p-6;
+  @layer l1.l2 {
+    @apply p-6;
+  }
 }
 
 @utility sheet-left {
-  @apply top-0 bottom-0 left-0 h-full w-3/4 max-w-sm border-r;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left [&:not(.no-animation)]:duration-300;
+  @layer l1 {
+    @apply top-0 bottom-0 left-0 h-full w-3/4 max-w-sm border-r;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left [&:not(.no-animation)]:duration-300;
+  }
 }
 
 @utility sheet-right {
-  @apply top-0 bottom-0 right-0 h-full w-3/4 max-w-sm border-l;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right [&:not(.no-animation)]:duration-300;
+  @layer l1 {
+    @apply top-0 bottom-0 right-0 h-full w-3/4 max-w-sm border-l;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right [&:not(.no-animation)]:duration-300;
+  }
 }
 
 @utility sheet-top {
-  @apply top-0 left-0 right-0 w-full border-b;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-top [&:not(.no-animation)]:data-[state=closed]:slide-out-to-top [&:not(.no-animation)]:duration-300;
+  @layer l1 {
+    @apply top-0 left-0 right-0 w-full border-b;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-top [&:not(.no-animation)]:data-[state=closed]:slide-out-to-top [&:not(.no-animation)]:duration-300;
+  }
 }
 
 @utility sheet-bottom {
-  @apply bottom-0 left-0 right-0 w-full border-t;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-bottom [&:not(.no-animation)]:data-[state=closed]:slide-out-to-bottom [&:not(.no-animation)]:duration-300;
+  @layer l1 {
+    @apply bottom-0 left-0 right-0 w-full border-t;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-bottom [&:not(.no-animation)]:data-[state=closed]:slide-out-to-bottom [&:not(.no-animation)]:duration-300;
+  }
 }
