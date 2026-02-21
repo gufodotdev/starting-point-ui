@@ -1,15 +1,19 @@
 /* Starting Point UI Collapsible Styles */
 
 @utility collapsible-panel {
-  @apply invisible h-0 overflow-hidden;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-collapsible-down;
-  @apply [&:not(.no-animation)]:data-[state=closed]:animate-collapsible-up;
+  @layer l1.l2 {
+    @apply invisible h-0 overflow-hidden;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-collapsible-down;
+    @apply [&:not(.no-animation)]:data-[state=closed]:animate-collapsible-up;
 
-  &.open {
-    @apply visible h-auto;
+    &.open {
+      @apply visible h-auto;
+    }
   }
 }
 
 @utility collapsible-content {
-  @apply flex flex-col gap-2;
+  @layer l1.l2 {
+    @apply flex flex-col gap-2;
+  }
 }
