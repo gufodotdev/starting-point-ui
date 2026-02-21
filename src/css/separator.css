@@ -1,14 +1,20 @@
 /* Starting Point UI Separator Styles */
 
 @utility separator {
-  @apply bg-border shrink-0;
-  @apply [&:where(&:not(.separator-horizontal,.separator-vertical))]:separator-horizontal;
+  @layer l1.l2 {
+    @apply bg-border shrink-0;
+    @apply [&:where(&:not(.separator-horizontal,.separator-vertical))]:separator-horizontal;
+  }
 }
 
 @utility separator-horizontal {
-  @apply h-px w-full;
+  @layer l1 {
+    @apply h-px w-full;
+  }
 }
 
 @utility separator-vertical {
-  @apply h-full self-stretch w-px;
+  @layer l1 {
+    @apply h-full self-stretch w-px;
+  }
 }
