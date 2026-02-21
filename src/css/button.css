@@ -1,55 +1,81 @@
 /* Starting Point UI Button Styles */
 
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
-  @apply [&:where(&:not(.btn-default,.btn-destructive,.btn-outline,.btn-secondary,.btn-ghost,.btn-link))]:btn-default;
-  @apply [&:where(&:not(.btn-base,.btn-sm,.btn-lg,.btn-icon,.btn-icon-sm,.btn-icon-lg))]:btn-base;
+  @layer l1.l2 {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+    @apply [&:where(&:not(.btn-default,.btn-destructive,.btn-outline,.btn-secondary,.btn-ghost,.btn-link))]:btn-default;
+    @apply [&:where(&:not(.btn-base,.btn-sm,.btn-lg,.btn-icon,.btn-icon-sm,.btn-icon-lg))]:btn-base;
+  }
 }
 
 @utility btn-default {
-  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  @layer l1 {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
 }
 
 @utility btn-destructive {
-  @apply bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60;
+  @layer l1 {
+    @apply bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60;
+  }
 }
 
 @utility btn-outline {
-  @apply border bg-background shadow-xs hover:bg-secondary hover:text-secondary-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50;
+  @layer l1 {
+    @apply border bg-background shadow-xs hover:bg-secondary hover:text-secondary-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50;
+  }
 }
 
 @utility btn-secondary {
-  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  @layer l1 {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
 }
 
 @utility btn-ghost {
-  @apply hover:bg-secondary hover:text-secondary-foreground dark:hover:bg-secondary/50;
+  @layer l1 {
+    @apply hover:bg-secondary hover:text-secondary-foreground dark:hover:bg-secondary/50;
+  }
 }
 
 @utility btn-link {
-  @apply text-primary underline-offset-4 hover:underline;
+  @layer l1 {
+    @apply text-primary underline-offset-4 hover:underline;
+  }
 }
 
 @utility btn-sm {
-  @apply h-8 gap-1.5 px-3 has-[>svg]:px-2.5;
+  @layer l1 {
+    @apply h-8 gap-1.5 px-3 has-[>svg]:px-2.5;
+  }
 }
 
 @utility btn-base {
-  @apply h-9 px-4 py-2 has-[>svg]:px-3;
+  @layer l1 {
+    @apply h-9 px-4 py-2 has-[>svg]:px-3;
+  }
 }
 
 @utility btn-lg {
-  @apply h-10 px-6 has-[>svg]:px-4;
+  @layer l1 {
+    @apply h-10 px-6 has-[>svg]:px-4;
+  }
 }
 
 @utility btn-icon-sm {
-  @apply size-8;
+  @layer l1 {
+    @apply size-8;
+  }
 }
 
 @utility btn-icon {
-  @apply size-9;
+  @layer l1 {
+    @apply size-9;
+  }
 }
 
 @utility btn-icon-lg {
-  @apply size-10;
+  @layer l1 {
+    @apply size-10;
+  }
 }
