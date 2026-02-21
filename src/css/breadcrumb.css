@@ -21,7 +21,8 @@
 
 @utility breadcrumb-separator {
   @layer l1.l2 {
-    @apply [&>svg]:size-3.5;
+    @apply [&>svg]:size-3.5 [&>svg]:shrink-0;
+    @apply [&>i[class*='ri-']]:text-base [&>i[class*='ri-']]:leading-none [&>i[class*='ri-']]:shrink-0;
   }
 }
 
