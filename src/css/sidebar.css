@@ -1,102 +1,136 @@
 /* Starting Point UI Sidebar Styles */
 
 @utility sidebar {
-  @apply flex min-h-dvh w-full overflow-x-clip bg-sidebar;
+  @layer l1.l2 {
+    @apply flex min-h-dvh w-full overflow-x-clip bg-sidebar;
+  }
 }
 
 @utility sidebar-panel {
-  @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 w-(--sidebar-width) hidden;
-  @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0;
-  @apply [&:not(.no-animation)]:sidebar:transition-[margin] [&:not(.no-animation)]:sidebar:duration-200 [&:not(.no-animation)]:sidebar:ease-linear;
-  /* Mobile animations */
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
-  /* Desktop: no animations */
-  @apply sidebar:translate-x-0 sidebar:animate-none!;
-  /* Default to left */
-  @apply [&:where(&:not(.sidebar-left,.sidebar-right))]:sidebar-left;
+  @layer l1.l2 {
+    @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 w-(--sidebar-width) hidden;
+    @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0;
+    @apply [&:not(.no-animation)]:sidebar:transition-[margin] [&:not(.no-animation)]:sidebar:duration-200 [&:not(.no-animation)]:sidebar:ease-linear;
+    /* Mobile animations */
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+    /* Desktop: no animations */
+    @apply sidebar:translate-x-0 sidebar:animate-none!;
+    /* Default to left */
+    @apply [&:where(&:not(.sidebar-left,.sidebar-right))]:sidebar-left;
 
-  &.open {
-    @apply block;
+    &.open {
+      @apply block;
+    }
   }
 }
 
 @utility sidebar-left {
-  @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
-  @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left;
+  @layer l1 {
+    @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
+    @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left;
 
-  &.collapsed {
-    @apply sidebar:-ml-(--sidebar-width);
+    &.collapsed {
+      @apply sidebar:-ml-(--sidebar-width);
+    }
   }
 }
 
 @utility sidebar-right {
-  @apply right-0 border-l in-[.sidebar-inset]:border-l-0;
-  @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right;
+  @layer l1 {
+    @apply right-0 border-l in-[.sidebar-inset]:border-l-0;
+    @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right;
 
-  &.collapsed {
-    @apply sidebar:-mr-(--sidebar-width);
+    &.collapsed {
+      @apply sidebar:-mr-(--sidebar-width);
+    }
   }
 }
 
 @utility sidebar-page {
-  @apply flex-1 bg-background;
-  @apply sidebar:in-[.sidebar-inset]:m-2 sidebar:in-[.sidebar-inset]:shadow-sm sidebar:in-[.sidebar-inset]:rounded-xl;
+  @layer l1.l2 {
+    @apply flex-1 bg-background;
+    @apply sidebar:in-[.sidebar-inset]:m-2 sidebar:in-[.sidebar-inset]:shadow-sm sidebar:in-[.sidebar-inset]:rounded-xl;
+  }
 }
 
 @utility sidebar-content {
-  @apply flex flex-col h-dvh sticky top-0;
+  @layer l1.l2 {
+    @apply flex flex-col h-dvh sticky top-0;
+  }
 }
 
 @utility sidebar-header {
-  @apply flex flex-col gap-2 p-2;
+  @layer l1.l2 {
+    @apply flex flex-col gap-2 p-2;
+  }
 }
 
 @utility sidebar-footer {
-  @apply flex flex-col gap-2 p-2 mt-auto;
+  @layer l1.l2 {
+    @apply flex flex-col gap-2 p-2 mt-auto;
+  }
 }
 
 @utility sidebar-menu {
-  @apply flex-1 flex flex-col overflow-y-auto;
+  @layer l1.l2 {
+    @apply flex-1 flex flex-col overflow-y-auto;
+  }
 }
 
 @utility menu-group {
-  @apply relative flex w-full min-w-0 flex-col gap-1 p-2;
+  @layer l1.l2 {
+    @apply relative flex w-full min-w-0 flex-col gap-1 p-2;
+  }
 }
 
 @utility menu-subgroup {
-  @apply border-l border-sidebar-border mx-3.5 px-2.5 flex flex-col gap-1 py-0.5;
+  @layer l1.l2 {
+    @apply border-l border-sidebar-border mx-3.5 px-2.5 flex flex-col gap-1 py-0.5;
+  }
 }
 
 @utility menu-btn {
-  @apply flex items-center gap-2 overflow-hidden rounded-md px-2 text-sm w-full;
-  @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
-  @apply [&.active]:bg-sidebar-accent [&.active]:font-medium [&.active]:text-sidebar-accent-foreground;
-  @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-  @apply [&:where(&:not(.menu-btn-sm,.menu-btn-lg))]:menu-btn-base;
+  @layer l1.l2 {
+    @apply flex items-center gap-2 overflow-hidden rounded-md px-2 text-sm w-full;
+    @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply [&.active]:bg-sidebar-accent [&.active]:font-medium [&.active]:text-sidebar-accent-foreground;
+    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply [&:where(&:not(.menu-btn-sm,.menu-btn-lg))]:menu-btn-base;
+  }
 }
 
 @utility menu-btn-sm {
-  @apply h-7 -translate-x-px;
+  @layer l1 {
+    @apply h-7 -translate-x-px;
+  }
 }
 
 @utility menu-btn-base {
-  @apply h-8;
+  @layer l1 {
+    @apply h-8;
+  }
 }
 
 @utility menu-btn-lg {
-  @apply h-12;
+  @layer l1 {
+    @apply h-12;
+  }
 }
 
 @utility menu-label {
-  @apply text-sidebar-foreground/70 h-8 shrink-0 rounded-md px-2 text-xs font-medium flex items-center;
+  @layer l1.l2 {
+    @apply text-sidebar-foreground/70 h-8 shrink-0 rounded-md px-2 text-xs font-medium flex items-center;
+  }
 }
 
 @utility sidebar-backdrop {
-  /* Hidden by default, always hidden on desktop */
-  @apply fixed inset-0 z-40 bg-black/50 hidden sidebar:hidden;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+  @layer l1.l2 {
+    /* Hidden by default, always hidden on desktop */
+    @apply fixed inset-0 z-40 bg-black/50 hidden sidebar:hidden;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
 
-  &.open {
-    @apply block pointer-events-auto;
+    &.open {
+      @apply block pointer-events-auto;
+    }
   }
 }
