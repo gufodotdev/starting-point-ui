@@ -2,7 +2,9 @@
 
 @utility badge {
   @layer l1.l2 {
-    @apply inline-flex items-center justify-center gap-1 rounded-full border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 overflow-hidden transition-[color,box-shadow] [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-3 [&_svg]:shrink-0;
+    @apply inline-flex items-center justify-center gap-1 rounded-full border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 overflow-hidden transition-[color,box-shadow];
+    @apply [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-3 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-sm [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
     @apply outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
     @apply [&:where(&:not(.badge-default,.badge-secondary,.badge-destructive,.badge-outline))]:badge-default;
   }
