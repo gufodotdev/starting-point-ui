@@ -17,7 +17,7 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       aria-controls="accordion-panel-1"
     >
       Is it accessible?
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="accordion-panel-1" class="accordion-panel open">
       <div class="accordion-content">
@@ -35,7 +35,7 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       aria-controls="accordion-panel-2"
     >
       Is it styled?
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="accordion-panel-2" class="accordion-panel">
       <div class="accordion-content">
@@ -53,7 +53,7 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       aria-controls="accordion-panel-3"
     >
       Is it animated?
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="accordion-panel-3" class="accordion-panel">
       <div class="accordion-content">
@@ -82,7 +82,7 @@ Add `data-sp-multiple` to the accordion to allow multiple sections to be open at
       aria-controls="multi-panel-1"
     >
       First section
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="multi-panel-1" class="accordion-panel open">
       <div class="accordion-content">
@@ -100,7 +100,7 @@ Add `data-sp-multiple` to the accordion to allow multiple sections to be open at
       aria-controls="multi-panel-2"
     >
       Second section
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="multi-panel-2" class="accordion-panel open">
       <div class="accordion-content">
@@ -129,7 +129,7 @@ Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control ic
       aria-controls="icon-panel-1"
     >
       Rotating chevron
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="icon-panel-1" class="accordion-panel open">
       <div class="accordion-content">
@@ -147,8 +147,8 @@ Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control ic
       aria-controls="icon-panel-2"
     >
       Plus/minus swap
-      <icon-plus class="[[aria-expanded=true]>&]:hidden" />
-      <icon-minus class="hidden [[aria-expanded=true]>&]:block" />
+      <i class="ri-add-fill [[aria-expanded=true]>&]:hidden"></i>
+      <i class="ri-subtract-fill hidden [[aria-expanded=true]>&]:block"></i>
     </button>
     <div id="icon-panel-2" class="accordion-panel">
       <div class="accordion-content">
@@ -194,7 +194,7 @@ Add `disabled` to the trigger button to prevent interaction.
       aria-controls="disabled-panel-1"
     >
       Enabled section
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="disabled-panel-1" class="accordion-panel open">
       <div class="accordion-content">This section can be toggled.</div>
@@ -211,7 +211,7 @@ Add `disabled` to the trigger button to prevent interaction.
       aria-controls="disabled-panel-2"
     >
       Disabled section
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="disabled-panel-2" class="accordion-panel">
       <div class="accordion-content">This section cannot be opened.</div>
@@ -227,7 +227,7 @@ Add `disabled` to the trigger button to prevent interaction.
       aria-controls="disabled-panel-3"
     >
       Another enabled section
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="disabled-panel-3" class="accordion-panel">
       <div class="accordion-content">This section can also be toggled.</div>
@@ -261,7 +261,7 @@ An accordion consists of five parts:
       data-sp-target="#panel-1"
     >
       Section title
-      <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
     </button>
     <div id="panel-1" class="accordion-panel">
       <div class="accordion-content">Section content</div>
@@ -301,7 +301,7 @@ To disable all animations, add `no-animation` to the trigger:
 ```html
 <button class="accordion-trigger no-animation">
   Section title
-  <icon-chevron-down class="[[aria-expanded=true]>&]:rotate-180" />
+  <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
 </button>
 <div class="accordion-panel no-animation">...</div>
 ```

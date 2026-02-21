@@ -8,9 +8,11 @@
 
 @utility accordion-trigger {
   @layer l1.l2 {
-    @apply flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
+    @apply flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
     @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-[1.125rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
     @apply [&:not(.no-animation)_svg]:transition-transform [&:not(.no-animation)_svg]:duration-200;
+    @apply [&:not(.no-animation)_i[class*='ri-']]:transition-transform [&:not(.no-animation)_i[class*='ri-']]:duration-200;
   }
 }
 
