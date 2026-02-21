@@ -3,6 +3,7 @@
 @utility btn {
   @layer l1.l2 {
     @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+    @apply [&_i[class*='ri-']]:text-[1.125rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
     @apply [&:where(&:not(.btn-default,.btn-destructive,.btn-outline,.btn-secondary,.btn-ghost,.btn-link))]:btn-default;
     @apply [&:where(&:not(.btn-base,.btn-sm,.btn-lg,.btn-icon,.btn-icon-sm,.btn-icon-lg))]:btn-base;
   }

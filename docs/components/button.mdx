@@ -35,13 +35,13 @@ Use different sizes to fit various contexts and layouts.
 <button class="btn btn-outline">Base</button>
 <button class="btn btn-outline btn-lg">Large</button>
 <button class="btn btn-outline btn-icon-lg" aria-label="Add item">
-  <icon-plus />
+  <i class="ri-add-fill"></i>
 </button>
 <button class="btn btn-outline btn-icon" aria-label="Add item">
-  <icon-plus />
+  <i class="ri-add-fill"></i>
 </button>
 <button class="btn btn-outline btn-icon-sm" aria-label="Add item">
-  <icon-plus />
+  <i class="ri-add-fill"></i>
 </button>
 ```
 
@@ -53,12 +53,16 @@ Buttons can include icons alongside text or as the only content. For icon-only b
 
 ```html preview
 <button class="btn btn-outline btn-icon" aria-label="More options">
-  <icon-ellipsis />
+  <i class="ri-more-fill"></i>
 </button>
-<button class="btn btn-outline"><icon-download /> Export</button>
-<button class="btn btn-outline">Open <icon-chevron-down /></button>
+<button class="btn btn-outline">
+  <i class="ri-download-2-line"></i> Export
+</button>
+<button class="btn btn-outline">
+  Open <i class="ri-arrow-down-s-line"></i>
+</button>
 <button class="btn btn-ghost btn-icon" aria-label="Close">
-  <icon-x />
+  <i class="ri-close-fill"></i>
 </button>
 ```
 
@@ -70,7 +74,7 @@ Disable buttons to prevent interaction, such as while processing a request.
 
 ```html preview
 <button class="btn btn-outline" disabled>
-  <icon-loader-circle class="animate-spin" /> Processing
+  <i class="ri-loader-4-fill animate-spin"></i> Processing
 </button>
 ```
 
@@ -123,10 +127,10 @@ Stack buttons vertically using `btn-group-vertical`.
 ```html preview
 <div class="btn-group btn-group-vertical">
   <button class="btn btn-outline btn-icon" aria-label="Increase">
-    <icon-plus />
+    <i class="ri-add-fill"></i>
   </button>
   <button class="btn btn-outline btn-icon" aria-label="Decrease">
-    <icon-minus />
+    <i class="ri-subtract-fill"></i>
   </button>
 </div>
 ```
@@ -142,7 +146,7 @@ Add visual separation between buttons using `btn-group-separator`. This is recom
   <button class="btn btn-secondary">Save</button>
   <div class="btn-group-separator"></div>
   <button class="btn btn-secondary btn-icon" aria-label="More options">
-    <icon-chevron-down />
+    <i class="ri-arrow-down-s-line"></i>
   </button>
 </div>
 ```
