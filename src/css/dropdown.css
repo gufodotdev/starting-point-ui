@@ -1,32 +1,42 @@
 /* Starting Point UI Dropdown Styles */
 
 @utility dropdown {
-  @apply relative inline-block;
+  @layer l1.l2 {
+    @apply relative inline-block;
+  }
 }
 
 @utility dropdown-menu {
-  @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md whitespace-nowrap;
-  @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
+  @layer l1.l2 {
+    @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md whitespace-nowrap;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
 
-  &.open {
-    @apply block;
+    &.open {
+      @apply block;
+    }
   }
 }
 
 @utility dropdown-item {
-  @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors;
-  @apply hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground;
-  @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
+  @layer l1.l2 {
+    @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors;
+    @apply hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
 
-  &[aria-disabled="true"] {
-    @apply pointer-events-none opacity-50;
+    &[aria-disabled="true"] {
+      @apply pointer-events-none opacity-50;
+    }
   }
 }
 
 @utility dropdown-label {
-  @apply px-2.5 py-1.5 text-sm font-medium;
+  @layer l1.l2 {
+    @apply px-2.5 py-1.5 text-sm font-medium;
+  }
 }
 
 @utility dropdown-separator {
-  @apply -mx-1 my-1 h-px bg-border;
+  @layer l1.l2 {
+    @apply -mx-1 my-1 h-px bg-border;
+  }
 }
