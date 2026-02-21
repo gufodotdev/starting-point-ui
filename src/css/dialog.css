@@ -29,3 +29,9 @@
     @apply p-6;
   }
 }
+
+@utility dialog-footer {
+  @layer l1.l2 {
+    @apply px-6 py-3 border-t bg-muted/50 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end;
+  }
+}
