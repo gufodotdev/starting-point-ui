@@ -216,16 +216,16 @@ The tabs JavaScript module provides full keyboard navigation following the WAI-A
 
 For proper screen reader support, add these attributes to your tabs:
 
-| Attribute                     | Description                                                        |
-| ----------------------------- | ------------------------------------------------------------------ |
-| `role="tablist"`              | Add to `.tab-list` to identify the container as a tablist          |
-| `role="tab"`                  | Add to `.tab` to identify the button as a tab                      |
-| `role="tabpanel"`             | Add to `.tab-panel` to identify the content as a tabpanel          |
-| `aria-label`                  | Add to `.tab-list` to provide an accessible name                   |
-| `aria-selected="true\|false"` | Add to `.tab` to indicate the selected state                       |
-| `aria-controls="panel-id"`    | Add to `.tab` to reference the controlled panel                    |
-| `aria-labelledby="tab-id"`    | Add to `.tab-panel` to reference the tab that controls this panel  |
-| `tabindex="0\|-1"`            | Add to `.tab` - only the active tab should be in tab order         |
+| Attribute                     | Description                                                       |
+| ----------------------------- | ----------------------------------------------------------------- |
+| `role="tablist"`              | Add to `.tab-list` to identify the container as a tablist         |
+| `role="tab"`                  | Add to `.tab` to identify the button as a tab                     |
+| `role="tabpanel"`             | Add to `.tab-panel` to identify the content as a tabpanel         |
+| `aria-label`                  | Add to `.tab-list` to provide an accessible name                  |
+| `aria-selected="true\|false"` | Add to `.tab` to indicate the selected state                      |
+| `aria-controls="panel-id"`    | Add to `.tab` to reference the controlled panel                   |
+| `aria-labelledby="tab-id"`    | Add to `.tab-panel` to reference the tab that controls this panel |
+| `tabindex="0\|-1"`            | Add to `.tab` - only the active tab should be in tab order        |
 
 ```html
 <div class="tab-list" role="tablist" aria-label="Settings">
@@ -254,7 +254,12 @@ For proper screen reader support, add these attributes to your tabs:
     Notifications
   </button>
 </div>
-<div id="panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-1">
+<div
+  id="panel-1"
+  class="tab-panel active"
+  role="tabpanel"
+  aria-labelledby="tab-1"
+>
   General settings.
 </div>
 <div id="panel-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-2">
@@ -279,12 +284,12 @@ Navigation wraps around - pressing `ArrowRight` on the last tab moves to the fir
 
 All available classes for the tabs component.
 
-| Class       | Description                                                            |
-| ----------- | ---------------------------------------------------------------------- |
-| `tab-list`  | Container element that holds all tab buttons                           |
-| `tab`       | Individual tab button element                                          |
-| `tab-panel` | Content panel element associated with a tab                            |
-| `active`    | Add to `.tab` and `.tab-panel` to mark as selected and show the panel  |
+| Class       | Description                                                           |
+| ----------- | --------------------------------------------------------------------- |
+| `tab-list`  | Container element that holds all tab buttons                          |
+| `tab`       | Individual tab button element                                         |
+| `tab-panel` | Content panel element associated with a tab                           |
+| `active`    | Add to `.tab` and `.tab-panel` to mark as selected and show the panel |
 
 ```html
 <div class="tab-list">

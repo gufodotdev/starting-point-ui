@@ -8,14 +8,14 @@ const PANEL_SELECTOR = ".dialog-panel, .sheet-panel";
 function getAnimatableElements(dialog: HTMLDialogElement): HTMLElement[] {
   return [
     ...dialog.querySelectorAll<HTMLElement>(
-      `${BACKDROP_SELECTOR}, ${PANEL_SELECTOR}`
+      `${BACKDROP_SELECTOR}, ${PANEL_SELECTOR}`,
     ),
   ];
 }
 
 function setDataState(
   elements: HTMLElement[],
-  state: "open" | "closed" | null
+  state: "open" | "closed" | null,
 ) {
   for (const el of elements) {
     if (state === null) {
@@ -65,7 +65,7 @@ export function toggle(dialog: HTMLDialogElement) {
 // Handle keydown for Escape and focus trapping
 function handleKeydown(e: KeyboardEvent) {
   const dialogEl = (e.target as HTMLElement).closest<HTMLDialogElement>(
-    "dialog"
+    "dialog",
   );
   if (!dialogEl?.open) return;
 

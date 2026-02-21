@@ -179,8 +179,7 @@ function handleKeydown(e: KeyboardEvent) {
       break;
     case "End":
       e.preventDefault();
-      nextItem =
-        [...items].reverse().find((item) => !isDisabled(item)) ?? null;
+      nextItem = [...items].reverse().find((item) => !isDisabled(item)) ?? null;
       break;
   }
 

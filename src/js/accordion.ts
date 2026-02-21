@@ -76,7 +76,7 @@ function handleClick(e: MouseEvent) {
   // Close other panels in the same accordion (unless data-sp-multiple is set)
   if (accordion && !accordion.hasAttribute("data-sp-multiple")) {
     const otherPanels = accordion.querySelectorAll<HTMLElement>(
-      ".accordion-panel.open"
+      ".accordion-panel.open",
     );
     for (const otherPanel of otherPanels) {
       if (otherPanel !== panel) {

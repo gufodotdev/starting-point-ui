@@ -4,7 +4,7 @@ import { waitForAnimations } from "./utils";
 
 function getBreakpoint(): number {
   const value = getComputedStyle(document.documentElement).getPropertyValue(
-    "--breakpoint-sidebar"
+    "--breakpoint-sidebar",
   );
   return parseInt(value, 10) || 1024;
 }
@@ -39,7 +39,7 @@ function setOpenClass(elements: HTMLElement[], isOpen: boolean) {
 
 function setDataState(
   elements: HTMLElement[],
-  state: "open" | "closed" | null
+  state: "open" | "closed" | null,
 ) {
   for (const el of elements) {
     if (state === null) {
@@ -123,7 +123,7 @@ function handleClick(e: MouseEvent) {
 function handleKeydown(e: KeyboardEvent) {
   if (e.key === "Escape") {
     const openPanel = document.querySelector<HTMLElement>(
-      ".sidebar-panel.open"
+      ".sidebar-panel.open",
     );
     if (openPanel) {
       e.preventDefault();
@@ -137,7 +137,7 @@ function handleResize() {
   if (!isMobile()) {
     // Clean up any open mobile sidebars
     const openPanels = document.querySelectorAll<HTMLElement>(
-      ".sidebar-panel.open"
+      ".sidebar-panel.open",
     );
     openPanels.forEach((sidebarPanel) => {
       const elements = getAnimatableElements(sidebarPanel);

@@ -21,7 +21,7 @@ export function getFocusableElements(container: HTMLElement): HTMLElement[] {
 }
 
 export async function waitForAnimations(
-  elements: HTMLElement[]
+  elements: HTMLElement[],
 ): Promise<void> {
   const animations = elements.flatMap((el) => el.getAnimations());
   if (animations.length === 0) return;
@@ -37,7 +37,7 @@ export function isDisabled(el: HTMLElement): boolean {
 export function findNextEnabled(
   items: HTMLElement[],
   startIndex: number,
-  direction: 1 | -1
+  direction: 1 | -1,
 ): HTMLElement | null {
   const len = items.length;
   for (let i = 1; i <= len; i++) {

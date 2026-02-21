@@ -30,7 +30,7 @@ function getHandles(container: HTMLElement): HTMLElement[] {
 
 function getPanelSizes(
   panels: HTMLElement[],
-  direction: "horizontal" | "vertical"
+  direction: "horizontal" | "vertical",
 ): number[] {
   return panels.map((panel) => {
     const rect = panel.getBoundingClientRect();
@@ -40,7 +40,7 @@ function getPanelSizes(
 
 function getContainerSize(
   container: HTMLElement,
-  direction: "horizontal" | "vertical"
+  direction: "horizontal" | "vertical",
 ): number {
   const rect = container.getBoundingClientRect();
   return direction === "horizontal" ? rect.width : rect.height;
@@ -48,7 +48,7 @@ function getContainerSize(
 
 function getMinSizePx(
   panel: HTMLElement,
-  direction: "horizontal" | "vertical"
+  direction: "horizontal" | "vertical",
 ): number {
   const computed = getComputedStyle(panel);
   const value =
@@ -58,7 +58,7 @@ function getMinSizePx(
 
 function getMaxSizePx(
   panel: HTMLElement,
-  direction: "horizontal" | "vertical"
+  direction: "horizontal" | "vertical",
 ): number {
   const computed = getComputedStyle(panel);
   const value =
@@ -187,7 +187,7 @@ function handlePointerMove(e: PointerEvent) {
       detail: {
         sizes: newSizes.map((size) => (size / containerSize) * 100),
       },
-    })
+    }),
   );
 }
 
@@ -266,7 +266,7 @@ function handleKeydown(e: KeyboardEvent) {
       detail: {
         sizes: newSizes.map((size) => (size / containerSize) * 100),
       },
-    })
+    }),
   );
 }
 
