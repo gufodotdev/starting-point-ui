@@ -8,8 +8,8 @@
 
 @utility breadcrumb-link {
   @layer l1.l2 {
-    @apply inline-flex items-center gap-1.5 text-foreground;
-    @apply hover:text-foreground transition-colors;
+    @apply inline-flex items-center gap-1.5 transition-colors;
+    @apply hover:text-foreground;
   }
 }
 
