@@ -1,23 +1,33 @@
 /* Starting Point UI Avatar Styles */
 
 @utility avatar {
-  @apply aspect-square shrink-0 rounded-full object-cover;
-  @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
+  @layer l1.l2 {
+    @apply aspect-square shrink-0 rounded-full object-cover;
+    @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
+  }
 }
 
 @utility avatar-fallback {
-  @apply inline-flex items-center justify-center rounded-full bg-muted text-muted-foreground font-medium;
-  @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
+  @layer l1.l2 {
+    @apply inline-flex items-center justify-center rounded-full bg-muted text-muted-foreground font-medium;
+    @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
+  }
 }
 
 @utility avatar-sm {
-  @apply size-8 text-xs;
+  @layer l1 {
+    @apply size-8 text-xs;
+  }
 }
 
 @utility avatar-base {
-  @apply size-9 text-sm;
+  @layer l1 {
+    @apply size-9 text-sm;
+  }
 }
 
 @utility avatar-lg {
-  @apply size-10 text-base;
+  @layer l1 {
+    @apply size-10 text-base;
+  }
 }
