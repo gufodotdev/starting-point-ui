@@ -22,6 +22,7 @@
     @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors;
     @apply hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground;
     @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
+    @apply [&_i[class*='ri-']]:text-[1.125rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
 
     &[aria-disabled="true"] {
       @apply pointer-events-none opacity-50;
