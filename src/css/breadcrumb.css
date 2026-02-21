@@ -10,12 +10,16 @@
   @layer l1.l2 {
     @apply inline-flex items-center gap-1.5 transition-colors;
     @apply hover:text-foreground;
+    @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-base [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }
 
 @utility breadcrumb-page {
   @layer l1.l2 {
     @apply inline-flex items-center gap-1.5 text-foreground;
+    @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-base [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }
 
