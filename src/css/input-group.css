@@ -33,6 +33,7 @@
 @utility input-group-addon {
   @layer l1.l2 {
     @apply flex items-center justify-center gap-2 px-3 shrink-0 text-sm text-muted-foreground select-none cursor-text;
-    @apply [&_svg:not([class*='size-'])]:size-4;
+    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-[1.125rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }
