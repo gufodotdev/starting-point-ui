@@ -6,33 +6,42 @@ description: A Tailwind CSS dialog component for modals, sheets, and non-modal d
 A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 
 ```html preview
-<button class="btn" data-sp-toggle="dialog" data-sp-target="#demo-modal">
+<button data-sp-toggle="dialog" data-sp-target="#dialog-3" class="btn">
   Open Dialog
 </button>
 
 <dialog
-  id="demo-modal"
+  id="dialog-3"
   class="dialog"
-  aria-labelledby="demo-title"
-  aria-describedby="demo-desc"
+  aria-labelledby="dialog-3-title"
+  aria-describedby="dialog-3-desc"
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
     <div class="dialog-content">
       <button
-        class="btn btn-ghost btn-icon absolute top-2 right-2"
+        class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
         aria-label="Close"
         data-sp-dismiss="dialog"
       >
-        <icon-x />
+        <i class="ri-close-line text-xl"></i>
       </button>
-      <h2 id="demo-title" class="text-lg font-semibold mb-2">Dialog Title</h2>
-      <p id="demo-desc" class="text-muted-foreground mb-4">
-        This is a modal dialog. Click the backdrop or press Escape to close.
-      </p>
-      <div class="flex gap-2 justify-end">
-        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
-        <button class="btn" data-sp-dismiss="dialog">Confirm</button>
+      <div class="grid gap-6">
+        <div>
+          <h2 id="dialog-3-title" class="text-lg font-semibold tracking-tight">
+            Confirm changes
+          </h2>
+          <p id="dialog-3-desc" class="mt-2 text-sm/6 text-muted-foreground">
+            This is a modal dialog. Close it by clicking the backdrop, pressing
+            escape, or using the close button.
+          </p>
+        </div>
+        <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <button class="btn btn-outline" data-sp-dismiss="dialog">
+            Cancel
+          </button>
+          <button class="btn" data-sp-dismiss="dialog">Confirm</button>
+        </div>
       </div>
     </div>
   </div>
@@ -104,35 +113,38 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
 Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or pressing Escape.
 
 ```html preview
-<button
-  class="btn btn-destructive"
-  data-sp-toggle="dialog"
-  data-sp-target="#static-modal"
->
-  Delete
+<button data-sp-toggle="dialog" data-sp-target="#dialog-4" class="btn">
+  Open Dialog
 </button>
 
 <dialog
-  id="static-modal"
+  id="dialog-4"
   class="dialog"
   data-sp-backdrop="static"
-  aria-labelledby="static-title"
-  aria-describedby="static-desc"
+  aria-labelledby="dialog-4-title"
+  aria-describedby="dialog-4-desc"
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
     <div class="dialog-content">
-      <h2 id="static-title" class="text-lg font-semibold mb-2">
-        Are you sure?
-      </h2>
-      <p id="static-desc" class="text-muted-foreground mb-4">
-        This action cannot be undone. Backdrop clicks and Escape are disabled.
-      </p>
-      <div class="flex gap-2 justify-end">
-        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
-        <button class="btn btn-destructive" data-sp-dismiss="dialog">
-          Delete
-        </button>
+      <div class="grid gap-6">
+        <div>
+          <h2 id="dialog-4-title" class="text-lg font-semibold tracking-tight">
+            Delete account
+          </h2>
+          <p id="dialog-4-desc" class="mt-2 text-sm/6 text-muted-foreground">
+            This dialog uses a static backdrop. You must choose an action to
+            close. Clicking outside or escape won&#x27;t work.
+          </p>
+        </div>
+        <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <button class="btn btn-outline" data-sp-dismiss="dialog">
+            Cancel
+          </button>
+          <button class="btn btn-destructive" data-sp-dismiss="dialog">
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   </div>
