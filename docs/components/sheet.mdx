@@ -6,35 +6,103 @@ description: A Tailwind CSS sheet component for slide-out panels from any edge o
 A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
 
 ```html preview
-<button class="btn" data-sp-toggle="dialog" data-sp-target="#sheet-demo">
-  Open Sheet
+<button class="btn btn-outline" data-sp-toggle="dialog" data-sp-target="#sheet-simple">
+  Open Simple Sheet
 </button>
-
-<dialog
-  id="sheet-demo"
-  class="dialog"
-  aria-labelledby="sheet-demo-title"
-  aria-describedby="sheet-demo-desc"
->
+<dialog id="sheet-simple" class="dialog" aria-labelledby="sheet-simple-title" aria-describedby="sheet-simple-desc">
   <div class="sheet-backdrop"></div>
   <div class="sheet-panel">
     <div class="sheet-content">
-      <button
-        class="btn btn-ghost btn-icon absolute top-4 right-4"
-        aria-label="Close"
-        data-sp-dismiss="dialog"
-      >
-        <icon-x />
+      <button class="btn btn-ghost btn-icon-sm absolute top-4 right-4" aria-label="Close" data-sp-dismiss="dialog">
+        <i class="ri-close-line text-xl"></i>
       </button>
-      <h2 id="sheet-demo-title" class="text-lg font-semibold">Sheet Title</h2>
-      <p id="sheet-demo-desc" class="text-muted-foreground text-sm">
-        This sheet slides in from the left. Great for navigation menus or
-        sidebars.
+      <h2 id="sheet-simple-title" class="text-lg font-semibold">Sheet Title</h2>
+      <p id="sheet-simple-desc" class="mt-2 text-sm text-muted-foreground">
+        This is a simple sheet that slides in from the left. Click the backdrop or press escape to close.
       </p>
     </div>
   </div>
 </dialog>
+
+<button data-sp-toggle="dialog" data-sp-target="#sheet-menu" class="btn btn-outline">
+  Open Menu Sheet
+</button>
+<dialog id="sheet-menu" class="dialog" aria-labelledby="sheet-menu-title">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel sheet-left">
+    <div class="sidebar-content">
+      <header class="sidebar-header">
+        <div class="menu-item menu-item-lg justify-between">
+          <a class="flex items-center gap-2" href="/">
+            <div
+              class="flex items-center justify-center size-6 rounded-sm overflow-hidden shrink-0 bg-primary text-primary-foreground text-sm font-bold"
+            >
+              ui
+            </div>
+            <div class="text-sm font-medium truncate">Starting Point</div>
+          </a>
+          <button
+            class="btn btn-ghost btn-icon-sm"
+            aria-label="Close"
+            data-sp-dismiss="dialog"
+          >
+            <i class="ri-close-line text-xl"></i>
+          </button>
+        </div>
+      </header>
+      <nav class="sidebar-menu">
+        <div class="menu-group">
+          <span class="menu-label">Platform</span>
+          <a href="#" class="menu-btn">
+            <i class="ri-dashboard-line"></i>
+            Dashboard
+          </a>
+          <a href="#" class="menu-btn active">
+            <i class="ri-folder-line"></i>
+            Projects
+          </a>
+          <a href="#" class="menu-btn">
+            <i class="ri-team-line"></i>
+            Team
+          </a>
+          <a href="#" class="menu-btn">
+            <i class="ri-settings-3-line"></i>
+            Settings
+          </a>
+        </div>
+        <div class="menu-group">
+          <span class="menu-label">Resources</span>
+          <a href="#" class="menu-btn">
+            <i class="ri-book-open-line"></i>
+            Documentation
+          </a>
+          <a href="#" class="menu-btn">
+            <i class="ri-lifebuoy-line"></i>
+            Support
+          </a>
+        </div>
+      </nav>
+      <footer class="sidebar-footer">
+        <button class="menu-btn menu-btn-lg w-full">
+          <img
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+            alt="User"
+            class="size-8 rounded-lg"
+          />
+          <div class="grid flex-1 text-left text-sm leading-tight">
+            <span class="truncate font-medium">Sarah Johnson</span>
+            <span class="truncate text-xs text-muted-foreground">
+              sarah@example.com
+            </span>
+          </div>
+        </button>
+      </footer>
+    </div>
+  </div>
+</dialog>
 ```
+
+If you're building a navigation menu, you might prefer using the [Sidebar](/docs/components/sidebar) utilities instead of the sheet utilities, which works just as well. The menu example above uses sidebar utilities while the simple sheet uses sheet utilities.
 
 ---
 
