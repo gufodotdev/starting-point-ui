@@ -3,17 +3,21 @@ title: Sidebar
 description: A Tailwind CSS sidebar component for building application layouts with collapsible navigation.
 ---
 
-A Tailwind CSS sidebar component for building application layouts with collapsible navigation.
+A Tailwind CSS sidebar component for building dashboards, admin panels, and application layouts. See more [sidebar examples](/examples/components/sidebar).
+
+![Sidebar component](https://cdn.gufo.dev/screenshots/components-sidebar-1-light-518ced23.webp)
 
 ```html
 <div class="sidebar">
   <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel">
     <div class="sidebar-content">
-      <nav>...</nav>
+      <header class="sidebar-header">...</header>
+      <nav class="sidebar-menu">...</nav>
+      <footer class="sidebar-footer">...</footer>
     </div>
   </aside>
-  <main class="flex-1">
+  <main class="sidebar-page">
     <p>Your content here</p>
   </main>
 </div>
@@ -30,40 +34,50 @@ By default, sidebars are positioned on the left side.
   <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel" id="my-sidebar">
     <div class="sidebar-content">
-      <div class="font-semibold mb-4">Acme Inc</div>
-      <nav class="flex flex-col gap-1">
-        <a href="#" class="btn btn-ghost justify-start">Dashboard</a>
-        <a href="#" class="btn btn-ghost justify-start">Projects</a>
-        <a href="#" class="btn btn-ghost justify-start">Settings</a>
+      <header class="sidebar-header">
+        <div class="menu-btn menu-btn-lg">Acme Inc</div>
+      </header>
+      <nav class="sidebar-menu">
+        <div class="menu-group">
+          <a href="#" class="menu-btn">Dashboard</a>
+          <a href="#" class="menu-btn">Projects</a>
+          <a href="#" class="menu-btn">Settings</a>
+        </div>
       </nav>
     </div>
   </aside>
-  <main class="flex-1">
+  <main class="sidebar-page">
     <header class="flex items-center gap-4 border-b p-4">
       <button
         class="btn btn-outline btn-icon"
         data-sp-toggle="sidebar"
         data-sp-target="#my-sidebar"
       >
-        <svg
-          class="size-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <rect width="18" height="18" x="3" y="3" rx="2" />
-          <path d="M9 3v18" />
-        </svg>
+        <i class="ri-side-bar-line"></i>
       </button>
       <h1>Dashboard</h1>
     </header>
     <div class="p-6">
       <p>Main content goes here.</p>
     </div>
+  </main>
+</div>
+```
+
+---
+
+## Inset sidebar
+
+Use `sidebar-inset` for a sidebar with an inset main content area.
+
+```html
+<div class="sidebar sidebar-inset">
+  <div class="sidebar-backdrop"></div>
+  <aside class="sidebar-panel" id="my-sidebar">
+    <div class="sidebar-content">...</div>
+  </aside>
+  <main class="sidebar-page">
+    <p>Main content with rounded corners and shadow</p>
   </main>
 </div>
 ```
@@ -77,16 +91,20 @@ Use `sidebar-right` for a sidebar on the right side.
 ```html
 <div class="sidebar">
   <div class="sidebar-backdrop"></div>
-  <main class="flex-1">
+  <main class="sidebar-page">
     <p>Main content</p>
   </main>
   <aside class="sidebar-panel sidebar-right" id="right-sidebar">
     <div class="sidebar-content">
-      <div class="font-semibold mb-4">Inspector</div>
-      <nav class="flex flex-col gap-1">
-        <a href="#" class="btn btn-ghost justify-start">Properties</a>
-        <a href="#" class="btn btn-ghost justify-start">Styles</a>
-        <a href="#" class="btn btn-ghost justify-start">Layers</a>
+      <header class="sidebar-header">
+        <div class="menu-btn menu-btn-lg">Inspector</div>
+      </header>
+      <nav class="sidebar-menu">
+        <div class="menu-group">
+          <a href="#" class="menu-btn">Properties</a>
+          <a href="#" class="menu-btn">Styles</a>
+          <a href="#" class="menu-btn">Layers</a>
+        </div>
       </nav>
     </div>
   </aside>
@@ -104,20 +122,90 @@ You can use both left and right sidebars together.
   <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel" id="left-sidebar">
     <div class="sidebar-content">
-      <div class="font-semibold mb-4">Navigation</div>
-      <nav>...</nav>
+      <header class="sidebar-header">
+        <div class="menu-btn menu-btn-lg">Navigation</div>
+      </header>
+      <nav class="sidebar-menu">...</nav>
     </div>
   </aside>
-  <main class="flex-1">
+  <main class="sidebar-page">
     <p>Main content</p>
   </main>
   <aside class="sidebar-panel sidebar-right" id="right-sidebar">
     <div class="sidebar-content">
-      <div class="font-semibold mb-4">Inspector</div>
-      <nav>...</nav>
+      <header class="sidebar-header">
+        <div class="menu-btn menu-btn-lg">Inspector</div>
+      </header>
+      <nav class="sidebar-menu">...</nav>
     </div>
   </aside>
 </div>
+```
+
+---
+
+## Menu structure
+
+The sidebar menu uses a structured hierarchy of groups, labels, and buttons.
+
+```html
+<nav class="sidebar-menu">
+  <div class="menu-group">
+    <span class="menu-label">Platform</span>
+    <a href="#" class="menu-btn">
+      <i class="ri-dashboard-line"></i>
+      Dashboard
+    </a>
+    <a href="#" class="menu-btn active">
+      <i class="ri-settings-line"></i>
+      Settings
+    </a>
+  </div>
+  <div class="menu-group">
+    <span class="menu-label">Projects</span>
+    <a href="#" class="menu-btn">Design Engineering</a>
+    <a href="#" class="menu-btn">Sales &amp; Marketing</a>
+  </div>
+</nav>
+```
+
+### Nested menus
+
+Use `menu-subgroup` for nested navigation items. This works with the [collapsible](/docs/components/collapsible) component to show/hide submenus. See it in action in the [first sidebar example](/examples/components/sidebar/1).
+
+```html
+<nav class="sidebar-menu">
+  <div class="menu-group">
+    <button
+      class="menu-btn"
+      data-sp-toggle="collapsible"
+      data-sp-target="#submenu"
+    >
+      <i class="ri-terminal-box-line"></i>
+      Playground
+      <i
+        class="ri-arrow-right-s-line ml-auto transition-transform in-aria-expanded:rotate-90"
+      ></i>
+    </button>
+    <div id="submenu" class="collapsible-panel open">
+      <div class="menu-subgroup">
+        <a href="#" class="menu-btn menu-btn-sm">History</a>
+        <a href="#" class="menu-btn menu-btn-sm">Starred</a>
+        <a href="#" class="menu-btn menu-btn-sm">Settings</a>
+      </div>
+    </div>
+  </div>
+</nav>
+```
+
+### Button sizes
+
+Menu buttons come in three sizes.
+
+```html
+<a href="#" class="menu-btn menu-btn-sm">Small</a>
+<a href="#" class="menu-btn">Base (default)</a>
+<a href="#" class="menu-btn menu-btn-lg">Large</a>
 ```
 
 ---
@@ -146,6 +234,7 @@ A sidebar layout consists of these parts:
 2. **`.sidebar-backdrop`** - Overlay shown on mobile when sidebar is open
 3. **`.sidebar-panel`** - The sidebar panel element (defaults to left positioning)
 4. **`.sidebar-content`** - Sticky inner wrapper for sidebar content
+5. **`.sidebar-page`** - Main content area
 
 ```html
 <div class="sidebar">
@@ -155,7 +244,7 @@ A sidebar layout consists of these parts:
       <!-- Sidebar content -->
     </div>
   </aside>
-  <main class="flex-1">
+  <main class="sidebar-page">
     <!-- Page content -->
   </main>
 </div>
@@ -223,26 +312,23 @@ All available classes for the sidebar component.
 | Class              | Description                                            |
 | ------------------ | ------------------------------------------------------ |
 | `sidebar`          | Root container with flex layout and min-height         |
+| `sidebar-inset`    | Modifier for inset layout with rounded main content    |
 | `sidebar-panel`    | Main sidebar panel element, left-positioned by default |
 | `sidebar-left`     | Explicit left positioning (applied by default)         |
 | `sidebar-right`    | Right positioning with right border                    |
-| `sidebar-content`  | Sticky inner wrapper with padding and overflow scroll  |
+| `sidebar-content`  | Sticky inner wrapper for sidebar content               |
+| `sidebar-header`   | Header section with padding                            |
+| `sidebar-menu`     | Scrollable menu container                              |
+| `sidebar-footer`   | Footer section with padding, pushed to bottom          |
+| `sidebar-page`     | Main content area                                      |
 | `sidebar-backdrop` | Mobile overlay backdrop                                |
-| `no-animation`     | Disables default animations on panel or backdrop       |
-
-```html
-<div class="sidebar">
-  <div class="sidebar-backdrop"></div>
-  <aside class="sidebar-panel sidebar-right">
-    <div class="sidebar-content">
-      <!-- Content -->
-    </div>
-  </aside>
-  <main class="flex-1">
-    <!-- Content -->
-  </main>
-</div>
-```
+| `menu-group`       | Group container for menu items                         |
+| `menu-subgroup`    | Nested group with left border                          |
+| `menu-label`       | Section label text                                     |
+| `menu-btn`         | Menu button/link with hover states                     |
+| `menu-btn-sm`      | Small menu button (28px)                               |
+| `menu-btn-lg`      | Large menu button (48px)                               |
+| `no-animation`     | Disables default animations                            |
 
 ### Data attributes
 
@@ -253,13 +339,3 @@ All data attributes for the sidebar component.
 | `data-sp-toggle="sidebar"` | Add to a button to toggle the sidebar panel     |
 | `data-sp-target="#id"`     | Specifies which sidebar panel to toggle         |
 | `data-state`               | Set to `open` or `closed` on panel and backdrop |
-
-```html
-<button data-sp-toggle="sidebar" data-sp-target="#my-sidebar">Toggle</button>
-
-<aside class="sidebar-panel" id="my-sidebar">
-  <div class="sidebar-content">
-    <!-- Content -->
-  </div>
-</aside>
-```
