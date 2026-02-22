@@ -12,7 +12,7 @@
 
 @utility dialog-backdrop {
   @layer l1.l2 {
-    @apply fixed inset-0 bg-black/30 backdrop-blur-xs -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
+    @apply fixed inset-0 bg-black/10 backdrop-blur-xs -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
     @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
   }
 }
