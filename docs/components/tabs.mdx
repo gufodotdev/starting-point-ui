@@ -6,43 +6,55 @@ description: A Tailwind CSS tabs component for organizing content into switchabl
 A Tailwind CSS tabs component for organizing content into switchable panels.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/tabs/1 -->
 <div class="w-96">
   <div class="tab-list" role="tablist" aria-label="Example tabs">
     <button
+      id="tabs-1-tab-account"
       type="button"
       class="tab active"
       role="tab"
       aria-selected="true"
+      aria-controls="tabs-1-panel-account"
       data-sp-toggle="tab"
-      data-sp-target="#panel-1"
+      data-sp-target="#tabs-1-panel-account"
       tabindex="0"
     >
       Account
     </button>
     <button
+      id="tabs-1-tab-password"
       type="button"
       class="tab"
       role="tab"
       aria-selected="false"
+      aria-controls="tabs-1-panel-password"
       data-sp-toggle="tab"
-      data-sp-target="#panel-2"
+      data-sp-target="#tabs-1-panel-password"
       tabindex="-1"
     >
       Password
     </button>
     <button
+      id="tabs-1-tab-settings"
       type="button"
       class="tab"
       role="tab"
       aria-selected="false"
+      aria-controls="tabs-1-panel-settings"
       data-sp-toggle="tab"
-      data-sp-target="#panel-3"
+      data-sp-target="#tabs-1-panel-settings"
       tabindex="-1"
     >
       Settings
     </button>
   </div>
-  <div id="panel-1" class="tab-panel active mt-2" role="tabpanel">
+  <div
+    id="tabs-1-panel-account"
+    class="tab-panel mt-2 active"
+    role="tabpanel"
+    aria-labelledby="tabs-1-tab-account"
+  >
     <div class="card">
       <div class="card-content">
         <h3 class="font-medium mb-2">Account</h3>
@@ -52,7 +64,12 @@ A Tailwind CSS tabs component for organizing content into switchable panels.
       </div>
     </div>
   </div>
-  <div id="panel-2" class="tab-panel mt-2" role="tabpanel">
+  <div
+    id="tabs-1-panel-password"
+    class="tab-panel mt-2"
+    role="tabpanel"
+    aria-labelledby="tabs-1-tab-password"
+  >
     <div class="card">
       <div class="card-content">
         <h3 class="font-medium mb-2">Password</h3>
@@ -62,7 +79,12 @@ A Tailwind CSS tabs component for organizing content into switchable panels.
       </div>
     </div>
   </div>
-  <div id="panel-3" class="tab-panel mt-2" role="tabpanel">
+  <div
+    id="tabs-1-panel-settings"
+    class="tab-panel mt-2"
+    role="tabpanel"
+    aria-labelledby="tabs-1-tab-settings"
+  >
     <div class="card">
       <div class="card-content">
         <h3 class="font-medium mb-2">Settings</h3>
@@ -73,6 +95,7 @@ A Tailwind CSS tabs component for organizing content into switchable panels.
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/tabs/1 -->
 ```
 
 ---
