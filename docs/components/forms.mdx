@@ -6,76 +6,113 @@ description: Tailwind CSS form components including inputs, textareas, selects, 
 Tailwind CSS form components including inputs, textareas, selects, checkboxes, radios, switches, and labels.
 
 ```html preview
-<form class="grid gap-8 max-w-sm">
+<!-- START https://startingpointui.com/examples/docs/forms/1 -->
+<form class="grid gap-6 max-w-sm">
   <div class="grid gap-3">
-    <label class="label" for="full-name">Full name</label>
-    <input class="input" type="text" id="full-name" placeholder="John Smith" />
-  </div>
-  <div class="grid gap-3">
-    <label class="label" for="email">Email</label>
+    <div class="flex items-center justify-between">
+      <label class="label" for="full-name">Full name</label>
+    </div>
     <input
       class="input"
-      type="email"
-      id="email"
-      placeholder="john@example.com"
+      id="full-name"
+      type="text"
+      placeholder="John Smith"
+      name="full-name"
     />
   </div>
   <div class="grid gap-3">
-    <label class="label" for="event-date">Event date</label>
-    <input class="input" type="date" id="event-date" />
+    <div class="flex items-center justify-between">
+      <label class="label" for="email">Email</label>
+    </div>
+    <input
+      class="input"
+      id="email"
+      type="email"
+      placeholder="john@example.com"
+      name="email"
+    />
   </div>
   <div class="grid gap-3">
-    <label class="label" for="event-type">Event type</label>
-    <select class="select" id="event-type">
+    <div class="flex items-center justify-between">
+      <label class="label" for="phone-number">Phone number</label>
+    </div>
+    <input
+      class="input"
+      id="phone-number"
+      type="text"
+      placeholder="+1 (555) 000-0000"
+      aria-invalid="true"
+      aria-describedby="phone-number-error"
+      name="phone-number"
+    />
+    <p id="phone-number-error" class="text-xs text-destructive">
+      Please enter a valid phone number
+    </p>
+  </div>
+  <div class="grid gap-3">
+    <div class="flex items-center justify-between">
+      <label class="label" for="event-date">Event date</label>
+    </div>
+    <input class="input" id="event-date" type="date" name="event-date" />
+  </div>
+  <div class="grid gap-3">
+    <div class="flex items-center justify-between">
+      <label class="label" for="event-type">Event type</label>
+    </div>
+    <select class="select" id="event-type" name="event-type">
       <option value="">Select event type</option>
       <option value="wedding">Wedding Reception</option>
       <option value="corporate">Corporate Event</option>
       <option value="birthday">Birthday Party</option>
-      <option value="anniversary">Anniversary</option>
-      <option value="other">Other</option>
     </select>
   </div>
   <div class="grid gap-3">
-    <label class="label" for="menu-file">Upload menu preferences</label>
-    <input class="input" type="file" id="menu-file" accept=".pdf,.doc,.docx" />
+    <div class="flex items-center justify-between">
+      <label class="label" for="cover-image">Cover image</label>
+    </div>
+    <input
+      class="input"
+      id="cover-image"
+      type="file"
+      accept=".jpg,.jpeg,.png,.webp"
+      name="cover-image"
+    />
   </div>
   <div class="grid gap-3">
-    <label class="label" for="details">Additional details</label>
+    <div class="flex items-center justify-between">
+      <label class="label" for="additional-details">Additional details</label>
+    </div>
     <textarea
       class="textarea"
-      id="details"
-      placeholder="Tell us about your event, dietary requirements, venue details..."
+      id="additional-details"
+      name="additional-details"
+      placeholder="Tell us about your event..."
     ></textarea>
   </div>
-  <div class="grid gap-3">
-    <span class="label">Payment method</span>
-    <div class="grid gap-3">
-      <div class="flex items-center gap-2">
-        <input class="radio" type="radio" name="payment" id="card" checked />
-        <label class="label" for="card">Credit card</label>
-      </div>
-      <div class="flex items-center gap-2">
-        <input class="radio" type="radio" name="payment" id="paypal" />
-        <label class="label" for="paypal">PayPal</label>
-      </div>
-      <div class="flex items-center gap-2">
-        <input class="radio" type="radio" name="payment" id="bank" />
-        <label class="label" for="bank">Bank transfer</label>
-      </div>
-    </div>
-  </div>
-  <div class="flex items-center gap-2">
-    <input class="checkbox" type="checkbox" id="newsletter" />
-    <label class="label" for="newsletter">
+  <div class="flex items-center gap-3">
+    <input
+      type="checkbox"
+      class="checkbox"
+      id="send-me-news-and-special-offers"
+      name="send-me-news-and-special-offers"
+    />
+    <label class="label" for="send-me-news-and-special-offers">
       Send me news and special offers
     </label>
   </div>
-  <div class="flex items-center gap-2">
-    <input class="switch" type="checkbox" id="notifications" role="switch" />
-    <label class="label" for="notifications">Enable notifications</label>
+  <div class="flex items-center gap-3">
+    <input
+      type="checkbox"
+      role="switch"
+      class="switch"
+      id="enable-notifications"
+      name="enable-notifications"
+    />
+    <label class="label" for="enable-notifications">Enable notifications</label>
   </div>
   <button class="btn" type="submit">Submit Request</button>
 </form>
+<!-- END https://startingpointui.com/examples/docs/forms/1 -->
 ```
 
 ---
@@ -85,6 +122,7 @@ Tailwind CSS form components including inputs, textareas, selects, checkboxes, r
 Decorate inputs with icons, text, or other addons using input groups.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/2 -->
 <div class="grid gap-6 w-full max-w-sm">
   <div class="input-group">
     <span class="input-group-addon"><i class="ri-search-line"></i></span>
@@ -107,11 +145,13 @@ Decorate inputs with icons, text, or other addons using input groups.
     </span>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/forms/2 -->
 ```
 
 Input groups can include text addons for prefixes, suffixes, or units.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/3 -->
 <div class="grid gap-6 w-full max-w-sm">
   <div class="input-group">
     <span class="input-group-addon">$</span>
@@ -128,15 +168,18 @@ Input groups can include text addons for prefixes, suffixes, or units.
     <span class="input-group-addon">@company.com</span>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/forms/3 -->
 ```
 
 You can also use [Button Group](/docs/components/button) with inputs for text addons.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/4 -->
 <div class="btn-group w-full max-w-sm">
   <span class="btn-group-text">https://</span>
   <input class="input" placeholder="example.com" />
 </div>
+<!-- END https://startingpointui.com/examples/docs/forms/4 -->
 ```
 
 ---
@@ -146,38 +189,40 @@ You can also use [Button Group](/docs/components/button) with inputs for text ad
 Form elements come in three sizes that match button heights.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/5 -->
 <div class="flex flex-col gap-6 w-full max-w-sm">
-  <div class="flex gap-4 items-end">
-    <input class="input input-sm flex-1" type="text" placeholder="Small" />
-    <select class="select select-sm flex-1">
+  <div class="flex flex-col md:flex-row gap-4 md:items-end">
+    <input class="input input-sm md:flex-1" placeholder="Small" />
+    <select class="select select-sm md:flex-1">
       <option>Small</option>
     </select>
-    <div class="input-group input-group-sm flex-1">
+    <div class="input-group input-group-sm md:flex-1">
       <span class="input-group-addon"><i class="ri-search-line"></i></span>
       <input class="input" placeholder="Small" />
     </div>
   </div>
-  <div class="flex gap-4 items-end">
-    <input class="input flex-1" type="text" placeholder="Base" />
-    <select class="select flex-1">
+  <div class="flex flex-col md:flex-row gap-4 md:items-end">
+    <input class="input md:flex-1" placeholder="Base" />
+    <select class="select md:flex-1">
       <option>Base</option>
     </select>
-    <div class="input-group flex-1">
+    <div class="input-group md:flex-1">
       <span class="input-group-addon"><i class="ri-search-line"></i></span>
       <input class="input" placeholder="Base" />
     </div>
   </div>
-  <div class="flex gap-4 items-end">
-    <input class="input input-lg flex-1" type="text" placeholder="Large" />
-    <select class="select select-lg flex-1">
+  <div class="flex flex-col md:flex-row gap-4 md:items-end">
+    <input class="input input-lg md:flex-1" placeholder="Large" />
+    <select class="select select-lg md:flex-1">
       <option>Large</option>
     </select>
-    <div class="input-group input-group-lg flex-1">
+    <div class="input-group input-group-lg md:flex-1">
       <span class="input-group-addon"><i class="ri-search-line"></i></span>
       <input class="input" placeholder="Large" />
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/forms/5 -->
 ```
 
 ---
@@ -187,43 +232,45 @@ Form elements come in three sizes that match button heights.
 Disabled form elements appear faded and cannot be interacted with. Add `peer` to the input so the label also dims.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/6 -->
 <div class="flex flex-col gap-6 w-full max-w-sm">
   <div class="input-group">
     <span class="input-group-addon"><i class="ri-search-line"></i></span>
-    <input class="input" placeholder="Searching..." disabled />
+    <input class="input" placeholder="Searching..." disabled="" />
     <span class="input-group-addon">
       <i class="ri-loader-4-line animate-spin"></i>
     </span>
   </div>
-  <input class="input" type="text" placeholder="Disabled input" disabled />
-  <select class="select" disabled>
+  <input class="input" placeholder="Disabled input" disabled="" />
+  <select class="select" disabled="">
     <option>Disabled select</option>
   </select>
   <textarea
     class="textarea"
     placeholder="Disabled textarea"
-    disabled
+    disabled=""
   ></textarea>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-3">
     <input
-      class="checkbox peer"
       type="checkbox"
+      class="checkbox peer"
       id="disabled-checkbox"
-      disabled
+      disabled=""
     />
     <label class="label" for="disabled-checkbox">Disabled checkbox</label>
   </div>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-3">
     <input
-      class="switch peer"
       type="checkbox"
-      id="disabled-switch"
       role="switch"
-      disabled
+      class="switch peer"
+      id="disabled-switch"
+      disabled=""
     />
     <label class="label" for="disabled-switch">Disabled switch</label>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/forms/6 -->
 ```
 
 ---
@@ -233,63 +280,691 @@ Disabled form elements appear faded and cannot be interacted with. Add `peer` to
 Form elements show a red ring when marked as invalid. Use `aria-describedby` to associate error messages.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/7 -->
 <div class="flex flex-col gap-6 w-full max-w-sm">
-  <div class="grid gap-2">
-    <label class="label" for="email-invalid">Email address</label>
+  <div class="grid gap-3">
+    <div class="flex items-center justify-between">
+      <label class="label" for="email-address">Email address</label>
+    </div>
     <input
       class="input"
+      id="email-address"
       type="email"
-      id="email-invalid"
-      value="johndoe"
       aria-invalid="true"
-      aria-describedby="email-error"
+      aria-describedby="email-address-error"
+      name="email-address"
+      value="johndoe"
     />
-    <p id="email-error" class="text-sm text-destructive">
+    <p id="email-address-error" class="text-xs text-destructive">
       Not a valid email address
     </p>
   </div>
-  <div class="grid gap-2">
-    <label class="label" for="country-invalid">Country</label>
+  <div class="grid gap-3">
+    <div class="flex items-center justify-between">
+      <label class="label" for="country">Country</label>
+    </div>
     <select
       class="select"
-      id="country-invalid"
+      id="country"
+      name="country"
       aria-invalid="true"
       aria-describedby="country-error"
     >
       <option value="">Select a country</option>
       <option value="us">United States</option>
     </select>
-    <p id="country-error" class="text-sm text-destructive">
+    <p id="country-error" class="text-xs text-destructive">
       Please select a country
     </p>
   </div>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-3">
     <input
-      class="checkbox"
       type="checkbox"
+      class="checkbox"
       id="invalid-cb"
       aria-invalid="true"
     />
     <label class="label" for="invalid-cb">You must accept the terms</label>
   </div>
-  <div class="grid gap-2">
+  <div class="grid gap-3">
     <label class="label" for="amount-invalid">Amount</label>
     <div class="input-group">
       <span class="input-group-addon">$</span>
       <input
         class="input"
         id="amount-invalid"
-        value="-50"
         aria-invalid="true"
         aria-describedby="amount-error"
+        value="-50"
       />
       <span class="input-group-addon">USD</span>
     </div>
-    <p id="amount-error" class="text-sm text-destructive">
+    <p id="amount-error" class="text-xs text-destructive">
       Amount must be positive
     </p>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/forms/7 -->
+```
+
+---
+
+## Toggle groups
+
+Use radio buttons for single selection or checkboxes for multi-select. Add descriptions for extra context.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/8 -->
+<div class="grid gap-8 w-full max-w-sm">
+  <div class="grid gap-5">
+    <span class="label">Delivery speed</span>
+    <div class="grid gap-3">
+      <div class="flex gap-3 items-center">
+        <input
+          type="radio"
+          class="radio"
+          id="delivery-speed-standard"
+          name="delivery-speed"
+          checked=""
+          value="standard"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="delivery-speed-standard">Standard</label>
+        </div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <input
+          type="radio"
+          class="radio"
+          id="delivery-speed-express"
+          name="delivery-speed"
+          value="express"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="delivery-speed-express">Express</label>
+        </div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <input
+          type="radio"
+          class="radio"
+          id="delivery-speed-overnight"
+          name="delivery-speed"
+          value="overnight"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="delivery-speed-overnight">Overnight</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid gap-5">
+    <span class="label">Dietary requirements</span>
+    <div class="grid gap-3">
+      <div class="flex gap-3 items-center">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-vegetarian"
+          name="dietary-requirements"
+          checked=""
+          value="vegetarian"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="dietary-requirements-vegetarian">
+            Vegetarian
+          </label>
+        </div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-vegan"
+          name="dietary-requirements"
+          value="vegan"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="dietary-requirements-vegan">Vegan</label>
+        </div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-gluten-free"
+          name="dietary-requirements"
+          value="gluten-free"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="dietary-requirements-gluten-free">
+            Gluten-free
+          </label>
+        </div>
+      </div>
+      <div class="flex gap-3 items-center">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-dairy-free"
+          name="dietary-requirements"
+          value="dairy-free"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="dietary-requirements-dairy-free">
+            Dairy-free
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/forms/8 -->
+```
+
+Toggle groups with descriptions give users more context about each option.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/9 -->
+<div class="grid gap-8 w-full max-w-sm">
+  <div class="grid gap-5">
+    <span class="label">Notification preferences</span>
+    <div class="grid gap-5">
+      <div class="flex gap-3 items-start">
+        <input
+          type="radio"
+          class="radio"
+          id="notification-preferences-all"
+          name="notification-preferences"
+          checked=""
+          value="all"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="notification-preferences-all">
+            All notifications
+          </label>
+          <p class="text-sm text-muted-foreground">
+            Receive all email and push notifications
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <input
+          type="radio"
+          class="radio"
+          id="notification-preferences-important"
+          name="notification-preferences"
+          value="important"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="notification-preferences-important">
+            Important only
+          </label>
+          <p class="text-sm text-muted-foreground">
+            Only receive notifications for important updates
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <input
+          type="radio"
+          class="radio"
+          id="notification-preferences-none"
+          name="notification-preferences"
+          value="none"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="notification-preferences-none">None</label>
+          <p class="text-sm text-muted-foreground">
+            Do not receive any notifications
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid gap-5">
+    <span class="label">Role</span>
+    <div class="grid gap-5">
+      <div class="flex gap-3 items-start">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="role-administrator"
+          name="role"
+          checked=""
+          value="administrator"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="role-administrator">Administrator</label>
+          <p class="text-sm text-muted-foreground">Can perform any action</p>
+        </div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="role-editor"
+          name="role"
+          value="editor"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="role-editor">Editor</label>
+          <p class="text-sm text-muted-foreground">
+            Can read, create, and update
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="role-viewer"
+          name="role"
+          value="viewer"
+        />
+        <div class="grid gap-2">
+          <label class="label" for="role-viewer">Viewer</label>
+          <p class="text-sm text-muted-foreground">Can only read content</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/forms/9 -->
+```
+
+---
+
+## Card select
+
+Selection cards with icons for choosing between a small set of options. Supports both radio and checkbox modes.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/10 -->
+<div class="grid gap-8 w-full max-w-sm">
+  <div class="grid gap-3">
+    <span class="label">Payment method</span>
+    <div class="grid gap-5" style="grid-template-columns: repeat(3, 1fr)">
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="radio"
+          class="sr-only"
+          name="payment-method"
+          checked=""
+          value="card"
+        />
+        <i class="ri-bank-card-fill text-2xl"></i>
+        <span class="label">Card</span>
+      </label>
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="radio"
+          class="sr-only"
+          name="payment-method"
+          value="paypal"
+        />
+        <i class="ri-paypal-fill text-2xl"></i>
+        <span class="label">PayPal</span>
+      </label>
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="radio"
+          class="sr-only"
+          name="payment-method"
+          value="apple"
+        />
+        <i class="ri-apple-fill text-2xl"></i>
+        <span class="label">Apple</span>
+      </label>
+    </div>
+  </div>
+  <div class="grid gap-3">
+    <span class="label">Project type</span>
+    <div class="grid gap-5" style="grid-template-columns: repeat(2, 1fr)">
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="checkbox"
+          class="sr-only"
+          name="project-type"
+          checked=""
+          value="web"
+        />
+        <i class="ri-global-line text-2xl"></i>
+        <span class="label">Web</span>
+      </label>
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="checkbox"
+          class="sr-only"
+          name="project-type"
+          value="mobile"
+        />
+        <i class="ri-smartphone-line text-2xl"></i>
+        <span class="label">Mobile</span>
+      </label>
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="checkbox"
+          class="sr-only"
+          name="project-type"
+          value="desktop"
+        />
+        <i class="ri-computer-line text-2xl"></i>
+        <span class="label">Desktop</span>
+      </label>
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="checkbox"
+          class="sr-only"
+          name="project-type"
+          value="api"
+        />
+        <i class="ri-code-s-slash-line text-2xl"></i>
+        <span class="label">API</span>
+      </label>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/forms/10 -->
+```
+
+---
+
+## List select
+
+Bordered selection cards with optional descriptions. Works well for plans, tiers, or feature selection.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/11 -->
+<div class="grid gap-8 w-full max-w-sm">
+  <div class="grid gap-3">
+    <span class="label">Shipping</span>
+    <div class="grid gap-3">
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Standard</div>
+          <div class="text-sm text-muted-foreground">4-10 business days</div>
+        </div>
+        <input
+          type="radio"
+          class="radio"
+          name="shipping"
+          checked=""
+          value="standard"
+        />
+      </label>
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Fast</div>
+          <div class="text-sm text-muted-foreground">2-5 business days</div>
+        </div>
+        <input type="radio" class="radio" name="shipping" value="fast" />
+      </label>
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Next day</div>
+          <div class="text-sm text-muted-foreground">1 business day</div>
+        </div>
+        <input type="radio" class="radio" name="shipping" value="next-day" />
+      </label>
+    </div>
+  </div>
+  <div class="grid gap-3">
+    <span class="label">Features</span>
+    <div class="grid gap-3">
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Cloud storage</div>
+          <div class="text-sm text-muted-foreground">
+            50 GB of secure cloud storage
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          class="checkbox"
+          name="features"
+          checked=""
+          value="storage"
+        />
+      </label>
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Automatic backups</div>
+          <div class="text-sm text-muted-foreground">
+            Daily backups with 30-day retention
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          class="checkbox"
+          name="features"
+          value="backup"
+        />
+      </label>
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Priority support</div>
+          <div class="text-sm text-muted-foreground">
+            24/7 dedicated support team
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          class="checkbox"
+          name="features"
+          value="support"
+        />
+      </label>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/forms/11 -->
+```
+
+---
+
+## Switch groups
+
+Groups of toggle switches for managing multiple settings. Use `separated` to add dividers between items.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/12 -->
+<div class="grid gap-12 w-full max-w-sm">
+  <div class="grid gap-5">
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="email">Email notifications</label>
+        <span class="text-sm text-muted-foreground">
+          Receive updates and alerts via email
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="email"
+        name="email"
+        checked=""
+      />
+    </div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="push">Push notifications</label>
+        <span class="text-sm text-muted-foreground">
+          Get instant alerts on your mobile device
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="push"
+        name="push"
+      />
+    </div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="marketing">Marketing emails</label>
+        <span class="text-sm text-muted-foreground">
+          Stay informed about new features and offers
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="marketing"
+        name="marketing"
+      />
+    </div>
+  </div>
+  <div class="grid gap-5">
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="analytics">Usage analytics</label>
+        <span class="text-sm text-muted-foreground">
+          Help us improve by sharing anonymous usage data
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="analytics"
+        name="analytics"
+        checked=""
+      />
+    </div>
+    <div class="separator" role="separator"></div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="cookies">Third-party cookies</label>
+        <span class="text-sm text-muted-foreground">
+          Allow cookies from external services
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="cookies"
+        name="cookies"
+      />
+    </div>
+    <div class="separator" role="separator"></div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="tracking">Ad tracking</label>
+        <span class="text-sm text-muted-foreground">
+          Enable personalized advertising
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="tracking"
+        name="tracking"
+      />
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/forms/12 -->
+```
+
+---
+
+## User select
+
+Assign roles or permissions per user with avatar, name, and a dropdown selector.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/forms/13 -->
+<div class="w-full max-w-sm">
+  <div class="grid gap-5">
+    <span class="label">People with access</span>
+    <div class="grid gap-5">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            class="avatar"
+            alt="Sarah Johnson"
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+          />
+          <div class="text-sm">
+            <p class="font-semibold text-foreground">Sarah Johnson</p>
+            <p class="text-muted-foreground">sarah@example.com</p>
+          </div>
+        </div>
+        <select class="select select-sm w-22" name="sarah-johnson">
+          <option value="write" selected="">Write</option>
+          <option value="read">Read</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            class="avatar"
+            alt="Michael Chen"
+            src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
+          />
+          <div class="text-sm">
+            <p class="font-semibold text-foreground">Michael Chen</p>
+            <p class="text-muted-foreground">michael@example.com</p>
+          </div>
+        </div>
+        <select class="select select-sm w-22" name="michael-chen">
+          <option value="write">Write</option>
+          <option value="read" selected="">Read</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            class="avatar"
+            alt="Emma Wilson"
+            src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
+          />
+          <div class="text-sm">
+            <p class="font-semibold text-foreground">Emma Wilson</p>
+            <p class="text-muted-foreground">emma@example.com</p>
+          </div>
+        </div>
+        <select class="select select-sm w-22" name="emma-wilson">
+          <option value="write">Write</option>
+          <option value="read" selected="">Read</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/forms/13 -->
 ```
 
 ---
