@@ -6,42 +6,44 @@ description: A Tailwind CSS card component for grouping content.
 A Tailwind CSS card component for grouping content. See more [card examples](/examples/components/card).
 
 ```html preview
+<!-- START https://startingpointui.com/examples/components/card/3 -->
 <div class="card w-full max-w-sm">
   <img
     src="https://cdn.gufo.dev/stockphotos/fdab3fb9.webp"
     alt="Blog post cover"
     class="aspect-3/2 object-cover rounded-t-xl w-full"
   />
-  <div class="card-content">
-    <span
-      class="flex items-center gap-1.5 text-xs font-medium tracking-tight text-accent"
-    >
-      <span>Mar 15, 2024</span>
-      <span>·</span>
-      <span>Design</span>
-    </span>
-    <h3 class="text-lg font-semibold tracking-tight mt-2">
-      Design Systems with Tailwind
-    </h3>
-    <p class="text-sm/6 text-muted-foreground mt-2">
-      Learn how utility classes can help you build and scale a beautiful design
-      system across projects.
-    </p>
-    <div class="flex items-center gap-3 mt-6">
+  <div class="card-content grid gap-6">
+    <div>
+      <span
+        class="flex items-center gap-1.5 text-xs font-medium tracking-tight text-accent"
+      >
+        <span>Mar 15, 2024</span>
+        <span>·</span>
+        <span>Design</span>
+      </span>
+      <h3 class="text-lg font-semibold tracking-tight mt-2">
+        Design Systems with Tailwind
+      </h3>
+      <p class="text-sm/6 text-muted-foreground mt-2">
+        Learn how utility classes can help you build and scale a beautiful
+        design system across projects.
+      </p>
+    </div>
+    <div class="flex items-center gap-3">
       <img
         class="avatar"
-        src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
         alt="Sarah Johnson"
+        src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
       />
-      <div class="grid gap-1.5">
-        <span class="text-sm/none font-medium">Sarah Johnson</span>
-        <span class="text-xs/none text-muted-foreground font-medium">
-          Product Designer
-        </span>
+      <div class="text-sm">
+        <p class="font-semibold text-foreground">Sarah Johnson</p>
+        <p class="text-muted-foreground">Product Designer</p>
       </div>
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/components/card/3 -->
 ```
 
 ---
@@ -52,17 +54,28 @@ Card content comes in three sizes for different use cases.
 
 ```html preview
 <div class="grid gap-6 w-full max-w-sm">
-  <div class="card">
+  <!-- START https://startingpointui.com/examples/components/item/1 -->
+  <div class="card w-full max-w-sm">
     <div class="card-content card-content-sm flex items-center gap-4">
-      <icon-credit-card class="size-5 text-muted-foreground" />
-      <div class="flex-1 grid gap-1">
-        <h3 class="font-semibold text-sm leading-none">Payment Method</h3>
-        <p class="text-muted-foreground text-sm">Visa ending in 4242</p>
+      <div class="flex items-center gap-3 flex-1">
+        <img
+          class="avatar"
+          alt="Sarah Johnson"
+          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+        />
+        <div class="text-sm">
+          <p class="font-semibold text-foreground">Sarah Johnson</p>
+          <p class="text-muted-foreground">Product Designer</p>
+        </div>
       </div>
-      <a href="#" class="btn btn-ghost btn-sm">Edit</a>
+      <button class="btn btn-ghost btn-icon-sm">
+        <i class="ri-add-line"></i>
+      </button>
     </div>
   </div>
-  <div class="card">
+  <!-- END https://startingpointui.com/examples/components/item/1 -->
+  <!-- START https://startingpointui.com/examples/components/card/7 -->
+  <div class="card w-full max-w-sm">
     <img
       src="https://cdn.gufo.dev/stockphotos/1fb406af.webp"
       alt="Product"
@@ -101,8 +114,10 @@ Card content comes in three sizes for different use cases.
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-content sm:p-12 grid gap-6">
+  <!-- END https://startingpointui.com/examples/components/card/7 -->
+  <!-- START https://startingpointui.com/examples/components/card/4 -->
+  <div class="card w-full max-w-sm">
+    <div class="card-content grid gap-6 card-content-lg">
       <h3 class="text-lg/snug font-semibold tracking-tight">Premium Plan</h3>
       <div>
         <span class="text-4xl font-bold sm:text-5xl">$29</span>
@@ -138,6 +153,7 @@ Card content comes in three sizes for different use cases.
       <button class="btn btn-lg w-full mt-2">Buy Now</button>
     </div>
   </div>
+  <!-- END https://startingpointui.com/examples/components/card/4 -->
 </div>
 ```
 
@@ -148,10 +164,11 @@ Card content comes in three sizes for different use cases.
 Cards come in two variants for different contexts.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/card/1 -->
 <div class="grid gap-6 w-full max-w-sm">
   <div class="card">
     <div class="card-content card-content-sm flex items-center gap-4">
-      <icon-credit-card class="size-5 text-muted-foreground" />
+      <i class="ri-bank-card-line text-xl text-muted-foreground"></i>
       <div class="flex-1 grid gap-1">
         <h3 class="font-semibold text-sm leading-none">Payment Method</h3>
         <p class="text-muted-foreground text-sm">Visa ending in 4242</p>
@@ -161,7 +178,7 @@ Cards come in two variants for different contexts.
   </div>
   <div class="card card-muted">
     <div class="card-content card-content-sm flex items-center gap-4">
-      <icon-info class="size-5 text-muted-foreground" />
+      <i class="ri-information-line text-xl text-muted-foreground"></i>
       <div class="flex-1 grid gap-1">
         <h3 class="font-semibold text-sm leading-none">Quick Tip</h3>
         <p class="text-muted-foreground text-sm">Press ⌘K to open search</p>
@@ -169,6 +186,7 @@ Cards come in two variants for different contexts.
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/card/1 -->
 ```
 
 ---
@@ -178,12 +196,13 @@ Cards come in two variants for different contexts.
 You can combine card classes with Tailwind utilities for custom styling.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/card/2 -->
 <div
   class="card bg-linear-to-br from-pink-500 via-purple-500 to-indigo-500 border-0 text-white w-full max-w-sm shadow-xl"
 >
   <div class="card-content grid gap-6">
     <div class="flex items-center justify-between">
-      <icon-sparkles class="size-6" />
+      <i class="ri-sparkling-line text-2xl"></i>
       <span class="text-xs font-medium bg-white/20 px-2 py-1 rounded-full">
         Limited
       </span>
@@ -199,6 +218,7 @@ You can combine card classes with Tailwind utilities for custom styling.
     </button>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/card/2 -->
 ```
 
 ---
