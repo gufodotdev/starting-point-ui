@@ -6,46 +6,47 @@ description: A Tailwind CSS dialog component for modals, sheets, and non-modal d
 A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 
 ```html preview
-<button data-sp-toggle="dialog" data-sp-target="#dialog-3" class="btn">
+<!-- START https://startingpointui.com/examples/docs/dialog/1 -->
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#dialog-1"
+  class="btn btn-outline"
+>
   Open Dialog
 </button>
-
 <dialog
-  id="dialog-3"
+  id="dialog-1"
   class="dialog"
-  aria-labelledby="dialog-3-title"
-  aria-describedby="dialog-3-desc"
+  aria-labelledby="dialog-1-t"
+  aria-describedby="dialog-1-d"
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <div class="dialog-content">
-      <button
-        class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-        aria-label="Close"
-        data-sp-dismiss="dialog"
-      >
-        <i class="ri-close-line text-xl"></i>
-      </button>
-      <div class="grid gap-6">
-        <div>
-          <h2 id="dialog-3-title" class="text-lg font-semibold tracking-tight">
-            Confirm changes
-          </h2>
-          <p id="dialog-3-desc" class="mt-2 text-sm/6 text-muted-foreground">
-            This is a modal dialog. Close it by clicking the backdrop, pressing
-            escape, or using the close button.
-          </p>
-        </div>
-        <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <button class="btn btn-outline" data-sp-dismiss="dialog">
-            Cancel
-          </button>
-          <button class="btn" data-sp-dismiss="dialog">Confirm</button>
-        </div>
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
+    <div class="dialog-content grid gap-6">
+      <div>
+        <h2 id="dialog-1-t" class="text-lg font-semibold tracking-tight">
+          Confirm changes
+        </h2>
+        <p id="dialog-1-d" class="mt-2 text-sm/6 text-muted-foreground">
+          This is a modal dialog. Close it by clicking the backdrop, pressing
+          escape, or using the close button.
+        </p>
+      </div>
+      <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn" data-sp-dismiss="dialog">Confirm</button>
       </div>
     </div>
   </div>
 </dialog>
+<!-- END https://startingpointui.com/examples/docs/dialog/1 -->
 ```
 
 ---
@@ -55,55 +56,69 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 This component uses `dialog.show()` instead of `dialog.showModal()`, so the backdrop is what creates the modal behavior. Add `.dialog-backdrop` to block interaction with the page behind it, or omit it for a non-modal dialog.
 
 ```html preview
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#modal-example"
->
+<!-- START https://startingpointui.com/examples/docs/dialog/2 -->
+<button data-sp-toggle="dialog" data-sp-target="#modal" class="btn btn-outline">
   Open Modal
 </button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#nonmodal-example"
->
-  Open Non-modal
-</button>
-
 <dialog
-  id="modal-example"
+  id="modal"
   class="dialog"
-  aria-labelledby="modal-title"
-  aria-describedby="modal-desc"
+  aria-labelledby="modal-t"
+  aria-describedby="modal-d"
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <h2 id="modal-title" class="text-lg font-semibold mb-2">Modal</h2>
-      <p id="modal-desc" class="text-muted-foreground mb-4">
-        Background is blocked. Click backdrop or press Escape to close.
-      </p>
-      <button class="btn" data-sp-dismiss="dialog">Close</button>
+      <div>
+        <h2 id="modal-t" class="text-lg font-semibold tracking-tight">Modal</h2>
+        <p id="modal-d" class="mt-2 text-sm/6 text-muted-foreground">
+          Background is blocked. Click backdrop or press Escape to close.
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
-
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#nonmodal"
+  class="btn btn-outline"
+>
+  Open Non-modal
+</button>
 <dialog
-  id="nonmodal-example"
+  id="nonmodal"
   class="dialog"
-  aria-labelledby="nonmodal-title"
-  aria-describedby="nonmodal-desc"
+  aria-labelledby="nonmodal-t"
+  aria-describedby="nonmodal-d"
 >
   <div class="dialog-panel">
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <h2 id="nonmodal-title" class="text-lg font-semibold mb-2">Non-modal</h2>
-      <p id="nonmodal-desc" class="text-muted-foreground mb-4">
-        You can interact with the page behind this dialog.
-      </p>
-      <button class="btn" data-sp-dismiss="dialog">Close</button>
+      <div>
+        <h2 id="nonmodal-t" class="text-lg font-semibold tracking-tight">
+          Non-modal
+        </h2>
+        <p id="nonmodal-d" class="mt-2 text-sm/6 text-muted-foreground">
+          You can interact with the page behind this dialog.
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
+<!-- END https://startingpointui.com/examples/docs/dialog/2 -->
 ```
 
 ---
@@ -113,42 +128,43 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
 Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or pressing Escape.
 
 ```html preview
-<button data-sp-toggle="dialog" data-sp-target="#dialog-4" class="btn">
+<!-- START https://startingpointui.com/examples/docs/dialog/3 -->
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#dialog-3"
+  class="btn btn-outline"
+>
   Open Dialog
 </button>
-
 <dialog
-  id="dialog-4"
+  id="dialog-3"
   class="dialog"
   data-sp-backdrop="static"
-  aria-labelledby="dialog-4-title"
-  aria-describedby="dialog-4-desc"
+  aria-labelledby="dialog-3-t"
+  aria-describedby="dialog-3-d"
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
-    <div class="dialog-content">
-      <div class="grid gap-6">
-        <div>
-          <h2 id="dialog-4-title" class="text-lg font-semibold tracking-tight">
-            Delete account
-          </h2>
-          <p id="dialog-4-desc" class="mt-2 text-sm/6 text-muted-foreground">
-            This dialog uses a static backdrop. You must choose an action to
-            close. Clicking outside or escape won&#x27;t work.
-          </p>
-        </div>
-        <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <button class="btn btn-outline" data-sp-dismiss="dialog">
-            Cancel
-          </button>
-          <button class="btn btn-destructive" data-sp-dismiss="dialog">
-            Delete
-          </button>
-        </div>
+    <div class="dialog-content grid gap-6">
+      <div>
+        <h2 id="dialog-3-t" class="text-lg font-semibold tracking-tight">
+          Delete account
+        </h2>
+        <p id="dialog-3-d" class="mt-2 text-sm/6 text-muted-foreground">
+          This dialog uses a static backdrop. You must choose an action to
+          close. Clicking outside or escape won&#x27;t work.
+        </p>
+      </div>
+      <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn btn-destructive" data-sp-dismiss="dialog">
+          Delete
+        </button>
       </div>
     </div>
   </div>
 </dialog>
+<!-- END https://startingpointui.com/examples/docs/dialog/3 -->
 ```
 
 ---
@@ -158,110 +174,111 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 Override positioning, sizing, and styles to create custom dialog variants like sheets, fullscreen modals, or custom backdrops.
 
 ```html preview
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-example"
->
+<!-- START https://startingpointui.com/examples/docs/dialog/4 -->
+<button data-sp-toggle="dialog" data-sp-target="#sheet" class="btn btn-outline">
   Sheet
 </button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#fullscreen-example"
->
-  Fullscreen
-</button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#gradient-example"
->
-  Gradient Backdrop
-</button>
-
 <dialog
-  id="sheet-example"
+  id="sheet"
   class="dialog"
-  aria-labelledby="sheet-title"
-  aria-describedby="sheet-desc"
+  aria-labelledby="sheet-t"
+  aria-describedby="sheet-d"
 >
   <div class="dialog-backdrop"></div>
   <div
     class="dialog-panel no-animation top-0 left-0 h-dvh w-72 max-h-none rounded-none translate-x-0 translate-y-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left duration-300"
   >
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <button
-        class="btn btn-ghost btn-icon absolute top-2 right-2"
-        aria-label="Close"
-        data-sp-dismiss="dialog"
-      >
-        <icon-x />
-      </button>
-      <h2 id="sheet-title" class="text-lg font-semibold mb-2">Sheet</h2>
-      <p id="sheet-desc" class="text-muted-foreground">
-        This sheet slides in from the left. Great for navigation menus or
-        sidebars.
-      </p>
+      <div>
+        <h2 id="sheet-t" class="text-lg font-semibold tracking-tight">Sheet</h2>
+        <p id="sheet-d" class="mt-2 text-sm/6 text-muted-foreground">
+          This sheet slides in from the left. Great for navigation menus or
+          sidebars.
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
-
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#fullscreen"
+  class="btn btn-outline"
+>
+  Fullscreen
+</button>
 <dialog
-  id="fullscreen-example"
+  id="fullscreen"
   class="dialog"
-  aria-labelledby="fullscreen-title"
-  aria-describedby="fullscreen-desc"
+  aria-labelledby="fullscreen-t"
+  aria-describedby="fullscreen-d"
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel max-w-none h-screen">
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <div class="flex justify-between items-center mb-4">
-        <h2 id="fullscreen-title" class="text-lg font-semibold">
+      <div>
+        <h2 id="fullscreen-t" class="text-lg font-semibold tracking-tight">
           Fullscreen Modal
         </h2>
-        <button
-          class="btn btn-ghost btn-icon"
-          aria-label="Close"
-          data-sp-dismiss="dialog"
-        >
-          <icon-x />
-        </button>
+        <p id="fullscreen-d" class="mt-2 text-sm/6 text-muted-foreground">
+          This modal takes up the entire screen.
+        </p>
       </div>
-      <p id="fullscreen-desc" class="text-muted-foreground">
-        This modal takes up the entire screen.
-      </p>
     </div>
   </div>
 </dialog>
-
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#gradient"
+  class="btn btn-outline"
+>
+  Gradient Backdrop
+</button>
 <dialog
-  id="gradient-example"
+  id="gradient"
   class="dialog"
-  aria-labelledby="gradient-title"
-  aria-describedby="gradient-desc"
+  aria-labelledby="gradient-t"
+  aria-describedby="gradient-d"
 >
   <div
     class="dialog-backdrop bg-linear-to-br from-pink-500/60 via-purple-500/60 to-cyan-500/60 backdrop-blur-sm"
   ></div>
   <div
-    class="dialog-panel bg-linear-to-br from-purple-950 to-slate-900 text-white border border-purple-500/30"
+    class="dialog-panel bg-linear-to-br from-purple-950 to-slate-900 border border-purple-500/30"
   >
-    <div class="dialog-content">
-      <button
-        class="btn btn-ghost btn-icon absolute top-2 right-2 text-white hover:bg-white/10"
-        aria-label="Close"
-        data-sp-dismiss="dialog"
-      >
-        <icon-x />
-      </button>
-      <h2 id="gradient-title" class="text-lg font-semibold mb-2">
-        Custom Styles
-      </h2>
-      <p id="gradient-desc" class="text-purple-200 mb-4">
-        Override the backdrop and panel with gradients, blur, or any custom
-        styles.
-      </p>
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
+    <div class="dialog-content grid gap-6">
+      <div>
+        <h2
+          id="gradient-t"
+          class="text-lg font-semibold tracking-tight text-white"
+        >
+          Custom Styles
+        </h2>
+        <p id="gradient-d" class="mt-2 text-sm/6 text-purple-200">
+          Override the backdrop and panel with gradients, blur, or any custom
+          styles.
+        </p>
+      </div>
       <button
         class="btn w-full bg-purple-600 hover:bg-purple-700 text-white"
         data-sp-dismiss="dialog"
@@ -271,6 +288,7 @@ Override positioning, sizing, and styles to create custom dialog variants like s
     </div>
   </div>
 </dialog>
+<!-- END https://startingpointui.com/examples/docs/dialog/4 -->
 ```
 
 ---
@@ -352,116 +370,146 @@ To customize animations, add `no-animation` to disable the defaults and use your
 ```
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/dialog/5 -->
 <button
-  class="btn btn-outline"
   data-sp-toggle="dialog"
   data-sp-target="#anim-default"
+  class="btn btn-outline"
 >
   Default
 </button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-none"
->
-  No Animation
-</button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-slide"
->
-  Slide from Bottom
-</button>
-<button
-  class="btn btn-outline"
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-slow"
->
-  Slow (500ms)
-</button>
-
 <dialog
   id="anim-default"
   class="dialog"
-  aria-labelledby="anim-default-title"
-  aria-describedby="anim-default-desc"
+  aria-labelledby="anim-default-t"
+  aria-describedby="anim-default-d"
 >
   <div class="dialog-backdrop"></div>
   <div class="dialog-panel">
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <h2 id="anim-default-title" class="text-lg font-semibold mb-2">
-        Default Animation
-      </h2>
-      <p id="anim-default-desc" class="text-muted-foreground mb-4">
-        The backdrop fades while the panel fades and zooms.
-      </p>
-      <button class="btn" data-sp-dismiss="dialog">Close</button>
+      <div>
+        <h2 id="anim-default-t" class="text-lg font-semibold tracking-tight">
+          Default Animation
+        </h2>
+        <p id="anim-default-d" class="mt-2 text-sm/6 text-muted-foreground">
+          The backdrop fades while the panel fades and zooms.
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
-
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-none"
+  class="btn btn-outline"
+>
+  No Animation
+</button>
 <dialog
   id="anim-none"
   class="dialog"
-  aria-labelledby="anim-none-title"
-  aria-describedby="anim-none-desc"
+  aria-labelledby="anim-none-t"
+  aria-describedby="anim-none-d"
 >
   <div class="dialog-backdrop no-animation"></div>
   <div class="dialog-panel no-animation">
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <h2 id="anim-none-title" class="text-lg font-semibold mb-2">
-        No Animation
-      </h2>
-      <p id="anim-none-desc" class="text-muted-foreground mb-4">
-        Add the `no-animation` class to disable the default animations.
-      </p>
-      <button class="btn" data-sp-dismiss="dialog">Close</button>
+      <div>
+        <h2 id="anim-none-t" class="text-lg font-semibold tracking-tight">
+          No Animation
+        </h2>
+        <p id="anim-none-d" class="mt-2 text-sm/6 text-muted-foreground">
+          Add the `no-animation` class to disable the default animations.
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
-
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-slide"
+  class="btn btn-outline"
+>
+  Slide from Bottom
+</button>
 <dialog
   id="anim-slide"
   class="dialog"
-  aria-labelledby="anim-slide-title"
-  aria-describedby="anim-slide-desc"
+  aria-labelledby="anim-slide-t"
+  aria-describedby="anim-slide-d"
 >
   <div class="dialog-backdrop"></div>
   <div
     class="dialog-panel no-animation data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom duration-300"
   >
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <h2 id="anim-slide-title" class="text-lg font-semibold mb-2">
-        Slide from Bottom
-      </h2>
-      <p id="anim-slide-desc" class="text-muted-foreground mb-4">
-        Use `no-animation` and add your own animation classes.
-      </p>
-      <button class="btn" data-sp-dismiss="dialog">Close</button>
+      <div>
+        <h2 id="anim-slide-t" class="text-lg font-semibold tracking-tight">
+          Slide from Bottom
+        </h2>
+        <p id="anim-slide-d" class="mt-2 text-sm/6 text-muted-foreground">
+          Use `no-animation` and add your own animation classes.
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
-
+<button
+  data-sp-toggle="dialog"
+  data-sp-target="#anim-slow"
+  class="btn btn-outline"
+>
+  Slow (500ms)
+</button>
 <dialog
   id="anim-slow"
   class="dialog"
-  aria-labelledby="anim-slow-title"
-  aria-describedby="anim-slow-desc"
+  aria-labelledby="anim-slow-t"
+  aria-describedby="anim-slow-d"
 >
   <div class="dialog-backdrop duration-500"></div>
   <div class="dialog-panel duration-500">
+    <button
+      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+      aria-label="Close"
+      data-sp-dismiss="dialog"
+    >
+      <i class="ri-close-line text-xl"></i>
+    </button>
     <div class="dialog-content">
-      <h2 id="anim-slow-title" class="text-lg font-semibold mb-2">
-        Slow Animation
-      </h2>
-      <p id="anim-slow-desc" class="text-muted-foreground mb-4">
-        Override the duration with utility classes like `duration-500`.
-      </p>
-      <button class="btn" data-sp-dismiss="dialog">Close</button>
+      <div>
+        <h2 id="anim-slow-t" class="text-lg font-semibold tracking-tight">
+          Slow Animation
+        </h2>
+        <p id="anim-slow-d" class="mt-2 text-sm/6 text-muted-foreground">
+          Override the duration with utility classes like `duration-500`.
+        </p>
+      </div>
     </div>
   </div>
 </dialog>
+<!-- END https://startingpointui.com/examples/docs/dialog/5 -->
 ```
 
 The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. You can customize or replace these with your own animations.
