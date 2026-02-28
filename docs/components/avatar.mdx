@@ -6,11 +6,13 @@ description: A Tailwind CSS avatar component for displaying user profile images.
 A Tailwind CSS avatar component for displaying user profile images.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/avatar/1 -->
 <img
   class="avatar"
-  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
-  alt="User"
+  alt="Sarah Johnson"
+  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
 />
+<!-- END https://startingpointui.com/examples/docs/avatar/1 -->
 ```
 
 ---
@@ -20,8 +22,10 @@ A Tailwind CSS avatar component for displaying user profile images.
 When no image is available, display initials or an icon as a fallback.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/avatar/2 -->
 <span class="avatar-fallback">JD</span>
-<span class="avatar-fallback"><icon-user class="size-4" /></span>
+<span class="avatar-fallback"><i class="ri-user-line"></i></span>
+<!-- END https://startingpointui.com/examples/docs/avatar/2 -->
 ```
 
 ---
@@ -31,29 +35,33 @@ When no image is available, display initials or an icon as a fallback.
 Avatars come in multiple sizes.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/avatar/3 -->
 <img
   class="avatar avatar-sm"
-  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-  alt="User"
+  alt="Sarah Johnson"
+  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
 />
 <img
   class="avatar"
-  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-  alt="User"
+  alt="Sarah Johnson"
+  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
 />
 <img
   class="avatar avatar-lg"
-  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-  alt="User"
+  alt="Sarah Johnson"
+  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
 />
+<!-- END https://startingpointui.com/examples/docs/avatar/3 -->
 ```
 
 Fallbacks also scale with the size.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/avatar/4 -->
 <span class="avatar-fallback avatar-sm">JD</span>
 <span class="avatar-fallback">JD</span>
 <span class="avatar-fallback avatar-lg">JD</span>
+<!-- END https://startingpointui.com/examples/docs/avatar/4 -->
 ```
 
 ---
@@ -63,51 +71,55 @@ Fallbacks also scale with the size.
 Display multiple avatars in a stacked group.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/avatar/5 -->
 <div class="avatar-group">
   <img
     class="avatar"
-    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
-    alt="User 1"
+    alt="Sarah Johnson"
+    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
   />
   <img
     class="avatar"
-    src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=face"
-    alt="User 2"
+    alt="Michael Chen"
+    src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
   />
   <img
     class="avatar"
-    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face"
-    alt="User 3"
+    alt="Emma Wilson"
+    src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
   />
   <img
     class="avatar"
-    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop&crop=face"
-    alt="User 4"
+    alt="David Park"
+    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
   />
 </div>
+<!-- END https://startingpointui.com/examples/docs/avatar/5 -->
 ```
 
 Avatar groups work with different sizes.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/avatar/6 -->
 <div class="avatar-group">
   <img
     class="avatar avatar-lg"
-    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
-    alt="User 5"
+    alt="Sarah Johnson"
+    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
   />
   <img
     class="avatar avatar-lg"
-    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face"
-    alt="User 6"
+    alt="Michael Chen"
+    src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
   />
   <img
     class="avatar avatar-lg"
-    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-    alt="User 7"
+    alt="Emma Wilson"
+    src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
   />
   <span class="avatar-fallback avatar-lg">+5</span>
 </div>
+<!-- END https://startingpointui.com/examples/docs/avatar/6 -->
 ```
 
 ---
@@ -117,21 +129,23 @@ Avatar groups work with different sizes.
 Combine avatar classes with Tailwind utilities for custom styling.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/avatar/7 -->
 <img
   class="avatar rounded-md"
-  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-  alt="User"
+  alt="Sarah Johnson"
+  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
 />
 <img
   class="avatar size-16 rounded-lg"
-  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-  alt="User"
+  alt="Sarah Johnson"
+  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
 />
 <img
   class="avatar ring-2 ring-primary ring-offset-2 ring-offset-background"
-  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-  alt="User"
+  alt="Sarah Johnson"
+  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
 />
+<!-- END https://startingpointui.com/examples/docs/avatar/7 -->
 ```
 
 ---
