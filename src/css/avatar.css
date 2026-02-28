@@ -10,6 +10,7 @@
 @utility avatar-fallback {
   @layer l1.l2 {
     @apply inline-flex items-center justify-center rounded-full bg-muted text-muted-foreground font-medium;
+    @apply [&_svg:not([class*='size-'])]:size-5 [&_i[class*='ri-']]:text-[1.125rem] [&_i[class*='ri-']]:leading-none;
     @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
   }
 }
