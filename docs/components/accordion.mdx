@@ -6,20 +6,23 @@ description: A Tailwind CSS accordion component for organizing content into coll
 A Tailwind CSS accordion component for organizing content into collapsible sections.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/accordion/1 -->
 <div class="accordion max-w-lg">
   <div class="accordion-item">
     <button
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#accordion-panel-1"
+      data-sp-target="#acc-1-panel"
       aria-expanded="true"
-      aria-controls="accordion-panel-1"
+      aria-controls="acc-1-panel"
     >
       Is it accessible?
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="accordion-panel-1" class="accordion-panel open">
+    <div id="acc-1-panel" class="accordion-panel open">
       <div class="accordion-content">
         Yes. It adheres to the WAI-ARIA design pattern for accordions.
       </div>
@@ -30,14 +33,16 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#accordion-panel-2"
+      data-sp-target="#acc-2-panel"
       aria-expanded="false"
-      aria-controls="accordion-panel-2"
+      aria-controls="acc-2-panel"
     >
       Is it styled?
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="accordion-panel-2" class="accordion-panel">
+    <div id="acc-2-panel" class="accordion-panel">
       <div class="accordion-content">
         Yes. It comes with default styles that match your theme.
       </div>
@@ -48,20 +53,23 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#accordion-panel-3"
+      data-sp-target="#acc-3-panel"
       aria-expanded="false"
-      aria-controls="accordion-panel-3"
+      aria-controls="acc-3-panel"
     >
       Is it animated?
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="accordion-panel-3" class="accordion-panel">
+    <div id="acc-3-panel" class="accordion-panel">
       <div class="accordion-content">
-        Yes. It's animated using CSS animations.
+        Yes. It is animated using CSS animations.
       </div>
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/accordion/1 -->
 ```
 
 ---
@@ -71,20 +79,23 @@ A Tailwind CSS accordion component for organizing content into collapsible secti
 Add `data-sp-multiple` to the accordion to allow multiple sections to be open at the same time.
 
 ```html preview
-<div class="accordion max-w-lg" data-sp-multiple>
+<!-- START https://startingpointui.com/examples/docs/accordion/2 -->
+<div class="accordion max-w-lg" data-sp-multiple="">
   <div class="accordion-item">
     <button
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#multi-panel-1"
+      data-sp-target="#multi-1-panel"
       aria-expanded="true"
-      aria-controls="multi-panel-1"
+      aria-controls="multi-1-panel"
     >
       First section
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="multi-panel-1" class="accordion-panel open">
+    <div id="multi-1-panel" class="accordion-panel open">
       <div class="accordion-content">
         This accordion allows multiple sections to be open at once.
       </div>
@@ -95,20 +106,23 @@ Add `data-sp-multiple` to the accordion to allow multiple sections to be open at
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#multi-panel-2"
+      data-sp-target="#multi-2-panel"
       aria-expanded="true"
-      aria-controls="multi-panel-2"
+      aria-controls="multi-2-panel"
     >
       Second section
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="multi-panel-2" class="accordion-panel open">
+    <div id="multi-2-panel" class="accordion-panel open">
       <div class="accordion-content">
         Both sections can be expanded simultaneously.
       </div>
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/accordion/2 -->
 ```
 
 ---
@@ -118,20 +132,23 @@ Add `data-sp-multiple` to the accordion to allow multiple sections to be open at
 Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control icon behavior.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/accordion/3 -->
 <div class="accordion max-w-lg">
   <div class="accordion-item">
     <button
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#icon-panel-1"
+      data-sp-target="#icon-1-panel"
       aria-expanded="true"
-      aria-controls="icon-panel-1"
+      aria-controls="icon-1-panel"
     >
       Rotating chevron
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="icon-panel-1" class="accordion-panel open">
+    <div id="icon-1-panel" class="accordion-panel open">
       <div class="accordion-content">
         The chevron rotates 180° when expanded.
       </div>
@@ -142,15 +159,17 @@ Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control ic
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#icon-panel-2"
+      data-sp-target="#icon-2-panel"
       aria-expanded="false"
-      aria-controls="icon-panel-2"
+      aria-controls="icon-2-panel"
     >
       Plus/minus swap
-      <i class="ri-add-fill [[aria-expanded=true]>&]:hidden"></i>
-      <i class="ri-subtract-fill hidden [[aria-expanded=true]>&]:block"></i>
+      <i class="ri-add-fill [[aria-expanded=true]&gt;&amp;]:hidden"></i>
+      <i
+        class="ri-subtract-fill hidden [[aria-expanded=true]&gt;&amp;]:block"
+      ></i>
     </button>
-    <div id="icon-panel-2" class="accordion-panel">
+    <div id="icon-2-panel" class="accordion-panel">
       <div class="accordion-content">Swap between plus and minus icons.</div>
     </div>
   </div>
@@ -159,17 +178,18 @@ Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control ic
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#icon-panel-3"
+      data-sp-target="#icon-3-panel"
       aria-expanded="false"
-      aria-controls="icon-panel-3"
+      aria-controls="icon-3-panel"
     >
       No icon
     </button>
-    <div id="icon-panel-3" class="accordion-panel">
+    <div id="icon-3-panel" class="accordion-panel">
       <div class="accordion-content">You can also omit the icon entirely.</div>
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/accordion/3 -->
 ```
 
 ---
@@ -179,20 +199,23 @@ Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control ic
 Add `disabled` to the trigger button to prevent interaction.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/accordion/4 -->
 <div class="accordion max-w-lg">
   <div class="accordion-item">
     <button
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#disabled-panel-1"
+      data-sp-target="#dis-1-panel"
       aria-expanded="true"
-      aria-controls="disabled-panel-1"
+      aria-controls="dis-1-panel"
     >
       Enabled section
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="disabled-panel-1" class="accordion-panel open">
+    <div id="dis-1-panel" class="accordion-panel open">
       <div class="accordion-content">This section can be toggled.</div>
     </div>
   </div>
@@ -200,16 +223,18 @@ Add `disabled` to the trigger button to prevent interaction.
     <button
       class="accordion-trigger"
       type="button"
-      disabled
+      disabled=""
       data-sp-toggle="accordion"
-      data-sp-target="#disabled-panel-2"
+      data-sp-target="#dis-2-panel"
       aria-expanded="false"
-      aria-controls="disabled-panel-2"
+      aria-controls="dis-2-panel"
     >
       Disabled section
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="disabled-panel-2" class="accordion-panel">
+    <div id="dis-2-panel" class="accordion-panel">
       <div class="accordion-content">This section cannot be opened.</div>
     </div>
   </div>
@@ -218,18 +243,21 @@ Add `disabled` to the trigger button to prevent interaction.
       class="accordion-trigger"
       type="button"
       data-sp-toggle="accordion"
-      data-sp-target="#disabled-panel-3"
+      data-sp-target="#dis-3-panel"
       aria-expanded="false"
-      aria-controls="disabled-panel-3"
+      aria-controls="dis-3-panel"
     >
       Another enabled section
-      <i class="ri-arrow-down-s-line [[aria-expanded=true]>&]:rotate-180"></i>
+      <i
+        class="ri-arrow-down-s-line [[aria-expanded=true]&gt;&amp;]:rotate-180"
+      ></i>
     </button>
-    <div id="disabled-panel-3" class="accordion-panel">
+    <div id="dis-3-panel" class="accordion-panel">
       <div class="accordion-content">This section can also be toggled.</div>
     </div>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/accordion/4 -->
 ```
 
 ---
