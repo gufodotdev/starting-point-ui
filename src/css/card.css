@@ -39,6 +39,6 @@
 
 @utility card-content-lg {
   @layer l1 {
-    @apply p-12;
+    @apply p-8;
   }
 }
