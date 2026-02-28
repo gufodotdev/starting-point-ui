@@ -6,9 +6,10 @@ description: A Tailwind CSS pagination component for navigating between pages.
 A Tailwind CSS pagination component for navigating between pages, built using the [button](/docs/components/button) component.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/pagination/1 -->
 <nav class="flex flex-wrap items-center gap-1">
   <a href="#" class="btn btn-ghost">
-    <icon-chevron-left />
+    <i class="ri-arrow-left-s-line"></i>
     <span class="hidden sm:block">Previous</span>
   </a>
   <a href="#" class="btn btn-ghost btn-icon">1</a>
@@ -16,9 +17,10 @@ A Tailwind CSS pagination component for navigating between pages, built using th
   <a href="#" class="btn btn-ghost btn-icon">3</a>
   <a href="#" class="btn btn-ghost">
     <span class="hidden sm:block">Next</span>
-    <icon-chevron-right />
+    <i class="ri-arrow-right-s-line"></i>
   </a>
 </nav>
+<!-- END https://startingpointui.com/examples/docs/pagination/1 -->
 ```
 
 ---
@@ -28,24 +30,26 @@ A Tailwind CSS pagination component for navigating between pages, built using th
 Use an ellipsis to indicate additional pages between visible page numbers.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/pagination/2 -->
 <nav class="flex flex-wrap items-center gap-1">
   <a href="#" class="btn btn-ghost">
-    <icon-chevron-left />
+    <i class="ri-arrow-left-s-line"></i>
     <span class="hidden sm:block">Previous</span>
   </a>
   <a href="#" class="btn btn-ghost btn-icon">1</a>
   <a href="#" class="btn btn-outline btn-icon" aria-current="page">2</a>
   <a href="#" class="btn btn-ghost btn-icon">3</a>
-  <span class="flex size-9 items-center justify-center" aria-hidden="true">
-    <icon-more-horizontal class="size-4" />
+  <span class="flex items-center justify-center size-9" aria-hidden="true">
+    <i class="ri-more-fill text-sm"></i>
   </span>
   <a href="#" class="btn btn-ghost btn-icon">9</a>
   <a href="#" class="btn btn-ghost btn-icon">10</a>
   <a href="#" class="btn btn-ghost">
     <span class="hidden sm:block">Next</span>
-    <icon-chevron-right />
+    <i class="ri-arrow-right-s-line"></i>
   </a>
 </nav>
+<!-- END https://startingpointui.com/examples/docs/pagination/2 -->
 ```
 
 ---
@@ -55,19 +59,21 @@ Use an ellipsis to indicate additional pages between visible page numbers.
 Use button size classes like `btn-sm` and `btn-icon-sm` for a more compact pagination.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/pagination/3 -->
 <nav class="flex flex-wrap items-center gap-1">
   <a href="#" class="btn btn-ghost btn-sm">
-    <icon-chevron-left />
-    Previous
+    <i class="ri-arrow-left-s-line"></i>
+    <span class="hidden sm:block">Previous</span>
   </a>
   <a href="#" class="btn btn-ghost btn-icon-sm">1</a>
   <a href="#" class="btn btn-outline btn-icon-sm" aria-current="page">2</a>
   <a href="#" class="btn btn-ghost btn-icon-sm">3</a>
   <a href="#" class="btn btn-ghost btn-sm">
-    Next
-    <icon-chevron-right />
+    <span class="hidden sm:block">Next</span>
+    <i class="ri-arrow-right-s-line"></i>
   </a>
 </nav>
+<!-- END https://startingpointui.com/examples/docs/pagination/3 -->
 ```
 
 ---
