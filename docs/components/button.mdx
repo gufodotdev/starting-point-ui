@@ -6,7 +6,9 @@ description: A Tailwind CSS button component with multiple variants, sizes, and 
 A Tailwind CSS button component with multiple variants, sizes, and icon support.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/1 -->
 <button class="btn">Button</button>
+<!-- END https://startingpointui.com/examples/docs/button/1 -->
 ```
 
 ---
@@ -16,12 +18,14 @@ A Tailwind CSS button component with multiple variants, sizes, and icon support.
 Use different variants to communicate intent and hierarchy.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/2 -->
 <button class="btn">Default</button>
 <button class="btn btn-destructive">Destructive</button>
 <button class="btn btn-outline">Outline</button>
 <button class="btn btn-secondary">Secondary</button>
 <button class="btn btn-ghost">Ghost</button>
 <button class="btn btn-link">Link</button>
+<!-- END https://startingpointui.com/examples/docs/button/2 -->
 ```
 
 ---
@@ -31,6 +35,7 @@ Use different variants to communicate intent and hierarchy.
 Use different sizes to fit various contexts and layouts.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/3 -->
 <button class="btn btn-outline btn-sm">Small</button>
 <button class="btn btn-outline">Base</button>
 <button class="btn btn-outline btn-lg">Large</button>
@@ -43,6 +48,7 @@ Use different sizes to fit various contexts and layouts.
 <button class="btn btn-outline btn-icon-sm" aria-label="Add item">
   <i class="ri-add-fill"></i>
 </button>
+<!-- END https://startingpointui.com/examples/docs/button/3 -->
 ```
 
 ---
@@ -52,6 +58,7 @@ Use different sizes to fit various contexts and layouts.
 Buttons can include icons alongside text or as the only content. For icon-only buttons, always include an `aria-label` for accessibility.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/4 -->
 <button class="btn btn-outline btn-icon" aria-label="More options">
   <i class="ri-more-fill"></i>
 </button>
@@ -66,6 +73,7 @@ Buttons can include icons alongside text or as the only content. For icon-only b
 <button class="btn btn-ghost btn-icon" aria-label="Close">
   <i class="ri-close-fill"></i>
 </button>
+<!-- END https://startingpointui.com/examples/docs/button/4 -->
 ```
 
 ---
@@ -75,10 +83,12 @@ Buttons can include icons alongside text or as the only content. For icon-only b
 Disable buttons to prevent interaction, such as while processing a request.
 
 ```html preview
-<button class="btn btn-outline" disabled>
+<!-- START https://startingpointui.com/examples/docs/button/5 -->
+<button class="btn btn-outline" disabled="">
   <i class="ri-loader-4-fill animate-spin"></i>
   Processing
 </button>
+<!-- END https://startingpointui.com/examples/docs/button/5 -->
 ```
 
 ---
@@ -88,11 +98,13 @@ Disable buttons to prevent interaction, such as while processing a request.
 Group related buttons together with horizontal or vertical layouts using `.btn-group`.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/6 -->
 <div class="btn-group">
   <button class="btn btn-outline">Left</button>
   <button class="btn btn-outline">Center</button>
   <button class="btn btn-outline">Right</button>
 </div>
+<!-- END https://startingpointui.com/examples/docs/button/6 -->
 ```
 
 ---
@@ -102,6 +114,7 @@ Group related buttons together with horizontal or vertical layouts using `.btn-g
 Button groups work with all button sizes.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/7 -->
 <div class="flex flex-col gap-4">
   <div class="btn-group">
     <button class="btn btn-outline btn-sm">Left</button>
@@ -119,6 +132,7 @@ Button groups work with all button sizes.
     <button class="btn btn-outline btn-lg">Right</button>
   </div>
 </div>
+<!-- END https://startingpointui.com/examples/docs/button/7 -->
 ```
 
 ---
@@ -128,6 +142,7 @@ Button groups work with all button sizes.
 Stack buttons vertically using `btn-group-vertical`.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/8 -->
 <div class="btn-group btn-group-vertical">
   <button class="btn btn-outline btn-icon" aria-label="Increase">
     <i class="ri-add-fill"></i>
@@ -136,6 +151,7 @@ Stack buttons vertically using `btn-group-vertical`.
     <i class="ri-subtract-fill"></i>
   </button>
 </div>
+<!-- END https://startingpointui.com/examples/docs/button/8 -->
 ```
 
 ---
@@ -145,6 +161,7 @@ Stack buttons vertically using `btn-group-vertical`.
 Add visual separation between buttons using `btn-group-separator`. This is recommended for variants without borders like `btn-secondary` to improve visual hierarchy.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/9 -->
 <div class="btn-group">
   <button class="btn btn-secondary">Save</button>
   <div class="btn-group-separator"></div>
@@ -152,6 +169,7 @@ Add visual separation between buttons using `btn-group-separator`. This is recom
     <i class="ri-arrow-down-s-line"></i>
   </button>
 </div>
+<!-- END https://startingpointui.com/examples/docs/button/9 -->
 ```
 
 ---
@@ -161,10 +179,12 @@ Add visual separation between buttons using `btn-group-separator`. This is recom
 Use `btn-group-text` for non-interactive text labels.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/10 -->
 <div class="btn-group">
   <span class="btn-group-text">https://</span>
   <input class="input" placeholder="example.com" />
 </div>
+<!-- END https://startingpointui.com/examples/docs/button/10 -->
 ```
 
 ---
@@ -174,11 +194,13 @@ Use `btn-group-text` for non-interactive text labels.
 You can combine button classes with Tailwind utilities for custom styling.
 
 ```html preview
+<!-- START https://startingpointui.com/examples/docs/button/11 -->
 <button
   class="btn bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 text-white border-0 px-6 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
 >
   Gradient Button
 </button>
+<!-- END https://startingpointui.com/examples/docs/button/11 -->
 ```
 
 ---
