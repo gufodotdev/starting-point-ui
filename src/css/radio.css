@@ -10,14 +10,15 @@
     @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
 
     &:checked {
-      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3' fill='%23171717'/%3e%3c/svg%3e");
+      @apply bg-primary border-primary;
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4' fill='white'/%3e%3c/svg%3e");
       background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
     }
 
     :is(.dark *) &:checked {
-      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3' fill='%23fafafa'/%3e%3c/svg%3e");
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4' fill='%23171717'/%3e%3c/svg%3e");
     }
   }
 }
