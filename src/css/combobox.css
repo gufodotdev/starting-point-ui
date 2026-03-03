@@ -1,0 +1,122 @@
+/* Starting Point UI Combobox Styles */
+
+@utility combobox {
+    @layer l1.l2 {
+      @apply relative inline-block;
+    }
+  }
+  
+  @utility combobox-trigger {
+    @layer l1.l2 {
+      @apply border-input inline-flex w-full cursor-pointer items-center justify-between gap-2 rounded-md border bg-transparent text-sm shadow-xs transition-[color,box-shadow] outline-none;
+      @apply dark:bg-input/30 dark:hover:bg-input/50;
+      @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
+      @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+      @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+      @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
+      @apply [&:where(&:not(.combobox-trigger-sm,.combobox-trigger-base,.combobox-trigger-lg))]:combobox-trigger-base;
+    }
+  }
+  
+  @utility combobox-trigger-sm {
+    @layer l1 {
+      @apply h-8 px-3;
+    }
+  }
+  
+  @utility combobox-trigger-base {
+    @layer l1 {
+      @apply h-9 px-3;
+    }
+  }
+  
+  @utility combobox-trigger-lg {
+    @layer l1 {
+      @apply h-10 px-3;
+    }
+  }
+  
+  @utility combobox-value {
+    @layer l1.l2 {
+      @apply flex-1 truncate text-left;
+  
+      &[data-placeholder] {
+        @apply text-muted-foreground;
+      }
+    }
+  }
+  
+  @utility combobox-menu {
+    @layer l1.l2 {
+      @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md;
+      @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
+  
+      &.open {
+        @apply block;
+      }
+    }
+  }
+  
+  @utility combobox-search-wrap {
+    @layer l1.l2 {
+      @apply flex items-center gap-2 border-b px-3;
+      @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4 [&_svg]:text-muted-foreground;
+    }
+  }
+  
+  @utility combobox-input {
+    @layer l1.l2 {
+      @apply h-9 w-full min-w-0 bg-transparent py-2 text-sm outline-none placeholder:text-muted-foreground;
+      @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
+    }
+  }
+  
+  @utility combobox-list {
+    @layer l1.l2 {
+      @apply max-h-60 overflow-y-auto p-1;
+    }
+  }
+  
+  @utility combobox-item {
+    @layer l1.l2 {
+      @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm py-1.5 pr-2.5 pl-8 text-sm outline-none transition-colors;
+      @apply hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground;
+      @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
+  
+      &[aria-disabled="true"] {
+        @apply pointer-events-none opacity-50;
+      }
+  
+      &.selected .combobox-check {
+        @apply opacity-100;
+      }
+    }
+  }
+  
+  @utility combobox-check {
+    @layer l1.l2 {
+      @apply absolute left-2 size-4 opacity-0;
+    }
+  }
+  
+  @utility combobox-label {
+    @layer l1.l2 {
+      @apply px-2.5 py-1.5 text-sm font-medium text-muted-foreground;
+    }
+  }
+  
+  @utility combobox-separator {
+    @layer l1.l2 {
+      @apply -mx-1 my-1 h-px bg-border;
+    }
+  }
+  
+  @utility combobox-empty {
+    @layer l1.l2 {
+      @apply hidden py-6 text-center text-sm text-muted-foreground;
+  
+      &.visible {
+        @apply block;
+      }
+    }
+  }  
