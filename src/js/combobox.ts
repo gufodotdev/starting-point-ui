@@ -113,7 +113,10 @@ import {
   
     menu
       .querySelectorAll<HTMLElement>(".combobox-item")
-      .forEach((el) => el.classList.remove("selected"));
+      .forEach((el) => {
+        el.classList.remove("selected");
+        el.removeAttribute("aria-selected");
+      });
     item.classList.add("selected");
     item.setAttribute("aria-selected", "true");
   
