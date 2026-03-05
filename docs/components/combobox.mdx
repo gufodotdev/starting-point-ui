@@ -314,13 +314,61 @@ Use `combobox-trigger-sm`, `combobox-trigger-base`, or `combobox-trigger-lg` to 
 
 ---
 
+## Hidden input for form submission
+
+Add an `<input type="hidden">` with `data-sp-value` inside the combobox so the selected value is included in native form submission. Give the input a `name` attribute for the form field name. The script sets the input’s value when the user selects an option, and syncs it from the initial selected item when the page loads.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/combobox/form -->
+<form class="space-y-4" method="get" action="#" id="combobox-form-demo">
+  <div class="combobox w-56">
+    <input type="hidden" data-sp-value name="framework" value="" />
+    <button
+      class="combobox-trigger w-full"
+      type="button"
+      data-sp-toggle="combobox"
+      data-sp-target="#cb-form-menu"
+      aria-expanded="false"
+    >
+      <span class="combobox-value" data-placeholder>Select a framework...</span>
+      <i class="ri-expand-up-down-line text-muted-foreground"></i>
+    </button>
+    <div class="combobox-menu w-56" id="cb-form-menu">
+      <div class="combobox-search-wrap">
+        <i class="ri-search-line"></i>
+        <input class="combobox-input" type="text" placeholder="Search..." />
+      </div>
+      <div class="combobox-list" role="listbox">
+        <div class="combobox-item" role="option" data-value="next" tabindex="0">
+          <i class="combobox-check ri-check-line"></i>
+          Next.js
+        </div>
+        <div class="combobox-item" role="option" data-value="sveltekit" tabindex="0">
+          <i class="combobox-check ri-check-line"></i>
+          SvelteKit
+        </div>
+        <div class="combobox-item" role="option" data-value="nuxt" tabindex="0">
+          <i class="combobox-check ri-check-line"></i>
+          Nuxt.js
+        </div>
+      </div>
+      <div class="combobox-empty">No results.</div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<!-- END https://startingpointui.com/examples/docs/combobox/form -->
+```
+
+---
+
 ## How it works
 
 The combobox component uses a small JavaScript module that handles opening, closing, filtering, selecting, positioning, and keyboard navigation.
 
 ### Structure
 
-A combobox consists of six parts:
+A combobox consists of six required parts and one optional part:
 
 1. **`.combobox`** — Container that wraps the trigger and menu
 2. **`.combobox-trigger`** — Button that opens and closes the menu
@@ -328,6 +376,7 @@ A combobox consists of six parts:
 4. **`.combobox-menu`** — The floating panel with search input and item list
 5. **`.combobox-list`** — Scrollable list of options
 6. **`.combobox-item`** — Individual selectable option
+7. **Value input (optional)** — `<input type="hidden" data-sp-value>` inside `.combobox` that receives the selected value for native form submission
 
 ```html
 <div class="combobox">
@@ -492,6 +541,7 @@ Add `aria-expanded="false"` to the trigger button. The JavaScript updates it aut
 | ---------------------------- | ---------------- | ------------------------------------------------------- |
 | `data-sp-toggle="combobox"`  | Trigger button   | Toggles the combobox menu                               |
 | `data-sp-target="#id"`       | Trigger button   | ID of the `.combobox-menu` element to control           |
+| `data-sp-value`              | Input            | Marks the input that receives the selected value for form submission |
 | `data-sp-placement`          | `.combobox`      | Menu placement relative to trigger (default: `bottom-start`) |
 | `data-sp-offset`             | `.combobox`      | Distance from trigger in pixels (default: `4`)          |
 | `data-value`                 | `.combobox-item` | Value emitted in the `sp:combobox:change` event         |
