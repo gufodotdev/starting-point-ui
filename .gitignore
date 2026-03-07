@@ -4,6 +4,13 @@ node_modules
 # Build output
 dist
 
+# Turbo
+.turbo
+
+# Next.js
+.next/
+out/
+
 # Local env files
 .env
 .env.local

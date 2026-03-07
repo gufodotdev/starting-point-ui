@@ -21,14 +21,23 @@ A Tailwind CSS combobox component that combines a trigger button with a searchab
   <div class="combobox-menu w-56" id="cb-1-menu">
     <div class="combobox-search-wrap">
       <i class="ri-search-line"></i>
-      <input class="combobox-input" type="text" placeholder="Search framework..." />
+      <input
+        class="combobox-input"
+        type="text"
+        placeholder="Search framework..."
+      />
     </div>
     <div class="combobox-list" role="listbox">
       <div class="combobox-item" role="option" data-value="next" tabindex="0">
         <i class="combobox-check ri-check-line"></i>
         Next.js
       </div>
-      <div class="combobox-item" role="option" data-value="sveltekit" tabindex="0">
+      <div
+        class="combobox-item"
+        role="option"
+        data-value="sveltekit"
+        tabindex="0"
+      >
         <i class="combobox-check ri-check-line"></i>
         SvelteKit
       </div>
@@ -73,7 +82,11 @@ Add the `selected` class to a `.combobox-item` and set the trigger text to show 
   <div class="combobox-menu w-56" id="cb-2-menu">
     <div class="combobox-search-wrap">
       <i class="ri-search-line"></i>
-      <input class="combobox-input" type="text" placeholder="Search framework..." />
+      <input
+        class="combobox-input"
+        type="text"
+        placeholder="Search framework..."
+      />
     </div>
     <div class="combobox-list" role="listbox">
       <div class="combobox-item" role="option" data-value="next" tabindex="0">
@@ -343,7 +356,12 @@ Add an `<input type="hidden">` with `data-sp-value` inside the combobox so the s
           <i class="combobox-check ri-check-line"></i>
           Next.js
         </div>
-        <div class="combobox-item" role="option" data-value="sveltekit" tabindex="0">
+        <div
+          class="combobox-item"
+          role="option"
+          data-value="sveltekit"
+          tabindex="0"
+        >
           <i class="combobox-check ri-check-line"></i>
           SvelteKit
         </div>
@@ -453,9 +471,11 @@ When an item is selected, the module adds `.selected` and `aria-selected="true"`
 A `sp:combobox:change` custom event is dispatched on the `.combobox` element with `detail.value` (from `data-value`) and `detail.label`:
 
 ```js
-document.querySelector(".combobox").addEventListener("sp:combobox:change", (e) => {
-  console.log(e.detail.value, e.detail.label);
-});
+document
+  .querySelector(".combobox")
+  .addEventListener("sp:combobox:change", (e) => {
+    console.log(e.detail.value, e.detail.label);
+  });
 ```
 
 ### Animation
@@ -503,49 +523,49 @@ Add `aria-expanded="false"` to the trigger button. The JavaScript updates it aut
 
 #### Keyboard navigation
 
-| Key               | Action                                                |
-| ----------------- | ----------------------------------------------------- |
-| `Enter` / `Space` | Opens the menu when trigger is focused                |
-| `Escape`          | Closes the menu and returns focus to the trigger      |
-| `ArrowDown`       | Move focus to the next visible item                   |
-| `ArrowUp`         | Move focus to the previous visible item               |
-| `Home`            | Move focus to the first visible item                  |
-| `End`             | Move focus to the last visible item                   |
-| `Enter`           | Selects the focused item                              |
+| Key               | Action                                           |
+| ----------------- | ------------------------------------------------ |
+| `Enter` / `Space` | Opens the menu when trigger is focused           |
+| `Escape`          | Closes the menu and returns focus to the trigger |
+| `ArrowDown`       | Move focus to the next visible item              |
+| `ArrowUp`         | Move focus to the previous visible item          |
+| `Home`            | Move focus to the first visible item             |
+| `End`             | Move focus to the last visible item              |
+| `Enter`           | Selects the focused item                         |
 
 ### Class reference
 
-| Class                    | Description                                                        |
-| ------------------------ | ------------------------------------------------------------------ |
-| `combobox`               | Container that wraps the trigger and menu                          |
-| `combobox-trigger`       | Button that opens and closes the menu                              |
-| `combobox-trigger-sm`    | Small trigger height (h-8)                                         |
-| `combobox-trigger-base`  | Base trigger height (h-9, default)                                 |
-| `combobox-trigger-lg`    | Large trigger height (h-10)                                        |
-| `combobox-value`         | Span inside the trigger for the selected label or placeholder text |
-| `combobox-menu`          | Floating panel containing the search input and list                |
-| `combobox-search-wrap`   | Row containing the search icon and input                           |
-| `combobox-input`         | Borderless text input for filtering options                        |
-| `combobox-list`          | Scrollable container for the list of options                       |
-| `combobox-item`          | Individual selectable option                                       |
-| `combobox-check`         | Check icon inside an item, visible when the item is selected       |
-| `combobox-label`         | Non-interactive group heading                                      |
-| `combobox-separator`     | Horizontal divider between groups                                  |
-| `combobox-empty`         | Message shown when no items match the search query                 |
-| `selected`               | Add to `.combobox-item` to mark it as the selected value           |
-| `no-animation`           | Add to `.combobox-menu` to disable the default open animation      |
+| Class                   | Description                                                        |
+| ----------------------- | ------------------------------------------------------------------ |
+| `combobox`              | Container that wraps the trigger and menu                          |
+| `combobox-trigger`      | Button that opens and closes the menu                              |
+| `combobox-trigger-sm`   | Small trigger height (h-8)                                         |
+| `combobox-trigger-base` | Base trigger height (h-9, default)                                 |
+| `combobox-trigger-lg`   | Large trigger height (h-10)                                        |
+| `combobox-value`        | Span inside the trigger for the selected label or placeholder text |
+| `combobox-menu`         | Floating panel containing the search input and list                |
+| `combobox-search-wrap`  | Row containing the search icon and input                           |
+| `combobox-input`        | Borderless text input for filtering options                        |
+| `combobox-list`         | Scrollable container for the list of options                       |
+| `combobox-item`         | Individual selectable option                                       |
+| `combobox-check`        | Check icon inside an item, visible when the item is selected       |
+| `combobox-label`        | Non-interactive group heading                                      |
+| `combobox-separator`    | Horizontal divider between groups                                  |
+| `combobox-empty`        | Message shown when no items match the search query                 |
+| `selected`              | Add to `.combobox-item` to mark it as the selected value           |
+| `no-animation`          | Add to `.combobox-menu` to disable the default open animation      |
 
 ### Data attributes
 
-| Attribute                    | Element          | Description                                             |
-| ---------------------------- | ---------------- | ------------------------------------------------------- |
-| `data-sp-toggle="combobox"`  | Trigger button   | Toggles the combobox menu                               |
-| `data-sp-target="#id"`       | Trigger button   | ID of the `.combobox-menu` element to control           |
-| `data-sp-value`              | Input            | Marks the input that receives the selected value for form submission |
-| `data-sp-placement`          | `.combobox`      | Menu placement relative to trigger (default: `bottom-start`) |
-| `data-sp-offset`             | `.combobox`      | Distance from trigger in pixels (default: `4`)          |
-| `data-value`                 | `.combobox-item` | Value emitted in the `sp:combobox:change` event         |
-| `data-placeholder`           | `.combobox-value`| Marks the value span as showing placeholder text        |
-| `data-state`                 | `.combobox-menu` | Set to `open` or `closed` during animation              |
-| `aria-disabled="true"`       | `.combobox-item` | Disables the item visually and functionally             |
-| `aria-selected="true"`       | `.combobox-item` | Marks the item as the currently selected option         |
+| Attribute                   | Element           | Description                                                          |
+| --------------------------- | ----------------- | -------------------------------------------------------------------- |
+| `data-sp-toggle="combobox"` | Trigger button    | Toggles the combobox menu                                            |
+| `data-sp-target="#id"`      | Trigger button    | ID of the `.combobox-menu` element to control                        |
+| `data-sp-value`             | Input             | Marks the input that receives the selected value for form submission |
+| `data-sp-placement`         | `.combobox`       | Menu placement relative to trigger (default: `bottom-start`)         |
+| `data-sp-offset`            | `.combobox`       | Distance from trigger in pixels (default: `4`)                       |
+| `data-value`                | `.combobox-item`  | Value emitted in the `sp:combobox:change` event                      |
+| `data-placeholder`          | `.combobox-value` | Marks the value span as showing placeholder text                     |
+| `data-state`                | `.combobox-menu`  | Set to `open` or `closed` during animation                           |
+| `aria-disabled="true"`      | `.combobox-item`  | Disables the item visually and functionally                          |
+| `aria-selected="true"`      | `.combobox-item`  | Marks the item as the currently selected option                      |
