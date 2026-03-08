@@ -10,12 +10,6 @@ import {
 import { isDisabled, waitForAnimations } from "./utils";
 
 function getMenu(combobox: HTMLElement): HTMLElement | null {
-  const target = combobox.querySelector<HTMLElement>(
-    "[data-sp-toggle='combobox']",
-  )?.dataset.spTarget;
-  if (target) {
-    return document.querySelector<HTMLElement>(target);
-  }
   return combobox.querySelector(".combobox-menu");
 }
 
@@ -25,10 +19,6 @@ function getTrigger(combobox: HTMLElement): HTMLElement | null {
 
 function getInput(combobox: HTMLElement): HTMLInputElement | null {
   return combobox.querySelector(".combobox-input");
-}
-
-function getValueInput(combobox: HTMLElement): HTMLInputElement | null {
-  return combobox.querySelector("input[data-sp-value]");
 }
 
 function getOpenCombobox(): HTMLElement | null {
@@ -73,11 +63,11 @@ export async function open(combobox: HTMLElement) {
 
   const trigger = getTrigger(combobox);
 
-  await positionMenu(combobox);
-
   menu.classList.add("open");
   trigger?.setAttribute("aria-expanded", "true");
   menu.setAttribute("data-state", "open");
+
+  positionMenu(combobox);
 
   const input = getInput(combobox);
   input?.focus();
@@ -111,45 +101,56 @@ export function toggle(combobox: HTMLElement) {
   }
 }
 
-export function select(combobox: HTMLElement, item: HTMLElement) {
+function updateTriggerText(combobox: HTMLElement) {
   const menu = getMenu(combobox);
   if (!menu) return;
 
-  menu.querySelectorAll<HTMLElement>(".combobox-item").forEach((el) => {
-    el.classList.remove("selected");
-    el.removeAttribute("aria-selected");
-  });
-  item.classList.add("selected");
-  item.setAttribute("aria-selected", "true");
-
-  const siblingText = item
-    .querySelector(".combobox-check + *")
-    ?.textContent?.trim();
-  const label =
-    item.dataset.label ??
-    (siblingText || undefined) ??
-    item.textContent?.trim() ??
-    "";
-
+  const checked = menu.querySelectorAll<HTMLInputElement>(".combobox-item input:checked");
   const valueEl = combobox.querySelector<HTMLElement>(".combobox-value");
-  if (valueEl) {
-    valueEl.textContent = label;
-    valueEl.removeAttribute("data-placeholder");
+  if (!valueEl) return;
+
+  if (checked.length === 0) {
+    if (valueEl.dataset.placeholder) {
+      valueEl.textContent = valueEl.dataset.placeholder;
+      valueEl.removeAttribute("data-placeholder");
+    }
+  } else {
+    if (!valueEl.dataset.placeholder) {
+      valueEl.dataset.placeholder = valueEl.textContent ?? "";
+    }
+    if (checked.length === 1) {
+      valueEl.textContent = checked[0].closest<HTMLElement>(".combobox-item")?.textContent?.trim() ?? "";
+    } else {
+      const name = checked[0].name ?? "items";
+      valueEl.textContent = `${checked.length} ${name} selected`;
+    }
   }
+}
 
-  const value = item.dataset.value ?? "";
+export function select(combobox: HTMLElement, item: HTMLElement) {
+  const input = item.querySelector<HTMLInputElement>("input");
+  const isMultiple = input?.type === "checkbox";
 
-  const valueInput = getValueInput(combobox);
-  if (valueInput) valueInput.value = value;
-
-  combobox.dispatchEvent(
-    new CustomEvent("sp:combobox:change", {
-      bubbles: true,
-      detail: { value, label },
-    }),
-  );
-
-  close(combobox);
+  if (isMultiple) {
+    if (input) {
+      input.checked = !input.checked;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    item.setAttribute("aria-selected", String(input?.checked ?? false));
+    updateTriggerText(combobox);
+  } else {
+    const menu = getMenu(combobox);
+    menu?.querySelectorAll<HTMLElement>(".combobox-item").forEach((el) => {
+      el.setAttribute("aria-selected", "false");
+    });
+    if (input) {
+      input.checked = true;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    item.setAttribute("aria-selected", "true");
+    updateTriggerText(combobox);
+    close(combobox);
+  }
 }
 
 export function filter(combobox: HTMLElement, query: string) {
@@ -239,7 +240,7 @@ function handleKeydown(e: KeyboardEvent) {
   const menu = getMenu(combobox);
   if (!menu?.classList.contains("open")) return;
 
-  if (e.key === "Enter" && target.matches(".combobox-item")) {
+  if ((e.key === "Enter" || e.key === " ") && target.matches(".combobox-item")) {
     e.preventDefault();
     if (!isDisabled(target)) {
       select(combobox, target);
@@ -303,25 +304,11 @@ function handleInput(e: Event) {
   filter(combobox, input.value);
 }
 
-function syncInitialValueInputs() {
-  document.querySelectorAll<HTMLElement>(".combobox").forEach((combobox) => {
-    const valueInput = getValueInput(combobox);
-    const selectedItem = combobox.querySelector<HTMLElement>(
-      ".combobox-item.selected",
-    );
-    if (valueInput && selectedItem) {
-      valueInput.value = selectedItem.dataset.value ?? "";
-    }
-  });
-}
-
 let initialized = false;
 
 (function init() {
   if (typeof document === "undefined" || initialized) return;
   initialized = true;
-
-  syncInitialValueInputs();
 
   document.addEventListener("click", handleClick);
   document.addEventListener("keydown", handleKeydown);
