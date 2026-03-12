@@ -8,6 +8,7 @@ import * as dropdown from "./dropdown";
 import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import * as tabs from "./tabs";
+import "./tooltip";
 
 export {
   accordion,

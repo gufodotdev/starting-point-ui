@@ -28,6 +28,7 @@
 @import "./table.css";
 @import "./tabs.css";
 @import "./textarea.css";
+@import "./tooltip.css";
 
 @custom-variant dark (&:is(.dark *));
 
