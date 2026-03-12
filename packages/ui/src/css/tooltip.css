@@ -1,0 +1,25 @@
+/* Starting Point UI Tooltip Styles */
+
+@utility tooltip {
+  @layer l1.l2 {
+    @apply relative inline-block;
+  }
+}
+
+@utility tooltip-content {
+  @layer l1.l2 {
+    @apply absolute z-998 hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground shadow-md whitespace-nowrap;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
+    @apply [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:data-[state=closed]:zoom-out-95;
+
+    &.open {
+      @apply block;
+    }
+  }
+}
+
+@utility tooltip-arrow {
+  @layer l1.l2 {
+    @apply absolute size-2 rotate-45 bg-primary;
+  }
+}

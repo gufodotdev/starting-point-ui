@@ -32,6 +32,7 @@ const navigation = [
       { title: "Sidebar", href: "/docs/components/sidebar" },
       { title: "Table", href: "/docs/components/table" },
       { title: "Tabs", href: "/docs/components/tabs" },
+      { title: "Tooltip", href: "/docs/components/tooltip" },
     ],
   },
 ];
