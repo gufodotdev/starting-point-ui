@@ -1,0 +1,78 @@
+---
+title: Label
+description: A Tailwind CSS label component for accessible form fields.
+---
+
+A Tailwind CSS label component for accessible form fields.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/label/1 -->
+<label class="label">Email</label>
+<!-- END https://startingpointui.com/examples/docs/label/1 -->
+```
+
+---
+
+## With input
+
+Connect a label to an input using matching `for` and `id` attributes. Clicking the label focuses the input, and screen readers announce it correctly.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/label/2 -->
+<div class="grid gap-3">
+  <label class="label" for="email">Email</label>
+  <input
+    class="input"
+    id="email"
+    type="email"
+    placeholder="you@example.com"
+    name="email"
+  />
+</div>
+<!-- END https://startingpointui.com/examples/docs/label/2 -->
+```
+
+---
+
+## With checkbox
+
+Place the label next to a checkbox or switch for inline toggle fields.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/label/3 -->
+<div class="flex items-center gap-3">
+  <input
+    type="checkbox"
+    class="checkbox"
+    id="accept-terms-and-conditions"
+    name="accept-terms-and-conditions"
+  />
+  <label class="label" for="accept-terms-and-conditions">
+    Accept terms and conditions
+  </label>
+</div>
+<!-- END https://startingpointui.com/examples/docs/label/3 -->
+```
+
+---
+
+## How it works
+
+The label component is a CSS-only utility class applied to a `<label>` element.
+
+### Structure
+
+Use the `.label` class on a `<label>` element. The `for` attribute connects the label to a form element by matching its `id`. Clicking the label will focus or toggle the linked element:
+
+```html
+<label class="label" for="name">Name</label>
+<input class="input" id="name" type="text" />
+```
+
+The `for` value must match the `id` of the target element exactly. This also allows screen readers to announce the label when the input is focused.
+
+### Class reference
+
+| Class   | Description       |
+| ------- | ----------------- |
+| `label` | Base label styles |

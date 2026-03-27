@@ -1,0 +1,230 @@
+---
+title: Select
+description: A Tailwind CSS select component for choosing from a list of options.
+---
+
+A Tailwind CSS select component for choosing from a list of options.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/select/1 -->
+<div class="w-full max-w-xs">
+  <select class="select">
+    <option value="">Select a country</option>
+    <option value="us">United States</option>
+    <option value="uk">United Kingdom</option>
+    <option value="ca">Canada</option>
+    <option value="au">Australia</option>
+  </select>
+</div>
+<!-- END https://startingpointui.com/examples/docs/select/1 -->
+```
+
+---
+
+## With label
+
+Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label focuses the select and screen readers announce it correctly.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/select/2 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="country">Country</label>
+    <select class="select" id="country" name="country">
+      <option value="">Select a country</option>
+      <option value="us">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="ca">Canada</option>
+      <option value="au">Australia</option>
+    </select>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/select/2 -->
+```
+
+---
+
+## Sizes
+
+Use size modifiers to change the select height.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/select/3 -->
+<div class="grid gap-6 w-full max-w-xs">
+  <select class="select select-sm">
+    <option>Small</option>
+  </select>
+  <select class="select">
+    <option>Default</option>
+  </select>
+  <select class="select select-lg">
+    <option>Large</option>
+  </select>
+</div>
+<!-- END https://startingpointui.com/examples/docs/select/3 -->
+```
+
+---
+
+## Disabled
+
+Add `disabled` to prevent interaction. The select appears faded automatically.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/select/4 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="country">Country</label>
+    <select class="select" id="country" name="country" disabled="">
+      <option value="">Select a country</option>
+      <option value="us">United States</option>
+    </select>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/select/4 -->
+```
+
+---
+
+## Validation
+
+Add `aria-invalid="true"` to show the select in an error state. Connect an error message using `aria-describedby` on the select, pointing to the `id` of the error element. This lets screen readers announce the error when the select is focused.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/select/5 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="country">Country</label>
+    <select
+      class="select"
+      id="country"
+      name="country"
+      aria-invalid="true"
+      aria-describedby="country-error"
+    >
+      <option value="">Select a country</option>
+      <option value="us">United States</option>
+    </select>
+    <p id="country-error" class="text-xs text-destructive">
+      Please select a country
+    </p>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/select/5 -->
+```
+
+---
+
+## With avatars
+
+Combine selects with [avatars](/docs/components/avatar) to assign roles or permissions per user.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/select/6 -->
+<div class="w-full max-w-md">
+  <div class="grid gap-5">
+    <span class="label">People with access</span>
+    <div class="grid gap-5">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            class="avatar"
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+            alt="Sarah Johnson"
+          />
+          <div class="text-sm">
+            <p class="font-semibold text-foreground">Sarah Johnson</p>
+            <p class="text-muted-foreground">sarah@example.com</p>
+          </div>
+        </div>
+        <select class="select select-sm w-22" name="sarah-johnson">
+          <option value="write" selected="">Write</option>
+          <option value="read">Read</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            class="avatar"
+            src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
+            alt="Michael Chen"
+          />
+          <div class="text-sm">
+            <p class="font-semibold text-foreground">Michael Chen</p>
+            <p class="text-muted-foreground">michael@example.com</p>
+          </div>
+        </div>
+        <select class="select select-sm w-22" name="michael-chen">
+          <option value="write">Write</option>
+          <option value="read" selected="">Read</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            class="avatar"
+            src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
+            alt="Emma Wilson"
+          />
+          <div class="text-sm">
+            <p class="font-semibold text-foreground">Emma Wilson</p>
+            <p class="text-muted-foreground">emma@example.com</p>
+          </div>
+        </div>
+        <select class="select select-sm w-22" name="emma-wilson">
+          <option value="write">Write</option>
+          <option value="read" selected="">Read</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/select/6 -->
+```
+
+---
+
+## How it works
+
+The select component is a CSS-only utility class applied to a native `<select>` element.
+
+### Structure
+
+Use the `.select` class on a `<select>` element. Pair it with a `.label` element connected via `for` and `id`:
+
+```html
+<label class="label" for="country">Country</label>
+<select class="select" id="country">
+  <option value="">Select a country</option>
+  <option value="us">United States</option>
+</select>
+```
+
+### Disabled state
+
+Add `disabled` to the select:
+
+```html
+<select class="select" disabled>
+  <option>Disabled</option>
+</select>
+```
+
+### Validation
+
+Add `aria-invalid="true"` to show the select in an error state:
+
+```html
+<select class="select" aria-invalid="true">
+  <option value="">Select an option</option>
+</select>
+```
+
+### Class reference
+
+| Class         | Description         |
+| ------------- | ------------------- |
+| `select`      | Base select styles  |
+| `select-sm`   | Small size variant  |
+| `select-base` | Base size (default) |
+| `select-lg`   | Large size variant  |

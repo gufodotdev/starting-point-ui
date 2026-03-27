@@ -1,0 +1,333 @@
+---
+title: Checkbox
+description: A Tailwind CSS checkbox component for toggling options on and off.
+---
+
+A Tailwind CSS checkbox component for toggling options on and off.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/checkbox/1 -->
+<input type="checkbox" class="checkbox" />
+<!-- END https://startingpointui.com/examples/docs/checkbox/1 -->
+```
+
+---
+
+## With label
+
+Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label toggles the checkbox and screen readers announce it correctly.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/checkbox/2 -->
+<div class="flex items-center gap-3">
+  <input
+    type="checkbox"
+    class="checkbox"
+    id="accept-terms-and-conditions"
+    name="accept-terms-and-conditions"
+  />
+  <label class="label" for="accept-terms-and-conditions">
+    Accept terms and conditions
+  </label>
+</div>
+<!-- END https://startingpointui.com/examples/docs/checkbox/2 -->
+```
+
+---
+
+## Group
+
+Use multiple checkboxes with the same `name` for multi-select groups.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/checkbox/3 -->
+<div class="grid gap-5">
+  <span class="label">Dietary requirements</span>
+  <div class="grid gap-3">
+    <div class="flex gap-3 items-center">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="dietary-requirements-vegetarian"
+        name="dietary-requirements"
+        checked=""
+        value="vegetarian"
+      />
+      <div class="grid gap-2">
+        <label class="label" for="dietary-requirements-vegetarian">
+          Vegetarian
+        </label>
+      </div>
+    </div>
+    <div class="flex gap-3 items-center">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="dietary-requirements-vegan"
+        name="dietary-requirements"
+        value="vegan"
+      />
+      <div class="grid gap-2">
+        <label class="label" for="dietary-requirements-vegan">Vegan</label>
+      </div>
+    </div>
+    <div class="flex gap-3 items-center">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="dietary-requirements-gluten-free"
+        name="dietary-requirements"
+        value="gluten-free"
+      />
+      <div class="grid gap-2">
+        <label class="label" for="dietary-requirements-gluten-free">
+          Gluten-free
+        </label>
+      </div>
+    </div>
+    <div class="flex gap-3 items-center">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="dietary-requirements-dairy-free"
+        name="dietary-requirements"
+        value="dairy-free"
+      />
+      <div class="grid gap-2">
+        <label class="label" for="dietary-requirements-dairy-free">
+          Dairy-free
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/checkbox/3 -->
+```
+
+---
+
+## With descriptions
+
+Add a description below each label for extra context.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/checkbox/4 -->
+<div class="grid gap-5">
+  <span class="label">Notifications</span>
+  <div class="grid gap-5">
+    <div class="flex gap-3 items-start">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="notifications-email"
+        name="notifications"
+        value="email"
+      />
+      <div class="grid gap-2">
+        <label class="label" for="notifications-email">
+          Email notifications
+        </label>
+        <p class="text-sm text-muted-foreground">
+          Receive updates about your account via email.
+        </p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="notifications-sms"
+        name="notifications"
+        value="sms"
+      />
+      <div class="grid gap-2">
+        <label class="label" for="notifications-sms">SMS notifications</label>
+        <p class="text-sm text-muted-foreground">
+          Get text messages for important alerts.
+        </p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="notifications-push"
+        name="notifications"
+        value="push"
+      />
+      <div class="grid gap-2">
+        <label class="label" for="notifications-push">Push notifications</label>
+        <p class="text-sm text-muted-foreground">
+          Receive push notifications on your device.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/checkbox/4 -->
+```
+
+---
+
+## Disabled
+
+Add `disabled` to the checkbox and `peer` so the label dims to match.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/checkbox/5 -->
+<div class="flex items-center gap-3">
+  <input type="checkbox" class="checkbox peer" id="disabled-cb" disabled="" />
+  <label class="label" for="disabled-cb">Disabled checkbox</label>
+</div>
+<!-- END https://startingpointui.com/examples/docs/checkbox/5 -->
+```
+
+---
+
+## Card select
+
+Use checkboxes inside cards for a visual multi-select layout.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/checkbox/6 -->
+<div class="w-full max-w-md">
+  <div class="grid gap-3">
+    <span class="label">Platform</span>
+    <div class="grid gap-5" style="grid-template-columns: repeat(3, 1fr)">
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input
+          type="checkbox"
+          class="sr-only"
+          name="platform"
+          checked=""
+          value="web"
+        />
+        <i class="ri-global-line text-2xl"></i>
+        <span class="label">Web</span>
+      </label>
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input type="checkbox" class="sr-only" name="platform" value="mobile" />
+        <i class="ri-smartphone-line text-2xl"></i>
+        <span class="label">Mobile</span>
+      </label>
+      <label
+        class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <input type="checkbox" class="sr-only" name="platform" value="api" />
+        <i class="ri-code-s-slash-line text-2xl"></i>
+        <span class="label">API</span>
+      </label>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/checkbox/6 -->
+```
+
+---
+
+## List select
+
+Use checkboxes inside list items for a multi-select list with descriptions.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/checkbox/7 -->
+<div class="w-full max-w-md">
+  <div class="grid gap-3">
+    <span class="label">Features</span>
+    <div class="grid gap-3">
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Cloud storage</div>
+          <div class="text-sm text-muted-foreground">
+            50 GB of secure cloud storage
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          class="checkbox"
+          name="features"
+          checked=""
+          value="storage"
+        />
+      </label>
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Automatic backups</div>
+          <div class="text-sm text-muted-foreground">
+            Daily backups with 30-day retention
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          class="checkbox"
+          name="features"
+          value="backup"
+        />
+      </label>
+      <label
+        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
+      >
+        <div class="flex-1 grid gap-2">
+          <div class="label">Priority support</div>
+          <div class="text-sm text-muted-foreground">
+            24/7 dedicated support team
+          </div>
+        </div>
+        <input
+          type="checkbox"
+          class="checkbox"
+          name="features"
+          value="support"
+        />
+      </label>
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/checkbox/7 -->
+```
+
+---
+
+## How it works
+
+The checkbox component is a CSS-only utility class applied to a native `<input type="checkbox">` element.
+
+### Structure
+
+Use the `.checkbox` class on an `<input type="checkbox">`. Pair it with a `.label` element connected via `for` and `id`:
+
+```html
+<input type="checkbox" class="checkbox" id="terms" />
+<label class="label" for="terms">Accept terms</label>
+```
+
+### Disabled state
+
+Add `disabled` to the checkbox. Use `peer` on the checkbox so the label automatically dims via `peer-disabled`:
+
+```html
+<input type="checkbox" class="checkbox peer" id="cb" disabled />
+<label class="label" for="cb">Disabled</label>
+```
+
+### Validation
+
+Add `aria-invalid="true"` to show the checkbox in an error state:
+
+```html
+<input type="checkbox" class="checkbox" aria-invalid="true" />
+```
+
+### Class reference
+
+| Class      | Description          |
+| ---------- | -------------------- |
+| `checkbox` | Base checkbox styles |

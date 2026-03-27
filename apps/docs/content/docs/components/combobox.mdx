@@ -3,10 +3,95 @@ title: Combobox
 description: A Tailwind CSS combobox component that combines a trigger button with a searchable, keyboard-navigable list.
 ---
 
-A Tailwind CSS combobox component that combines a trigger button with a searchable, keyboard-navigable list. Supports single and multi-select. Pair with a `label` element for accessible form fields.
+A Tailwind CSS combobox component that combines a trigger button with a searchable, keyboard-navigable list. Supports single and multi-select.
 
 ```html preview
 <!-- START https://startingpointui.com/examples/docs/combobox/1 -->
+<div class="combobox w-56">
+  <button
+    class="combobox-trigger w-full"
+    type="button"
+    data-sp-toggle="combobox"
+    aria-expanded="false"
+  >
+    <span class="combobox-value">Select a framework...</span>
+    <i class="ri-expand-up-down-line text-muted-foreground"></i>
+  </button>
+  <div class="combobox-menu w-56" role="listbox">
+    <div class="combobox-search">
+      <i class="ri-search-line"></i>
+      <input
+        class="combobox-input"
+        type="text"
+        placeholder="Search framework..."
+      />
+    </div>
+    <div class="combobox-list">
+      <div class="combobox-item" role="option" tabindex="0">
+        <input
+          type="radio"
+          class="sr-only"
+          tabindex="-1"
+          name="framework"
+          value="next"
+        />
+        Next.js
+      </div>
+      <div class="combobox-item" role="option" tabindex="0">
+        <input
+          type="radio"
+          class="sr-only"
+          tabindex="-1"
+          name="framework"
+          value="sveltekit"
+        />
+        SvelteKit
+      </div>
+      <div class="combobox-item" role="option" tabindex="0">
+        <input
+          type="radio"
+          class="sr-only"
+          tabindex="-1"
+          name="framework"
+          value="nuxt"
+        />
+        Nuxt.js
+      </div>
+      <div class="combobox-item" role="option" tabindex="0">
+        <input
+          type="radio"
+          class="sr-only"
+          tabindex="-1"
+          name="framework"
+          value="remix"
+        />
+        Remix
+      </div>
+      <div class="combobox-item" role="option" tabindex="0">
+        <input
+          type="radio"
+          class="sr-only"
+          tabindex="-1"
+          name="framework"
+          value="astro"
+        />
+        Astro
+      </div>
+    </div>
+    <div class="combobox-empty">No framework found.</div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/combobox/1 -->
+```
+
+---
+
+## With label
+
+Pair with a [Label](/docs/components/label) for accessible form fields. Use `aria-labelledby` on the trigger pointing to the label's `id` so screen readers announce it correctly.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/combobox/2 -->
 <div class="space-y-2">
   <label class="label" id="framework-label">Framework</label>
   <div class="combobox w-56">
@@ -85,7 +170,7 @@ A Tailwind CSS combobox component that combines a trigger button with a searchab
     </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/combobox/1 -->
+<!-- END https://startingpointui.com/examples/docs/combobox/2 -->
 ```
 
 ---
@@ -95,7 +180,7 @@ A Tailwind CSS combobox component that combines a trigger button with a searchab
 Use `<input type="radio">` inside each item for single select. Clicking an item checks the radio, updates the trigger text, and closes the menu. Only one item can be selected at a time.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/combobox/2 -->
+<!-- START https://startingpointui.com/examples/docs/combobox/3 -->
 <div class="combobox w-56">
   <button
     class="combobox-trigger w-full"
@@ -170,7 +255,7 @@ Use `<input type="radio">` inside each item for single select. Clicking an item 
     <div class="combobox-empty">No framework found.</div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/combobox/2 -->
+<!-- END https://startingpointui.com/examples/docs/combobox/3 -->
 ```
 
 ---
@@ -180,7 +265,7 @@ Use `<input type="radio">` inside each item for single select. Clicking an item 
 Use `<input type="checkbox">` inside each item for multi-select. The menu stays open after selection, and the trigger shows "N name selected" for two or more selections.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/combobox/3 -->
+<!-- START https://startingpointui.com/examples/docs/combobox/4 -->
 <div class="combobox w-56">
   <button
     class="combobox-trigger w-full"
@@ -241,7 +326,7 @@ Use `<input type="checkbox">` inside each item for multi-select. The menu stays 
     <div class="combobox-empty">No tools found.</div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/combobox/3 -->
+<!-- END https://startingpointui.com/examples/docs/combobox/4 -->
 ```
 
 ---
@@ -251,7 +336,7 @@ Use `<input type="checkbox">` inside each item for multi-select. The menu stays 
 Add `checked` to the input and `aria-selected="true"` to the item. Set the trigger text to the selected label and store the placeholder in `data-placeholder`.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/combobox/4 -->
+<!-- START https://startingpointui.com/examples/docs/combobox/5 -->
 <div class="combobox w-56">
   <button
     class="combobox-trigger w-full"
@@ -334,7 +419,7 @@ Add `checked` to the input and `aria-selected="true"` to the item. Set the trigg
     <div class="combobox-empty">No framework found.</div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/combobox/4 -->
+<!-- END https://startingpointui.com/examples/docs/combobox/5 -->
 ```
 
 ---
@@ -344,7 +429,7 @@ Add `checked` to the input and `aria-selected="true"` to the item. Set the trigg
 Use `.combobox-label` and `.combobox-separator` to group options visually.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/combobox/5 -->
+<!-- START https://startingpointui.com/examples/docs/combobox/6 -->
 <div class="combobox w-56">
   <button
     class="combobox-trigger w-full"
@@ -418,7 +503,7 @@ Use `.combobox-label` and `.combobox-separator` to group options visually.
     <div class="combobox-empty">No language found.</div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/combobox/5 -->
+<!-- END https://startingpointui.com/examples/docs/combobox/6 -->
 ```
 
 ---
@@ -428,7 +513,7 @@ Use `.combobox-label` and `.combobox-separator` to group options visually.
 Use `aria-disabled="true"` and `tabindex="-1"` on a `.combobox-item` to prevent selection. Add `disabled` to the input as well.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/combobox/6 -->
+<!-- START https://startingpointui.com/examples/docs/combobox/7 -->
 <div class="combobox w-56">
   <button
     class="combobox-trigger w-full"
@@ -485,7 +570,7 @@ Use `aria-disabled="true"` and `tabindex="-1"` on a `.combobox-item` to prevent 
     <div class="combobox-empty">No plan found.</div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/combobox/6 -->
+<!-- END https://startingpointui.com/examples/docs/combobox/7 -->
 ```
 
 ---
@@ -495,7 +580,7 @@ Use `aria-disabled="true"` and `tabindex="-1"` on a `.combobox-item` to prevent 
 Use `combobox-trigger-sm`, `combobox-trigger-base`, or `combobox-trigger-lg` to control the trigger size.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/combobox/7 -->
+<!-- START https://startingpointui.com/examples/docs/combobox/8 -->
 <div class="flex gap-4 flex-wrap">
   <div class="combobox w-48">
     <button
@@ -618,7 +703,7 @@ Use `combobox-trigger-sm`, `combobox-trigger-base`, or `combobox-trigger-lg` to 
     </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/combobox/7 -->
+<!-- END https://startingpointui.com/examples/docs/combobox/8 -->
 ```
 
 ---

@@ -1,0 +1,209 @@
+---
+title: Switch
+description: A Tailwind CSS switch component for toggling settings on and off.
+---
+
+A Tailwind CSS switch component for toggling settings on and off.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/switch/1 -->
+<input type="checkbox" role="switch" class="switch" />
+<!-- END https://startingpointui.com/examples/docs/switch/1 -->
+```
+
+---
+
+## With label
+
+Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label toggles the switch and screen readers announce it correctly.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/switch/2 -->
+<div class="flex items-center gap-3">
+  <input
+    type="checkbox"
+    role="switch"
+    class="switch"
+    id="enable-notifications"
+    name="enable-notifications"
+  />
+  <label class="label" for="enable-notifications">Enable notifications</label>
+</div>
+<!-- END https://startingpointui.com/examples/docs/switch/2 -->
+```
+
+---
+
+## Group
+
+Use a group of switches for managing multiple settings with descriptions.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/switch/3 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-5">
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="email">Email notifications</label>
+        <span class="text-sm text-muted-foreground">
+          Receive updates and alerts via email
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="email"
+        name="email"
+        checked=""
+      />
+    </div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="push">Push notifications</label>
+        <span class="text-sm text-muted-foreground">
+          Get instant alerts on your mobile device
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="push"
+        name="push"
+      />
+    </div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="marketing">Marketing emails</label>
+        <span class="text-sm text-muted-foreground">
+          Stay informed about new features and offers
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="marketing"
+        name="marketing"
+      />
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/switch/3 -->
+```
+
+---
+
+## Separated group
+
+Add separators between switch items for visual distinction.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/switch/4 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-5">
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="analytics">Usage analytics</label>
+        <span class="text-sm text-muted-foreground">
+          Help us improve by sharing anonymous usage data
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="analytics"
+        name="analytics"
+        checked=""
+      />
+    </div>
+    <div class="separator" role="separator"></div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="cookies">Third-party cookies</label>
+        <span class="text-sm text-muted-foreground">
+          Allow cookies from external services
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="cookies"
+        name="cookies"
+      />
+    </div>
+    <div class="separator" role="separator"></div>
+    <div class="flex items-start justify-between gap-4">
+      <div class="grid gap-2">
+        <label class="label" for="tracking">Ad tracking</label>
+        <span class="text-sm text-muted-foreground">
+          Enable personalized advertising
+        </span>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="tracking"
+        name="tracking"
+      />
+    </div>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/switch/4 -->
+```
+
+---
+
+## Disabled
+
+Add `disabled` to the switch and `peer` so the label dims to match.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/switch/5 -->
+<div class="flex items-center gap-3">
+  <input
+    type="checkbox"
+    role="switch"
+    class="switch peer"
+    id="disabled-switch"
+    disabled=""
+    name="disabled-switch"
+  />
+  <label class="label" for="disabled-switch">Disabled switch</label>
+</div>
+<!-- END https://startingpointui.com/examples/docs/switch/5 -->
+```
+
+---
+
+## How it works
+
+The switch component is a CSS-only utility class applied to a native `<input type="checkbox">` element with `role="switch"`.
+
+### Structure
+
+Use the `.switch` class on an `<input type="checkbox">` with `role="switch"`. Pair it with a `.label` element connected via `for` and `id`:
+
+```html
+<input type="checkbox" role="switch" class="switch" id="notifications" />
+<label class="label" for="notifications">Enable notifications</label>
+```
+
+### Disabled state
+
+Add `disabled` to the switch. Use `peer` on the switch so the label automatically dims via `peer-disabled`:
+
+```html
+<input type="checkbox" role="switch" class="switch peer" id="sw" disabled />
+<label class="label" for="sw">Disabled</label>
+```
+
+### Class reference
+
+| Class    | Description        |
+| -------- | ------------------ |
+| `switch` | Base switch styles |

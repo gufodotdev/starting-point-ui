@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
+import { Github } from "lucide-react";
 import { landingCards } from "@/lib/landing-cards";
 import { ScrollIndicator } from "@/components/scroll-indicator";
 
@@ -15,12 +15,9 @@ export default function Home() {
     <div className="relative grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100dvh-var(--navbar-height))] overflow-x-hidden lg:overflow-hidden">
       <div className="lg:col-span-6 xl:col-span-5 flex flex-col lg:items-center justify-center px-4 sm:px-6 py-6">
         <div className="max-w-xl lg:-mt-(--navbar-height)">
-          <a
-            href="https://plus.startingpointui.com"
-            className="badge badge-secondary inline-flex"
-          >
-            Browse ready-made examples <ArrowRight className="size-3" />
-          </a>
+          <span className="badge badge-secondary">
+            25+ accessible components for Tailwind CSS
+          </span>
           <h1 className="mt-6 text-3xl/tight xs:text-4xl/tight lg:text-5xl/tight font-extrabold tracking-tight">
             The Starting Point <br /> for Your Next Project
           </h1>
@@ -35,12 +32,15 @@ export default function Home() {
             <Link href="/docs/guides/installation" className="btn lg:btn-lg">
               Get Started
             </Link>
-            <Link
-              href="/docs/guides/introduction"
+            <a
+              href="https://github.com/gufodotdev/starting-point-ui"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-outline lg:btn-lg"
             >
-              Documentation
-            </Link>
+              <Github className="size-4" />
+              View Source
+            </a>
           </div>
           <div className="lg:hidden mt-6">
             <ScrollIndicator />

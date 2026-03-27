@@ -1,0 +1,188 @@
+---
+title: Input
+description: A Tailwind CSS input component for text, email, password, and other form fields.
+---
+
+A Tailwind CSS input component for single-line text entry.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/input/1 -->
+<div class="w-full max-w-xs">
+  <input class="input" type="text" placeholder="Full name" />
+</div>
+<!-- END https://startingpointui.com/examples/docs/input/1 -->
+```
+
+---
+
+## With label
+
+Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label focuses the input and screen readers announce it correctly.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/input/2 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="full-name">Full name</label>
+    <input
+      class="input"
+      id="full-name"
+      type="text"
+      placeholder="John Smith"
+      name="full-name"
+    />
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/input/2 -->
+```
+
+---
+
+## Types
+
+The `.input` class works with all native input types. Set the `type` attribute to change the behavior.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/input/3 -->
+<div class="grid gap-6 w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="email">Email</label>
+    <input
+      class="input"
+      id="email"
+      type="email"
+      placeholder="you@example.com"
+      name="email"
+    />
+  </div>
+  <div class="grid gap-3">
+    <label class="label" for="password">Password</label>
+    <input
+      class="input"
+      id="password"
+      type="password"
+      placeholder="Enter your password"
+      name="password"
+    />
+  </div>
+  <div class="grid gap-3">
+    <label class="label" for="date">Date</label>
+    <input class="input" id="date" type="date" name="date" />
+  </div>
+  <div class="grid gap-3">
+    <label class="label" for="cover-image">Cover image</label>
+    <input class="input" id="cover-image" type="file" name="cover-image" />
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/input/3 -->
+```
+
+---
+
+## Sizes
+
+Use size modifiers to change the input height.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/input/4 -->
+<div class="grid gap-6 w-full max-w-xs">
+  <input class="input input-sm" placeholder="Small" />
+  <input class="input" placeholder="Default" />
+  <input class="input input-lg" placeholder="Large" />
+</div>
+<!-- END https://startingpointui.com/examples/docs/input/4 -->
+```
+
+---
+
+## Disabled
+
+Add `disabled` to prevent interaction. The input appears faded automatically.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/input/5 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="email">Email</label>
+    <input
+      class="input"
+      id="email"
+      type="email"
+      placeholder="you@example.com"
+      disabled=""
+      name="email"
+    />
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/input/5 -->
+```
+
+---
+
+## Validation
+
+Add `aria-invalid="true"` to show the input in an error state. Connect an error message using `aria-describedby` on the input, pointing to the `id` of the error element. This lets screen readers announce the error when the input is focused.
+
+```html preview
+<!-- START https://startingpointui.com/examples/docs/input/6 -->
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="phone-number">Phone number</label>
+    <input
+      class="input"
+      id="phone-number"
+      type="text"
+      placeholder="+1 (555) 000-0000"
+      aria-invalid="true"
+      aria-describedby="phone-number-error"
+      name="phone-number"
+    />
+    <p id="phone-number-error" class="text-xs text-destructive">
+      Please enter a valid phone number
+    </p>
+  </div>
+</div>
+<!-- END https://startingpointui.com/examples/docs/input/6 -->
+```
+
+---
+
+## How it works
+
+The input component is a CSS-only utility class applied to a native `<input>` element.
+
+### Structure
+
+Use the `.input` class on an `<input>` element. Pair it with a `.label` element connected via `for` and `id`:
+
+```html
+<label class="label" for="name">Name</label>
+<input class="input" id="name" type="text" placeholder="Enter your name" />
+```
+
+### Disabled state
+
+Add `disabled` to the input:
+
+```html
+<input class="input" type="text" disabled />
+```
+
+### Validation
+
+Add `aria-invalid="true"` to show the input in an error state:
+
+```html
+<input class="input" type="text" aria-invalid="true" />
+```
+
+For decorating inputs with icons or text addons, see [Input Group](/docs/components/input-group).
+
+### Class reference
+
+| Class        | Description         |
+| ------------ | ------------------- |
+| `input`      | Base input styles   |
+| `input-sm`   | Small size variant  |
+| `input-base` | Base size (default) |
+| `input-lg`   | Large size variant  |
