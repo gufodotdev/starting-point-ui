@@ -25,11 +25,18 @@ export function Navbar() {
           </div>
           <div className="flex items-center gap-1 -mr-2">
             <SearchDialog />
+            <div className="mr-1" />
             <Link
               href="/docs/guides/introduction"
               className="btn btn-ghost btn-sm max-lg:hidden"
             >
               Docs
+            </Link>
+            <Link
+              href="/examples"
+              className="btn btn-ghost btn-sm max-lg:hidden"
+            >
+              Examples
             </Link>
             <a
               href="https://github.com/gufodotdev/starting-point-ui"
@@ -60,6 +67,15 @@ export function Navbar() {
               </button>
             </div>
             <Sidebar />
+            <div className="menu-group">
+              <Link
+                href="/examples"
+                className="menu-btn"
+                data-sp-dismiss="dialog"
+              >
+                Examples
+              </Link>
+            </div>
           </div>
         </div>
       </dialog>

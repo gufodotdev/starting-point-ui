@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Generated search index
 /public/search-index.json
+
+# Generated examples data
+/.source
