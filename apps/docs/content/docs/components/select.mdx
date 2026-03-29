@@ -21,11 +21,11 @@ A Tailwind CSS select component for choosing from a list of options.
 
 ## With label
 
-Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label focuses the select and screen readers announce it correctly.
+Pair with a [Label](/docs/components/label) and wrap in a [Field](/docs/components/field) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label focuses the select and screen readers announce it correctly.
 
 ```html preview
 <div class="w-full max-w-xs">
-  <div class="grid gap-3">
+  <div class="field">
     <label class="label" for="country">Country</label>
     <select class="select" id="country" name="country">
       <option value="">Select a country</option>
@@ -46,9 +46,9 @@ Add `disabled` to prevent interaction. The select appears faded automatically.
 
 ```html preview
 <div class="w-full max-w-xs">
-  <div class="grid gap-3">
-    <label class="label" for="country">Country</label>
-    <select class="select" id="country" name="country" disabled="">
+  <div class="field">
+    <label class="label" for="disabled-country">Country</label>
+    <select class="select" id="disabled-country" name="country" disabled="">
       <option value="">Select a country</option>
       <option value="us">United States</option>
     </select>
@@ -64,11 +64,11 @@ Add `aria-invalid="true"` to show the select in an error state. Connect an error
 
 ```html preview
 <div class="w-full max-w-xs">
-  <div class="grid gap-3">
-    <label class="label" for="country">Country</label>
+  <div class="field">
+    <label class="label" for="validation-country">Country</label>
     <select
       class="select"
-      id="country"
+      id="validation-country"
       name="country"
       aria-invalid="true"
       aria-describedby="country-error"
@@ -76,7 +76,7 @@ Add `aria-invalid="true"` to show the select in an error state. Connect an error
       <option value="">Select a country</option>
       <option value="us">United States</option>
     </select>
-    <p id="country-error" class="text-xs text-destructive">
+    <p class="field-error" id="country-error">
       Please select a country
     </p>
   </div>
