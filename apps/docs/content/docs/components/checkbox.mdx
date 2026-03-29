@@ -13,19 +13,21 @@ A Tailwind CSS checkbox component for toggling options on and off.
 
 ## With label
 
-Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label toggles the checkbox and screen readers announce it correctly.
+Pair with a [Label](/docs/components/label) and wrap in a [Field](/docs/components/field) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label toggles the checkbox and screen readers announce it correctly.
 
 ```html preview
-<div class="flex items-center gap-3">
-  <input
-    type="checkbox"
-    class="checkbox"
-    id="accept-terms-and-conditions"
-    name="accept-terms-and-conditions"
-  />
-  <label class="label" for="accept-terms-and-conditions">
-    Accept terms and conditions
-  </label>
+<div class="w-fit">
+  <div class="field field-horizontal">
+    <input
+      type="checkbox"
+      class="checkbox"
+      id="accept-terms-and-conditions"
+      name="accept-terms-and-conditions"
+    />
+    <label class="label" for="accept-terms-and-conditions">
+      Accept terms and conditions
+    </label>
+  </div>
 </div>
 ```
 
@@ -36,59 +38,53 @@ Pair with a [Label](/docs/components/label) for accessible form fields. Connect 
 Use multiple checkboxes with the same `name` for multi-select groups.
 
 ```html preview
-<div class="grid gap-5">
-  <span class="label">Dietary requirements</span>
-  <div class="grid gap-3">
-    <div class="flex gap-3 items-center">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="dietary-requirements-vegetarian"
-        name="dietary-requirements"
-        checked=""
-        value="vegetarian"
-      />
-      <div class="grid gap-2">
+<div class="w-fit">
+  <div class="field-group">
+    <span class="label">Dietary requirements</span>
+    <div class="field-group gap-3">
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-vegetarian"
+          name="dietary-requirements"
+          checked=""
+          value="vegetarian"
+        />
         <label class="label" for="dietary-requirements-vegetarian">
           Vegetarian
         </label>
       </div>
-    </div>
-    <div class="flex gap-3 items-center">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="dietary-requirements-vegan"
-        name="dietary-requirements"
-        value="vegan"
-      />
-      <div class="grid gap-2">
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-vegan"
+          name="dietary-requirements"
+          value="vegan"
+        />
         <label class="label" for="dietary-requirements-vegan">Vegan</label>
       </div>
-    </div>
-    <div class="flex gap-3 items-center">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="dietary-requirements-gluten-free"
-        name="dietary-requirements"
-        value="gluten-free"
-      />
-      <div class="grid gap-2">
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-gluten-free"
+          name="dietary-requirements"
+          value="gluten-free"
+        />
         <label class="label" for="dietary-requirements-gluten-free">
           Gluten-free
         </label>
       </div>
-    </div>
-    <div class="flex gap-3 items-center">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="dietary-requirements-dairy-free"
-        name="dietary-requirements"
-        value="dairy-free"
-      />
-      <div class="grid gap-2">
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="dietary-requirements-dairy-free"
+          name="dietary-requirements"
+          value="dairy-free"
+        />
         <label class="label" for="dietary-requirements-dairy-free">
           Dairy-free
         </label>
@@ -105,54 +101,54 @@ Use multiple checkboxes with the same `name` for multi-select groups.
 Add a description below each label for extra context.
 
 ```html preview
-<div class="grid gap-5">
-  <span class="label">Notifications</span>
-  <div class="grid gap-5">
-    <div class="flex gap-3 items-start">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="notifications-email"
-        name="notifications"
-        value="email"
-      />
-      <div class="grid gap-2">
-        <label class="label" for="notifications-email">
-          Email notifications
-        </label>
-        <p class="text-sm text-muted-foreground">
-          Receive updates about your account via email.
-        </p>
+<div class="w-fit">
+  <div class="field-group">
+    <span class="label">Notifications</span>
+    <div class="field-group">
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="notifications-email"
+          name="notifications"
+          value="email"
+        />
+        <div class="field-content">
+          <label class="label" for="notifications-email">
+            Email notifications
+          </label>
+          <p class="field-description">
+            Receive updates about your account via email.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="flex gap-3 items-start">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="notifications-sms"
-        name="notifications"
-        value="sms"
-      />
-      <div class="grid gap-2">
-        <label class="label" for="notifications-sms">SMS notifications</label>
-        <p class="text-sm text-muted-foreground">
-          Get text messages for important alerts.
-        </p>
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="notifications-sms"
+          name="notifications"
+          value="sms"
+        />
+        <div class="field-content">
+          <label class="label" for="notifications-sms">SMS notifications</label>
+          <p class="field-description">Get text messages for important alerts.</p>
+        </div>
       </div>
-    </div>
-    <div class="flex gap-3 items-start">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="notifications-push"
-        name="notifications"
-        value="push"
-      />
-      <div class="grid gap-2">
-        <label class="label" for="notifications-push">Push notifications</label>
-        <p class="text-sm text-muted-foreground">
-          Receive push notifications on your device.
-        </p>
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="notifications-push"
+          name="notifications"
+          value="push"
+        />
+        <div class="field-content">
+          <label class="label" for="notifications-push">Push notifications</label>
+          <p class="field-description">
+            Receive push notifications on your device.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -166,9 +162,11 @@ Add a description below each label for extra context.
 Add `disabled` to the checkbox and `peer` so the label dims to match.
 
 ```html preview
-<div class="flex items-center gap-3">
-  <input type="checkbox" class="checkbox peer" id="disabled-cb" disabled="" />
-  <label class="label" for="disabled-cb">Disabled checkbox</label>
+<div class="w-fit">
+  <div class="field field-horizontal">
+    <input type="checkbox" class="checkbox peer" id="disabled-cb" disabled="" />
+    <label class="label" for="disabled-cb">Disabled checkbox</label>
+  </div>
 </div>
 ```
 
