@@ -53,8 +53,8 @@ export default function Example() {
             </label>
           </div>
         </div>
-        <form className="grid gap-6">
-          <div className="grid gap-3">
+        <form className="field-group">
+          <div className="field">
             <label className="label" htmlFor="cardholder-name">
               Cardholder Name
             </label>
@@ -66,7 +66,7 @@ export default function Example() {
               name="cardholder-name"
             />
           </div>
-          <div className="grid gap-3">
+          <div className="field">
             <label className="label" htmlFor="card-number">
               Card Number
             </label>
@@ -79,7 +79,7 @@ export default function Example() {
             />
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <div className="grid gap-3">
+            <div className="field">
               <label className="label" htmlFor="month">
                 Month
               </label>
@@ -91,7 +91,7 @@ export default function Example() {
                 name="month"
               />
             </div>
-            <div className="grid gap-3">
+            <div className="field">
               <label className="label" htmlFor="year">
                 Year
               </label>
@@ -103,7 +103,7 @@ export default function Example() {
                 name="year"
               />
             </div>
-            <div className="grid gap-3">
+            <div className="field">
               <label className="label" htmlFor="cvv">
                 CVV
               </label>

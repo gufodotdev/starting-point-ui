@@ -14,8 +14,8 @@ export default function Example() {
             Share your thoughts to help us improve.
           </p>
         </div>
-        <form className="grid gap-6">
-          <div className="grid gap-3">
+        <form className="field-group">
+          <div className="field">
             <label className="label" htmlFor="title">
               Title
             </label>
@@ -27,7 +27,7 @@ export default function Example() {
               name="title"
             />
           </div>
-          <div className="grid gap-3">
+          <div className="field">
             <label className="label" htmlFor="type">
               Type
             </label>
@@ -38,7 +38,7 @@ export default function Example() {
               <option value="praise">Praise</option>
             </select>
           </div>
-          <div className="grid gap-3">
+          <div className="field">
             <label className="label" htmlFor="description">
               Description
             </label>

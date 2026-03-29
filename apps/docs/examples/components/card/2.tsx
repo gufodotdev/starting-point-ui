@@ -12,8 +12,8 @@ export default function Example() {
             Enter your credentials to access your account.
           </p>
         </div>
-        <form className="grid gap-6">
-          <div className="grid gap-3">
+        <form className="field-group">
+          <div className="field">
             <label className="label" htmlFor="email">
               Email
             </label>
@@ -25,7 +25,7 @@ export default function Example() {
               name="email"
             />
           </div>
-          <div className="grid gap-3">
+          <div className="field">
             <div className="flex items-center justify-between">
               <label className="label" htmlFor="password">
                 Password
