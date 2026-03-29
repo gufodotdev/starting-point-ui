@@ -1,5 +1,7 @@
 # Starting Point UI
 
+![Starting Point UI](https://raw.githubusercontent.com/gufodotdev/starting-point-ui/main/.github/startingpointui.png)
+
 An open-source component library built for Tailwind CSS. Inspired by [Shadcn UI](https://ui.shadcn.com).
 
 ## Documentation
