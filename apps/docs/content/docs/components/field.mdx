@@ -1,0 +1,245 @@
+---
+title: Field
+description: A Tailwind CSS field component for building structured, accessible form layouts.
+---
+
+A Tailwind CSS field component for building structured, accessible form layouts with labels, descriptions, and error messages.
+
+```html preview
+<div class="w-full max-w-sm">
+  <div class="field">
+    <label class="label" for="field-email">Email</label>
+    <input
+      class="input"
+      id="field-email"
+      type="email"
+      placeholder="you@example.com"
+      name="email"
+    />
+  </div>
+</div>
+```
+
+---
+
+## With description
+
+Add a description below the input. Use `aria-describedby` on the input pointing to the description's `id` so screen readers announce the help text.
+
+```html preview
+<div class="w-full max-w-sm">
+  <div class="field">
+    <label class="label" for="field-username">Username</label>
+    <input
+      class="input"
+      id="field-username"
+      type="text"
+      placeholder="johndoe"
+      aria-describedby="field-username-desc"
+      name="username"
+    />
+    <p class="field-description" id="field-username-desc">This is your public display name.</p>
+  </div>
+</div>
+```
+
+---
+
+## With error
+
+Use `.field-error` to display validation errors. Add `aria-invalid="true"` to the input and connect the error message using `aria-describedby` so screen readers announce it when the input is focused.
+
+```html preview
+<div class="w-full max-w-sm">
+  <div class="field">
+    <label class="label" for="field-password">Password</label>
+    <input
+      class="input"
+      id="field-password"
+      type="password"
+      placeholder="Enter your password"
+      aria-invalid="true"
+      aria-describedby="field-password-error"
+      name="password"
+    />
+    <p class="field-error" id="field-password-error">
+      Password must be at least 8 characters.
+    </p>
+  </div>
+</div>
+```
+
+---
+
+## Field group
+
+Use `.field-group` to stack multiple fields with consistent spacing.
+
+```html preview
+<div class="w-full max-w-sm">
+  <div class="field-group">
+    <div class="field">
+      <label class="label" for="fg-first-name">First name</label>
+      <input
+        class="input"
+        id="fg-first-name"
+        type="text"
+        placeholder="John"
+        name="first-name"
+      />
+    </div>
+    <div class="field">
+      <label class="label" for="fg-last-name">Last name</label>
+      <input
+        class="input"
+        id="fg-last-name"
+        type="text"
+        placeholder="Smith"
+        name="last-name"
+      />
+    </div>
+    <div class="field">
+      <label class="label" for="fg-email">Email</label>
+      <input
+        class="input"
+        id="fg-email"
+        type="email"
+        placeholder="you@example.com"
+        aria-describedby="fg-email-desc"
+        name="email"
+      />
+      <p class="field-description" id="fg-email-desc">We'll never share your email.</p>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Horizontal
+
+Use `.field-horizontal` for inline fields like checkboxes and switches.
+
+```html preview
+<div class="w-full max-w-sm">
+  <div class="field-group">
+    <div class="field field-horizontal">
+      <input type="checkbox" class="checkbox" id="field-terms" name="terms" />
+      <label class="label" for="field-terms">Accept terms and conditions</label>
+    </div>
+    <div class="field field-horizontal">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="field-marketing"
+        aria-describedby="field-marketing-desc"
+        name="marketing"
+      />
+      <div class="field-content">
+        <label class="label" for="field-marketing">Marketing emails</label>
+        <p class="field-description" id="field-marketing-desc">
+          Receive emails about new products and features.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Disabled
+
+Add `disabled` to the form element.
+
+```html preview
+<div class="w-full max-w-sm">
+  <div class="field">
+    <label class="label" for="field-disabled">Email</label>
+    <input
+      class="input"
+      id="field-disabled"
+      type="email"
+      placeholder="you@example.com"
+      disabled=""
+      name="email"
+    />
+  </div>
+</div>
+```
+
+---
+
+## How it works
+
+The field component is a set of CSS-only utility classes for composing structured form layouts.
+
+### Structure
+
+A field consists of a wrapper, label, input, and optional descriptions and errors:
+
+```html
+<div class="field">
+  <label class="label" for="name">Name</label>
+  <input class="input" id="name" type="text" aria-describedby="name-desc name-error" />
+  <p class="field-description" id="name-desc">Help text goes here.</p>
+  <p class="field-error" id="name-error">Error message goes here.</p>
+</div>
+```
+
+### Grouping
+
+Use `.field-group` to stack multiple fields with consistent spacing:
+
+```html
+<div class="field-group">
+  <div class="field">...</div>
+  <div class="field">...</div>
+</div>
+```
+
+### Disabled state
+
+Add `disabled` to the form element:
+
+```html
+<div class="field">
+  <label class="label" for="name">Name</label>
+  <input class="input" id="name" disabled />
+</div>
+```
+
+### Validation
+
+Use `aria-invalid="true"` on the input and `aria-describedby` pointing to the error element:
+
+```html
+<div class="field">
+  <label class="label" for="email">Email</label>
+  <input
+    class="input"
+    id="email"
+    aria-invalid="true"
+    aria-describedby="email-error"
+  />
+  <p class="field-error" id="email-error">Please enter a valid email.</p>
+</div>
+```
+
+### Accessibility
+
+- Connect `<label>` to the input using matching `for` and `id` attributes so clicking the label focuses the input and screen readers announce it correctly.
+- Use `aria-describedby` on the input to link help text (`.field-description`) and error messages (`.field-error`) so screen readers announce them when the input is focused.
+- Use `aria-invalid="true"` on the input to indicate an error state. This also triggers the input's built-in error styling.
+
+### Class reference
+
+| Class               | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| `field`             | Field wrapper with flex layout                 |
+| `field-vertical`    | Vertical layout (default)                      |
+| `field-horizontal`  | Horizontal layout for checkboxes, switches     |
+| `field-content`     | Groups label + description in horizontal fields |
+| `field-group`       | Groups multiple fields with consistent spacing |
+| `field-description` | Help text below an input                       |
+| `field-error`       | Error message in destructive color             |

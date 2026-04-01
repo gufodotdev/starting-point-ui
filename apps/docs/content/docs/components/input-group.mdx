@@ -6,30 +6,30 @@ description: A Tailwind CSS input group component for decorating inputs with ico
 A Tailwind CSS input group component for decorating [inputs](/docs/components/input) with icons, text, or other addons.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/input-group/1 -->
-<div class="grid gap-6 w-full max-w-xs">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="ri-search-line"></i></span>
-    <input class="input" placeholder="Search..." />
-  </div>
-  <div class="input-group">
-    <span class="input-group-addon"><i class="ri-mail-line"></i></span>
-    <input class="input" type="email" placeholder="Enter your email" />
-  </div>
-  <div class="input-group">
-    <span class="input-group-addon"><i class="ri-bank-card-line"></i></span>
-    <input class="input" placeholder="Card number" />
-    <span class="input-group-addon"><i class="ri-check-fill"></i></span>
-  </div>
-  <div class="input-group">
-    <input class="input" placeholder="Rate this" />
-    <span class="input-group-addon">
-      <i class="ri-star-line"></i>
-      <i class="ri-information-line"></i>
-    </span>
+<div class="w-full max-w-xs">
+  <div class="field-group">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="ri-search-line"></i></span>
+      <input class="input" placeholder="Search..." />
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="ri-mail-line"></i></span>
+      <input class="input" type="email" placeholder="Enter your email" />
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="ri-bank-card-line"></i></span>
+      <input class="input" placeholder="Card number" />
+      <span class="input-group-addon"><i class="ri-check-fill"></i></span>
+    </div>
+    <div class="input-group">
+      <input class="input" placeholder="Rate this" />
+      <span class="input-group-addon">
+        <i class="ri-star-line"></i>
+        <i class="ri-information-line"></i>
+      </span>
+    </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/input-group/1 -->
 ```
 
 ---
@@ -39,49 +39,24 @@ A Tailwind CSS input group component for decorating [inputs](/docs/components/in
 Use text addons for prefixes, suffixes, or units.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/input-group/2 -->
-<div class="grid gap-6 w-full max-w-xs">
-  <div class="input-group">
-    <span class="input-group-addon">$</span>
-    <input class="input" placeholder="0.00" />
-    <span class="input-group-addon">USD</span>
-  </div>
-  <div class="input-group">
-    <span class="input-group-addon">https://</span>
-    <input class="input" placeholder="example" />
-    <span class="input-group-addon">.com</span>
-  </div>
-  <div class="input-group">
-    <input class="input" placeholder="Enter your username" />
-    <span class="input-group-addon">@company.com</span>
-  </div>
-</div>
-<!-- END https://startingpointui.com/examples/docs/input-group/2 -->
-```
-
----
-
-## Sizes
-
-Use size modifiers on the `.input-group` container to change the height.
-
-```html preview
-<!-- START https://startingpointui.com/examples/docs/input-group/3 -->
-<div class="grid gap-6 w-full max-w-xs">
-  <div class="input-group input-group-sm">
-    <span class="input-group-addon"><i class="ri-search-line"></i></span>
-    <input class="input" placeholder="Small" />
-  </div>
-  <div class="input-group">
-    <span class="input-group-addon"><i class="ri-search-line"></i></span>
-    <input class="input" placeholder="Default" />
-  </div>
-  <div class="input-group input-group-lg">
-    <span class="input-group-addon"><i class="ri-search-line"></i></span>
-    <input class="input" placeholder="Large" />
+<div class="w-full max-w-xs">
+  <div class="field-group">
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <input class="input" placeholder="0.00" />
+      <span class="input-group-addon">USD</span>
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">https://</span>
+      <input class="input" placeholder="example" />
+      <span class="input-group-addon">.com</span>
+    </div>
+    <div class="input-group">
+      <input class="input" placeholder="Enter your username" />
+      <span class="input-group-addon">@company.com</span>
+    </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/input-group/3 -->
 ```
 
 ---
@@ -91,14 +66,12 @@ Use size modifiers on the `.input-group` container to change the height.
 Add `disabled` to the input inside the group. The addons dim automatically.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/input-group/4 -->
 <div class="w-full max-w-xs">
   <div class="input-group">
     <span class="input-group-addon"><i class="ri-search-line"></i></span>
     <input class="input" placeholder="Search..." disabled="" />
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/input-group/4 -->
 ```
 
 ---
@@ -133,7 +106,4 @@ Addons can be placed before, after, or on both sides of the input:
 | Class               | Description                 |
 | ------------------- | --------------------------- |
 | `input-group`       | Container for grouped input |
-| `input-group-sm`    | Small size variant          |
-| `input-group-base`  | Base size (default)         |
-| `input-group-lg`    | Large size variant          |
 | `input-group-addon` | Addon element (icons, text) |

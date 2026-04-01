@@ -6,7 +6,6 @@ description: A Tailwind CSS dialog component for modals, sheets, and non-modal d
 A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/dialog/1 -->
 <button
   data-sp-toggle="dialog"
   data-sp-target="#dialog-1"
@@ -46,7 +45,6 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
     </div>
   </div>
 </dialog>
-<!-- END https://startingpointui.com/examples/docs/dialog/1 -->
 ```
 
 ---
@@ -56,7 +54,6 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 This component uses `dialog.show()` instead of `dialog.showModal()`, so the backdrop is what creates the modal behavior. Add `.dialog-backdrop` to block interaction with the page behind it, or omit it for a non-modal dialog.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/dialog/2 -->
 <button data-sp-toggle="dialog" data-sp-target="#modal" class="btn btn-outline">
   Open Modal
 </button>
@@ -118,7 +115,6 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
     </div>
   </div>
 </dialog>
-<!-- END https://startingpointui.com/examples/docs/dialog/2 -->
 ```
 
 ---
@@ -128,7 +124,6 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
 Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or pressing Escape.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/dialog/3 -->
 <button
   data-sp-toggle="dialog"
   data-sp-target="#dialog-3"
@@ -164,7 +159,6 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
     </div>
   </div>
 </dialog>
-<!-- END https://startingpointui.com/examples/docs/dialog/3 -->
 ```
 
 ---
@@ -174,7 +168,6 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 Override positioning, sizing, and styles to create custom dialog variants like sheets, fullscreen modals, or custom backdrops.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/dialog/4 -->
 <button data-sp-toggle="dialog" data-sp-target="#sheet" class="btn btn-outline">
   Sheet
 </button>
@@ -288,7 +281,6 @@ Override positioning, sizing, and styles to create custom dialog variants like s
     </div>
   </div>
 </dialog>
-<!-- END https://startingpointui.com/examples/docs/dialog/4 -->
 ```
 
 ---
@@ -370,7 +362,6 @@ To customize animations, add `no-animation` to disable the defaults and use your
 ```
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/dialog/5 -->
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-default"
@@ -509,7 +500,6 @@ To customize animations, add `no-animation` to disable the defaults and use your
     </div>
   </div>
 </dialog>
-<!-- END https://startingpointui.com/examples/docs/dialog/5 -->
 ```
 
 The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. You can customize or replace these with your own animations.

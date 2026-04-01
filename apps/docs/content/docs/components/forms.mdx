@@ -6,64 +6,64 @@ description: Tailwind CSS form components including inputs, textareas, selects, 
 Tailwind CSS form components for building accessible, styled forms.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/forms/1 -->
-<form class="grid gap-6 w-full max-w-xs">
-  <div class="grid gap-3">
-    <label class="label" for="full-name">Full name</label>
-    <input
-      class="input"
-      id="full-name"
-      type="text"
-      placeholder="John Smith"
-      name="full-name"
-    />
-  </div>
-  <div class="grid gap-3">
-    <label class="label" for="email-address">Email address</label>
-    <input
-      class="input"
-      id="email-address"
-      type="email"
-      placeholder="john@example.com"
-      name="email-address"
-    />
-  </div>
-  <div class="grid gap-3">
-    <label class="label" for="event-date">Event date</label>
-    <input class="input" id="event-date" type="date" name="event-date" />
-  </div>
-  <div class="grid gap-3">
-    <label class="label" for="event-type">Event type</label>
-    <select class="select" id="event-type" name="event-type">
-      <option value="">Select event type</option>
-      <option value="wedding">Wedding Reception</option>
-      <option value="corporate">Corporate Event</option>
-      <option value="birthday">Birthday Party</option>
-    </select>
-  </div>
-  <div class="grid gap-3">
-    <label class="label" for="additional-details">Additional details</label>
-    <textarea
-      class="textarea"
-      id="additional-details"
-      name="additional-details"
-      placeholder="Tell us about your event..."
-    ></textarea>
-  </div>
-  <div class="flex items-center gap-3">
-    <input
-      type="checkbox"
-      class="checkbox"
-      id="email-me-news-and-special-offers"
-      name="email-me-news-and-special-offers"
-    />
-    <label class="label" for="email-me-news-and-special-offers">
-      Email me news and special offers
-    </label>
-  </div>
-  <button class="btn" type="submit">Submit</button>
-</form>
-<!-- END https://startingpointui.com/examples/docs/forms/1 -->
+<div class="w-full max-w-xs">
+  <form class="field-group">
+    <div class="field">
+      <label class="label" for="full-name">Full name</label>
+      <input
+        class="input"
+        id="full-name"
+        type="text"
+        placeholder="John Smith"
+        name="full-name"
+      />
+    </div>
+    <div class="field">
+      <label class="label" for="email-address">Email address</label>
+      <input
+        class="input"
+        id="email-address"
+        type="email"
+        placeholder="john@example.com"
+        name="email-address"
+      />
+    </div>
+    <div class="field">
+      <label class="label" for="event-date">Event date</label>
+      <input class="input" id="event-date" type="date" name="event-date" />
+    </div>
+    <div class="field">
+      <label class="label" for="event-type">Event type</label>
+      <select class="select" id="event-type" name="event-type">
+        <option value="">Select event type</option>
+        <option value="wedding">Wedding Reception</option>
+        <option value="corporate">Corporate Event</option>
+        <option value="birthday">Birthday Party</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="label" for="additional-details">Additional details</label>
+      <textarea
+        class="textarea"
+        id="additional-details"
+        name="additional-details"
+        placeholder="Tell us about your event..."
+      ></textarea>
+    </div>
+    <div class="field field-horizontal">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="email-me-news-and-special-offers"
+        name="email-me-news-and-special-offers"
+      />
+      <label class="label" for="email-me-news-and-special-offers">
+        Email me news and special offers
+      </label>
+    </div>
+    <button class="btn" type="submit">Submit</button>
+  </form>
+</div>
 ```
 
 ---
@@ -74,6 +74,7 @@ Tailwind CSS form components for building accessible, styled forms.
 - [Input Group](/docs/components/input-group) — Decorate inputs with icons, text, or other addons
 - [Textarea](/docs/components/textarea) — Multi-line text input
 - [Select](/docs/components/select) — Native dropdown for choosing from a list of options
+- [Field](/docs/components/field) — Structured form field layout with labels, descriptions, and errors
 - [Combobox](/docs/components/combobox) — Searchable, keyboard-navigable dropdown with single and multi-select
 - [Checkbox](/docs/components/checkbox) — Toggle options on and off, with card and list select variants
 - [Radio Group](/docs/components/radio-group) — Select a single option from a group, with card and list select variants

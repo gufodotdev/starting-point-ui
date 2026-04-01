@@ -6,23 +6,20 @@ description: A Tailwind CSS textarea component for multi-line text input.
 A Tailwind CSS textarea component for multi-line text input.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/textarea/1 -->
 <div class="w-full max-w-xs">
   <textarea class="textarea" placeholder="Tell us what you think..."></textarea>
 </div>
-<!-- END https://startingpointui.com/examples/docs/textarea/1 -->
 ```
 
 ---
 
 ## With label
 
-Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label focuses the textarea and screen readers announce it correctly.
+Pair with a [Label](/docs/components/label) and wrap in a [Field](/docs/components/field) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label focuses the textarea and screen readers announce it correctly.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/textarea/2 -->
 <div class="w-full max-w-xs">
-  <div class="grid gap-3">
+  <div class="field">
     <label class="label" for="message">Message</label>
     <textarea
       class="textarea"
@@ -32,7 +29,6 @@ Pair with a [Label](/docs/components/label) for accessible form fields. Connect 
     ></textarea>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/textarea/2 -->
 ```
 
 ---
@@ -42,20 +38,18 @@ Pair with a [Label](/docs/components/label) for accessible form fields. Connect 
 Add `disabled` to prevent interaction. The textarea appears faded automatically.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/textarea/3 -->
 <div class="w-full max-w-xs">
-  <div class="grid gap-3">
-    <label class="label" for="message">Message</label>
+  <div class="field">
+    <label class="label" for="disabled-message">Message</label>
     <textarea
       class="textarea"
-      id="message"
+      id="disabled-message"
       name="message"
       placeholder="Tell us what you think..."
       disabled=""
     ></textarea>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/textarea/3 -->
 ```
 
 ---
@@ -65,9 +59,8 @@ Add `disabled` to prevent interaction. The textarea appears faded automatically.
 Add `aria-invalid="true"` to show the textarea in an error state. Connect an error message using `aria-describedby` on the textarea, pointing to the `id` of the error element. This lets screen readers announce the error when the textarea is focused.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/textarea/4 -->
 <div class="w-full max-w-xs">
-  <div class="grid gap-3">
+  <div class="field">
     <label class="label" for="bio">Bio</label>
     <textarea
       class="textarea"
@@ -77,12 +70,11 @@ Add `aria-invalid="true"` to show the textarea in an error state. Connect an err
       aria-invalid="true"
       aria-describedby="bio-error"
     ></textarea>
-    <p id="bio-error" class="text-xs text-destructive">
+    <p class="field-error" id="bio-error">
       Bio must be at least 10 characters
     </p>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/textarea/4 -->
 ```
 
 ---

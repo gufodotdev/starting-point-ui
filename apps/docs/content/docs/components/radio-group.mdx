@@ -6,50 +6,44 @@ description: A Tailwind CSS radio group component for selecting a single option 
 A Tailwind CSS radio group component for selecting a single option from a set.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/radio-group/1 -->
-<div class="grid gap-5">
-  <span class="label sr-only">Delivery speed</span>
-  <div class="grid gap-3">
-    <div class="flex gap-3 items-center">
-      <input
-        type="radio"
-        class="radio"
-        id="delivery-speed-standard"
-        name="delivery-speed"
-        checked=""
-        value="standard"
-      />
-      <div class="grid gap-2">
+<div class="w-fit">
+  <div class="field-group">
+    <span class="label sr-only">Delivery speed</span>
+    <div class="field-group gap-3">
+      <div class="field field-horizontal">
+        <input
+          type="radio"
+          class="radio"
+          id="delivery-speed-standard"
+          name="delivery-speed"
+          checked=""
+          value="standard"
+        />
         <label class="label" for="delivery-speed-standard">Standard</label>
       </div>
-    </div>
-    <div class="flex gap-3 items-center">
-      <input
-        type="radio"
-        class="radio"
-        id="delivery-speed-express"
-        name="delivery-speed"
-        value="express"
-      />
-      <div class="grid gap-2">
+      <div class="field field-horizontal">
+        <input
+          type="radio"
+          class="radio"
+          id="delivery-speed-express"
+          name="delivery-speed"
+          value="express"
+        />
         <label class="label" for="delivery-speed-express">Express</label>
       </div>
-    </div>
-    <div class="flex gap-3 items-center">
-      <input
-        type="radio"
-        class="radio"
-        id="delivery-speed-overnight"
-        name="delivery-speed"
-        value="overnight"
-      />
-      <div class="grid gap-2">
+      <div class="field field-horizontal">
+        <input
+          type="radio"
+          class="radio"
+          id="delivery-speed-overnight"
+          name="delivery-speed"
+          value="overnight"
+        />
         <label class="label" for="delivery-speed-overnight">Overnight</label>
       </div>
     </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/radio-group/1 -->
 ```
 
 ---
@@ -59,63 +53,63 @@ A Tailwind CSS radio group component for selecting a single option from a set.
 Add a description below each label for extra context.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/radio-group/2 -->
-<div class="grid gap-5">
-  <span class="label">Notification preferences</span>
-  <div class="grid gap-5">
-    <div class="flex gap-3 items-start">
-      <input
-        type="radio"
-        class="radio"
-        id="notification-preferences-all"
-        name="notification-preferences"
-        checked=""
-        value="all"
-      />
-      <div class="grid gap-2">
-        <label class="label" for="notification-preferences-all">
-          All notifications
-        </label>
-        <p class="text-sm text-muted-foreground">
-          Receive all email and push notifications
-        </p>
+<div class="w-fit">
+  <div class="field-group">
+    <span class="label">Notification preferences</span>
+    <div class="field-group">
+      <div class="field field-horizontal">
+        <input
+          type="radio"
+          class="radio"
+          id="notification-preferences-all"
+          name="notification-preferences"
+          checked=""
+          value="all"
+        />
+        <div class="field-content">
+          <label class="label" for="notification-preferences-all">
+            All notifications
+          </label>
+          <p class="field-description">
+            Receive all email and push notifications
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="flex gap-3 items-start">
-      <input
-        type="radio"
-        class="radio"
-        id="notification-preferences-important"
-        name="notification-preferences"
-        value="important"
-      />
-      <div class="grid gap-2">
-        <label class="label" for="notification-preferences-important">
-          Important only
-        </label>
-        <p class="text-sm text-muted-foreground">
-          Only receive notifications for important updates
-        </p>
+      <div class="field field-horizontal">
+        <input
+          type="radio"
+          class="radio"
+          id="notification-preferences-important"
+          name="notification-preferences"
+          value="important"
+        />
+        <div class="field-content">
+          <label class="label" for="notification-preferences-important">
+            Important only
+          </label>
+          <p class="field-description">
+            Only receive notifications for important updates
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="flex gap-3 items-start">
-      <input
-        type="radio"
-        class="radio"
-        id="notification-preferences-none"
-        name="notification-preferences"
-        value="none"
-      />
-      <div class="grid gap-2">
-        <label class="label" for="notification-preferences-none">None</label>
-        <p class="text-sm text-muted-foreground">
-          Do not receive any notifications
-        </p>
+      <div class="field field-horizontal">
+        <input
+          type="radio"
+          class="radio"
+          id="notification-preferences-none"
+          name="notification-preferences"
+          value="none"
+        />
+        <div class="field-content">
+          <label class="label" for="notification-preferences-none">None</label>
+          <p class="field-description">
+            Do not receive any notifications
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/radio-group/2 -->
 ```
 
 ---
@@ -125,12 +119,12 @@ Add a description below each label for extra context.
 Add `disabled` to the radio and `peer` so the label dims to match.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/radio-group/3 -->
-<div class="flex items-center gap-3">
-  <input type="radio" class="radio peer" id="disabled-radio" disabled="" />
-  <label class="label" for="disabled-radio">Disabled radio</label>
+<div class="w-fit">
+  <div class="field field-horizontal">
+    <input type="radio" class="radio peer" id="disabled-radio" disabled="" />
+    <label class="label" for="disabled-radio">Disabled radio</label>
+  </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/radio-group/3 -->
 ```
 
 ---
@@ -140,7 +134,6 @@ Add `disabled` to the radio and `peer` so the label dims to match.
 Use radios inside cards for a visual single-select layout.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/radio-group/4 -->
 <div class="w-full max-w-md">
   <div class="grid gap-3">
     <span class="label">Payment method</span>
@@ -185,7 +178,6 @@ Use radios inside cards for a visual single-select layout.
     </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/radio-group/4 -->
 ```
 
 ---
@@ -195,7 +187,6 @@ Use radios inside cards for a visual single-select layout.
 Use radios inside list items for a single-select list with descriptions.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/radio-group/5 -->
 <div class="w-full max-w-md">
   <div class="grid gap-3">
     <span class="label">Shipping</span>
@@ -236,7 +227,6 @@ Use radios inside list items for a single-select list with descriptions.
     </div>
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/radio-group/5 -->
 ```
 
 ---

@@ -26,6 +26,7 @@ const navigation = [
       { title: "Combobox", href: "/docs/components/combobox" },
       { title: "Dialog", href: "/docs/components/dialog" },
       { title: "Dropdown", href: "/docs/components/dropdown" },
+      { title: "Field", href: "/docs/components/field" },
       { title: "Forms", href: "/docs/components/forms" },
       { title: "Input", href: "/docs/components/input" },
       { title: "Input Group", href: "/docs/components/input-group" },

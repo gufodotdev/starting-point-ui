@@ -1,0 +1,45 @@
+/* Starting Point UI Field Styles */
+
+@utility field-group {
+  @layer l1.l2 {
+    @apply grid w-full gap-6;
+  }
+}
+
+@utility field {
+  @layer l1.l2 {
+    @apply flex w-full gap-3;
+    @apply [&:where(&:not(.field-vertical,.field-horizontal))]:field-vertical;
+  }
+}
+
+@utility field-vertical {
+  @layer l1 {
+    @apply flex-col;
+  }
+}
+
+@utility field-horizontal {
+  @layer l1 {
+    @apply flex-row items-center has-[.field-content]:items-start;
+  }
+}
+
+@utility field-content {
+  @layer l1.l2 {
+    @apply grid gap-2;
+  }
+}
+
+@utility field-description {
+  @layer l1.l2 {
+    @apply text-left text-sm leading-normal font-normal text-muted-foreground;
+    @apply [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary;
+  }
+}
+
+@utility field-error {
+  @layer l1.l2 {
+    @apply text-sm font-normal text-destructive;
+  }
+}

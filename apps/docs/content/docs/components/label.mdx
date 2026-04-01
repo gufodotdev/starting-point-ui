@@ -6,30 +6,28 @@ description: A Tailwind CSS label component for accessible form fields.
 A Tailwind CSS label component for accessible form fields.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/label/1 -->
 <label class="label">Email</label>
-<!-- END https://startingpointui.com/examples/docs/label/1 -->
 ```
 
 ---
 
 ## With input
 
-Connect a label to an input using matching `for` and `id` attributes. Clicking the label focuses the input, and screen readers announce it correctly.
+Connect a label to an input using matching `for` and `id` attributes. Clicking the label focuses the input, and screen readers announce it correctly. Use a [Field](/docs/components/field) wrapper for consistent spacing.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/label/2 -->
-<div class="grid gap-3">
-  <label class="label" for="email">Email</label>
-  <input
-    class="input"
-    id="email"
-    type="email"
-    placeholder="you@example.com"
-    name="email"
-  />
+<div class="w-full max-w-xs">
+  <div class="field">
+    <label class="label" for="email">Email</label>
+    <input
+      class="input"
+      id="email"
+      type="email"
+      placeholder="you@example.com"
+      name="email"
+    />
+  </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/label/2 -->
 ```
 
 ---
@@ -39,8 +37,7 @@ Connect a label to an input using matching `for` and `id` attributes. Clicking t
 Place the label next to a checkbox or switch for inline toggle fields.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/label/3 -->
-<div class="flex items-center gap-3">
+<div class="field field-horizontal">
   <input
     type="checkbox"
     class="checkbox"
@@ -51,7 +48,6 @@ Place the label next to a checkbox or switch for inline toggle fields.
     Accept terms and conditions
   </label>
 </div>
-<!-- END https://startingpointui.com/examples/docs/label/3 -->
 ```
 
 ---
