@@ -59,8 +59,12 @@ async function run() {
 
   const browser = await puppeteer.launch({
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--font-render-hinting=none", "--disable-font-subpixel-positioning"],
   });
+
+  const page = await browser.newPage();
+  await page.setContent(shell, { waitUntil: "networkidle0" });
+  await page.evaluate(() => Promise.all(Array.from(document.fonts).map((f) => f.load())));
 
   for (const target of targets) {
     const viewportWidth = VIEWPORT_WIDTHS[target.type] ?? 1440;
@@ -68,9 +72,7 @@ async function run() {
 
     console.log(`  ${target.type}/${target.category}/${target.variant} (${viewportWidth}px)`);
 
-    const page = await browser.newPage();
     await page.setViewport({ width: viewportWidth, height: 900, deviceScaleFactor: 1 });
-    await page.setContent(shell, { waitUntil: "networkidle0" });
 
     const bodyClasses = ["font-sans antialiased min-h-screen bg-background", target.presetClasses].filter(Boolean).join(" ");
     await page.evaluate(({ html, bodyClasses }) => {
@@ -94,9 +96,9 @@ async function run() {
       await sharp(buffer).resize({ width: OUTPUT_WIDTH }).webp({ quality: 90 }).toFile(outputPath);
       console.log(`    ✓ ${theme}`);
     }
-
-    await page.close();
   }
+
+  await page.close();
 
   await browser.close();
   console.log(`\n✅ Done.`);

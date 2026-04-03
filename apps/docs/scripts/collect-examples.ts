@@ -87,7 +87,7 @@ async function collectExamples() {
 
   // Build CSS: Tailwind + Starting Point UI, scanned against all examples
   const uiCss = await readFile(join(UI_DIST_DIR, "index.css"), "utf-8");
-  const inputCss = `@import "tailwindcss";\n${uiCss}\n@source "../examples";`;
+  const inputCss = `@import "tailwindcss";\n${uiCss}\n@source "../examples";\n@theme inline { --font-sans: "Inter", sans-serif; }`;
   const result = await postcss([tailwindcss({ optimize: { minify: true } })]).process(inputCss, {
     from: join(process.cwd(), "examples.css"),
   });
