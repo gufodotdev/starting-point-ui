@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "prebuild": "tsx scripts/collect-examples.ts && tsx scripts/generate-search-index.ts",
+    "prebuild": "tsx scripts/collect-examples.ts && tsx scripts/generate-search-index.ts && tsx scripts/screenshot.ts",
     "collect-examples": "tsx scripts/collect-examples.ts",
     "screenshot": "tsx scripts/screenshot.ts",
     "build": "next build",

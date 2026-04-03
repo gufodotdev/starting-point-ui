@@ -1,12 +1,11 @@
 import puppeteer from "puppeteer";
 import sharp from "sharp";
-import { readFile, mkdir } from "fs/promises";
+import { readFile, mkdir, rm } from "fs/promises";
 import { join } from "path";
 
 const SOURCE_DIR = join(process.cwd(), ".source");
 const OUTPUT_DIR = join(process.cwd(), "public/screenshots");
 const OUTPUT_WIDTH = 640;
-const BASE_URL = "http://localhost:3000";
 
 const VIEWPORT_WIDTHS: Record<string, number> = {
   components: 1024,
@@ -20,6 +19,8 @@ type Target = {
   type: string;
   category: string;
   variant: number;
+  html: string;
+  presetClasses: string;
 };
 
 function resolveTargets(types: TypeData[], filterType?: string, filterCategory?: string, filterVariant?: string): Target[] {
@@ -31,7 +32,7 @@ function resolveTargets(types: TypeData[], filterType?: string, filterCategory?:
       if (filterCategory && c.category !== filterCategory) continue;
       for (const v of c.variants) {
         if (filterVariant && v.variant !== Number(filterVariant)) continue;
-        targets.push({ type: t.type, category: c.category, variant: v.variant });
+        targets.push({ type: t.type, category: c.category, variant: v.variant, html: v.html, presetClasses: v.presetClasses });
       }
     }
   }
@@ -49,11 +50,17 @@ async function run() {
     process.exit(1);
   }
 
+  const shell = await readFile(join(SOURCE_DIR, "examples.html"), "utf-8");
+
   console.log(`\nCapturing ${targets.length} example(s)...\n`);
 
+  await rm(OUTPUT_DIR, { recursive: true, force: true });
   await mkdir(OUTPUT_DIR, { recursive: true });
 
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
 
   for (const target of targets) {
     const viewportWidth = VIEWPORT_WIDTHS[target.type] ?? 1440;
@@ -62,10 +69,15 @@ async function run() {
     console.log(`  ${target.type}/${target.category}/${target.variant} (${viewportWidth}px)`);
 
     const page = await browser.newPage();
-    const url = `${BASE_URL}/view/${target.type}/${target.category}/${target.variant}`;
-
     await page.setViewport({ width: viewportWidth, height: 900, deviceScaleFactor: 1 });
-    await page.goto(url, { waitUntil: "networkidle2" });
+    await page.setContent(shell, { waitUntil: "networkidle0" });
+
+    const bodyClasses = ["font-sans antialiased min-h-screen bg-background", target.presetClasses].filter(Boolean).join(" ");
+    await page.evaluate(({ html, bodyClasses }) => {
+      document.body.className = bodyClasses;
+      document.body.innerHTML = html;
+    }, { html: target.html, bodyClasses });
+    await page.waitForNetworkIdle();
 
     // Blur any focused element
     await page.evaluate(() => (document.activeElement as HTMLElement)?.blur?.());
