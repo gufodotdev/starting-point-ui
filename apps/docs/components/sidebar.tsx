@@ -32,6 +32,7 @@ const navigation = [
       { title: "Input Group", href: "/docs/components/input-group" },
       { title: "Label", href: "/docs/components/label" },
       { title: "Pagination", href: "/docs/components/pagination" },
+      { title: "Popover", href: "/docs/components/popover" },
       { title: "Radio Group", href: "/docs/components/radio-group" },
       { title: "Resizable", href: "/docs/components/resizable" },
       { title: "Select", href: "/docs/components/select" },
