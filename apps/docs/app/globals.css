@@ -5,6 +5,7 @@
 
 @theme inline {
   --font-sans: "Inter", sans-serif;
+  --breakpoint-xxs: 400px;
 }
 
 :root {

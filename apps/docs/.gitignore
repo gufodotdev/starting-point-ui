@@ -45,6 +45,3 @@ next-env.d.ts
 
 # Generated examples data
 /.source
-
-# Generated screenshots
-/public/screenshots
