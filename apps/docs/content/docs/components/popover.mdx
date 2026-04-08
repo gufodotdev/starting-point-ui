@@ -254,6 +254,16 @@ Add `data-sp-toggle="popover"` to the trigger button. The JavaScript will find t
 
 Clicking outside the popover or pressing Escape closes the content panel. When opened, focus moves to the first focusable element inside the content.
 
+For programmatic control, use the global `sp.popover` module:
+
+```js
+const popover = document.querySelector(".popover");
+
+sp.popover.open(popover);
+sp.popover.close(popover);
+sp.popover.toggle(popover);
+```
+
 ### Focus trapping
 
 When the popover is open, pressing Tab and Shift+Tab cycles focus through the focusable elements inside `.popover-content`. Focus wraps from the last element back to the first, and vice versa. This keeps keyboard users within the popover until they explicitly close it with Escape.
