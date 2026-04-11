@@ -9,7 +9,7 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 <button
   data-sp-toggle="dialog"
   data-sp-target="#dialog-1"
-  class="btn btn-outline"
+  class="btn"
 >
   Open Dialog
 </button>
@@ -39,8 +39,8 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
         </p>
       </div>
       <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
-        <button class="btn" data-sp-dismiss="dialog">Confirm</button>
+        <button class="btn" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn btn-primary" data-sp-dismiss="dialog">Confirm</button>
       </div>
     </div>
   </div>
@@ -54,7 +54,7 @@ A Tailwind CSS dialog component for modals, sheets, and non-modal dialogs.
 This component uses `dialog.show()` instead of `dialog.showModal()`, so the backdrop is what creates the modal behavior. Add `.dialog-backdrop` to block interaction with the page behind it, or omit it for a non-modal dialog.
 
 ```html preview
-<button data-sp-toggle="dialog" data-sp-target="#modal" class="btn btn-outline">
+<button data-sp-toggle="dialog" data-sp-target="#modal" class="btn">
   Open Modal
 </button>
 <dialog
@@ -85,7 +85,7 @@ This component uses `dialog.show()` instead of `dialog.showModal()`, so the back
 <button
   data-sp-toggle="dialog"
   data-sp-target="#nonmodal"
-  class="btn btn-outline"
+  class="btn"
 >
   Open Non-modal
 </button>
@@ -127,7 +127,7 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 <button
   data-sp-toggle="dialog"
   data-sp-target="#dialog-3"
-  class="btn btn-outline"
+  class="btn"
 >
   Open Dialog
 </button>
@@ -151,7 +151,7 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
         </p>
       </div>
       <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn" data-sp-dismiss="dialog">Cancel</button>
         <button class="btn btn-destructive" data-sp-dismiss="dialog">
           Delete
         </button>
@@ -168,7 +168,7 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 Override positioning, sizing, and styles to create custom dialog variants like sheets, fullscreen modals, or custom backdrops.
 
 ```html preview
-<button data-sp-toggle="dialog" data-sp-target="#sheet" class="btn btn-outline">
+<button data-sp-toggle="dialog" data-sp-target="#sheet" class="btn">
   Sheet
 </button>
 <dialog
@@ -202,7 +202,7 @@ Override positioning, sizing, and styles to create custom dialog variants like s
 <button
   data-sp-toggle="dialog"
   data-sp-target="#fullscreen"
-  class="btn btn-outline"
+  class="btn"
 >
   Fullscreen
 </button>
@@ -236,7 +236,7 @@ Override positioning, sizing, and styles to create custom dialog variants like s
 <button
   data-sp-toggle="dialog"
   data-sp-target="#gradient"
-  class="btn btn-outline"
+  class="btn"
 >
   Gradient Backdrop
 </button>
@@ -365,7 +365,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-default"
-  class="btn btn-outline"
+  class="btn"
 >
   Default
 </button>
@@ -399,7 +399,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-none"
-  class="btn btn-outline"
+  class="btn"
 >
   No Animation
 </button>
@@ -433,7 +433,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-slide"
-  class="btn btn-outline"
+  class="btn"
 >
   Slide from Bottom
 </button>
@@ -469,7 +469,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-slow"
-  class="btn btn-outline"
+  class="btn"
 >
   Slow (500ms)
 </button>

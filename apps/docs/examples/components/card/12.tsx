@@ -29,7 +29,7 @@ export default function Example() {
             <i className="ri-chat-3-line text-muted-foreground" />
             <span>48</span>
           </div>
-          <button className="btn btn-sm ml-auto">
+          <button className="btn btn-primary btn-sm ml-auto">
             Follow
             <i className="ri-add-line" />
           </button>

@@ -9,7 +9,7 @@ A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-1"
-  class="btn btn-outline"
+  class="btn"
 >
   Open Sheet
 </button>
@@ -52,7 +52,7 @@ If you're building a navigation menu, you might want to use [Sidebar](/docs/comp
 The backdrop is what creates the modal behavior. Add `.sheet-backdrop` to block interaction with the page behind it, or omit it for a non-modal sheet.
 
 ```html preview
-<button data-sp-toggle="dialog" data-sp-target="#modal" class="btn btn-outline">
+<button data-sp-toggle="dialog" data-sp-target="#modal" class="btn">
   Open Modal
 </button>
 <dialog
@@ -83,7 +83,7 @@ The backdrop is what creates the modal behavior. Add `.sheet-backdrop` to block 
 <button
   data-sp-toggle="dialog"
   data-sp-target="#nonmodal"
-  class="btn btn-outline"
+  class="btn"
 >
   Open Non-modal
 </button>
@@ -125,7 +125,7 @@ Use direction utilities to control which edge the sheet slides in from.
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-left"
-  class="btn btn-outline"
+  class="btn"
 >
   Left
 </button>
@@ -159,7 +159,7 @@ Use direction utilities to control which edge the sheet slides in from.
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-right"
-  class="btn btn-outline"
+  class="btn"
 >
   Right
 </button>
@@ -193,7 +193,7 @@ Use direction utilities to control which edge the sheet slides in from.
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-top"
-  class="btn btn-outline"
+  class="btn"
 >
   Top
 </button>
@@ -227,7 +227,7 @@ Use direction utilities to control which edge the sheet slides in from.
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-bottom"
-  class="btn btn-outline"
+  class="btn"
 >
   Bottom
 </button>
@@ -270,7 +270,7 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-static"
-  class="btn btn-outline"
+  class="btn"
 >
   Delete Account
 </button>
@@ -293,7 +293,7 @@ Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or
         </p>
       </div>
       <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-        <button class="btn btn-outline" data-sp-dismiss="dialog">Cancel</button>
+        <button class="btn" data-sp-dismiss="dialog">Cancel</button>
         <button class="btn btn-destructive" data-sp-dismiss="dialog">
           Delete
         </button>
@@ -313,7 +313,7 @@ You can use [Sidebar](/docs/components/sidebar) utilities inside the sheet panel
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-sidebar-menu"
-  class="btn btn-outline"
+  class="btn"
 >
   Open Menu Sheet
 </button>
@@ -407,7 +407,7 @@ Override the default width using Tailwind utilities.
 <button
   data-sp-toggle="dialog"
   data-sp-target="#sheet-wide"
-  class="btn btn-outline"
+  class="btn"
 >
   Wide Sheet
 </button>
@@ -522,7 +522,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-default"
-  class="btn btn-outline"
+  class="btn"
 >
   Default
 </button>
@@ -556,7 +556,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-none"
-  class="btn btn-outline"
+  class="btn"
 >
   No Animation
 </button>
@@ -590,7 +590,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 <button
   data-sp-toggle="dialog"
   data-sp-target="#anim-slow"
-  class="btn btn-outline"
+  class="btn"
 >
   Slow (500ms)
 </button>

@@ -50,10 +50,10 @@ export default function Example() {
             ></textarea>
           </div>
           <div className="flex justify-end gap-2">
-            <button className="btn btn-outline" type="button">
+            <button className="btn" type="button">
               Cancel
             </button>
-            <button className="btn" type="submit">
+            <button className="btn btn-primary" type="submit">
               Submit
             </button>
           </div>

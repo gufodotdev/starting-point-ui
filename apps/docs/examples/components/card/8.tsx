@@ -116,7 +116,7 @@ export default function Example() {
               />
             </div>
           </div>
-          <button className="btn" type="submit">
+          <button className="btn btn-primary" type="submit">
             Continue
           </button>
         </form>

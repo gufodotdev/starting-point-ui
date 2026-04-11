@@ -40,7 +40,7 @@ export default function Example() {
             <span>API access</span>
           </li>
         </ul>
-        <button className="btn btn-lg w-full mt-2">Buy Now</button>
+        <button className="btn btn-primary btn-lg w-full mt-2">Buy Now</button>
       </div>
     </div>
   );

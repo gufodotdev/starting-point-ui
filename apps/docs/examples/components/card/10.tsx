@@ -33,7 +33,7 @@ export default function Example() {
           <button className="btn btn-ghost btn-icon">
             <i className="ri-skip-back-fill" />
           </button>
-          <button className="btn btn-icon">
+          <button className="btn btn-primary btn-icon">
             <i className="ri-pause-fill" />
           </button>
           <button className="btn btn-ghost btn-icon">

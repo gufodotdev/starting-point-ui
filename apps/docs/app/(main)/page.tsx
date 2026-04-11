@@ -56,12 +56,12 @@ export default function Home() {
             Tailwind CSS. Beautiful, accessible, and works in any project.
           </p>
           <div className="mt-6 lg:mt-8 grid xs:flex gap-3">
-            <Link href="/docs/guides/installation" className="btn lg:btn-lg">
+            <Link href="/docs/guides/installation" className="btn btn-primary lg:btn-lg">
               Get Started
             </Link>
             <button
               type="button"
-              className="btn btn-outline lg:btn-lg"
+              className="btn lg:btn-lg"
               data-sp-toggle="dialog"
               data-sp-target="#theme-editor"
             >

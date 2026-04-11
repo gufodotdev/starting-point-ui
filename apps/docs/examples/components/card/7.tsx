@@ -40,7 +40,7 @@ export default function Example() {
               $199
             </span>
           </div>
-          <button className="btn btn-sm">Add to Cart</button>
+          <button className="btn btn-primary btn-sm">Add to Cart</button>
         </div>
       </div>
     </div>

@@ -68,7 +68,7 @@ export default function Example() {
             />
           </div>
         </div>
-        <button className="btn">Save preferences</button>
+        <button className="btn btn-primary">Save preferences</button>
       </div>
     </div>
   );

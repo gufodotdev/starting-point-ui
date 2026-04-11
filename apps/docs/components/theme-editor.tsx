@@ -546,7 +546,7 @@ export function ThemeEditor() {
           <div className="flex gap-2 p-6 border-t">
             <button
               type="button"
-              className="btn btn-outline btn-sm flex-1"
+              className="btn btn-sm flex-1"
               onClick={() => {
                 setConfig(defaultConfig);
                 clearTheme();

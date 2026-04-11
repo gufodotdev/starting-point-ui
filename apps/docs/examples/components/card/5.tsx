@@ -22,7 +22,7 @@ export default function Example() {
             readOnly
             defaultValue="https://example.com/doc/abc123"
           />
-          <button className="btn btn-outline btn-icon">
+          <button className="btn btn-icon">
             <i className="ri-file-copy-line" />
           </button>
         </div>

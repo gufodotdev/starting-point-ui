@@ -44,7 +44,7 @@ export default function Example() {
               name="password"
             />
           </div>
-          <button className="btn" type="submit">
+          <button className="btn btn-primary" type="submit">
             Sign In
           </button>
         </form>
@@ -59,10 +59,10 @@ export default function Example() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <button className="btn btn-outline" type="button">
+          <button className="btn" type="button">
             <i className="ri-google-fill"></i>Google
           </button>
-          <button className="btn btn-outline" type="button">
+          <button className="btn" type="button">
             <i className="ri-github-fill"></i>GitHub
           </button>
         </div>
