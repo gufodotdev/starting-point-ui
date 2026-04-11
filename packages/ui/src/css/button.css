@@ -11,7 +11,7 @@
 
 @utility btn-default {
   @layer l1 {
-    @apply border bg-background shadow-xs hover:bg-muted hover:text-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50;
+    @apply border bg-btn text-btn-foreground border-btn-border shadow-btn hover:bg-btn-foreground/5 dark:hover:bg-btn-foreground/10;
   }
 }
 
