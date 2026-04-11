@@ -17,7 +17,7 @@
     }
 
     &:checked::before {
-      @apply translate-x-[calc(100%-2px)] bg-thumb;
+      @apply translate-x-[calc(100%-2px)] bg-primary-foreground;
     }
   }
 }
