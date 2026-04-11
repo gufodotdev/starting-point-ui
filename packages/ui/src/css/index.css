@@ -45,6 +45,9 @@
   --card-radius: 0.875rem;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
+  --popover-border: oklch(0.922 0 0);
+  --popover-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --popover-radius: 0.5rem;
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
@@ -92,6 +95,8 @@
   --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
+  --popover-border: oklch(1 0 0 / 10%);
+  --popover-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
@@ -138,6 +143,9 @@
   --radius-card: var(--card-radius);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-popover-border: var(--popover-border);
+  --shadow-popover: var(--popover-shadow);
+  --radius-popover: var(--popover-radius);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);

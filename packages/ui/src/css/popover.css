@@ -8,7 +8,7 @@
 
 @utility popover-content {
   @layer l1.l2 {
-    @apply absolute z-998 hidden w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md;
+    @apply absolute z-998 hidden w-72 rounded-popover border border-popover-border bg-popover p-4 text-popover-foreground shadow-popover;
     @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
 
     &.open {
