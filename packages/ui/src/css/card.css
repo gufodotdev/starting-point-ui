@@ -2,7 +2,7 @@
 
 @utility card {
   @layer l1.l2 {
-    @apply text-card-foreground rounded-xl;
+    @apply text-card-foreground rounded-card;
     @apply [&:where(&:not(.card-default,.card-muted))]:card-default;
   }
 }
