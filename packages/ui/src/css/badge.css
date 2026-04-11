@@ -24,7 +24,7 @@
 
 @utility badge-destructive {
   @layer l1 {
-    @apply border-transparent bg-destructive text-white dark:bg-destructive/60 [&:is(a)]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40;
+    @apply border-transparent bg-destructive text-destructive-foreground dark:bg-destructive/60 [&:is(a)]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40;
   }
 }
 
