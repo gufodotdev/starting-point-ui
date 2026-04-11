@@ -2,9 +2,8 @@
 
 @utility radio {
   @layer l1.l2 {
-    @apply border-input text-primary size-4 shrink-0 rounded-full border shadow-xs outline-none appearance-none cursor-pointer;
+    @apply border-input-border bg-input text-primary size-4 shrink-0 rounded-full border shadow-input outline-none appearance-none cursor-pointer;
     @apply transition-[color,box-shadow];
-    @apply dark:bg-input/30;
     @apply disabled:cursor-not-allowed disabled:opacity-50;
     @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
     @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;

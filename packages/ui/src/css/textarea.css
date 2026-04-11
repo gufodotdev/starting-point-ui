@@ -2,9 +2,8 @@
 
 @utility textarea {
   @layer l1.l2 {
-    @apply border-input w-full rounded-md border bg-transparent shadow-xs transition-[color,box-shadow] outline-none appearance-none;
-    @apply placeholder:text-muted-foreground;
-    @apply dark:bg-input/30;
+    @apply w-full rounded-md border border-input-border bg-input text-input-foreground shadow-input transition-[color,box-shadow] outline-none appearance-none;
+    @apply placeholder:text-input-placeholder;
     @apply field-sizing-content min-h-16 px-3 py-2 text-sm;
     @apply disabled:cursor-not-allowed disabled:opacity-50;
     @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];

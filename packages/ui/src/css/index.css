@@ -55,7 +55,11 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --input: oklch(1 0 0 / 0%);
+  --input-foreground: oklch(0.145 0 0);
+  --input-placeholder: oklch(0.556 0 0);
+  --input-border: oklch(0.922 0 0);
+  --input-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --ring: oklch(0.708 0 0);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -96,7 +100,11 @@
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --input: oklch(1 0 0 / 4.5%);
+  --input-foreground: oklch(0.985 0 0);
+  --input-placeholder: oklch(0.708 0 0);
+  --input-border: oklch(1 0 0 / 15%);
+  --input-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --ring: oklch(0.556 0 0);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
@@ -138,6 +146,10 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
+  --color-input-foreground: var(--input-foreground);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-input-border: var(--input-border);
+  --shadow-input: var(--input-shadow);
   --color-ring: var(--ring);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);

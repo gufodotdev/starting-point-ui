@@ -93,7 +93,7 @@ export function SearchDialog() {
       {/* Desktop: input-style button */}
       <button
         type="button"
-        className="hidden md:inline-flex items-center gap-2 rounded-md border bg-background hover:bg-muted/50 dark:bg-card dark:border-input dark:hover:bg-input/50 px-3 py-1.5 text-sm text-muted-foreground shadow-none h-8 w-48 lg:w-56 xl:w-64 justify-start relative"
+        className="hidden md:inline-flex items-center gap-2 rounded-md border bg-background hover:bg-muted/50 dark:bg-card dark:hover:bg-muted/50 px-3 py-1.5 text-sm text-muted-foreground shadow-none h-8 w-48 lg:w-56 xl:w-64 justify-start relative"
         onClick={openDialog}
       >
         <Search className="size-4" />
@@ -108,7 +108,7 @@ export function SearchDialog() {
         <div className="dialog-backdrop" onClick={closeDialog}></div>
         <div className="dialog-panel w-[calc(100%-2rem)] max-w-lg rounded-xl border-none bg-card p-2 pb-11 shadow-2xl ring-4 ring-border/80 dark:bg-card">
           <div className="relative">
-            <div className="flex h-9 items-center gap-2 rounded-md border bg-input/50 px-3">
+            <div className="flex h-9 items-center gap-2 rounded-md border bg-muted/50 px-3">
               <Search
                 className="size-4 shrink-0 opacity-50"
                 aria-hidden="true"
@@ -155,7 +155,7 @@ export function SearchDialog() {
                     type="button"
                     aria-selected={index === selectedIndex}
                     data-selected={index === selectedIndex}
-                    className="relative flex w-full cursor-default select-none items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm outline-none data-[selected=true]:border-input data-[selected=true]:bg-input/50"
+                    className="relative flex w-full cursor-default select-none items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm outline-none data-[selected=true]:border-border data-[selected=true]:bg-muted/50"
                     onClick={() => navigateToResult(result)}
                     onMouseEnter={() => setSelectedIndex(index)}
                   >

@@ -2,8 +2,7 @@
 
 @utility checkbox {
   @layer l1.l2 {
-    @apply border-input size-4 shrink-0 rounded-[4px] border shadow-xs transition-[box-shadow,background-color,border-color] outline-none appearance-none cursor-pointer;
-    @apply dark:bg-input/30;
+    @apply border-input-border bg-input size-4 shrink-0 rounded-[4px] border shadow-input transition-[box-shadow,background-color,border-color] outline-none appearance-none cursor-pointer;
     @apply checked:bg-primary checked:border-primary;
     @apply disabled:cursor-not-allowed disabled:opacity-50;
     @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
