@@ -69,6 +69,9 @@
   --btn-foreground: oklch(0.145 0 0);
   --btn-border: oklch(0.922 0 0);
   --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  --track: oklch(0.922 0 0);
+  --thumb: oklch(1 0 0);
 }
 
 .dark {
@@ -104,6 +107,9 @@
   --btn-foreground: oklch(0.985 0 0);
   --btn-border: oklch(1 0 0 / 15%);
   --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  --track: oklch(1 0 0 / 12%);
+  --thumb: oklch(0.145 0 0);
 }
 
 @theme inline {
@@ -140,6 +146,9 @@
   --color-btn-foreground: var(--btn-foreground);
   --color-btn-border: var(--btn-border);
   --shadow-btn: var(--btn-shadow);
+
+  --color-track: var(--track);
+  --color-thumb: var(--thumb);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
