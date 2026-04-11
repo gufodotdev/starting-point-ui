@@ -1,0 +1,63 @@
+/* Starting Point UI Slider Styles */
+
+@utility slider {
+  @layer l1.l2 {
+    @apply h-4 w-full appearance-none bg-transparent outline-none cursor-pointer;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+
+    &::-webkit-slider-runnable-track {
+      @apply h-1 w-full rounded-full;
+      background: linear-gradient(
+        to right,
+        var(--primary) 0% var(--val, 0%),
+        var(--track) var(--val, 0%) 100%
+      );
+    }
+
+    &::-moz-range-track {
+      @apply h-1 w-full rounded-full;
+      background: linear-gradient(
+        to right,
+        var(--primary) 0% var(--val, 0%),
+        var(--track) var(--val, 0%) 100%
+      );
+    }
+
+    &::-webkit-slider-thumb {
+      @apply size-3 appearance-none rounded-full bg-thumb border border-primary shadow-sm transition-[box-shadow];
+      margin-top: calc((0.25rem - 0.75rem) / 2);
+    }
+
+    &::-moz-range-thumb {
+      @apply size-3 rounded-full bg-thumb border border-primary shadow-sm transition-[box-shadow];
+    }
+
+    &:hover::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+    &:hover::-moz-range-thumb {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+
+    &:focus-visible::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+    &:focus-visible::-moz-range-thumb {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+
+    &:active::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+    &:active::-moz-range-thumb {
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+
+    &[aria-invalid="true"]::-webkit-slider-thumb {
+      border-color: var(--destructive);
+    }
+    &[aria-invalid="true"]::-moz-range-thumb {
+      border-color: var(--destructive);
+    }
+  }
+}

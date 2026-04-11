@@ -1,0 +1,179 @@
+---
+title: Slider
+description: A Tailwind CSS slider component for selecting a value from a range.
+---
+
+A Tailwind CSS slider component for selecting a value from a range.
+
+```html preview
+<input
+  type="range"
+  class="slider"
+  min="0"
+  max="100"
+  value="50"
+  style="--val: 50%"
+/>
+```
+
+---
+
+## With label
+
+Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so screen readers announce the control correctly.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label" for="volume">Volume</label>
+    <input
+      type="range"
+      class="slider"
+      id="volume"
+      name="volume"
+      min="0"
+      max="100"
+      value="60"
+      style="--val: 60%"
+    />
+  </div>
+</div>
+```
+
+---
+
+## With value
+
+Show the current value alongside the slider. Add `data-sp-slider-value` to any element and point it at the slider's `id` — the library keeps its text content in sync with the slider.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <div class="flex items-center justify-between">
+      <label class="label" for="brightness">Brightness</label>
+      <span
+        class="text-sm text-muted-foreground"
+        data-sp-slider-value="brightness"
+      >
+        75
+      </span>
+    </div>
+    <input
+      type="range"
+      class="slider"
+      id="brightness"
+      name="brightness"
+      min="0"
+      max="100"
+      value="75"
+      style="--val: 75%"
+    />
+  </div>
+</div>
+```
+
+---
+
+## Stepped
+
+Use the `step` attribute to snap to discrete values.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <div class="flex items-center justify-between">
+      <label class="label" for="price">Max price</label>
+      <span class="text-sm text-muted-foreground" data-sp-slider-value="price">
+        250
+      </span>
+    </div>
+    <input
+      type="range"
+      class="slider"
+      id="price"
+      name="price"
+      min="0"
+      max="500"
+      step="25"
+      value="250"
+      style="--val: 50%"
+    />
+  </div>
+</div>
+```
+
+---
+
+## Disabled
+
+Add `disabled` to the slider and `peer` so the label dims to match.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="grid gap-3">
+    <label class="label peer-disabled:opacity-50" for="disabled-slider">
+      Disabled slider
+    </label>
+    <input
+      type="range"
+      class="slider peer"
+      id="disabled-slider"
+      name="disabled-slider"
+      min="0"
+      max="100"
+      value="40"
+      style="--val: 40%"
+      disabled=""
+    />
+  </div>
+</div>
+```
+
+---
+
+## How it works
+
+The slider component is a utility class applied to a native `<input type="range">` element. The filled portion of the track is painted using a `--val` CSS variable, which the library's JavaScript keeps in sync with the input's current value.
+
+### Structure
+
+Use the `.slider` class on an `<input type="range">`. Always set `min`, `max`, and `value` — the library uses them to compute the fill width. Pair with a `.label` element connected via `for` and `id`, and set the initial fill by passing `--val` as an inline style matching the initial `value`:
+
+```html
+<label class="label" for="volume">Volume</label>
+<input
+  type="range"
+  class="slider"
+  id="volume"
+  min="0"
+  max="100"
+  value="50"
+  style="--val: 50%"
+/>
+```
+
+The library updates `--val` automatically whenever the user interacts with the slider, and also when the `value`, `min`, or `max` attributes change programmatically. The inline `--val` only matters for the initial render — without it, the fill would flash empty until the JavaScript runs.
+
+### Displaying the current value
+
+To show the slider's value in another element, add `data-sp-slider-value` pointing at the slider's `id`. The library keeps the element's text content in sync with the slider as it changes:
+
+```html
+<span data-sp-slider-value="volume">50</span>
+<input type="range" class="slider" id="volume" value="50" style="--val: 50%" />
+```
+
+### Disabled state
+
+Add `disabled` to the slider. Use `peer` on the slider so the label automatically dims via `peer-disabled`:
+
+```html
+<input type="range" class="slider peer" id="sl" disabled />
+<label class="label peer-disabled:opacity-50" for="sl">Disabled</label>
+```
+
+### Class reference
+
+| Class    | Description        |
+| -------- | ------------------ |
+| `slider` | Base slider styles |

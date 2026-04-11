@@ -39,6 +39,7 @@ const navigation = [
       { title: "Separator", href: "/docs/components/separator" },
       { title: "Sheet", href: "/docs/components/sheet" },
       { title: "Sidebar", href: "/docs/components/sidebar" },
+      { title: "Slider", href: "/docs/components/slider" },
       { title: "Switch", href: "/docs/components/switch" },
       { title: "Table", href: "/docs/components/table" },
       { title: "Tabs", href: "/docs/components/tabs" },

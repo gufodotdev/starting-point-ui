@@ -8,6 +8,7 @@ import * as dropdown from "./dropdown";
 import * as popover from "./popover";
 import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
+import "./slider";
 import * as tabs from "./tabs";
 import "./tooltip";
 
