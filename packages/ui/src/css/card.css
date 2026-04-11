@@ -9,7 +9,7 @@
 
 @utility card-default {
   @layer l1 {
-    @apply bg-card border;
+    @apply bg-card border border-card-border shadow-card;
   }
 }
 
