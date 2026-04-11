@@ -26,5 +26,5 @@
 }
 
 @utility btn-group-separator {
-  @apply bg-input relative self-stretch;
+  @apply bg-btn-border relative self-stretch;
 }
