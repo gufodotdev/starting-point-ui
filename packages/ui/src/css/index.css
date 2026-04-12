@@ -76,17 +76,14 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --sidebar-width: 16rem;
-
   --btn: oklch(1 0 0);
   --btn-foreground: oklch(0.145 0 0);
   --btn-border: oklch(0.922 0 0);
   --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --btn-radius: 0.5rem;
   --badge-radius: 9999px;
-
   --track: oklch(0.922 0 0);
   --thumb: oklch(1 0 0);
-
   --font-body: "Inter", sans-serif;
   --font-heading: "Inter", sans-serif;
 }
@@ -127,12 +124,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-
   --btn: oklch(1 0 0 / 4.5%);
   --btn-foreground: oklch(0.985 0 0);
   --btn-border: oklch(1 0 0 / 15%);
   --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-
   --track: oklch(1 0 0 / 12%);
   --thumb: oklch(1 0 0);
 }
@@ -177,22 +172,18 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
   --color-btn: var(--btn);
   --color-btn-foreground: var(--btn-foreground);
   --color-btn-border: var(--btn-border);
   --shadow-btn: var(--btn-shadow);
   --radius-btn: var(--btn-radius);
   --radius-badge: var(--badge-radius);
-
   --color-track: var(--track);
   --color-thumb: var(--thumb);
-
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
   --breakpoint-xs: 540px;
 }
 
