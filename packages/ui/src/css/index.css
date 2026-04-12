@@ -82,6 +82,7 @@
   --btn-border: oklch(0.922 0 0);
   --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --btn-radius: 0.5rem;
+  --badge-radius: 9999px;
 
   --track: oklch(0.922 0 0);
   --thumb: oklch(1 0 0);
@@ -179,6 +180,7 @@
   --color-btn-border: var(--btn-border);
   --shadow-btn: var(--btn-shadow);
   --radius-btn: var(--btn-radius);
+  --radius-badge: var(--badge-radius);
 
   --color-track: var(--track);
   --color-thumb: var(--thumb);
