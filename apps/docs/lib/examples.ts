@@ -6,6 +6,7 @@ import { cache } from "react";
 
 const presets = {
   default: "p-4 sm:p-12 flex flex-wrap items-center justify-center gap-2 max-xxs:[zoom:0.8]",
+  fullpage: "",
 } as const;
 
 export type Preset = keyof typeof presets;
@@ -36,6 +37,11 @@ export const exampleMeta: Record<
       title: "Card Examples",
       description:
         "Free Tailwind CSS card examples. Copy and paste into your project. Built with Starting Point UI and works in any Tailwind project.",
+    },
+    sidebar: {
+      title: "Sidebar Examples",
+      description:
+        "Free Tailwind CSS sidebar examples. Copy and paste into your project. Built with Starting Point UI and works in any Tailwind project.",
     },
   },
 };
