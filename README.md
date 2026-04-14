@@ -1,23 +1,66 @@
 # Starting Point UI
 
+An open-source component library for Tailwind CSS. Inspired by [shadcn/ui](https://ui.shadcn.com), Starting Point UI gives you the same beautiful design system without locking you into a framework. React, Vue, Angular, Django, Laravel, Rails, plain HTML - if it runs Tailwind, it works.
+
+Visit [startingpointui.com](https://www.startingpointui.com) for full documentation, live examples, and an interactive theme editor.
+
 ![Starting Point UI](https://raw.githubusercontent.com/gufodotdev/starting-point-ui/main/.github/startingpointui.png)
 
-An open-source component library built for Tailwind CSS. Inspired by [Shadcn UI](https://ui.shadcn.com).
+## Features
 
-## Documentation
+- **Framework-agnostic** - works with any web stack. Build with React, Vue, Laravel, plain HTML, or anything else that supports Tailwind
+- **Easy to use** - add classes like `btn`, `card`, or `input` and you're done
+- **Accessible** - built with WAI-ARIA patterns, keyboard navigation, and focus management
+- **Dark mode** - works out of the box with Tailwind's dark mode
+- **Themeable** - easy to customize and make your own, follows the same theming principles as shadcn/ui
+- **Lightweight** - just CSS and a small JavaScript module for interactive components
+- **Clean markup** - readable class names, no class soup
 
-Visit [startingpointui.com](https://www.startingpointui.com) for full documentation, component examples, and guides.
+## Components
 
-## Getting Started
+Beautiful components for building complete interfaces:
 
-Visit [startingpointui.com/docs/guides/installation](https://www.startingpointui.com/docs/guides/installation) to get started.
+Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Card, Checkbox, Collapsible, Combobox, Dialog, Dropdown, Field, Input, Input Group, Label, Pagination, Popover, Radio Group, Resizable, Select, Separator, Sheet, Sidebar, Slider, Switch, Table, Tabs, Textarea, Tooltip
 
-## Development
+## Quick Start
 
-```sh
-npm install
-npm run dev
+Install the package:
+
+```bash
+npm install starting-point-ui
 ```
+
+Add the import to your CSS file:
+
+```css
+@import "tailwindcss";
+@import "starting-point-ui";
+```
+
+Use components in your markup:
+
+```html
+<button class="btn btn-primary">Get Started</button>
+```
+
+For interactive components (dialogs, dropdowns, tabs, etc.), add the JavaScript:
+
+```html
+<script
+  src="https://cdn.jsdelivr.net/npm/starting-point-ui@0.15.0"
+  type="module"
+></script>
+```
+
+Or import it in your bundler:
+
+```js
+import "starting-point-ui";
+```
+
+## Philosophy
+
+Starting Point UI is designed to be the first thing you install in any new project. Regardless of what you're building or what framework you choose, the components are always the same - so you can start every project from the same familiar foundation.
 
 ## Community
 

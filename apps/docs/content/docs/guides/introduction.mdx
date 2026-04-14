@@ -1,24 +1,54 @@
 ---
 title: Introduction
-description: Learn what Starting Point UI is and how it can help you build UIs faster.
+description: Learn what Starting Point UI is, how it works, and why it's designed to be the starting point for your next Tailwind CSS project.
 ---
 
-Starting Point UI is an open-source component library built for Tailwind CSS.
+An open-source component library for Tailwind CSS. Inspired by [shadcn/ui](https://ui.shadcn.com), Starting Point UI gives you the same beautiful design system without locking you into a framework. React, Vue, Angular, Django, Laravel, Rails, plain HTML - if it runs Tailwind, it works.
 
 ---
 
 ## What is Starting Point UI?
 
-Tailwind CSS doesn't include pre-built components or JavaScript for interactive elements. Starting Point UI fills this gap by providing class names for common components like buttons, cards, form elements, dialogs, and more. It also includes optional JavaScript for interactive components like dialogs and dropdowns.
+Tailwind CSS is great for styling, but it doesn't include pre-built components or JavaScript for interactive elements. Starting Point UI provides both - a complete set of components like buttons, cards, form elements, dialogs, and more, along with optional JavaScript for interactive components. Everything is built as Tailwind utilities, so you style and customize components the same way you already work with Tailwind. Add classes like `btn`, `card`, or `input` and you're done.
 
-Starting Point UI is designed to work in any Tailwind CSS project regardless of setup. Whether you're using a JavaScript framework, a templating engine, or plain HTML, you can use the same library across all your projects. The JavaScript uses event delegation to ensure interactions work automatically, whether elements were rendered on page load or added dynamically later, making it compatible with most frameworks and rendering models.
-
-Ready to get started? Head over to the [Installation](/docs/guides/installation) guide.
+It works with any web stack, regardless of framework. The JavaScript uses event delegation, so interactive components work automatically whether elements are rendered on page load or added dynamically later. Starting Point UI is designed to be the first thing you install in any new project - regardless of what you're building, the components are always the same, so you can start every project from the same familiar foundation.
 
 ---
 
-## Inspiration
+## Features
 
-The styling is inspired by [Shadcn UI](https://ui.shadcn.com) and uses the same CSS variables, making it easy to adopt for those already familiar with Shadcn.
+- **Framework-agnostic** - works with any web stack that supports Tailwind
+- **Easy to use** - add classes like `btn`, `card`, or `input` and you're done
+- **Accessible** - built with WAI-ARIA patterns, keyboard navigation, and focus management
+- **Dark mode** - works out of the box with Tailwind's dark mode
+- **Themeable** - easy to customize and make your own, follows the same theming principles as shadcn/ui
+- **Lightweight** - just CSS and a small JavaScript module for interactive components
+- **Clean markup** - readable class names, no class soup
 
-The JavaScript takes inspiration from [Bootstrap](https://getbootstrap.com) and [Radix UI](https://www.radix-ui.com).
+---
+
+## FAQ
+
+### How is this different from shadcn/ui?
+
+shadcn/ui is a collection of copy-paste components built for React. Starting Point UI is an installable npm package that works with any framework. The styling and theming follow the same conventions, so if you're familiar with shadcn/ui you'll feel right at home.
+
+### Do I need React to use this?
+
+No. Starting Point UI works with any web stack that supports Tailwind CSS. The JavaScript is vanilla and uses event delegation, so it works with any rendering model.
+
+### Do I need to install JavaScript?
+
+The JavaScript is optional. If you only need static components like buttons, cards, and badges, the CSS is all you need. JavaScript is only required for interactive components like dialogs, dropdowns, and tabs.
+
+### Can I customize it to match my brand?
+
+Yes, it's easy to customize. Starting Point UI uses CSS variables for colors, radius, fonts, and spacing, so you can quickly adjust everything to match your brand. Check out the [Theming](/docs/guides/theming) guide to learn more.
+
+### What version of Tailwind CSS do I need?
+
+Starting Point UI requires Tailwind CSS v4 or later.
+
+---
+
+Ready to get started? Head over to the [Installation](/docs/guides/installation) guide.

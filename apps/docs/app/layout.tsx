@@ -11,8 +11,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  title: "Starting Point UI",
-  description: "An open-source component library built for Tailwind CSS.",
+  title: {
+    default: "Starting Point UI",
+    template: "%s - Starting Point UI",
+  },
+  description:
+    "A framework-agnostic component library for Tailwind CSS, inspired by shadcn/ui.",
 };
 
 export default function RootLayout({

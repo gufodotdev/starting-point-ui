@@ -17,9 +17,9 @@ import Card11 from "@/examples/components/card/11";
 import Card12 from "@/examples/components/card/12";
 
 export const metadata: Metadata = {
-  title: "Starting Point UI - Beautiful Components for Tailwind CSS",
+  title: "Beautiful Components for Tailwind CSS",
   description:
-    "An open-source component library built for Tailwind CSS. Beautiful, accessible, and works in any project.",
+    "An open-source component library for Tailwind CSS. Inspired by shadcn/ui, Starting Point UI gives you the same beautiful design system without locking you into a framework.",
 };
 
 const cards = [
