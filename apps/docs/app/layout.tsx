@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
   title: "Starting Point UI",
   description: "An open-source component library built for Tailwind CSS.",
 };
