@@ -30,7 +30,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased">
+      <body className="antialiased">
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var e=localStorage.getItem("sp-theme-exp");if(e&&Date.now()>Number(e)){localStorage.removeItem("sp-theme");localStorage.removeItem("sp-theme-config");localStorage.removeItem("sp-theme-font");localStorage.removeItem("sp-theme-exp");return}var t=localStorage.getItem("sp-theme");if(t){var s=document.createElement("style");s.id="sp-theme";s.textContent=t;document.head.appendChild(s)}var f=localStorage.getItem("sp-theme-font");if(f){var l=document.createElement("link");l.rel="stylesheet";l.href=f;document.head.appendChild(l)}}catch(e){}})()`,

@@ -10,7 +10,7 @@ A Tailwind CSS card component for grouping content. See more [card examples](/ex
   <img
     src="https://cdn.gufo.dev/stockphotos/fdab3fb9.webp"
     alt="Blog post cover"
-    class="aspect-3/2 object-cover rounded-t-xl w-full"
+    class="aspect-3/2 object-cover rounded-t-card w-full"
   />
   <div class="card-content grid gap-6">
     <div>
@@ -74,7 +74,7 @@ Card content comes in three sizes for different use cases.
     <img
       src="https://cdn.gufo.dev/stockphotos/1fb406af.webp"
       alt="Product"
-      class="aspect-3/2 object-cover rounded-t-xl w-full"
+      class="aspect-3/2 object-cover rounded-t-card w-full"
     />
     <div class="card-content grid gap-6">
       <div>
@@ -123,23 +123,23 @@ Card content comes in three sizes for different use cases.
       <div class="separator"></div>
       <ul class="grid gap-4 text-sm">
         <li class="text-muted-foreground flex items-center">
-          <i class="ri-check-line mr-4 text-lg/none text-green-600"></i>
+          <i class="ri-check-line mr-4 text-lg/none text-primary"></i>
           <span>Up to 10 team members</span>
         </li>
         <li class="text-muted-foreground flex items-center">
-          <i class="ri-check-line mr-4 text-lg/none text-green-600"></i>
+          <i class="ri-check-line mr-4 text-lg/none text-primary"></i>
           <span>50GB cloud storage</span>
         </li>
         <li class="text-muted-foreground flex items-center">
-          <i class="ri-check-line mr-4 text-lg/none text-green-600"></i>
+          <i class="ri-check-line mr-4 text-lg/none text-primary"></i>
           <span>Priority email support</span>
         </li>
         <li class="text-muted-foreground flex items-center">
-          <i class="ri-check-line mr-4 text-lg/none text-green-600"></i>
+          <i class="ri-check-line mr-4 text-lg/none text-primary"></i>
           <span>Advanced analytics dashboard</span>
         </li>
         <li class="text-muted-foreground flex items-center">
-          <i class="ri-check-line mr-4 text-lg/none text-green-600"></i>
+          <i class="ri-check-line mr-4 text-lg/none text-primary"></i>
           <span>API access</span>
         </li>
       </ul>
@@ -232,7 +232,7 @@ Cards can include images or other elements alongside content:
 
 ```html
 <div class="card">
-  <img src="..." alt="..." class="rounded-t-xl" />
+  <img src="..." alt="..." class="rounded-t-card" />
   <div class="card-content">...</div>
 </div>
 ```

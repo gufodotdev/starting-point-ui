@@ -9,7 +9,7 @@ export default function Example() {
         <img
           src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
           alt="Sarah Johnson"
-          className="w-full aspect-square object-cover rounded-xl"
+          className="w-full aspect-square object-cover rounded-card"
         />
         <div>
           <h3 className="text-lg font-semibold tracking-tight">

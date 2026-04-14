@@ -3,13 +3,13 @@ title: Theming
 description: Learn how to customize the Starting Point UI theme to match your brand.
 ---
 
-Starting Point UI follows the same theming conventions as [shadcn/ui](https://ui.shadcn.com/docs/theming). We use the **Neutral** base color by default.
+Starting Point UI uses CSS variables for theming. Override any variable in your CSS to customize the look and feel. Use the **theme editor** in the top right to preview changes and export your theme.
 
 ---
 
 ## Convention
 
-We use a simple `background` and `foreground` convention for colors. The `background` variable is used for the background color of the component and the `foreground` variable is used for the text color.
+We use a `background` and `foreground` convention for colors. The `background` variable is used for the background color of a component and the `foreground` variable is used for the text color.
 
 Given the following CSS variables:
 
@@ -28,7 +28,7 @@ The `background` color of the following component will be `var(--primary)` and t
 
 ## List of variables
 
-Here's the list of variables available for customization:
+Here's the full list of variables available for customization:
 
 ```css
 :root {
@@ -37,20 +37,51 @@ Here's the list of variables available for customization:
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
+  --card-border: oklch(0.922 0 0);
+  --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --card-radius: 0.875rem;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
+  --popover-border: oklch(0.922 0 0);
+  --popover-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --popover-radius: 0.5rem;
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.556 0 0);
+  --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --input: oklch(1 0 0 / 0%);
+  --input-foreground: oklch(0.145 0 0);
+  --input-placeholder: oklch(0.556 0 0);
+  --input-border: oklch(0.922 0 0);
+  --input-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --input-radius: 0.5rem;
   --ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-width: 16rem;
+  --btn: oklch(1 0 0);
+  --btn-foreground: oklch(0.145 0 0);
+  --btn-border: oklch(0.922 0 0);
+  --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --btn-radius: 0.5rem;
+  --badge-radius: 9999px;
+  --track: oklch(0.922 0 0);
+  --thumb: oklch(1 0 0);
+  --font-body: "Inter", sans-serif;
+  --font-heading: "Inter", sans-serif;
 }
 
 .dark {
@@ -58,20 +89,43 @@ Here's the list of variables available for customization:
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
+  --card-border: oklch(1 0 0 / 10%);
+  --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
+  --popover-border: oklch(1 0 0 / 10%);
+  --popover-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.708 0 0);
+  --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --input: oklch(1 0 0 / 4.5%);
+  --input-foreground: oklch(0.985 0 0);
+  --input-placeholder: oklch(0.708 0 0);
+  --input-border: oklch(1 0 0 / 15%);
+  --input-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --ring: oklch(0.556 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.922 0 0);
+  --sidebar-primary-foreground: oklch(0.205 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+  --btn: oklch(1 0 0 / 4.5%);
+  --btn-foreground: oklch(0.985 0 0);
+  --btn-border: oklch(1 0 0 / 15%);
+  --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --track: oklch(1 0 0 / 12%);
+  --thumb: oklch(1 0 0);
 }
 ```
 
@@ -100,9 +154,27 @@ Override any of these variables after importing the library styles:
 
 ---
 
+## Fonts
+
+The library uses two font variables applied in the base layer:
+
+- `--font-body` — applied to `body`, used for all text by default
+- `--font-heading` — applied to `h1` through `h6`
+
+Override them to use different fonts:
+
+```css
+:root {
+  --font-body: "Inter", sans-serif;
+  --font-heading: "Playfair Display", serif;
+}
+```
+
+---
+
 ## Adding new colors
 
-To add new colors, you need to add them to your CSS file and use the `@theme inline` directive to make them available as Tailwind utilities:
+To add new colors, define them in your CSS and use the `@theme inline` directive to make them available as Tailwind utilities:
 
 ```css label="app/globals.css"
 :root {

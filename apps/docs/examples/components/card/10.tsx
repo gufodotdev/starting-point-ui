@@ -8,7 +8,7 @@ export default function Example() {
       <img
         src="https://cdn.gufo.dev/stockphotos/f5ddf336.webp"
         alt="Album cover"
-        className="aspect-square object-cover rounded-t-xl w-full"
+        className="aspect-square object-cover rounded-t-card w-full"
       />
       <div className="card-content grid gap-6">
         <div className="text-center">

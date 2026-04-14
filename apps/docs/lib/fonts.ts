@@ -12,6 +12,42 @@ export const fonts = [
     cdn: "https://fonts.bunny.net/css?family=geist:400,500,600,700",
   },
   {
+    name: "DM Sans",
+    family: "DM Sans",
+    value: '"DM Sans", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=dm-sans:400,500,600,700",
+  },
+  {
+    name: "Plus Jakarta Sans",
+    family: "Plus Jakarta Sans",
+    value: '"Plus Jakarta Sans", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700",
+  },
+  {
+    name: "Space Grotesk",
+    family: "Space Grotesk",
+    value: '"Space Grotesk", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=space-grotesk:400,500,600,700",
+  },
+  {
+    name: "Sora",
+    family: "Sora",
+    value: '"Sora", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=sora:400,500,600,700",
+  },
+  {
+    name: "Outfit",
+    family: "Outfit",
+    value: '"Outfit", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=outfit:400,500,600,700",
+  },
+  {
+    name: "Manrope",
+    family: "Manrope",
+    value: '"Manrope", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=manrope:400,500,600,700",
+  },
+  {
     name: "Nunito",
     family: "Nunito",
     value: '"Nunito", sans-serif',
@@ -40,6 +76,60 @@ export const fonts = [
     family: "Poppins",
     value: '"Poppins", sans-serif',
     cdn: "https://fonts.bunny.net/css?family=poppins:400,500,600,700",
+  },
+  {
+    name: "Lato",
+    family: "Lato",
+    value: '"Lato", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=lato:400,700",
+  },
+  {
+    name: "Open Sans",
+    family: "Open Sans",
+    value: '"Open Sans", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=open-sans:400,500,600,700",
+  },
+  {
+    name: "Work Sans",
+    family: "Work Sans",
+    value: '"Work Sans", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=work-sans:400,500,600,700",
+  },
+  {
+    name: "Lexend",
+    family: "Lexend",
+    value: '"Lexend", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=lexend:400,500,600,700",
+  },
+  {
+    name: "Bricolage Grotesque",
+    family: "Bricolage Grotesque",
+    value: '"Bricolage Grotesque", sans-serif',
+    cdn: "https://fonts.bunny.net/css?family=bricolage-grotesque:400,500,600,700",
+  },
+  {
+    name: "Playfair Display",
+    family: "Playfair Display",
+    value: '"Playfair Display", serif',
+    cdn: "https://fonts.bunny.net/css?family=playfair-display:400,500,600,700",
+  },
+  {
+    name: "Merriweather",
+    family: "Merriweather",
+    value: '"Merriweather", serif',
+    cdn: "https://fonts.bunny.net/css?family=merriweather:400,700",
+  },
+  {
+    name: "Lora",
+    family: "Lora",
+    value: '"Lora", serif',
+    cdn: "https://fonts.bunny.net/css?family=lora:400,500,600,700",
+  },
+  {
+    name: "Source Serif 4",
+    family: "Source Serif 4",
+    value: '"Source Serif 4", serif',
+    cdn: "https://fonts.bunny.net/css?family=source-serif-4:400,500,600,700",
   },
 ];
 

@@ -11,6 +11,20 @@ export type Shade =
   | "900"
   | "950";
 
+export const SHADES: Shade[] = [
+  "50",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+  "950",
+];
+
 export type ColorScale = Record<Shade, string>;
 
 export const primaryColorNames = [
@@ -388,4 +402,70 @@ export const colors: Record<ColorName, ColorScale> = {
     "900": "oklch(0.214 0.009 43.1)",
     "950": "oklch(0.147 0.004 49.3)",
   },
+};
+
+type ShadePair = { light: Shade; dark: Shade };
+
+export const primaryShades: Record<ColorName, ShadePair> = {
+  // brand colors
+  red:     { light: "600", dark: "500" },
+  orange:  { light: "600", dark: "500" },
+  amber:   { light: "600", dark: "500" },
+  yellow:  { light: "600", dark: "500" },
+  lime:    { light: "600", dark: "500" },
+  green:   { light: "600", dark: "500" },
+  emerald: { light: "600", dark: "500" },
+  teal:    { light: "600", dark: "500" },
+  cyan:    { light: "600", dark: "500" },
+  sky:     { light: "600", dark: "500" },
+  blue:    { light: "600", dark: "500" },
+  indigo:  { light: "600", dark: "500" },
+  violet:  { light: "600", dark: "500" },
+  purple:  { light: "600", dark: "500" },
+  fuchsia: { light: "600", dark: "500" },
+  pink:    { light: "600", dark: "500" },
+  rose:    { light: "600", dark: "500" },
+
+  // gray colors
+  slate:   { light: "900", dark: "100" },
+  gray:    { light: "900", dark: "100" },
+  zinc:    { light: "900", dark: "100" },
+  neutral: { light: "900", dark: "100" },
+  stone:   { light: "900", dark: "100" },
+  mauve:   { light: "900", dark: "100" },
+  olive:   { light: "900", dark: "100" },
+  mist:    { light: "900", dark: "100" },
+  taupe:   { light: "900", dark: "100" },
+};
+
+export const accentShades: Record<ColorName, ShadePair> = {
+  // brand colors — same as primary
+  red:     { light: "600", dark: "500" },
+  orange:  { light: "600", dark: "500" },
+  amber:   { light: "600", dark: "500" },
+  yellow:  { light: "600", dark: "500" },
+  lime:    { light: "600", dark: "500" },
+  green:   { light: "600", dark: "500" },
+  emerald: { light: "600", dark: "500" },
+  teal:    { light: "600", dark: "500" },
+  cyan:    { light: "600", dark: "500" },
+  sky:     { light: "600", dark: "500" },
+  blue:    { light: "600", dark: "500" },
+  indigo:  { light: "600", dark: "500" },
+  violet:  { light: "600", dark: "500" },
+  purple:  { light: "600", dark: "500" },
+  fuchsia: { light: "600", dark: "500" },
+  pink:    { light: "600", dark: "500" },
+  rose:    { light: "600", dark: "500" },
+
+  // gray colors — muted, not near-black/white
+  slate:   { light: "500", dark: "400" },
+  gray:    { light: "500", dark: "400" },
+  zinc:    { light: "500", dark: "400" },
+  neutral: { light: "500", dark: "400" },
+  stone:   { light: "500", dark: "400" },
+  mauve:   { light: "500", dark: "400" },
+  olive:   { light: "500", dark: "400" },
+  mist:    { light: "500", dark: "400" },
+  taupe:   { light: "500", dark: "400" },
 };

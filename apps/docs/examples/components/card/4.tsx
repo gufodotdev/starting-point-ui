@@ -20,23 +20,23 @@ export default function Example() {
         <div className="separator"></div>
         <ul className="grid gap-4 text-sm">
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-green-600"></i>
+            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
             <span>Up to 10 team members</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-green-600"></i>
+            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
             <span>50GB cloud storage</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-green-600"></i>
+            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
             <span>Priority email support</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-green-600"></i>
+            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
             <span>Advanced analytics dashboard</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-green-600"></i>
+            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
             <span>API access</span>
           </li>
         </ul>
