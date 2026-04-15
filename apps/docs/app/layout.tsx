@@ -8,9 +8,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
   title: {
     default: "Starting Point UI",
     template: "%s - Starting Point UI",
