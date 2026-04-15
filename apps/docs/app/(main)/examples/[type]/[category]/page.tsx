@@ -29,6 +29,7 @@ export default async function CategoryPage({
 
   const examples = cat.variants.map((v) => ({
     variant: v.variant,
+    description: v.description,
     highlightedCode: v.html,
   }));
 
@@ -43,7 +44,7 @@ export default async function CategoryPage({
         {examples.map((ex) => (
           <Example
             key={ex.variant}
-            variant={ex.variant}
+            description={ex.description}
             viewSrc={`/view/${type}/${category}/${ex.variant}`}
             highlightedCode={ex.highlightedCode}
           />

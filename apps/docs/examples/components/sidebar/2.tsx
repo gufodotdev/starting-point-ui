@@ -1,6 +1,6 @@
 import type { ExampleConfig } from "@/lib/examples";
 
-export const config: ExampleConfig = { preset: "fullpage", classList: "min-h-[800px]" };
+export const config: ExampleConfig = { preset: "fullpage", classList: "min-h-[800px]", description: "Inset layout, flat navigation" };
 
 export default function Example() {
   return (

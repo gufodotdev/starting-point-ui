@@ -1,6 +1,6 @@
 import type { ExampleConfig } from "@/lib/examples";
 
-export const config: ExampleConfig = { preset: "default" };
+export const config: ExampleConfig = { preset: "default", description: "Share document" };
 
 export default function Example() {
   return (

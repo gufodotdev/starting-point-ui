@@ -1,6 +1,6 @@
 import type { ExampleConfig } from "@/lib/examples";
 
-export const config: ExampleConfig = { preset: "fullpage", classList: "min-h-[800px]" };
+export const config: ExampleConfig = { preset: "fullpage", classList: "min-h-[800px]", description: "Default layout, collapsible navigation" };
 
 export default function Example() {
   return (
@@ -36,21 +36,54 @@ export default function Example() {
                   <a href="#" className="menu-btn menu-btn-sm">Settings</a>
                 </div>
               </div>
-              <a href="#" className="menu-btn">
+              <button
+                className="menu-btn"
+                data-sp-toggle="collapsible"
+                data-sp-target="#models-1"
+              >
                 <i className="ri-robot-line"></i>
                 Models
-                <i className="ri-arrow-right-s-line ml-auto"></i>
-              </a>
-              <a href="#" className="menu-btn">
+                <i className="ri-arrow-right-s-line ml-auto transition-transform in-aria-expanded:rotate-90"></i>
+              </button>
+              <div id="models-1" className="collapsible-panel">
+                <div className="menu-subgroup">
+                  <a href="#" className="menu-btn menu-btn-sm">Genesis</a>
+                  <a href="#" className="menu-btn menu-btn-sm">Explorer</a>
+                  <a href="#" className="menu-btn menu-btn-sm">Quantum</a>
+                </div>
+              </div>
+              <button
+                className="menu-btn"
+                data-sp-toggle="collapsible"
+                data-sp-target="#docs-1"
+              >
                 <i className="ri-book-open-line"></i>
                 Documentation
-                <i className="ri-arrow-right-s-line ml-auto"></i>
-              </a>
-              <a href="#" className="menu-btn">
+                <i className="ri-arrow-right-s-line ml-auto transition-transform in-aria-expanded:rotate-90"></i>
+              </button>
+              <div id="docs-1" className="collapsible-panel">
+                <div className="menu-subgroup">
+                  <a href="#" className="menu-btn menu-btn-sm">Introduction</a>
+                  <a href="#" className="menu-btn menu-btn-sm">Get Started</a>
+                  <a href="#" className="menu-btn menu-btn-sm">Tutorials</a>
+                </div>
+              </div>
+              <button
+                className="menu-btn"
+                data-sp-toggle="collapsible"
+                data-sp-target="#settings-1"
+              >
                 <i className="ri-settings-3-line"></i>
                 Settings
-                <i className="ri-arrow-right-s-line ml-auto"></i>
-              </a>
+                <i className="ri-arrow-right-s-line ml-auto transition-transform in-aria-expanded:rotate-90"></i>
+              </button>
+              <div id="settings-1" className="collapsible-panel">
+                <div className="menu-subgroup">
+                  <a href="#" className="menu-btn menu-btn-sm">General</a>
+                  <a href="#" className="menu-btn menu-btn-sm">Team</a>
+                  <a href="#" className="menu-btn menu-btn-sm">Billing</a>
+                </div>
+              </div>
             </div>
             <div className="menu-group">
               <span className="menu-label">Projects</span>

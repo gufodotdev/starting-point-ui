@@ -14,6 +14,7 @@ export type Preset = keyof typeof presets;
 export type ExampleConfig = {
   preset: Preset;
   classList?: string;
+  description: string;
 };
 
 export function getPresetClasses(preset: Preset): string {
@@ -51,6 +52,7 @@ export const exampleMeta: Record<
 export type ExampleVariant = {
   variant: number;
   html: string;
+  description: string;
   presetClasses: string;
 };
 

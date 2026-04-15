@@ -4,12 +4,12 @@ import { useRef, useState } from "react";
 import { Copy, Check, Smartphone, Monitor, Loader2 } from "lucide-react";
 
 type Props = {
-  variant: number;
+  description: string;
   viewSrc: string;
   highlightedCode: string;
 };
 
-export function Example({ variant, viewSrc, highlightedCode }: Props) {
+export function Example({ description, viewSrc, highlightedCode }: Props) {
   const [view, setView] = useState<"preview" | "code">("preview");
   const [isMobile, setIsMobile] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -25,7 +25,7 @@ export function Example({ variant, viewSrc, highlightedCode }: Props) {
   return (
     <div className="rounded-lg border overflow-hidden">
       <div className="flex items-center justify-between px-4 h-12 border-b bg-muted/50">
-        <div className="flex items-center">
+        <div className="flex items-center gap-4">
           <div className="flex rounded border bg-muted p-0.5">
             <button
               onClick={() => setView("preview")}
@@ -48,6 +48,8 @@ export function Example({ variant, viewSrc, highlightedCode }: Props) {
               Code
             </button>
           </div>
+          <div className="separator separator-vertical self-center h-4 hidden sm:block"></div>
+          <span className="text-xs text-muted-foreground hidden sm:block">{description}</span>
         </div>
         <div className="flex items-center gap-1 -mr-2">
           {view === "preview" && (
@@ -91,7 +93,7 @@ export function Example({ variant, viewSrc, highlightedCode }: Props) {
             width: isMobile ? "400px" : "100%",
             maxWidth: "100%",
           }}
-          title={`Example ${variant}`}
+          title={description}
         />
       </div>
       <div className={`overflow-auto max-h-120 lg:max-h-[930px] bg-background ${view === "code" ? "" : "hidden"}`}>

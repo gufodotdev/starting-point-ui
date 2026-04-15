@@ -60,12 +60,17 @@ async function collectExamples() {
             lang: "html",
             themes: { dark: "github-dark", light: "github-light" },
           });
-          const cfg = mod.config ?? {};
+          const cfg = mod.config;
+          if (!cfg?.description) {
+            throw new Error(
+              `Missing description for example "${typeName}/${categoryName}/${variantNum}". Add a description to the config export.`,
+            );
+          }
           const presetClasses = cfg.preset ? getPresetClasses(cfg.preset) : "";
           const customClasses = cfg.classList ?? "";
           const combinedClasses = [presetClasses, customClasses].filter(Boolean).join(" ");
 
-          variants.push({ variant: variantNum, html, presetClasses: combinedClasses });
+          variants.push({ variant: variantNum, html, description: cfg.description, presetClasses: combinedClasses });
         }
 
         const meta = exampleMeta[typeName]?.[categoryName];
