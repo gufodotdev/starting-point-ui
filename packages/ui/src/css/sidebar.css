@@ -12,7 +12,7 @@
     @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0;
     @apply [&:not(.no-animation)]:sidebar:transition-[margin] [&:not(.no-animation)]:sidebar:duration-200 [&:not(.no-animation)]:sidebar:ease-linear;
     /* Mobile animations */
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:max-sidebar:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
     /* Desktop: no animations */
     @apply sidebar:translate-x-0 sidebar:animate-none!;
     /* Default to left */
@@ -148,7 +148,7 @@
   @layer l1.l2 {
     /* Hidden by default, always hidden on desktop */
     @apply fixed inset-0 z-40 bg-black/10 backdrop-blur-xs hidden sidebar:hidden;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:max-sidebar:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
 
     &.open {
       @apply block pointer-events-auto;
