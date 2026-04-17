@@ -10,6 +10,7 @@ import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import "./slider";
 import * as tabs from "./tabs";
+import { toast } from "./toast";
 import "./tooltip";
 
 export {
@@ -22,6 +23,7 @@ export {
   resizable,
   sidebar,
   tabs,
+  toast,
 };
 
 declare global {
@@ -36,6 +38,7 @@ declare global {
       resizable: typeof resizable;
       sidebar: typeof sidebar;
       tabs: typeof tabs;
+      toast: typeof toast;
     };
   }
 }
@@ -51,5 +54,6 @@ if (typeof window !== "undefined") {
     resizable,
     sidebar,
     tabs,
+    toast,
   };
 }

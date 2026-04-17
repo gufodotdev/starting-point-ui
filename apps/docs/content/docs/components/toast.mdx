@@ -1,0 +1,359 @@
+---
+title: Toast
+description: A Tailwind CSS toast component for temporary notifications and feedback messages.
+---
+
+A Tailwind CSS toast component for temporary notifications and feedback messages. Toasts are created programmatically via JavaScript and auto-dismiss after a configurable duration.
+
+```html preview
+<button
+  class="btn"
+  onclick="sp.toast('Event has been created')"
+>
+  Show Toast
+</button>
+```
+
+---
+
+## Types
+
+Set the `type` option for semantic toast variants with icons.
+
+```html preview
+<div class="flex flex-wrap gap-2">
+  <button class="btn" onclick="sp.toast('A default toast notification')">
+    Default
+  </button>
+  <button class="btn" onclick="sp.toast('Changes saved successfully', { type: 'success' })">
+    Success
+  </button>
+  <button class="btn" onclick="sp.toast('Failed to save changes', { type: 'error' })">
+    Error
+  </button>
+  <button class="btn" onclick="sp.toast('This action cannot be undone', { type: 'warning' })">
+    Warning
+  </button>
+  <button class="btn" onclick="sp.toast('A new version is available', { type: 'info' })">
+    Info
+  </button>
+</div>
+```
+
+---
+
+## With description
+
+Add a secondary line of text with the `description` option.
+
+```html preview
+<button
+  class="btn"
+  onclick="sp.toast('Profile updated', { type: 'success', description: 'Your changes have been saved and are now live.' })"
+>
+  With Description
+</button>
+```
+
+---
+
+## With action
+
+Add a clickable action button to the toast.
+
+```html preview
+<button
+  class="btn"
+  onclick="sp.toast('File deleted', { description: 'report-2024.pdf was moved to trash.', action: { label: 'Undo', onClick: () => sp.toast('File restored', { type: 'success' }) } })"
+>
+  With Action
+</button>
+```
+
+---
+
+## Loading and update
+
+Use `type: "loading"` to show a spinner. Loading toasts don't auto-dismiss and aren't dismissible by default. Use `update()` on the returned toast instance to swap it to a different state.
+
+```html preview
+<button
+  class="btn"
+  onclick="(function(){ var t = sp.toast('Loading data...', { type: 'loading' }); setTimeout(function(){ t.update({ title: 'Data loaded successfully', type: 'success' }) }, 2000) })()"
+>
+  Loading → Success
+</button>
+```
+
+---
+
+## Duration
+
+Control how long the toast stays visible (in milliseconds). Default is 4000ms. Set to `0` for a persistent toast that must be dismissed manually.
+
+```html preview
+<div class="flex flex-wrap gap-2">
+  <button
+    class="btn"
+    onclick="sp.toast('Gone in 2 seconds', { duration: 2000 })"
+  >
+    Short (2s)
+  </button>
+  <button
+    class="btn"
+    onclick="sp.toast('Staying for 10 seconds', { duration: 10000 })"
+  >
+    Long (10s)
+  </button>
+  <button
+    class="btn"
+    onclick="sp.toast('I won\'t go away on my own', { duration: 0 })"
+  >
+    Persistent
+  </button>
+</div>
+```
+
+---
+
+## Position
+
+Place the toast container in any corner or centered at the top/bottom of the screen. Default is `bottom-right`.
+
+```html preview
+<div class="flex flex-wrap gap-2">
+  <button
+    class="btn"
+    onclick="sp.toast('Top left', { position: 'top-left' })"
+  >
+    Top Left
+  </button>
+  <button
+    class="btn"
+    onclick="sp.toast('Top center', { position: 'top-center' })"
+  >
+    Top Center
+  </button>
+  <button
+    class="btn"
+    onclick="sp.toast('Top right', { position: 'top-right' })"
+  >
+    Top Right
+  </button>
+  <button
+    class="btn"
+    onclick="sp.toast('Bottom left', { position: 'bottom-left' })"
+  >
+    Bottom Left
+  </button>
+  <button
+    class="btn"
+    onclick="sp.toast('Bottom center', { position: 'bottom-center' })"
+  >
+    Bottom Center
+  </button>
+  <button
+    class="btn"
+    onclick="sp.toast('Bottom right', { position: 'bottom-right' })"
+  >
+    Bottom Right
+  </button>
+</div>
+```
+
+---
+
+## Non-dismissible
+
+Set `dismissible: false` to hide the close button. The toast will only disappear when the duration expires.
+
+```html preview
+<button
+  class="btn"
+  onclick="sp.toast('Processing your request...', { type: 'info', dismissible: false, duration: 3000 })"
+>
+  Non-dismissible
+</button>
+```
+
+---
+
+## How it works
+
+Toasts can be created via JavaScript or declaratively with HTML. The JavaScript module dynamically creates DOM elements and manages their lifecycle (creation, animation, auto-dismiss, removal).
+
+### Usage
+
+Call `sp.toast()` to show a toast:
+
+```js
+// Default toast
+sp.toast("Something happened");
+
+// With type
+sp.toast("Changes saved", { type: "success" });
+sp.toast("Something went wrong", { type: "error" });
+sp.toast("This action cannot be undone", { type: "warning" });
+sp.toast("New update available", { type: "info" });
+sp.toast("Processing...", { type: "loading" });
+
+// With options
+sp.toast("Profile updated", {
+  type: "success",
+  description: "Your changes are now live.",
+  duration: 5000,
+  position: "top-right",
+});
+
+// With action button
+sp.toast("File deleted", {
+  action: {
+    label: "Undo",
+    onClick: () => console.log("Undo clicked"),
+  },
+});
+```
+
+### Updating toasts
+
+`toast()` returns a toast instance with `update()` and `dismiss()` methods. This is useful for loading states where you want to swap the toast content after an async operation completes.
+
+```js
+const t = sp.toast("Creating post...", { type: "loading" });
+
+const res = await fetch("/api/posts", { method: "POST", body });
+
+if (res.ok) {
+  t.update({ title: "Post created", type: "success" });
+} else {
+  t.update({ title: "Failed to create post", type: "error" });
+}
+```
+
+`update()` can change any combination of `title`, `type`, `description`, and `duration`:
+
+```js
+t.update({
+  title: "New title",
+  type: "warning",
+  description: "Something to note",
+  duration: 6000,
+});
+```
+
+### Dismissing toasts
+
+Toasts auto-dismiss after their duration. You can also dismiss them programmatically:
+
+```js
+// Dismiss via the returned instance
+const t = sp.toast("Hello");
+t.dismiss();
+
+// Dismiss by ID
+sp.toast.dismiss(t.id);
+
+// Dismiss all active toasts
+sp.toast.dismissAll();
+```
+
+The auto-dismiss timer pauses when the user hovers over a toast and resumes when they move away.
+
+### Declarative (HTML)
+
+You can trigger toasts without writing JavaScript by adding a `data-sp-toast` attribute to any element. The toast module uses a `MutationObserver` to detect these elements, show the toast, and remove the element from the DOM.
+
+Pass a plain string for a simple toast:
+
+```html
+<div data-sp-toast="Changes saved"></div>
+```
+
+Or pass a JSON object for the full config:
+
+```html
+<div data-sp-toast='{"title":"Post created","type":"success","description":"Your post is now live."}'></div>
+```
+
+This works with any server-side templating language. For example, in Laravel Blade:
+
+```blade
+@if (session('toast'))
+    <div data-sp-toast='@json(session("toast"))'></div>
+@endif
+```
+
+```php
+// Controller
+return redirect()->back()->with('toast', [
+    'title' => 'Post created',
+    'type' => 'success',
+]);
+```
+
+It also works with dynamically rendered elements — React, Livewire, HTMX, or anything that adds nodes to the DOM after page load.
+
+### Options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | `string` | `"default"` | `"success"`, `"error"`, `"warning"`, `"info"`, or `"loading"` |
+| `description` | `string` | — | Secondary text below the title |
+| `duration` | `number` | `4000` | Auto-dismiss delay in ms. Set to `0` for persistent. Loading type defaults to `0` |
+| `position` | `string` | `"bottom-right"` | Where to show the toast |
+| `dismissible` | `boolean` | `true` | Show the close button. Loading type defaults to `false` |
+| `action` | `{ label, onClick }` | — | Action button with click handler |
+
+### Toast instance
+
+The object returned by `sp.toast()`:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Unique toast identifier |
+| `update(options)` | `function` | Update the toast title, type, description, or duration |
+| `dismiss()` | `function` | Dismiss this toast |
+
+### Positions
+
+| Value | Description |
+| --- | --- |
+| `top-left` | Top left corner |
+| `top-center` | Top center |
+| `top-right` | Top right corner |
+| `bottom-left` | Bottom left corner |
+| `bottom-center` | Bottom center |
+| `bottom-right` | Bottom right corner (default) |
+
+### Class reference
+
+These classes are used internally by the toast module. You generally won't write them by hand, but they're available if you need to customize the appearance.
+
+| Class | Description |
+| --- | --- |
+| `toast` | Fixed container that holds toasts |
+| `toast-panel` | Individual toast element |
+| `toast-icon` | Icon wrapper |
+| `toast-content` | Content wrapper (title + description) |
+| `toast-title` | Toast title text |
+| `toast-description` | Secondary description text |
+| `toast-close` | Close/dismiss button |
+| `toast-action` | Action button wrapper |
+| `toast-success` | Success variant |
+| `toast-error` | Error variant |
+| `toast-warning` | Warning variant |
+| `toast-info` | Info variant |
+| `toast-loading` | Loading variant |
+
+### Position classes
+
+Add these to `toast` to control placement:
+
+| Class | Description |
+| --- | --- |
+| `toast-top-left` | Position top left |
+| `toast-top-right` | Position top right |
+| `toast-top-center` | Position top center |
+| `toast-bottom-left` | Position bottom left |
+| `toast-bottom-right` | Position bottom right (default) |
+| `toast-bottom-center` | Position bottom center |
