@@ -1,5 +1,9 @@
 /* Starting Point UI Tooltip Styles */
 
+/* .tooltip-arrow is injected by JS at runtime, so users never write it in
+   their source. Force-emit. */
+@source inline("tooltip-arrow");
+
 @utility tooltip {
   @layer l1.l2 {
     @apply relative inline-block;
