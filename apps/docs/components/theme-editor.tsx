@@ -176,7 +176,7 @@ export function ThemeEditor() {
         aria-labelledby="theme-editor-title"
       >
         <div className="sheet-backdrop bg-transparent! backdrop-blur-none!" />
-        <div className="sheet-panel w-110 max-w-full! flex flex-col">
+        <div className="sheet-panel w-110 max-w-full! flex flex-col overflow-y-auto px-6">
           <button
             type="button"
             className={`btn btn-ghost btn-icon-sm absolute top-2 right-2 z-20 ${showCode ? "hidden" : ""}`}
@@ -193,7 +193,7 @@ export function ThemeEditor() {
           >
             <ArrowLeft />
           </button>
-          <div className="px-6 pt-6 pb-4 border-b">
+          <div className="pt-6 pb-6">
             <h2
               id="theme-editor-title"
               className="text-lg font-semibold tracking-tight"
@@ -212,7 +212,8 @@ export function ThemeEditor() {
               .
             </p>
           </div>
-          <div className="px-6 py-4 flex-1 overflow-y-auto">
+          <hr className="separator" />
+          <div className="py-6 flex-1">
             <div className="space-y-6">
               <div className="space-y-3">
                 <Picker
@@ -402,7 +403,8 @@ export function ThemeEditor() {
               </div>
             </div>
           </div>
-          <div className="flex gap-2 p-6 border-t">
+          <hr className="separator" />
+          <div className="flex gap-2 py-6">
             <button
               type="button"
               className="btn btn-sm flex-1"
