@@ -6,12 +6,10 @@ description: A Tailwind CSS tooltip component for displaying informational text 
 A Tailwind CSS tooltip component for displaying informational text on hover or when the element receives keyboard focus.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/tooltip/1 -->
 <div class="tooltip">
   <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-1">Hover me</button>
   <div class="tooltip-content" id="tip-1" role="tooltip">Tooltip text</div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/tooltip/1 -->
 ```
 
 ---
@@ -21,7 +19,6 @@ A Tailwind CSS tooltip component for displaying informational text on hover or w
 Use `data-sp-placement` to control the tooltip position (default is `top`).
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/tooltip/2 -->
 <div class="tooltip" data-sp-placement="left">
   <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-left">Left</button>
   <div class="tooltip-content" id="tip-left" role="tooltip">Left tooltip</div>
@@ -38,7 +35,6 @@ Use `data-sp-placement` to control the tooltip position (default is `top`).
   <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-right">Right</button>
   <div class="tooltip-content" id="tip-right" role="tooltip">Right tooltip</div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/tooltip/2 -->
 ```
 
 ---
@@ -49,7 +45,6 @@ The tooltip includes a default fade and zoom animation. Add `no-animation` to th
 content element to disable it, or use your own classes with `data-[state=open]:` selectors.
 
 ```html preview
-<!-- START https://startingpointui.com/examples/docs/tooltip/3 -->
 <div class="tooltip">
   <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-default">Default</button>
   <div class="tooltip-content" id="tip-default" role="tooltip">Default animation</div>
@@ -70,7 +65,6 @@ content element to disable it, or use your own classes with `data-[state=open]:`
     Custom animation
   </div>
 </div>
-<!-- END https://startingpointui.com/examples/docs/tooltip/3 -->
 ```
 
 The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. 
