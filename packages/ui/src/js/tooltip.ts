@@ -1,28 +1,13 @@
 // Starting Point UI Tooltip Module
 
+import { type Placement } from "@floating-ui/dom";
 import {
-  computePosition,
-  flip,
-  shift,
-  offset,
-  arrow,
-  type Placement,
-} from "@floating-ui/dom";
-import { waitForAnimations } from "./utils";
-
-let tooltipIdCounter = 0;
-const targetStates = new WeakMap<HTMLElement, "open" | "close">();
-
-const STATIC_SIDE: Record<string, string> = {
-  top: "bottom",
-  right: "left",
-  bottom: "top",
-  left: "right",
-};
-
-function getContent(tooltip: HTMLElement): HTMLElement | null {
-  return tooltip.querySelector(".tooltip-content");
-}
+  closePoppable,
+  getOpenPoppable,
+  openPoppable,
+  positionFloating,
+  type PoppableConfig,
+} from "./utils";
 
 function getOrCreateArrow(content: HTMLElement): HTMLElement {
   let arrowEl = content.querySelector<HTMLElement>(".tooltip-arrow");
@@ -34,120 +19,35 @@ function getOrCreateArrow(content: HTMLElement): HTMLElement {
   return arrowEl;
 }
 
-function getTrigger(tooltip: HTMLElement): HTMLElement | null {
-  return tooltip.querySelector("[data-sp-toggle='tooltip']");
-}
-
-function ensureContentId(content: HTMLElement): string {
-  if (!content.id) {
-    content.id = `sp-tooltip-${++tooltipIdCounter}`;
-  }
-  return content.id;
-}
-
-function getOpenTooltip(): HTMLElement | null {
-  const openContent = document.querySelector(".tooltip-content.open");
-  return openContent?.closest(".tooltip") ?? null;
-}
-
-async function positionContent(tooltip: HTMLElement) {
-  const trigger = getTrigger(tooltip);
-  const content = getContent(tooltip);
-  if (!trigger || !content) return;
-
-  const arrowEl = getOrCreateArrow(content);
-  const placement =
-    (tooltip.dataset.spPlacement as Placement) || "top";
-
-  const result = await computePosition(trigger, content, {
-    placement,
-    middleware: [
-      offset(8),
-      flip(),
-      shift({ padding: 8 }),
-      arrow({ element: arrowEl, padding: 4 }),
-    ],
-  });
-
-  Object.assign(content.style, {
-    left: `${result.x}px`,
-    top: `${result.y}px`,
-  });
-
-  if (result.middlewareData.arrow) {
-    const { x, y } = result.middlewareData.arrow;
-    const side = STATIC_SIDE[result.placement.split("-")[0]];
-
-    Object.assign(arrowEl.style, {
-      left: x != null ? `${x}px` : "",
-      top: y != null ? `${y}px` : "",
-      [side]: "-4px",
+const CONFIG: PoppableConfig = {
+  rootSelector: ".tooltip",
+  contentSelector: ".tooltip-content",
+  triggerSelector: "[data-sp-toggle='tooltip']",
+  ariaExpanded: false,
+  position: async (root, trigger, content) => {
+    await positionFloating(trigger, content, {
+      placement: (root.dataset.spPlacement as Placement) || "top",
+      offset: 8,
+      arrow: getOrCreateArrow(content),
     });
-  }
-}
+  },
+};
 
-async function open(tooltip: HTMLElement) {
-  const content = getContent(tooltip);
-  if (!content || content.classList.contains("open")) return;
-
-  const openTooltip = getOpenTooltip();
-  if (openTooltip) {
-    close(openTooltip);
-  }
-
-  // Make the element measurable but invisible so position can be computed
-  // before the tooltip becomes visible and the animation starts.
-  targetStates.set(content, "open");
-  content.style.visibility = "hidden";
-  content.classList.add("open");
-
-  await positionContent(tooltip);
-
-  if (targetStates.get(content) !== "open") return;
-
-  content.style.visibility = "";
-  content.setAttribute("data-state", "open");
-
-  const trigger = getTrigger(tooltip);
-  if (trigger) {
-    trigger.setAttribute("aria-describedby", ensureContentId(content));
-  }
-}
-
-async function close(tooltip: HTMLElement) {
-  const content = getContent(tooltip);
-  if (!content || !content.classList.contains("open")) return;
-
-  targetStates.set(content, "close");
-  content.setAttribute("data-state", "closed");
-
-  await waitForAnimations([content]);
-
-  if (targetStates.get(content) !== "close") return;
-
-  content.classList.remove("open");
-  content.removeAttribute("data-state");
-
-  const trigger = getTrigger(tooltip);
-  if (trigger) {
-    trigger.removeAttribute("aria-describedby");
-  }
-}
+const open = (tooltip: HTMLElement) => openPoppable(tooltip, CONFIG);
+const close = (tooltip: HTMLElement) => closePoppable(tooltip, CONFIG);
 
 function handleMouseOver(e: MouseEvent) {
   const target = e.target as HTMLElement;
-  const trigger = target.closest<HTMLElement>("[data-sp-toggle='tooltip']");
+  const trigger = target.closest<HTMLElement>(CONFIG.triggerSelector);
   if (!trigger) return;
 
-  const tooltip = trigger.closest<HTMLElement>(".tooltip");
-  if (tooltip) {
-    open(tooltip);
-  }
+  const tooltip = trigger.closest<HTMLElement>(CONFIG.rootSelector);
+  if (tooltip) open(tooltip);
 }
 
 function handleMouseOut(e: MouseEvent) {
   const target = e.target as HTMLElement;
-  const tooltip = target.closest<HTMLElement>(".tooltip");
+  const tooltip = target.closest<HTMLElement>(CONFIG.rootSelector);
   if (!tooltip) return;
 
   const related = e.relatedTarget as HTMLElement | null;
@@ -158,18 +58,16 @@ function handleMouseOut(e: MouseEvent) {
 
 function handleFocusIn(e: FocusEvent) {
   const target = e.target as HTMLElement;
-  const trigger = target.closest<HTMLElement>("[data-sp-toggle='tooltip']");
+  const trigger = target.closest<HTMLElement>(CONFIG.triggerSelector);
   if (!trigger) return;
 
-  const tooltip = trigger.closest<HTMLElement>(".tooltip");
-  if (tooltip) {
-    open(tooltip);
-  }
+  const tooltip = trigger.closest<HTMLElement>(CONFIG.rootSelector);
+  if (tooltip) open(tooltip);
 }
 
 function handleFocusOut(e: FocusEvent) {
   const target = e.target as HTMLElement;
-  const tooltip = target.closest<HTMLElement>(".tooltip");
+  const tooltip = target.closest<HTMLElement>(CONFIG.rootSelector);
   if (!tooltip) return;
 
   const related = e.relatedTarget as HTMLElement | null;
@@ -181,11 +79,11 @@ function handleFocusOut(e: FocusEvent) {
 function handleKeydown(e: KeyboardEvent) {
   if (e.key !== "Escape") return;
 
-  const openTooltip = getOpenTooltip();
+  const openTooltip = getOpenPoppable(CONFIG);
   if (!openTooltip) return;
 
   e.preventDefault();
-  const trigger = getTrigger(openTooltip);
+  const trigger = openTooltip.querySelector<HTMLElement>(CONFIG.triggerSelector);
   close(openTooltip);
   trigger?.focus();
 }

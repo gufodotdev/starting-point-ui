@@ -8,8 +8,8 @@ A Tailwind CSS tooltip component for displaying informational text on hover or w
 ```html preview
 <!-- START https://startingpointui.com/examples/docs/tooltip/1 -->
 <div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip">Hover me</button>
-  <div class="tooltip-content" role="tooltip">Tooltip text</div>
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-1">Hover me</button>
+  <div class="tooltip-content" id="tip-1" role="tooltip">Tooltip text</div>
 </div>
 <!-- END https://startingpointui.com/examples/docs/tooltip/1 -->
 ```
@@ -23,20 +23,20 @@ Use `data-sp-placement` to control the tooltip position (default is `top`).
 ```html preview
 <!-- START https://startingpointui.com/examples/docs/tooltip/2 -->
 <div class="tooltip" data-sp-placement="left">
-  <button class="btn" data-sp-toggle="tooltip">Left</button>
-  <div class="tooltip-content" role="tooltip">Left tooltip</div>
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-left">Left</button>
+  <div class="tooltip-content" id="tip-left" role="tooltip">Left tooltip</div>
 </div>
 <div class="tooltip" data-sp-placement="top">
-  <button class="btn" data-sp-toggle="tooltip">Top</button>
-  <div class="tooltip-content" role="tooltip">Top tooltip</div>
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-top">Top</button>
+  <div class="tooltip-content" id="tip-top" role="tooltip">Top tooltip</div>
 </div>
 <div class="tooltip" data-sp-placement="bottom">
-  <button class="btn" data-sp-toggle="tooltip">Bottom</button>
-  <div class="tooltip-content" role="tooltip">Bottom tooltip</div>
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-bottom">Bottom</button>
+  <div class="tooltip-content" id="tip-bottom" role="tooltip">Bottom tooltip</div>
 </div>
 <div class="tooltip" data-sp-placement="right">
-  <button class="btn" data-sp-toggle="tooltip">Right</button>
-  <div class="tooltip-content" role="tooltip">Right tooltip</div>
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-right">Right</button>
+  <div class="tooltip-content" id="tip-right" role="tooltip">Right tooltip</div>
 </div>
 <!-- END https://startingpointui.com/examples/docs/tooltip/2 -->
 ```
@@ -51,19 +51,20 @@ content element to disable it, or use your own classes with `data-[state=open]:`
 ```html preview
 <!-- START https://startingpointui.com/examples/docs/tooltip/3 -->
 <div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip">Default</button>
-  <div class="tooltip-content" role="tooltip">Default animation</div>
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-default">Default</button>
+  <div class="tooltip-content" id="tip-default" role="tooltip">Default animation</div>
 </div>
 <div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip">No Animation</button>
-  <div class="tooltip-content no-animation" role="tooltip">No animation</div>
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-noanim">No Animation</button>
+  <div class="tooltip-content no-animation" id="tip-noanim" role="tooltip">No animation</div>
 </div>
 <div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip">
+  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-slide">
     Slide from Bottom
   </button>
   <div
     class="tooltip-content no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom"
+    id="tip-slide"
     role="tooltip"
   >
     Custom animation
@@ -91,8 +92,8 @@ A tooltip consists of three parts:
 
 ```html
 <div class="tooltip">
-  <button data-sp-toggle="tooltip">Hover me</button>
-  <div class="tooltip-content" role="tooltip">Tooltip text</div>
+  <button data-sp-toggle="tooltip" aria-describedby="my-tip">Hover me</button>
+  <div class="tooltip-content" id="my-tip" role="tooltip">Tooltip text</div>
 </div>
 ```
 
@@ -120,7 +121,7 @@ To customize animations, add `no-animation` to disable the defaults and use your
 
 ### Accessibility
 
-The tooltip JavaScript module shows content on both hover and keyboard focus for full accessibility.
+The tooltip JavaScript module shows content on both hover and keyboard focus.
 
 Add `role="tooltip"` to the content element:
 
@@ -128,9 +129,26 @@ Add `role="tooltip"` to the content element:
 <div class="tooltip-content" role="tooltip">Tooltip text</div>
 ```
 
-When the tooltip opens, an `aria-describedby` attribute is automatically added to the trigger element, 
-linking it to the tooltip content. An `id` is auto-generated on `.tooltip-content` if 
-one isn't already present. If you provide your own `id`, it will be used instead.
+For screen reader users, link the trigger to the content with `aria-describedby`.
+Add an `id` to the content and point the trigger at it:
+
+```html
+<div class="tooltip">
+  <button
+    class="btn"
+    data-sp-toggle="tooltip"
+    aria-describedby="save-tip"
+  >
+    Save
+  </button>
+  <div class="tooltip-content" id="save-tip" role="tooltip">
+    Saves your changes
+  </div>
+</div>
+```
+
+Without `aria-describedby`, the tooltip still works visually but its content
+won't be announced by screen readers.
 
 #### Keyboard navigation
 
@@ -152,8 +170,8 @@ All available classes for the tooltip component.
 
 ```html
 <div class="tooltip">
-  <button data-sp-toggle="tooltip">Hover me</button>
-  <div class="tooltip-content" role="tooltip">Tooltip text</div>
+  <button data-sp-toggle="tooltip" aria-describedby="my-tip">Hover me</button>
+  <div class="tooltip-content" id="my-tip" role="tooltip">Tooltip text</div>
 </div>
 ```
 
@@ -169,7 +187,7 @@ All data attributes for the tooltip component.
 
 ```html
 <div class="tooltip" data-sp-placement="bottom">
-  <button data-sp-toggle="tooltip">Hover me</button>
-  <div class="tooltip-content" role="tooltip">Tooltip text</div>
+  <button data-sp-toggle="tooltip" aria-describedby="my-tip">Hover me</button>
+  <div class="tooltip-content" id="my-tip" role="tooltip">Tooltip text</div>
 </div>
 ```

@@ -215,6 +215,41 @@ Use `data-sp-placement` to control the popover position (default is `bottom`).
 
 ---
 
+## Offset
+
+Use `data-sp-offset` to control the distance between the trigger and the popover (default is `4`).
+
+```html preview
+<div class="popover" data-sp-offset="0">
+  <button
+    class="btn"
+    type="button"
+    data-sp-toggle="popover"
+    aria-expanded="false"
+  >
+    No offset
+  </button>
+  <div class="popover-content">
+    <p class="text-sm">Flush against the trigger.</p>
+  </div>
+</div>
+<div class="popover" data-sp-offset="12">
+  <button
+    class="btn"
+    type="button"
+    data-sp-toggle="popover"
+    aria-expanded="false"
+  >
+    Large offset
+  </button>
+  <div class="popover-content">
+    <p class="text-sm">12 pixels of breathing room.</p>
+  </div>
+</div>
+```
+
+---
+
 ## How it works
 
 The popover component uses a small JavaScript module that handles opening, closing, positioning, and focus trapping.
@@ -370,14 +405,15 @@ All available classes for the popover component.
 
 All data attributes for the popover component.
 
-| Attribute                   | Element     | Description                                 |
-| --------------------------- | ----------- | ------------------------------------------- |
-| `data-sp-toggle="popover"`  | Button      | Toggles the popover                         |
-| `data-sp-placement`         | `.popover`  | Content position (default: `bottom`)        |
-| `data-state`                | Content     | Set to `open` when content is visible       |
+| Attribute                   | Element     | Description                                    |
+| --------------------------- | ----------- | ---------------------------------------------- |
+| `data-sp-toggle="popover"`  | Button      | Toggles the popover                            |
+| `data-sp-placement`         | `.popover`  | Content position (default: `bottom`)           |
+| `data-sp-offset`            | `.popover`  | Distance from trigger in pixels (default: `4`) |
+| `data-state`                | Content     | Set to `open` when content is visible          |
 
 ```html
-<div class="popover" data-sp-placement="bottom-start">
+<div class="popover" data-sp-placement="bottom-start" data-sp-offset="8">
   <button data-sp-toggle="popover" aria-expanded="false">Open</button>
   <div class="popover-content">
     <!-- Any content -->

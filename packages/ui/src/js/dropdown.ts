@@ -1,96 +1,44 @@
 // Starting Point UI Dropdown Module
 
+import { type Placement } from "@floating-ui/dom";
 import {
-  computePosition,
-  flip,
-  shift,
-  offset,
-  type Placement,
-} from "@floating-ui/dom";
-import { findNextEnabled, isDisabled, waitForAnimations } from "./utils";
+  closeIfOutside,
+  closePoppable,
+  findNextEnabled,
+  focusFirstEnabledItem,
+  getOpenPoppable,
+  isDisabled,
+  openPoppable,
+  positionFloating,
+  togglePoppable,
+  type PoppableConfig,
+} from "./utils";
 
-function getMenu(dropdown: HTMLElement): HTMLElement | null {
-  return dropdown.querySelector(".dropdown-menu");
-}
+const CONFIG: PoppableConfig = {
+  rootSelector: ".dropdown",
+  contentSelector: ".dropdown-menu",
+  triggerSelector: "[data-sp-toggle='dropdown']",
+  position: async (root, trigger, menu) => {
+    await positionFloating(trigger, menu, {
+      placement: (root.dataset.spPlacement as Placement) || "bottom-end",
+      offset: parseInt(root.dataset.spOffset || "4", 10),
+    });
+  },
+  onAfterOpen: (_root, menu) => {
+    focusFirstEnabledItem(menu, ".dropdown-item");
+  },
+};
 
-function getTrigger(dropdown: HTMLElement): HTMLElement | null {
-  return dropdown.querySelector("[data-sp-toggle='dropdown']");
-}
-
-function getOpenDropdown(): HTMLElement | null {
-  const openMenu = document.querySelector(".dropdown-menu.open");
-  return openMenu?.closest(".dropdown") ?? null;
-}
-
-async function positionMenu(dropdown: HTMLElement) {
-  const trigger = getTrigger(dropdown);
-  const menu = getMenu(dropdown);
-  if (!trigger || !menu) return;
-
-  const placement = (dropdown.dataset.spPlacement as Placement) || "bottom-end";
-  const offsetValue = parseInt(dropdown.dataset.spOffset || "4", 10);
-
-  const { x, y } = await computePosition(trigger, menu, {
-    placement,
-    middleware: [offset(offsetValue), flip(), shift({ padding: 8 })],
-  });
-
-  Object.assign(menu.style, {
-    left: `${x}px`,
-    top: `${y}px`,
-  });
-}
-
-export function open(dropdown: HTMLElement) {
-  const menu = getMenu(dropdown);
-  if (!menu || menu.classList.contains("open")) return;
-
-  // Close any other open dropdown first
-  const openDropdown = getOpenDropdown();
-  if (openDropdown) {
-    close(openDropdown);
-  }
-
-  const trigger = getTrigger(dropdown);
-
-  menu.classList.add("open");
-  trigger?.setAttribute("aria-expanded", "true");
-  menu.setAttribute("data-state", "open");
-
-  positionMenu(dropdown);
-}
-
-export async function close(dropdown: HTMLElement) {
-  const menu = getMenu(dropdown);
-  if (!menu || !menu.classList.contains("open")) return;
-
-  const trigger = getTrigger(dropdown);
-
-  trigger?.setAttribute("aria-expanded", "false");
-  menu.setAttribute("data-state", "closed");
-
-  await waitForAnimations([menu]);
-
-  menu.classList.remove("open");
-  menu.removeAttribute("data-state");
-}
-
-export function toggle(dropdown: HTMLElement) {
-  const menu = getMenu(dropdown);
-  if (menu?.classList.contains("open")) {
-    close(dropdown);
-  } else {
-    open(dropdown);
-  }
-}
+export const open = (dropdown: HTMLElement) => openPoppable(dropdown, CONFIG);
+export const close = (dropdown: HTMLElement) => closePoppable(dropdown, CONFIG);
+export const toggle = (dropdown: HTMLElement) => togglePoppable(dropdown, CONFIG);
 
 function handleClick(e: MouseEvent) {
   const target = e.target as HTMLElement;
 
-  // Handle toggle button clicks
-  const toggleBtn = target.closest<HTMLElement>("[data-sp-toggle='dropdown']");
+  const toggleBtn = target.closest<HTMLElement>(CONFIG.triggerSelector);
   if (toggleBtn) {
-    const dropdown = toggleBtn.closest<HTMLElement>(".dropdown");
+    const dropdown = toggleBtn.closest<HTMLElement>(CONFIG.rootSelector);
     if (dropdown) {
       e.preventDefault();
       toggle(dropdown);
@@ -98,56 +46,43 @@ function handleClick(e: MouseEvent) {
     return;
   }
 
-  // Handle item clicks
   const item = target.closest<HTMLElement>(".dropdown-item");
   if (item) {
-    // Ignore disabled items
     if (isDisabled(item)) {
       e.preventDefault();
       return;
     }
-    const dropdown = item.closest<HTMLElement>(".dropdown");
-    if (dropdown) {
-      close(dropdown);
-    }
+    const dropdown = item.closest<HTMLElement>(CONFIG.rootSelector);
+    if (dropdown) close(dropdown);
     return;
   }
 
-  // Close dropdown when clicking outside
-  const openDropdown = getOpenDropdown();
-  if (openDropdown && !openDropdown.contains(target)) {
-    close(openDropdown);
-  }
+  closeIfOutside(target, CONFIG);
 }
 
 function handleKeydown(e: KeyboardEvent) {
   const target = e.target as HTMLElement;
-  const dropdown = target.closest<HTMLElement>(".dropdown");
+  const dropdown = target.closest<HTMLElement>(CONFIG.rootSelector);
 
-  // Handle Escape to close
-  const openDropdown = getOpenDropdown();
+  const openDropdown = getOpenPoppable(CONFIG);
   if (e.key === "Escape" && openDropdown) {
     e.preventDefault();
-    const trigger = getTrigger(openDropdown);
+    const trigger = openDropdown.querySelector<HTMLElement>(CONFIG.triggerSelector);
     close(openDropdown);
     trigger?.focus();
     return;
   }
 
-  // Handle Enter/Space on trigger
   if (
     (e.key === "Enter" || e.key === " ") &&
-    target.matches("[data-sp-toggle='dropdown']")
+    target.matches(CONFIG.triggerSelector)
   ) {
     e.preventDefault();
-    if (dropdown) {
-      toggle(dropdown);
-    }
+    if (dropdown) toggle(dropdown);
     return;
   }
 
-  // Handle arrow navigation within menu
-  const menu = dropdown ? getMenu(dropdown) : null;
+  const menu = dropdown?.querySelector<HTMLElement>(CONFIG.contentSelector);
   if (!menu?.classList.contains("open")) return;
 
   const items = [...menu.querySelectorAll<HTMLElement>(".dropdown-item")];
@@ -167,8 +102,7 @@ function handleKeydown(e: KeyboardEvent) {
     case "ArrowUp":
       e.preventDefault();
       if (currentIndex < 0) {
-        nextItem =
-          [...items].reverse().find((item) => !isDisabled(item)) ?? null;
+        nextItem = [...items].reverse().find((item) => !isDisabled(item)) ?? null;
       } else {
         nextItem = findNextEnabled(items, currentIndex, -1);
       }
@@ -183,24 +117,13 @@ function handleKeydown(e: KeyboardEvent) {
       break;
   }
 
-  if (nextItem) {
-    nextItem.focus();
-  }
+  nextItem?.focus();
 }
 
 function handleFocusOut(e: FocusEvent) {
-  const openDropdown = getOpenDropdown();
-  if (!openDropdown) return;
-
-  const relatedTarget = e.relatedTarget as HTMLElement | null;
-
-  // If focus is moving outside the dropdown, close it
-  if (!relatedTarget || !openDropdown.contains(relatedTarget)) {
-    close(openDropdown);
-  }
+  closeIfOutside(e.relatedTarget as HTMLElement | null, CONFIG);
 }
 
-// Initialize global listeners
 let initialized = false;
 
 (function init() {
