@@ -1,5 +1,9 @@
 /* Starting Point UI Toast Styles */
 
+/* Toast classes are applied by JS at runtime, so they never appear in the
+   user's source files for Tailwind to scan. Force-emit them. */
+@source inline("{toast,toast-panel,toast-content,toast-title,toast-description,toast-icon,toast-close,toast-action,toast-success,toast-error,toast-warning,toast-info,toast-loading,toast-top-left,toast-top-right,toast-top-center,toast-bottom-left,toast-bottom-right,toast-bottom-center}");
+
 @utility toast {
   @layer l1.l2 {
     @apply fixed z-999 pointer-events-none list-none m-0 p-0;
