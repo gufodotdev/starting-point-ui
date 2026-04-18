@@ -488,15 +488,20 @@ The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-an
 
 ### Accessibility
 
-The dropdown JavaScript module provides full keyboard navigation and proper ARIA attributes.
-
-For proper accessibility, add `aria-expanded="false"` to the trigger button:
+The dropdown provides full keyboard navigation and manages the `aria-expanded` state at runtime. Add `aria-expanded="false"` to the trigger button. The JavaScript toggles it to `"true"` when the menu opens:
 
 ```html
 <button data-sp-toggle="dropdown" aria-expanded="false">Open</button>
 ```
 
-The JavaScript will automatically update `aria-expanded` when the dropdown opens and closes.
+The dropdown does not add `role="menu"` or `role="menuitem"` by default. Dropdowns are used for many things in practice (actions, navigation links, search inputs, forms) and those patterns don't all fit the strict ARIA menu model. If your dropdown is exclusively a list of command actions (Edit, Delete, etc.), you can opt into true menu semantics by adding the roles yourself:
+
+```html
+<div class="dropdown-menu" role="menu">
+  <a href="#" class="dropdown-item" role="menuitem">Edit</a>
+  <a href="#" class="dropdown-item" role="menuitem">Delete</a>
+</div>
+```
 
 #### Keyboard navigation
 
@@ -543,6 +548,7 @@ All data attributes for the dropdown component.
 | `data-sp-toggle="dropdown"` | Button      | Toggles the dropdown                           |
 | `data-sp-placement`         | `.dropdown` | Menu position (default: `bottom-end`)          |
 | `data-sp-offset`            | `.dropdown` | Distance from trigger in pixels (default: `4`) |
+| `aria-expanded`             | Button      | Set `"false"` initially; JS toggles on open/close |
 | `data-state`                | Menu        | Set to `open` when menu is visible             |
 | `aria-disabled="true"`      | Item        | Disables the item visually and functionally    |
 
