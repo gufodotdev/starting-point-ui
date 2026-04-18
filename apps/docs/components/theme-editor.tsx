@@ -46,7 +46,6 @@ function dot(color: string) {
 }
 
 function loadFont(font: (typeof fonts)[number]) {
-  if (font.name === "Inter") return;
   const id = `sp-font-${font.name.toLowerCase()}`;
   if (document.getElementById(id)) return;
   const link = document.createElement("link");
@@ -64,15 +63,10 @@ function applyTheme(css: string) {
     document.head.appendChild(style);
   }
   style.textContent = css;
-  localStorage.setItem("sp-theme", css);
 }
 
 function clearTheme() {
   document.getElementById("sp-theme")?.remove();
-  localStorage.removeItem("sp-theme");
-  localStorage.removeItem("sp-theme-config");
-  localStorage.removeItem("sp-theme-font");
-  localStorage.removeItem("sp-theme-exp");
 }
 
 export function ThemeEditor() {
@@ -124,19 +118,6 @@ export function ThemeEditor() {
   const accentPickerOptions = buildColorOptions(accentShades, true);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("sp-theme-config");
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        const keys = Object.keys(defaultConfig);
-        const valid = keys.every((k) => k in parsed && typeof parsed[k] === typeof (defaultConfig as Record<string, unknown>)[k]);
-        if (valid) {
-          setConfig(parsed);
-        } else {
-          localStorage.removeItem("sp-theme-config");
-        }
-      }
-    } catch {}
     setReady(true);
 
     const dialog = document.getElementById("theme-editor");
@@ -149,24 +130,14 @@ export function ThemeEditor() {
 
   useEffect(() => {
     if (!ready) return;
+    if (config === defaultConfig) return;
+
     const bodyFont = fonts.find((f) => f.name === config.bodyFont);
     const headingFont = fonts.find((f) => f.name === config.headingFont);
     if (bodyFont) loadFont(bodyFont);
     if (headingFont) loadFont(headingFont);
 
-    const cdns = [bodyFont?.cdn, headingFont?.cdn].filter(Boolean);
-    if (cdns.length > 0) {
-      localStorage.setItem("sp-theme-font", cdns.join(","));
-    } else {
-      localStorage.removeItem("sp-theme-font");
-    }
-
     applyTheme(buildThemeCSS(config));
-    localStorage.setItem("sp-theme-config", JSON.stringify(config));
-    localStorage.setItem(
-      "sp-theme-exp",
-      String(Date.now() + 4 * 60 * 60 * 1000),
-    );
   }, [config, ready]);
 
   useEffect(() => {
