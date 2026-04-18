@@ -55,7 +55,7 @@ export function ScrollIndicator() {
       {visibilities.map((vis, i) => (
         <button key={i} onClick={() => scrollTo(i)} className="py-2">
           <div
-            className="h-0.5 w-12 rounded-full transition-all duration-150"
+            className="h-0.5 w-12 rounded-full"
             style={{
               background: `linear-gradient(to right, var(--color-foreground) ${vis * 100}%, var(--color-muted) ${vis * 100}%)`,
             }}
