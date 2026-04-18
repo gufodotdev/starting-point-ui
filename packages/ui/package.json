@@ -1,6 +1,6 @@
 {
   "name": "starting-point-ui",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "A framework-agnostic component library for Tailwind CSS, inspired by shadcn/ui",
   "type": "module",
   "main": "./dist/index.js",
