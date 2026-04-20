@@ -1,32 +1,88 @@
 ---
 title: Input Group
-description: A Tailwind CSS input group component for decorating inputs with icons, text, or other addons.
+description: A Tailwind CSS input group component for decorating inputs with icons, buttons, or text addons.
 ---
 
-A Tailwind CSS input group component for decorating [inputs](/docs/components/input) with icons, text, or other addons.
+A Tailwind CSS input group component for decorating [inputs](/docs/components/input) with icons, buttons, or text addons.
 
 ```html preview
 <div class="w-full max-w-xs">
   <div class="field-group">
     <div class="input-group">
-      <span class="input-group-addon"><i class="ri-search-line"></i></span>
-      <input class="input" placeholder="Search..." />
+      <i class="input-group-icon ri-search-line"></i>
+      <input class="input" placeholder="Search" />
     </div>
     <div class="input-group">
-      <span class="input-group-addon"><i class="ri-mail-line"></i></span>
-      <input class="input" type="email" placeholder="Enter your email" />
+      <input class="input" type="password" placeholder="Password" value="supersecret" />
+      <button class="input-group-btn-icon" type="button" aria-label="Show password">
+        <i class="ri-eye-line"></i>
+      </button>
     </div>
     <div class="input-group">
-      <span class="input-group-addon"><i class="ri-bank-card-line"></i></span>
-      <input class="input" placeholder="Card number" />
-      <span class="input-group-addon"><i class="ri-check-fill"></i></span>
+      <span class="input-group-text">https://</span>
+      <input class="input" placeholder="example.com" />
     </div>
     <div class="input-group">
-      <input class="input" placeholder="Rate this" />
-      <span class="input-group-addon">
-        <i class="ri-star-line"></i>
-        <i class="ri-information-line"></i>
-      </span>
+      <input class="input" placeholder="Search" />
+      <button class="input-group-btn" type="button">Go</button>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Icons
+
+Use `input-group-icon` for a non-interactive icon overlay inside the input.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="field-group">
+    <div class="input-group">
+      <i class="input-group-icon ri-search-line"></i>
+      <input class="input" placeholder="Leading icon" />
+    </div>
+    <div class="input-group">
+      <input class="input" placeholder="Trailing icon" />
+      <i class="input-group-icon ri-search-line"></i>
+    </div>
+    <div class="input-group">
+      <i class="input-group-icon ri-mail-line"></i>
+      <input class="input" type="email" placeholder="Email" />
+      <i class="input-group-icon ri-check-line"></i>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Icon buttons
+
+Use `input-group-btn-icon` for interactive icon buttons like a password toggle or clear action. It overlays the input the same way as `input-group-icon`.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="field-group">
+    <div class="input-group">
+      <button class="input-group-btn-icon" type="button" aria-label="Menu">
+        <i class="ri-menu-line"></i>
+      </button>
+      <input class="input" placeholder="Leading icon button" />
+    </div>
+    <div class="input-group">
+      <input class="input" type="password" placeholder="Password" value="supersecret" />
+      <button class="input-group-btn-icon" type="button" aria-label="Show password">
+        <i class="ri-eye-line"></i>
+      </button>
+    </div>
+    <div class="input-group">
+      <i class="input-group-icon ri-search-line"></i>
+      <input class="input" placeholder="Search" />
+      <button class="input-group-btn-icon" type="button" aria-label="Clear">
+        <i class="ri-close-line"></i>
+      </button>
     </div>
   </div>
 </div>
@@ -36,24 +92,58 @@ A Tailwind CSS input group component for decorating [inputs](/docs/components/in
 
 ## Text addons
 
-Use text addons for prefixes, suffixes, or units.
+Use `input-group-text` for text prefixes, suffixes, or units. It sits next to the input as a separate pill with a muted background.
 
 ```html preview
 <div class="w-full max-w-xs">
   <div class="field-group">
     <div class="input-group">
-      <span class="input-group-addon">$</span>
+      <span class="input-group-text">https://</span>
+      <input class="input" placeholder="example.com" />
+    </div>
+    <div class="input-group">
+      <input class="input" placeholder="username" />
+      <span class="input-group-text">@company.com</span>
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">$</span>
       <input class="input" placeholder="0.00" />
-      <span class="input-group-addon">USD</span>
+      <span class="input-group-text">USD</span>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Button addons
+
+Use `input-group-btn` for a full button that sits next to the input.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="field-group">
+    <div class="input-group">
+      <button class="input-group-btn" type="button">Search</button>
+      <input class="input" placeholder="Leading button" />
     </div>
     <div class="input-group">
-      <span class="input-group-addon">https://</span>
-      <input class="input" placeholder="example" />
-      <span class="input-group-addon">.com</span>
+      <input class="input" placeholder="Trailing button" />
+      <button class="input-group-btn" type="button">Go</button>
     </div>
     <div class="input-group">
-      <input class="input" placeholder="Enter your username" />
-      <span class="input-group-addon">@company.com</span>
+      <button class="input-group-btn" type="button">
+        <i class="ri-search-line"></i>
+        Search
+      </button>
+      <input class="input" placeholder="Leading button with icon" />
+    </div>
+    <div class="input-group">
+      <input class="input" placeholder="Trailing button with icon" />
+      <button class="input-group-btn" type="button">
+        Go
+        <i class="ri-arrow-right-line"></i>
+      </button>
     </div>
   </div>
 </div>
@@ -63,13 +153,29 @@ Use text addons for prefixes, suffixes, or units.
 
 ## Disabled
 
-Add `disabled` to the input inside the group. The addons dim automatically.
+Add `disabled` to the input. Addons inside the group dim automatically.
 
 ```html preview
 <div class="w-full max-w-xs">
-  <div class="input-group">
-    <span class="input-group-addon"><i class="ri-search-line"></i></span>
-    <input class="input" placeholder="Search..." disabled="" />
+  <div class="field-group">
+    <div class="input-group">
+      <i class="input-group-icon ri-search-line"></i>
+      <input class="input" placeholder="Disabled with icon" disabled="" />
+    </div>
+    <div class="input-group">
+      <input class="input" type="password" placeholder="Disabled with icon button" value="supersecret" disabled="" />
+      <button class="input-group-btn-icon" type="button" aria-label="Show password" disabled="">
+        <i class="ri-eye-line"></i>
+      </button>
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">https://</span>
+      <input class="input" placeholder="Disabled with text" disabled="" />
+    </div>
+    <div class="input-group">
+      <input class="input" placeholder="Disabled with button" disabled="" />
+      <button class="input-group-btn" type="button" disabled="">Go</button>
+    </div>
   </div>
 </div>
 ```
@@ -78,32 +184,40 @@ Add `disabled` to the input inside the group. The addons dim automatically.
 
 ## How it works
 
-The input group component wraps an input with addon elements for icons or text.
+Input group uses two different patterns depending on what you're adding:
+
+- **Icons and icon buttons** (`input-group-icon`, `input-group-btn-icon`) are positioned absolutely inside the input. The input gets extra padding so text doesn't collide with them.
+- **Text and button addons** (`input-group-text`, `input-group-btn`) sit next to the input as a separate pill, sharing a seam with the input's border.
 
 ### Structure
 
-Wrap an `.input` with `.input-group-addon` elements inside a `.input-group` container:
+Wrap an `.input` with one or more addons inside an `.input-group` container:
 
 ```html
 <div class="input-group">
-  <span class="input-group-addon"><i class="ri-search-line"></i></span>
+  <i class="input-group-icon ri-search-line"></i>
   <input class="input" placeholder="Search..." />
 </div>
 ```
 
-Addons can be placed before, after, or on both sides of the input:
+You can combine icon overlays with text or button addons:
 
 ```html
 <div class="input-group">
-  <span class="input-group-addon">$</span>
-  <input class="input" placeholder="0.00" />
-  <span class="input-group-addon">USD</span>
+  <span class="input-group-text">https://</span>
+  <input class="input" placeholder="example" />
+  <button class="input-group-btn-icon" type="button" aria-label="Clear">
+    <i class="ri-close-line"></i>
+  </button>
 </div>
 ```
 
 ### Class reference
 
-| Class               | Description                 |
-| ------------------- | --------------------------- |
-| `input-group`       | Container for grouped input |
-| `input-group-addon` | Addon element (icons, text) |
+| Class                  | Description                                                |
+| ---------------------- | ---------------------------------------------------------- |
+| `input-group`          | Container for grouped input                                |
+| `input-group-icon`     | Non-interactive icon positioned inside the input           |
+| `input-group-btn-icon` | Interactive icon button positioned inside the input        |
+| `input-group-text`     | Text pill addon sitting next to the input (prefix/suffix)  |
+| `input-group-btn`      | Full button addon sitting next to the input                |

@@ -2,19 +2,60 @@
 
 @utility input-group {
   @layer l1.l2 {
-    @apply relative flex h-9 w-full items-center rounded-input border border-input-border bg-input text-input-foreground shadow-input transition-[color,box-shadow] outline-none;
-    @apply has-[:focus-visible]:border-ring has-[:focus-visible]:ring-ring/50 has-[:focus-visible]:ring-[3px];
-    @apply has-[[aria-invalid=true]]:ring-destructive/20 has-[[aria-invalid=true]]:border-destructive dark:has-[[aria-invalid=true]]:ring-destructive/40;
-    @apply has-[:disabled]:opacity-50;
-    @apply [&>.input]:flex-1 [&>.input]:min-w-0 [&>.input]:border-0 [&>.input]:shadow-none [&>.input]:rounded-none [&>.input]:bg-transparent [&>.input]:focus-visible:ring-0;
-    @apply has-[>.input-group-addon:first-child]:[&>.input]:pl-0 has-[>.input-group-addon:last-child]:[&>.input]:pr-0;
+    @apply relative flex w-full items-stretch;
+    /* When the input is disabled, dim any sibling addons to match. */
+    @apply has-[.input:disabled]:[&>.input-group-text]:opacity-50 has-[.input:disabled]:[&>.input-group-btn]:opacity-50 has-[.input:disabled]:[&>.input-group-icon]:opacity-50 has-[.input:disabled]:[&>.input-group-btn-icon]:opacity-50;
   }
 }
 
-@utility input-group-addon {
+@utility input-group-icon {
   @layer l1.l2 {
-    @apply flex items-center justify-center gap-2 px-3 shrink-0 text-sm text-muted-foreground select-none cursor-text;
+    @apply pointer-events-none absolute inset-y-0 flex items-center justify-center text-muted-foreground;
+    @apply [&:first-child]:left-3 [&:last-child]:right-3;
+    /* Make room on the input for the overlay. */
+    @apply [&+.input]:pl-9 [.input:has(+&)]:pr-9;
     @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&_i[class*='ri-']]:text-[1.125rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-[1rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
+  }
+}
+
+@utility input-group-btn-icon {
+  @layer l1.l2 {
+    @apply absolute inset-y-0 my-auto flex size-7 items-center justify-center text-muted-foreground cursor-pointer rounded-sm transition-colors;
+    @apply hover:bg-muted hover:text-foreground dark:hover:bg-muted/50;
+    @apply focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+    @apply [&:first-child]:left-1 [&:last-child]:right-1;
+    /* Make room on the input for the overlay. */
+    @apply [&+.input]:pl-9 [.input:has(+&)]:pr-9;
+    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-[1rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
+  }
+}
+
+@utility input-group-text {
+  @layer l1.l2 {
+    @apply flex shrink-0 items-center px-3 text-sm text-foreground bg-muted border-y border-input-border shadow-input select-none;
+    @apply [&:first-child]:rounded-l-input [&:first-child]:border-l [&:first-child]:border-l-input-border;
+    @apply [&:last-child]:rounded-r-input [&:last-child]:border-r [&:last-child]:border-r-input-border;
+    /* Flatten the input's touching corner. Input keeps its own border which serves as the seam; override its color to --border so it stays visible in inset theme. */
+    @apply [&+.input]:rounded-l-none [&+.input]:border-l-border [&+.input]:relative [&+.input]:focus-visible:z-10 [&+.input]:focus-visible:border-l-ring;
+    @apply [.input:has(+&)]:rounded-r-none [.input:has(+&)]:border-r-border [.input:has(+&)]:relative [.input:has(+&)]:focus-visible:z-10 [.input:has(+&)]:focus-visible:border-r-ring;
+  }
+}
+
+@utility input-group-btn {
+  @layer l1.l2 {
+    @apply flex shrink-0 items-center gap-2 px-3 text-sm font-medium text-foreground bg-input border-y border-input-border shadow-input cursor-pointer transition-colors;
+    @apply hover:bg-muted dark:hover:bg-muted/50;
+    @apply focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:z-10 focus-visible:border-ring;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+    @apply [&:first-child]:rounded-l-input [&:first-child]:border-l [&:first-child]:border-l-input-border;
+    @apply [&:last-child]:rounded-r-input [&:last-child]:border-r [&:last-child]:border-r-input-border;
+    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply [&_i[class*='ri-']]:text-[1rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
+    /* Flatten the input's touching corner. Input keeps its own border which serves as the seam; override its color to --border so it stays visible in inset theme. */
+    @apply [&+.input]:rounded-l-none [&+.input]:border-l-border [&+.input]:relative [&+.input]:focus-visible:z-10 [&+.input]:focus-visible:border-l-ring;
+    @apply [.input:has(+&)]:rounded-r-none [.input:has(+&)]:border-r-border [.input:has(+&)]:relative [.input:has(+&)]:focus-visible:z-10 [.input:has(+&)]:focus-visible:border-r-ring;
   }
 }
