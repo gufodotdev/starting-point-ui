@@ -151,6 +151,37 @@ Use `input-group-btn` for a full button that sits next to the input.
 
 ---
 
+## Invalid
+
+Add `aria-invalid="true"` to the input to show an error state. Adjacent addons automatically mirror the destructive border.
+
+```html preview
+<div class="w-full max-w-xs">
+  <div class="field-group">
+    <div class="input-group">
+      <i class="input-group-icon ri-search-line"></i>
+      <input class="input" placeholder="Invalid with icon" aria-invalid="true" />
+    </div>
+    <div class="input-group">
+      <input class="input" type="password" placeholder="Invalid with icon button" value="bad" aria-invalid="true" />
+      <button class="input-group-btn-icon" type="button" aria-label="Show password">
+        <i class="ri-eye-line"></i>
+      </button>
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">https://</span>
+      <input class="input" placeholder="Invalid with text" aria-invalid="true" />
+    </div>
+    <div class="input-group">
+      <input class="input" placeholder="Invalid with button" aria-invalid="true" />
+      <button class="input-group-btn" type="button">Go</button>
+    </div>
+  </div>
+</div>
+```
+
+---
+
 ## Disabled
 
 Add `disabled` to the input. Addons inside the group dim automatically.
