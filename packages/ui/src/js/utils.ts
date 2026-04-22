@@ -107,16 +107,6 @@ export function findNextEnabled(
   return null;
 }
 
-export function focusFirstEnabledItem(
-  container: HTMLElement,
-  itemSelector: string,
-): HTMLElement | null {
-  const items = [...container.querySelectorAll<HTMLElement>(itemSelector)];
-  const target = items.find((item) => !isDisabled(item)) ?? null;
-  target?.focus();
-  return target;
-}
-
 export interface PoppableConfig {
   rootSelector: string;
   contentSelector: string;
