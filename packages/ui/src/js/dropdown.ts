@@ -5,7 +5,6 @@ import {
   closeIfOutside,
   closePoppable,
   findNextEnabled,
-  focusFirstEnabledItem,
   getOpenPoppable,
   isDisabled,
   openPoppable,
@@ -23,9 +22,6 @@ const CONFIG: PoppableConfig = {
       placement: (root.dataset.spPlacement as Placement) || "bottom-end",
       offset: parseInt(root.dataset.spOffset || "4", 10),
     });
-  },
-  onAfterOpen: (_root, menu) => {
-    focusFirstEnabledItem(menu, ".dropdown-item");
   },
 };
 
