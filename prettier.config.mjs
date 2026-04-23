@@ -8,4 +8,5 @@ export default {
   trailingComma: "all",
   bracketSpacing: true,
   htmlWhitespaceSensitivity: "ignore",
+  plugins: ["prettier-plugin-svg-oneline"],
 };

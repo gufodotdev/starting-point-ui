@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "prettier": "^3.7.4",
+    "prettier-plugin-svg-oneline": "*",
     "turbo": "^2.8.13"
   },
   "workspaces": [
