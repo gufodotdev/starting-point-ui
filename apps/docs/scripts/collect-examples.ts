@@ -4,6 +4,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import * as prettier from "prettier/standalone";
 import * as htmlParser from "prettier/plugins/html";
+import * as svgOnelinePlugin from "prettier-plugin-svg-oneline";
 import { codeToHtml } from "shiki";
 
 import { getPresetClasses } from "../lib/examples";
@@ -51,7 +52,7 @@ async function collectExamples() {
               `class="${cls.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#x27;/g, "'")}"`);
           const formatted = await prettier.format(rawHtml, {
             parser: "html",
-            plugins: [htmlParser],
+            plugins: [htmlParser, svgOnelinePlugin],
             printWidth: 80,
             tabWidth: 2,
             htmlWhitespaceSensitivity: "ignore",
