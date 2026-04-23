@@ -9,13 +9,24 @@ A Tailwind CSS input group component for decorating [inputs](/docs/components/in
 <div class="w-full max-w-xs">
   <div class="field-group">
     <div class="input-group">
-      <i class="input-group-icon ri-search-line"></i>
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+      </span>
       <input class="input" placeholder="Search" />
     </div>
     <div class="input-group">
-      <input class="input" type="password" placeholder="Password" value="supersecret" />
-      <button class="input-group-btn-icon" type="button" aria-label="Show password">
-        <i class="ri-eye-line"></i>
+      <input
+        class="input"
+        type="password"
+        placeholder="Password"
+        value="supersecret"
+      />
+      <button
+        class="input-group-btn-icon"
+        type="button"
+        aria-label="Show password"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </div>
     <div class="input-group">
@@ -40,17 +51,25 @@ Use `input-group-icon` for a non-interactive icon overlay inside the input.
 <div class="w-full max-w-xs">
   <div class="field-group">
     <div class="input-group">
-      <i class="input-group-icon ri-search-line"></i>
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+      </span>
       <input class="input" placeholder="Leading icon" />
     </div>
     <div class="input-group">
       <input class="input" placeholder="Trailing icon" />
-      <i class="input-group-icon ri-search-line"></i>
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+      </span>
     </div>
     <div class="input-group">
-      <i class="input-group-icon ri-mail-line"></i>
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+      </span>
       <input class="input" type="email" placeholder="Email" />
-      <i class="input-group-icon ri-check-line"></i>
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
     </div>
   </div>
 </div>
@@ -67,21 +86,32 @@ Use `input-group-btn-icon` for interactive icon buttons like a password toggle o
   <div class="field-group">
     <div class="input-group">
       <button class="input-group-btn-icon" type="button" aria-label="Menu">
-        <i class="ri-menu-line"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
       </button>
       <input class="input" placeholder="Leading icon button" />
     </div>
     <div class="input-group">
-      <input class="input" type="password" placeholder="Password" value="supersecret" />
-      <button class="input-group-btn-icon" type="button" aria-label="Show password">
-        <i class="ri-eye-line"></i>
+      <input
+        class="input"
+        type="password"
+        placeholder="Password"
+        value="supersecret"
+      />
+      <button
+        class="input-group-btn-icon"
+        type="button"
+        aria-label="Show password"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </div>
     <div class="input-group">
-      <i class="input-group-icon ri-search-line"></i>
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+      </span>
       <input class="input" placeholder="Search" />
       <button class="input-group-btn-icon" type="button" aria-label="Clear">
-        <i class="ri-close-line"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
   </div>
@@ -133,7 +163,7 @@ Use `input-group-btn` for a full button that sits next to the input.
     </div>
     <div class="input-group">
       <button class="input-group-btn" type="button">
-        <i class="ri-search-line"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
         Search
       </button>
       <input class="input" placeholder="Leading button with icon" />
@@ -142,7 +172,7 @@ Use `input-group-btn` for a full button that sits next to the input.
       <input class="input" placeholder="Trailing button with icon" />
       <button class="input-group-btn" type="button">
         Go
-        <i class="ri-arrow-right-line"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </button>
     </div>
   </div>
@@ -159,21 +189,45 @@ Add `aria-invalid="true"` to the input to show an error state. Adjacent addons a
 <div class="w-full max-w-xs">
   <div class="field-group">
     <div class="input-group">
-      <i class="input-group-icon ri-search-line"></i>
-      <input class="input" placeholder="Invalid with icon" aria-invalid="true" />
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+      </span>
+      <input
+        class="input"
+        placeholder="Invalid with icon"
+        aria-invalid="true"
+      />
     </div>
     <div class="input-group">
-      <input class="input" type="password" placeholder="Invalid with icon button" value="bad" aria-invalid="true" />
-      <button class="input-group-btn-icon" type="button" aria-label="Show password">
-        <i class="ri-eye-line"></i>
+      <input
+        class="input"
+        type="password"
+        placeholder="Invalid with icon button"
+        value="bad"
+        aria-invalid="true"
+      />
+      <button
+        class="input-group-btn-icon"
+        type="button"
+        aria-label="Show password"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </div>
     <div class="input-group">
       <span class="input-group-text">https://</span>
-      <input class="input" placeholder="Invalid with text" aria-invalid="true" />
+      <input
+        class="input"
+        placeholder="Invalid with text"
+        aria-invalid="true"
+      />
     </div>
     <div class="input-group">
-      <input class="input" placeholder="Invalid with button" aria-invalid="true" />
+      <input
+        class="input"
+        placeholder="Invalid with button"
+        aria-invalid="true"
+      />
       <button class="input-group-btn" type="button">Go</button>
     </div>
   </div>
@@ -190,13 +244,26 @@ Add `disabled` to the input. Addons inside the group dim automatically.
 <div class="w-full max-w-xs">
   <div class="field-group">
     <div class="input-group">
-      <i class="input-group-icon ri-search-line"></i>
+      <span class="input-group-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+      </span>
       <input class="input" placeholder="Disabled with icon" disabled="" />
     </div>
     <div class="input-group">
-      <input class="input" type="password" placeholder="Disabled with icon button" value="supersecret" disabled="" />
-      <button class="input-group-btn-icon" type="button" aria-label="Show password" disabled="">
-        <i class="ri-eye-line"></i>
+      <input
+        class="input"
+        type="password"
+        placeholder="Disabled with icon button"
+        value="supersecret"
+        disabled=""
+      />
+      <button
+        class="input-group-btn-icon"
+        type="button"
+        aria-label="Show password"
+        disabled=""
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </div>
     <div class="input-group">
@@ -226,7 +293,9 @@ Wrap an `.input` with one or more addons inside an `.input-group` container:
 
 ```html
 <div class="input-group">
-  <i class="input-group-icon ri-search-line"></i>
+  <span class="input-group-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+  </span>
   <input class="input" placeholder="Search..." />
 </div>
 ```
@@ -238,17 +307,17 @@ You can combine icon overlays with text or button addons:
   <span class="input-group-text">https://</span>
   <input class="input" placeholder="example" />
   <button class="input-group-btn-icon" type="button" aria-label="Clear">
-    <i class="ri-close-line"></i>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
   </button>
 </div>
 ```
 
 ### Class reference
 
-| Class                  | Description                                                |
-| ---------------------- | ---------------------------------------------------------- |
-| `input-group`          | Container for grouped input                                |
-| `input-group-icon`     | Non-interactive icon positioned inside the input           |
-| `input-group-btn-icon` | Interactive icon button positioned inside the input        |
-| `input-group-text`     | Text pill addon sitting next to the input (prefix/suffix)  |
-| `input-group-btn`      | Full button addon sitting next to the input                |
+| Class                  | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `input-group`          | Container for grouped input                               |
+| `input-group-icon`     | Non-interactive icon positioned inside the input          |
+| `input-group-btn-icon` | Interactive icon button positioned inside the input       |
+| `input-group-text`     | Text pill addon sitting next to the input (prefix/suffix) |
+| `input-group-btn`      | Full button addon sitting next to the input               |
