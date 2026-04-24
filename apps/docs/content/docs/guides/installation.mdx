@@ -124,28 +124,19 @@ Then set it as the default font:
 
 ## Icons (optional)
 
-The examples on this site use [Remix Icon](https://remixicon.com/). You can add it via CDN:
+Components automatically style SVG icons placed inside them, so you can drop in any inline SVG:
 
 ```html
-<link
-  href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.css"
-  rel="stylesheet"
-/>
+<button class="btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+  Continue
+</button>
 ```
 
-Or install it as a package:
-
-```bash
-npm install remixicon
-```
-
-Then import it in your CSS:
-
-```css
-@import "remixicon/fonts/remixicon.css";
-```
-
-You're free to use any icon library you prefer, including SVGs. The components support both Remix Icons and SVGs out of the box.
+The examples on this site use icons from [Lucide](https://lucide.dev/), but any SVG-based icon library works. Lucide ships official packages for most frameworks, as static SVGs, or as a plain script — see the [Lucide guide](https://lucide.dev/guide/) for all the options.
 
 ---
 

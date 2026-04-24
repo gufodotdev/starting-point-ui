@@ -11,7 +11,6 @@
     @apply inline-flex items-center gap-1.5 transition-colors;
     @apply hover:text-foreground;
     @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
-    @apply [&_i[class*='ri-']]:text-base [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }
 
@@ -19,14 +18,12 @@
   @layer l1.l2 {
     @apply inline-flex items-center gap-1.5 text-foreground;
     @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
-    @apply [&_i[class*='ri-']]:text-base [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }
 
 @utility breadcrumb-separator {
   @layer l1.l2 {
     @apply [&>svg]:size-3.5 [&>svg]:shrink-0;
-    @apply [&>i[class*='ri-']]:text-base [&>i[class*='ri-']]:leading-none [&>i[class*='ri-']]:shrink-0;
   }
 }
 
@@ -34,6 +31,5 @@
   @layer l1.l2 {
     @apply flex size-9 items-center justify-center;
     @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
-    @apply [&_i[class*='ri-']]:text-base [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }

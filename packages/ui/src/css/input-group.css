@@ -15,7 +15,6 @@
     /* Make room on the input for the overlay. */
     @apply [&+.input]:pl-9 [.input:has(+&)]:pr-9;
     @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&_i[class*='ri-']]:text-[1rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }
 
@@ -29,7 +28,6 @@
     /* Make room on the input for the overlay. */
     @apply [&+.input]:pl-9 [.input:has(+&)]:pr-9;
     @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&_i[class*='ri-']]:text-[1rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
   }
 }
 
@@ -55,7 +53,6 @@
     @apply [&:first-child]:rounded-l-input [&:first-child]:border-l [&:first-child]:border-l-input-border;
     @apply [&:last-child]:rounded-r-input [&:last-child]:border-r [&:last-child]:border-r-input-border;
     @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&_i[class*='ri-']]:text-[1rem] [&_i[class*='ri-']]:leading-none [&_i[class*='ri-']]:shrink-0;
     /* Flatten the input's touching corner. Input keeps its own border which serves as the seam; override its color to --border so it stays visible in inset theme. Skip when focused or invalid so the ring/destructive border takes over. */
     @apply [&+.input:not([aria-invalid=true]):not(:focus-visible)]:border-l-border [&+.input]:rounded-l-none [&+.input]:relative [&+.input]:focus-visible:z-10;
     @apply [.input:not([aria-invalid=true]):not(:focus-visible):has(+&)]:border-r-border [.input:has(+&)]:rounded-r-none [.input:has(+&)]:relative [.input:has(+&)]:focus-visible:z-10;
