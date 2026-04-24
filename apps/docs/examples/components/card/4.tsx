@@ -1,6 +1,9 @@
 import type { ExampleConfig } from "@/lib/examples";
 
-export const config: ExampleConfig = { preset: "default", description: "Price listing" };
+export const config: ExampleConfig = {
+  preset: "default",
+  description: "Price listing",
+};
 
 export default function Example() {
   return (
@@ -20,23 +23,23 @@ export default function Example() {
         <div className="separator"></div>
         <ul className="grid gap-4 text-sm">
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
             <span>Up to 10 team members</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
             <span>50GB cloud storage</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
             <span>Priority email support</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
             <span>Advanced analytics dashboard</span>
           </li>
           <li className="text-muted-foreground flex items-center">
-            <i className="ri-check-line mr-4 text-lg/none text-primary"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
             <span>API access</span>
           </li>
         </ul>

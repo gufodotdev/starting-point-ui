@@ -1,6 +1,9 @@
 import type { ExampleConfig } from "@/lib/examples";
 
-export const config: ExampleConfig = { preset: "default", description: "Blog post" };
+export const config: ExampleConfig = {
+  preset: "default",
+  description: "Blog post",
+};
 
 export default function Example() {
   return (
