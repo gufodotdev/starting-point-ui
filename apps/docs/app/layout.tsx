@@ -30,12 +30,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <head>
-        <link
-          href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.css"
-          rel="stylesheet"
-        />
-      </head>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
