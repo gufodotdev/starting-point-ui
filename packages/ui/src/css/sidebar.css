@@ -85,7 +85,8 @@
 
 @utility menu-subgroup {
   @layer l1.l2 {
-    @apply border-l border-sidebar-border mx-3.5 px-2.5 flex flex-col gap-1 py-0.5;
+    @apply border-l border-sidebar-border mx-3.5 translate-x-px px-2.5 flex flex-col gap-1 py-0.5;
+    @apply [&>.menu-btn]:-translate-x-px;
   }
 }
 
