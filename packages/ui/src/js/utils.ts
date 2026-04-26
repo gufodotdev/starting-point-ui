@@ -27,7 +27,7 @@ export async function positionFloating(
 ): Promise<void> {
   const middleware = [
     offsetMw(options.offset ?? 4),
-    flip(),
+    flip({ crossAxis: true, fallbackAxisSideDirection: "start" }),
     shift({ padding: 8 }),
   ];
 
