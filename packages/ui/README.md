@@ -47,7 +47,7 @@ For interactive components (dialogs, dropdowns, tabs, etc.), add the JavaScript:
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/starting-point-ui@0.20.1"
+  src="https://cdn.jsdelivr.net/npm/starting-point-ui@0.20.2"
   type="module"
 ></script>
 ```
