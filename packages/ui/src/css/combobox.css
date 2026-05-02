@@ -1,12 +1,6 @@
 /* Starting Point UI Combobox Styles */
 
-@utility combobox {
-    @layer l1.l2 {
-      @apply relative inline-block;
-    }
-  }
-  
-  @utility combobox-trigger {
+@utility combobox-trigger {
     @layer l1.l2 {
       @apply h-9 inline-flex w-full cursor-pointer items-center justify-between gap-2 rounded-input border border-input-border bg-input text-input-foreground px-3 text-sm shadow-input transition-[color,box-shadow] outline-none;
       @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
@@ -26,7 +20,7 @@
     }
   }
   
-  @utility combobox-menu {
+  @utility combobox {
     @layer l1.l2 {
       @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover text-popover-foreground shadow-popover;
       @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;

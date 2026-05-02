@@ -2,43 +2,52 @@
 
 import { type Placement } from "@floating-ui/dom";
 import {
-  closeIfOutside,
-  closePoppable,
-  findNextEnabled,
-  getOpenPoppable,
-  isDisabled,
-  openPoppable,
+  closeAnchor,
+  closeAnchorIfOutside,
+  getAnchorTrigger,
+  getOpenAnchor,
+  getTargetContent,
+  installHoverTriggers,
+  openAnchor,
   positionFloating,
-  togglePoppable,
-  type PoppableConfig,
-} from "./utils";
+  toggleAnchor,
+  type AnchorOptions,
+} from "./floating";
+import { findNextEnabled, isDisabled } from "./utils";
 
-const CONFIG: PoppableConfig = {
-  rootSelector: ".dropdown",
-  contentSelector: ".dropdown-menu",
-  triggerSelector: "[data-sp-toggle='dropdown']",
-  position: async (root, trigger, menu) => {
+const TRIGGER_SELECTOR = "[data-sp-toggle='dropdown']";
+const CONTENT_SELECTOR = ".dropdown";
+
+const OPTS: AnchorOptions = {
+  contentSelector: CONTENT_SELECTOR,
+  triggerSelector: TRIGGER_SELECTOR,
+  position: async (trigger, menu) => {
     await positionFloating(trigger, menu, {
-      placement: (root.dataset.spPlacement as Placement) || "bottom-end",
-      offset: parseInt(root.dataset.spOffset || "4", 10),
+      placement: (trigger.dataset.spPlacement as Placement) || "bottom-end",
+      offset: parseInt(trigger.dataset.spOffset || "4", 10),
     });
   },
 };
 
-export const open = (dropdown: HTMLElement) => openPoppable(dropdown, CONFIG);
-export const close = (dropdown: HTMLElement) => closePoppable(dropdown, CONFIG);
-export const toggle = (dropdown: HTMLElement) => togglePoppable(dropdown, CONFIG);
+export const open = (trigger: HTMLElement) => {
+  const menu = getTargetContent(trigger);
+  if (menu) openAnchor(trigger, menu, OPTS, { viaClick: true });
+};
+export const close = (menu: HTMLElement) => closeAnchor(menu, OPTS);
+export const toggle = (trigger: HTMLElement) => {
+  const menu = getTargetContent(trigger);
+  if (menu) toggleAnchor(trigger, menu, OPTS, { viaClick: true });
+};
 
 function handleClick(e: MouseEvent) {
   const target = e.target as HTMLElement;
 
-  const toggleBtn = target.closest<HTMLElement>(CONFIG.triggerSelector);
-  if (toggleBtn) {
-    const dropdown = toggleBtn.closest<HTMLElement>(CONFIG.rootSelector);
-    if (dropdown) {
-      e.preventDefault();
-      toggle(dropdown);
-    }
+  const trigger = target.closest<HTMLElement>(TRIGGER_SELECTOR);
+  if (trigger) {
+    const menu = getTargetContent(trigger);
+    if (!menu) return;
+    e.preventDefault();
+    toggleAnchor(trigger, menu, OPTS, { viaClick: true });
     return;
   }
 
@@ -48,37 +57,40 @@ function handleClick(e: MouseEvent) {
       e.preventDefault();
       return;
     }
-    const dropdown = item.closest<HTMLElement>(CONFIG.rootSelector);
-    if (dropdown) close(dropdown);
+    const menu = item.closest<HTMLElement>(CONTENT_SELECTOR);
+    if (menu) closeAnchor(menu, OPTS);
     return;
   }
 
-  closeIfOutside(target, CONFIG);
+  closeAnchorIfOutside(target, OPTS);
 }
 
 function handleKeydown(e: KeyboardEvent) {
   const target = e.target as HTMLElement;
-  const dropdown = target.closest<HTMLElement>(CONFIG.rootSelector);
 
-  const openDropdown = getOpenPoppable(CONFIG);
-  if (e.key === "Escape" && openDropdown) {
+  const openMenu = getOpenAnchor(OPTS);
+  if (e.key === "Escape" && openMenu) {
     e.preventDefault();
-    const trigger = openDropdown.querySelector<HTMLElement>(CONFIG.triggerSelector);
-    close(openDropdown);
+    const trigger = getAnchorTrigger(openMenu);
+    closeAnchor(openMenu, OPTS);
     trigger?.focus();
     return;
   }
 
   if (
     (e.key === "Enter" || e.key === " ") &&
-    target.matches(CONFIG.triggerSelector)
+    target.matches(TRIGGER_SELECTOR)
   ) {
     e.preventDefault();
-    if (dropdown) toggle(dropdown);
+    const menu = getTargetContent(target);
+    if (menu) toggleAnchor(target, menu, OPTS, { viaClick: true });
     return;
   }
 
-  const menu = dropdown?.querySelector<HTMLElement>(CONFIG.contentSelector);
+  // Arrow nav works whether focus is on an item OR on the trigger of an open menu.
+  const menu =
+    target.closest<HTMLElement>(CONTENT_SELECTOR) ??
+    (target.matches(TRIGGER_SELECTOR) ? getTargetContent(target) : null);
   if (!menu?.classList.contains("open")) return;
 
   const items = [...menu.querySelectorAll<HTMLElement>(".dropdown-item")];
@@ -117,7 +129,7 @@ function handleKeydown(e: KeyboardEvent) {
 }
 
 function handleFocusOut(e: FocusEvent) {
-  closeIfOutside(e.relatedTarget as HTMLElement | null, CONFIG);
+  closeAnchorIfOutside(e.relatedTarget as HTMLElement | null, OPTS);
 }
 
 let initialized = false;
@@ -129,4 +141,5 @@ let initialized = false;
   document.addEventListener("click", handleClick);
   document.addEventListener("keydown", handleKeydown);
   document.addEventListener("focusout", handleFocusOut);
+  installHoverTriggers(OPTS);
 })();

@@ -2,12 +2,6 @@
 
 @utility dropdown {
   @layer l1.l2 {
-    @apply relative inline-block;
-  }
-}
-
-@utility dropdown-menu {
-  @layer l1.l2 {
     @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover p-1 text-popover-foreground shadow-popover whitespace-nowrap;
     @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
 

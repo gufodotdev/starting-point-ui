@@ -29,13 +29,15 @@ export function Picker({
   search,
   searchPlaceholder = "Search...",
 }: PickerProps) {
+  const menuId = `${id}-menu`;
   return (
-    <div className="combobox w-full">
+    <>
       <button
         className="relative w-full rounded-lg px-3 py-2 text-left ring-1 ring-foreground/10 hover:bg-muted transition-colors outline-none focus-visible:ring-foreground/50"
         type="button"
         id={id}
         data-sp-toggle="combobox"
+        data-sp-target={`#${menuId}`}
         aria-expanded="false"
       >
         <div className="flex flex-col">
@@ -50,7 +52,7 @@ export function Picker({
           </span>
         )}
       </button>
-      <div className="combobox-menu w-full" role="listbox">
+      <div id={menuId} className="combobox" role="listbox">
         {search && (
           <div className="combobox-search">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -86,6 +88,6 @@ export function Picker({
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

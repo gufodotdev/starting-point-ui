@@ -6,24 +6,23 @@ description: A Tailwind CSS dropdown component for displaying a list of actions 
 A Tailwind CSS dropdown component for displaying a list of actions or options.
 
 ```html preview
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Options
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">New file</a>
-    <a href="#" class="dropdown-item">Copy link</a>
-    <div class="dropdown-separator"></div>
-    <a href="#" class="dropdown-item">Edit</a>
-    <a href="#" class="dropdown-item">Rename</a>
-    <div class="dropdown-separator"></div>
-    <a href="#" class="dropdown-item">Delete</a>
-  </div>
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="dropdown"
+  data-sp-target="#dropdown-options"
+  aria-expanded="false"
+>
+  Options
+</button>
+<div id="dropdown-options" class="dropdown">
+  <a href="#" class="dropdown-item">New file</a>
+  <a href="#" class="dropdown-item">Copy link</a>
+  <div class="dropdown-separator"></div>
+  <a href="#" class="dropdown-item">Edit</a>
+  <a href="#" class="dropdown-item">Rename</a>
+  <div class="dropdown-separator"></div>
+  <a href="#" class="dropdown-item">Delete</a>
 </div>
 ```
 
@@ -34,39 +33,38 @@ A Tailwind CSS dropdown component for displaying a list of actions or options.
 Add icons to dropdown items for better visual hierarchy.
 
 ```html preview
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Options
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
-      New file
-    </a>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Copy link
-    </a>
-    <div class="dropdown-separator"></div>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
-      Edit
-    </a>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1"/><path d="M7 22h1a4 4 0 0 0 4-4v-1"/><path d="M7 2h1a4 4 0 0 1 4 4v1"/></svg>
-      Rename
-    </a>
-    <div class="dropdown-separator"></div>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-      Delete
-    </a>
-  </div>
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="dropdown"
+  data-sp-target="#dropdown-icons"
+  aria-expanded="false"
+>
+  Options
+</button>
+<div id="dropdown-icons" class="dropdown">
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
+    New file
+  </a>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    Copy link
+  </a>
+  <div class="dropdown-separator"></div>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+    Edit
+  </a>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1"/><path d="M7 22h1a4 4 0 0 0 4-4v-1"/><path d="M7 2h1a4 4 0 0 1 4 4v1"/></svg>
+    Rename
+  </a>
+  <div class="dropdown-separator"></div>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    Delete
+  </a>
 </div>
 ```
 
@@ -77,40 +75,39 @@ Add icons to dropdown items for better visual hierarchy.
 Use `.dropdown-label` to group items with a heading.
 
 ```html preview
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    My Account
-  </button>
-  <div class="dropdown-menu">
-    <div class="dropdown-label">Settings</div>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      Profile
-    </a>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-      Billing
-    </a>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
-      Notifications
-    </a>
-    <div class="dropdown-separator"></div>
-    <div class="dropdown-label">Help</div>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
-      Documentation
-    </a>
-    <a href="#" class="dropdown-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
-      Support
-    </a>
-  </div>
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="dropdown"
+  data-sp-target="#dropdown-account"
+  aria-expanded="false"
+>
+  My Account
+</button>
+<div id="dropdown-account" class="dropdown">
+  <div class="dropdown-label">Settings</div>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Profile
+  </a>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    Billing
+  </a>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+    Notifications
+  </a>
+  <div class="dropdown-separator"></div>
+  <div class="dropdown-label">Help</div>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+    Documentation
+  </a>
+  <a href="#" class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
+    Support
+  </a>
 </div>
 ```
 
@@ -121,26 +118,25 @@ Use `.dropdown-label` to group items with a heading.
 Use `aria-disabled="true"` to disable an item. Add `tabindex="-1"` to prevent tab navigation to the item.
 
 ```html preview
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Actions
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Edit</a>
-    <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">
-      Duplicate
-    </a>
-    <a href="#" class="dropdown-item">Archive</a>
-    <div class="dropdown-separator"></div>
-    <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">
-      Delete
-    </a>
-  </div>
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="dropdown"
+  data-sp-target="#dropdown-disabled"
+  aria-expanded="false"
+>
+  Actions
+</button>
+<div id="dropdown-disabled" class="dropdown">
+  <a href="#" class="dropdown-item">Edit</a>
+  <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">
+    Duplicate
+  </a>
+  <a href="#" class="dropdown-item">Archive</a>
+  <div class="dropdown-separator"></div>
+  <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">
+    Delete
+  </a>
 </div>
 ```
 
@@ -148,176 +144,68 @@ Use `aria-disabled="true"` to disable an item. Add `tabindex="-1"` to prevent ta
 
 ## Placement
 
-Use `data-sp-placement` to control the dropdown position (default is `bottom-end`).
+Use `data-sp-placement` on the trigger to control where the menu appears relative to it (default is `bottom-end`).
 
 ```html preview
-<div class="dropdown" data-sp-placement="bottom-start">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    bottom-start
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-bottom-start" data-sp-placement="bottom-start" aria-expanded="false">bottom-start</button>
+<div id="dropdown-bottom-start" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="bottom">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    bottom
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-bottom" data-sp-placement="bottom" aria-expanded="false">bottom</button>
+<div id="dropdown-bottom" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="bottom-end">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    bottom-end
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-bottom-end" data-sp-placement="bottom-end" aria-expanded="false">bottom-end</button>
+<div id="dropdown-bottom-end" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="top-start">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    top-start
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-top-start" data-sp-placement="top-start" aria-expanded="false">top-start</button>
+<div id="dropdown-top-start" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="top">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    top
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-top" data-sp-placement="top" aria-expanded="false">top</button>
+<div id="dropdown-top" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="top-end">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    top-end
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-top-end" data-sp-placement="top-end" aria-expanded="false">top-end</button>
+<div id="dropdown-top-end" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="left-start">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    left-start
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-left-start" data-sp-placement="left-start" aria-expanded="false">left-start</button>
+<div id="dropdown-left-start" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="left">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    left
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-left" data-sp-placement="left" aria-expanded="false">left</button>
+<div id="dropdown-left" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="left-end">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    left-end
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-left-end" data-sp-placement="left-end" aria-expanded="false">left-end</button>
+<div id="dropdown-left-end" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="right-start">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    right-start
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-right-start" data-sp-placement="right-start" aria-expanded="false">right-start</button>
+<div id="dropdown-right-start" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="right">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    right
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-right" data-sp-placement="right" aria-expanded="false">right</button>
+<div id="dropdown-right" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-placement="right-end">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    right-end
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-right-end" data-sp-placement="right-end" aria-expanded="false">right-end</button>
+<div id="dropdown-right-end" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
 ```
 
@@ -325,50 +213,47 @@ Use `data-sp-placement` to control the dropdown position (default is `bottom-end
 
 ## Offset
 
-Use `data-sp-offset` to control the distance between the trigger and the menu (default is `4`).
+Use `data-sp-offset` on the trigger to control the distance between the trigger and the menu (default is `4`).
 
 ```html preview
-<div class="dropdown" data-sp-offset="0">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    No Offset
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-offset-0" data-sp-offset="0" aria-expanded="false">No Offset</button>
+<div id="dropdown-offset-0" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Default (4)
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-offset-default" aria-expanded="false">Default (4)</button>
+<div id="dropdown-offset-default" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
 </div>
-<div class="dropdown" data-sp-offset="12">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Offset 12
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-offset-12" data-sp-offset="12" aria-expanded="false">Offset 12</button>
+<div id="dropdown-offset-12" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
+</div>
+```
+
+---
+
+## Hover trigger
+
+Add `data-sp-trigger="hover"` to open the dropdown on pointer hover. Click still works for touch devices and keyboard users.
+
+```html preview
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="dropdown"
+  data-sp-target="#dropdown-hover"
+  data-sp-trigger="hover"
+  aria-expanded="false"
+>
+  Hover me
+</button>
+<div id="dropdown-hover" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
+  <a href="#" class="dropdown-item">Logout</a>
 </div>
 ```
 
@@ -380,44 +265,36 @@ The dropdown component uses a small JavaScript module that handles opening, clos
 
 ### Structure
 
-A dropdown consists of three parts:
+A dropdown consists of two elements linked by id:
 
-1. **`.dropdown`** - Container that wraps the trigger and menu
-2. **`[data-sp-toggle="dropdown"]`** - Button that opens/closes the menu
-3. **`.dropdown-menu`** - The menu panel with items
+1. **`[data-sp-toggle="dropdown"]`** with `data-sp-target="#id"` — the trigger button
+2. **`.dropdown`** with a matching `id` — the menu panel with items
 
 ```html
-<div class="dropdown">
-  <button type="button" data-sp-toggle="dropdown" aria-expanded="false">
-    Open Menu
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Item 1</a>
-    <a href="#" class="dropdown-item">Item 2</a>
-  </div>
+<button data-sp-toggle="dropdown" data-sp-target="#my-menu" aria-expanded="false">
+  Open Menu
+</button>
+<div id="my-menu" class="dropdown">
+  <a href="#" class="dropdown-item">Item 1</a>
+  <a href="#" class="dropdown-item">Item 2</a>
 </div>
 ```
 
+The trigger and the menu can live anywhere in the DOM as long as the id matches.
+
 ### Opening and closing
 
-Use data attributes to control the dropdown without writing JavaScript.
-
-Add `data-sp-toggle="dropdown"` to the trigger button. The JavaScript will find the `.dropdown-menu` sibling and toggle it:
-
-```html
-<button data-sp-toggle="dropdown" aria-expanded="false">Open</button>
-```
-
-Clicking outside the dropdown or pressing Escape closes the menu. Clicking an item also closes the dropdown by default.
+Add `data-sp-toggle="dropdown"` and `data-sp-target` to the trigger to toggle the linked menu on click. Clicking outside the menu or pressing Escape closes it. Clicking an item also closes it by default.
 
 For programmatic control, use the global `StartingPointUI.dropdown` module:
 
 ```js
-const dropdown = document.querySelector(".dropdown");
+const trigger = document.querySelector("[data-sp-target='#my-menu']");
+const menu = document.getElementById("my-menu");
 
-StartingPointUI.dropdown.open(dropdown);
-StartingPointUI.dropdown.close(dropdown);
-StartingPointUI.dropdown.toggle(dropdown);
+StartingPointUI.dropdown.open(trigger);
+StartingPointUI.dropdown.close(menu);
+StartingPointUI.dropdown.toggle(trigger);
 ```
 
 ### Animation
@@ -428,59 +305,31 @@ To customize animations, add `no-animation` to disable the defaults and use your
 
 ```html
 <div
-  class="dropdown-menu no-animation data-[state=open]:animate-in data-[state=open]:slide-in-from-top-2"
+  id="my-menu"
+  class="dropdown no-animation data-[state=open]:animate-in data-[state=open]:slide-in-from-top-2"
 >
   <!-- Custom slide animation -->
 </div>
 ```
 
 ```html preview
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Default
-  </button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-    <a href="#" class="dropdown-item">Logout</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-anim-default" aria-expanded="false">Default</button>
+<div id="dropdown-anim-default" class="dropdown">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
+  <a href="#" class="dropdown-item">Logout</a>
 </div>
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    No Animation
-  </button>
-  <div class="dropdown-menu no-animation">
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-    <a href="#" class="dropdown-item">Logout</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-anim-none" aria-expanded="false">No Animation</button>
+<div id="dropdown-anim-none" class="dropdown no-animation">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
+  <a href="#" class="dropdown-item">Logout</a>
 </div>
-<div class="dropdown">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Slide from Top
-  </button>
-  <div
-    class="dropdown-menu no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2"
-  >
-    <a href="#" class="dropdown-item">Profile</a>
-    <a href="#" class="dropdown-item">Settings</a>
-    <a href="#" class="dropdown-item">Logout</a>
-  </div>
+<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-anim-slide" aria-expanded="false">Slide from Top</button>
+<div id="dropdown-anim-slide" class="dropdown no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2">
+  <a href="#" class="dropdown-item">Profile</a>
+  <a href="#" class="dropdown-item">Settings</a>
+  <a href="#" class="dropdown-item">Logout</a>
 </div>
 ```
 
@@ -491,13 +340,15 @@ The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-an
 The dropdown provides full keyboard navigation and manages the `aria-expanded` state at runtime. Add `aria-expanded="false"` to the trigger button. The JavaScript toggles it to `"true"` when the menu opens:
 
 ```html
-<button data-sp-toggle="dropdown" aria-expanded="false">Open</button>
+<button data-sp-toggle="dropdown" data-sp-target="#my-menu" aria-expanded="false">
+  Open
+</button>
 ```
 
 The dropdown does not add `role="menu"` or `role="menuitem"` by default. Dropdowns are used for many things in practice (actions, navigation links, search inputs, forms) and those patterns don't all fit the strict ARIA menu model. If your dropdown is exclusively a list of command actions (Edit, Delete, etc.), you can opt into true menu semantics by adding the roles yourself:
 
 ```html
-<div class="dropdown-menu" role="menu">
+<div id="my-menu" class="dropdown" role="menu">
   <a href="#" class="dropdown-item" role="menuitem">Edit</a>
   <a href="#" class="dropdown-item" role="menuitem">Delete</a>
 </div>
@@ -513,29 +364,27 @@ The dropdown does not add `role="menu"` or `role="menuitem"` by default. Dropdow
 | `ArrowUp`         | Move focus to previous item                   |
 | `Home`            | Move focus to first item                      |
 | `End`             | Move focus to last item                       |
+| `Tab`             | Cycle focus through items inside the menu     |
 
 ### Class reference
 
 All available classes for the dropdown component.
 
-| Class                | Description                                 |
-| -------------------- | ------------------------------------------- |
-| `dropdown`           | Container for the dropdown                  |
-| `dropdown-menu`      | The menu panel that appears on toggle       |
-| `dropdown-item`      | Individual menu item                        |
-| `dropdown-label`     | Label/heading for grouping items            |
-| `dropdown-separator` | Horizontal divider between items            |
-| `no-animation`       | Disables default animation on dropdown-menu |
+| Class                | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `dropdown`           | The menu panel that appears on toggle        |
+| `dropdown-item`      | Individual menu item                         |
+| `dropdown-label`     | Label/heading for grouping items             |
+| `dropdown-separator` | Horizontal divider between items             |
+| `no-animation`       | Disables default animation on the menu       |
 
 ```html
-<div class="dropdown">
-  <button data-sp-toggle="dropdown">Open</button>
-  <div class="dropdown-menu">
-    <div class="dropdown-label">Group</div>
-    <a href="#" class="dropdown-item">Item</a>
-    <div class="dropdown-separator"></div>
-    <a href="#" class="dropdown-item">Item</a>
-  </div>
+<button data-sp-toggle="dropdown" data-sp-target="#my-menu">Open</button>
+<div id="my-menu" class="dropdown">
+  <div class="dropdown-label">Group</div>
+  <a href="#" class="dropdown-item">Item</a>
+  <div class="dropdown-separator"></div>
+  <a href="#" class="dropdown-item">Item</a>
 </div>
 ```
 
@@ -543,21 +392,29 @@ All available classes for the dropdown component.
 
 All data attributes for the dropdown component.
 
-| Attribute                   | Element     | Description                                    |
-| --------------------------- | ----------- | ---------------------------------------------- |
-| `data-sp-toggle="dropdown"` | Button      | Toggles the dropdown                           |
-| `data-sp-placement`         | `.dropdown` | Menu position (default: `bottom-end`)          |
-| `data-sp-offset`            | `.dropdown` | Distance from trigger in pixels (default: `4`) |
-| `aria-expanded`             | Button      | Set `"false"` initially; JS toggles on open/close |
-| `data-state`                | Menu        | Set to `open` when menu is visible             |
-| `aria-disabled="true"`      | Item        | Disables the item visually and functionally    |
+| Attribute                   | Element     | Description                                              |
+| --------------------------- | ----------- | -------------------------------------------------------- |
+| `data-sp-toggle="dropdown"` | Button      | Marks the trigger                                        |
+| `data-sp-target="#id"`      | Button      | The id of the linked `.dropdown` menu                    |
+| `data-sp-trigger`           | Button      | `"click"` (default) or `"hover"`                         |
+| `data-sp-placement`         | Button      | Menu position (default: `bottom-end`)                    |
+| `data-sp-offset`            | Button      | Distance from trigger in pixels (default: `4`)           |
+| `aria-expanded`             | Button      | Set `"false"` initially; JS toggles on open/close        |
+| `data-state`                | `.dropdown` | Set to `open` when menu is visible                       |
+| `aria-disabled="true"`      | Item        | Disables the item visually and functionally              |
 
 ```html
-<div class="dropdown" data-sp-placement="bottom-start" data-sp-offset="8">
-  <button data-sp-toggle="dropdown" aria-expanded="false">Open</button>
-  <div class="dropdown-menu">
-    <a href="#" class="dropdown-item">Enabled</a>
-    <a href="#" class="dropdown-item" aria-disabled="true">Disabled</a>
-  </div>
+<button
+  data-sp-toggle="dropdown"
+  data-sp-target="#my-menu"
+  data-sp-placement="bottom-start"
+  data-sp-offset="8"
+  aria-expanded="false"
+>
+  Open
+</button>
+<div id="my-menu" class="dropdown">
+  <a href="#" class="dropdown-item">Enabled</a>
+  <a href="#" class="dropdown-item" aria-disabled="true">Disabled</a>
 </div>
 ```

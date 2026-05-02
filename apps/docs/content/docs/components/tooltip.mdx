@@ -6,69 +6,51 @@ description: A Tailwind CSS tooltip component for displaying informational text 
 A Tailwind CSS tooltip component for displaying informational text on hover or when the element receives keyboard focus.
 
 ```html preview
-<div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-1">Hover me</button>
-  <div class="tooltip-content" id="tip-1" role="tooltip">Tooltip text</div>
-</div>
+<button class="btn" aria-describedby="tip-1">Hover me</button>
+<div id="tip-1" class="tooltip" role="tooltip">Tooltip text</div>
 ```
+
+To attach a tooltip to a trigger, point the trigger's `aria-describedby` at the tooltip's `id`.
 
 ---
 
 ## Placement
 
-Use `data-sp-placement` to control the tooltip position (default is `top`).
+Use `data-sp-placement` on the tooltip to control its position relative to the trigger (default is `top`).
 
 ```html preview
-<div class="tooltip" data-sp-placement="left">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-left">Left</button>
-  <div class="tooltip-content" id="tip-left" role="tooltip">Left tooltip</div>
-</div>
-<div class="tooltip" data-sp-placement="top">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-top">Top</button>
-  <div class="tooltip-content" id="tip-top" role="tooltip">Top tooltip</div>
-</div>
-<div class="tooltip" data-sp-placement="bottom">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-bottom">Bottom</button>
-  <div class="tooltip-content" id="tip-bottom" role="tooltip">Bottom tooltip</div>
-</div>
-<div class="tooltip" data-sp-placement="right">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-right">Right</button>
-  <div class="tooltip-content" id="tip-right" role="tooltip">Right tooltip</div>
-</div>
+<button class="btn" aria-describedby="tip-left">Left</button>
+<div id="tip-left" class="tooltip" role="tooltip" data-sp-placement="left">Left tooltip</div>
+<button class="btn" aria-describedby="tip-top">Top</button>
+<div id="tip-top" class="tooltip" role="tooltip" data-sp-placement="top">Top tooltip</div>
+<button class="btn" aria-describedby="tip-bottom">Bottom</button>
+<div id="tip-bottom" class="tooltip" role="tooltip" data-sp-placement="bottom">Bottom tooltip</div>
+<button class="btn" aria-describedby="tip-right">Right</button>
+<div id="tip-right" class="tooltip" role="tooltip" data-sp-placement="right">Right tooltip</div>
 ```
 
 ---
 
 ## Animation
 
-The tooltip includes a default fade and zoom animation. Add `no-animation` to the 
-content element to disable it, or use your own classes with `data-[state=open]:` selectors.
+The tooltip includes a default fade and zoom animation. Add `no-animation` to disable it, or use your own classes with `data-[state=open]:` selectors.
 
 ```html preview
-<div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-default">Default</button>
-  <div class="tooltip-content" id="tip-default" role="tooltip">Default animation</div>
-</div>
-<div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-noanim">No Animation</button>
-  <div class="tooltip-content no-animation" id="tip-noanim" role="tooltip">No animation</div>
-</div>
-<div class="tooltip">
-  <button class="btn" data-sp-toggle="tooltip" aria-describedby="tip-slide">
-    Slide from Bottom
-  </button>
-  <div
-    class="tooltip-content no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom"
-    id="tip-slide"
-    role="tooltip"
-  >
-    Custom animation
-  </div>
+<button class="btn" aria-describedby="tip-default">Default</button>
+<div id="tip-default" class="tooltip" role="tooltip">Default animation</div>
+<button class="btn" aria-describedby="tip-noanim">No Animation</button>
+<div id="tip-noanim" class="tooltip no-animation" role="tooltip">No animation</div>
+<button class="btn" aria-describedby="tip-slide">Slide from Bottom</button>
+<div
+  id="tip-slide"
+  class="tooltip no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom"
+  role="tooltip"
+>
+  Custom animation
 </div>
 ```
 
-The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. 
-You can customize or replace these with your own animations.
+The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. You can customize or replace these with your own animations.
 
 ---
 
@@ -78,35 +60,34 @@ The tooltip component uses a small JavaScript module that handles showing, hidin
 
 ### Structure
 
-A tooltip consists of three parts:
+A tooltip consists of two elements linked by `aria-describedby`:
 
-1. **`.tooltip`** - Container that wraps the trigger and content
-2. **`[data-sp-toggle="tooltip"]`** - Element that shows the tooltip on hover/focus
-3. **`.tooltip-content`** - The floating content panel
+1. **Any focusable element** (button, link, etc.) with `aria-describedby="tooltip-id"`
+2. **`.tooltip`** with a matching `id` and `role="tooltip"` — the floating content panel
 
 ```html
-<div class="tooltip">
-  <button data-sp-toggle="tooltip" aria-describedby="my-tip">Hover me</button>
-  <div class="tooltip-content" id="my-tip" role="tooltip">Tooltip text</div>
-</div>
+<button aria-describedby="my-tip">Hover me</button>
+<div id="my-tip" class="tooltip" role="tooltip">Tooltip text</div>
 ```
 
-The arrow element (`.tooltip-arrow`) is automatically created by the JavaScript when the tooltip opens.
+The trigger and the tooltip can live anywhere in the DOM as long as the id matches.
 
 ### Opening and closing
 
-The tooltip opens automatically when the user hovers over or focuses the trigger element. It closes when 
-the mouse leaves or the trigger loses focus. Pressing Escape also closes the tooltip.
+The tooltip opens automatically when the user hovers over or focuses the trigger. It closes when the mouse leaves or the trigger loses focus. Pressing Escape also closes the tooltip.
+
+Tooltips do not move focus into themselves and do not intercept clicks — clicking the trigger does whatever the trigger normally does (submit a form, navigate, etc.).
 
 ### Animation
 
-The tooltip includes a default fade and zoom animation. When shown, the JavaScript sets `data-state="open"` on the content element.
+The tooltip includes a default fade and zoom animation. When shown, the JavaScript sets `data-state="open"` on the tooltip element.
 
 To customize animations, add `no-animation` to disable the defaults and use your own classes with `data-[state=open]:` selectors:
 
 ```html
 <div
-  class="tooltip-content no-animation data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom"
+  id="my-tip"
+  class="tooltip no-animation data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom"
   role="tooltip"
 >
   <!-- Custom slide animation -->
@@ -115,34 +96,22 @@ To customize animations, add `no-animation` to disable the defaults and use your
 
 ### Accessibility
 
-The tooltip JavaScript module shows content on both hover and keyboard focus.
+The tooltip JavaScript module shows content on both hover and keyboard focus, and pressing Escape closes it.
 
-Add `role="tooltip"` to the content element:
+Add `role="tooltip"` to the tooltip element so screen readers announce it correctly:
 
 ```html
-<div class="tooltip-content" role="tooltip">Tooltip text</div>
+<div id="my-tip" class="tooltip" role="tooltip">Tooltip text</div>
 ```
 
-For screen reader users, link the trigger to the content with `aria-describedby`.
-Add an `id` to the content and point the trigger at it:
+`aria-describedby` on the trigger is required — that's how the tooltip is discovered. Without it the JavaScript has no way to know which tooltip belongs to which trigger.
 
 ```html
-<div class="tooltip">
-  <button
-    class="btn"
-    data-sp-toggle="tooltip"
-    aria-describedby="save-tip"
-  >
-    Save
-  </button>
-  <div class="tooltip-content" id="save-tip" role="tooltip">
-    Saves your changes
-  </div>
+<button class="btn" aria-describedby="save-tip">Save</button>
+<div id="save-tip" class="tooltip" role="tooltip">
+  Saves your changes
 </div>
 ```
-
-Without `aria-describedby`, the tooltip still works visually but its content
-won't be announced by screen readers.
 
 #### Keyboard navigation
 
@@ -155,33 +124,30 @@ won't be announced by screen readers.
 
 All available classes for the tooltip component.
 
-| Class             | Description                                       |
-| ----------------- | ------------------------------------------------- |
-| `tooltip`         | Container that wraps the trigger and content      |
-| `tooltip-content` | The floating content that appears on hover/focus  |
-| `tooltip-arrow`   | Arrow element (auto-injected by JavaScript)       |
-| `no-animation`    | Disables default animation on tooltip-content     |
+| Class           | Description                                  |
+| --------------- | -------------------------------------------- |
+| `tooltip`       | The floating content that appears on hover/focus |
+| `tooltip-arrow` | Arrow element (auto-injected by JavaScript)  |
+| `no-animation`  | Disables default animation on the tooltip    |
 
 ```html
-<div class="tooltip">
-  <button data-sp-toggle="tooltip" aria-describedby="my-tip">Hover me</button>
-  <div class="tooltip-content" id="my-tip" role="tooltip">Tooltip text</div>
-</div>
+<button aria-describedby="my-tip">Hover me</button>
+<div id="my-tip" class="tooltip" role="tooltip">Tooltip text</div>
 ```
 
 ### Data attributes
 
 All data attributes for the tooltip component.
 
-| Attribute                  | Element            | Description                           |
-| -------------------------- | ------------------ | ------------------------------------- |
-| `data-sp-toggle="tooltip"` | Button/trigger     | Designates the tooltip trigger        |
-| `data-sp-placement`        | `.tooltip`         | Content position (default: `top`)     |
-| `data-state`               | `.tooltip-content` | Set to `open` when content is visible |
+| Attribute           | Element    | Description                                           |
+| ------------------- | ---------- | ----------------------------------------------------- |
+| `aria-describedby`  | Trigger    | Required — id of the linked `.tooltip`                |
+| `data-sp-placement` | `.tooltip` | Tooltip position (default: `top`)                     |
+| `data-state`        | `.tooltip` | Set to `open` when tooltip is visible                 |
 
 ```html
-<div class="tooltip" data-sp-placement="bottom">
-  <button data-sp-toggle="tooltip" aria-describedby="my-tip">Hover me</button>
-  <div class="tooltip-content" id="my-tip" role="tooltip">Tooltip text</div>
+<button class="btn" aria-describedby="my-tip">Hover me</button>
+<div id="my-tip" class="tooltip" role="tooltip" data-sp-placement="bottom">
+  Tooltip text
 </div>
 ```

@@ -59,60 +59,60 @@ export default function Example() {
             </div>
           </nav>
           <footer className="sidebar-footer">
-            <div className="dropdown" data-sp-placement="right-end">
-              <button
-                className="menu-btn menu-btn-lg"
-                data-sp-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-                  alt="Sarah Johnson"
-                  className="size-8 rounded-lg"
-                />
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Sarah Johnson</span>
-                  <span className="truncate text-xs text-muted-foreground">
-                    sarah@example.com
-                  </span>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-auto"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-              <div className="dropdown-menu min-w-56">
-                <div className="dropdown-label flex items-center gap-2 px-1 py-1.5">
-                  <img
-                    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-                    alt="Sarah Johnson"
-                    className="size-8 rounded-lg"
-                  />
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Sarah Johnson</span>
-                    <span className="truncate text-xs text-muted-foreground">
-                      sarah@example.com
-                    </span>
-                  </div>
-                </div>
-                <div className="dropdown-separator"></div>
-                <a href="#" className="dropdown-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  Account
-                </a>
-                <a href="#" className="dropdown-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-                  Billing
-                </a>
-                <a href="#" className="dropdown-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
-                  Notifications
-                </a>
-                <div className="dropdown-separator"></div>
-                <a href="#" className="dropdown-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
-                  Log out
-                </a>
+            <button
+              className="menu-btn menu-btn-lg"
+              data-sp-toggle="dropdown"
+              data-sp-target="#user-menu-2"
+              data-sp-placement="right-end"
+              aria-expanded="false"
+            >
+              <img
+                src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+                alt="Sarah Johnson"
+                className="size-8 rounded-lg"
+              />
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-medium">Sarah Johnson</span>
+                <span className="truncate text-xs text-muted-foreground">
+                  sarah@example.com
+                </span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-auto"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+            </button>
+          </footer>
+          <div id="user-menu-2" className="dropdown min-w-56">
+            <div className="dropdown-label flex items-center gap-2 px-1 py-1.5">
+              <img
+                src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+                alt="Sarah Johnson"
+                className="size-8 rounded-lg"
+              />
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-medium">Sarah Johnson</span>
+                <span className="truncate text-xs text-muted-foreground">
+                  sarah@example.com
+                </span>
               </div>
             </div>
-          </footer>
+            <div className="dropdown-separator"></div>
+            <a href="#" className="dropdown-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Account
+            </a>
+            <a href="#" className="dropdown-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              Billing
+            </a>
+            <a href="#" className="dropdown-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+              Notifications
+            </a>
+            <div className="dropdown-separator"></div>
+            <a href="#" className="dropdown-item">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+              Log out
+            </a>
+          </div>
         </div>
       </aside>
       <main className="sidebar-page flex flex-col">

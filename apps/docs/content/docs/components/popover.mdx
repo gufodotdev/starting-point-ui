@@ -6,37 +6,36 @@ description: A Tailwind CSS popover component for displaying rich content in a f
 A Tailwind CSS popover component for displaying rich content in a floating panel.
 
 ```html preview
-<div class="popover">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    Open Popover
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Dimensions</h4>
-      <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="popover"
+  data-sp-target="#popover-dimensions"
+  aria-expanded="false"
+>
+  Open Popover
+</button>
+<div id="popover-dimensions" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Dimensions</h4>
+    <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="flex items-center gap-4">
+      <label class="label w-20 shrink-0">Width</label>
+      <input class="input" type="text" value="100%" />
     </div>
-    <div class="flex flex-col gap-3">
-      <div class="flex items-center gap-4">
-        <label class="label w-20 shrink-0">Width</label>
-        <input class="input" type="text" value="100%" />
-      </div>
-      <div class="flex items-center gap-4">
-        <label class="label w-20 shrink-0">Height</label>
-        <input class="input" type="text" value="25px" />
-      </div>
-      <div class="flex items-center gap-4">
-        <label class="label w-20 shrink-0">Max. Width</label>
-        <input class="input" type="text" value="300px" />
-      </div>
-      <div class="flex items-center gap-4">
-        <label class="label w-20 shrink-0">Max. Height</label>
-        <input class="input" type="text" value="none" />
-      </div>
+    <div class="flex items-center gap-4">
+      <label class="label w-20 shrink-0">Height</label>
+      <input class="input" type="text" value="25px" />
+    </div>
+    <div class="flex items-center gap-4">
+      <label class="label w-20 shrink-0">Max. Width</label>
+      <input class="input" type="text" value="300px" />
+    </div>
+    <div class="flex items-center gap-4">
+      <label class="label w-20 shrink-0">Max. Height</label>
+      <input class="input" type="text" value="none" />
     </div>
   </div>
 </div>
@@ -49,23 +48,22 @@ A Tailwind CSS popover component for displaying rich content in a floating panel
 A simple popover with a title and description.
 
 ```html preview
-<div class="popover">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    Open Popover
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">About this feature</h4>
-      <p class="text-sm text-muted-foreground">
-        This feature allows you to customize the layout dimensions of any layer
-        in your project. Changes are applied in real time.
-      </p>
-    </div>
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="popover"
+  data-sp-target="#popover-basic"
+  aria-expanded="false"
+>
+  Open Popover
+</button>
+<div id="popover-basic" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">About this feature</h4>
+    <p class="text-sm text-muted-foreground">
+      This feature allows you to customize the layout dimensions of any layer
+      in your project. Changes are applied in real time.
+    </p>
   </div>
 </div>
 ```
@@ -74,135 +72,63 @@ A simple popover with a title and description.
 
 ## Placement
 
-Use `data-sp-placement` to control the popover position (default is `bottom`).
+Use `data-sp-placement` on the trigger to control where the popover appears relative to it (default is `bottom`).
 
 ```html preview
-<div class="popover" data-sp-placement="bottom-start">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    bottom-start
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Bottom Start</h4>
-      <p class="text-sm text-muted-foreground">Aligned to the start of the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-bottom-start" data-sp-placement="bottom-start" aria-expanded="false">bottom-start</button>
+<div id="popover-bottom-start" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Bottom Start</h4>
+    <p class="text-sm text-muted-foreground">Aligned to the start of the trigger.</p>
   </div>
 </div>
-<div class="popover" data-sp-placement="bottom">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    bottom
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Bottom</h4>
-      <p class="text-sm text-muted-foreground">Centered below the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-bottom" data-sp-placement="bottom" aria-expanded="false">bottom</button>
+<div id="popover-bottom" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Bottom</h4>
+    <p class="text-sm text-muted-foreground">Centered below the trigger.</p>
   </div>
 </div>
-<div class="popover" data-sp-placement="bottom-end">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    bottom-end
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Bottom End</h4>
-      <p class="text-sm text-muted-foreground">Aligned to the end of the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-bottom-end" data-sp-placement="bottom-end" aria-expanded="false">bottom-end</button>
+<div id="popover-bottom-end" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Bottom End</h4>
+    <p class="text-sm text-muted-foreground">Aligned to the end of the trigger.</p>
   </div>
 </div>
-<div class="popover" data-sp-placement="top-start">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    top-start
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Top Start</h4>
-      <p class="text-sm text-muted-foreground">Aligned to the start above the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-top-start" data-sp-placement="top-start" aria-expanded="false">top-start</button>
+<div id="popover-top-start" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Top Start</h4>
+    <p class="text-sm text-muted-foreground">Aligned to the start above the trigger.</p>
   </div>
 </div>
-<div class="popover" data-sp-placement="top">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    top
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Top</h4>
-      <p class="text-sm text-muted-foreground">Centered above the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-top" data-sp-placement="top" aria-expanded="false">top</button>
+<div id="popover-top" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Top</h4>
+    <p class="text-sm text-muted-foreground">Centered above the trigger.</p>
   </div>
 </div>
-<div class="popover" data-sp-placement="top-end">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    top-end
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Top End</h4>
-      <p class="text-sm text-muted-foreground">Aligned to the end above the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-top-end" data-sp-placement="top-end" aria-expanded="false">top-end</button>
+<div id="popover-top-end" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Top End</h4>
+    <p class="text-sm text-muted-foreground">Aligned to the end above the trigger.</p>
   </div>
 </div>
-<div class="popover" data-sp-placement="left">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    left
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Left</h4>
-      <p class="text-sm text-muted-foreground">Centered to the left of the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-left" data-sp-placement="left" aria-expanded="false">left</button>
+<div id="popover-left" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Left</h4>
+    <p class="text-sm text-muted-foreground">Centered to the left of the trigger.</p>
   </div>
 </div>
-<div class="popover" data-sp-placement="right">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    right
-  </button>
-  <div class="popover-content">
-    <div class="mb-3 space-y-1">
-      <h4 class="text-sm font-medium leading-none">Right</h4>
-      <p class="text-sm text-muted-foreground">Centered to the right of the trigger.</p>
-    </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-right" data-sp-placement="right" aria-expanded="false">right</button>
+<div id="popover-right" class="popover">
+  <div class="mb-3 space-y-1">
+    <h4 class="text-sm font-medium leading-none">Right</h4>
+    <p class="text-sm text-muted-foreground">Centered to the right of the trigger.</p>
   </div>
 </div>
 ```
@@ -211,33 +137,43 @@ Use `data-sp-placement` to control the popover position (default is `bottom`).
 
 ## Offset
 
-Use `data-sp-offset` to control the distance between the trigger and the popover (default is `4`).
+Use `data-sp-offset` on the trigger to control the distance between the trigger and the popover (default is `4`).
 
 ```html preview
-<div class="popover" data-sp-offset="0">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    No offset
-  </button>
-  <div class="popover-content">
-    <p class="text-sm">Flush against the trigger.</p>
-  </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-offset-0" data-sp-offset="0" aria-expanded="false">No offset</button>
+<div id="popover-offset-0" class="popover">
+  <p class="text-sm">Flush against the trigger.</p>
 </div>
-<div class="popover" data-sp-offset="12">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    Large offset
-  </button>
-  <div class="popover-content">
-    <p class="text-sm">12 pixels of breathing room.</p>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-offset-12" data-sp-offset="12" aria-expanded="false">Large offset</button>
+<div id="popover-offset-12" class="popover">
+  <p class="text-sm">12 pixels of breathing room.</p>
+</div>
+```
+
+---
+
+## Hover trigger
+
+Add `data-sp-trigger="hover"` to open the popover on pointer hover. Click still works for touch devices and keyboard users.
+
+```html preview
+<button
+  class="btn"
+  type="button"
+  data-sp-toggle="popover"
+  data-sp-target="#popover-hover"
+  data-sp-trigger="hover"
+  aria-expanded="false"
+>
+  Hover me
+</button>
+<div id="popover-hover" class="popover">
+  <div class="space-y-1">
+    <h4 class="text-sm font-medium leading-none">Hover-opened popover</h4>
+    <p class="text-sm text-muted-foreground">
+      Move your pointer here to keep it open. Click the trigger to commit
+      focus into the panel.
+    </p>
   </div>
 </div>
 ```
@@ -250,104 +186,68 @@ The popover component uses a small JavaScript module that handles opening, closi
 
 ### Structure
 
-A popover consists of three parts:
+A popover consists of two elements linked by id:
 
-1. **`.popover`** - Container that wraps the trigger and content
-2. **`[data-sp-toggle="popover"]`** - Button that opens/closes the popover
-3. **`.popover-content`** - The floating content panel
+1. **`[data-sp-toggle="popover"]`** with `data-sp-target="#id"` — the trigger button
+2. **`.popover`** with a matching `id` — the floating content panel
 
 ```html
-<div class="popover">
-  <button type="button" data-sp-toggle="popover" aria-expanded="false">
-    Open Popover
-  </button>
-  <div class="popover-content">
-    <!-- Any content -->
-  </div>
+<button data-sp-toggle="popover" data-sp-target="#my-popover" aria-expanded="false">
+  Open Popover
+</button>
+<div id="my-popover" class="popover">
+  <!-- Any content -->
 </div>
 ```
 
+The trigger and the popover can live anywhere in the DOM as long as the id matches.
+
 ### Opening and closing
 
-Use data attributes to control the popover without writing JavaScript.
-
-Add `data-sp-toggle="popover"` to the trigger button. The JavaScript will find the `.popover-content` sibling and toggle it:
-
-```html
-<button data-sp-toggle="popover" aria-expanded="false">Open</button>
-```
-
-Clicking outside the popover or pressing Escape closes the content panel. When opened, focus moves to the first focusable element inside the content.
+Add `data-sp-toggle="popover"` and `data-sp-target` to the trigger to toggle the linked popover on click. Clicking outside the popover or pressing Escape closes it. When opened, focus moves into the popover.
 
 For programmatic control, use the global `sp.popover` module:
 
 ```js
-const popover = document.querySelector(".popover");
+const trigger = document.querySelector("[data-sp-target='#my-popover']");
+const popover = document.getElementById("my-popover");
 
-sp.popover.open(popover);
+sp.popover.open(trigger);
 sp.popover.close(popover);
-sp.popover.toggle(popover);
+sp.popover.toggle(trigger);
 ```
 
 ### Focus trapping
 
-When the popover is open, pressing Tab and Shift+Tab cycles focus through the focusable elements inside `.popover-content`. Focus wraps from the last element back to the first, and vice versa. This keeps keyboard users within the popover until they explicitly close it with Escape.
+When the popover is open, Tab and Shift+Tab cycle focus through the focusable elements inside. Focus wraps from the last element back to the first, and vice versa. This keeps keyboard users within the popover until they explicitly close it with Escape.
 
 ### Animation
 
-The popover includes a default fade and zoom animation. When opened, the JavaScript sets `data-state="open"` on the content element.
+The popover includes a default fade and zoom animation. When opened, the JavaScript sets `data-state="open"` on the popover element.
 
 To customize animations, add `no-animation` to disable the defaults and use your own classes with `data-[state=open]:` selectors:
 
 ```html
 <div
-  class="popover-content no-animation data-[state=open]:animate-in data-[state=open]:slide-in-from-top-2"
+  id="my-popover"
+  class="popover no-animation data-[state=open]:animate-in data-[state=open]:slide-in-from-top-2"
 >
   <!-- Custom slide animation -->
 </div>
 ```
 
 ```html preview
-<div class="popover">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    Default
-  </button>
-  <div class="popover-content">
-    <p class="text-sm">Default fade and zoom animation.</p>
-  </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-anim-default" aria-expanded="false">Default</button>
+<div id="popover-anim-default" class="popover">
+  <p class="text-sm">Default fade and zoom animation.</p>
 </div>
-<div class="popover">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    No Animation
-  </button>
-  <div class="popover-content no-animation">
-    <p class="text-sm">Animations are disabled.</p>
-  </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-anim-none" aria-expanded="false">No Animation</button>
+<div id="popover-anim-none" class="popover no-animation">
+  <p class="text-sm">Animations are disabled.</p>
 </div>
-<div class="popover">
-  <button
-    class="btn"
-    type="button"
-    data-sp-toggle="popover"
-    aria-expanded="false"
-  >
-    Slide from Top
-  </button>
-  <div
-    class="popover-content no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2"
-  >
-    <p class="text-sm">Slides in from the top.</p>
-  </div>
+<button class="btn" type="button" data-sp-toggle="popover" data-sp-target="#popover-anim-slide" aria-expanded="false">Slide from Top</button>
+<div id="popover-anim-slide" class="popover no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2">
+  <p class="text-sm">Slides in from the top.</p>
 </div>
 ```
 
@@ -360,7 +260,9 @@ The popover JavaScript module provides focus trapping and proper ARIA attributes
 For proper accessibility, add `aria-expanded="false"` to the trigger button:
 
 ```html
-<button data-sp-toggle="popover" aria-expanded="false">Open</button>
+<button data-sp-toggle="popover" data-sp-target="#my-popover" aria-expanded="false">
+  Open
+</button>
 ```
 
 The JavaScript will automatically update `aria-expanded` when the popover opens and closes.
@@ -371,25 +273,22 @@ The JavaScript will automatically update `aria-expanded` when the popover opens 
 | ----------------- | ----------------------------------------------------------------------------- |
 | `Enter` / `Space` | Opens/closes popover when trigger is focused                                  |
 | `Escape`          | Closes the popover and returns focus to the trigger                           |
-| `Tab`             | Cycles focus through focusable elements within the popover content            |
-| `Shift + Tab`     | Cycles focus backward through focusable elements within the popover content   |
+| `Tab`             | Cycles focus through focusable elements within the popover                    |
+| `Shift + Tab`     | Cycles focus backward through focusable elements within the popover           |
 
 ### Class reference
 
 All available classes for the popover component.
 
-| Class             | Description                                   |
-| ----------------- | --------------------------------------------- |
-| `popover`         | Container for the popover                     |
-| `popover-content` | The floating content panel                    |
-| `no-animation`    | Disables default animation on popover-content |
+| Class          | Description                              |
+| -------------- | ---------------------------------------- |
+| `popover`      | The floating content panel               |
+| `no-animation` | Disables default animation on the popover|
 
 ```html
-<div class="popover">
-  <button data-sp-toggle="popover">Open</button>
-  <div class="popover-content">
-    <!-- Any content -->
-  </div>
+<button data-sp-toggle="popover" data-sp-target="#my-popover">Open</button>
+<div id="my-popover" class="popover">
+  <!-- Any content -->
 </div>
 ```
 
@@ -397,18 +296,27 @@ All available classes for the popover component.
 
 All data attributes for the popover component.
 
-| Attribute                   | Element     | Description                                    |
-| --------------------------- | ----------- | ---------------------------------------------- |
-| `data-sp-toggle="popover"`  | Button      | Toggles the popover                            |
-| `data-sp-placement`         | `.popover`  | Content position (default: `bottom`)           |
-| `data-sp-offset`            | `.popover`  | Distance from trigger in pixels (default: `4`) |
-| `data-state`                | Content     | Set to `open` when content is visible          |
+| Attribute                   | Element    | Description                                       |
+| --------------------------- | ---------- | ------------------------------------------------- |
+| `data-sp-toggle="popover"`  | Button     | Marks the trigger                                 |
+| `data-sp-target="#id"`      | Button     | The id of the linked `.popover`                   |
+| `data-sp-trigger`           | Button     | `"click"` (default) or `"hover"`                  |
+| `data-sp-placement`         | Button     | Popover position (default: `bottom`)              |
+| `data-sp-offset`            | Button     | Distance from trigger in pixels (default: `4`)    |
+| `aria-expanded`             | Button     | Set `"false"` initially; JS toggles on open/close |
+| `data-state`                | `.popover` | Set to `open` when popover is visible             |
 
 ```html
-<div class="popover" data-sp-placement="bottom-start" data-sp-offset="8">
-  <button data-sp-toggle="popover" aria-expanded="false">Open</button>
-  <div class="popover-content">
-    <!-- Any content -->
-  </div>
+<button
+  data-sp-toggle="popover"
+  data-sp-target="#my-popover"
+  data-sp-placement="bottom-start"
+  data-sp-offset="8"
+  aria-expanded="false"
+>
+  Open
+</button>
+<div id="my-popover" class="popover">
+  <!-- Any content -->
 </div>
 ```

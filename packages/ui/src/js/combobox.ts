@@ -2,15 +2,20 @@
 
 import { type Placement } from "@floating-ui/dom";
 import {
-  closeIfOutside,
-  closePoppable,
-  getOpenPoppable,
-  isDisabled,
-  openPoppable,
+  closeAnchor,
+  closeAnchorIfOutside,
+  getAnchorTrigger,
+  getOpenAnchor,
+  getTargetContent,
+  openAnchor,
   positionFloating,
-  togglePoppable,
-  type PoppableConfig,
-} from "./utils";
+  toggleAnchor,
+  type AnchorOptions,
+} from "./floating";
+import { isDisabled } from "./utils";
+
+const TRIGGER_SELECTOR = "[data-sp-toggle='combobox']";
+const CONTENT_SELECTOR = ".combobox";
 
 function getVisibleItems(menu: HTMLElement): HTMLElement[] {
   return [...menu.querySelectorAll<HTMLElement>(".combobox-item")].filter(
@@ -18,10 +23,7 @@ function getVisibleItems(menu: HTMLElement): HTMLElement[] {
   );
 }
 
-export function filter(combobox: HTMLElement, query: string) {
-  const menu = combobox.querySelector<HTMLElement>(".combobox-menu");
-  if (!menu) return;
-
+export function filter(menu: HTMLElement, query: string) {
   const normalizedQuery = query.trim().toLowerCase();
   const items = menu.querySelectorAll<HTMLElement>(".combobox-item");
   let visibleCount = 0;
@@ -41,36 +43,39 @@ export function filter(combobox: HTMLElement, query: string) {
   }
 }
 
-const CONFIG: PoppableConfig = {
-  rootSelector: ".combobox",
-  contentSelector: ".combobox-menu",
-  triggerSelector: "[data-sp-toggle='combobox']",
-  position: async (root, trigger, menu) => {
+const OPTS: AnchorOptions = {
+  contentSelector: CONTENT_SELECTOR,
+  triggerSelector: TRIGGER_SELECTOR,
+  position: async (trigger, menu) => {
+    // Match menu width to trigger so options align with the value they populate.
+    menu.style.width = `${trigger.offsetWidth}px`;
     await positionFloating(trigger, menu, {
-      placement: (root.dataset.spPlacement as Placement) || "bottom-start",
-      offset: parseInt(root.dataset.spOffset || "4", 10),
+      placement: (trigger.dataset.spPlacement as Placement) || "bottom-start",
+      offset: parseInt(trigger.dataset.spOffset || "4", 10),
     });
   },
-  onAfterOpen: (root) => {
-    root.querySelector<HTMLInputElement>(".combobox-input")?.focus();
-  },
-  onAfterClose: (root) => {
-    filter(root, "");
-    const input = root.querySelector<HTMLInputElement>(".combobox-input");
+  onAfterClose: (_trigger, menu) => {
+    filter(menu, "");
+    const input = menu.querySelector<HTMLInputElement>(".combobox-input");
     if (input) input.value = "";
   },
 };
 
-export const open = (combobox: HTMLElement) => openPoppable(combobox, CONFIG);
-export const close = (combobox: HTMLElement) => closePoppable(combobox, CONFIG);
-export const toggle = (combobox: HTMLElement) => togglePoppable(combobox, CONFIG);
+export const open = (trigger: HTMLElement) => {
+  const menu = getTargetContent(trigger);
+  if (menu) openAnchor(trigger, menu, OPTS, { viaClick: true });
+};
+export const close = (menu: HTMLElement) => closeAnchor(menu, OPTS);
+export const toggle = (trigger: HTMLElement) => {
+  const menu = getTargetContent(trigger);
+  if (menu) toggleAnchor(trigger, menu, OPTS, { viaClick: true });
+};
 
-function updateTriggerText(combobox: HTMLElement) {
-  const menu = combobox.querySelector<HTMLElement>(CONFIG.contentSelector);
-  if (!menu) return;
-
-  const checked = menu.querySelectorAll<HTMLInputElement>(".combobox-item input:checked");
-  const valueEl = combobox.querySelector<HTMLElement>(".combobox-value");
+function updateTriggerText(trigger: HTMLElement, menu: HTMLElement) {
+  const checked = menu.querySelectorAll<HTMLInputElement>(
+    ".combobox-item input:checked",
+  );
+  const valueEl = trigger.querySelector<HTMLElement>(".combobox-value");
   if (!valueEl) return;
 
   if (checked.length === 0) {
@@ -83,7 +88,9 @@ function updateTriggerText(combobox: HTMLElement) {
       valueEl.dataset.placeholder = valueEl.textContent ?? "";
     }
     if (checked.length === 1) {
-      valueEl.textContent = checked[0].closest<HTMLElement>(".combobox-item")?.textContent?.trim() ?? "";
+      valueEl.textContent =
+        checked[0].closest<HTMLElement>(".combobox-item")?.textContent?.trim() ??
+        "";
     } else {
       const name = checked[0].name ?? "items";
       valueEl.textContent = `${checked.length} ${name} selected`;
@@ -91,7 +98,7 @@ function updateTriggerText(combobox: HTMLElement) {
   }
 }
 
-export function select(combobox: HTMLElement, item: HTMLElement) {
+export function select(trigger: HTMLElement, menu: HTMLElement, item: HTMLElement) {
   const input = item.querySelector<HTMLInputElement>("input");
   const isMultiple = input?.type === "checkbox";
 
@@ -101,10 +108,9 @@ export function select(combobox: HTMLElement, item: HTMLElement) {
       input.dispatchEvent(new Event("change", { bubbles: true }));
     }
     item.setAttribute("aria-selected", String(input?.checked ?? false));
-    updateTriggerText(combobox);
+    updateTriggerText(trigger, menu);
   } else {
-    const menu = combobox.querySelector<HTMLElement>(CONFIG.contentSelector);
-    menu?.querySelectorAll<HTMLElement>(".combobox-item").forEach((el) => {
+    menu.querySelectorAll<HTMLElement>(".combobox-item").forEach((el) => {
       el.setAttribute("aria-selected", "false");
     });
     if (input) {
@@ -112,20 +118,20 @@ export function select(combobox: HTMLElement, item: HTMLElement) {
       input.dispatchEvent(new Event("change", { bubbles: true }));
     }
     item.setAttribute("aria-selected", "true");
-    updateTriggerText(combobox);
-    close(combobox);
+    updateTriggerText(trigger, menu);
+    closeAnchor(menu, OPTS);
   }
 }
 
 function handleClick(e: MouseEvent) {
   const target = e.target as HTMLElement;
 
-  const toggleBtn = target.closest<HTMLElement>(CONFIG.triggerSelector);
-  if (toggleBtn) {
-    const combobox = toggleBtn.closest<HTMLElement>(CONFIG.rootSelector);
-    if (combobox) {
+  const trigger = target.closest<HTMLElement>(TRIGGER_SELECTOR);
+  if (trigger) {
+    const menu = getTargetContent(trigger);
+    if (menu) {
       e.preventDefault();
-      toggle(combobox);
+      toggleAnchor(trigger, menu, OPTS, { viaClick: true });
     }
     return;
   }
@@ -136,44 +142,53 @@ function handleClick(e: MouseEvent) {
       e.preventDefault();
       return;
     }
-    const combobox = item.closest<HTMLElement>(CONFIG.rootSelector);
-    if (combobox) select(combobox, item);
+    const menu = item.closest<HTMLElement>(CONTENT_SELECTOR);
+    if (menu) {
+      const associatedTrigger = getAnchorTrigger(menu);
+      if (associatedTrigger) select(associatedTrigger, menu, item);
+    }
     return;
   }
 
-  closeIfOutside(target, CONFIG);
+  closeAnchorIfOutside(target, OPTS);
 }
 
 function handleKeydown(e: KeyboardEvent) {
   const target = e.target as HTMLElement;
-  const combobox = target.closest<HTMLElement>(CONFIG.rootSelector);
 
-  const openCombobox = getOpenPoppable(CONFIG);
-
-  if (e.key === "Escape" && openCombobox) {
+  const openMenu = getOpenAnchor(OPTS);
+  if (e.key === "Escape" && openMenu) {
     e.preventDefault();
-    const trigger = openCombobox.querySelector<HTMLElement>(CONFIG.triggerSelector);
-    close(openCombobox);
+    const trigger = getAnchorTrigger(openMenu);
+    closeAnchor(openMenu, OPTS);
     trigger?.focus();
     return;
   }
 
   if (
     (e.key === "Enter" || e.key === " ") &&
-    target.matches(CONFIG.triggerSelector)
+    target.matches(TRIGGER_SELECTOR)
   ) {
     e.preventDefault();
-    if (combobox) toggle(combobox);
+    const menu = getTargetContent(target);
+    if (menu) toggleAnchor(target, menu, OPTS, { viaClick: true });
     return;
   }
 
-  if (!combobox) return;
-  const menu = combobox.querySelector<HTMLElement>(CONFIG.contentSelector);
+  const menu =
+    target.closest<HTMLElement>(CONTENT_SELECTOR) ??
+    (target.matches(TRIGGER_SELECTOR) ? getTargetContent(target) : null);
   if (!menu?.classList.contains("open")) return;
 
-  if ((e.key === "Enter" || e.key === " ") && target.matches(".combobox-item")) {
+  if (
+    (e.key === "Enter" || e.key === " ") &&
+    target.matches(".combobox-item")
+  ) {
     e.preventDefault();
-    if (!isDisabled(target)) select(combobox, target);
+    if (!isDisabled(target)) {
+      const trigger = getAnchorTrigger(menu);
+      if (trigger) select(trigger, menu, target);
+    }
     return;
   }
 
@@ -187,12 +202,14 @@ function handleKeydown(e: KeyboardEvent) {
 
     switch (e.key) {
       case "ArrowDown":
-        nextItem = currentIndex < 0 ? items[0] : (items[currentIndex + 1] ?? items[0]);
+        nextItem =
+          currentIndex < 0 ? items[0] : items[currentIndex + 1] ?? items[0];
         break;
       case "ArrowUp":
-        nextItem = currentIndex < 0
-          ? items[items.length - 1]
-          : (items[currentIndex - 1] ?? items[items.length - 1]);
+        nextItem =
+          currentIndex < 0
+            ? items[items.length - 1]
+            : items[currentIndex - 1] ?? items[items.length - 1];
         break;
       case "Home":
         nextItem = items[0];
@@ -207,17 +224,15 @@ function handleKeydown(e: KeyboardEvent) {
 }
 
 function handleFocusOut(e: FocusEvent) {
-  closeIfOutside(e.relatedTarget as HTMLElement | null, CONFIG);
+  closeAnchorIfOutside(e.relatedTarget as HTMLElement | null, OPTS);
 }
 
 function handleInput(e: Event) {
   const input = e.target as HTMLInputElement;
   if (!input.matches(".combobox-input")) return;
 
-  const combobox = input.closest<HTMLElement>(CONFIG.rootSelector);
-  if (!combobox) return;
-
-  filter(combobox, input.value);
+  const menu = input.closest<HTMLElement>(CONTENT_SELECTOR);
+  if (menu) filter(menu, input.value);
 }
 
 let initialized = false;
