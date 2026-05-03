@@ -69,7 +69,7 @@ function clearTheme() {
   document.getElementById("sp-theme")?.remove();
 }
 
-export function ThemeEditor() {
+export function ThemeEditor({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [config, setConfig] = useState<ThemeConfig>(defaultConfig);
   const [ready, setReady] = useState(false);
@@ -163,7 +163,7 @@ export function ThemeEditor() {
     <>
       <button
         type="button"
-        className="btn btn-ghost btn-icon-sm"
+        className={`btn btn-ghost btn-icon-sm${className ? ` ${className}` : ""}`}
         aria-label="Open theme editor"
         data-sp-toggle="dialog"
         data-sp-target="#theme-editor"
