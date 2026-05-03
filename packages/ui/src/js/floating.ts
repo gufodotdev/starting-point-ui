@@ -1,7 +1,8 @@
 // Starting Point UI Floating Module
 //
 // Anchored-content primitive: trigger → content via data-sp-target="#id".
-// On open, content is portaled to <body> and positioned by Floating UI.
+// On open, the panel is promoted to the top layer via the popover API and
+// positioned by Floating UI.
 
 import {
   autoUpdate,
@@ -42,6 +43,7 @@ export async function positionFloating(
 
   const result = await computePosition(reference, floating, {
     placement: options.placement,
+    strategy: "absolute",
     middleware,
   });
 
@@ -73,8 +75,6 @@ export interface AnchorOptions {
 
 interface AnchorRecord {
   trigger: HTMLElement;
-  parent: Node;
-  nextSibling: Node | null;
   cleanup: () => void;
   /** Focus moved into the content; Tab is trapped. */
   focused: boolean;
@@ -180,14 +180,13 @@ export async function openAnchor(
   if (!anchorRecords.has(content)) {
     const record: AnchorRecord = {
       trigger,
-      parent: content.parentNode!,
-      nextSibling: content.nextSibling,
       cleanup: () => {},
       focused: willFocus,
     };
-    document.body.appendChild(content);
-    // Position before autoUpdate; otherwise focus lands at body's top-left
-    // and the browser auto-scrolls to it.
+    if (!content.hasAttribute("popover")) content.setAttribute("popover", "manual");
+    content.showPopover();
+    // Position before autoUpdate; otherwise focus lands at the popover's
+    // default top-left and the browser auto-scrolls to it.
     await opts.position(trigger, content);
     record.cleanup = autoUpdate(trigger, content, () => {
       opts.position(trigger, content);
@@ -241,7 +240,7 @@ export async function closeAnchor(
 
   if (record) {
     record.cleanup();
-    record.parent.insertBefore(content, record.nextSibling);
+    if (content.matches(":popover-open")) content.hidePopover();
     anchorRecords.delete(content);
     activeAnchors.delete(content);
   }

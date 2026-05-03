@@ -22,7 +22,7 @@
   
   @utility combobox {
     @layer l1.l2 {
-      @apply absolute z-998 hidden min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover text-popover-foreground shadow-popover;
+      @apply absolute inset-auto z-998 m-0 hidden min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover text-popover-foreground shadow-popover;
       @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
   
       &.open {
