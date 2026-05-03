@@ -316,7 +316,7 @@ export function resolveThemeVars(config: ThemeConfig) {
   const bodyFont = fonts.find((f) => f.name === config.bodyFont);
   const headingFont = fonts.find((f) => f.name === config.headingFont);
 
-  if (bodyFont) lightVars["--font-body"] = bodyFont.value;
+  if (bodyFont) lightVars["--font-sans"] = bodyFont.value;
   if (headingFont) lightVars["--font-heading"] = headingFont.value;
 
   return { lightVars, darkVars, bodyFont, headingFont };

@@ -80,8 +80,7 @@ Here's the full list of variables available for customization:
   --badge-radius: 9999px;
   --track: oklch(0.922 0 0);
   --thumb: oklch(1 0 0);
-  --font-body: "Inter", sans-serif;
-  --font-heading: "Inter", sans-serif;
+  --font-heading: var(--font-sans);
 }
 
 .dark {
@@ -156,16 +155,16 @@ Override any of these variables after importing the library styles:
 
 ## Fonts
 
-The library uses two font variables applied in the base layer:
+The library uses two font variables:
 
-- `--font-body` — applied to `body`, used for all text by default
-- `--font-heading` — applied to `h1` through `h6`
+- `--font-sans` — Tailwind's default body font token. Defaults to the system sans-serif stack. Set this to use a custom body font.
+- `--font-heading` — applied to `h1` through `h6`. Inherits from `--font-sans` by default, so headings follow the body font unless you override it.
 
 Override them to use different fonts:
 
 ```css
 :root {
-  --font-body: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
   --font-heading: "Playfair Display", serif;
 }
 ```

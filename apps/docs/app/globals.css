@@ -11,8 +11,8 @@
   --navbar-height: 4rem;
   --sidebar-width: 14rem;
   --toc-width: 14rem;
-  --font-body: var(--font-inter), sans-serif;
-  --font-heading: var(--font-inter), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-sans);
 }
 
 .scrollbar-none {

@@ -94,7 +94,17 @@ export default function RootLayout({ children }) {
 
 ## Font (optional)
 
-The examples on this site use [Inter](https://rsms.me/inter/) as the font. If you want the same look and feel, you can add it to your project. Here's an example using a CDN:
+By default the package uses Tailwind's `--font-sans` for body text, and `--font-heading` for headings (which inherits from `--font-sans` unless overridden). The examples on this site use [Inter](https://rsms.me/inter/) — to match that look, load Inter and set it as the body font:
+
+```css
+@import url("https://fonts.bunny.net/css?family=inter:400,500,600,700");
+
+@theme inline {
+  --font-sans: "Inter", sans-serif;
+}
+```
+
+Or load Inter via a `<link>` tag in your HTML:
 
 ```html
 <head>
@@ -106,17 +116,11 @@ The examples on this site use [Inter](https://rsms.me/inter/) as the font. If yo
 </head>
 ```
 
-Or load it directly in your CSS:
-
-```css
-@import url("https://fonts.bunny.net/css?family=inter:400,500,600,700");
-```
-
-Then set it as the default font:
+To use a different font for headings, override `--font-heading`:
 
 ```css
 @theme inline {
-  --font-sans: "Inter", sans-serif;
+  --font-heading: "Your Heading Font", serif;
 }
 ```
 

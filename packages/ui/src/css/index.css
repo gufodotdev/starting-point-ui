@@ -85,8 +85,7 @@
   --badge-radius: 9999px;
   --track: oklch(0.922 0 0);
   --thumb: oklch(1 0 0);
-  --font-body: "Inter", sans-serif;
-  --font-heading: "Inter", sans-serif;
+  --font-heading: var(--font-sans);
 }
 
 .dark {
@@ -203,7 +202,6 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-body);
   }
 
   h1, h2, h3, h4, h5, h6 {
