@@ -12,9 +12,6 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.startingpointui.com"),
-  alternates: {
-    canonical: "/",
-  },
   title: {
     default: "Starting Point UI",
     template: "%s - Starting Point UI",

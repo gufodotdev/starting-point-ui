@@ -1,9 +1,14 @@
 import { notFound } from "next/navigation";
 import { readdir } from "fs/promises";
 import { join } from "path";
+import type { Metadata } from "next";
 import { getPresetClasses, type Preset } from "@/lib/examples";
 
 export const dynamicParams = false;
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 const EXAMPLES_DIR = join(process.cwd(), "examples");
 

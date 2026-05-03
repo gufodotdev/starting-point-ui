@@ -7,6 +7,7 @@ import { SidebarIllustration } from "@/components/illustrations/sidebar";
 export const metadata = {
   title: allExamplesMeta.title,
   description: allExamplesMeta.description,
+  alternates: { canonical: "/examples" },
 };
 
 export default async function AllExamplesPage() {

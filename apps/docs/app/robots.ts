@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: "/view/",
     },
     sitemap: "https://www.startingpointui.com/sitemap.xml",
   };

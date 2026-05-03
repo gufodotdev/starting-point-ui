@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   title: "Beautiful Components for Tailwind CSS",
   description:
     "An open-source component library for Tailwind CSS. Inspired by shadcn/ui, Starting Point UI gives you the same beautiful design system without locking you into a framework.",
+  alternates: { canonical: "/" },
 };
 
 const cards = [
