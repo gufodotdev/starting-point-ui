@@ -9,7 +9,7 @@
 
 @utility sheet-panel {
   @layer l1.l2 {
-    @apply fixed pointer-events-auto bg-background shadow-lg [animation-fill-mode:forwards]!;
+    @apply fixed pointer-events-auto bg-popover text-popover-foreground shadow-lg [animation-fill-mode:forwards]!;
     @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-left;
   }
 }
