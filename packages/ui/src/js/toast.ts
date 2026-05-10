@@ -337,7 +337,15 @@ function init() {
 
   const start = () => {
     document.addEventListener("click", handleClick);
-    scanForToasts(document.body);
+    // Skip the initial scan on Back/Forward so cached `data-sp-toast`
+    // markup doesn't re-fire. Later additions still go through the observer.
+    if (
+      (performance.getEntriesByType("navigation")[0] as
+        | PerformanceNavigationTiming
+        | undefined)?.type !== "back_forward"
+    ) {
+      scanForToasts(document.body);
+    }
     new MutationObserver((mutations) => {
       for (const m of mutations) {
         for (const node of m.addedNodes) scanForToasts(node);
