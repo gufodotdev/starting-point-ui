@@ -267,6 +267,31 @@ Override positioning, sizing, and styles to create custom dialog variants like s
 
 ---
 
+## Server-rendered open state
+
+Server-rendered apps often need a dialog to stay open across a form submission — for example when the form posts back with validation errors and the user needs to keep filling in the same dialog.
+
+Render the `<dialog>` with the `open` attribute when the relevant condition is true. The browser opens the dialog before any animation runs, so the page looks like it never left.
+
+```html
+<dialog id="confirm-delete" class="dialog" {{ $hasErrors ? 'open' : '' }}>
+  <div class="dialog-backdrop"></div>
+  <div class="dialog-panel">
+    <form method="POST" action="/account">
+      <input name="password" type="password" required />
+      {{ $errorMessage }}
+      <button type="submit">Confirm</button>
+    </form>
+  </div>
+</dialog>
+```
+
+When the user submits with an invalid password, the server re-renders the page with the dialog markup containing `open`. The dialog is in its open state from the first paint, so there is no fade-in animation and the user sees their entry preserved with the validation message inline.
+
+The same pattern works for any flag the server can compute: a session flash, a query parameter, an error bag, or a model state.
+
+---
+
 ## How it works
 
 This component uses the native HTML [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element with a small JavaScript module that handles opening, closing, animations, and focus management.
