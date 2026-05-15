@@ -1,5 +1,7 @@
 // Starting Point UI Slider Module
 
+export {};
+
 function updateSlider(el: HTMLInputElement) {
   const min = Number(el.min);
   const max = Number(el.max);
