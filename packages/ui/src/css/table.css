@@ -27,6 +27,10 @@
 @utility table-row {
   @layer l1.l2 {
     @apply border-b transition-colors hover:bg-muted/50;
+
+    &:has(input[type="checkbox"]:checked):not(:has(input[data-sp-toggle-all])) {
+      @apply bg-muted/50;
+    }
   }
 }
 
