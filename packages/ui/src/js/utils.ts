@@ -29,6 +29,14 @@ export async function waitForAnimations(
   await Promise.all(animations.map((a) => a.finished.catch(() => {})));
 }
 
+let idCounter = 0;
+
+// The element's id, generating a fresh one only if it has none.
+export function ensureId(el: HTMLElement, prefix = "sp"): string {
+  if (!el.id) el.id = `${prefix}-${++idCounter}`;
+  return el.id;
+}
+
 export function isDisabled(el: HTMLElement): boolean {
   return (
     el.hasAttribute("disabled") || el.getAttribute("aria-disabled") === "true"

@@ -196,7 +196,12 @@
     scrollbar-gutter: stable;
   }
 
-  html:has(dialog[open] :is(.dialog-backdrop, .sheet-backdrop)) {
+  /* showModal() doesn't lock body scroll; do it ourselves. */
+  html:has(dialog.dialog[open]) {
+    @apply overflow-hidden;
+  }
+
+  html:has(dialog[open] .sheet-backdrop) {
     @apply overflow-hidden;
   }
 

@@ -1,31 +1,38 @@
-/* Starting Point UI Dialog Styles */
-
 @utility dialog {
   @layer l1.l2 {
-    @apply isolate pointer-events-none fixed inset-0 z-999 w-full h-dvh p-0 bg-transparent border-none max-w-none max-h-none overflow-hidden;
+    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-999;
+    @apply m-0 p-0 max-w-sm w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] overflow-y-auto;
+    @apply bg-popover text-popover-foreground rounded-lg shadow-lg border-none;
+
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-95 [&.show]:duration-200 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-95 [&.hide]:duration-200 [&.hide]:[animation-fill-mode:forwards];
 
     &::backdrop {
-      @apply hidden;
+      @apply bg-black/30 backdrop-blur-xs;
     }
-  }
-}
-
-@utility dialog-backdrop {
-  @layer l1.l2 {
-    @apply fixed inset-0 bg-black/30 backdrop-blur-xs -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
-  }
-}
-
-@utility dialog-panel {
-  @layer l1.l2 {
-    @apply fixed pointer-events-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-popover text-popover-foreground rounded-lg shadow-lg max-w-sm w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] overflow-y-auto [animation-fill-mode:forwards]!;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:data-[state=closed]:zoom-out-95 [&:not(.no-animation)]:duration-200;
+    &.show::backdrop {
+      @apply animate-in fade-in-0 duration-200 [animation-fill-mode:forwards];
+    }
+    &.hide::backdrop {
+      @apply animate-out fade-out-0 duration-200 [animation-fill-mode:forwards];
+    }
   }
 }
 
 @utility dialog-content {
   @layer l1.l2 {
     @apply p-6;
+  }
+}
+
+@utility dialog-title {
+  @layer l1.l2 {
+    @apply text-lg font-semibold tracking-tight;
+  }
+}
+
+@utility dialog-description {
+  @layer l1.l2 {
+    @apply text-sm/6 text-muted-foreground mt-2;
   }
 }
