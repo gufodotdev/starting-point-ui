@@ -197,11 +197,8 @@
   }
 
   /* showModal() doesn't lock body scroll; do it ourselves. */
-  html:has(dialog.dialog[open]) {
-    @apply overflow-hidden;
-  }
-
-  html:has(dialog[open] .sheet-backdrop) {
+  html:has(dialog.dialog[open]),
+  html:has(dialog.sheet[open]) {
     @apply overflow-hidden;
   }
 

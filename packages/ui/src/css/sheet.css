@@ -1,16 +1,50 @@
-/* Starting Point UI Sheet Styles */
-
-@utility sheet-backdrop {
+@utility sheet {
   @layer l1.l2 {
-    @apply fixed inset-0 bg-black/30 backdrop-blur-xs -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
+    @apply fixed m-0 p-0 z-999 bg-popover text-popover-foreground shadow-lg border-none;
+
+    &::backdrop {
+      @apply bg-black/30 backdrop-blur-xs;
+    }
+    &.show::backdrop {
+      @apply animate-in fade-in-0 duration-200 [animation-fill-mode:forwards];
+    }
+    &.hide::backdrop {
+      @apply animate-out fade-out-0 duration-200 [animation-fill-mode:forwards];
+    }
+
+    @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-left;
   }
 }
 
-@utility sheet-panel {
-  @layer l1.l2 {
-    @apply fixed pointer-events-auto bg-popover text-popover-foreground shadow-lg [animation-fill-mode:forwards]!;
-    @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-left;
+@utility sheet-left {
+  @layer l1 {
+    @apply top-0 bottom-0 left-0 right-auto h-full w-3/4 max-w-sm border-r max-h-none;
+    @apply [&.show]:animate-in [&.show]:slide-in-from-left [&.show]:duration-300 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:slide-out-to-left [&.hide]:duration-300 [&.hide]:[animation-fill-mode:forwards];
+  }
+}
+
+@utility sheet-right {
+  @layer l1 {
+    @apply top-0 bottom-0 right-0 left-auto h-full w-3/4 max-w-sm border-l max-h-none;
+    @apply [&.show]:animate-in [&.show]:slide-in-from-right [&.show]:duration-300 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:slide-out-to-right [&.hide]:duration-300 [&.hide]:[animation-fill-mode:forwards];
+  }
+}
+
+@utility sheet-top {
+  @layer l1 {
+    @apply top-0 left-0 right-0 bottom-auto w-full h-auto max-w-none border-b;
+    @apply [&.show]:animate-in [&.show]:slide-in-from-top [&.show]:duration-300 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:slide-out-to-top [&.hide]:duration-300 [&.hide]:[animation-fill-mode:forwards];
+  }
+}
+
+@utility sheet-bottom {
+  @layer l1 {
+    @apply bottom-0 left-0 right-0 top-auto w-full h-auto max-w-none border-t;
+    @apply [&.show]:animate-in [&.show]:slide-in-from-bottom [&.show]:duration-300 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:slide-out-to-bottom [&.hide]:duration-300 [&.hide]:[animation-fill-mode:forwards];
   }
 }
 
@@ -20,30 +54,14 @@
   }
 }
 
-@utility sheet-left {
-  @layer l1 {
-    @apply top-0 bottom-0 left-0 h-full w-3/4 max-w-sm border-r;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left [&:not(.no-animation)]:duration-300;
+@utility sheet-title {
+  @layer l1.l2 {
+    @apply text-lg font-semibold tracking-tight;
   }
 }
 
-@utility sheet-right {
-  @layer l1 {
-    @apply top-0 bottom-0 right-0 h-full w-3/4 max-w-sm border-l;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right [&:not(.no-animation)]:duration-300;
-  }
-}
-
-@utility sheet-top {
-  @layer l1 {
-    @apply top-0 left-0 right-0 w-full border-b;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-top [&:not(.no-animation)]:data-[state=closed]:slide-out-to-top [&:not(.no-animation)]:duration-300;
-  }
-}
-
-@utility sheet-bottom {
-  @layer l1 {
-    @apply bottom-0 left-0 right-0 w-full border-t;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:slide-in-from-bottom [&:not(.no-animation)]:data-[state=closed]:slide-out-to-bottom [&:not(.no-animation)]:duration-300;
+@utility sheet-description {
+  @layer l1.l2 {
+    @apply text-sm/6 text-muted-foreground mt-2;
   }
 }

@@ -4,6 +4,7 @@
 import { getInstance, start } from "./observer";
 import type { ComponentFactory, SpInstance } from "./define";
 import { Dialog } from "./dialog";
+import { Sheet } from "./sheet";
 
 import * as accordion from "./accordion";
 import * as collapsible from "./collapsible";
@@ -18,13 +19,16 @@ import * as tabs from "./tabs";
 import { toast } from "./toast";
 import "./tooltip";
 
-const components: ComponentFactory[] = [Dialog];
+const components: ComponentFactory[] = [Dialog, Sheet];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
+const sheet = (el: HTMLElement): SpInstance | null => getInstance(el, Sheet);
 
 export {
   Dialog,
+  Sheet,
   dialog,
+  sheet,
   start,
   accordion,
   collapsible,
@@ -42,6 +46,7 @@ declare global {
   interface Window {
     sp: {
       dialog: typeof dialog;
+      sheet: typeof sheet;
       // Legacy namespaces, dropped as each component is ported.
       accordion: typeof accordion;
       collapsible: typeof collapsible;
@@ -59,6 +64,7 @@ declare global {
 if (typeof document !== "undefined") {
   window.sp = {
     dialog,
+    sheet,
     accordion,
     collapsible,
     combobox,

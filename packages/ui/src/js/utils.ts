@@ -37,6 +37,14 @@ export function ensureId(el: HTMLElement, prefix = "sp"): string {
   return el.id;
 }
 
+// Point `attr` at the first element matching `selector` (by id), unless the
+// author already set it. Used to wire aria-labelledby/describedby to a title.
+export function linkAria(host: HTMLElement, selector: string, attr: string): void {
+  if (host.hasAttribute(attr)) return;
+  const target = host.querySelector<HTMLElement>(selector);
+  if (target) host.setAttribute(attr, ensureId(target));
+}
+
 export function isDisabled(el: HTMLElement): boolean {
   return (
     el.hasAttribute("disabled") || el.getAttribute("aria-disabled") === "true"

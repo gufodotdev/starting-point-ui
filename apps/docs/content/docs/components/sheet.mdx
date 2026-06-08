@@ -1,705 +1,171 @@
 ---
 title: Sheet
-description: A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
+description: An accessible slide-out panel for Tailwind CSS, anchored to any edge of the screen.
 ---
 
-A Tailwind CSS sheet component for slide-out panels from any edge of the screen.
+A modal panel that slides in from a screen edge, for navigation, filters, and details.
 
-```html preview
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-1"
-  class="btn"
->
-  Open Sheet
-</button>
-<dialog
-  id="sheet-1"
-  class="dialog"
-  aria-labelledby="sheet-1-t"
-  aria-describedby="sheet-1-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="sheet-1-t" class="text-lg font-semibold tracking-tight">
-          Sheet Title
-        </h2>
-        <p id="sheet-1-d" class="mt-2 text-sm/6 text-muted-foreground">
-          This is a modal sheet. Close it by clicking the backdrop, pressing
-          escape, or using the close button.
-        </p>
-      </div>
-    </div>
+## Usage
+
+Add the `sheet` class to a `<dialog>` element and a `data-sp-sheet` attribute with a `toggle` option pointing at the trigger's `id`. Pick the edge it slides from with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom` (defaults to left). Add `data-sp-dismiss` to any button to close it.
+
+| Class                | Description                                            |
+| -------------------- | ------------------------------------------------------ |
+| `sheet`              | Add to the `<dialog>` element to create the sheet      |
+| `sheet-left`         | Slide in from the left (default)                       |
+| `sheet-right`        | Slide in from the right                                |
+| `sheet-top`          | Slide in from the top                                  |
+| `sheet-bottom`       | Slide in from the bottom                               |
+| `sheet-content`      | Add to a wrapper to pad the content                    |
+| `sheet-title`        | Add to the heading; sets the sheet's accessible name   |
+| `sheet-description`  | Add to the description text                            |
+
+```html
+<button id="my-trigger" class="btn">Open</button>
+
+<dialog class="sheet sheet-left" data-sp-sheet="toggle: #my-trigger">
+  <div class="sheet-content">
+    <h2 class="sheet-title">Title</h2>
+    <p class="sheet-description">Description</p>
+    <button class="btn" data-sp-dismiss>Close</button>
   </div>
 </dialog>
 ```
 
-If you're building a navigation menu, you might want to use [Sidebar](/docs/components/sidebar) utilities inside the panel. See the [Menu](#menu) example below.
-
----
-
-## Modal vs Non-modal
-
-The backdrop is what creates the modal behavior. Add `.sheet-backdrop` to block interaction with the page behind it, or omit it for a non-modal sheet.
-
 ```html preview
-<button data-sp-toggle="dialog" data-sp-target="#modal" class="btn">
-  Open Modal
-</button>
-<dialog
-  id="modal"
-  class="dialog"
-  aria-labelledby="modal-t"
-  aria-describedby="modal-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="modal-t" class="text-lg font-semibold tracking-tight">Modal</h2>
-        <p id="modal-d" class="mt-2 text-sm/6 text-muted-foreground">
-          Background is blocked. Click backdrop or press Escape to close.
-        </p>
-      </div>
-    </div>
-  </div>
-</dialog>
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#nonmodal"
-  class="btn"
->
-  Open Non-modal
-</button>
-<dialog
-  id="nonmodal"
-  class="dialog"
-  aria-labelledby="nonmodal-t"
-  aria-describedby="nonmodal-d"
->
-  <div class="sheet-panel">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="nonmodal-t" class="text-lg font-semibold tracking-tight">
-          Non-modal
-        </h2>
-        <p id="nonmodal-d" class="mt-2 text-sm/6 text-muted-foreground">
-          You can interact with the page behind this sheet.
-        </p>
-      </div>
-    </div>
+<button id="sheet-1-trigger" class="btn">Open Sheet</button>
+<dialog class="sheet" data-sp-sheet="toggle: #sheet-1-trigger">
+  <button
+    class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
+    aria-label="Close"
+    data-sp-dismiss
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+  <div class="sheet-content">
+    <h2 class="sheet-title">Sheet Title</h2>
+    <p class="sheet-description">
+      A modal sheet. Close it with the button, a backdrop click, or Escape.
+    </p>
   </div>
 </dialog>
 ```
-
----
 
 ## Directions
 
-Use direction utilities to control which edge the sheet slides in from.
+Set the edge with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`.
 
 ```html preview
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-left"
-  class="btn"
->
-  Left
-</button>
-<dialog
-  id="sheet-left"
-  class="dialog"
-  aria-labelledby="sheet-left-t"
-  aria-describedby="sheet-left-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="sheet-left-t" class="text-lg font-semibold tracking-tight">
-          Left Sheet
-        </h2>
-        <p id="sheet-left-d" class="mt-2 text-sm/6 text-muted-foreground">
-          Great for navigation menus or sidebars.
-        </p>
-      </div>
-    </div>
+<button id="dir-left" class="btn">Left</button>
+<dialog class="sheet sheet-left" data-sp-sheet="toggle: #dir-left">
+  <div class="sheet-content">
+    <h2 class="sheet-title">Left</h2>
+    <p class="sheet-description">Great for navigation menus.</p>
+    <button class="btn mt-4" data-sp-dismiss>Close</button>
   </div>
 </dialog>
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-right"
-  class="btn"
->
-  Right
-</button>
-<dialog
-  id="sheet-right"
-  class="dialog"
-  aria-labelledby="sheet-right-t"
-  aria-describedby="sheet-right-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel sheet-right">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="sheet-right-t" class="text-lg font-semibold tracking-tight">
-          Right Sheet
-        </h2>
-        <p id="sheet-right-d" class="mt-2 text-sm/6 text-muted-foreground">
-          Great for details panels or settings.
-        </p>
-      </div>
-    </div>
+
+<button id="dir-right" class="btn">Right</button>
+<dialog class="sheet sheet-right" data-sp-sheet="toggle: #dir-right">
+  <div class="sheet-content">
+    <h2 class="sheet-title">Right</h2>
+    <p class="sheet-description">Great for details or settings.</p>
+    <button class="btn mt-4" data-sp-dismiss>Close</button>
   </div>
 </dialog>
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-top"
-  class="btn"
->
-  Top
-</button>
-<dialog
-  id="sheet-top"
-  class="dialog"
-  aria-labelledby="sheet-top-t"
-  aria-describedby="sheet-top-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel sheet-top">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="sheet-top-t" class="text-lg font-semibold tracking-tight">
-          Top Sheet
-        </h2>
-        <p id="sheet-top-d" class="mt-2 text-sm/6 text-muted-foreground">
-          Great for notifications or alerts.
-        </p>
-      </div>
-    </div>
+
+<button id="dir-top" class="btn">Top</button>
+<dialog class="sheet sheet-top" data-sp-sheet="toggle: #dir-top">
+  <div class="sheet-content">
+    <h2 class="sheet-title">Top</h2>
+    <p class="sheet-description">Great for notifications.</p>
+    <button class="btn mt-4" data-sp-dismiss>Close</button>
   </div>
 </dialog>
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-bottom"
-  class="btn"
->
-  Bottom
-</button>
-<dialog
-  id="sheet-bottom"
-  class="dialog"
-  aria-labelledby="sheet-bottom-t"
-  aria-describedby="sheet-bottom-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel sheet-bottom">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="sheet-bottom-t" class="text-lg font-semibold tracking-tight">
-          Bottom Sheet
-        </h2>
-        <p id="sheet-bottom-d" class="mt-2 text-sm/6 text-muted-foreground">
-          Great for mobile actions or menus.
-        </p>
-      </div>
-    </div>
+
+<button id="dir-bottom" class="btn">Bottom</button>
+<dialog class="sheet sheet-bottom" data-sp-sheet="toggle: #dir-bottom">
+  <div class="sheet-content">
+    <h2 class="sheet-title">Bottom</h2>
+    <p class="sheet-description">Great for mobile actions.</p>
+    <button class="btn mt-4" data-sp-dismiss>Close</button>
   </div>
 </dialog>
 ```
 
----
+## Static
 
-## Static backdrop
-
-Use `data-sp-backdrop="static"` to prevent closing when clicking the backdrop or pressing Escape.
+Add `static: true` so the backdrop won't close the sheet and the user has to pick an action. Escape still closes it, so keyboard users are never stuck.
 
 ```html preview
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-static"
-  class="btn"
->
-  Delete Account
-</button>
+<button id="sheet-static-trigger" class="btn">Delete account</button>
 <dialog
-  id="sheet-static"
-  class="dialog"
-  data-sp-backdrop="static"
-  aria-labelledby="sheet-static-t"
-  aria-describedby="sheet-static-d"
+  class="sheet sheet-right"
+  data-sp-sheet="toggle: #sheet-static-trigger; static: true"
 >
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel sheet-right">
-    <div class="sheet-content grid gap-6">
-      <div>
-        <h2 id="sheet-static-t" class="text-lg font-semibold tracking-tight">
-          Are you sure?
-        </h2>
-        <p id="sheet-static-d" class="mt-2 text-sm/6 text-muted-foreground">
-          This action cannot be undone. Backdrop clicks and Escape are disabled.
-        </p>
-      </div>
-      <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-        <button class="btn" data-sp-dismiss="dialog">Cancel</button>
-        <button class="btn btn-destructive" data-sp-dismiss="dialog">
-          Delete
-        </button>
-      </div>
+  <div class="sheet-content grid gap-6">
+    <div>
+      <h2 class="sheet-title">Are you sure?</h2>
+      <p class="sheet-description">
+        Clicking outside won't dismiss this. Choose an action to continue.
+      </p>
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+      <button class="btn" data-sp-dismiss>Cancel</button>
+      <button class="btn btn-destructive" data-sp-dismiss>Delete</button>
     </div>
   </div>
 </dialog>
 ```
 
----
+## Options
 
-## Menu
+Set options in the `data-sp-sheet` value, separated by semicolons.
 
-You can use [Sidebar](/docs/components/sidebar) utilities inside the sheet panel to build navigation menus.
+| Option   | Type    | Default | Description                                           |
+| -------- | ------- | ------- | ----------------------------------------------------- |
+| `toggle` | String  | —       | Selector for the element that opens the sheet         |
+| `static` | Boolean | `false` | Backdrop click won't close the sheet (Escape still does) |
 
-```html preview
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-sidebar-menu"
-  class="btn"
->
-  Open Menu Sheet
-</button>
-<dialog
-  id="sheet-sidebar-menu"
-  class="dialog"
-  aria-labelledby="sheet-sidebar-menu-t"
-  aria-describedby="sheet-sidebar-menu-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel sheet-left">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sidebar-content">
-      <header class="sidebar-header">
-        <div class="menu-item menu-item-lg">
-          <a class="flex items-center gap-2" href="/">
-            <div
-              class="flex items-center justify-center size-6 rounded-sm overflow-hidden shrink-0 bg-primary text-primary-foreground text-sm font-bold"
-            >
-              ui
-            </div>
-            <div class="text-sm font-medium truncate">Starting Point</div>
-          </a>
-        </div>
-      </header>
-      <nav class="sidebar-menu">
-        <div class="menu-group">
-          <span class="menu-label">Platform</span>
-          <a href="#" class="menu-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-            Dashboard
-          </a>
-          <a href="#" class="menu-btn active">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-            Projects
-          </a>
-          <a href="#" class="menu-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
-            Team
-          </a>
-          <a href="#" class="menu-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
-            Settings
-          </a>
-        </div>
-        <div class="menu-group">
-          <span class="menu-label">Resources</span>
-          <a href="#" class="menu-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
-            Documentation
-          </a>
-          <a href="#" class="menu-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>
-            Support
-          </a>
-        </div>
-      </nav>
-      <footer class="sidebar-footer">
-        <button class="menu-btn menu-btn-lg w-full">
-          <img
-            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-            alt="Sarah Johnson"
-            class="size-8 rounded-lg"
-          />
-          <div class="grid flex-1 text-left text-sm leading-tight">
-            <span class="truncate font-medium">Sarah Johnson</span>
-            <span class="truncate text-xs text-muted-foreground">
-              sarah@example.com
-            </span>
-          </div>
-        </button>
-      </footer>
-    </div>
-  </div>
-</dialog>
-```
+| Attribute         | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `data-sp-dismiss` | Add to a button inside the sheet to close it |
 
----
+## Events
 
-## Customization
+Lifecycle events fire on the sheet element; `before*` events are cancelable.
 
-Override the default width using Tailwind utilities.
-
-```html preview
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#sheet-wide"
-  class="btn"
->
-  Wide Sheet
-</button>
-<dialog
-  id="sheet-wide"
-  class="dialog"
-  aria-labelledby="sheet-wide-t"
-  aria-describedby="sheet-wide-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel max-w-lg">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="sheet-wide-t" class="text-lg font-semibold tracking-tight">
-          Wide Sheet
-        </h2>
-        <p id="sheet-wide-d" class="mt-2 text-sm/6 text-muted-foreground">
-          This sheet uses `max-w-lg` to override the default width.
-        </p>
-      </div>
-    </div>
-  </div>
-</dialog>
-```
-
----
-
-## How it works
-
-The sheet component is a stylistic variant of the [Dialog](/docs/components/dialog) component. It uses the same JavaScript module and data attributes, but with different CSS classes that position the panel at the edge of the screen with slide animations instead of centered with zoom animations.
-
-### Structure
-
-A sheet consists of these parts:
-
-1. **`<dialog class="dialog">`** - The native dialog element, styled to be a fixed fullscreen container
-2. **`.sheet-backdrop`** - An overlay that blocks interaction with the page
-3. **`.sheet-panel`** - The content panel (defaults to left positioning)
-4. **`.sheet-content`** - Inner wrapper with padding
-
-```html
-<dialog id="my-sheet" class="dialog">
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <div class="sheet-content">
-      <!-- Your content here -->
-    </div>
-  </div>
-</dialog>
-```
-
-### Opening and closing
-
-Use data attributes to control the sheet without writing JavaScript.
-
-To open a sheet, add `data-sp-toggle="dialog"` and `data-sp-target` to a button:
-
-```html
-<button data-sp-toggle="dialog" data-sp-target="#my-sheet">Open Sheet</button>
-```
-
-To close from inside the sheet, add `data-sp-dismiss="dialog"` to any button. The JavaScript will find the closest parent `<dialog>` element and close it:
-
-```html
-<button data-sp-dismiss="dialog">Close</button>
-```
-
-Clicking the backdrop or pressing Escape also closes the sheet. To prevent this, add `data-sp-backdrop="static"` to the dialog element:
-
-```html
-<dialog id="confirm-sheet" class="dialog" data-sp-backdrop="static">
-  <!-- User must click a button to close -->
-</dialog>
-```
-
-The component uses `dialog.show()` rather than `dialog.showModal()`, which allows more flexible backdrop styling. Modal behavior (blocking page interaction) comes from the `.sheet-backdrop` element instead.
-
-For programmatic control, use the global `StartingPointUI.dialog` module:
+| Event              | When                                       |
+| ------------------ | ------------------------------------------ |
+| `sp:beforeshow`    | Before showing (cancelable)                |
+| `sp:show`          | Opening                                     |
+| `sp:shown`         | Open and settled                           |
+| `sp:beforehide`    | Before hiding (cancelable)                 |
+| `sp:hide`          | Closing                                     |
+| `sp:hidden`        | Closed                                      |
+| `sp:hideprevented` | A static sheet refused a backdrop dismiss  |
 
 ```js
-const sheet = document.querySelector("#my-sheet");
-
-StartingPointUI.dialog.open(sheet);
-StartingPointUI.dialog.close(sheet);
-StartingPointUI.dialog.toggle(sheet);
+el.addEventListener("sp:beforeshow", (e) => {
+  if (!ready) e.preventDefault(); // veto the open
+});
 ```
 
-### Animation
+## Methods
 
-The sheet includes default slide animations based on direction. When opened, the JavaScript sets `data-state="open"` on the backdrop and panel. When closing, it sets `data-state="closed"` and waits for animations to complete before calling `dialog.close()`.
+Get the instance with `sp.sheet(el)`, then call its methods:
 
-To customize animations, add `no-animation` to disable the defaults and use your own classes with `data-[state=open]:` and `data-[state=closed]:` selectors:
-
-```html
-<div
-  class="sheet-panel sheet-right no-animation
-  data-[state=open]:animate-in data-[state=open]:slide-in-from-right
-  data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right duration-500"
->
-  <!-- Slower slide animation -->
-</div>
+```js
+const sheet = sp.sheet(document.querySelector("#my-sheet"));
+sheet.show();
 ```
 
-```html preview
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-default"
-  class="btn"
->
-  Default
-</button>
-<dialog
-  id="anim-default"
-  class="dialog"
-  aria-labelledby="anim-default-t"
-  aria-describedby="anim-default-d"
->
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="anim-default-t" class="text-lg font-semibold tracking-tight">
-          Default Animation
-        </h2>
-        <p id="anim-default-d" class="mt-2 text-sm/6 text-muted-foreground">
-          The backdrop fades while the panel slides in from the left.
-        </p>
-      </div>
-    </div>
-  </div>
-</dialog>
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-none"
-  class="btn"
->
-  No Animation
-</button>
-<dialog
-  id="anim-none"
-  class="dialog"
-  aria-labelledby="anim-none-t"
-  aria-describedby="anim-none-d"
->
-  <div class="sheet-backdrop no-animation"></div>
-  <div class="sheet-panel no-animation">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="anim-none-t" class="text-lg font-semibold tracking-tight">
-          No Animation
-        </h2>
-        <p id="anim-none-d" class="mt-2 text-sm/6 text-muted-foreground">
-          Add the `no-animation` class to disable the default animations.
-        </p>
-      </div>
-    </div>
-  </div>
-</dialog>
-<button
-  data-sp-toggle="dialog"
-  data-sp-target="#anim-slow"
-  class="btn"
->
-  Slow (500ms)
-</button>
-<dialog
-  id="anim-slow"
-  class="dialog"
-  aria-labelledby="anim-slow-t"
-  aria-describedby="anim-slow-d"
->
-  <div class="sheet-backdrop duration-500"></div>
-  <div class="sheet-panel duration-500">
-    <button
-      class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
-      aria-label="Close"
-      data-sp-dismiss="dialog"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-content">
-      <div>
-        <h2 id="anim-slow-t" class="text-lg font-semibold tracking-tight">
-          Slow Animation
-        </h2>
-        <p id="anim-slow-d" class="mt-2 text-sm/6 text-muted-foreground">
-          Override the duration with utility classes like `duration-500`.
-        </p>
-      </div>
-    </div>
-  </div>
-</dialog>
-```
+| Method     | Description                 |
+| ---------- | -------------------------- |
+| `show()`   | Open the sheet             |
+| `hide()`   | Close the sheet            |
+| `toggle()` | Open if closed, else close |
 
-The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. You can customize or replace these with your own animations.
+## Accessibility
 
-### Accessibility
-
-This component uses the native `<dialog>` element for proper screen reader announcements. The JavaScript module provides Escape key handling for all sheets, and focus trapping (Tab cycles through focusable elements) for modal sheets.
-
-For proper screen reader support, add these attributes to your sheets:
-
-| Attribute                    | Description                                       |
-| ---------------------------- | ------------------------------------------------- |
-| `aria-labelledby="title-id"` | Add to `dialog` to reference the title element    |
-| `aria-describedby="desc-id"` | Add to `dialog` to reference the description      |
-| `aria-label="Close"`         | Add to icon-only buttons for screen reader labels |
-
-```html
-<dialog aria-labelledby="title" aria-describedby="desc">
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <div class="sheet-content">
-      <button aria-label="Close" data-sp-dismiss="dialog">
-        <icon-x />
-      </button>
-      <h2 id="title">Title</h2>
-      <p id="desc">Description</p>
-    </div>
-  </div>
-</dialog>
-```
-
-### Class reference
-
-All available classes for the sheet component.
-
-| Class            | Description                                      |
-| ---------------- | ------------------------------------------------ |
-| `dialog`         | Base class for the `dialog` element              |
-| `sheet-backdrop` | Overlay that blocks interaction with the page    |
-| `sheet-panel`    | The content panel (defaults to left direction)   |
-| `sheet-content`  | Inner wrapper with padding                       |
-| `sheet-left`     | Add to `.sheet-panel` to slide from the left     |
-| `sheet-right`    | Add to `.sheet-panel` to slide from the right    |
-| `sheet-top`      | Add to `.sheet-panel` to slide from the top      |
-| `sheet-bottom`   | Add to `.sheet-panel` to slide from the bottom   |
-| `no-animation`   | Disables default animations on backdrop or panel |
-
-```html
-<dialog class="dialog">
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel sheet-right">
-    <div class="sheet-content">
-      <!-- Content -->
-    </div>
-  </div>
-</dialog>
-```
-
-### Data attributes
-
-All data attributes for the sheet component.
-
-| Attribute                   | Description                                              |
-| --------------------------- | -------------------------------------------------------- |
-| `data-sp-toggle="dialog"`   | Add to a button to open the sheet in `data-sp-target`    |
-| `data-sp-target="#id"`      | Specifies which sheet to open                            |
-| `data-sp-dismiss="dialog"`  | Add to a button inside the sheet to close it             |
-| `data-sp-backdrop="static"` | Add to `dialog` to prevent closing on backdrop or Escape |
-| `data-state`                | Set to `open` or `closed` on backdrop and panel          |
-
-```html
-<button data-sp-toggle="dialog" data-sp-target="#my-sheet">Open</button>
-
-<dialog id="my-sheet" class="dialog" data-sp-backdrop="static">
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <div class="sheet-content">
-      <button data-sp-dismiss="dialog">Close</button>
-    </div>
-  </div>
-</dialog>
-```
+The sheet adheres to the [Dialog (Modal) WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) and sets the appropriate roles and properties automatically.
