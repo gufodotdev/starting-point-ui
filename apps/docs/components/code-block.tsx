@@ -9,56 +9,25 @@ type CodeBlockProps = BaseCodeBlockProps &
   (
     | { header?: null }
     | { header: "label"; label: string }
-    | { header: "preview"; id: string }
+    | { header: "preview" }
   );
 
 export function CodeBlock(props: CodeBlockProps) {
   const { children, code, header } = props;
 
   if (header === "preview") {
-    const previewId = `preview-${props.id}`;
-    const codeId = `code-${props.id}`;
-
     return (
-      <div className="my-4 rounded-lg border">
-        <Header code={code}>
-          <div className="tab-list" role="tablist">
-            <button
-              type="button"
-              className="tab active"
-              role="tab"
-              aria-selected="true"
-              data-sp-toggle="tab"
-              data-sp-target={`#${previewId}`}
-            >
-              Preview
-            </button>
-            <button
-              type="button"
-              className="tab"
-              role="tab"
-              aria-selected="false"
-              data-sp-toggle="tab"
-              data-sp-target={`#${codeId}`}
-            >
-              Code
-            </button>
-          </div>
-        </Header>
-
-        <div
-          id={previewId}
-          className="tab-panel active p-4 sm:p-12"
-          role="tabpanel"
-        >
+      <div className="my-4 overflow-hidden rounded-lg border">
+        <div className="flex min-h-72 items-center justify-center p-4 sm:p-12">
           <div
             className="flex flex-wrap items-center justify-center gap-4"
             dangerouslySetInnerHTML={{ __html: code }}
           />
         </div>
 
-        <div id={codeId} className="tab-panel" role="tabpanel">
+        <div className="relative border-t">
           <Pre>{children}</Pre>
+          <CopyButton code={code} className="absolute top-2" adjustForScrollbar />
         </div>
       </div>
     );
@@ -85,7 +54,7 @@ export function CodeBlock(props: CodeBlockProps) {
 
 function Pre({ children }: { children: React.ReactNode }) {
   return (
-    <pre className="overflow-auto max-h-125 bg-muted/50 p-4 text-sm rounded-b-lg">
+    <pre className="scrollbar-thin overflow-auto max-h-80 bg-muted/50 p-4 rounded-b-lg">
       {children}
     </pre>
   );

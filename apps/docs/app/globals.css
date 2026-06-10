@@ -83,5 +83,5 @@ code[data-theme] span {
 }
 
 pre {
-  @apply text-sm/6;
+  @apply text-[0.8rem]/6;
 }

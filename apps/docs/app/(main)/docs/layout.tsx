@@ -15,8 +15,10 @@ export default function DocsLayout({
         </div>
       </aside>
 
-      <main className="flex-1 min-w-0 py-6 lg:py-12 *:max-w-3xl *:mx-auto">
-        <article id="content">{children}</article>
+      <main className="flex-1 min-w-0 py-6 lg:py-12 *:max-w-160 *:mx-auto">
+        <article id="content" className="text-[1.05rem] sm:text-[15px]">
+          {children}
+        </article>
       </main>
 
       {/* Table of contents */}

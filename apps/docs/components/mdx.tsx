@@ -1,14 +1,14 @@
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { CodeBlock } from "@/components/code-block";
-import { hashCode } from "@/lib/utils";
+import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 
 const prettyCodeOptions = {
   theme: {
-    dark: "github-dark",
-    light: "github-light",
+    dark: codeThemeDark,
+    light: codeThemeLight,
   },
   keepBackground: false,
   transformers: [
@@ -60,7 +60,7 @@ const prettyCodeOptions = {
 const components = {
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
-      className="text-lg font-semibold tracking-tight mt-6 sm:mt-12 mb-4 scroll-mt-20"
+      className="mt-10 lg:mt-12 first:mt-0 scroll-mt-28 text-xl font-medium tracking-tight [&+p]:mt-4"
       {...props}
     >
       {children}
@@ -68,20 +68,18 @@ const components = {
   ),
   h3: ({ children, ...props }: React.ComponentProps<"h3">) => (
     <h3
-      className="text-base font-semibold tracking-tight mt-6 sm:mt-12 mb-4 scroll-mt-20"
+      className="mt-8 scroll-mt-28 text-lg font-medium tracking-tight [&+p]:mt-4"
       {...props}
     >
       {children}
     </h3>
   ),
   p: ({ children }: React.ComponentProps<"p">) => (
-    <p className="text-base/7 mb-3 sm:mb-6 text-muted-foreground [figure+&]:mt-3 sm:[figure+&]:mt-6">
-      {children}
-    </p>
+    <p className="leading-relaxed not-first:mt-6">{children}</p>
   ),
   a: ({ children, ...props }: React.ComponentProps<"a">) => (
     <a
-      className="text-primary font-medium underline underline-offset-4"
+      className="text-blue-600 dark:text-blue-400 font-medium underline underline-offset-4"
       {...props}
     >
       {children}
@@ -91,14 +89,12 @@ const components = {
     <blockquote className="mt-6 border-l-2 pl-6 italic">{children}</blockquote>
   ),
   ul: ({ children }: React.ComponentProps<"ul">) => (
-    <ul className="my-6 ml-6 list-disc [&>li]:mt-2 [&_ul]:my-2 [&_ul]:list-[circle] [&_ul]:text-muted-foreground [&_ul]:text-sm">
-      {children}
-    </ul>
+    <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
   ),
   ol: ({ children }: React.ComponentProps<"ol">) => (
     <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
   ),
-  hr: () => <hr className="my-6 sm:my-12 border-dashed" />,
+  hr: () => <hr className="my-8" />,
   code: ({
     children,
     ...props
@@ -111,7 +107,7 @@ const components = {
       return <code {...props}>{children}</code>;
     }
     return (
-      <code className="font-mono rounded bg-muted px-1.5 py-0.5 text-xs text-foreground">
+      <code className="font-mono rounded bg-blue-500/10 px-1.5 py-0.5 text-xs text-blue-600 dark:text-blue-400">
         {children}
       </code>
     );
@@ -128,7 +124,7 @@ const components = {
   }) => {
     if (preview === "true") {
       return (
-        <CodeBlock code={code} header="preview" id={hashCode(code)}>
+        <CodeBlock code={code} header="preview">
           {children}
         </CodeBlock>
       );
@@ -143,20 +139,23 @@ const components = {
     return <CodeBlock code={code}>{children}</CodeBlock>;
   },
   table: ({ children }: React.ComponentProps<"table">) => (
-    <div className="my-4 overflow-x-auto">
-      <table className="w-full text-sm whitespace-nowrap">{children}</table>
+    <div className="scrollbar-thin my-6 w-full overflow-y-auto rounded-lg border">
+      <table className="relative w-full overflow-hidden border-none text-sm [&_tbody_tr:last-child]:border-b-0">
+        {children}
+      </table>
     </div>
   ),
   thead: ({ children }: React.ComponentProps<"thead">) => (
-    <thead className="border-b">{children}</thead>
+    <thead className="bg-muted/50">{children}</thead>
+  ),
+  tr: ({ children }: React.ComponentProps<"tr">) => (
+    <tr className="m-0 border-b">{children}</tr>
   ),
   th: ({ children }: React.ComponentProps<"th">) => (
-    <th className="text-left font-medium py-3 pr-4 first:w-64">{children}</th>
+    <th className="px-4 py-2 text-left font-bold">{children}</th>
   ),
   td: ({ children }: React.ComponentProps<"td">) => (
-    <td className="py-3 pr-4 text-muted-foreground text-sm first:w-64">
-      {children}
-    </td>
+    <td className="px-4 py-2 text-left whitespace-nowrap">{children}</td>
   ),
 };
 
