@@ -5,31 +5,13 @@ description: An accessible modal dialog for Tailwind CSS, for confirmations, for
 
 A modal dialog for confirmations, forms, and alerts.
 
-## Usage
+## Basic Usage
 
 Add the `dialog` class to a `<dialog>` element and a `data-sp-dialog` attribute with a `toggle` option pointing at the trigger's `id`. Add `data-sp-dismiss` to any button to close it, or close with a click on the backdrop or the Escape key.
 
-| Class                | Description                                            |
-| -------------------- | ----------------------------------------------------- |
-| `dialog`             | Add to the `<dialog>` element to create the dialog    |
-| `dialog-content`     | Add to a wrapper to pad the content                   |
-| `dialog-title`       | Add to the heading; sets the dialog's accessible name |
-| `dialog-description` | Add to the description text                           |
-
-```html
-<button id="my-trigger" class="btn">Open</button>
-
-<dialog class="dialog" data-sp-dialog="toggle: #my-trigger">
-  <div class="dialog-content">
-    <h2 class="dialog-title">Title</h2>
-    <p class="dialog-description">Description</p>
-    <button class="btn" data-sp-dismiss>Close</button>
-  </div>
-</dialog>
-```
-
 ```html preview
 <button id="dialog-1-trigger" class="btn">Open Dialog</button>
+
 <dialog class="dialog" data-sp-dialog="toggle: #dialog-1-trigger">
   <button
     class="btn btn-ghost btn-icon-xs absolute top-3 right-3"
@@ -54,12 +36,13 @@ Add the `dialog` class to a `<dialog>` element and a `data-sp-dialog` attribute 
 </dialog>
 ```
 
-## Static
+## Static Backdrop
 
 Add `static: true` so the backdrop won't close the dialog and the user has to pick an action. Escape still closes it, so keyboard users are never stuck.
 
 ```html preview
 <button id="static-trigger" class="btn">Delete account</button>
+
 <dialog class="dialog" data-sp-dialog="toggle: #static-trigger; static: true">
   <div class="dialog-content grid gap-6">
     <div>
@@ -109,16 +92,17 @@ el.addEventListener("sp:beforeshow", (e) => {
 
 Get the instance with `sp.dialog(el)`, then call its methods:
 
-```js
-const dialog = sp.dialog(document.querySelector("#my-dialog"));
-dialog.show();
-```
-
 | Method     | Description                 |
 | ---------- | -------------------------- |
 | `show()`   | Open the dialog            |
 | `hide()`   | Close the dialog           |
 | `toggle()` | Open if closed, else close |
+
+```js
+const dialog = sp.dialog(document.querySelector("#my-dialog"));
+
+dialog.show();
+```
 
 ## Accessibility
 
