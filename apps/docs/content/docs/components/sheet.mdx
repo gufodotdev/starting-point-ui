@@ -5,35 +5,13 @@ description: An accessible slide-out panel for Tailwind CSS, anchored to any edg
 
 A modal panel that slides in from a screen edge, for navigation, filters, and details.
 
-## Usage
+## Basic Usage
 
-Add the `sheet` class to a `<dialog>` element and a `data-sp-sheet` attribute with a `toggle` option pointing at the trigger's `id`. Pick the edge it slides from with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom` (defaults to left). Add `data-sp-dismiss` to any button to close it.
-
-| Class                | Description                                            |
-| -------------------- | ------------------------------------------------------ |
-| `sheet`              | Add to the `<dialog>` element to create the sheet      |
-| `sheet-left`         | Slide in from the left (default)                       |
-| `sheet-right`        | Slide in from the right                                |
-| `sheet-top`          | Slide in from the top                                  |
-| `sheet-bottom`       | Slide in from the bottom                               |
-| `sheet-content`      | Add to a wrapper to pad the content                    |
-| `sheet-title`        | Add to the heading; sets the sheet's accessible name   |
-| `sheet-description`  | Add to the description text                            |
-
-```html
-<button id="my-trigger" class="btn">Open</button>
-
-<dialog class="sheet sheet-left" data-sp-sheet="toggle: #my-trigger">
-  <div class="sheet-content">
-    <h2 class="sheet-title">Title</h2>
-    <p class="sheet-description">Description</p>
-    <button class="btn" data-sp-dismiss>Close</button>
-  </div>
-</dialog>
-```
+Add the `sheet` class to a `<dialog>` element and a `data-sp-sheet` attribute with a `toggle` option pointing at the trigger's `id`. Add `data-sp-dismiss` to any button to close it, or close with a click on the backdrop or the Escape key.
 
 ```html preview
 <button id="sheet-1-trigger" class="btn">Open Sheet</button>
+
 <dialog class="sheet" data-sp-sheet="toggle: #sheet-1-trigger">
   <button
     class="btn btn-ghost btn-icon-sm absolute top-2 right-2"
@@ -53,10 +31,11 @@ Add the `sheet` class to a `<dialog>` element and a `data-sp-sheet` attribute wi
 
 ## Directions
 
-Set the edge with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`.
+Set the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`. Without one, it defaults to `sheet-left`.
 
 ```html preview
 <button id="dir-left" class="btn">Left</button>
+
 <dialog class="sheet sheet-left" data-sp-sheet="toggle: #dir-left">
   <div class="sheet-content">
     <h2 class="sheet-title">Left</h2>
@@ -66,6 +45,7 @@ Set the edge with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`.
 </dialog>
 
 <button id="dir-right" class="btn">Right</button>
+
 <dialog class="sheet sheet-right" data-sp-sheet="toggle: #dir-right">
   <div class="sheet-content">
     <h2 class="sheet-title">Right</h2>
@@ -75,6 +55,7 @@ Set the edge with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`.
 </dialog>
 
 <button id="dir-top" class="btn">Top</button>
+
 <dialog class="sheet sheet-top" data-sp-sheet="toggle: #dir-top">
   <div class="sheet-content">
     <h2 class="sheet-title">Top</h2>
@@ -84,6 +65,7 @@ Set the edge with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`.
 </dialog>
 
 <button id="dir-bottom" class="btn">Bottom</button>
+
 <dialog class="sheet sheet-bottom" data-sp-sheet="toggle: #dir-bottom">
   <div class="sheet-content">
     <h2 class="sheet-title">Bottom</h2>
@@ -93,12 +75,13 @@ Set the edge with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`.
 </dialog>
 ```
 
-## Static
+## Static Backdrop
 
 Add `static: true` so the backdrop won't close the sheet and the user has to pick an action. Escape still closes it, so keyboard users are never stuck.
 
 ```html preview
 <button id="sheet-static-trigger" class="btn">Delete account</button>
+
 <dialog
   class="sheet sheet-right"
   data-sp-sheet="toggle: #sheet-static-trigger; static: true"
@@ -155,16 +138,17 @@ el.addEventListener("sp:beforeshow", (e) => {
 
 Get the instance with `sp.sheet(el)`, then call its methods:
 
-```js
-const sheet = sp.sheet(document.querySelector("#my-sheet"));
-sheet.show();
-```
-
 | Method     | Description                 |
 | ---------- | -------------------------- |
 | `show()`   | Open the sheet             |
 | `hide()`   | Close the sheet            |
 | `toggle()` | Open if closed, else close |
+
+```js
+const sheet = sp.sheet(document.querySelector("#my-sheet"));
+
+sheet.show();
+```
 
 ## Accessibility
 
