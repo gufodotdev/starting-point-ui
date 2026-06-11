@@ -66,6 +66,24 @@ test("stays open when clicking inside the panel", async ({ page }) => {
   await expect(popover(page)).toHaveClass(/shown/);
 });
 
+test("emits the lifecycle events in order", async ({ page }) => {
+  await mount(page, BASIC);
+  const events = await page.evaluate(async () => {
+    const el = document.querySelector("#pop") as HTMLElement;
+    const seen: string[] = [];
+    for (const type of ["beforeshow", "show", "shown", "beforehide", "hide", "hidden"]) {
+      el.addEventListener(`sp-${type}`, () => seen.push(type));
+    }
+    const p = (window as any).sp.popover(el);
+    p.show();
+    await new Promise((r) => setTimeout(r, 300));
+    p.hide();
+    await new Promise((r) => setTimeout(r, 300));
+    return seen;
+  });
+  expect(events).toEqual(["beforeshow", "show", "shown", "beforehide", "hide", "hidden"]);
+});
+
 test("syncs aria-expanded on the trigger", async ({ page }) => {
   await mount(page, BASIC);
   const trigger = page.locator("#trigger");
