@@ -5,36 +5,37 @@ import { getInstance, start } from "./observer";
 import type { ComponentFactory, SpInstance } from "./define";
 import { Dialog } from "./dialog";
 import { Sheet } from "./sheet";
+import { Popover } from "./popover";
 
 import * as accordion from "./accordion";
 import * as collapsible from "./collapsible";
 import * as combobox from "./combobox";
 import * as dropdown from "./dropdown";
-import * as popover from "./popover";
 import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import "./checkbox";
 import "./slider";
 import * as tabs from "./tabs";
 import { toast } from "./toast";
-import "./tooltip";
 
-const components: ComponentFactory[] = [Dialog, Sheet];
+const components: ComponentFactory[] = [Dialog, Sheet, Popover];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
 const sheet = (el: HTMLElement): SpInstance | null => getInstance(el, Sheet);
+const popover = (el: HTMLElement): SpInstance | null => getInstance(el, Popover);
 
 export {
   Dialog,
   Sheet,
+  Popover,
   dialog,
   sheet,
+  popover,
   start,
   accordion,
   collapsible,
   combobox,
   dropdown,
-  popover,
   resizable,
   sidebar,
   tabs,
@@ -47,12 +48,12 @@ declare global {
     sp: {
       dialog: typeof dialog;
       sheet: typeof sheet;
+      popover: typeof popover;
       // Legacy namespaces, dropped as each component is ported.
       accordion: typeof accordion;
       collapsible: typeof collapsible;
       combobox: typeof combobox;
       dropdown: typeof dropdown;
-      popover: typeof popover;
       resizable: typeof resizable;
       sidebar: typeof sidebar;
       tabs: typeof tabs;
@@ -65,11 +66,11 @@ if (typeof document !== "undefined") {
   window.sp = {
     dialog,
     sheet,
+    popover,
     accordion,
     collapsible,
     combobox,
     dropdown,
-    popover,
     resizable,
     sidebar,
     tabs,

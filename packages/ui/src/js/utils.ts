@@ -45,6 +45,18 @@ export function linkAria(host: HTMLElement, selector: string, attr: string): voi
   if (target) host.setAttribute(attr, ensureId(target));
 }
 
+// Resolve a component's trigger element from its `toggle` config selector, once,
+// caching it on the instance. Shared by the trigger mixins (click + hover) so
+// each resolves the same element regardless of compose order.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function resolveTrigger(instance: any): HTMLElement | null {
+  if (instance.trigger === undefined) {
+    const sel = instance.config.toggle as string | undefined;
+    instance.trigger = sel ? document.querySelector<HTMLElement>(sel) : null;
+  }
+  return instance.trigger ?? null;
+}
+
 export function isDisabled(el: HTMLElement): boolean {
   return (
     el.hasAttribute("disabled") || el.getAttribute("aria-disabled") === "true"
