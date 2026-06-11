@@ -25,4 +25,8 @@ export const Popover = define({
     Popoverable,
     Anchorable,
   ],
+
+  props: {
+    placement: { type: String, default: "bottom" },
+  },
 });
