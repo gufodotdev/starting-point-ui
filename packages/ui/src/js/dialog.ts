@@ -1,5 +1,4 @@
-// Modal dialog on a native <dialog>. Composes the lifecycle (Togglable), trigger
-// (ClickToShow), modal mechanism (Modalable), and dismiss behavior (Dismissable).
+// Modal dialog on a native <dialog>.
 
 import { define } from "./define";
 import type { SpInstance } from "./define";

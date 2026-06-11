@@ -1,5 +1,4 @@
-// Sheet: a modal <dialog> that slides in from a screen edge. Behaves like Dialog
-// (same mixins); the edge and slide animation come from CSS (.sheet-left etc).
+// Modal <dialog> that slides in from a screen edge (edge/animation in CSS).
 
 import { define } from "./define";
 import type { SpInstance } from "./define";
