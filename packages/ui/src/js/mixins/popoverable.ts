@@ -17,6 +17,7 @@ export const Popoverable: Mixin = {
       this._position?.();
     },
     _unmount(this: SpInstance): void {
+      if (this.el.contains(document.activeElement)) this.trigger?.focus();
       (this.el as HTMLElement & { hidePopover(): void }).hidePopover();
     },
   },
