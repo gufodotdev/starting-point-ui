@@ -34,8 +34,8 @@ export const ClickToShow: Mixin = {
       }
     });
 
-    this.on(this.el, "sp:beforeshow", () => trigger.setAttribute("aria-expanded", "true"));
-    this.on(this.el, "sp:beforehide", () => trigger.setAttribute("aria-expanded", "false"));
+    this.on(this.el, "sp-beforeshow", () => trigger.setAttribute("aria-expanded", "true"));
+    this.on(this.el, "sp-beforehide", () => trigger.setAttribute("aria-expanded", "false"));
   },
 
   destroy(this: SpInstance) {

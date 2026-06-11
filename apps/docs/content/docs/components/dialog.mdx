@@ -74,16 +74,16 @@ Lifecycle events fire on the dialog element; `before*` events are cancelable.
 
 | Event              | When                                       |
 | ------------------ | ------------------------------------------ |
-| `sp:beforeshow`    | Before showing (cancelable)                |
-| `sp:show`          | Opening                                     |
-| `sp:shown`         | Open and settled                           |
-| `sp:beforehide`    | Before hiding (cancelable)                 |
-| `sp:hide`          | Closing                                     |
-| `sp:hidden`        | Closed                                      |
-| `sp:hideprevented` | A static dialog refused a backdrop dismiss |
+| `sp-beforeshow`    | Before showing (cancelable)                |
+| `sp-show`          | Opening                                     |
+| `sp-shown`         | Open and settled                           |
+| `sp-beforehide`    | Before hiding (cancelable)                 |
+| `sp-hide`          | Closing                                     |
+| `sp-hidden`        | Closed                                      |
+| `sp-hideprevented` | A static dialog refused a backdrop dismiss |
 
 ```js
-el.addEventListener("sp:beforeshow", (e) => {
+el.addEventListener("sp-beforeshow", (e) => {
   if (!ready) e.preventDefault(); // veto the open
 });
 ```

@@ -77,7 +77,7 @@ test("wires aria-labelledby and aria-describedby to the title and description", 
 });
 
 test.describe("static", () => {
-  test("a backdrop click does not close it and fires sp:hideprevented", async ({ page }) => {
+  test("a backdrop click does not close it and fires sp-hideprevented", async ({ page }) => {
     await mount(page, STATIC);
     await page.click("#trigger");
     await expect(sheet(page)).toHaveClass(/shown/);
@@ -85,7 +85,7 @@ test.describe("static", () => {
     const prevented = await page.evaluate(async () => {
       const el = document.querySelector("dialog.sheet") as HTMLElement;
       let fired = false;
-      el.addEventListener("sp:hideprevented", () => (fired = true));
+      el.addEventListener("sp-hideprevented", () => (fired = true));
       el.dispatchEvent(new MouseEvent("click", { bubbles: true }));
       await new Promise((r) => setTimeout(r, 50));
       return fired;

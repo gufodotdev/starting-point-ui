@@ -1,6 +1,6 @@
 // Modal mechanism via a native <dialog> (showModal). Also owns the modal's
 // native dismissal: Escape and backdrop click. With `static`, a backdrop click
-// is refused (sp:hideprevented) but Escape still closes.
+// is refused (sp-hideprevented) but Escape still closes.
 
 import type { Mixin, SpInstance } from "../define";
 

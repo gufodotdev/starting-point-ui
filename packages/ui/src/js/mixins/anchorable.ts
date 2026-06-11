@@ -20,8 +20,8 @@ export const Anchorable: Mixin = {
   },
 
   init(this: SpInstance) {
-    this.on(this.el, "sp:show", () => this._startAnchor());
-    this.on(this.el, "sp:hidden", () => this._stopAnchor());
+    this.on(this.el, "sp-show", () => this._startAnchor());
+    this.on(this.el, "sp-hidden", () => this._stopAnchor());
   },
 
   destroy(this: SpInstance) {

@@ -78,7 +78,7 @@ test("emits the lifecycle events in order", async ({ page }) => {
     const el = document.querySelector("dialog.dialog") as HTMLElement;
     const seen: string[] = [];
     for (const type of ["beforeshow", "show", "shown", "beforehide", "hide", "hidden"]) {
-      el.addEventListener(`sp:${type}`, () => seen.push(type));
+      el.addEventListener(`sp-${type}`, () => seen.push(type));
     }
     (window as any).sp.dialog(el).show();
     await new Promise((r) => setTimeout(r, 400));
@@ -89,11 +89,11 @@ test("emits the lifecycle events in order", async ({ page }) => {
   expect(events).toEqual(["beforeshow", "show", "shown", "beforehide", "hide", "hidden"]);
 });
 
-test("sp:beforeshow is cancelable", async ({ page }) => {
+test("sp-beforeshow is cancelable", async ({ page }) => {
   await mount(page, BASIC);
   await page.evaluate(() => {
     const el = document.querySelector("dialog.dialog") as HTMLElement;
-    el.addEventListener("sp:beforeshow", (e) => e.preventDefault());
+    el.addEventListener("sp-beforeshow", (e) => e.preventDefault());
   });
   await page.click("#trigger");
   await expect(dialog(page)).not.toHaveClass(/shown/);
@@ -110,7 +110,7 @@ test("sp.dialog(el) returns the instance with the public API", async ({ page }) 
 });
 
 test.describe("static", () => {
-  test("a backdrop click does not close it and fires sp:hideprevented", async ({ page }) => {
+  test("a backdrop click does not close it and fires sp-hideprevented", async ({ page }) => {
     await mount(page, STATIC);
     await page.click("#trigger");
     await expect(dialog(page)).toHaveClass(/shown/);
@@ -118,7 +118,7 @@ test.describe("static", () => {
     const prevented = await page.evaluate(async () => {
       const el = document.querySelector("dialog.dialog") as HTMLElement;
       let fired = false;
-      el.addEventListener("sp:hideprevented", () => (fired = true));
+      el.addEventListener("sp-hideprevented", () => (fired = true));
       el.dispatchEvent(new MouseEvent("click", { bubbles: true }));
       await new Promise((r) => setTimeout(r, 50));
       return fired;

@@ -83,7 +83,7 @@ export function define(def: Definition): ComponentFactory {
 
       emit(type) {
         return el.dispatchEvent(
-          new CustomEvent(`sp:${type}`, { bubbles: true, cancelable: true }),
+          new CustomEvent(`sp-${type}`, { bubbles: true, cancelable: true }),
         );
       },
 
