@@ -1,18 +1,20 @@
-/* Starting Point UI Tooltip Styles */
-
-/* .tooltip-arrow is injected by JS at runtime, so users never write it in
-   their source. Force-emit. */
+/* tooltip-arrow is injected by JS at runtime, so it never appears in user
+   source. Force-emit it. */
 @source inline("tooltip-arrow");
 
 @utility tooltip {
   @layer l1.l2 {
-    @apply absolute inset-auto z-998 m-0 hidden overflow-visible rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground shadow-md whitespace-nowrap;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
-    @apply [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:data-[state=closed]:zoom-out-95;
-
-    &.open {
-      @apply block;
+    /* Hidden until JS upgrades it to a [popover], so it doesn't flash on load. */
+    &:not([popover]) {
+      @apply hidden;
     }
+
+    /* JS sets inline left/top; reset the native [popover] centering. */
+    @apply fixed inset-auto m-0 z-998 overflow-visible;
+    @apply rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground shadow-md whitespace-nowrap;
+
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-95 [&.show]:duration-150 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-95 [&.hide]:duration-150 [&.hide]:[animation-fill-mode:forwards];
   }
 }
 
