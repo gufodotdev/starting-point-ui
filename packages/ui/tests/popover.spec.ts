@@ -66,6 +66,25 @@ test("stays open when clicking inside the panel", async ({ page }) => {
   await expect(popover(page)).toHaveClass(/shown/);
 });
 
+test("closes when focus moves outside", async ({ page }) => {
+  await mount(page, BASIC);
+  await page.click("#trigger");
+  await expect(popover(page)).toHaveClass(/shown/);
+  await page.focus("#inside");
+  await page.keyboard.press("Tab");
+  await expect(popover(page)).not.toHaveClass(/shown/);
+});
+
+test("stays open when focus moves back to the trigger", async ({ page }) => {
+  await mount(page, BASIC);
+  await page.click("#trigger");
+  await expect(popover(page)).toHaveClass(/shown/);
+  await page.focus("#inside");
+  await page.keyboard.press("Shift+Tab");
+  expect(await page.evaluate(() => document.activeElement?.id)).toBe("trigger");
+  await expect(popover(page)).toHaveClass(/shown/);
+});
+
 test("emits the lifecycle events in order", async ({ page }) => {
   await mount(page, BASIC);
   const events = await page.evaluate(async () => {
