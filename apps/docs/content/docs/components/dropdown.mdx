@@ -83,12 +83,12 @@ Add `aria-disabled="true"` and `tabindex="-1"` to disable an item. Arrow navigat
 
 ## Placement
 
-Set where the menu opens relative to its trigger with the `placement` option (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement)). Defaults to `bottom-start`.
+Set where the menu opens relative to its trigger with the `placement` option (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement)). Defaults to `bottom-end`.
 
 ```html preview
-<button id="dropdown-end-trigger" class="btn">bottom-end</button>
+<button id="dropdown-start-trigger" class="btn">bottom-start</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-end-trigger; placement: bottom-end">
+<div class="dropdown" data-sp-dropdown="toggle: #dropdown-start-trigger; placement: bottom-start">
   <a href="#" class="dropdown-item">Profile</a>
   <a href="#" class="dropdown-item">Settings</a>
 </div>
@@ -122,7 +122,7 @@ Set options in the `data-sp-dropdown` value, separated by semicolons.
 | Option      | Type   | Default          | Description                                               |
 | ----------- | ------ | ---------------- | --------------------------------------------------------- |
 | `toggle`    | String | —                | Selector for the element that opens the menu              |
-| `placement` | String | `bottom-start`   | Position relative to the trigger (Floating UI placement)  |
+| `placement` | String | `bottom-end`     | Position relative to the trigger (Floating UI placement)  |
 | `offset`    | Number | `4`              | Gap in pixels between the trigger and the menu            |
 | `mode`      | String | `click`          | `click` to toggle on click, `hover` to open on hover      |
 | `item`      | String | `.dropdown-item` | Selector for the entries arrow navigation moves between   |

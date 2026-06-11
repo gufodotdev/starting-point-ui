@@ -31,6 +31,7 @@ export const Dropdown = define({
   ],
 
   props: {
+    placement: { type: String, default: "bottom-end" },
     offset: { type: Number, default: 4 },
     item: { type: String, default: ".dropdown-item" },
   },
