@@ -7,11 +7,11 @@ import { Dialog } from "./dialog";
 import { Sheet } from "./sheet";
 import { Popover } from "./popover";
 import { Tooltip } from "./tooltip";
+import { Dropdown } from "./dropdown";
 
 import * as accordion from "./accordion";
 import * as collapsible from "./collapsible";
 import * as combobox from "./combobox";
-import * as dropdown from "./dropdown";
 import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import "./checkbox";
@@ -19,27 +19,29 @@ import "./slider";
 import * as tabs from "./tabs";
 import { toast } from "./toast";
 
-const components: ComponentFactory[] = [Dialog, Sheet, Popover, Tooltip];
+const components: ComponentFactory[] = [Dialog, Sheet, Popover, Tooltip, Dropdown];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
 const sheet = (el: HTMLElement): SpInstance | null => getInstance(el, Sheet);
 const popover = (el: HTMLElement): SpInstance | null => getInstance(el, Popover);
 const tooltip = (el: HTMLElement): SpInstance | null => getInstance(el, Tooltip);
+const dropdown = (el: HTMLElement): SpInstance | null => getInstance(el, Dropdown);
 
 export {
   Dialog,
   Sheet,
   Popover,
   Tooltip,
+  Dropdown,
   dialog,
   sheet,
   popover,
   tooltip,
+  dropdown,
   start,
   accordion,
   collapsible,
   combobox,
-  dropdown,
   resizable,
   sidebar,
   tabs,
@@ -54,11 +56,11 @@ declare global {
       sheet: typeof sheet;
       popover: typeof popover;
       tooltip: typeof tooltip;
+      dropdown: typeof dropdown;
       // Legacy namespaces, dropped as each component is ported.
       accordion: typeof accordion;
       collapsible: typeof collapsible;
       combobox: typeof combobox;
-      dropdown: typeof dropdown;
       resizable: typeof resizable;
       sidebar: typeof sidebar;
       tabs: typeof tabs;
@@ -73,10 +75,10 @@ if (typeof document !== "undefined") {
     sheet,
     popover,
     tooltip,
+    dropdown,
     accordion,
     collapsible,
     combobox,
-    dropdown,
     resizable,
     sidebar,
     tabs,
