@@ -20,6 +20,7 @@ const BASIC = `
   <div id="menu" class="dropdown" data-sp-dropdown="toggle: #trigger">
     <button id="i1" class="dropdown-item">One</button>
     <button id="i2" class="dropdown-item">Two</button>
+    <div id="sep" class="dropdown-separator"></div>
     <button id="i3" class="dropdown-item">Three</button>
   </div>
   <button id="outside">Outside</button>`;
@@ -101,6 +102,20 @@ test("clicking an item closes the menu", async ({ page }) => {
   await expect(menu(page)).not.toHaveClass(/shown/);
 });
 
+test("Enter and Space activate the focused item", async ({ page }) => {
+  await mount(page, BASIC);
+  await page.click("#trigger");
+  await page.keyboard.press("ArrowDown");
+  expect(await activeId(page)).toBe("i1");
+  await page.keyboard.press("Space");
+  await expect(menu(page)).not.toHaveClass(/shown/);
+
+  await page.click("#trigger");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Enter");
+  await expect(menu(page)).not.toHaveClass(/shown/);
+});
+
 test("clicking a disabled item keeps the menu open", async ({ page }) => {
   await mount(page, DISABLED);
   await page.click("#trigger");
@@ -149,6 +164,56 @@ test("emits the lifecycle events in order", async ({ page }) => {
     return seen;
   });
   expect(events).toEqual(["beforeshow", "show", "shown", "beforehide", "hide", "hidden"]);
+});
+
+// WAI-ARIA Menu Button pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
+test.describe("WAI-ARIA compliance", () => {
+  test("applies menu semantics automatically", async ({ page }) => {
+    await mount(page, BASIC);
+    const trigger = page.locator("#trigger");
+    await expect(trigger).toHaveAttribute("aria-haspopup", "menu");
+    await expect(trigger).toHaveAttribute("aria-controls", "menu");
+    await expect(menu(page)).toHaveAttribute("role", "menu");
+    await expect(menu(page)).toHaveAttribute("aria-labelledby", "trigger");
+    await expect(page.locator("#sep")).toHaveAttribute("role", "separator");
+
+    for (const id of ["i1", "i2", "i3"]) {
+      await expect(page.locator(`#${id}`)).toHaveAttribute("role", "menuitem");
+      // Roving tabindex: items are not Tab stops.
+      await expect(page.locator(`#${id}`)).toHaveAttribute("tabindex", "-1");
+    }
+  });
+
+  test("Enter on the trigger opens the menu and focuses the first item", async ({ page }) => {
+    await mount(page, BASIC);
+    await page.focus("#trigger");
+    await page.keyboard.press("Enter");
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("i1");
+  });
+
+  test("ArrowDown on the closed trigger opens the menu and focuses the first item", async ({ page }) => {
+    await mount(page, BASIC);
+    await page.focus("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("i1");
+  });
+
+  test("ArrowUp on the closed trigger opens the menu and focuses the last item", async ({ page }) => {
+    await mount(page, BASIC);
+    await page.focus("#trigger");
+    await page.keyboard.press("ArrowUp");
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("i3");
+  });
+
+  test("a pointer click leaves focus on the trigger", async ({ page }) => {
+    await mount(page, BASIC);
+    await page.click("#trigger");
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("trigger");
+  });
 });
 
 test("sp.dropdown(el) returns the instance with the public API", async ({ page }) => {

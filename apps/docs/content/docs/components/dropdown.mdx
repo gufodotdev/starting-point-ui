@@ -126,6 +126,7 @@ Set options in the `data-sp-dropdown` value, separated by semicolons.
 | `offset`    | Number | `4`              | Gap in pixels between the trigger and the menu            |
 | `mode`      | String | `click`          | `click` to toggle on click, `hover` to open on hover      |
 | `item`      | String | `.dropdown-item` | Selector for the entries arrow navigation moves between   |
+| `matchWidth` | Boolean | `false`        | Match the menu width to the trigger width                 |
 
 ## Events
 
@@ -164,22 +165,14 @@ dropdown.show();
 
 ## Accessibility
 
-The trigger's `aria-expanded` and `aria-controls` are kept in sync automatically, and closing the menu returns focus to the trigger.
+The dropdown adheres to the [Menu Button WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) and sets the appropriate roles and properties automatically. Roles you author yourself are left as is.
 
-The dropdown does not add `role="menu"` or `role="menuitem"` by default. Dropdowns are used for many things in practice (actions, navigation links, forms) and those don't all fit the strict ARIA menu model. If your dropdown is exclusively a list of command actions, you can opt into menu semantics by adding the roles yourself:
-
-```html
-<div class="dropdown" data-sp-dropdown="toggle: #my-trigger" role="menu">
-  <a href="#" class="dropdown-item" role="menuitem">Edit</a>
-  <a href="#" class="dropdown-item" role="menuitem">Delete</a>
-</div>
-```
-
-| Key               | Action                                            |
-| ----------------- | ------------------------------------------------- |
-| `Enter` / `Space` | Opens or closes the menu when the trigger is focused |
-| `Escape`          | Closes the menu and returns focus to the trigger  |
-| `ArrowDown`       | Move to the next item, wrapping to the first      |
-| `ArrowUp`         | Move to the previous item, wrapping to the last   |
-| `Home` / `End`    | Move to the first or last item                    |
-| `Tab`             | Moves focus out of the menu and closes it         |
+| Key               | Action                                                |
+| ----------------- | ----------------------------------------------------- |
+| `Enter` / `Space` | Opens the menu and focuses the first item             |
+| `ArrowDown`       | Opens the menu and focuses the first item; inside, move to the next item, wrapping |
+| `ArrowUp`         | Opens the menu and focuses the last item; inside, move to the previous item, wrapping |
+| `Home` / `End`    | Move to the first or last item                        |
+| `Enter` / `Space` | Activates the focused item and closes the menu        |
+| `Escape`          | Closes the menu and returns focus to the trigger      |
+| `Tab`             | Moves focus out of the menu and closes it             |
