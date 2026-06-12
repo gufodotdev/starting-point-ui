@@ -17,6 +17,7 @@ export const Anchorable: Mixin = {
   props: {
     placement: { type: String, default: "bottom-start" },
     offset: { type: Number, default: 6 },
+    matchWidth: { type: Boolean, default: false },
   },
 
   init(this: SpInstance) {
@@ -31,6 +32,7 @@ export const Anchorable: Mixin = {
   methods: {
     _position(this: SpInstance): void {
       if (!this.trigger) return;
+      if (this.config.matchWidth) this.el.style.width = `${this.trigger.offsetWidth}px`;
       const arrowEl = this.el.querySelector<HTMLElement>("[data-sp-arrow]");
       // Leave room for the arrow's protrusion on top of the configured gap so
       // the panel isn't flush against the trigger.
