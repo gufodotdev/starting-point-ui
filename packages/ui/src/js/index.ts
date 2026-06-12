@@ -13,11 +13,12 @@ import { Tabs } from "./tabs";
 import { Collapsible } from "./collapsible";
 import { Accordion } from "./accordion";
 
+import { toast, ToastTrigger } from "./toast";
+
 import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import "./checkbox";
 import "./slider";
-import { toast } from "./toast";
 
 const components: ComponentFactory[] = [
   Dialog,
@@ -29,6 +30,7 @@ const components: ComponentFactory[] = [
   Tabs,
   Collapsible,
   Accordion,
+  ToastTrigger,
 ];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
@@ -60,10 +62,10 @@ export {
   tabs,
   collapsible,
   accordion,
+  toast,
   start,
   resizable,
   sidebar,
-  toast,
 };
 export type { SpInstance };
 
@@ -79,10 +81,10 @@ declare global {
       tabs: typeof tabs;
       collapsible: typeof collapsible;
       accordion: typeof accordion;
+      toast: typeof toast;
       // Legacy namespaces, dropped as each component is ported.
       resizable: typeof resizable;
       sidebar: typeof sidebar;
-      toast: typeof toast;
     };
   }
 }
@@ -98,9 +100,9 @@ if (typeof document !== "undefined") {
     tabs,
     collapsible,
     accordion,
+    toast,
     resizable,
     sidebar,
-    toast,
   };
 
   const run = () => start(components);

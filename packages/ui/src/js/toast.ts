@@ -1,5 +1,7 @@
-// Starting Point UI Toast Module
+// Imperative notifications stacked in per-position top-layer containers.
 
+import { define } from "./define";
+import type { SpInstance } from "./define";
 import { waitForAnimations } from "./utils";
 
 export interface ToastOptions {
@@ -36,7 +38,10 @@ export interface ToastInstance {
 }
 
 const DEFAULT_DURATION = 4000;
+// Gap and peek distance; matches the 14px values in toast.css.
 const GAP = 14;
+// Collapsed stacks show the front toast plus this many peeking behind it.
+const VISIBLE = 3;
 const TYPE_CLASSES = ["toast-success", "toast-error", "toast-warning", "toast-info", "toast-loading"];
 
 interface ToastEntry {
@@ -44,6 +49,7 @@ interface ToastEntry {
   element: HTMLElement;
   height: number;
   timer: ReturnType<typeof setTimeout> | null;
+  duration: number;
   position: string;
 }
 
@@ -54,6 +60,12 @@ const containers = new Map<
   { element: HTMLElement; toasts: ToastEntry[] }
 >();
 const byId = new Map<string, ToastEntry>();
+
+// Toasts are not component instances, so they dispatch their lifecycle events
+// directly. Not cancelable: creation and dismissal are imperative calls.
+function emit(el: HTMLElement, type: string) {
+  el.dispatchEvent(new CustomEvent(`sp-${type}`, { bubbles: true }));
+}
 
 function getContainer(position: string) {
   let entry = containers.get(position);
@@ -68,13 +80,36 @@ function getContainer(position: string) {
   document.body.appendChild(container);
   container.showPopover();
 
+  // Interacting with the stack expands it (CSS :hover) and pauses every timer.
+  const pauseAll = () => {
+    for (const t of containers.get(position)?.toasts ?? []) {
+      if (t.timer) {
+        clearTimeout(t.timer);
+        t.timer = null;
+      }
+    }
+  };
+  const resumeAll = () => {
+    for (const t of containers.get(position)?.toasts ?? []) {
+      if (t.duration > 0 && !t.timer) {
+        t.timer = setTimeout(() => dismiss(t.id), t.duration);
+      }
+    }
+  };
+  container.addEventListener("pointerenter", pauseAll);
+  container.addEventListener("pointerleave", resumeAll);
+  container.addEventListener("focusin", pauseAll);
+  container.addEventListener("focusout", resumeAll);
+
   entry = { element: container, toasts: [] };
   containers.set(position, entry);
 
   return entry;
 }
 
-// Recalculate --offset for all toasts in a container
+// Recalculate the stacking variables for all toasts in a container. CSS
+// renders the collapsed stack from --index and switches to the expanded
+// --offset while the stack is hovered.
 function updateOffsets(position: string) {
   const entry = containers.get(position);
   if (!entry) return;
@@ -83,9 +118,18 @@ function updateOffsets(position: string) {
   let offset = 0;
 
   // Toasts are ordered newest-first (index 0 = newest = closest to edge)
-  for (const t of entry.toasts) {
+  entry.toasts.forEach((t, i) => {
     t.element.style.setProperty("--offset", `${lift * offset}px`);
+    t.element.style.setProperty("--index", `${i}`);
+    t.element.style.zIndex = `${entry.toasts.length - i}`;
+    t.element.toggleAttribute("data-stacked", i > 0);
+    t.element.toggleAttribute("data-stack-overflow", i >= VISIBLE);
     offset += t.height + GAP;
+  });
+
+  const front = entry.toasts[0];
+  if (front) {
+    entry.element.style.setProperty("--front-toast-height", `${front.height}px`);
   }
 }
 
@@ -182,43 +226,33 @@ function show(title: string, type: ToastType, options: ToastOptions): ToastInsta
   const container = getContainer(position);
   const element = createToastElement(id, title, type, options);
 
-  // Append in closed state so we can measure without flashing the entry style.
-  element.setAttribute("data-state", "closed");
+  // Append in the base (closed) state so we can measure without flashing.
   container.element.appendChild(element);
   const height = element.getBoundingClientRect().height;
 
   // Add to front of list (newest first = closest to edge)
-  const entry: ToastEntry = { id, element, height, timer: null, position };
+  const entry: ToastEntry = { id, element, height, timer: null, duration, position };
   container.toasts.unshift(entry);
   byId.set(id, entry);
 
   updateOffsets(position);
 
-  // Trigger mount animation on next frame.
+  // Enter on the next frame so the transition runs from the base state.
   requestAnimationFrame(() => {
-    element.setAttribute("data-state", "open");
+    element.classList.add("show");
+    emit(element, "show");
+    requestAnimationFrame(() => {
+      waitForAnimations([element]).then(() => {
+        if (!element.classList.contains("show")) return; // dismissed mid-enter
+        element.classList.replace("show", "shown");
+        emit(element, "shown");
+      });
+    });
   });
 
   if (duration > 0) {
     entry.timer = setTimeout(() => dismiss(id), duration);
   }
-
-  // Pause timer on hover/focus, restart on leave/blur.
-  function pauseTimer() {
-    if (entry.timer) {
-      clearTimeout(entry.timer);
-      entry.timer = null;
-    }
-  }
-  function resumeTimer() {
-    if (duration > 0 && !entry.timer) {
-      entry.timer = setTimeout(() => dismiss(id), duration);
-    }
-  }
-  element.addEventListener("mouseenter", pauseTimer);
-  element.addEventListener("mouseleave", resumeTimer);
-  element.addEventListener("focusin", pauseTimer);
-  element.addEventListener("focusout", resumeTimer);
 
   return {
     id,
@@ -244,9 +278,12 @@ export async function dismiss(id: string) {
     updateOffsets(entry.position);
   }
 
-  entry.element.setAttribute("data-state", "closed");
+  entry.element.classList.remove("show", "shown");
+  entry.element.classList.add("hide");
+  emit(entry.element, "hide");
   await waitForAnimations([entry.element]);
 
+  emit(entry.element, "hidden");
   entry.element.remove();
 
   if (container.toasts.length === 0) {
@@ -274,13 +311,13 @@ export function update(id: string, options: ToastUpdateOptions) {
   updateOffsets(entry.position);
 
   const duration = options.duration ?? DEFAULT_DURATION;
+  entry.duration = duration;
   if (entry.timer) clearTimeout(entry.timer);
   if (duration > 0) {
     entry.timer = setTimeout(() => dismiss(id), duration);
   }
 }
 
-// Main toast function
 export function toast(title: string, options: ToastOptions = {}): ToastInstance {
   const type = options.type ?? "default";
   if (type === "loading") {
@@ -289,75 +326,58 @@ export function toast(title: string, options: ToastOptions = {}): ToastInstance 
   return show(title, type, options);
 }
 
+const sugar = (type: ToastType) => (title: string, options: ToastOptions = {}) =>
+  toast(title, { ...options, type });
+
 toast.update = update;
 toast.dismiss = dismiss;
 toast.dismissAll = dismissAll;
+toast.success = sugar("success");
+toast.error = sugar("error");
+toast.warning = sugar("warning");
+toast.info = sugar("info");
+toast.loading = sugar("loading");
 
-// Global click handler for dismiss buttons
-function handleClick(e: MouseEvent) {
-  const target = e.target as HTMLElement;
-  const dismissBtn = target.closest<HTMLElement>("[data-sp-toast-dismiss]");
-  if (!dismissBtn) return;
-  const toastEl = dismissBtn.closest<HTMLElement>("[data-toast-id]");
-  const id = toastEl?.getAttribute("data-toast-id");
-  if (id) dismiss(id);
-}
+// Cached [data-sp-toast] markup re-appears on Back/Forward restores; skip the
+// triggers present at load, but process anything inserted afterwards.
+let skipFlash =
+  typeof performance !== "undefined" &&
+  (performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined)
+    ?.type === "back_forward";
 
-// Process declarative toast triggers from HTML
-function processToastElement(el: HTMLElement) {
-  const value = el.getAttribute("data-sp-toast");
-  if (!value) return;
-
-  try {
-    const config = JSON.parse(value);
-    const title = config.title ?? "";
-    delete config.title;
-    toast(title, config);
-  } catch {
-    toast(value);
-  }
-
-  el.remove();
-}
-
-function scanForToasts(root: Node) {
-  if (!(root instanceof HTMLElement)) return;
-  if (root.hasAttribute("data-sp-toast")) processToastElement(root);
-  for (const el of root.querySelectorAll<HTMLElement>("[data-sp-toast]")) {
-    processToastElement(el);
-  }
-}
-
-// Initialize global listeners
-let initialized = false;
-
-function init() {
-  if (typeof document === "undefined" || initialized) return;
-  initialized = true;
-
-  const start = () => {
-    document.addEventListener("click", handleClick);
-    // Skip the initial scan on Back/Forward so cached `data-sp-toast`
-    // markup doesn't re-fire. Later additions still go through the observer.
-    if (
-      (performance.getEntriesByType("navigation")[0] as
-        | PerformanceNavigationTiming
-        | undefined)?.type !== "back_forward"
-    ) {
-      scanForToasts(document.body);
-    }
-    new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        for (const node of m.addedNodes) scanForToasts(node);
-      }
-    }).observe(document.body, { childList: true, subtree: true });
-  };
-
+if (skipFlash && typeof document !== "undefined") {
+  // Clears on a task after the observer's initial scan.
+  const clear = () => setTimeout(() => (skipFlash = false), 0);
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", start, { once: true });
+    document.addEventListener("DOMContentLoaded", clear, { once: true });
   } else {
-    start();
+    clear();
   }
 }
 
-init();
+// Flash trigger: an element carrying a toast as a plain string or JSON config,
+// fired and removed on sight. Lets server-rendered redirects queue toasts.
+export const ToastTrigger = define({
+  name: "toast-trigger",
+  selector: "[data-sp-toast]",
+
+  init(this: SpInstance) {
+    if (skipFlash) return;
+    const value = this.el.getAttribute("data-sp-toast") ?? "";
+    try {
+      const { title = "", ...options } = JSON.parse(value);
+      toast(title, options);
+    } catch {
+      toast(value);
+    }
+    this.el.remove();
+  },
+});
+
+if (typeof document !== "undefined") {
+  document.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-sp-toast-dismiss]");
+    const id = btn?.closest<HTMLElement>("[data-toast-id]")?.getAttribute("data-toast-id");
+    if (id) dismiss(id);
+  });
+}

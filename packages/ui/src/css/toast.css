@@ -1,5 +1,3 @@
-/* Starting Point UI Toast Styles */
-
 /* Toast classes are applied by JS at runtime, so they never appear in the
    user's source files for Tailwind to scan. Force-emit them. */
 @source inline("{toaster,toast,toast-content,toast-title,toast-description,toast-icon,toast-close,toast-action,toast-success,toast-error,toast-warning,toast-info,toast-loading,toaster-top-left,toaster-top-right,toaster-top-center,toaster-bottom-left,toaster-bottom-right,toaster-bottom-center}");
@@ -17,6 +15,22 @@
     &:popover-open {
       display: block;
     }
+
+    /* Hovering the stack expands it to the full list. */
+    &:hover :is(.toast.show, .toast.shown) {
+      transform: translateY(var(--offset, 0px));
+      height: auto;
+    }
+
+    /* While collapsed, back toasts take the front toast's height and the
+       stack shows at most three. */
+    &:not(:hover) .toast[data-stacked] {
+      height: var(--front-toast-height, auto);
+      overflow: hidden;
+    }
+    &:not(:hover) .toast[data-stack-overflow] {
+      opacity: 0;
+    }
   }
 }
 
@@ -24,16 +38,25 @@
   @layer l1.l2 {
     @apply pointer-events-auto absolute w-full flex items-center gap-2 rounded-popover border border-popover-border bg-popover p-4 text-[13px] text-popover-foreground shadow-popover;
 
-    transition: transform 300ms, opacity 150ms;
+    /* The base state doubles as enter-from and exit-to; .hide falls back to it. */
+    transition: transform 300ms, opacity 150ms, height 300ms;
+    opacity: 0;
+    transform: translateY(var(--enter-from, 100%));
 
-    &[data-state="closed"] {
-      opacity: 0;
-      transform: translateY(100%);
+    /* Invisible bridge across the stack gap so :hover survives the pointer
+       moving between expanded toasts. */
+    &::after {
+      content: "";
+      @apply absolute left-0 right-0 h-[14px];
     }
 
-    &[data-state="open"] {
+    /* Collapsed stack: each toast peeks 14px behind the front one, slightly
+       scaled down. The front toast (index 0) sits at the edge unchanged. */
+    &.show,
+    &.shown {
       opacity: 1;
-      transform: translateY(var(--offset, 0px));
+      transform: translateY(calc(var(--lift, -1) * var(--index, 0) * 14px))
+        scale(calc(1 - var(--index, 0) * 0.05));
     }
   }
 }
@@ -75,15 +98,28 @@
 }
 
 @layer l1 {
-  :is(.toaster-bottom-left, .toaster-bottom-right, .toaster-bottom-center) .toast {
-    bottom: 0;
+  :is(.toaster-bottom-left, .toaster-bottom-right, .toaster-bottom-center) {
+    --lift: -1;
+
+    & .toast {
+      bottom: 0;
+
+      &::after {
+        bottom: 100%;
+      }
+    }
   }
 
-  :is(.toaster-top-left, .toaster-top-right, .toaster-top-center) .toast {
-    top: 0;
+  :is(.toaster-top-left, .toaster-top-right, .toaster-top-center) {
+    --lift: 1;
 
-    &[data-state="closed"] {
-      transform: translateY(-100%);
+    & .toast {
+      top: 0;
+      --enter-from: -100%;
+
+      &::after {
+        top: 100%;
+      }
     }
   }
 }
