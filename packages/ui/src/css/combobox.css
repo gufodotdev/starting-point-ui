@@ -7,9 +7,12 @@
       @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
       @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
       @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
+      /* End-align the trailing chevron even when the label is plain text
+         (static trigger) instead of a flex-1 value span. */
+      @apply [&_svg:last-child]:ml-auto;
     }
   }
-  
+
   @utility combobox-value {
     @layer l1.l2 {
       @apply flex flex-1 items-center truncate text-left;
@@ -18,11 +21,6 @@
       /* Render placeholder text from data-sp-placeholder when no children are present */
       &[data-sp-placeholder]:not(:has(> *))::before {
         content: attr(data-sp-placeholder);
-      }
-
-      /* Dynamic triggers show the placeholder as a muted hint; static triggers
-         use the placeholder as the permanent label, so leave it at default color. */
-      &[data-sp-placeholder]:not([data-sp-static])::before {
         @apply text-muted-foreground;
       }
 
@@ -44,12 +42,16 @@
   
   @utility combobox {
     @layer l1.l2 {
-      @apply absolute inset-auto z-998 m-0 hidden min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover text-popover-foreground shadow-popover;
-      @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95;
-  
-      &.open {
-        @apply block;
+      /* Hidden until JS upgrades it to a [popover], so it doesn't flash on load. */
+      &:not([popover]) {
+        @apply hidden;
       }
+
+      /* JS sets inline left/top; reset the native [popover] centering. */
+      @apply fixed inset-auto m-0 z-998 min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover text-popover-foreground shadow-popover;
+
+      @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-95 [&.show]:duration-150 [&.show]:[animation-fill-mode:forwards];
+      @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-95 [&.hide]:duration-150 [&.hide]:[animation-fill-mode:forwards];
     }
   }
   
@@ -76,7 +78,7 @@
   @utility combobox-item {
     @layer l1.l2 {
       @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm py-1.5 pr-2.5 pl-8 text-sm outline-none transition-colors;
-      @apply hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground;
+      @apply hover:bg-secondary hover:text-secondary-foreground data-highlighted:bg-secondary data-highlighted:text-secondary-foreground;
       @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
   
       &[aria-disabled="true"] {

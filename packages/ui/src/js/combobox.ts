@@ -1,308 +1,180 @@
-// Starting Point UI Combobox Module
+// Anchored, filterable option list; selection state lives in each item's
+// hidden radio (single select) or checkbox (multi select) input.
 
-import { type Placement } from "@floating-ui/dom";
-import {
-  closeAnchor,
-  closeAnchorIfOutside,
-  getAnchorTrigger,
-  getOpenAnchor,
-  getTargetContent,
-  openAnchor,
-  positionFloating,
-  toggleAnchor,
-  type AnchorOptions,
-} from "./floating";
-import { isDisabled } from "./utils";
+import { define } from "./define";
+import type { SpInstance } from "./define";
+import { ensureId, isDisabled, resolveTrigger } from "./utils";
+import { Togglable } from "./mixins/togglable";
+import { ClickToShow } from "./mixins/click-to-show";
+import { ClickOutsideHide } from "./mixins/click-outside-hide";
+import { FocusOutsideHide } from "./mixins/focus-outside-hide";
+import { Escapable } from "./mixins/escapable";
+import { Navigable } from "./mixins/navigable";
+import { Popoverable } from "./mixins/popoverable";
+import { Anchorable } from "./mixins/anchorable";
 
-const TRIGGER_SELECTOR = "[data-sp-toggle='combobox']";
-const CONTENT_SELECTOR = ".combobox";
+const ITEM = ".combobox-item";
 
-function getVisibleItems(menu: HTMLElement): HTMLElement[] {
-  return [...menu.querySelectorAll<HTMLElement>(".combobox-item")].filter(
-    (item) => !item.hidden && !isDisabled(item),
-  );
-}
+export const Combobox = define({
+  name: "combobox",
+  selector: "[data-sp-combobox]",
+  mixins: [
+    Togglable,
+    ClickToShow,
+    ClickOutsideHide,
+    FocusOutsideHide,
+    Escapable,
+    Navigable,
+    Popoverable,
+    Anchorable,
+  ],
 
-export function filter(menu: HTMLElement, query: string) {
-  const normalizedQuery = query.trim().toLowerCase();
-  const items = menu.querySelectorAll<HTMLElement>(".combobox-item");
-  let visibleCount = 0;
-
-  items.forEach((item) => {
-    const text = (item.dataset.label ?? item.textContent ?? "")
-      .trim()
-      .toLowerCase();
-    const matches = !normalizedQuery || text.includes(normalizedQuery);
-    item.hidden = !matches;
-    if (matches) visibleCount++;
-  });
-
-  const emptyEl = menu.querySelector<HTMLElement>(".combobox-empty");
-  if (emptyEl) {
-    emptyEl.classList.toggle("visible", visibleCount === 0);
-  }
-}
-
-// Build a stable key from the currently-checked items so we can detect
-// whether selections changed between open and close.
-function getSelectionKey(menu: HTMLElement): string {
-  return [
-    ...menu.querySelectorAll<HTMLInputElement>(".combobox-item input:checked"),
-  ]
-    .map((input) => `${input.name}:${input.value}`)
-    .sort()
-    .join("|");
-}
-
-// Snapshot the selection state per trigger; only used by the on-close submit
-// path to decide whether selections changed since open. The on-change path
-// submits unconditionally and doesn't need a snapshot.
-const openSnapshots = new WeakMap<HTMLElement, string>();
-
-function findFormFor(trigger: HTMLElement, attr: string): HTMLFormElement | null {
-  const formId = trigger.getAttribute(attr);
-  if (formId) {
-    const el = document.getElementById(formId);
-    return el instanceof HTMLFormElement ? el : null;
-  }
-  return trigger.closest("form");
-}
-
-function submitForm(form: HTMLFormElement) {
-  if (typeof form.requestSubmit === "function") form.requestSubmit();
-  else form.submit();
-}
-
-function submitFormForTrigger(trigger: HTMLElement, attr: string) {
-  const form = findFormFor(trigger, attr);
-  if (form) submitForm(form);
-}
-
-const OPTS: AnchorOptions = {
-  contentSelector: CONTENT_SELECTOR,
-  triggerSelector: TRIGGER_SELECTOR,
-  position: async (trigger, menu) => {
-    // Match menu width to trigger so options align with the value they populate.
-    menu.style.width = `${trigger.offsetWidth}px`;
-    await positionFloating(trigger, menu, {
-      placement: (trigger.dataset.spPlacement as Placement) || "bottom-start",
-      offset: parseInt(trigger.dataset.spOffset || "4", 10),
-    });
+  props: {
+    offset: { type: Number, default: 4 },
+    // Arrow navigation only visits items the current filter left visible.
+    item: { type: String, default: `${ITEM}:not([hidden])` },
+    matchWidth: { type: Boolean, default: true },
   },
-  onAfterOpen: (trigger, menu) => {
-    if (trigger.hasAttribute("data-sp-submit-on-close")) {
-      openSnapshots.set(trigger, getSelectionKey(menu));
+
+  init(this: SpInstance) {
+    // WAI-ARIA combobox (dialog popup) semantics, applied unless authored.
+    const trigger = resolveTrigger(this);
+    trigger?.setAttribute("aria-haspopup", "dialog");
+    if (trigger && !trigger.hasAttribute("role")) trigger.setAttribute("role", "combobox");
+    if (!this.el.hasAttribute("role")) this.el.setAttribute("role", "dialog");
+    if (trigger && !this.el.hasAttribute("aria-label") && !this.el.hasAttribute("aria-labelledby")) {
+      this.el.setAttribute("aria-labelledby", ensureId(trigger));
     }
-  },
-  onAfterClose: (trigger, menu) => {
-    filter(menu, "");
-    const input = menu.querySelector<HTMLInputElement>(".combobox-input");
-    if (input) input.value = "";
 
-    // If the trigger opts in and the selection changed since open, submit
-    // the associated form (explicit id via attribute value, or the
-    // enclosing form when value is empty).
-    if (trigger.hasAttribute("data-sp-submit-on-close")) {
-      const before = openSnapshots.get(trigger);
-      openSnapshots.delete(trigger);
-      const after = getSelectionKey(menu);
-      if (before !== undefined && before !== after) {
-        submitFormForTrigger(trigger, "data-sp-submit-on-close");
+    const input = this.el.querySelector<HTMLInputElement>(".combobox-input");
+    const list = this.el.querySelector<HTMLElement>(".combobox-list");
+    if (input) {
+      input.setAttribute("role", "combobox");
+      input.setAttribute("aria-autocomplete", "list");
+      input.setAttribute("aria-expanded", "true");
+      if (list) input.setAttribute("aria-controls", ensureId(list));
+    }
+    if (list && !list.hasAttribute("role")) list.setAttribute("role", "listbox");
+    this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
+      if (!item.hasAttribute("role")) item.setAttribute("role", "option");
+      // Options are highlighted via aria-activedescendant, never focused.
+      item.tabIndex = -1;
+    });
+
+    this.on(this.el, "click", (e) => {
+      const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
+      if (!item) return;
+      if (isDisabled(item)) {
+        e.preventDefault();
+        return;
       }
-    }
-  },
-};
-
-export const open = (trigger: HTMLElement) => {
-  const menu = getTargetContent(trigger);
-  if (menu) openAnchor(trigger, menu, OPTS, { viaClick: true });
-};
-export const close = (menu: HTMLElement) => closeAnchor(menu, OPTS);
-export const toggle = (trigger: HTMLElement) => {
-  const menu = getTargetContent(trigger);
-  if (menu) toggleAnchor(trigger, menu, OPTS, { viaClick: true });
-};
-
-function getItemLabel(input: HTMLInputElement): string {
-  return (
-    input.closest<HTMLElement>(".combobox-item")?.textContent?.trim() ?? ""
-  );
-}
-
-function makeValueItem(text: string): HTMLSpanElement {
-  const el = document.createElement("span");
-  el.textContent = text;
-  return el;
-}
-
-function updateTriggerText(trigger: HTMLElement, menu: HTMLElement) {
-  const valueEl = trigger.querySelector<HTMLElement>(".combobox-value");
-  if (!valueEl || valueEl.hasAttribute("data-sp-static")) return;
-
-  const checked = menu.querySelectorAll<HTMLInputElement>(
-    ".combobox-item input:checked",
-  );
-  valueEl.replaceChildren(
-    ...[...checked].map((input) => makeValueItem(getItemLabel(input))),
-  );
-}
-
-export function select(trigger: HTMLElement, menu: HTMLElement, item: HTMLElement) {
-  const input = item.querySelector<HTMLInputElement>("input");
-  if (!input) return;
-
-  const isMultiple = input.type === "checkbox";
-
-  // Radio behavior: clear sibling items' selected state before flipping this one on.
-  if (!isMultiple) {
-    menu.querySelectorAll<HTMLElement>(".combobox-item").forEach((el) => {
-      el.setAttribute("aria-selected", "false");
+      this.select(item);
     });
-  }
 
-  input.checked = isMultiple ? !input.checked : true;
-  input.dispatchEvent(new Event("change", { bubbles: true }));
-  item.setAttribute("aria-selected", String(input.checked));
-  updateTriggerText(trigger, menu);
-
-  if (!isMultiple) closeAnchor(menu, OPTS);
-}
-
-function handleClick(e: MouseEvent) {
-  const target = e.target as HTMLElement;
-
-  const trigger = target.closest<HTMLElement>(TRIGGER_SELECTOR);
-  if (trigger) {
-    const menu = getTargetContent(trigger);
-    if (menu) {
+    this.on(this.el, "keydown", (e) => {
+      if ((e as KeyboardEvent).key !== "Enter") return;
+      const item = this.el.querySelector<HTMLElement>(`${ITEM}[data-highlighted]`);
+      if (!item) return;
       e.preventDefault();
-      toggleAnchor(trigger, menu, OPTS, { viaClick: true });
-    }
-    return;
-  }
+      if (!isDisabled(item)) this.select(item);
+    });
 
-  const item = target.closest<HTMLElement>(".combobox-item");
-  if (item) {
-    if (isDisabled(item)) {
-      e.preventDefault();
-      return;
-    }
-    const menu = item.closest<HTMLElement>(CONTENT_SELECTOR);
-    if (menu) {
-      const associatedTrigger = getAnchorTrigger(menu);
-      if (associatedTrigger) select(associatedTrigger, menu, item);
-    }
-    return;
-  }
+    this.on(this.el, "input", (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.matches(".combobox-input")) this.filter(target.value);
+    });
 
-  closeAnchorIfOutside(target, OPTS);
-}
+    this.on(this.el, "sp-show", () => {
+      input?.focus();
+    });
 
-function handleKeydown(e: KeyboardEvent) {
-  const target = e.target as HTMLElement;
+    this.on(this.el, "sp-hidden", () => {
+      this.filter("");
+      if (input) input.value = "";
+    });
+  },
 
-  const openMenu = getOpenAnchor(OPTS);
-  if (e.key === "Escape" && openMenu) {
-    e.preventDefault();
-    const trigger = getAnchorTrigger(openMenu);
-    closeAnchor(openMenu, OPTS);
-    trigger?.focus();
-    return;
-  }
+  methods: {
+    filter(this: SpInstance, query: string): void {
+      const normalized = query.trim().toLowerCase();
+      let visibleCount = 0;
 
-  if (
-    (e.key === "Enter" || e.key === " ") &&
-    target.matches(TRIGGER_SELECTOR)
-  ) {
-    e.preventDefault();
-    const menu = getTargetContent(target);
-    if (menu) toggleAnchor(target, menu, OPTS, { viaClick: true });
-    return;
-  }
+      this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
+        const text = (item.dataset.label ?? item.textContent ?? "").trim().toLowerCase();
+        const matches = !normalized || text.includes(normalized);
+        item.hidden = !matches;
+        if (matches) visibleCount++;
+      });
 
-  const menu =
-    target.closest<HTMLElement>(CONTENT_SELECTOR) ??
-    (target.matches(TRIGGER_SELECTOR) ? getTargetContent(target) : null);
-  if (!menu?.classList.contains("open")) return;
+      this.el
+        .querySelector<HTMLElement>(".combobox-empty")
+        ?.classList.toggle("visible", visibleCount === 0);
 
-  if (
-    (e.key === "Enter" || e.key === " ") &&
-    target.matches(".combobox-item")
-  ) {
-    e.preventDefault();
-    if (!isDisabled(target)) {
-      const trigger = getAnchorTrigger(menu);
-      if (trigger) select(trigger, menu, target);
-    }
-    return;
-  }
+      // A query highlights its first match (so Enter selects it right away);
+      // an empty one clears the highlight back to the untouched-list state.
+      const visible = [...this.el.querySelectorAll<HTMLElement>(this.config.item as string)];
+      const target = normalized ? visible.find((item) => !isDisabled(item)) : null;
+      if (target) this._setActive(target);
+      else this._clearActive();
+    },
 
-  if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) {
-    e.preventDefault();
-    const items = getVisibleItems(menu);
-    if (!items.length) return;
+    select(this: SpInstance, item: HTMLElement): void {
+      const input = item.querySelector<HTMLInputElement>("input");
+      if (!input) return;
 
-    const currentIndex = items.indexOf(target);
-    let nextItem: HTMLElement | null = null;
+      const multiple = input.type === "checkbox";
 
-    switch (e.key) {
-      case "ArrowDown":
-        nextItem =
-          currentIndex < 0 ? items[0] : items[currentIndex + 1] ?? items[0];
-        break;
-      case "ArrowUp":
-        nextItem =
-          currentIndex < 0
-            ? items[items.length - 1]
-            : items[currentIndex - 1] ?? items[items.length - 1];
-        break;
-      case "Home":
-        nextItem = items[0];
-        break;
-      case "End":
-        nextItem = items[items.length - 1];
-        break;
-    }
+      if (!multiple) {
+        this.el.querySelectorAll<HTMLElement>(ITEM).forEach((el) => {
+          el.setAttribute("aria-selected", "false");
+        });
+      }
 
-    nextItem?.focus();
-  }
-}
+      // Re-selecting the selected option clears it, so the empty initial
+      // state stays reachable for optional fields.
+      input.checked = !input.checked;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+      item.setAttribute("aria-selected", String(input.checked));
+      this._updateValue();
 
-function handleFocusOut(e: FocusEvent) {
-  closeAnchorIfOutside(e.relatedTarget as HTMLElement | null, OPTS);
-}
+      if (!multiple) this.hide();
+    },
 
-function handleInput(e: Event) {
-  const input = e.target as HTMLInputElement;
-  if (!input.matches(".combobox-input")) return;
+    // Virtual highlight (cmdk-style): focus stays in the search input while
+    // aria-activedescendant and [data-highlighted] track the active option.
+    _activeIndex(this: SpInstance, items: HTMLElement[]): number {
+      return items.findIndex((item) => item.hasAttribute("data-highlighted"));
+    },
 
-  const menu = input.closest<HTMLElement>(CONTENT_SELECTOR);
-  if (menu) filter(menu, input.value);
-}
+    _setActive(this: SpInstance, item: HTMLElement): void {
+      this.el.querySelector(`${ITEM}[data-highlighted]`)?.removeAttribute("data-highlighted");
+      item.setAttribute("data-highlighted", "");
+      this.el
+        .querySelector(".combobox-input")
+        ?.setAttribute("aria-activedescendant", ensureId(item));
+      item.scrollIntoView({ block: "nearest" });
+    },
 
-function handleChange(e: Event) {
-  const input = e.target as HTMLElement | null;
-  if (!(input instanceof HTMLInputElement)) return;
-  if (!input.closest(".combobox-item")) return;
+    _clearActive(this: SpInstance): void {
+      this.el.querySelector(`${ITEM}[data-highlighted]`)?.removeAttribute("data-highlighted");
+      this.el.querySelector(".combobox-input")?.removeAttribute("aria-activedescendant");
+    },
 
-  const menu = input.closest<HTMLElement>(CONTENT_SELECTOR);
-  if (!menu) return;
+    // One span per checked item: the CSS collapses 2+ of them into "N selected".
+    _updateValue(this: SpInstance): void {
+      const valueEl: HTMLElement | null = this.trigger?.querySelector(".combobox-value") ?? null;
+      if (!valueEl) return;
 
-  const trigger = getAnchorTrigger(menu);
-  if (!trigger?.hasAttribute("data-sp-submit-on-change")) return;
-
-  submitFormForTrigger(trigger, "data-sp-submit-on-change");
-}
-
-let initialized = false;
-
-(function init() {
-  if (typeof document === "undefined" || initialized) return;
-  initialized = true;
-
-  document.addEventListener("click", handleClick);
-  document.addEventListener("keydown", handleKeydown);
-  document.addEventListener("focusout", handleFocusOut);
-  document.addEventListener("input", handleInput);
-  document.addEventListener("change", handleChange);
-})();
+      const labels = [...this.el.querySelectorAll<HTMLInputElement>(`${ITEM} input:checked`)].map(
+        (input) => input.closest<HTMLElement>(ITEM)?.textContent?.trim() ?? "",
+      );
+      valueEl.replaceChildren(
+        ...labels.map((text) => {
+          const span = document.createElement("span");
+          span.textContent = text;
+          return span;
+        }),
+      );
+    },
+  },
+});
