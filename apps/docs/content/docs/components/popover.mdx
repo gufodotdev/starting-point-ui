@@ -62,8 +62,9 @@ Set options in the `data-sp-popover` value, separated by semicolons.
 | ----------- | ------ | -------- | --------------------------------------------------------- |
 | `toggle`    | String | —        | Selector for the element that opens the popover           |
 | `placement` | String | `bottom` | Position relative to the trigger (Floating UI placement)  |
-| `offset`    | Number | `6`            | Gap in pixels between the trigger and the popover        |
-| `mode`      | String | `click`        | `click` to toggle on click, `hover` to open on hover     |
+| `offset`    | Number | `6`      | Gap in pixels between the trigger and the popover         |
+| `mode`      | String | `click`  | `click` to toggle on click, `hover` to open on hover      |
+| `matchWidth` | Boolean | `false` | Match the popover width to the trigger width             |
 
 ## Events
 
@@ -102,4 +103,4 @@ popover.show();
 
 ## Accessibility
 
-The popover is non-modal, following the WAI-ARIA [disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/): it does not trap focus or block the page. The trigger's `aria-expanded` and `aria-controls` are kept in sync automatically.
+The popover adheres to the [Dialog WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) as a non-modal dialog and sets the appropriate roles and properties automatically.

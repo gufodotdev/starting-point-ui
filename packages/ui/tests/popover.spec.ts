@@ -113,6 +113,29 @@ test("syncs aria-expanded on the trigger", async ({ page }) => {
   await expect(trigger).toHaveAttribute("aria-expanded", "false");
 });
 
+// WAI-ARIA non-modal dialog semantics (Radix-style popover):
+// https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+test.describe("WAI-ARIA compliance", () => {
+  test("applies dialog semantics automatically", async ({ page }) => {
+    await mount(page, BASIC);
+    const trigger = page.locator("#trigger");
+    await expect(trigger).toHaveAttribute("aria-haspopup", "dialog");
+    await expect(trigger).toHaveAttribute("aria-controls", "pop");
+    await expect(popover(page)).toHaveAttribute("role", "dialog");
+    await expect(popover(page)).toHaveAttribute("aria-labelledby", "trigger");
+  });
+
+  test("returns focus to the trigger when closed from inside", async ({ page }) => {
+    await mount(page, BASIC);
+    await page.click("#trigger");
+    await expect(popover(page)).toHaveClass(/shown/);
+    await page.focus("#inside");
+    await page.keyboard.press("Escape");
+    await page.waitForFunction(() => !document.querySelector("#pop")!.matches(":popover-open"));
+    expect(await page.evaluate(() => document.activeElement?.id)).toBe("trigger");
+  });
+});
+
 test("sp.popover(el) returns the instance with the public API", async ({ page }) => {
   await mount(page, BASIC);
   const api = await page.evaluate(() => {
