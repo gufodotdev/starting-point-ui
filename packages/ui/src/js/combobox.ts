@@ -140,6 +140,11 @@ export const Combobox = define({
       if (!multiple) this.hide();
     },
 
+    // Arrows come from the search input, not from the options.
+    _navigates(): boolean {
+      return true;
+    },
+
     // Virtual highlight (cmdk-style): focus stays in the search input while
     // aria-activedescendant and [data-highlighted] track the active option.
     _activeIndex(this: SpInstance, items: HTMLElement[]): number {
