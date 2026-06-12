@@ -12,7 +12,7 @@ export interface SpInstance {
   config: Record<string, unknown>;
 
   on(target: EventTarget, type: EventName, handler: (e: Event) => void): void;
-  emit(type: string): boolean;
+  emit(type: string, detail?: unknown): boolean;
   dispose(): void;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -81,9 +81,9 @@ export function define(def: Definition): ComponentFactory {
         cleanups.push(() => target.removeEventListener(type, bound));
       },
 
-      emit(type) {
+      emit(type, detail) {
         return el.dispatchEvent(
-          new CustomEvent(`sp-${type}`, { bubbles: true, cancelable: true }),
+          new CustomEvent(`sp-${type}`, { bubbles: true, cancelable: true, detail }),
         );
       },
 
