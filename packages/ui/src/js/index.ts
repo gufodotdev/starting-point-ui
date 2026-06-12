@@ -10,9 +10,9 @@ import { Tooltip } from "./tooltip";
 import { Dropdown } from "./dropdown";
 import { Combobox } from "./combobox";
 import { Tabs } from "./tabs";
+import { Collapsible } from "./collapsible";
 
 import * as accordion from "./accordion";
-import * as collapsible from "./collapsible";
 import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import "./checkbox";
@@ -27,6 +27,7 @@ const components: ComponentFactory[] = [
   Dropdown,
   Combobox,
   Tabs,
+  Collapsible,
 ];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
@@ -36,6 +37,7 @@ const tooltip = (el: HTMLElement): SpInstance | null => getInstance(el, Tooltip)
 const dropdown = (el: HTMLElement): SpInstance | null => getInstance(el, Dropdown);
 const combobox = (el: HTMLElement): SpInstance | null => getInstance(el, Combobox);
 const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
+const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
 
 export {
   Dialog,
@@ -45,6 +47,7 @@ export {
   Dropdown,
   Combobox,
   Tabs,
+  Collapsible,
   dialog,
   sheet,
   popover,
@@ -52,9 +55,9 @@ export {
   dropdown,
   combobox,
   tabs,
+  collapsible,
   start,
   accordion,
-  collapsible,
   resizable,
   sidebar,
   toast,
@@ -71,9 +74,9 @@ declare global {
       dropdown: typeof dropdown;
       combobox: typeof combobox;
       tabs: typeof tabs;
+      collapsible: typeof collapsible;
       // Legacy namespaces, dropped as each component is ported.
       accordion: typeof accordion;
-      collapsible: typeof collapsible;
       resizable: typeof resizable;
       sidebar: typeof sidebar;
       toast: typeof toast;
@@ -90,8 +93,8 @@ if (typeof document !== "undefined") {
     dropdown,
     combobox,
     tabs,
-    accordion,
     collapsible,
+    accordion,
     resizable,
     sidebar,
     toast,

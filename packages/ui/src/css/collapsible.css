@@ -1,12 +1,33 @@
-/* Starting Point UI Collapsible Styles */
+@theme {
+  --animate-collapse-down: collapse-down 0.2s ease-out;
+  --animate-collapse-up: collapse-up 0.2s ease-out;
+
+  /* JS measures the panel's content height into --sp-collapse-height. */
+  @keyframes collapse-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--sp-collapse-height);
+    }
+  }
+  @keyframes collapse-up {
+    from {
+      height: var(--sp-collapse-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
 
 @utility collapsible-panel {
   @layer l1.l2 {
     @apply invisible h-0 overflow-hidden;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-collapsible-down;
-    @apply [&:not(.no-animation)]:data-[state=closed]:animate-collapsible-up;
+    @apply [&.show]:visible [&.show]:animate-collapse-down;
+    @apply [&.hide]:visible [&.hide]:animate-collapse-up;
 
-    &.open {
+    &.shown {
       @apply visible h-auto;
     }
   }
