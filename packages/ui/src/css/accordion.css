@@ -1,8 +1,12 @@
-/* Starting Point UI Accordion Styles */
-
 @utility accordion {
   @layer l1.l2 {
-    @apply w-full divide-y;
+    @apply w-full;
+
+    /* Dividers between sections: each heading after the first carries one, so
+       an open panel pushes the next section's divider down with it. */
+    & > :has(> .accordion-trigger):not(:first-child) {
+      @apply border-t;
+    }
   }
 }
 
@@ -10,17 +14,18 @@
   @layer l1.l2 {
     @apply flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
     @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&:not(.no-animation)_svg]:transition-transform [&:not(.no-animation)_svg]:duration-200;
+    @apply [&_svg]:transition-transform [&_svg]:duration-200;
   }
 }
 
 @utility accordion-panel {
   @layer l1.l2 {
+    /* Panels are Collapsibles, so they animate with the collapse keyframes. */
     @apply invisible h-0 overflow-hidden;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-accordion-down;
-    @apply [&:not(.no-animation)]:data-[state=closed]:animate-accordion-up;
+    @apply [&.show]:visible [&.show]:animate-collapse-down;
+    @apply [&.hide]:visible [&.hide]:animate-collapse-up;
 
-    &.open {
+    &.shown {
       @apply visible h-auto;
     }
   }

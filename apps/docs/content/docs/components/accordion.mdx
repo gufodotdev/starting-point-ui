@@ -1,363 +1,198 @@
 ---
 title: Accordion
-description: A Tailwind CSS accordion component for organizing content into collapsible sections.
+description: An accessible accordion for Tailwind CSS, stacking expandable sections with one or many open.
 ---
 
-A Tailwind CSS accordion component for organizing content into collapsible sections.
+A stack of expandable sections where the first trigger pairs with the first panel, the second with the second, and so on.
+
+## Basic Usage
+
+Add `data-sp-accordion` to a container holding `accordion-trigger` buttons wrapped in headings and one `accordion-panel` per trigger. Wrap panel children in `accordion-content`. Opening a section closes the open one, and clicking an open section's trigger closes it. All ids, ARIA attributes, and pairing are handled automatically.
 
 ```html preview
-<div class="accordion max-w-lg">
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#acc-1-panel"
-      aria-expanded="true"
-      aria-controls="acc-1-panel"
-    >
+<div class="accordion max-w-md" data-sp-accordion>
+  <h3>
+    <button class="accordion-trigger">
       Is it accessible?
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div id="acc-1-panel" class="accordion-panel open">
-      <div class="accordion-content">
-        Yes. It adheres to the WAI-ARIA design pattern for accordions.
-      </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">
+      Yes. It adheres to the WAI-ARIA accordion pattern with all wiring done for you.
     </div>
   </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#acc-2-panel"
-      aria-expanded="false"
-      aria-controls="acc-2-panel"
-    >
+  <h3>
+    <button class="accordion-trigger">
       Is it styled?
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div id="acc-2-panel" class="accordion-panel">
-      <div class="accordion-content">
-        Yes. It comes with default styles that match your theme.
-      </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">
+      Yes. It ships with default styles you can override with utilities.
     </div>
   </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#acc-3-panel"
-      aria-expanded="false"
-      aria-controls="acc-3-panel"
-    >
+  <h3>
+    <button class="accordion-trigger">
       Is it animated?
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div id="acc-3-panel" class="accordion-panel">
-      <div class="accordion-content">
-        Yes. It is animated using CSS animations.
-      </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">
+      Yes. The height transition is animated by default.
     </div>
   </div>
 </div>
 ```
 
----
+## Multiple open sections
 
-## Multiple open
-
-Add `data-sp-multiple` to the accordion to allow multiple sections to be open at the same time.
+Add `multiple: true` so opening a section keeps the others open.
 
 ```html preview
-<div class="accordion max-w-lg" data-sp-multiple="">
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#multi-1-panel"
-      aria-expanded="true"
-      aria-controls="multi-1-panel"
-    >
-      First section
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div id="multi-1-panel" class="accordion-panel open">
-      <div class="accordion-content">
-        This accordion allows multiple sections to be open at once.
-      </div>
-    </div>
+<div class="accordion max-w-md" data-sp-accordion="multiple: true">
+  <h3>
+    <button class="accordion-trigger">Shipping</button>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">Free shipping on orders over $50.</div>
   </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#multi-2-panel"
-      aria-expanded="true"
-      aria-controls="multi-2-panel"
-    >
-      Second section
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div id="multi-2-panel" class="accordion-panel open">
-      <div class="accordion-content">
-        Both sections can be expanded simultaneously.
-      </div>
-    </div>
+  <h3>
+    <button class="accordion-trigger">Returns</button>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">Returns are accepted within 30 days.</div>
   </div>
 </div>
 ```
-
----
 
 ## Icons
 
-Add any SVG icon inside the trigger. Use `aria-expanded` selectors to control icon behavior.
+Add any SVG icon inside the trigger. Use `in-aria-expanded:` variants to control icon behavior, or omit the icon entirely.
 
 ```html preview
-<div class="accordion max-w-lg">
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#icon-1-panel"
-      aria-expanded="true"
-      aria-controls="icon-1-panel"
-    >
+<div class="accordion max-w-md" data-sp-accordion>
+  <h3>
+    <button class="accordion-trigger">
       Rotating chevron
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div id="icon-1-panel" class="accordion-panel open">
-      <div class="accordion-content">
-        The chevron rotates 180° when expanded.
-      </div>
-    </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">The chevron rotates 180° when expanded.</div>
   </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#icon-2-panel"
-      aria-expanded="false"
-      aria-controls="icon-2-panel"
-    >
+  <h3>
+    <button class="accordion-trigger">
       Plus/minus swap
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden [[aria-expanded=true]>&]:block"><path d="M5 12h14"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden text-muted-foreground in-aria-expanded:block"><path d="M5 12h14"/></svg>
     </button>
-    <div id="icon-2-panel" class="accordion-panel">
-      <div class="accordion-content">Swap between plus and minus icons.</div>
-    </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">Swap between plus and minus icons.</div>
   </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#icon-3-panel"
-      aria-expanded="false"
-      aria-controls="icon-3-panel"
-    >
-      No icon
-    </button>
-    <div id="icon-3-panel" class="accordion-panel">
-      <div class="accordion-content">You can also omit the icon entirely.</div>
-    </div>
+  <h3>
+    <button class="accordion-trigger">No icon</button>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">You can also omit the icon entirely.</div>
   </div>
 </div>
 ```
-
----
 
 ## Disabled
 
-Add `disabled` to the trigger button to prevent interaction.
+Add `disabled` to a trigger to prevent interaction. Arrow navigation skips it.
 
 ```html preview
-<div class="accordion max-w-lg">
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#dis-1-panel"
-      aria-expanded="true"
-      aria-controls="dis-1-panel"
-    >
+<div class="accordion max-w-md" data-sp-accordion>
+  <h3>
+    <button class="accordion-trigger">
       Enabled section
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div id="dis-1-panel" class="accordion-panel open">
-      <div class="accordion-content">This section can be toggled.</div>
-    </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">This section can be toggled.</div>
   </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      disabled=""
-      data-sp-toggle="accordion"
-      data-sp-target="#dis-2-panel"
-      aria-expanded="false"
-      aria-controls="dis-2-panel"
-    >
+  <h3>
+    <button class="accordion-trigger" disabled>
       Disabled section
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div id="dis-2-panel" class="accordion-panel">
-      <div class="accordion-content">This section cannot be opened.</div>
-    </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">This section cannot be opened.</div>
   </div>
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      type="button"
-      data-sp-toggle="accordion"
-      data-sp-target="#dis-3-panel"
-      aria-expanded="false"
-      aria-controls="dis-3-panel"
-    >
+  <h3>
+    <button class="accordion-trigger">
       Another enabled section
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <div id="dis-3-panel" class="accordion-panel">
-      <div class="accordion-content">This section can also be toggled.</div>
-    </div>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">This section can also be toggled.</div>
   </div>
 </div>
 ```
 
----
+## Initially open
 
-## How it works
+Add the `shown` class to a panel so it renders open on first paint, before JavaScript loads. Set `aria-expanded="true"` on its trigger so the state matches.
 
-The accordion component uses a small JavaScript module that handles opening and closing content panels. By default, only one section can be open at a time.
-
-### Structure
-
-An accordion consists of five parts:
-
-1. **`.accordion`** - Container that groups accordion items
-2. **`.accordion-item`** - Individual collapsible section
-3. **`.accordion-trigger`** - Button that toggles the section
-4. **`.accordion-panel`** - Panel wrapper that controls visibility and animations
-5. **`.accordion-content`** - Content container with padding and text styles
-
-```html
-<div class="accordion">
-  <div class="accordion-item">
-    <button
-      class="accordion-trigger"
-      data-sp-toggle="accordion"
-      data-sp-target="#panel-1"
-    >
-      Section title
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <div id="panel-1" class="accordion-panel">
-      <div class="accordion-content">Section content</div>
-    </div>
+```html preview
+<div class="accordion max-w-md" data-sp-accordion>
+  <h3>
+    <button class="accordion-trigger" aria-expanded="true">Open by default</button>
+  </h3>
+  <div class="accordion-panel shown">
+    <div class="accordion-content">This section starts expanded.</div>
+  </div>
+  <h3>
+    <button class="accordion-trigger">Closed by default</button>
+  </h3>
+  <div class="accordion-panel">
+    <div class="accordion-content">This section starts collapsed.</div>
   </div>
 </div>
 ```
 
-### Opening and closing
+## Options
 
-Use data attributes to control the accordion without writing JavaScript.
+Set options in the `data-sp-accordion` value, separated by semicolons.
 
-Add `data-sp-toggle="accordion"` to the trigger button and `data-sp-target` to specify which panel to toggle:
+| Option     | Type    | Default | Description                             |
+| ---------- | ------- | ------- | ---------------------------------------- |
+| `multiple` | Boolean | `false` | Opening a section keeps the others open |
 
-```html
-<button data-sp-toggle="accordion" data-sp-target="#panel-1">Toggle</button>
-```
+## Events
 
-By default, opening a panel will close any other open panels in the same accordion. Add `data-sp-multiple` to the `.accordion` container to allow multiple panels open at once.
-
-For programmatic control, use the global `sp.accordion` module:
+Each panel is a [Collapsible](/docs/components/collapsible), so the full lifecycle (`sp-beforeshow` through `sp-hidden`) fires on the panels and bubbles to the accordion container.
 
 ```js
-const panel = document.querySelector("#panel-1");
-
-sp.accordion.open(panel);
-sp.accordion.close(panel);
-sp.accordion.toggle(panel);
+accordion.addEventListener("sp-shown", (e) => {
+  console.log("opened:", e.target);
+});
 ```
 
-### Animation
+## Methods
 
-The accordion includes a smooth height animation using CSS keyframes. Icons inside the trigger also animate by default.
+Panels are Collapsible instances; control one with `sp.collapsible(panel)`:
 
-To disable all animations, add `no-animation` to the trigger:
+```js
+const panel = document.querySelector("#my-accordion .accordion-panel");
 
-```html
-<button class="accordion-trigger no-animation">
-  Section title
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="[[aria-expanded=true]>&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-</button>
-<div class="accordion-panel no-animation">...</div>
+sp.collapsible(panel).show();
 ```
 
-To animate icons, use `aria-expanded` selectors. Icons have a default transition that matches the height animation:
+## Accessibility
 
-```html
-<!-- Rotate icon -->
-<svg class="[[aria-expanded=true]>&]:rotate-180" ...></svg>
+The accordion adheres to the [Accordion WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) and sets the appropriate roles and properties automatically. Wrap each trigger in a heading matching your page's structure, as in the examples.
 
-<!-- Swap icons -->
-<svg class="[[aria-expanded=true]>&]:hidden" ...></svg>
-<svg class="hidden [[aria-expanded=true]>&]:block" ...></svg>
-```
-
-### Accessibility
-
-For proper accessibility, add `aria-expanded` and `aria-controls` to the trigger button:
-
-```html
-<button
-  data-sp-toggle="accordion"
-  data-sp-target="#panel-1"
-  aria-expanded="false"
-  aria-controls="panel-1"
->
-  Toggle
-</button>
-```
-
-The JavaScript will automatically update `aria-expanded` when the panel opens and closes.
-
-#### Keyboard navigation
-
-| Key               | Action                                         |
-| ----------------- | ---------------------------------------------- |
-| `Enter` / `Space` | Opens/closes the panel when trigger is focused |
-| `ArrowDown`       | Move focus to next trigger                     |
-| `ArrowUp`         | Move focus to previous trigger                 |
-| `Home`            | Move focus to first trigger                    |
-| `End`             | Move focus to last trigger                     |
-| `Tab`             | Move focus to next/previous focusable element  |
-
-### Class reference
-
-| Class               | Description                                                             |
-| ------------------- | ----------------------------------------------------------------------- |
-| `accordion`         | Container that groups accordion items                                   |
-| `accordion-item`    | Individual collapsible section                                          |
-| `accordion-trigger` | Button that toggles the section                                         |
-| `accordion-panel`   | Panel wrapper that controls visibility and animations                   |
-| `accordion-content` | Content container with padding and text styles                          |
-| `open`              | Add to `.accordion-panel` to show by default                            |
-| `no-animation`      | Add to `.accordion-trigger` or `.accordion-panel` to disable animations |
-
-### Data attributes
-
-| Attribute                    | Description                                                      |
-| ---------------------------- | ---------------------------------------------------------------- |
-| `data-sp-toggle="accordion"` | Add to trigger button to toggle the accordion panel              |
-| `data-sp-target="#id"`       | Add to trigger button to specify which panel to toggle           |
-| `data-sp-multiple`           | Add to `.accordion` to allow multiple panels open at once        |
-| `data-state`                 | Set on `.accordion-panel` to `open` or `closed` during animation |
+| Key                     | Action                                    |
+| ----------------------- | ----------------------------------------- |
+| `Enter` / `Space`       | Toggles the focused header's section      |
+| `ArrowDown` / `ArrowUp` | Move focus to the next or previous header |
+| `Home` / `End`          | Move focus to the first or last header    |
