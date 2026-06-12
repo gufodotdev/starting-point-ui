@@ -17,7 +17,6 @@ import { toast, ToastTrigger } from "./toast";
 import { Slider } from "./slider";
 
 import * as sidebar from "./sidebar";
-import "./checkbox";
 
 const components: ComponentFactory[] = [
   Dialog,

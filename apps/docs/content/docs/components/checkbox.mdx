@@ -280,71 +280,6 @@ Use checkboxes inside list items for a multi-select list with descriptions.
 
 ---
 
-## Toggle all
-
-Mark one checkbox with `data-sp-toggle-all` to make it a master that controls every other checkbox in the same form. Toggling the master flips all targets. Toggling individual targets updates the master to checked, unchecked, or a "some selected" mixed state automatically.
-
-Targets are grouped to the master by the standard HTML `form` attribute. If the master has `form="my-form"`, every checkbox with the same `form="my-form"` is a target. Otherwise, every checkbox sharing the same closest `<form>` ancestor is a target. Disabled targets are skipped.
-
-```html preview
-<form id="toggle-all-form">
-  <div class="field-group">
-    <div class="field field-horizontal">
-      <input type="checkbox" class="checkbox" id="toggle-all-master" data-sp-toggle-all />
-      <label class="label" for="toggle-all-master">Select all</label>
-    </div>
-    <div class="field-group gap-3 pl-6">
-      <div class="field field-horizontal">
-        <input type="checkbox" class="checkbox" id="toggle-all-1" name="ids[]" value="1" />
-        <label class="label" for="toggle-all-1">One</label>
-      </div>
-      <div class="field field-horizontal">
-        <input type="checkbox" class="checkbox" id="toggle-all-2" name="ids[]" value="2" />
-        <label class="label" for="toggle-all-2">Two</label>
-      </div>
-      <div class="field field-horizontal">
-        <input type="checkbox" class="checkbox" id="toggle-all-3" name="ids[]" value="3" />
-        <label class="label" for="toggle-all-3">Three</label>
-      </div>
-    </div>
-  </div>
-</form>
-```
-
-The master and its targets do not need to be inside the same DOM container. Use the `form="X"` attribute on both so they can live anywhere.
-
-```html
-<input type="checkbox" form="my-form" data-sp-toggle-all />
-...
-<input type="checkbox" form="my-form" name="ids[]" value="1" />
-```
-
-Don't give the master a `name` attribute. Inputs without a `name` are excluded from form submission, which is what you want here — the master is a UI controller, not a value to submit.
-
-### Pre-checked state
-
-If targets are pre-checked on render (for example, from server-rendered state), set the master's `data-sp-toggle-all` value to match. This lets the CSS show the right icon at first paint without waiting for JS.
-
-| Value                       | Meaning                          |
-| --------------------------- | -------------------------------- |
-| `data-sp-toggle-all="none"` | No targets checked (default)     |
-| `data-sp-toggle-all="some"` | Some targets checked (dash icon) |
-| `data-sp-toggle-all="all"`  | All targets checked (checkmark)  |
-
-```html
-<!-- Some targets pre-checked: dash paints immediately -->
-<input type="checkbox" class="checkbox" data-sp-toggle-all="some" />
-
-<!-- All targets pre-checked: checkmark paints immediately, master is also `checked` -->
-<input type="checkbox" class="checkbox" data-sp-toggle-all="all" checked />
-```
-
-For the default `"none"` state you can omit the value entirely — bare `data-sp-toggle-all` and `data-sp-toggle-all=""` render the same as `data-sp-toggle-all="none"`. The JavaScript normalizes to `"none"` after the first sync.
-
-The JavaScript keeps the attribute in sync after every change, so the value is only set explicitly on the server side; later toggles in the browser are handled automatically.
-
----
-
 ## How it works
 
 The checkbox component is a CSS-only utility class applied to a native `<input type="checkbox">` element.
@@ -380,9 +315,3 @@ Add `aria-invalid="true"` to show the checkbox in an error state:
 | Class      | Description          |
 | ---------- | -------------------- |
 | `checkbox` | Base checkbox styles |
-
-### Data attributes
-
-| Attribute             | Element           | Description                                                                                   |
-| --------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
-| `data-sp-toggle-all` | Master checkbox | Identifies a checkbox as a master controlling other checkboxes in the same form. The value mirrors the current group state: `none` / `some` / `all`. Servers can pre-render `some` or `all` to avoid a JS-driven flicker on first paint. |
