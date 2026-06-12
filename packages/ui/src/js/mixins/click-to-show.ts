@@ -17,11 +17,13 @@ export const ClickToShow: Mixin = {
     trigger.setAttribute("aria-controls", ensureId(this.el));
 
     this.on(trigger, "click", (e) => {
+      // The browser default is never wanted on a toggle trigger: an untyped
+      // <button> in a form would submit it, a link would navigate.
+      e.preventDefault();
       // On touch, HoverToShow arms _preventClick so the tap that opened us isn't
       // toggled shut by the synthesized click.
       if (this._preventClick) {
         this._preventClick = null;
-        e.preventDefault();
         return;
       }
       this.toggle({ trigger });
