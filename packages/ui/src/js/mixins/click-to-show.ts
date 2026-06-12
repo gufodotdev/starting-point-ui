@@ -2,7 +2,7 @@
 // aria-expanded / aria-controls. Needs Togglable.
 
 import type { Mixin, SpInstance } from "../define";
-import { resolveTrigger } from "../utils";
+import { ensureId, resolveTrigger } from "../utils";
 
 export const ClickToShow: Mixin = {
   props: { toggle: String },
@@ -14,7 +14,7 @@ export const ClickToShow: Mixin = {
     if (!trigger.hasAttribute("aria-expanded")) {
       trigger.setAttribute("aria-expanded", "false");
     }
-    if (this.el.id) trigger.setAttribute("aria-controls", this.el.id);
+    trigger.setAttribute("aria-controls", ensureId(this.el));
 
     this.on(trigger, "click", (e) => {
       // On touch, HoverToShow arms _preventClick so the tap that opened us isn't
