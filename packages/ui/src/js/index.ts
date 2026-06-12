@@ -16,7 +16,6 @@ import { Accordion } from "./accordion";
 import { toast, ToastTrigger } from "./toast";
 import { Slider } from "./slider";
 
-import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import "./checkbox";
 
@@ -68,7 +67,6 @@ export {
   slider,
   toast,
   start,
-  resizable,
   sidebar,
 };
 export type { SpInstance };
@@ -88,7 +86,6 @@ declare global {
       slider: typeof slider;
       toast: typeof toast;
       // Legacy namespaces, dropped as each component is ported.
-      resizable: typeof resizable;
       sidebar: typeof sidebar;
     };
   }
@@ -107,7 +104,6 @@ if (typeof document !== "undefined") {
     accordion,
     slider,
     toast,
-    resizable,
     sidebar,
   };
 

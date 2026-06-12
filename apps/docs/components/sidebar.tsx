@@ -34,7 +34,6 @@ const navigation = [
       { title: "Pagination", href: "/docs/components/pagination" },
       { title: "Popover", href: "/docs/components/popover" },
       { title: "Radio Group", href: "/docs/components/radio-group" },
-      { title: "Resizable", href: "/docs/components/resizable" },
       { title: "Select", href: "/docs/components/select" },
       { title: "Separator", href: "/docs/components/separator" },
       { title: "Sheet", href: "/docs/components/sheet" },
