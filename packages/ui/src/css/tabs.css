@@ -1,5 +1,3 @@
-/* Starting Point UI Tabs Styles */
-
 @utility tab-list {
   @layer l1.l2 {
     @apply bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px];
