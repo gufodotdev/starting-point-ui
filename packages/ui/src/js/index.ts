@@ -14,11 +14,11 @@ import { Collapsible } from "./collapsible";
 import { Accordion } from "./accordion";
 
 import { toast, ToastTrigger } from "./toast";
+import { Slider } from "./slider";
 
 import * as resizable from "./resizable";
 import * as sidebar from "./sidebar";
 import "./checkbox";
-import "./slider";
 
 const components: ComponentFactory[] = [
   Dialog,
@@ -31,6 +31,7 @@ const components: ComponentFactory[] = [
   Collapsible,
   Accordion,
   ToastTrigger,
+  Slider,
 ];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
@@ -42,6 +43,7 @@ const combobox = (el: HTMLElement): SpInstance | null => getInstance(el, Combobo
 const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
 const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
 const accordion = (el: HTMLElement): SpInstance | null => getInstance(el, Accordion);
+const slider = (el: HTMLElement): SpInstance | null => getInstance(el, Slider);
 
 export {
   Dialog,
@@ -53,6 +55,7 @@ export {
   Tabs,
   Collapsible,
   Accordion,
+  Slider,
   dialog,
   sheet,
   popover,
@@ -62,6 +65,7 @@ export {
   tabs,
   collapsible,
   accordion,
+  slider,
   toast,
   start,
   resizable,
@@ -81,6 +85,7 @@ declare global {
       tabs: typeof tabs;
       collapsible: typeof collapsible;
       accordion: typeof accordion;
+      slider: typeof slider;
       toast: typeof toast;
       // Legacy namespaces, dropped as each component is ported.
       resizable: typeof resizable;
@@ -100,6 +105,7 @@ if (typeof document !== "undefined") {
     tabs,
     collapsible,
     accordion,
+    slider,
     toast,
     resizable,
     sidebar,

@@ -1,40 +1,33 @@
-// Starting Point UI Slider Module
+// Paints the filled track of a range input and mirrors its value.
 
-export {};
+import { define } from "./define";
+import type { SpInstance } from "./define";
 
-function updateSlider(el: HTMLInputElement) {
-  const min = Number(el.min);
-  const max = Number(el.max);
-  const value = Number(el.value);
-  const pct = ((value - min) / (max - min)) * 100;
-  el.style.setProperty("--val", `${pct}%`);
+export const Slider = define({
+  name: "slider",
+  selector: 'input[type="range"].slider',
 
-  if (el.id) {
-    const targets = document.querySelectorAll<HTMLElement>(
-      `[data-sp-slider-value="${el.id}"]`,
-    );
-    targets.forEach((target) => {
-      target.textContent = el.value;
-    });
-  }
-}
+  init(this: SpInstance) {
+    this.update();
+    this.on(this.el, "input", () => this.update());
+  },
 
-function handleInput(e: Event) {
-  const target = e.target as HTMLElement;
-  if (
-    target instanceof HTMLInputElement &&
-    target.type === "range" &&
-    target.classList.contains("slider")
-  ) {
-    updateSlider(target);
-  }
-}
+  methods: {
+    // Also the public refresh for programmatic value/min/max changes.
+    update(this: SpInstance): void {
+      const el = this.el as HTMLInputElement;
+      // Unset min/max read as ""; the native range defaults are 0 and 100.
+      const min = el.min === "" ? 0 : Number(el.min);
+      const max = el.max === "" ? 100 : Number(el.max);
+      const pct = ((Number(el.value) - min) / (max - min)) * 100;
+      el.style.setProperty("--val", `${pct}%`);
 
-let initialized = false;
-
-(function init() {
-  if (typeof document === "undefined" || initialized) return;
-  initialized = true;
-
-  document.addEventListener("input", handleInput);
-})();
+      if (!el.id) return;
+      document
+        .querySelectorAll<HTMLElement>(`[data-sp-slider-value="${CSS.escape(el.id)}"]`)
+        .forEach((target) => {
+          target.textContent = el.value;
+        });
+    },
+  },
+});
