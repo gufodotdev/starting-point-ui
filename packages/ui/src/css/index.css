@@ -76,6 +76,8 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --sidebar-width: 16rem;
+  --sidebar-width-mobile: 18rem;
+  --sidebar-width-icon: 3rem;
   --btn: oklch(1 0 0);
   --btn-foreground: oklch(0.145 0 0);
   --btn-border: oklch(0.922 0 0);
@@ -199,6 +201,13 @@
   html:has(dialog.dialog[open]),
   html:has(dialog.sheet[open]) {
     @apply overflow-hidden;
+  }
+
+  /* The mobile sidebar drawer is modal; lock scroll while it's open. */
+  @media (width < theme(--breakpoint-sidebar)) {
+    html:has(.sidebar-panel[data-open]) {
+      @apply overflow-hidden;
+    }
   }
 
   body {

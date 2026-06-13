@@ -1,343 +1,182 @@
 ---
 title: Sidebar
-description: A Tailwind CSS sidebar component for building application layouts with collapsible navigation.
+description: An accessible sidebar for Tailwind CSS application layouts, a collapsible column on desktop and a drawer on mobile.
 ---
 
-A Tailwind CSS sidebar component for building dashboards, admin panels, and application layouts. See more [sidebar examples](/examples/components/sidebar).
+A layout for dashboards and admin panels: an in-flow collapsible column on desktop, an off-canvas drawer with a backdrop on mobile.
 
-![Sidebar component](https://cdn.gufo.dev/screenshots/components-sidebar-1-light-518ced23.webp)
+## Basic Usage
+
+A sidebar layout pairs a `sidebar` root with a `sidebar-backdrop`, a `sidebar-panel`, and the `sidebar-page` content area. Add `data-sp-sidebar` to the panel with a `toggle` option pointing at the trigger's `id`.
+
+The panel is a flex column of three pieces: a `sidebar-header` and `sidebar-footer` that stay pinned, and a scrollable `sidebar-content` between them holding the menu. Below the sidebar breakpoint (1024px by default) the trigger opens the panel as a modal drawer; above it, the trigger collapses and expands the column in place.
 
 ```html
 <div class="sidebar">
   <div class="sidebar-backdrop"></div>
-  <aside class="sidebar-panel">
+  <aside class="sidebar-panel" data-sp-sidebar="toggle: #sidebar-trigger">
+    <header class="sidebar-header">
+      <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
+        <svg><!-- logo --></svg>
+        <span>Acme Inc</span>
+      </a>
+    </header>
     <div class="sidebar-content">
-      <header class="sidebar-header">...</header>
-      <nav class="sidebar-menu">...</nav>
-      <footer class="sidebar-footer">...</footer>
+      <div class="sidebar-group">
+        <span class="sidebar-group-label">Platform</span>
+        <nav class="sidebar-menu">
+          <div class="sidebar-menu-item">
+            <a href="#" class="sidebar-menu-button active">
+              <svg><!-- icon --></svg>
+              <span>Dashboard</span>
+            </a>
+          </div>
+          <div class="sidebar-menu-item">
+            <a href="#" class="sidebar-menu-button">
+              <svg><!-- icon --></svg>
+              <span>Projects</span>
+            </a>
+          </div>
+        </nav>
+      </div>
     </div>
-  </aside>
-  <main class="sidebar-page">
-    <p>Your content here</p>
-  </main>
-</div>
-```
-
----
-
-## Left sidebar
-
-By default, sidebars are positioned on the left side.
-
-```html
-<div class="sidebar">
-  <div class="sidebar-backdrop"></div>
-  <aside class="sidebar-panel" id="my-sidebar">
-    <div class="sidebar-content">
-      <header class="sidebar-header">
-        <div class="menu-btn menu-btn-lg">Acme Inc</div>
-      </header>
-      <nav class="sidebar-menu">
-        <div class="menu-group">
-          <a href="#" class="menu-btn">Dashboard</a>
-          <a href="#" class="menu-btn">Projects</a>
-          <a href="#" class="menu-btn">Settings</a>
-        </div>
-      </nav>
-    </div>
+    <footer class="sidebar-footer">
+      <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
+        <svg><!-- avatar --></svg>
+        <span>gufo.dev</span>
+      </a>
+    </footer>
   </aside>
   <main class="sidebar-page">
     <header class="flex items-center gap-4 border-b p-4">
-      <button
-        class="btn btn-icon"
-        data-sp-toggle="sidebar"
-        data-sp-target="#my-sidebar"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      <button id="sidebar-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+        <svg><!-- menu icon --></svg>
       </button>
       <h1>Dashboard</h1>
     </header>
-    <div class="p-6">
-      <p>Main content goes here.</p>
-    </div>
+    <div class="p-6">Your content here</div>
   </main>
 </div>
 ```
 
----
+See it running in the [sidebar examples](/examples/components/sidebar).
 
-## Inset sidebar
+## Collapse mode
 
-Use `sidebar-inset` for a sidebar with an inset main content area.
+Set `data-collapse` on the panel to choose how it collapses on desktop:
+
+- `offcanvas` (default) slides the whole panel away and the page reclaims the space.
+- `icon` shrinks the panel to a rail showing each menu button's leading icon.
+
+```html
+<aside class="sidebar-panel" data-collapse="icon" data-sp-sidebar="toggle: #sidebar-trigger">
+  ...
+</aside>
+```
+
+In `icon` mode each menu button needs a leading icon and a `<span>` label: the rail keeps the icon and hides the label, and a tooltip with the label appears on hover. Buttons without a leading icon, group labels, submenus, and badges are hidden in the rail. For brand rows in the header and footer, use a `sidebar-menu-button-lg` with a `size-8` logo or [avatar](/docs/components/avatar) so it fills the rail.
+
+## Initially collapsed
+
+Add the `collapsed` class to the panel to render it collapsed on first paint, before JavaScript loads, and set `aria-expanded="false"` on the trigger so its state matches.
+
+```html
+<aside class="sidebar-panel collapsed" data-collapse="icon" data-sp-sidebar="toggle: #sidebar-trigger">
+  ...
+</aside>
+```
+
+## Right side
+
+Add `sidebar-right` to position the panel on the right. Without it, the panel defaults to the left.
+
+```html
+<aside class="sidebar-panel sidebar-right" data-sp-sidebar="toggle: #sidebar-trigger">
+  ...
+</aside>
+```
+
+## Inset
+
+Add `sidebar-inset` to the root for an inset main content area with rounded corners and a shadow.
 
 ```html
 <div class="sidebar sidebar-inset">
   <div class="sidebar-backdrop"></div>
-  <aside class="sidebar-panel" id="my-sidebar">
-    <div class="sidebar-content">...</div>
-  </aside>
-  <main class="sidebar-page">
-    <p>Main content with rounded corners and shadow</p>
-  </main>
+  <aside class="sidebar-panel" data-sp-sidebar="toggle: #sidebar-trigger">...</aside>
+  <main class="sidebar-page">...</main>
 </div>
 ```
 
----
+## Submenus
 
-## Right sidebar
-
-Use `sidebar-right` for a sidebar on the right side.
+Use a [collapsible](/docs/components/collapsible) with a `sidebar-menu-sub` for nested navigation. Author `aria-expanded="true"` on the trigger and `shown` on the panel to start expanded.
 
 ```html
-<div class="sidebar">
-  <div class="sidebar-backdrop"></div>
-  <main class="sidebar-page">
-    <p>Main content</p>
-  </main>
-  <aside class="sidebar-panel sidebar-right" id="right-sidebar">
-    <div class="sidebar-content">
-      <header class="sidebar-header">
-        <div class="menu-btn menu-btn-lg">Inspector</div>
-      </header>
-      <nav class="sidebar-menu">
-        <div class="menu-group">
-          <a href="#" class="menu-btn">Properties</a>
-          <a href="#" class="menu-btn">Styles</a>
-          <a href="#" class="menu-btn">Layers</a>
-        </div>
-      </nav>
-    </div>
-  </aside>
-</div>
-```
-
----
-
-## Both sidebars
-
-You can use both left and right sidebars together.
-
-```html
-<div class="sidebar">
-  <div class="sidebar-backdrop"></div>
-  <aside class="sidebar-panel" id="left-sidebar">
-    <div class="sidebar-content">
-      <header class="sidebar-header">
-        <div class="menu-btn menu-btn-lg">Navigation</div>
-      </header>
-      <nav class="sidebar-menu">...</nav>
-    </div>
-  </aside>
-  <main class="sidebar-page">
-    <p>Main content</p>
-  </main>
-  <aside class="sidebar-panel sidebar-right" id="right-sidebar">
-    <div class="sidebar-content">
-      <header class="sidebar-header">
-        <div class="menu-btn menu-btn-lg">Inspector</div>
-      </header>
-      <nav class="sidebar-menu">...</nav>
-    </div>
-  </aside>
-</div>
-```
-
----
-
-## Menu structure
-
-The sidebar menu uses a structured hierarchy of groups, labels, and buttons.
-
-```html
-<nav class="sidebar-menu">
-  <div class="menu-group">
-    <span class="menu-label">Platform</span>
-    <a href="#" class="menu-btn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-      Dashboard
-    </a>
-    <a href="#" class="menu-btn active">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
-      Settings
-    </a>
+<div class="sidebar-menu-item">
+  <button id="submenu-trigger" class="sidebar-menu-button" aria-expanded="true">
+    <svg><!-- icon --></svg>
+    <span>Playground</span>
+    <svg class="ml-auto in-aria-expanded:rotate-90"><!-- chevron --></svg>
+  </button>
+  <div class="collapsible-panel shown" data-sp-collapsible="toggle: #submenu-trigger">
+    <ul class="sidebar-menu-sub">
+      <li class="sidebar-menu-sub-item"><a href="#" class="sidebar-menu-sub-button"><span>History</span></a></li>
+      <li class="sidebar-menu-sub-item"><a href="#" class="sidebar-menu-sub-button"><span>Starred</span></a></li>
+    </ul>
   </div>
-  <div class="menu-group">
-    <span class="menu-label">Projects</span>
-    <a href="#" class="menu-btn">Design Engineering</a>
-    <a href="#" class="menu-btn">Sales &amp; Marketing</a>
-  </div>
-</nav>
-```
-
-### Nested menus
-
-Use `menu-subgroup` for nested navigation items. This works with the [collapsible](/docs/components/collapsible) component to show/hide submenus. See it in action in the [first sidebar example](/examples/components/sidebar/1).
-
-```html
-<nav class="sidebar-menu">
-  <div class="menu-group">
-    <button
-      class="menu-btn"
-      data-sp-toggle="collapsible"
-      data-sp-target="#submenu"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
-      Playground
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto transition-transform in-aria-expanded:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
-    <div id="submenu" class="collapsible-panel open">
-      <div class="menu-subgroup">
-        <a href="#" class="menu-btn menu-btn-sm">History</a>
-        <a href="#" class="menu-btn menu-btn-sm">Starred</a>
-        <a href="#" class="menu-btn menu-btn-sm">Settings</a>
-      </div>
-    </div>
-  </div>
-</nav>
-```
-
-### Button sizes
-
-Menu buttons come in three sizes.
-
-```html
-<a href="#" class="menu-btn menu-btn-sm">Small</a>
-<a href="#" class="menu-btn">Base (default)</a>
-<a href="#" class="menu-btn menu-btn-lg">Large</a>
-```
-
----
-
-## Disabling animations
-
-Add the `no-animation` class to disable animations.
-
-```html
-<aside class="sidebar-panel no-animation">
-  <div class="sidebar-content">...</div>
-</aside>
-```
-
----
-
-## How it works
-
-The sidebar component provides a layout system with collapsible sidebars that work differently on mobile and desktop.
-
-### Structure
-
-A sidebar layout consists of these parts:
-
-1. **`.sidebar`** - Root container with flex layout and min-height
-2. **`.sidebar-backdrop`** - Overlay shown on mobile when sidebar is open
-3. **`.sidebar-panel`** - The sidebar panel element (defaults to left positioning)
-4. **`.sidebar-content`** - Sticky inner wrapper for sidebar content
-5. **`.sidebar-page`** - Main content area
-
-```html
-<div class="sidebar">
-  <div class="sidebar-backdrop"></div>
-  <aside class="sidebar-panel">
-    <div class="sidebar-content">
-      <!-- Sidebar content -->
-    </div>
-  </aside>
-  <main class="sidebar-page">
-    <!-- Page content -->
-  </main>
 </div>
 ```
 
-### Responsive behavior
+## Options
 
-The sidebar behaves differently based on screen size:
+Set options in the `data-sp-sidebar` value, separated by semicolons.
 
-- **Desktop (1024px and up)**: Sidebars are in-flow elements that push the main content. Toggling collapses/expands the sidebar using negative margins.
-- **Mobile (below 1024px)**: Sidebars are fixed overlays that slide in from the edge with a backdrop.
+| Option   | Type   | Default | Description                                     |
+| -------- | ------ | ------- | ----------------------------------------------- |
+| `toggle` | String | —       | Selector for the element that toggles the panel |
 
-The breakpoint can be customized via the `--breakpoint-sidebar` CSS variable:
+The collapse mode is set with the `data-collapse` attribute on the panel (`offcanvas` or `icon`) so the correct first paint happens before JavaScript loads.
 
-```css
-@theme inline {
-  --breakpoint-sidebar: 1024px;
-}
-```
+## Events
 
-### Opening and closing
+The mobile drawer fires the lifecycle events on the panel; `before*` events are cancelable. The desktop column fires `sp-collapse` and `sp-expand`, also cancelable.
 
-Use data attributes to control the sidebar without writing JavaScript.
-
-To toggle a sidebar, add `data-sp-toggle="sidebar"` and `data-sp-target` to a button:
-
-```html
-<button data-sp-toggle="sidebar" data-sp-target="#my-sidebar">
-  Toggle Sidebar
-</button>
-```
-
-Clicking the backdrop or pressing Escape closes the mobile sidebar.
-
-For programmatic control, import the sidebar module:
+| Event           | When                                      |
+| --------------- | ----------------------------------------- |
+| `sp-beforeshow` | Before the drawer opens (cancelable)      |
+| `sp-show`       | Drawer opening                            |
+| `sp-shown`      | Drawer open and settled                   |
+| `sp-beforehide` | Before the drawer closes (cancelable)     |
+| `sp-hide`       | Drawer closing                            |
+| `sp-hidden`     | Drawer closed                             |
+| `sp-collapse`   | The desktop column collapses (cancelable) |
+| `sp-expand`     | The desktop column expands (cancelable)   |
 
 ```js
-import { open, close, toggle } from "starting-point-ui/sidebar";
-
-const sidebarPanel = document.querySelector("#my-sidebar");
-
-toggle(sidebarPanel);
-open(sidebarPanel);
-close(sidebarPanel);
+// Persist the desktop state, e.g. into a cookie the server can render from.
+panel.addEventListener("sp-collapse", () => saveState("collapsed"));
+panel.addEventListener("sp-expand", () => saveState("expanded"));
 ```
 
-### Animation
+## Methods
 
-The sidebar includes default animations. When opened on mobile, the JavaScript sets `data-state="open"` on the panel and backdrop. When closing, it sets `data-state="closed"` and waits for animations to complete before hiding the elements.
+Get the instance with `sp.sidebar(el)`, then call its methods:
 
-To disable animations, add `no-animation` to the sidebar panel:
+| Method     | Description                                                       |
+| ---------- | ---------------------------------------------------------------- |
+| `toggle()` | Open or close the drawer on mobile, collapse or expand on desktop |
+| `show()`   | Open the mobile drawer                                            |
+| `hide()`   | Close the mobile drawer                                           |
 
-```html
-<aside class="sidebar-panel no-animation">
-  <div class="sidebar-content">
-    <!-- Content -->
-  </div>
-</aside>
+```js
+const sidebar = sp.sidebar(document.querySelector(".sidebar-panel"));
+
+sidebar.toggle();
 ```
 
-### Class reference
+## Accessibility
 
-All available classes for the sidebar component.
+The trigger's `aria-expanded` and `aria-controls` are wired automatically and reflect the current viewport: the drawer on mobile, the collapsed column on desktop. On mobile the open drawer adheres to the [Dialog (Modal) WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/): it sets `role="dialog"` and `aria-modal`, moves focus into the panel on open, returns focus to the trigger on close, and closes on Escape.
 
-| Class              | Description                                            |
-| ------------------ | ------------------------------------------------------ |
-| `sidebar`          | Root container with flex layout and min-height         |
-| `sidebar-inset`    | Modifier for inset layout with rounded main content    |
-| `sidebar-panel`    | Main sidebar panel element, left-positioned by default |
-| `sidebar-left`     | Explicit left positioning (applied by default)         |
-| `sidebar-right`    | Right positioning with right border                    |
-| `sidebar-content`  | Sticky inner wrapper for sidebar content               |
-| `sidebar-header`   | Header section with padding                            |
-| `sidebar-menu`     | Scrollable menu container                              |
-| `sidebar-footer`   | Footer section with padding, pushed to bottom          |
-| `sidebar-page`     | Main content area                                      |
-| `sidebar-backdrop` | Mobile overlay backdrop                                |
-| `menu-group`       | Group container for menu items                         |
-| `menu-subgroup`    | Nested group with left border                          |
-| `menu-label`       | Section label text                                     |
-| `menu-btn`         | Menu button/link with hover states                     |
-| `menu-btn-sm`      | Small menu button                                      |
-| `menu-btn-base`    | Base menu button size (default)                        |
-| `menu-btn-lg`      | Large menu button                                      |
-| `menu-item`        | Non-interactive menu item without hover/active states  |
-| `menu-item-sm`     | Small menu item                                        |
-| `menu-item-lg`     | Large menu item                                        |
-| `no-animation`     | Disables default animations                            |
-
-### Data attributes
-
-All data attributes for the sidebar component.
-
-| Attribute                  | Description                                     |
-| -------------------------- | ----------------------------------------------- |
-| `data-sp-toggle="sidebar"` | Add to a button to toggle the sidebar panel     |
-| `data-sp-target="#id"`     | Specifies which sidebar panel to toggle         |
-| `data-state`               | Set to `open` or `closed` on panel and backdrop |
+Use landmark elements as in the examples, an `<aside>` for the panel and `<nav>` for the menu, so screen reader users can jump between regions.

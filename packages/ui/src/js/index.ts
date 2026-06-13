@@ -1,5 +1,4 @@
-// Starting Point UI — JavaScript entry. Mid-migration: ported components run on
-// the define/observer model; the rest keep their old modules until ported.
+// Starting Point UI — JavaScript entry.
 
 import { getInstance, start } from "./observer";
 import type { ComponentFactory, SpInstance } from "./define";
@@ -15,8 +14,7 @@ import { Accordion } from "./accordion";
 
 import { toast, ToastTrigger } from "./toast";
 import { Slider } from "./slider";
-
-import * as sidebar from "./sidebar";
+import { Sidebar } from "./sidebar";
 
 const components: ComponentFactory[] = [
   Dialog,
@@ -30,6 +28,7 @@ const components: ComponentFactory[] = [
   Accordion,
   ToastTrigger,
   Slider,
+  Sidebar,
 ];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
@@ -42,6 +41,7 @@ const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
 const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
 const accordion = (el: HTMLElement): SpInstance | null => getInstance(el, Accordion);
 const slider = (el: HTMLElement): SpInstance | null => getInstance(el, Slider);
+const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar);
 
 export {
   Dialog,
@@ -54,6 +54,7 @@ export {
   Collapsible,
   Accordion,
   Slider,
+  Sidebar,
   dialog,
   sheet,
   popover,
@@ -64,9 +65,9 @@ export {
   collapsible,
   accordion,
   slider,
+  sidebar,
   toast,
   start,
-  sidebar,
 };
 export type { SpInstance };
 
@@ -83,9 +84,8 @@ declare global {
       collapsible: typeof collapsible;
       accordion: typeof accordion;
       slider: typeof slider;
-      toast: typeof toast;
-      // Legacy namespaces, dropped as each component is ported.
       sidebar: typeof sidebar;
+      toast: typeof toast;
     };
   }
 }
@@ -102,8 +102,8 @@ if (typeof document !== "undefined") {
     collapsible,
     accordion,
     slider,
-    toast,
     sidebar,
+    toast,
   };
 
   const run = () => start(components);

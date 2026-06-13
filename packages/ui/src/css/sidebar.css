@@ -1,5 +1,3 @@
-/* Starting Point UI Sidebar Styles */
-
 @utility sidebar {
   @layer l1.l2 {
     @apply flex min-h-dvh w-full overflow-x-clip bg-sidebar;
@@ -8,18 +6,24 @@
 
 @utility sidebar-panel {
   @layer l1.l2 {
-    @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 w-(--sidebar-width) hidden;
-    @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0;
-    @apply [&:not(.no-animation)]:sidebar:transition-[margin] [&:not(.no-animation)]:sidebar:duration-200 [&:not(.no-animation)]:sidebar:ease-linear;
-    /* Mobile animations */
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:max-sidebar:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
-    /* Desktop: no animations */
+    @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 hidden;
+    /* Cap the drawer at its token but shrink on narrow screens, leaving a gutter. */
+    @apply max-sidebar:w-[min(var(--sidebar-width-mobile),100%-1.5rem)];
+    @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0 sidebar:flex sidebar:w-(--sidebar-width) flex-col h-dvh;
+    /* Transition only on the transient classes, so an authored .collapsed
+       settles instantly with no animation (mirrors the dialog .show model). */
+    @apply [&:is(.collapsing,.expanding)]:sidebar:transition-[margin,width] sidebar:duration-200 sidebar:ease-linear;
+    @apply [&.show]:animate-in [&.hide]:animate-out max-sidebar:duration-300 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
     @apply sidebar:translate-x-0 sidebar:animate-none!;
-    /* Default to left */
     @apply [&:where(&:not(.sidebar-left,.sidebar-right))]:sidebar-left;
 
-    &.open {
-      @apply block;
+    /* The open mobile drawer is a flex column too, so header/footer pin. */
+    &:is(.show, .shown, .hide) {
+      @apply flex;
+    }
+
+    &.collapsed[data-collapse="icon"] {
+      @apply sidebar:w-(--sidebar-width-icon) sidebar:overflow-hidden;
     }
   }
 }
@@ -27,9 +31,9 @@
 @utility sidebar-left {
   @layer l1 {
     @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
-    @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left;
+    @apply [&.show]:slide-in-from-left [&.hide]:slide-out-to-left;
 
-    &.collapsed {
+    &.collapsed[data-collapse="offcanvas"] {
       @apply sidebar:-ml-(--sidebar-width);
     }
   }
@@ -38,9 +42,9 @@
 @utility sidebar-right {
   @layer l1 {
     @apply right-0 border-l in-[.sidebar-inset]:border-l-0;
-    @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right;
+    @apply [&.show]:slide-in-from-right [&.hide]:slide-out-to-right;
 
-    &.collapsed {
+    &.collapsed[data-collapse="offcanvas"] {
       @apply sidebar:-mr-(--sidebar-width);
     }
   }
@@ -55,25 +59,8 @@
 
 @utility sidebar-content {
   @layer l1.l2 {
-    @apply flex flex-col h-dvh sticky top-0;
-  }
-}
-
-@utility sidebar-header {
-  @layer l1.l2 {
-    @apply flex flex-col gap-2 px-3 py-2;
-  }
-}
-
-@utility sidebar-footer {
-  @layer l1.l2 {
-    @apply flex flex-col gap-2 px-3 py-2 mt-auto;
-  }
-}
-
-@utility sidebar-menu {
-  @layer l1.l2 {
-    @apply flex-1 flex flex-col overflow-y-auto;
+    /* min-h-0 lets the scroller shrink so it scrolls and header/footer pin. */
+    @apply flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto;
     scrollbar-width: thin;
     scrollbar-color: color-mix(in oklab, currentColor 20%, transparent) transparent;
 
@@ -90,81 +77,173 @@
   }
 }
 
-@utility menu-group {
+@utility sidebar-header {
   @layer l1.l2 {
-    @apply relative flex w-full min-w-0 flex-col gap-1;
-    @apply [.sidebar-menu_&]:px-3 [.sidebar-menu_&]:py-2;
+    @apply flex flex-col gap-2 p-2 shrink-0;
   }
 }
 
-@utility menu-subgroup {
+@utility sidebar-footer {
   @layer l1.l2 {
-    @apply border-l border-sidebar-border mx-3.5 translate-x-px px-2.5 flex flex-col gap-1 py-0.5;
-    @apply [&>.menu-btn]:-translate-x-px;
+    @apply flex flex-col gap-2 p-2 shrink-0;
   }
 }
 
-@utility menu-btn {
+@utility sidebar-menu {
   @layer l1.l2 {
-    @apply flex items-center gap-2 overflow-hidden rounded-md p-2 text-sm w-full;
+    @apply flex w-full min-w-0 flex-col gap-1;
+  }
+}
+
+@utility sidebar-group {
+  @layer l1.l2 {
+    @apply relative flex w-full min-w-0 flex-col gap-1 p-2;
+  }
+}
+
+@utility sidebar-group-label {
+  @layer l1.l2 {
+    @apply text-sidebar-foreground/70 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium;
+    @apply transition-[margin,opacity] duration-200 ease-linear;
+    @apply [&>svg]:size-4 [&>svg]:shrink-0;
+  }
+}
+
+@utility sidebar-group-content {
+  @layer l1.l2 {
+    @apply w-full text-sm flex flex-col gap-1;
+  }
+}
+
+@utility sidebar-group-action {
+  @layer l1.l2 {
+    @apply text-sidebar-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0;
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply [&>svg]:size-4 [&>svg]:shrink-0;
+  }
+}
+
+@utility sidebar-menu-item {
+  @layer l1.l2 {
+    @apply relative;
+  }
+}
+
+@utility sidebar-menu-button {
+  @layer l1.l2 {
+    @apply flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none;
+    @apply in-[.sidebar-panel:is(.collapsing,.expanding)]:transition-[width,height,padding];
+    @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply active:bg-sidebar-accent active:text-sidebar-accent-foreground;
+    @apply disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
     @apply [&.active]:bg-sidebar-accent [&.active]:font-medium [&.active]:text-sidebar-accent-foreground;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&:where(&:not(.menu-btn-sm,.menu-btn-lg))]:menu-btn-base;
+    @apply [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0;
+    @apply [&:where(&:not(.sidebar-menu-button-sm,.sidebar-menu-button-lg))]:h-8;
   }
 }
 
-@utility menu-item {
-  @layer l1.l2 {
-    @apply flex items-center gap-2 overflow-hidden rounded-md px-2 text-sm w-full h-8;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-  }
-}
-
-@utility menu-item-sm {
+@utility sidebar-menu-button-sm {
   @layer l1 {
-    @apply h-7;
+    @apply h-7 text-xs;
   }
 }
 
-@utility menu-item-lg {
+@utility sidebar-menu-button-lg {
   @layer l1 {
     @apply h-12;
   }
 }
 
-@utility menu-btn-sm {
-  @layer l1 {
-    @apply h-7 -translate-x-px;
-  }
-}
-
-@utility menu-btn-base {
-  @layer l1 {
-    @apply h-8;
-  }
-}
-
-@utility menu-btn-lg {
-  @layer l1 {
-    @apply h-12;
-  }
-}
-
-@utility menu-label {
+@utility sidebar-menu-action {
   @layer l1.l2 {
-    @apply text-sidebar-foreground/70 h-8 shrink-0 rounded-md px-2 text-xs font-medium flex items-center;
+    @apply text-sidebar-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0;
+    @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply [&>svg]:size-4 [&>svg]:shrink-0;
+  }
+}
+
+@utility sidebar-menu-badge {
+  @layer l1.l2 {
+    @apply text-sidebar-foreground pointer-events-none absolute right-1 top-1.5 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none;
+  }
+}
+
+@utility sidebar-menu-sub {
+  @layer l1.l2 {
+    @apply border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5;
+  }
+}
+
+@utility sidebar-menu-sub-item {
+  @layer l1.l2 {
+    @apply relative;
+  }
+}
+
+@utility sidebar-menu-sub-button {
+  @layer l1.l2 {
+    @apply text-sidebar-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sm outline-none;
+    @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply [&.active]:bg-sidebar-accent [&.active]:text-sidebar-accent-foreground;
+    @apply [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground;
+  }
+}
+
+@utility sidebar-rail {
+  @layer l1.l2 {
+    @apply max-sidebar:hidden absolute inset-y-0 z-20 w-4 -translate-x-1/2 cursor-col-resize transition-all;
+    @apply in-[.sidebar-left]:right-0 in-[.sidebar-right]:left-0;
+    @apply after:absolute after:inset-y-0 after:left-1/2 after:w-px hover:after:bg-sidebar-border;
   }
 }
 
 @utility sidebar-backdrop {
   @layer l1.l2 {
-    /* Hidden by default, always hidden on desktop */
     @apply fixed inset-0 z-40 bg-black/30 backdrop-blur-xs hidden sidebar:hidden;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:max-sidebar:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+    @apply [&.show]:animate-in [&.hide]:animate-out [&.show]:fade-in-0 [&.hide]:fade-out-0 max-sidebar:duration-300 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
 
-    &.open {
+    &:is(.show, .shown, .hide) {
       @apply block pointer-events-auto;
+    }
+  }
+}
+
+/* Icon collapse (desktop only): the rail shows each nav button's leading icon
+   and clips the rest. The button keeps p-2 so the icon never shifts. */
+@layer l1.l2 {
+  @media (width >= theme(--breakpoint-sidebar)) {
+    .sidebar-panel.collapsed[data-collapse="icon"] {
+      .sidebar-content,
+      .sidebar-group,
+      .sidebar-menu {
+        @apply overflow-hidden;
+      }
+
+      .sidebar-menu-sub,
+      .sidebar-menu-action,
+      .sidebar-menu-badge,
+      .collapsible-panel {
+        @apply hidden;
+      }
+
+      .sidebar-group-label {
+        @apply -mt-8 opacity-0;
+      }
+
+      /* A text-only button would show as clipped text, so hide it in the rail. */
+      .sidebar-menu-button:not(:has(> :first-child:is(svg, .avatar, [class*="size-8"]))) {
+        @apply hidden;
+      }
+
+      /* Large buttons drop padding so their size-8 leading box fills the rail. */
+      .sidebar-menu-button {
+        @apply size-8! p-2!;
+      }
+      .sidebar-menu-button-lg {
+        @apply p-0!;
+      }
     }
   }
 }
