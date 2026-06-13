@@ -9,7 +9,8 @@
     @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 hidden;
     /* Cap the drawer at its token but shrink on narrow screens, leaving a gutter. */
     @apply max-sidebar:w-[min(var(--sidebar-width-mobile),100%-1.5rem)];
-    @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0 sidebar:flex sidebar:w-(--sidebar-width) flex-col h-dvh;
+    /* Desktop: a sticky full-height column so it stays put while the page scrolls. */
+    @apply sidebar:sticky sidebar:top-0 sidebar:z-auto sidebar:block sidebar:shrink-0 sidebar:flex sidebar:w-(--sidebar-width) flex-col h-dvh;
     /* Transition only on the transient classes, so an authored .collapsed
        settles instantly with no animation (mirrors the dialog .show model). */
     @apply [&:is(.collapsing,.expanding)]:sidebar:transition-[margin,width] sidebar:duration-200 sidebar:ease-linear;
