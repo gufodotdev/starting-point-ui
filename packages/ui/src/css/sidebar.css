@@ -25,7 +25,12 @@
 
     &.collapsed[data-collapse="icon"] {
       @apply sidebar:w-(--sidebar-width-icon) sidebar:overflow-hidden;
+      /* Inset adds p-2; widen the rail by that 1rem so the icon isn't clipped. */
+      @apply sidebar:in-[.sidebar-inset]:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
+
+    /* Inset: pad the rail so its content floats off the screen edge. */
+    @apply sidebar:in-[.sidebar-inset]:p-2;
   }
 }
 
@@ -53,8 +58,10 @@
 
 @utility sidebar-page {
   @layer l1.l2 {
-    @apply flex-1 bg-background;
-    @apply sidebar:in-[.sidebar-inset]:m-2 sidebar:in-[.sidebar-inset]:shadow-sm sidebar:in-[.sidebar-inset]:rounded-xl;
+    @apply flex-1 min-w-0 bg-background;
+    /* Inset: the card floats on the sidebar-colored page, closed against the
+       sidebar on the left (m-2 minus ml). */
+    @apply sidebar:in-[.sidebar-inset]:my-2 sidebar:in-[.sidebar-inset]:mr-2 sidebar:in-[.sidebar-inset]:shadow-sm sidebar:in-[.sidebar-inset]:rounded-xl;
   }
 }
 
