@@ -18,9 +18,9 @@ export function CodeBlock(props: CodeBlockProps) {
   if (header === "preview") {
     return (
       <div className="my-4 overflow-hidden rounded-lg border">
-        <div className="flex min-h-72 items-center justify-center p-4 sm:p-12">
+        <div className="p-4">
           <div
-            className="flex flex-wrap items-center justify-center gap-4"
+            className="flex flex-wrap gap-4"
             dangerouslySetInnerHTML={{ __html: code }}
           />
         </div>
