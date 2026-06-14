@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/sidebar";
 import { TableOfContents } from "@/components/table-of-contents";
+import { TocCta } from "@/components/toc-cta";
 
 export default function DocsLayout({
   children,
@@ -22,10 +23,19 @@ export default function DocsLayout({
       </main>
 
       {/* Table of contents */}
-      <aside className="hidden xl:block w-(--toc-width) shrink-0 sticky top-(--navbar-height) h-[calc(100dvh-var(--navbar-height))] py-6 pl-6">
-        <h4 className="sidebar-group-label mb-3 px-0">On this page</h4>
-        <TableOfContents />
-      </aside>
+      <div className="sticky top-(--navbar-height) z-30 ml-auto hidden h-[90svh] w-(--toc-width) shrink-0 flex-col gap-4 overflow-hidden overscroll-none pb-8 pt-6 xl:flex">
+        <div className="scrollbar-none flex flex-col gap-8 overflow-y-auto px-8">
+          <div className="flex flex-col gap-2 text-sm">
+            <p className="sticky top-0 h-6 bg-background text-xs font-medium text-muted-foreground">
+              On This Page
+            </p>
+            <TableOfContents />
+          </div>
+        </div>
+        <div className="hidden flex-1 flex-col gap-6 px-6 pt-4 xl:flex">
+          <TocCta />
+        </div>
+      </div>
     </div>
   );
 }
