@@ -51,15 +51,17 @@ const navigation = [
 
 export function Sidebar() {
   return (
-    <nav className="sidebar-menu">
+    <nav>
       {navigation.map((category) => (
-        <div key={category.title} className="menu-group">
-          <h4 className="menu-label">{category.title}</h4>
-          {category.items.map((item) => (
-            <SidebarLink key={item.href} href={item.href}>
-              {item.title}
-            </SidebarLink>
-          ))}
+        <div key={category.title} className="sidebar-group first:pt-0">
+          <h4 className="sidebar-group-label">{category.title}</h4>
+          <div className="sidebar-menu">
+            {category.items.map((item) => (
+              <SidebarLink key={item.href} href={item.href}>
+                {item.title}
+              </SidebarLink>
+            ))}
+          </div>
         </div>
       ))}
     </nav>

@@ -91,10 +91,10 @@ export async function Navbar() {
         <div className="sheet-backdrop"></div>
         <div className="sheet-panel w-(--sidebar-width) rounded-none overflow-y-auto">
           <div className="sheet-content">
-            <div className="menu-group">
+            <div className="sidebar-group">
               <button
                 type="button"
-                className="menu-btn w-fit text-muted-foreground"
+                className="sidebar-menu-button w-fit text-muted-foreground"
                 aria-label="Close navigation menu"
                 data-sp-dismiss="dialog"
               >
@@ -102,14 +102,18 @@ export async function Navbar() {
               </button>
             </div>
             <Sidebar />
-            <div className="menu-group">
-              <Link
-                href="/examples"
-                className="menu-btn"
-                data-sp-dismiss="dialog"
-              >
-                Examples
-              </Link>
+            <div className="sidebar-group">
+              <div className="sidebar-menu">
+                <div className="sidebar-menu-item">
+                  <Link
+                    href="/examples"
+                    className="sidebar-menu-button"
+                    data-sp-dismiss="dialog"
+                  >
+                    <span>Examples</span>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

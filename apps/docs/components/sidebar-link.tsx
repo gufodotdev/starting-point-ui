@@ -13,11 +13,13 @@ export function SidebarLink({
   const pathname = usePathname();
 
   return (
-    <Link
-      href={href}
-      className={`menu-btn menu-btn-sm ${pathname === href ? "active" : ""}`}
-    >
-      {children}
-    </Link>
+    <div className="sidebar-menu-item">
+      <Link
+        href={href}
+        className={`sidebar-menu-button sidebar-menu-button-sm ${pathname === href ? "active" : ""}`}
+      >
+        <span>{children}</span>
+      </Link>
+    </div>
   );
 }

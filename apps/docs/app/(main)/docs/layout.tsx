@@ -23,7 +23,7 @@ export default function DocsLayout({
 
       {/* Table of contents */}
       <aside className="hidden xl:block w-(--toc-width) shrink-0 sticky top-(--navbar-height) h-[calc(100dvh-var(--navbar-height))] py-6 pl-6">
-        <h4 className="menu-label mb-3 px-0">On this page</h4>
+        <h4 className="sidebar-group-label mb-3 px-0">On this page</h4>
         <TableOfContents />
       </aside>
     </div>
