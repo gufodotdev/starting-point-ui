@@ -1,12 +1,12 @@
 import type { ThemeRegistration } from "shiki";
 
-// Custom Shiki themes using Tailwind colors so syntax highlighting matches the
-// inline code and link styling: tags/functions = blue, attribute names/keywords
-// = red, strings/numbers = violet, punctuation/text = neutral.
+// Custom Shiki themes using Tailwind colors so syntax highlighting stays clean
+// and minimal: tags/functions = sky, attribute names/keywords = pink,
+// strings/numbers = emerald, punctuation/text = neutral.
 
-const TAG = { light: "#2563eb", dark: "#60a5fa" }; // blue-600 / blue-400
-const ATTR = { light: "#dc2626", dark: "#f87171" }; // red-600 / red-400
-const STRING = { light: "#7c3aed", dark: "#a78bfa" }; // violet-600 / violet-400
+const TAG = { light: "#0284c7", dark: "#38bdf8" }; // sky-600 / sky-400
+const ATTR = { light: "#be185d", dark: "#f472b6" }; // pink-700 / pink-400
+const STRING = { light: "#059669", dark: "#34d399" }; // emerald-600 / emerald-400
 const TEXT = { light: "#1e293b", dark: "#e2e8f0" }; // slate-800 / slate-200
 const COMMENT = { light: "#64748b", dark: "#94a3b8" }; // slate-500 / slate-400
 

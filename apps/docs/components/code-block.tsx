@@ -54,7 +54,7 @@ export function CodeBlock(props: CodeBlockProps) {
 
 function Pre({ children }: { children: React.ReactNode }) {
   return (
-    <pre className="scrollbar-thin overflow-auto max-h-80 bg-muted/50 p-4 rounded-b-lg">
+    <pre className="scrollbar-thin overflow-auto max-h-80 bg-muted/25 p-4 rounded-b-lg">
       {children}
     </pre>
   );
