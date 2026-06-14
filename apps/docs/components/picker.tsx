@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 export type PickerOption = {
   value: string;
@@ -30,15 +30,41 @@ export function Picker({
   searchPlaceholder = "Search...",
 }: PickerProps) {
   const menuId = `${id}-menu`;
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // The combobox flips a hidden radio and dispatches a native `change`; React's
+  // onChange ignores programmatic native events, so listen on the element.
+  useEffect(() => {
+    const el = menuRef.current;
+    if (!el) return;
+    const handler = (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      if (input.matches('input[type="radio"]') && input.checked) {
+        onSelect(input.value);
+      }
+    };
+    el.addEventListener("change", handler);
+    return () => el.removeEventListener("change", handler);
+  }, [onSelect]);
+
+  // Radios are uncontrolled (the combobox mutates .checked directly), so mirror
+  // external value changes onto them and their aria-selected state.
+  useEffect(() => {
+    const el = menuRef.current;
+    if (!el) return;
+    el.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach((input) => {
+      const selected = input.value === value;
+      input.checked = selected;
+      input.closest(".combobox-item")?.setAttribute("aria-selected", String(selected));
+    });
+  }, [value]);
+
   return (
     <>
       <button
         className="relative w-full rounded-lg px-3 py-2 text-left ring-1 ring-foreground/10 hover:bg-muted transition-colors outline-none focus-visible:ring-foreground/50"
         type="button"
         id={id}
-        data-sp-toggle="combobox"
-        data-sp-target={`#${menuId}`}
-        aria-expanded="false"
       >
         <div className="flex flex-col">
           <span className="text-xs text-muted-foreground">{label}</span>
@@ -52,7 +78,12 @@ export function Picker({
           </span>
         )}
       </button>
-      <div id={menuId} className="combobox" role="listbox">
+      <div
+        ref={menuRef}
+        id={menuId}
+        className="combobox"
+        data-sp-combobox={`toggle: #${id}`}
+      >
         {search && (
           <div className="combobox-search">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
@@ -68,10 +99,8 @@ export function Picker({
             <div
               key={option.value}
               className="combobox-item"
-              role="option"
-              tabIndex={0}
+              data-label={option.label}
               aria-selected={value === option.value}
-              onClick={() => onSelect(option.value)}
             >
               <input
                 type="radio"
@@ -79,8 +108,7 @@ export function Picker({
                 tabIndex={-1}
                 name={id}
                 value={option.value}
-                checked={value === option.value}
-                readOnly
+                defaultChecked={value === option.value}
               />
               {option.preview}
               {option.label}

@@ -7,9 +7,9 @@ export function MobileNavCloser() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const dialog = document.querySelector<HTMLDialogElement>("#mobile-nav");
-    if (dialog?.open) {
-      window.sp?.dialog.close(dialog);
+    const sheet = document.querySelector<HTMLDialogElement>("#mobile-nav");
+    if (sheet?.open) {
+      window.sp?.sheet(sheet)?.hide();
     }
   }, [pathname]);
 

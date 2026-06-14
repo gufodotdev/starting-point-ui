@@ -125,8 +125,8 @@ export function ThemeEditor({ className }: { className?: string }) {
     const dialog = document.getElementById("theme-editor");
     if (dialog) {
       const onClose = () => setShowCode(false);
-      dialog.addEventListener("close", onClose);
-      return () => dialog.removeEventListener("close", onClose);
+      dialog.addEventListener("sp-hidden", onClose);
+      return () => dialog.removeEventListener("sp-hidden", onClose);
     }
   }, []);
 
@@ -165,25 +165,24 @@ export function ThemeEditor({ className }: { className?: string }) {
     <>
       <button
         type="button"
+        id="theme-editor-trigger"
         className={`btn btn-ghost btn-icon-sm${className ? ` ${className}` : ""}`}
         aria-label="Open theme editor"
-        data-sp-toggle="dialog"
-        data-sp-target="#theme-editor"
       >
         <WandSparkles />
       </button>
       <dialog
         id="theme-editor"
-        className="dialog"
+        data-sp-sheet="toggle: #theme-editor-trigger"
+        className="sheet sheet-left w-110 max-w-full! overflow-y-auto px-6 backdrop:bg-transparent! backdrop:backdrop-blur-none!"
         aria-labelledby="theme-editor-title"
       >
-        <div className="sheet-backdrop bg-transparent! backdrop-blur-none!" />
-        <div className="sheet-panel w-110 max-w-full! flex flex-col overflow-y-auto px-6">
+        <div className="flex min-h-full flex-col">
           <button
             type="button"
             className={`btn btn-ghost btn-icon-sm absolute top-2 right-2 z-20 ${showCode ? "hidden" : ""}`}
             aria-label="Close"
-            data-sp-dismiss="dialog"
+            data-sp-dismiss
           >
             <X />
           </button>

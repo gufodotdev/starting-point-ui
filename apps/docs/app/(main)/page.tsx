@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { WandSparkles } from "lucide-react";
 import { ScrollIndicator } from "@/components/scroll-indicator";
 import { LandingGrid } from "@/components/landing-grid";
+import { ThemeEditorTrigger } from "@/components/theme-editor-trigger";
 
 export const metadata: Metadata = {
   title: "Beautiful Components for Tailwind CSS",
@@ -36,15 +36,7 @@ export default function Home() {
             >
               Get Started
             </Link>
-            <button
-              type="button"
-              className="btn lg:btn-lg"
-              data-sp-toggle="dialog"
-              data-sp-target="#theme-editor"
-            >
-              <WandSparkles className="size-4" />
-              Make it yours
-            </button>
+            <ThemeEditorTrigger />
           </div>
           <div className="lg:hidden mt-6">
             <ScrollIndicator />

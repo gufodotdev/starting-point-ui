@@ -16,18 +16,27 @@ export function SearchDialog() {
 
   const openDialog = useCallback(() => {
     if (dialogRef.current) {
-      window.sp?.dialog.open(dialogRef.current);
+      window.sp?.dialog(dialogRef.current)?.show();
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, []);
 
   const closeDialog = useCallback(() => {
-    if (dialogRef.current) {
-      window.sp?.dialog.close(dialogRef.current);
+    window.sp?.dialog(dialogRef.current!)?.hide();
+  }, []);
+
+  // Reset search state whenever the dialog finishes closing, however it was
+  // dismissed (Escape, backdrop, or a result navigation).
+  useEffect(() => {
+    const el = dialogRef.current;
+    if (!el) return;
+    const reset = () => {
       setQuery("");
       setResults([]);
       setSelectedIndex(0);
-    }
+    };
+    el.addEventListener("sp-hidden", reset);
+    return () => el.removeEventListener("sp-hidden", reset);
   }, []);
 
   useEffect(() => {
@@ -104,9 +113,13 @@ export function SearchDialog() {
         </kbd>
       </button>
 
-      <dialog ref={dialogRef} id="search-dialog" className="dialog">
-        <div className="dialog-backdrop" onClick={closeDialog}></div>
-        <div className="dialog-panel w-[calc(100%-2rem)] max-w-lg rounded-xl border-none bg-card p-2 pb-11 shadow-2xl ring-4 ring-border/80 dark:bg-card">
+      <dialog
+        ref={dialogRef}
+        id="search-dialog"
+        data-sp-dialog
+        className="dialog w-[calc(100%-2rem)] max-w-lg rounded-xl border-none bg-card p-2 pb-11 shadow-2xl ring-4 ring-border/80 dark:bg-card"
+      >
+        <div>
           <div className="relative">
             <div className="flex h-9 items-center gap-2 rounded-md border bg-muted/50 px-3">
               <Search

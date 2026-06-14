@@ -25,10 +25,9 @@ export async function Navbar() {
           <div className="flex items-center gap-2 -ml-2 lg:ml-0">
             <button
               type="button"
+              id="mobile-nav-trigger"
               className="btn btn-ghost btn-icon-sm lg:hidden"
               aria-label="Open navigation menu"
-              data-sp-toggle="dialog"
-              data-sp-target="#mobile-nav"
             >
               <Menu />
             </button>
@@ -87,32 +86,33 @@ export async function Navbar() {
       </div>
 
       {/* Mobile navigation */}
-      <dialog id="mobile-nav" className="dialog">
-        <div className="sheet-backdrop"></div>
-        <div className="sheet-panel w-(--sidebar-width) rounded-none overflow-y-auto">
-          <div className="sheet-content">
-            <div className="sidebar-group">
-              <button
-                type="button"
-                className="sidebar-menu-button w-fit text-muted-foreground"
-                aria-label="Close navigation menu"
-                data-sp-dismiss="dialog"
-              >
-                <PanelLeftClose />
-              </button>
-            </div>
-            <Sidebar />
-            <div className="sidebar-group">
-              <div className="sidebar-menu">
-                <div className="sidebar-menu-item">
-                  <Link
-                    href="/examples"
-                    className="sidebar-menu-button"
-                    data-sp-dismiss="dialog"
-                  >
-                    <span>Examples</span>
-                  </Link>
-                </div>
+      <dialog
+        id="mobile-nav"
+        data-sp-sheet="toggle: #mobile-nav-trigger"
+        className="sheet sheet-left w-(--sidebar-width) rounded-none"
+      >
+        <div className="sheet-content">
+          <div className="sidebar-group">
+            <button
+              type="button"
+              className="sidebar-menu-button w-fit text-muted-foreground"
+              aria-label="Close navigation menu"
+              data-sp-dismiss
+            >
+              <PanelLeftClose />
+            </button>
+          </div>
+          <Sidebar />
+          <div className="sidebar-group">
+            <div className="sidebar-menu">
+              <div className="sidebar-menu-item">
+                <Link
+                  href="/examples"
+                  className="sidebar-menu-button"
+                  data-sp-dismiss
+                >
+                  <span>Examples</span>
+                </Link>
               </div>
             </div>
           </div>
