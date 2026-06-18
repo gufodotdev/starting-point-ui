@@ -10,7 +10,7 @@ import { Dismissable } from "./mixins/dismissable";
 
 export const Dialog = define({
   name: "dialog",
-  selector: "[data-sp-dialog]",
+  selector: ".dialog",
   mixins: [Togglable, ClickToShow, Modalable, Dismissable],
 
   init(this: SpInstance) {

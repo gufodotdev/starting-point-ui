@@ -22,7 +22,7 @@ async function waitClosed(page: Page) {
 
 const BASIC = `
   <button id="trigger" class="btn">Open</button>
-  <dialog class="dialog" data-sp-dialog="toggle: #trigger">
+  <dialog class="dialog" data-sp-toggle="#trigger">
     <h2 class="dialog-title">Title</h2>
     <p class="dialog-description">Description</p>
     <button id="dismiss" data-sp-dismiss>Close</button>
@@ -30,7 +30,7 @@ const BASIC = `
 
 const STATIC = `
   <button id="trigger" class="btn">Open</button>
-  <dialog class="dialog" data-sp-dialog="toggle: #trigger; static: true">
+  <dialog class="dialog" data-sp-toggle="#trigger" data-sp-static>
     <h2 class="dialog-title">Title</h2>
     <button id="dismiss" data-sp-dismiss>Close</button>
   </dialog>`;

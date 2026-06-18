@@ -98,7 +98,7 @@ export function define(def: Definition): ComponentFactory {
       instance[key] = fn.bind(instance);
     }
 
-    instance.config = readConfig(el, def.name, props);
+    instance.config = readConfig(el, props);
 
     // init across all parts, then ready (ready can rely on every init having run)
     for (const fn of hooks.init) fn.call(instance);
@@ -112,30 +112,22 @@ export function define(def: Definition): ComponentFactory {
   return create;
 }
 
-// Config is parsed from the identity attribute's value:
-//   <div data-sp-popover="placement: top; offset: 12">  ->  { placement: "top", offset: 12 }
-// props declares each option's type (for coercion) and optional default.
-function readConfig(el: HTMLElement, name: string, props: Props): Record<string, unknown> {
+// Each option is read from its own attribute on the element: data-sp-<option>.
+//   <div class="popover" data-sp-placement="top" data-sp-offset="12">
+// A valueless boolean attribute (data-sp-static) coerces to true. props declares
+// each option's type (for coercion) and optional default.
+function readConfig(el: HTMLElement, props: Props): Record<string, unknown> {
   const cfg: Record<string, unknown> = {};
   for (const [key, spec] of Object.entries(props)) {
     cfg[key] = typeof spec === "object" && "default" in spec ? spec.default : undefined;
-  }
-  const raw = el.getAttribute(`data-sp-${name}`) ?? "";
-  for (const [key, value] of parseOptions(raw)) {
-    if (key in props) cfg[key] = coerce(props[key], value);
+    const attr = `data-sp-${hyphenate(key)}`;
+    if (el.hasAttribute(attr)) cfg[key] = coerce(props[key], el.getAttribute(attr) ?? "");
   }
   return cfg;
 }
 
-function parseOptions(str: string): Array<[string, string]> {
-  return str
-    .split(";")
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .map((part): [string, string] => {
-      const i = part.indexOf(":");
-      return i === -1 ? [part, ""] : [part.slice(0, i).trim(), part.slice(i + 1).trim()];
-    });
+function hyphenate(s: string): string {
+  return s.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
 }
 
 function coerce(spec: PropSpec, value: string): unknown {
