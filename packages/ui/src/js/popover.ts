@@ -15,7 +15,7 @@ import { Anchorable } from "./mixins/anchorable";
 
 export const Popover = define({
   name: "popover",
-  selector: "[data-sp-popover]",
+  selector: ".popover",
   mixins: [
     Togglable,
     ClickToShow,

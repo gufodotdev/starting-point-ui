@@ -5,14 +5,10 @@ description: An accessible popover for Tailwind CSS, anchored to a trigger for r
 
 A non-modal floating panel anchored to a trigger, for rich content, forms, and menus.
 
-## Basic Usage
-
-Add the `popover` class to an element and a `data-sp-popover` attribute with a `toggle` option pointing at the trigger's `id`. It opens on click and closes on Escape, an outside click, or when focus moves outside. The panel is positioned against the trigger automatically.
-
 ```html preview
 <button id="popover-1-trigger" class="btn">Open Popover</button>
 
-<div class="popover" data-sp-popover="toggle: #popover-1-trigger">
+<div class="popover" data-sp-toggle="#popover-1-trigger">
   <div class="space-y-1">
     <h4 class="font-medium">Dimensions</h4>
     <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
@@ -30,41 +26,61 @@ Add the `popover` class to an element and a `data-sp-popover` attribute with a `
 </div>
 ```
 
-## Placement
+## Usage
 
-Set where the popover opens relative to its trigger with the `placement` option (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement), e.g. `top`, `right`, `bottom-end`).
+Add the `popover` class to an element. Give your trigger an `id`, then point the popover at it with `data-sp-toggle`. It opens on click and closes on Escape, an outside click, or when focus moves outside. The panel is positioned against the trigger automatically.
+
+```html
+<!-- This is a button toggling the popover -->
+<button id="my-trigger" class="btn">Open Popover</button>
+
+<!-- This is the popover -->
+<div class="popover" data-sp-toggle="#my-trigger">Popover content</div>
+```
+
+---
+
+## Examples
+
+### Placement
+
+Set where the popover opens relative to its trigger with `data-sp-placement` (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement), e.g. `top`, `right`, `bottom-end`).
 
 ```html preview
 <button id="popover-top-trigger" class="btn">Top</button>
 
-<div class="popover" data-sp-popover="toggle: #popover-top-trigger; placement: top">
+<div class="popover" data-sp-toggle="#popover-top-trigger" data-sp-placement="top">
   <p class="text-sm">This popover opens above the trigger.</p>
 </div>
 ```
 
-## Hover
+### Hover
 
-Add `mode: hover` to open the popover on hover instead of click. It opens on pointer enter or focus, and closes when the pointer leaves both the trigger and the panel.
+Add `data-sp-mode="hover"` to open the popover on hover instead of click. It opens on pointer enter or focus, and closes when the pointer leaves both the trigger and the panel.
 
 ```html preview
 <button id="popover-hover-trigger" class="btn">Hover me</button>
 
-<div class="popover" data-sp-popover="toggle: #popover-hover-trigger; mode: hover">
+<div class="popover" data-sp-toggle="#popover-hover-trigger" data-sp-mode="hover">
   <p class="text-sm">Opened on hover, closes when you leave.</p>
 </div>
 ```
 
+---
+
 ## Options
 
-Set options in the `data-sp-popover` value, separated by semicolons.
+Set each option with its own `data-sp-*` attribute on the popover.
 
-| Option      | Type   | Default  | Description                                               |
-| ----------- | ------ | -------- | --------------------------------------------------------- |
-| `toggle`    | String | —        | Selector for the element that opens the popover           |
-| `placement` | String | `bottom` | Position relative to the trigger (Floating UI placement)  |
-| `offset`    | Number | `6`      | Gap in pixels between the trigger and the popover         |
-| `mode`      | String | `click`  | `click` to toggle on click, `hover` to open on hover      |
-| `matchWidth` | Boolean | `false` | Match the popover width to the trigger width             |
+| Attribute           | Type    | Default  | Description                                              |
+| ------------------- | ------- | -------- | ------------------------------------------------------- |
+| `data-sp-toggle`    | String  | —        | Selector for the element that opens the popover          |
+| `data-sp-placement` | String  | `bottom` | Position relative to the trigger (Floating UI placement) |
+| `data-sp-offset`    | Number  | `6`      | Gap in pixels between the trigger and the popover         |
+| `data-sp-mode`      | String  | `click`  | `click` to toggle on click, `hover` to open on hover     |
+| `data-sp-match-width` | Boolean | `false` | Match the popover width to the trigger width            |
+
+---
 
 ## Events
 
@@ -85,6 +101,8 @@ el.addEventListener("sp-beforeshow", (e) => {
 });
 ```
 
+---
+
 ## Methods
 
 Get the instance with `sp.popover(el)`, then call its methods:
@@ -100,6 +118,8 @@ const popover = sp.popover(document.querySelector("#my-popover"));
 
 popover.show();
 ```
+
+---
 
 ## Accessibility
 

@@ -13,7 +13,7 @@ async function mount(page: Page, html: string) {
 
 const BASIC = `
   <button id="trigger" class="btn">Open</button>
-  <div id="pop" class="popover" data-sp-popover="toggle: #trigger">
+  <div id="pop" class="popover" data-sp-toggle="#trigger">
     <p>Popover content</p>
     <button id="inside">Inside</button>
   </div>
@@ -21,7 +21,7 @@ const BASIC = `
 
 const HOVER = `
   <button id="trigger" class="btn">Hover</button>
-  <div id="pop" class="popover" data-sp-popover="toggle: #trigger; mode: hover">
+  <div id="pop" class="popover" data-sp-toggle="#trigger" data-sp-mode="hover">
     <p>Hover content</p>
   </div>`;
 
@@ -140,7 +140,7 @@ test("sp.popover(el) returns the instance with the public API", async ({ page })
   await mount(page, BASIC);
   const api = await page.evaluate(() => {
     const el = document.querySelector("#pop") as HTMLElement;
-    const p = (window as Window & { sp: Record<string, (el: HTMLElement) => Record<string, unknown>> }).sp.popover(el);
+    const p = (window as any).sp.popover(el);
     return { show: typeof p.show, hide: typeof p.hide, toggle: typeof p.toggle };
   });
   expect(api).toEqual({ show: "function", hide: "function", toggle: "function" });
