@@ -18,8 +18,8 @@ export function TableOfContents() {
       headingObjectCallback: (obj, node) => {
         if (node.tagName === "H1") {
           (obj as { textContent: string }).textContent = "Introduction";
+          (obj as { headingLevel: number }).headingLevel = 2;
         }
-        (obj as { headingLevel: number }).headingLevel = 2;
         return obj;
       },
     });

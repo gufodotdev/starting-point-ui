@@ -11,13 +11,15 @@ export default function DocsLayout({
     <div className="flex gap-12 px-4">
       {/* Desktop sidebar */}
       <aside className="hidden lg:block w-(--sidebar-width) shrink-0 sticky top-(--navbar-height) h-[calc(100dvh-var(--navbar-height))] overflow-hidden">
-        <div className="h-full py-6 pr-6 overflow-y-auto scrollbar-none">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-6 bg-linear-to-b from-background to-transparent" />
+        <div className="h-full pt-4 pb-6 pr-6 overflow-y-auto scrollbar-none">
           <Sidebar />
         </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-12 bg-linear-to-t from-background to-transparent" />
       </aside>
 
       <main className="flex-1 min-w-0 py-6 lg:py-12 *:max-w-160 *:mx-auto">
-        <article id="content" className="text-[1.05rem] sm:text-[15px]">
+        <article id="content" className="text-sm/6">
           {children}
         </article>
       </main>

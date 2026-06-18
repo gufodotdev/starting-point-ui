@@ -57,9 +57,8 @@ html:has([data-no-scrollbar-gutter]) {
   @apply flex flex-col gap-2;
 }
 
-/* Nested heading levels indent, mirroring shadcn's data-depth padding. */
 .toc-list .toc-list {
-  @apply pl-4;
+  @apply gap-2 pt-2;
 }
 
 .toc-list-item {
@@ -68,6 +67,14 @@ html:has([data-no-scrollbar-gutter]) {
 
 .toc-link {
   @apply block truncate text-[0.8rem] text-muted-foreground no-underline transition-colors hover:text-foreground;
+}
+
+.toc-link.node-name--H3 {
+  @apply pl-4;
+}
+
+.toc-link.node-name--H4 {
+  @apply pl-6;
 }
 
 .is-active-link {
@@ -88,5 +95,5 @@ code[data-theme] span {
 }
 
 pre {
-  @apply text-[0.8rem]/6;
+  @apply text-[0.8rem]/5;
 }

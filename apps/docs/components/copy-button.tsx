@@ -43,8 +43,8 @@ export function CopyButton({
 
   const scrollbarClass = adjustForScrollbar
     ? hasScrollbar
-      ? "right-4"
-      : "right-2"
+      ? "right-3"
+      : "right-1.5"
     : "";
 
   return (
@@ -52,13 +52,13 @@ export function CopyButton({
       ref={ref}
       type="button"
       onClick={handleCopy}
-      className={`p-1.5 rounded-md hover:bg-muted transition-colors ${scrollbarClass} ${className ?? ""}`}
+      className={`btn btn-ghost btn-icon-xs cursor-pointer ${scrollbarClass} ${className ?? ""}`}
       aria-label={copied ? "Copied" : "Copy code"}
     >
       {copied ? (
-        <Check className="size-4 text-green-600" />
+        <Check className="size-3.5 text-green-600" />
       ) : (
-        <Copy className="size-4 text-foreground" />
+        <Copy className="size-3.5 text-foreground" />
       )}
     </button>
   );

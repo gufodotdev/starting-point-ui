@@ -75,13 +75,10 @@ const components = {
     </h3>
   ),
   p: ({ children }: React.ComponentProps<"p">) => (
-    <p className="leading-relaxed not-first:mt-6">{children}</p>
+    <p className="not-first:mt-6">{children}</p>
   ),
   a: ({ children, ...props }: React.ComponentProps<"a">) => (
-    <a
-      className="text-blue-600 dark:text-blue-400 font-medium underline underline-offset-4"
-      {...props}
-    >
+    <a className="font-medium underline underline-offset-4" {...props}>
       {children}
     </a>
   ),
@@ -94,7 +91,7 @@ const components = {
   ol: ({ children }: React.ComponentProps<"ol">) => (
     <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
   ),
-  hr: () => <hr className="my-8" />,
+  hr: () => <hr className="mt-10 lg:mt-12 mb-10 lg:mb-12 [&+*]:mt-0!" />,
   code: ({
     children,
     ...props
@@ -107,7 +104,7 @@ const components = {
       return <code {...props}>{children}</code>;
     }
     return (
-      <code className="font-mono rounded bg-blue-500/10 px-1.5 py-0.5 text-xs text-blue-600 dark:text-blue-400">
+      <code className="relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-[0.75rem] font-medium text-[#116329] dark:text-[#38bdf8] wrap-break-word outline-none">
         {children}
       </code>
     );
@@ -139,23 +136,23 @@ const components = {
     return <CodeBlock code={code}>{children}</CodeBlock>;
   },
   table: ({ children }: React.ComponentProps<"table">) => (
-    <div className="scrollbar-thin my-6 w-full overflow-y-auto rounded-lg border">
-      <table className="relative w-full overflow-hidden border-none text-sm [&_tbody_tr:last-child]:border-b-0">
+    <div className="scrollbar-thin my-6 w-full overflow-y-auto">
+      <table className="relative w-full [&_tbody_tr]:border-b [&_tbody_tr:last-child]:border-b-0">
         {children}
       </table>
     </div>
   ),
   thead: ({ children }: React.ComponentProps<"thead">) => (
-    <thead className="bg-muted/50">{children}</thead>
+    <thead className="bg-muted">{children}</thead>
   ),
   tr: ({ children }: React.ComponentProps<"tr">) => (
-    <tr className="m-0 border-b">{children}</tr>
+    <tr className="m-0">{children}</tr>
   ),
   th: ({ children }: React.ComponentProps<"th">) => (
-    <th className="px-4 py-2 text-left font-bold">{children}</th>
+    <th className="px-4 py-3 text-left font-medium">{children}</th>
   ),
   td: ({ children }: React.ComponentProps<"td">) => (
-    <td className="px-4 py-2 text-left whitespace-nowrap">{children}</td>
+    <td className="px-4 py-3 text-left whitespace-nowrap">{children}</td>
   ),
 };
 

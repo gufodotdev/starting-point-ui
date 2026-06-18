@@ -1,14 +1,10 @@
 import type { ThemeRegistration } from "shiki";
 
-// Custom Shiki themes using Tailwind colors so syntax highlighting stays clean
-// and minimal: tags/functions = sky, attribute names/keywords = pink,
-// strings/numbers = emerald, punctuation/text = neutral.
-
-const TAG = { light: "#0284c7", dark: "#38bdf8" }; // sky-600 / sky-400
-const ATTR = { light: "#be185d", dark: "#f472b6" }; // pink-700 / pink-400
-const STRING = { light: "#059669", dark: "#34d399" }; // emerald-600 / emerald-400
-const TEXT = { light: "#1e293b", dark: "#e2e8f0" }; // slate-800 / slate-200
-const COMMENT = { light: "#64748b", dark: "#94a3b8" }; // slate-500 / slate-400
+const TAG = { light: "#116329", dark: "#38bdf8" };
+const ATTR = { light: "#d73a49", dark: "#f472b6" };
+const STRING = { light: "#6f42c1", dark: "#34d399" };
+const TEXT = { light: "#1e293b", dark: "#e2e8f0" };
+const COMMENT = { light: "#64748b", dark: "#94a3b8" };
 
 function theme(mode: "light" | "dark"): ThemeRegistration {
   const pick = (c: { light: string; dark: string }) => c[mode];
