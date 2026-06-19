@@ -232,7 +232,7 @@
       .sidebar-menu-sub,
       .sidebar-menu-action,
       .sidebar-menu-badge,
-      .collapsible-panel {
+      .collapsible {
         @apply hidden;
       }
 

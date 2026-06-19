@@ -5,10 +5,6 @@ description: An accessible collapsible component for Tailwind CSS, expanding and
 
 A panel that expands and collapses in place, with an animated height transition.
 
-## Basic Usage
-
-Add the `collapsible-panel` class to an element and a `data-sp-collapsible` attribute with a `toggle` option pointing at the trigger's `id`. Wrap the panel's children in `collapsible-content`. The trigger's `aria-expanded` and `aria-controls` are wired automatically, so styles like the chevron swap below can key off `aria-expanded`.
-
 ```html preview
 <div class="flex w-full max-w-sm flex-col gap-2">
   <div class="flex items-center justify-between gap-4">
@@ -22,7 +18,7 @@ Add the `collapsible-panel` class to an element and a `data-sp-collapsible` attr
   <div class="rounded-md border px-4 py-2 font-mono text-sm">
     tailwindlabs/tailwindcss
   </div>
-  <div class="collapsible-panel" data-sp-collapsible="toggle: #collapsible-1-trigger">
+  <div class="collapsible" data-sp-toggle="#collapsible-1-trigger">
     <div class="collapsible-content">
       <div class="rounded-md border px-4 py-2 font-mono text-sm">
         twbs/bootstrap
@@ -35,7 +31,25 @@ Add the `collapsible-panel` class to an element and a `data-sp-collapsible` attr
 </div>
 ```
 
-## Initially open
+## Usage
+
+Add the `collapsible` class to an element and give it an `id`. Give your trigger an `id` too, then point the panel at it with `data-sp-toggle`. Wrap the panel's children in `collapsible-content`. The trigger's `aria-expanded` and `aria-controls` are wired automatically, so styles like the chevron swap above can key off `aria-expanded`.
+
+```html
+<!-- This is the trigger -->
+<button id="my-trigger" class="btn">Toggle</button>
+
+<!-- This is the panel -->
+<div class="collapsible" data-sp-toggle="#my-trigger">
+  <div class="collapsible-content">Hidden content</div>
+</div>
+```
+
+---
+
+## Examples
+
+### Initially open
 
 Add the `shown` class to the panel so it renders open on first paint, before JavaScript loads. Set `aria-expanded="true"` on the trigger so its state matches.
 
@@ -49,7 +63,7 @@ Add the `shown` class to the panel so it renders open on first paint, before Jav
       <span class="sr-only">Toggle</span>
     </button>
   </div>
-  <div class="collapsible-panel shown" data-sp-collapsible="toggle: #collapsible-open-trigger">
+  <div class="collapsible shown" data-sp-toggle="#collapsible-open-trigger">
     <div class="collapsible-content">
       <div class="rounded-md border px-4 py-2 font-mono text-sm">
         tailwindlabs/tailwindcss
@@ -62,13 +76,17 @@ Add the `shown` class to the panel so it renders open on first paint, before Jav
 </div>
 ```
 
+---
+
 ## Options
 
-Set options in the `data-sp-collapsible` value, separated by semicolons.
+Set each option with its own `data-sp-*` attribute on the panel.
 
-| Option   | Type   | Default | Description                                   |
-| -------- | ------ | ------- | --------------------------------------------- |
-| `toggle` | String | —       | Selector for the element that toggles the panel |
+| Attribute        | Type   | Default | Description                                      |
+| ---------------- | ------ | ------- | ------------------------------------------------ |
+| `data-sp-toggle` | String | —       | Selector for the element that toggles the panel  |
+
+---
 
 ## Events
 
@@ -82,6 +100,8 @@ Lifecycle events fire on the panel element; `before*` events are cancelable.
 | `sp-beforehide` | Before collapsing (cancelable) |
 | `sp-hide`       | Collapsing                  |
 | `sp-hidden`     | Collapsed                   |
+
+---
 
 ## Methods
 
@@ -98,6 +118,8 @@ const collapsible = sp.collapsible(document.querySelector("#my-panel"));
 
 collapsible.show();
 ```
+
+---
 
 ## Accessibility
 

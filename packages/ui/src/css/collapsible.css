@@ -21,7 +21,7 @@
   }
 }
 
-@utility collapsible-panel {
+@utility collapsible {
   @layer l1.l2 {
     @apply invisible h-0 overflow-hidden;
     @apply [&.show]:visible [&.show]:animate-collapse-down;

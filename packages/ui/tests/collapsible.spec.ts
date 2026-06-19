@@ -13,13 +13,13 @@ async function mount(page: Page, html: string) {
 
 const BASIC = `
   <button id="trigger" class="btn">Toggle</button>
-  <div id="panel" class="collapsible-panel" data-sp-collapsible="toggle: #trigger">
+  <div id="panel" class="collapsible" data-sp-toggle="#trigger">
     <div class="collapsible-content">Hidden content</div>
   </div>`;
 
 const PRESHOWN = `
   <button id="trigger" class="btn">Toggle</button>
-  <div id="panel" class="collapsible-panel shown" data-sp-collapsible="toggle: #trigger">
+  <div id="panel" class="collapsible shown" data-sp-toggle="#trigger">
     <div class="collapsible-content">Visible content</div>
   </div>`;
 
