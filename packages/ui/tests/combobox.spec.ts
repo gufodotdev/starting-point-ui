@@ -23,21 +23,21 @@ const SINGLE = `
   <button id="trigger" class="combobox-trigger">
     <span class="combobox-value" data-sp-placeholder="Pick one"></span>
   </button>
-  <div id="cb" class="combobox" data-sp-combobox="toggle: #trigger">
+  <div id="cb" class="combobox" data-sp-toggle="#trigger">
     <div class="combobox-search">
       <input id="search" class="combobox-input" type="text" />
     </div>
     <div class="combobox-list">
       <div id="i1" class="combobox-item">
-        <input type="radio" ${HIDE} tabindex="-1" name="fw" value="next" />
+        <input type="radio" ${HIDE} name="fw" value="next" />
         Next.js
       </div>
       <div id="i2" class="combobox-item">
-        <input type="radio" ${HIDE} tabindex="-1" name="fw" value="astro" />
+        <input type="radio" ${HIDE} name="fw" value="astro" />
         Astro
       </div>
       <div id="i3" class="combobox-item">
-        <input type="radio" ${HIDE} tabindex="-1" name="fw" value="nuxt" />
+        <input type="radio" ${HIDE} name="fw" value="nuxt" />
         Nuxt.js
       </div>
     </div>
@@ -48,15 +48,37 @@ const MULTI = `
   <button id="trigger" class="combobox-trigger">
     <span class="combobox-value" data-sp-placeholder="Pick tools"></span>
   </button>
-  <div id="cb" class="combobox" data-sp-combobox="toggle: #trigger">
+  <div id="cb" class="combobox" data-sp-toggle="#trigger">
     <div class="combobox-list">
       <div id="i1" class="combobox-item">
-        <input type="checkbox" ${HIDE} tabindex="-1" name="tools" value="eslint" />
+        <input type="checkbox" ${HIDE} name="tools" value="eslint" />
         ESLint
       </div>
       <div id="i2" class="combobox-item">
-        <input type="checkbox" ${HIDE} tabindex="-1" name="tools" value="vitest" />
+        <input type="checkbox" ${HIDE} name="tools" value="vitest" />
         Vitest
+      </div>
+    </div>
+  </div>`;
+
+// Author sets only `checked`; aria-selected is derived at init.
+const PRESELECTED = `
+  <button id="trigger" class="combobox-trigger">
+    <span class="combobox-value" data-sp-placeholder="Pick one"></span>
+  </button>
+  <div id="cb" class="combobox" data-sp-toggle="#trigger">
+    <div class="combobox-list">
+      <div id="i1" class="combobox-item">
+        <input type="radio" ${HIDE} name="fw" value="next" />
+        Next.js
+      </div>
+      <div id="i2" class="combobox-item">
+        <input type="radio" ${HIDE} name="fw" value="astro" checked />
+        Astro
+      </div>
+      <div id="i3" class="combobox-item">
+        <input type="radio" ${HIDE} name="fw" value="nuxt" />
+        Nuxt.js
       </div>
     </div>
   </div>`;
@@ -66,18 +88,18 @@ const SINGLE_FORM = `
     <button id="trigger" class="combobox-trigger">
       <span class="combobox-value" data-sp-placeholder="Drink"></span>
     </button>
-    <div id="cb" class="combobox" data-sp-combobox="toggle: #trigger">
+    <div id="cb" class="combobox" data-sp-toggle="#trigger">
       <div class="combobox-list">
         <div id="i1" class="combobox-item">
-          <input type="radio" ${HIDE} tabindex="-1" name="drink" value="water" />
+          <input type="radio" ${HIDE} name="drink" value="water" />
           Water
         </div>
         <div id="i2" class="combobox-item">
-          <input type="radio" ${HIDE} tabindex="-1" name="drink" value="coke" />
+          <input type="radio" ${HIDE} name="drink" value="coke" />
           Coke
         </div>
         <div id="i3" class="combobox-item">
-          <input type="radio" ${HIDE} tabindex="-1" name="drink" value="pepsi" />
+          <input type="radio" ${HIDE} name="drink" value="pepsi" />
           Pepsi
         </div>
       </div>
@@ -89,14 +111,14 @@ const MULTI_FORM = `
     <button id="trigger" class="combobox-trigger">
       <span class="combobox-value" data-sp-placeholder="Tools"></span>
     </button>
-    <div id="cb" class="combobox" data-sp-combobox="toggle: #trigger">
+    <div id="cb" class="combobox" data-sp-toggle="#trigger">
       <div class="combobox-list">
         <div id="i1" class="combobox-item">
-          <input type="checkbox" ${HIDE} tabindex="-1" name="tools" value="eslint" />
+          <input type="checkbox" ${HIDE} name="tools" value="eslint" />
           ESLint
         </div>
         <div id="i2" class="combobox-item">
-          <input type="checkbox" ${HIDE} tabindex="-1" name="tools" value="vitest" />
+          <input type="checkbox" ${HIDE} name="tools" value="vitest" />
           Vitest
         </div>
       </div>
@@ -155,6 +177,13 @@ test("single select checks the radio, syncs the value, and closes", async ({ pag
   await expect(page.locator("#i2")).toHaveAttribute("aria-selected", "true");
   expect(await page.locator("#i2 input").isChecked()).toBe(true);
   await expect(page.locator(".combobox-value")).toHaveText("Astro");
+});
+
+test("derives aria-selected from a pre-checked item on init", async ({ page }) => {
+  await mount(page, PRESELECTED);
+  await expect(page.locator("#i2")).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#i1")).toHaveAttribute("aria-selected", "false");
+  await expect(page.locator("#i3")).toHaveAttribute("aria-selected", "false");
 });
 
 test("re-selecting the selected item clears the selection", async ({ page }) => {

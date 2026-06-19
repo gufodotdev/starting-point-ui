@@ -80,7 +80,12 @@
       @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm py-1.5 pr-2.5 pl-8 text-sm outline-none transition-colors;
       @apply hover:bg-secondary hover:text-secondary-foreground data-highlighted:bg-secondary data-highlighted:text-secondary-foreground;
       @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
-  
+
+      /* The state-holding radio/checkbox is hidden; selection shows via ::before. */
+      & > input {
+        @apply sr-only;
+      }
+
       &[aria-disabled="true"] {
         @apply pointer-events-none opacity-50;
       }

@@ -5,38 +5,32 @@ description: An accessible combobox for Tailwind CSS that combines a trigger but
 
 A trigger button with a searchable option list, supporting single and multi select.
 
-## Basic Usage
-
-Add the `combobox` class to a panel with a `data-sp-combobox` attribute whose `toggle` option points at the trigger's `id`. The trigger holds a `combobox-value` span that displays the selection (or its `data-sp-placeholder` while empty). Each `combobox-item` wraps a visually hidden `<input type="radio">` (single select) or `<input type="checkbox">` (multi select) with a `name` and `value`.
-
-Opening the combobox focuses the search input. Typing filters the items, arrow keys move the highlight through the visible ones, and Enter or a click selects. Single select closes on selection, and selecting the chosen option again clears it, so optional fields can return to empty. The search resets whenever the menu closes.
-
 ```html preview
 <button id="combobox-1-trigger" class="combobox-trigger w-56">
   <span class="combobox-value" data-sp-placeholder="Select a framework..."></span>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 </button>
 
-<div class="combobox" data-sp-combobox="toggle: #combobox-1-trigger">
+<div class="combobox" data-sp-toggle="#combobox-1-trigger">
   <div class="combobox-search">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
     <input class="combobox-input" type="text" placeholder="Search framework..." />
   </div>
   <div class="combobox-list">
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="framework" value="next" />
+      <input type="radio" name="framework" value="next" />
       Next.js
     </div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="framework" value="sveltekit" />
+      <input type="radio" name="framework" value="sveltekit" />
       SvelteKit
     </div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="framework" value="nuxt" />
+      <input type="radio" name="framework" value="nuxt" />
       Nuxt.js
     </div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="framework" value="astro" />
+      <input type="radio" name="framework" value="astro" />
       Astro
     </div>
   </div>
@@ -44,7 +38,17 @@ Opening the combobox focuses the search input. Typing filters the items, arrow k
 </div>
 ```
 
-## Multi-select
+## Usage
+
+Add the `combobox` class to a panel. Give your trigger an `id`, then point the combobox at it with `data-sp-toggle`. The trigger holds a `combobox-value` span that displays the selection (or its `data-sp-placeholder` while empty). Each `combobox-item` wraps a visually hidden `<input type="radio">` (single select) or `<input type="checkbox">` (multi select) with a `name` and `value`.
+
+Opening the combobox focuses the search input. Typing filters the items, arrow keys move the highlight through the visible ones, and Enter or a click selects. Single select closes on selection, and selecting the chosen option again clears it, so optional fields can return to empty. The search resets whenever the menu closes.
+
+---
+
+## Examples
+
+### Multi-select
 
 Use `<input type="checkbox">` inside each item for multi select. The menu stays open after selection. When two or more items are selected, the trigger collapses to "N selected" automatically.
 
@@ -54,26 +58,26 @@ Use `<input type="checkbox">` inside each item for multi select. The menu stays 
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 </button>
 
-<div class="combobox" data-sp-combobox="toggle: #combobox-multi-trigger">
+<div class="combobox" data-sp-toggle="#combobox-multi-trigger">
   <div class="combobox-search">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
     <input class="combobox-input" type="text" placeholder="Search tools..." />
   </div>
   <div class="combobox-list">
     <div class="combobox-item">
-      <input type="checkbox" class="sr-only" tabindex="-1" name="tools" value="eslint" />
+      <input type="checkbox" name="tools" value="eslint" />
       ESLint
     </div>
     <div class="combobox-item">
-      <input type="checkbox" class="sr-only" tabindex="-1" name="tools" value="prettier" />
+      <input type="checkbox" name="tools" value="prettier" />
       Prettier
     </div>
     <div class="combobox-item">
-      <input type="checkbox" class="sr-only" tabindex="-1" name="tools" value="typescript" />
+      <input type="checkbox" name="tools" value="typescript" />
       TypeScript
     </div>
     <div class="combobox-item">
-      <input type="checkbox" class="sr-only" tabindex="-1" name="tools" value="vitest" />
+      <input type="checkbox" name="tools" value="vitest" />
       Vitest
     </div>
   </div>
@@ -81,9 +85,9 @@ Use `<input type="checkbox">` inside each item for multi select. The menu stays 
 </div>
 ```
 
-## Pre-selected value
+### Pre-selected value
 
-Add `checked` to the input and `aria-selected="true"` to the item, then render one `<span>` child per selection inside `combobox-value`. The CSS handles single and multi states automatically.
+Add `checked` to the input, then render one `<span>` child per selection inside `combobox-value`. The CSS handles single and multi states automatically.
 
 ```html preview
 <button id="combobox-pre-trigger" class="combobox-trigger w-56">
@@ -93,25 +97,25 @@ Add `checked` to the input and `aria-selected="true"` to the item, then render o
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 </button>
 
-<div class="combobox" data-sp-combobox="toggle: #combobox-pre-trigger">
+<div class="combobox" data-sp-toggle="#combobox-pre-trigger">
   <div class="combobox-list">
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="pre-framework" value="next" />
+      <input type="radio" name="pre-framework" value="next" />
       Next.js
     </div>
-    <div class="combobox-item" aria-selected="true">
-      <input type="radio" class="sr-only" tabindex="-1" name="pre-framework" value="sveltekit" checked />
+    <div class="combobox-item">
+      <input type="radio" name="pre-framework" value="sveltekit" checked />
       SvelteKit
     </div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="pre-framework" value="astro" />
+      <input type="radio" name="pre-framework" value="astro" />
       Astro
     </div>
   </div>
 </div>
 ```
 
-## Static trigger
+### Static trigger
 
 For triggers that should never show selection state, like a column-visibility toggle, leave out the `combobox-value` span and write the label as plain content. The selection only ever renders into a `combobox-value` span, so without one the trigger keeps its label.
 
@@ -121,25 +125,25 @@ For triggers that should never show selection state, like a column-visibility to
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 </button>
 
-<div class="combobox" data-sp-combobox="toggle: #combobox-static-trigger">
+<div class="combobox" data-sp-toggle="#combobox-static-trigger">
   <div class="combobox-list">
-    <div class="combobox-item" aria-selected="true">
-      <input type="checkbox" class="sr-only" tabindex="-1" name="cols" value="name" checked />
+    <div class="combobox-item">
+      <input type="checkbox" name="cols" value="name" checked />
       Name
     </div>
-    <div class="combobox-item" aria-selected="true">
-      <input type="checkbox" class="sr-only" tabindex="-1" name="cols" value="email" checked />
+    <div class="combobox-item">
+      <input type="checkbox" name="cols" value="email" checked />
       Email
     </div>
     <div class="combobox-item">
-      <input type="checkbox" class="sr-only" tabindex="-1" name="cols" value="role" />
+      <input type="checkbox" name="cols" value="role" />
       Role
     </div>
   </div>
 </div>
 ```
 
-## Labels
+### Labels
 
 Use `combobox-label` and `combobox-separator` to group options visually.
 
@@ -149,32 +153,32 @@ Use `combobox-label` and `combobox-separator` to group options visually.
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 </button>
 
-<div class="combobox" data-sp-combobox="toggle: #combobox-grouped-trigger">
+<div class="combobox" data-sp-toggle="#combobox-grouped-trigger">
   <div class="combobox-list">
     <div class="combobox-label">Frontend</div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="language" value="ts" />
+      <input type="radio" name="language" value="ts" />
       TypeScript
     </div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="language" value="js" />
+      <input type="radio" name="language" value="js" />
       JavaScript
     </div>
     <div class="combobox-separator"></div>
     <div class="combobox-label">Backend</div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="language" value="go" />
+      <input type="radio" name="language" value="go" />
       Go
     </div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="language" value="rust" />
+      <input type="radio" name="language" value="rust" />
       Rust
     </div>
   </div>
 </div>
 ```
 
-## Disabled items
+### Disabled items
 
 Add `aria-disabled="true"` to a `combobox-item` to prevent selection, and `disabled` to its input. Arrow navigation skips it.
 
@@ -184,35 +188,87 @@ Add `aria-disabled="true"` to a `combobox-item` to prevent selection, and `disab
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 </button>
 
-<div class="combobox" data-sp-combobox="toggle: #combobox-disabled-trigger">
+<div class="combobox" data-sp-toggle="#combobox-disabled-trigger">
   <div class="combobox-list">
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="plan" value="free" />
+      <input type="radio" name="plan" value="free" />
       Free
     </div>
     <div class="combobox-item">
-      <input type="radio" class="sr-only" tabindex="-1" name="plan" value="pro" />
+      <input type="radio" name="plan" value="pro" />
       Pro
     </div>
     <div class="combobox-item" aria-disabled="true">
-      <input type="radio" class="sr-only" tabindex="-1" disabled name="plan" value="enterprise" />
+      <input type="radio" disabled name="plan" value="enterprise" />
       Enterprise
     </div>
   </div>
 </div>
 ```
 
+### In a form
+
+Each item's hidden `<input>` carries a `name` and `value`, so the combobox participates in form submission like any native field. No extra wiring is needed: wrap it in a `<form>` and the selected value is included in the submitted data.
+
+```html preview
+<form
+  class="grid w-full max-w-sm gap-3"
+  onsubmit="event.preventDefault(); this.querySelector('[data-result]').textContent = 'Submitted: ' + (new FormData(this).get('framework') ?? 'nothing')"
+>
+  <label class="label" for="combobox-form-trigger">Framework</label>
+
+  <button id="combobox-form-trigger" class="combobox-trigger">
+    <span class="combobox-value" data-sp-placeholder="Select a framework..."></span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+  </button>
+
+  <div class="combobox" data-sp-toggle="#combobox-form-trigger">
+    <div class="combobox-list">
+      <div class="combobox-item">
+        <input type="radio" name="framework" value="next" />
+        Next.js
+      </div>
+      <div class="combobox-item">
+        <input type="radio" name="framework" value="sveltekit" />
+        SvelteKit
+      </div>
+      <div class="combobox-item">
+        <input type="radio" name="framework" value="astro" />
+        Astro
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <p class="text-sm text-muted-foreground" data-result>Submitted: —</p>
+</form>
+```
+
+Read the selection from the form's data on submit. For multi select, use `getAll` to collect every checked value.
+
+```js
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  data.get("framework"); // single: the selected value, or null
+  data.getAll("tools"); // multi: an array of every selected value
+});
+```
+
+---
+
 ## Options
 
-Set options in the `data-sp-combobox` value, separated by semicolons.
+Set each option with its own `data-sp-*` attribute on the combobox.
 
-| Option       | Type    | Default                       | Description                                               |
-| ------------ | ------- | ----------------------------- | --------------------------------------------------------- |
-| `toggle`     | String  | —                             | Selector for the element that opens the combobox          |
-| `placement`  | String  | `bottom-start`                | Position relative to the trigger (Floating UI placement)  |
-| `offset`     | Number  | `4`                           | Gap in pixels between the trigger and the panel           |
-| `matchWidth` | Boolean | `true`                        | Match the panel width to the trigger width                |
-| `item`       | String  | `.combobox-item:not([hidden])` | Selector for the entries arrow navigation moves between  |
+| Attribute             | Type    | Default                        | Description                                              |
+| --------------------- | ------- | ------------------------------ | ------------------------------------------------------- |
+| `data-sp-toggle`      | String  | —                              | Selector for the element that opens the combobox         |
+| `data-sp-placement`   | String  | `bottom-start`                 | Position relative to the trigger (Floating UI placement) |
+| `data-sp-offset`      | Number  | `4`                            | Gap in pixels between the trigger and the panel          |
+| `data-sp-match-width` | Boolean | `true`                         | Match the panel width to the trigger width               |
+
+---
 
 ## Events
 
@@ -233,6 +289,8 @@ el.addEventListener("change", (e) => {
 });
 ```
 
+---
+
 ## Methods
 
 Get the instance with `sp.combobox(el)`, then call its methods:
@@ -251,6 +309,8 @@ const combobox = sp.combobox(document.querySelector("#my-combobox"));
 combobox.filter("next");
 combobox.select(document.querySelector("#my-combobox .combobox-item"));
 ```
+
+---
 
 ## Accessibility
 

@@ -17,7 +17,7 @@ const ITEM = ".combobox-item";
 
 export const Combobox = define({
   name: "combobox",
-  selector: "[data-sp-combobox]",
+  selector: ".combobox",
   mixins: [
     Togglable,
     ClickToShow,
@@ -57,8 +57,15 @@ export const Combobox = define({
     if (list && !list.hasAttribute("role")) list.setAttribute("role", "listbox");
     this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
       if (!item.hasAttribute("role")) item.setAttribute("role", "option");
-      // Options are highlighted via aria-activedescendant, never focused.
+      // Options are highlighted via aria-activedescendant, never focused; the
+      // state-holding input stays out of the tab order too.
       item.tabIndex = -1;
+      const input = item.querySelector<HTMLInputElement>("input");
+      if (input) {
+        input.tabIndex = -1;
+        // aria-selected follows the input's checked state; authors only set checked.
+        item.setAttribute("aria-selected", String(input.checked));
+      }
     });
 
     this.on(this.el, "click", (e) => {

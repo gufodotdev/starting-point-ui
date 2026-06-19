@@ -82,7 +82,7 @@ export function Picker({
         ref={menuRef}
         id={menuId}
         className="combobox"
-        data-sp-combobox={`toggle: #${id}`}
+        data-sp-toggle={`#${id}`}
       >
         {search && (
           <div className="combobox-search">
@@ -100,12 +100,9 @@ export function Picker({
               key={option.value}
               className="combobox-item"
               data-label={option.label}
-              aria-selected={value === option.value}
             >
               <input
                 type="radio"
-                className="sr-only"
-                tabIndex={-1}
                 name={id}
                 value={option.value}
                 defaultChecked={value === option.value}
