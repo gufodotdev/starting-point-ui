@@ -17,7 +17,7 @@ async function mount(page: Page, html: string) {
 
 const BASIC = `
   <button id="trigger" class="btn">Open</button>
-  <div id="menu" class="dropdown" data-sp-dropdown="toggle: #trigger">
+  <div id="menu" class="dropdown" data-sp-toggle="#trigger">
     <button id="i1" class="dropdown-item">One</button>
     <button id="i2" class="dropdown-item">Two</button>
     <div id="sep" class="dropdown-separator"></div>
@@ -27,7 +27,7 @@ const BASIC = `
 
 const DISABLED = `
   <button id="trigger" class="btn">Open</button>
-  <div id="menu" class="dropdown" data-sp-dropdown="toggle: #trigger">
+  <div id="menu" class="dropdown" data-sp-toggle="#trigger">
     <button id="i1" class="dropdown-item">One</button>
     <button id="i2" class="dropdown-item" aria-disabled="true" tabindex="-1">Two</button>
     <button id="i3" class="dropdown-item">Three</button>

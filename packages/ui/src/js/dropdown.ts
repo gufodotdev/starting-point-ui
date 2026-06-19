@@ -16,7 +16,7 @@ import { Anchorable } from "./mixins/anchorable";
 
 export const Dropdown = define({
   name: "dropdown",
-  selector: "[data-sp-dropdown]",
+  selector: ".dropdown",
   mixins: [
     Togglable,
     ClickToShow,

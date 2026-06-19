@@ -5,14 +5,10 @@ description: An accessible dropdown menu for Tailwind CSS with full keyboard nav
 
 A menu of actions or links anchored to a trigger, with arrow-key navigation.
 
-## Basic Usage
-
-Add the `dropdown` class to an element and a `data-sp-dropdown` attribute with a `toggle` option pointing at the trigger's `id`. Use `dropdown-item` for each entry. The menu opens on click and closes on Escape, an outside click, when focus leaves, or when an item is chosen. Arrow keys move between items and wrap around at both ends.
-
 ```html preview
 <button id="dropdown-1-trigger" class="btn">Options</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-1-trigger">
+<div class="dropdown" data-sp-toggle="#dropdown-1-trigger">
   <a href="#" class="dropdown-item">New file</a>
   <a href="#" class="dropdown-item">Copy link</a>
   <div class="dropdown-separator"></div>
@@ -23,14 +19,33 @@ Add the `dropdown` class to an element and a `data-sp-dropdown` attribute with a
 </div>
 ```
 
-## Icons
+## Usage
+
+Add the `dropdown` class to an element. Give your trigger an `id`, then point the dropdown at it with `data-sp-toggle`. Use `dropdown-item` for each entry. The menu opens on click and closes on Escape, an outside click, when focus leaves, or when an item is chosen. Arrow keys move between items and wrap around at both ends.
+
+```html
+<!-- This is a button toggling the dropdown -->
+<button id="my-trigger" class="btn">Options</button>
+
+<!-- This is the dropdown -->
+<div class="dropdown" data-sp-toggle="#my-trigger">
+  <a href="#" class="dropdown-item">New file</a>
+  <a href="#" class="dropdown-item">Copy link</a>
+</div>
+```
+
+---
+
+## Examples
+
+### Icons
 
 Add icons to items for better visual hierarchy.
 
 ```html preview
 <button id="dropdown-icons-trigger" class="btn">Options</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-icons-trigger">
+<div class="dropdown" data-sp-toggle="#dropdown-icons-trigger">
   <a href="#" class="dropdown-item">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
     New file
@@ -47,14 +62,14 @@ Add icons to items for better visual hierarchy.
 </div>
 ```
 
-## Labels
+### Labels
 
 Use `dropdown-label` to group items with a heading.
 
 ```html preview
 <button id="dropdown-labels-trigger" class="btn">My Account</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-labels-trigger">
+<div class="dropdown" data-sp-toggle="#dropdown-labels-trigger">
   <div class="dropdown-label">Settings</div>
   <a href="#" class="dropdown-item">Profile</a>
   <a href="#" class="dropdown-item">Billing</a>
@@ -65,14 +80,14 @@ Use `dropdown-label` to group items with a heading.
 </div>
 ```
 
-## Disabled items
+### Disabled items
 
 Add `aria-disabled="true"` and `tabindex="-1"` to disable an item. Arrow navigation skips it and choosing it does nothing.
 
 ```html preview
 <button id="dropdown-disabled-trigger" class="btn">Actions</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-disabled-trigger">
+<div class="dropdown" data-sp-toggle="#dropdown-disabled-trigger">
   <a href="#" class="dropdown-item">Edit</a>
   <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">Duplicate</a>
   <a href="#" class="dropdown-item">Archive</a>
@@ -81,52 +96,56 @@ Add `aria-disabled="true"` and `tabindex="-1"` to disable an item. Arrow navigat
 </div>
 ```
 
-## Placement
+### Placement
 
-Set where the menu opens relative to its trigger with the `placement` option (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement)). Defaults to `bottom-end`.
+Set where the menu opens relative to its trigger with `data-sp-placement` (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement)). Defaults to `bottom-end`.
 
 ```html preview
 <button id="dropdown-start-trigger" class="btn">bottom-start</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-start-trigger; placement: bottom-start">
+<div class="dropdown" data-sp-toggle="#dropdown-start-trigger" data-sp-placement="bottom-start">
   <a href="#" class="dropdown-item">Profile</a>
   <a href="#" class="dropdown-item">Settings</a>
 </div>
 
 <button id="dropdown-right-trigger" class="btn">right-start</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-right-trigger; placement: right-start">
+<div class="dropdown" data-sp-toggle="#dropdown-right-trigger" data-sp-placement="right-start">
   <a href="#" class="dropdown-item">Profile</a>
   <a href="#" class="dropdown-item">Settings</a>
 </div>
 ```
 
-## Hover
+### Hover
 
-Add `mode: hover` to open the menu on hover instead of click. It opens on pointer enter or focus, and closes when the pointer leaves both the trigger and the menu.
+Add `data-sp-mode="hover"` to open the menu on hover instead of click. It opens on pointer enter or focus, and closes when the pointer leaves both the trigger and the menu.
 
 ```html preview
 <button id="dropdown-hover-trigger" class="btn">Hover me</button>
 
-<div class="dropdown" data-sp-dropdown="toggle: #dropdown-hover-trigger; mode: hover">
+<div class="dropdown" data-sp-toggle="#dropdown-hover-trigger" data-sp-mode="hover">
   <a href="#" class="dropdown-item">Profile</a>
   <a href="#" class="dropdown-item">Settings</a>
   <a href="#" class="dropdown-item">Logout</a>
 </div>
 ```
 
+---
+
 ## Options
 
-Set options in the `data-sp-dropdown` value, separated by semicolons.
+Set each option with its own `data-sp-*` attribute on the dropdown.
 
-| Option      | Type   | Default          | Description                                               |
-| ----------- | ------ | ---------------- | --------------------------------------------------------- |
-| `toggle`    | String | —                | Selector for the element that opens the menu              |
-| `placement` | String | `bottom-end`     | Position relative to the trigger (Floating UI placement)  |
-| `offset`    | Number | `4`              | Gap in pixels between the trigger and the menu            |
-| `mode`      | String | `click`          | `click` to toggle on click, `hover` to open on hover      |
-| `item`      | String | `.dropdown-item` | Selector for the entries arrow navigation moves between   |
-| `matchWidth` | Boolean | `false`        | Match the menu width to the trigger width                 |
+| Attribute             | Type    | Default          | Description                                              |
+| --------------------- | ------- | ---------------- | ------------------------------------------------------- |
+| `data-sp-toggle`      | String  | —                | Selector for the element that opens the menu             |
+| `data-sp-placement`   | String  | `bottom-end`     | Position relative to the trigger (Floating UI placement) |
+| `data-sp-offset`      | Number  | `4`              | Gap in pixels between the trigger and the menu           |
+| `data-sp-mode`        | String  | `click`          | `click` to toggle on click, `hover` to open on hover     |
+| `data-sp-item`        | String  | `.dropdown-item` | Selector for the entries arrow navigation moves between  |
+| `data-sp-match-width` | Boolean | `false`          | Match the menu width to the trigger width                |
+
+---
 
 ## Events
 
@@ -147,6 +166,8 @@ el.addEventListener("sp-beforehide", (e) => {
 });
 ```
 
+---
+
 ## Methods
 
 Get the instance with `sp.dropdown(el)`, then call its methods:
@@ -162,6 +183,8 @@ const dropdown = sp.dropdown(document.querySelector("#my-dropdown"));
 
 dropdown.show();
 ```
+
+---
 
 ## Accessibility
 
