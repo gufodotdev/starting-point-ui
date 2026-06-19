@@ -5,21 +5,35 @@ description: An accessible tooltip for Tailwind CSS, shown on hover or focus and
 
 A small label anchored to a trigger, shown on hover or keyboard focus.
 
-## Basic Usage
-
-Add the `tooltip` class to an element with an `id` and a `data-sp-tooltip` attribute with a `toggle` option pointing at the trigger's `id`. It shows on hover or focus and hides when the pointer leaves. The trigger is described by the tooltip automatically.
-
 ```html preview
 <button id="tooltip-1-trigger" class="btn">Hover me</button>
 
-<div id="tooltip-1" class="tooltip" data-sp-tooltip="toggle: #tooltip-1-trigger">
+<div id="tooltip-1" class="tooltip" data-sp-toggle="#tooltip-1-trigger">
   Add to library
 </div>
 ```
 
-## Placement
+## Usage
 
-Set where the tooltip opens relative to its trigger with the `placement` option (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement), e.g. `right`, `bottom`, `left`). Defaults to `top`.
+Add the `tooltip` class to an element and give it an `id`. Give your trigger an `id` too, then point the tooltip at it with `data-sp-toggle`. It shows on hover or focus and hides when the pointer leaves. The trigger is described by the tooltip automatically.
+
+```html
+<!-- This is the trigger -->
+<button id="my-trigger" class="btn">Hover me</button>
+
+<!-- This is the tooltip -->
+<div id="my-tooltip" class="tooltip" data-sp-toggle="#my-trigger">
+  Add to library
+</div>
+```
+
+---
+
+## Examples
+
+### Placement
+
+Set where the tooltip opens relative to its trigger with `data-sp-placement` (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement), e.g. `right`, `bottom`, `left`). Defaults to `top`.
 
 ```html preview
 <button id="tooltip-right-trigger" class="btn">Right</button>
@@ -27,21 +41,26 @@ Set where the tooltip opens relative to its trigger with the `placement` option 
 <div
   id="tooltip-right"
   class="tooltip"
-  data-sp-tooltip="toggle: #tooltip-right-trigger; placement: right"
+  data-sp-toggle="#tooltip-right-trigger"
+  data-sp-placement="right"
 >
   Opens to the right
 </div>
 ```
 
+---
+
 ## Options
 
-Set options in the `data-sp-tooltip` value, separated by semicolons.
+Set each option with its own `data-sp-*` attribute on the tooltip.
 
-| Option      | Type   | Default | Description                                              |
-| ----------- | ------ | ------- | -------------------------------------------------------- |
-| `toggle`    | String | —       | Selector for the element the tooltip describes           |
-| `placement` | String | `top`   | Position relative to the trigger (Floating UI placement) |
-| `offset`    | Number | `6`     | Gap in pixels between the trigger and the tooltip        |
+| Attribute           | Type   | Default | Description                                              |
+| ------------------- | ------ | ------- | -------------------------------------------------------- |
+| `data-sp-toggle`    | String | —       | Selector for the element the tooltip describes           |
+| `data-sp-placement` | String | `top`   | Position relative to the trigger (Floating UI placement) |
+| `data-sp-offset`    | Number | `6`     | Gap in pixels between the trigger and the tooltip        |
+
+---
 
 ## Events
 
@@ -55,6 +74,8 @@ Lifecycle events fire on the tooltip element; `before*` events are cancelable.
 | `sp-beforehide` | Before hiding (cancelable)  |
 | `sp-hide`       | Closing                     |
 | `sp-hidden`     | Closed                      |
+
+---
 
 ## Methods
 
@@ -71,6 +92,8 @@ const tooltip = sp.tooltip(document.querySelector("#my-tooltip"));
 
 tooltip.show();
 ```
+
+---
 
 ## Accessibility
 

@@ -17,7 +17,7 @@ async function mount(page: Page, html: string) {
 
 const BASIC = `
   <button id="trigger" class="btn">Hover me</button>
-  <div id="tip" class="tooltip" data-sp-tooltip="toggle: #trigger">Tooltip text</div>
+  <div id="tip" class="tooltip" data-sp-toggle="#trigger">Tooltip text</div>
   <button id="other">Other</button>`;
 
 const tooltip = (page: Page) => page.locator("#tip");
@@ -71,7 +71,7 @@ test("sp.tooltip(el) returns the instance with the public API", async ({ page })
   await mount(page, BASIC);
   const api = await page.evaluate(() => {
     const el = document.querySelector("#tip") as HTMLElement;
-    const t = (window as Window & { sp: Record<string, (el: HTMLElement) => Record<string, unknown>> }).sp.tooltip(el);
+    const t = (window as any).sp.tooltip(el);
     return { show: typeof t.show, hide: typeof t.hide, toggle: typeof t.toggle };
   });
   expect(api).toEqual({ show: "function", hide: "function", toggle: "function" });

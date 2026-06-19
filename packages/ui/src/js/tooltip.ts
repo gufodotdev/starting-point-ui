@@ -12,7 +12,7 @@ import { Anchorable } from "./mixins/anchorable";
 
 export const Tooltip = define({
   name: "tooltip",
-  selector: "[data-sp-tooltip]",
+  selector: ".tooltip",
   mixins: [Togglable, HoverToShow, HoverOutHide, Escapable, Popoverable, Anchorable],
 
   props: {
