@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 
 // Sheet shares Dialog's mixins, so the full lifecycle (events, focus, cancel) is
 // covered by dialog.spec. These tests verify Sheet's own identity, accessor, and
-// that the shared Dismissable mixin works under [data-sp-sheet].
+// that the shared Dismissable mixin works under .sheet.
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/index.html");
@@ -17,7 +17,7 @@ async function mount(page: Page, html: string) {
 
 const BASIC = `
   <button id="trigger" class="btn">Open</button>
-  <dialog class="sheet" data-sp-sheet="toggle: #trigger">
+  <dialog class="sheet" data-sp-toggle="#trigger">
     <h2 class="sheet-title">Title</h2>
     <p class="sheet-description">Description</p>
     <button id="dismiss" data-sp-dismiss>Close</button>
@@ -25,7 +25,7 @@ const BASIC = `
 
 const STATIC = `
   <button id="trigger" class="btn">Open</button>
-  <dialog class="sheet" data-sp-sheet="toggle: #trigger; static: true">
+  <dialog class="sheet" data-sp-toggle="#trigger" data-sp-static>
     <h2 class="sheet-title">Title</h2>
     <button id="dismiss" data-sp-dismiss>Close</button>
   </dialog>`;

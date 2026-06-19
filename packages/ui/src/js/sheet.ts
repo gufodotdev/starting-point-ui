@@ -10,7 +10,7 @@ import { Dismissable } from "./mixins/dismissable";
 
 export const Sheet = define({
   name: "sheet",
-  selector: "[data-sp-sheet]",
+  selector: ".sheet",
   mixins: [Togglable, ClickToShow, Modalable, Dismissable],
 
   init(this: SpInstance) {
