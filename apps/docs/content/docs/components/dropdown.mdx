@@ -82,17 +82,17 @@ Use `dropdown-label` to group items with a heading.
 
 ### Disabled items
 
-Add `aria-disabled="true"` and `tabindex="-1"` to disable an item. Arrow navigation skips it and choosing it does nothing.
+Add `aria-disabled="true"` to disable an item. Arrow navigation skips it and choosing it does nothing.
 
 ```html preview
 <button id="dropdown-disabled-trigger" class="btn">Actions</button>
 
 <div class="dropdown" data-sp-toggle="#dropdown-disabled-trigger">
   <a href="#" class="dropdown-item">Edit</a>
-  <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">Duplicate</a>
+  <a href="#" class="dropdown-item" aria-disabled="true">Duplicate</a>
   <a href="#" class="dropdown-item">Archive</a>
   <div class="dropdown-separator"></div>
-  <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">Delete</a>
+  <a href="#" class="dropdown-item" aria-disabled="true">Delete</a>
 </div>
 ```
 

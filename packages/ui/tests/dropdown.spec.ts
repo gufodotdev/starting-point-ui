@@ -29,7 +29,7 @@ const DISABLED = `
   <button id="trigger" class="btn">Open</button>
   <div id="menu" class="dropdown" data-sp-toggle="#trigger">
     <button id="i1" class="dropdown-item">One</button>
-    <button id="i2" class="dropdown-item" aria-disabled="true" tabindex="-1">Two</button>
+    <button id="i2" class="dropdown-item" aria-disabled="true">Two</button>
     <button id="i3" class="dropdown-item">Three</button>
   </div>`;
 
@@ -91,6 +91,16 @@ test("arrow navigation skips disabled items", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   expect(await activeId(page)).toBe("i1");
   await page.keyboard.press("ArrowDown");
+  expect(await activeId(page)).toBe("i3");
+});
+
+test("arrow navigation skips separators", async ({ page }) => {
+  await mount(page, BASIC);
+  await page.click("#trigger");
+  await expect(menu(page)).toHaveClass(/shown/);
+  await page.keyboard.press("ArrowDown"); // i1
+  await page.keyboard.press("ArrowDown"); // i2
+  await page.keyboard.press("ArrowDown"); // skips #sep, lands on i3
   expect(await activeId(page)).toBe("i3");
 });
 
