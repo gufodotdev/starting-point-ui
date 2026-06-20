@@ -10,6 +10,15 @@
   }
 }
 
+/* Drop the dividers between sections. */
+@utility accordion-no-divider {
+  @layer l1.l2 {
+    & > :has(> .accordion-trigger):not(:first-child) {
+      @apply border-t-0;
+    }
+  }
+}
+
 @utility accordion-trigger {
   @layer l1.l2 {
     @apply flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
@@ -18,21 +27,10 @@
   }
 }
 
-@utility accordion-panel {
-  @layer l1.l2 {
-    /* Panels are Collapsibles, so they animate with the collapse keyframes. */
-    @apply invisible h-0 overflow-hidden;
-    @apply [&.show]:visible [&.show]:animate-collapse-down;
-    @apply [&.hide]:visible [&.hide]:animate-collapse-up;
-
-    &.shown {
-      @apply visible h-auto;
-    }
-  }
-}
-
 @utility accordion-content {
   @layer l1.l2 {
+    /* Sits on the collapsible-content inside each panel for the section's
+       spacing and typography; the collapse itself is the plain Collapsible. */
     @apply pb-4 text-sm/6 text-muted-foreground;
   }
 }

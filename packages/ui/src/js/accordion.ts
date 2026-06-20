@@ -1,58 +1,53 @@
-// Group of collapsibles: the nth trigger pairs with the nth panel, one panel
-// open at a time unless multiple is set.
+// Coordinates a group of plain collapsibles: wrap any collapsibles in .accordion
+// and opening one closes the others, unless multiple is set. The collapsibles
+// keep their own toggle and lifecycle; the accordion adds the single-open rule
+// and the accordion ARIA roles (the triggers' aria-expanded/controls already
+// come from the collapsible).
 
 import { define } from "./define";
 import type { SpInstance } from "./define";
 import { getInstance } from "./observer";
 import { Collapsible } from "./collapsible";
-import { Navigable } from "./mixins/navigable";
 import { ensureId } from "./utils";
 
-const TRIGGER = ".accordion-trigger";
-const PANEL = ".accordion-panel";
+const PANEL = ".collapsible";
 
 export const Accordion = define({
   name: "accordion",
-  selector: "[data-sp-accordion]",
-  mixins: [Navigable],
+  selector: ".accordion",
 
   props: {
-    item: { type: String, default: TRIGGER },
     multiple: Boolean,
   },
 
   init(this: SpInstance) {
-    // Nested accordions own their own triggers and panels.
-    const mine = (el: HTMLElement) => el.closest("[data-sp-accordion]") === this.el;
-    const triggers = [...this.el.querySelectorAll<HTMLElement>(TRIGGER)].filter(mine);
+    // Nested accordions own their own panels.
+    const mine = (el: HTMLElement) => el.closest(".accordion") === this.el;
     const panels = [...this.el.querySelectorAll<HTMLElement>(PANEL)].filter(mine);
 
-    triggers.forEach((trigger, i) => {
-      const panel = panels[i];
-      if (!panel) return;
-      // Each panel becomes a Collapsible owned by its trigger; that brings the
-      // toggle behavior, lifecycle events, and aria-expanded/controls wiring.
-      panel.setAttribute("data-sp-collapsible", `toggle: #${ensureId(trigger)}`);
-      if (!panel.hasAttribute("role")) panel.setAttribute("role", "region");
-      panel.setAttribute("aria-labelledby", ensureId(trigger));
+    for (const panel of panels) {
+      // Ensure the panel's collapsible is live so the trigger gets its
+      // aria-expanded / aria-controls before we add the region semantics.
       getInstance(panel, Collapsible);
-    });
+      // The trigger is the one the collapsible points at (data-sp-toggle); label
+      // the panel as a region named by it, per the APG accordion pattern.
+      const toggle = panel.getAttribute("data-sp-toggle");
+      const trigger = toggle && document.querySelector<HTMLElement>(toggle);
+      if (!trigger) continue;
+      if (!panel.hasAttribute("role")) panel.setAttribute("role", "region");
+      if (!panel.hasAttribute("aria-labelledby")) {
+        panel.setAttribute("aria-labelledby", ensureId(trigger));
+      }
+    }
 
     // Single open: a panel starting to show closes its open siblings.
     this.on(this.el, "sp-beforeshow", (e) => {
       if (this.config.multiple) return;
       const target = e.target as HTMLElement;
-      if (!target.matches(PANEL) || !mine(target)) return;
+      if (!panels.includes(target)) return;
       for (const panel of panels) {
         if (panel !== target) getInstance(panel, Collapsible)?.hide();
       }
     });
-  },
-
-  methods: {
-    // Navigable: no overlay; arrows move focus between the header buttons.
-    _isMounted(): boolean {
-      return true;
-    },
   },
 });
