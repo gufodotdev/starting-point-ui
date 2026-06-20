@@ -49,6 +49,91 @@ Add the `collapsible` class to an element and give it an `id`. Give your trigger
 
 ## Examples
 
+### File tree
+
+Nest collapsibles to build an expandable file tree. Each folder row is a trigger, and the chevron rotates from pointing at the folder to pointing down as it opens.
+
+```html preview
+<div class="sidebar-menu max-w-xs">
+  <div class="sidebar-menu-item">
+    <button id="collapsible-tree-trigger" class="sidebar-menu-button" aria-expanded="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform [[aria-expanded=true]>&]:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+      <span>components</span>
+    </button>
+    <div class="collapsible shown" data-sp-toggle="#collapsible-tree-trigger">
+      <div class="collapsible-content">
+        <ul class="sidebar-menu-sub">
+          <li class="sidebar-menu-sub-item">
+            <button id="collapsible-tree-sub-trigger" class="sidebar-menu-sub-button w-full">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform [[aria-expanded=true]>&]:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+              <span>icons</span>
+            </button>
+            <div class="collapsible" data-sp-toggle="#collapsible-tree-sub-trigger">
+              <div class="collapsible-content">
+                <ul class="sidebar-menu-sub">
+                  <li class="sidebar-menu-sub-item">
+                    <a href="#" class="sidebar-menu-sub-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                      <span>chevron.tsx</span>
+                    </a>
+                  </li>
+                  <li class="sidebar-menu-sub-item">
+                    <a href="#" class="sidebar-menu-sub-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                      <span>folder.tsx</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="sidebar-menu-sub-item">
+            <a href="#" class="sidebar-menu-sub-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+              <span>accordion.tsx</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-sub-item">
+            <a href="#" class="sidebar-menu-sub-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+              <span>collapsible.tsx</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Show more
+
+Truncate a block of text behind a toggle that swaps its own label with `in-aria-expanded:` variants.
+
+```html preview
+<div class="flex w-full max-w-sm flex-col gap-2 text-sm/6">
+  <p>
+    Starting Point is a framework-agnostic component library built on Tailwind CSS.
+    Drop in the classes, add the script, and the components wire up their own state and accessibility.
+  </p>
+  <div class="collapsible" data-sp-toggle="#collapsible-more-trigger">
+    <div class="collapsible-content">
+      <p>
+        There is no build step and no runtime framework. Every component works from
+        markup and CSS alone, then progressively enhances once the script loads, so
+        the first paint is always correct.
+      </p>
+    </div>
+  </div>
+  <button id="collapsible-more-trigger" class="btn btn-link btn-sm self-start px-0">
+    <span class="in-aria-expanded:hidden">Show more</span>
+    <span class="hidden in-aria-expanded:inline">Show less</span>
+  </button>
+</div>
+```
+
 ### Initially open
 
 Add the `shown` class to the panel so it renders open on first paint, before JavaScript loads. Set `aria-expanded="true"` on the trigger so its state matches.

@@ -36,8 +36,14 @@ export const ClickToShow: Mixin = {
       }
     });
 
-    this.on(this.el, "sp-beforeshow", () => trigger.setAttribute("aria-expanded", "true"));
-    this.on(this.el, "sp-beforehide", () => trigger.setAttribute("aria-expanded", "false"));
+    // Guard against nested collapsibles: their lifecycle events bubble through
+    // this panel, so only react to our own.
+    this.on(this.el, "sp-beforeshow", (e) => {
+      if (e.target === this.el) trigger.setAttribute("aria-expanded", "true");
+    });
+    this.on(this.el, "sp-beforehide", (e) => {
+      if (e.target === this.el) trigger.setAttribute("aria-expanded", "false");
+    });
   },
 
   destroy(this: SpInstance) {

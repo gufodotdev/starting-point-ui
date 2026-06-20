@@ -23,6 +23,18 @@ const PRESHOWN = `
     <div class="collapsible-content">Visible content</div>
   </div>`;
 
+// Inner collapsible nested inside the outer panel; the outer starts open.
+const NESTED = `
+  <button id="outer-trigger" class="btn">Outer</button>
+  <div id="outer" class="collapsible shown" data-sp-toggle="#outer-trigger">
+    <div class="collapsible-content">
+      <button id="inner-trigger" class="btn">Inner</button>
+      <div id="inner" class="collapsible" data-sp-toggle="#inner-trigger">
+        <div class="collapsible-content">Nested content</div>
+      </div>
+    </div>
+  </div>`;
+
 const panel = (page: Page) => page.locator("#panel");
 
 test("opens from its trigger and settles to .shown", async ({ page }) => {
@@ -85,6 +97,26 @@ test("sp.collapsible(el) returns the instance with the public API", async ({ pag
     return { show: typeof c.show, hide: typeof c.hide, toggle: typeof c.toggle };
   });
   expect(api).toEqual({ show: "function", hide: "function", toggle: "function" });
+});
+
+test("a nested collapsible's lifecycle does not toggle the outer one", async ({ page }) => {
+  await mount(page, NESTED);
+  const outer = page.locator("#outer");
+  const outerTrigger = page.locator("#outer-trigger");
+  await expect(outer).toHaveClass(/shown/);
+  await expect(outerTrigger).toHaveAttribute("aria-expanded", "true");
+
+  // Open then close the inner panel; its bubbling sp-before* events must not
+  // flip the outer trigger or collapse the outer panel.
+  await page.click("#inner-trigger");
+  await expect(page.locator("#inner")).toHaveClass(/shown/);
+  await expect(outer).toHaveClass(/shown/);
+  await expect(outerTrigger).toHaveAttribute("aria-expanded", "true");
+
+  await page.click("#inner-trigger");
+  await expect(page.locator("#inner")).not.toHaveClass(/shown/);
+  await expect(outer).toHaveClass(/shown/);
+  await expect(outerTrigger).toHaveAttribute("aria-expanded", "true");
 });
 
 // WAI-ARIA Disclosure pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
