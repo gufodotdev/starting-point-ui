@@ -136,7 +136,7 @@ Truncate a block of text behind a toggle that swaps its own label with `in-aria-
 
 ### Initially open
 
-Add the `shown` class to the panel so it renders open on first paint, before JavaScript loads. Set `aria-expanded="true"` on the trigger so its state matches.
+Add the `shown` class to the panel so it renders open on first paint, before JavaScript loads. Also set `aria-expanded="true"` on the trigger so its icon paints in the open state too. On init the collapsible settles the state without replaying the enter animation.
 
 ```html preview
 <div class="flex w-full max-w-sm flex-col gap-2">

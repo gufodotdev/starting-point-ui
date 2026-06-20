@@ -23,6 +23,14 @@ const PRESHOWN = `
     <div class="collapsible-content">Visible content</div>
   </div>`;
 
+// Same as PRESHOWN but the author also set aria-expanded on the trigger for a
+// correct first paint; init must respect it, not overwrite it.
+const PRESHOWN_ARIA = `
+  <button id="trigger" class="btn" aria-expanded="true">Toggle</button>
+  <div id="panel" class="collapsible shown" data-sp-toggle="#trigger">
+    <div class="collapsible-content">Visible content</div>
+  </div>`;
+
 // Inner collapsible nested inside the outer panel; the outer starts open.
 const NESTED = `
   <button id="outer-trigger" class="btn">Outer</button>
@@ -60,6 +68,19 @@ test("settles an authored .shown panel and syncs the trigger", async ({ page }) 
   await expect(page.locator("#trigger")).toHaveAttribute("aria-expanded", "true");
   await page.click("#trigger");
   await expect(panel(page)).not.toHaveClass(/shown/);
+});
+
+test("respects an authored aria-expanded on a .shown panel and stays togglable", async ({ page }) => {
+  await mount(page, PRESHOWN_ARIA);
+  // Authoring aria-expanded for first paint must not break the settle.
+  await expect(panel(page)).toHaveClass(/shown/);
+  await expect(page.locator("#trigger")).toHaveAttribute("aria-expanded", "true");
+  await page.click("#trigger");
+  await expect(panel(page)).not.toHaveClass(/shown/);
+  await expect(page.locator("#trigger")).toHaveAttribute("aria-expanded", "false");
+  await page.click("#trigger");
+  await expect(panel(page)).toHaveClass(/shown/);
+  await expect(page.locator("#trigger")).toHaveAttribute("aria-expanded", "true");
 });
 
 test("measures the content height for the animation keyframes", async ({ page }) => {
