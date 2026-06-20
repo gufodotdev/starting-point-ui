@@ -1,4 +1,6 @@
-// Tab list switching panels in place; the nth tab pairs with the nth panel.
+// Tab list switching content panels in place. Each tab points at its panel with
+// data-sp-toggle, so the panels can live anywhere on the page; the tab-list is
+// the component and drives selection, arrow-key nav, and the roving tabindex.
 
 import { define } from "./define";
 import type { SpInstance } from "./define";
@@ -6,11 +8,10 @@ import { ensureId, isDisabled } from "./utils";
 import { Navigable } from "./mixins/navigable";
 
 const TAB = ".tab";
-const PANEL = ".tab-panel";
 
 export const Tabs = define({
   name: "tabs",
-  selector: "[data-sp-tabs]",
+  selector: ".tab-list",
   mixins: [Navigable],
 
   props: {
@@ -19,20 +20,16 @@ export const Tabs = define({
   },
 
   init(this: SpInstance) {
-    // WAI-ARIA tabs semantics, applied unless authored.
-    const list = this.el.querySelector<HTMLElement>(".tab-list");
-    if (list) {
-      if (!list.hasAttribute("role")) list.setAttribute("role", "tablist");
-      if (this.config.orientation === "vertical") {
-        list.setAttribute("aria-orientation", "vertical");
-      }
+    // WAI-ARIA tabs semantics on the list itself, applied unless authored.
+    if (!this.el.hasAttribute("role")) this.el.setAttribute("role", "tablist");
+    if (this.config.orientation === "vertical") {
+      this.el.setAttribute("aria-orientation", "vertical");
     }
 
     const tabs: HTMLElement[] = this._tabs();
-    const panels: HTMLElement[] = this._panels();
-    tabs.forEach((tab, i) => {
+    tabs.forEach((tab) => {
       if (!tab.hasAttribute("role")) tab.setAttribute("role", "tab");
-      const panel = panels[i];
+      const panel = this._panel(tab);
       if (!panel) return;
       if (!panel.hasAttribute("role")) panel.setAttribute("role", "tabpanel");
       tab.setAttribute("aria-controls", ensureId(panel));
@@ -49,22 +46,22 @@ export const Tabs = define({
 
     this.on(this.el, "click", (e) => {
       const tab = (e.target as HTMLElement).closest<HTMLElement>(TAB);
-      if (tab) this.select(tab);
+      if (tab && tabs.includes(tab)) this.select(tab);
     });
   },
 
   methods: {
-    // Nested tabs own their own tabs and panels.
+    // Nested tab-lists own their own tabs.
     _tabs(this: SpInstance): HTMLElement[] {
       return [...this.el.querySelectorAll<HTMLElement>(TAB)].filter(
-        (tab) => tab.closest("[data-sp-tabs]") === this.el,
+        (tab) => tab.closest(".tab-list") === this.el,
       );
     },
 
-    _panels(this: SpInstance): HTMLElement[] {
-      return [...this.el.querySelectorAll<HTMLElement>(PANEL)].filter(
-        (panel) => panel.closest("[data-sp-tabs]") === this.el,
-      );
+    // The panel a tab controls, resolved from its data-sp-toggle selector.
+    _panel(this: SpInstance, tab: HTMLElement): HTMLElement | null {
+      const sel = tab.getAttribute("data-sp-toggle");
+      return sel ? document.querySelector<HTMLElement>(sel) : null;
     },
 
     select(this: SpInstance, tab: HTMLElement): void {
@@ -77,14 +74,13 @@ export const Tabs = define({
 
     // Reflect the selection into classes, aria-selected, and the roving tabindex.
     _sync(this: SpInstance, selected: HTMLElement): void {
-      const panels: HTMLElement[] = this._panels();
       const tabs: HTMLElement[] = this._tabs();
-      tabs.forEach((tab, i) => {
+      tabs.forEach((tab) => {
         const active = tab === selected;
         tab.classList.toggle("active", active);
         tab.setAttribute("aria-selected", String(active));
         tab.tabIndex = active ? 0 : -1;
-        panels[i]?.classList.toggle("active", active);
+        this._panel(tab)?.classList.toggle("active", active);
       });
     },
 

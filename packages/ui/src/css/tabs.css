@@ -16,7 +16,7 @@
   }
 }
 
-@utility tab-panel {
+@utility tab-content {
   @layer l1.l2 {
     @apply hidden w-full min-w-0 outline-none;
 

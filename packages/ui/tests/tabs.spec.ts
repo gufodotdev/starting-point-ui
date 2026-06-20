@@ -11,49 +11,54 @@ async function mount(page: Page, html: string) {
   }, html);
 }
 
+// The tab-list is the component; each tab points at its panel via data-sp-toggle,
+// so the panels can live anywhere on the page.
 const BASIC = `
-  <div id="root" data-sp-tabs>
-    <div class="tab-list" aria-label="Example">
-      <button id="t1" class="tab">One</button>
-      <button id="t2" class="tab">Two</button>
-      <button id="t3" class="tab">Three</button>
-    </div>
-    <div id="p1" class="tab-panel">Panel one</div>
-    <div id="p2" class="tab-panel">Panel two</div>
-    <div id="p3" class="tab-panel">Panel three</div>
-  </div>`;
+  <div id="root" class="tab-list" aria-label="Example">
+    <button id="t1" class="tab" data-sp-toggle="#p1">One</button>
+    <button id="t2" class="tab" data-sp-toggle="#p2">Two</button>
+    <button id="t3" class="tab" data-sp-toggle="#p3">Three</button>
+  </div>
+  <div id="p1" class="tab-content">Panel one</div>
+  <div id="p2" class="tab-content">Panel two</div>
+  <div id="p3" class="tab-content">Panel three</div>`;
 
 const PRESELECTED = `
-  <div id="root" data-sp-tabs>
-    <div class="tab-list" aria-label="Example">
-      <button id="t1" class="tab">One</button>
-      <button id="t2" class="tab active">Two</button>
-    </div>
-    <div id="p1" class="tab-panel">Panel one</div>
-    <div id="p2" class="tab-panel active">Panel two</div>
-  </div>`;
+  <div id="root" class="tab-list" aria-label="Example">
+    <button id="t1" class="tab" data-sp-toggle="#p1">One</button>
+    <button id="t2" class="tab active" data-sp-toggle="#p2">Two</button>
+  </div>
+  <div id="p1" class="tab-content">Panel one</div>
+  <div id="p2" class="tab-content active">Panel two</div>`;
 
 const DISABLED = `
-  <div id="root" data-sp-tabs>
-    <div class="tab-list" aria-label="Example">
-      <button id="t1" class="tab">One</button>
-      <button id="t2" class="tab" disabled>Two</button>
-      <button id="t3" class="tab">Three</button>
-    </div>
-    <div id="p1" class="tab-panel">Panel one</div>
-    <div id="p2" class="tab-panel">Panel two</div>
-    <div id="p3" class="tab-panel">Panel three</div>
-  </div>`;
+  <div id="root" class="tab-list" aria-label="Example">
+    <button id="t1" class="tab" data-sp-toggle="#p1">One</button>
+    <button id="t2" class="tab" data-sp-toggle="#p2" disabled>Two</button>
+    <button id="t3" class="tab" data-sp-toggle="#p3">Three</button>
+  </div>
+  <div id="p1" class="tab-content">Panel one</div>
+  <div id="p2" class="tab-content">Panel two</div>
+  <div id="p3" class="tab-content">Panel three</div>`;
 
 const VERTICAL = `
-  <div id="root" data-sp-tabs="orientation: vertical">
-    <div class="tab-list" aria-label="Example">
-      <button id="t1" class="tab">One</button>
-      <button id="t2" class="tab">Two</button>
-    </div>
-    <div id="p1" class="tab-panel">Panel one</div>
-    <div id="p2" class="tab-panel">Panel two</div>
-  </div>`;
+  <div id="root" class="tab-list" data-sp-orientation="vertical" aria-label="Example">
+    <button id="t1" class="tab" data-sp-toggle="#p1">One</button>
+    <button id="t2" class="tab" data-sp-toggle="#p2">Two</button>
+  </div>
+  <div id="p1" class="tab-content">Panel one</div>
+  <div id="p2" class="tab-content">Panel two</div>`;
+
+// Panels can be detached from the tablist; they only need an id it points at.
+const DETACHED = `
+  <div id="root" class="tab-list" aria-label="Example">
+    <button id="t1" class="tab" data-sp-toggle="#p1">One</button>
+    <button id="t2" class="tab" data-sp-toggle="#p2">Two</button>
+  </div>
+  <section id="elsewhere">
+    <div id="p1" class="tab-content">Panel one</div>
+    <div id="p2" class="tab-content">Panel two</div>
+  </section>`;
 
 const activeId = (page: Page) => page.evaluate(() => document.activeElement?.id ?? null);
 
@@ -83,6 +88,14 @@ test("selects a tab and its panel on click", async ({ page }) => {
   await expect(page.locator("#p1")).not.toHaveClass(/active/);
 });
 
+test("controls panels that live outside the tablist", async ({ page }) => {
+  await mount(page, DETACHED);
+  await expect(page.locator("#p1")).toHaveClass(/active/);
+  await page.click("#t2");
+  await expect(page.locator("#p2")).toHaveClass(/active/);
+  await expect(page.locator("#p1")).not.toHaveClass(/active/);
+});
+
 test("emits sp-beforechange (cancelable) and sp-change with the tab", async ({ page }) => {
   await mount(page, BASIC);
   const changed = await page.evaluate(() => {
@@ -106,23 +119,19 @@ test("emits sp-beforechange (cancelable) and sp-change with the tab", async ({ p
 
 test("nested tabs stay independent", async ({ page }) => {
   await mount(page, `
-    <div id="outer" data-sp-tabs>
-      <div class="tab-list">
-        <button id="o1" class="tab active">Outer one</button>
-        <button id="o2" class="tab">Outer two</button>
+    <div id="outer" class="tab-list">
+      <button id="o1" class="tab active" data-sp-toggle="#op1">Outer one</button>
+      <button id="o2" class="tab" data-sp-toggle="#op2">Outer two</button>
+    </div>
+    <div id="op1" class="tab-content active">
+      <div id="inner" class="tab-list">
+        <button id="n1" class="tab active" data-sp-toggle="#np1">Inner one</button>
+        <button id="n2" class="tab" data-sp-toggle="#np2">Inner two</button>
       </div>
-      <div id="op1" class="tab-panel active">
-        <div id="inner" data-sp-tabs>
-          <div class="tab-list">
-            <button id="n1" class="tab active">Inner one</button>
-            <button id="n2" class="tab">Inner two</button>
-          </div>
-          <div id="np1" class="tab-panel active">Inner panel one</div>
-          <div id="np2" class="tab-panel">Inner panel two</div>
-        </div>
-      </div>
-      <div id="op2" class="tab-panel">Outer panel two</div>
-    </div>`);
+      <div id="np1" class="tab-content active">Inner panel one</div>
+      <div id="np2" class="tab-content">Inner panel two</div>
+    </div>
+    <div id="op2" class="tab-content">Outer panel two</div>`);
 
   await page.click("#n2");
   await expect(page.locator("#n2")).toHaveClass(/active/);
@@ -150,7 +159,7 @@ test("sp.tabs(el) returns the instance with the public API", async ({ page }) =>
 test.describe("WAI-ARIA compliance", () => {
   test("applies tabs semantics automatically", async ({ page }) => {
     await mount(page, BASIC);
-    await expect(page.locator(".tab-list")).toHaveAttribute("role", "tablist");
+    await expect(page.locator("#root")).toHaveAttribute("role", "tablist");
 
     for (const [tab, panel] of [["t1", "p1"], ["t2", "p2"], ["t3", "p3"]]) {
       await expect(page.locator(`#${tab}`)).toHaveAttribute("role", "tab");
@@ -201,7 +210,7 @@ test.describe("WAI-ARIA compliance", () => {
 
   test("a vertical tablist sets aria-orientation and uses Up/Down", async ({ page }) => {
     await mount(page, VERTICAL);
-    await expect(page.locator(".tab-list")).toHaveAttribute("aria-orientation", "vertical");
+    await expect(page.locator("#root")).toHaveAttribute("aria-orientation", "vertical");
     await page.focus("#t1");
     await page.keyboard.press("ArrowDown");
     expect(await activeId(page)).toBe("t2");

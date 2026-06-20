@@ -5,109 +5,128 @@ description: An accessible tabs component for Tailwind CSS, organizing content i
 
 A set of tabs switching between content panels in place.
 
-## Basic Usage
-
-Add `data-sp-tabs` to a wrapper holding a `tab-list` of `tab` buttons and one `tab-panel` per tab. The first tab pairs with the first panel, the second with the second, and so on. Mark the initially selected tab and its panel with `active`, so the markup renders correctly before JavaScript loads.
-
-Clicking a tab or moving through the list with the arrow keys switches the panels. All ids, roles, and ARIA attributes are generated, so the only markup the component asks for is `active` on the starting pair.
-
 ```html preview
-<div data-sp-tabs class="w-96">
-  <div class="tab-list">
-    <button class="tab active">Account</button>
-    <button class="tab">Password</button>
-    <button class="tab">Settings</button>
-  </div>
-  <div class="tab-panel mt-2 active">
-    <div class="card">
-      <div class="card-content">
-        <h3 class="font-medium mb-2">Account</h3>
-        <p class="text-sm text-muted-foreground">
-          Manage your account settings and preferences.
-        </p>
-      </div>
+<div class="tab-list w-96">
+  <button class="tab active" data-sp-toggle="#tab-account">Account</button>
+  <button class="tab" data-sp-toggle="#tab-password">Password</button>
+  <button class="tab" data-sp-toggle="#tab-settings">Settings</button>
+</div>
+<div id="tab-account" class="tab-content mt-2 active">
+  <div class="card">
+    <div class="card-content">
+      <h3 class="font-medium mb-2">Account</h3>
+      <p class="text-sm text-muted-foreground">
+        Manage your account settings and preferences.
+      </p>
     </div>
   </div>
-  <div class="tab-panel mt-2">
-    <div class="card">
-      <div class="card-content">
-        <h3 class="font-medium mb-2">Password</h3>
-        <p class="text-sm text-muted-foreground">
-          Change your password and security options.
-        </p>
-      </div>
+</div>
+<div id="tab-password" class="tab-content mt-2">
+  <div class="card">
+    <div class="card-content">
+      <h3 class="font-medium mb-2">Password</h3>
+      <p class="text-sm text-muted-foreground">
+        Change your password and security options.
+      </p>
     </div>
   </div>
-  <div class="tab-panel mt-2">
-    <div class="card">
-      <div class="card-content">
-        <h3 class="font-medium mb-2">Settings</h3>
-        <p class="text-sm text-muted-foreground">
-          Configure your application preferences.
-        </p>
-      </div>
+</div>
+<div id="tab-settings" class="tab-content mt-2">
+  <div class="card">
+    <div class="card-content">
+      <h3 class="font-medium mb-2">Settings</h3>
+      <p class="text-sm text-muted-foreground">
+        Configure your application preferences.
+      </p>
     </div>
   </div>
 </div>
 ```
 
-## Disabled tabs
+## Usage
+
+A `tab-list` holds the `tab` buttons. Each tab points at its `tab-content` panel with `data-sp-toggle`, the same wiring a [collapsible](/docs/components/collapsible) uses. Because the link is by id, the panels can live anywhere on the page, not just next to the list. Mark the initially selected tab and its panel with `active` so the markup renders correctly before JavaScript loads.
+
+Clicking a tab or moving through the list with the arrow keys switches the panels. All ids, roles, and ARIA attributes are generated, so the only markup the component asks for is the `data-sp-toggle` link and `active` on the starting pair.
+
+| Class         | Applies to                                          |
+| ------------- | --------------------------------------------------- |
+| `tab-list`    | The row of tab buttons; the component's root        |
+| `tab`         | Each tab button; add `active` to the selected one   |
+| `tab-content` | Each panel; add `active` to the selected one        |
+
+```html
+<div class="tab-list">
+  <button class="tab active" data-sp-toggle="#panel-one">One</button>
+  <button class="tab" data-sp-toggle="#panel-two">Two</button>
+</div>
+<div id="panel-one" class="tab-content active">First panel</div>
+<div id="panel-two" class="tab-content">Second panel</div>
+```
+
+---
+
+## Examples
+
+### Disabled tabs
 
 Add `disabled` to a tab to prevent selection. Arrow navigation skips it.
 
 ```html preview
-<div data-sp-tabs class="w-96">
-  <div class="tab-list">
-    <button class="tab active">Free</button>
-    <button class="tab" disabled>Pro</button>
-    <button class="tab">Enterprise</button>
-  </div>
-  <div class="tab-panel mt-2 active">
-    <p class="text-sm text-muted-foreground">The free plan.</p>
-  </div>
-  <div class="tab-panel mt-2">
-    <p class="text-sm text-muted-foreground">The pro plan.</p>
-  </div>
-  <div class="tab-panel mt-2">
-    <p class="text-sm text-muted-foreground">The enterprise plan.</p>
-  </div>
+<div class="tab-list w-96">
+  <button class="tab active" data-sp-toggle="#tab-free">Free</button>
+  <button class="tab" data-sp-toggle="#tab-pro" disabled>Pro</button>
+  <button class="tab" data-sp-toggle="#tab-enterprise">Enterprise</button>
+</div>
+<div id="tab-free" class="tab-content mt-2 active">
+  <p class="text-sm text-muted-foreground">The free plan.</p>
+</div>
+<div id="tab-pro" class="tab-content mt-2">
+  <p class="text-sm text-muted-foreground">The pro plan.</p>
+</div>
+<div id="tab-enterprise" class="tab-content mt-2">
+  <p class="text-sm text-muted-foreground">The enterprise plan.</p>
 </div>
 ```
 
-## Vertical
+### Vertical
 
-Set `orientation: vertical` so Up and Down move between tabs instead of Left and Right, and lay the list out with utilities.
+Add `data-sp-orientation="vertical"` so Up and Down move between tabs instead of Left and Right, and lay the list out with utilities.
 
 ```html preview
-<div data-sp-tabs="orientation: vertical" class="flex w-96 gap-4">
-  <div class="tab-list h-auto flex-col items-stretch">
-    <button class="tab active">General</button>
-    <button class="tab">Members</button>
-    <button class="tab">Billing</button>
+<div class="flex w-96 gap-4">
+  <div class="tab-list h-auto flex-col items-stretch" data-sp-orientation="vertical">
+    <button class="tab active" data-sp-toggle="#tab-general">General</button>
+    <button class="tab" data-sp-toggle="#tab-members">Members</button>
+    <button class="tab" data-sp-toggle="#tab-billing">Billing</button>
   </div>
-  <div class="tab-panel active">
+  <div id="tab-general" class="tab-content active">
     <p class="text-sm text-muted-foreground">General settings.</p>
   </div>
-  <div class="tab-panel">
+  <div id="tab-members" class="tab-content">
     <p class="text-sm text-muted-foreground">Manage members.</p>
   </div>
-  <div class="tab-panel">
+  <div id="tab-billing" class="tab-content">
     <p class="text-sm text-muted-foreground">Billing details.</p>
   </div>
 </div>
 ```
 
+---
+
 ## Options
 
-Set options in the `data-sp-tabs` value, separated by semicolons.
+Set each option with its own `data-sp-*` attribute on the tab list.
 
-| Option        | Type   | Default      | Description                                |
-| ------------- | ------ | ------------ | ------------------------------------------ |
-| `orientation` | String | `horizontal` | `vertical` switches arrow keys to Up/Down  |
+| Attribute             | Type   | Default      | Description                               |
+| --------------------- | ------ | ------------ | ----------------------------------------- |
+| `data-sp-orientation` | String | `horizontal` | `vertical` switches arrow keys to Up/Down |
+
+---
 
 ## Events
 
-Events fire on the `data-sp-tabs` element; `sp-beforechange` is cancelable and both carry the tab in `detail.tab`.
+Events fire on the `tab-list` element; `sp-beforechange` is cancelable and both carry the tab in `detail.tab`.
 
 | Event             | When                              |
 | ----------------- | --------------------------------- |
@@ -115,31 +134,35 @@ Events fire on the `data-sp-tabs` element; `sp-beforechange` is cancelable and b
 | `sp-change`       | A tab and its panel were selected |
 
 ```js
-el.addEventListener("sp-beforechange", (e) => {
+list.addEventListener("sp-beforechange", (e) => {
   if (unsavedChanges) e.preventDefault(); // veto the switch
 });
 ```
 
+---
+
 ## Methods
 
-Get the instance with `sp.tabs(el)`, then call its methods:
+Get the instance from the `tab-list` with `sp.tabs(el)`, then call its methods:
 
 | Method        | Description            |
 | ------------- | ---------------------- |
 | `select(tab)` | Select a `tab` element |
 
 ```js
-const tabs = sp.tabs(document.querySelector("#my-tabs"));
+const tabs = sp.tabs(document.querySelector("#my-tabs .tab-list"));
 
 tabs.select(document.querySelector("#my-tabs .tab:last-child"));
 ```
+
+---
 
 ## Accessibility
 
 The tabs adhere to the [Tabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and set the appropriate roles and properties automatically, with automatic activation: moving focus selects. If a page holds several tab sets, an `aria-label` on each `tab-list` helps screen reader users tell them apart.
 
-| Key                        | Action                                                                                  |
-| -------------------------- | --------------------------------------------------------------------------------------- |
-| `ArrowRight` / `ArrowLeft` | Select the next or previous tab, wrapping (vertical lists use `ArrowDown` / `ArrowUp`)  |
+| Key                        | Action                                                                                 |
+| -------------------------- | -------------------------------------------------------------------------------------- |
+| `ArrowRight` / `ArrowLeft` | Select the next or previous tab, wrapping (vertical lists use `ArrowDown` / `ArrowUp`) |
 | `Home` / `End`             | Select the first or last tab                                                            |
 | `Tab`                      | Moves from the active tab into its panel                                                |
