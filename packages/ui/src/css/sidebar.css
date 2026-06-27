@@ -1,6 +1,38 @@
 @utility sidebar {
   @layer l1.l2 {
     @apply flex min-h-dvh w-full overflow-x-clip bg-sidebar;
+
+    /* The panel is fixed, so a pseudo-element gap reserves its width in the flow
+       (otherwise the page renders under it): ::before for a left panel, ::after
+       for a right one, so one layout can host both. Width tracks the collapse. */
+    &:has(> .sidebar-panel:not(.sidebar-right))::before,
+    &:has(> .sidebar-panel.sidebar-right)::after {
+      @apply sidebar:block sidebar:w-(--sidebar-width) sidebar:shrink-0;
+      @apply sidebar:transition-[width] sidebar:duration-200 sidebar:ease-linear;
+      content: "";
+    }
+
+    /* Left gap (::before) mirrors the left panel's collapsed width. */
+    &:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="offcanvas"])::before {
+      @apply sidebar:w-0;
+    }
+    &:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
+      @apply sidebar:w-(--sidebar-width-icon);
+    }
+    &.sidebar-inset:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
+      @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
+    }
+
+    /* Right gap (::after) mirrors the right panel's collapsed width. */
+    &:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="offcanvas"])::after {
+      @apply sidebar:w-0;
+    }
+    &:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="icon"])::after {
+      @apply sidebar:w-(--sidebar-width-icon);
+    }
+    &.sidebar-inset:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="icon"])::after {
+      @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
+    }
   }
 }
 
@@ -9,11 +41,12 @@
     @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 hidden;
     /* Cap the drawer at its token but shrink on narrow screens, leaving a gutter. */
     @apply max-sidebar:w-[min(var(--sidebar-width-mobile),100%-1.5rem)];
-    /* Desktop: a sticky full-height column so it stays put while the page scrolls. */
-    @apply sidebar:sticky sidebar:top-0 sidebar:z-auto sidebar:block sidebar:shrink-0 sidebar:flex sidebar:w-(--sidebar-width) flex-col h-dvh;
+    /* Desktop: a fixed full-height column (the layout's gap reserves its flow
+       space), so it can slide off or shrink without the page jumping. */
+    @apply sidebar:fixed sidebar:inset-y-0 sidebar:z-10 sidebar:block sidebar:flex sidebar:h-svh sidebar:w-(--sidebar-width) flex-col;
     /* Transition only on the transient classes, so an authored .collapsed
        settles instantly with no animation (mirrors the dialog .show model). */
-    @apply [&:is(.collapsing,.expanding)]:sidebar:transition-[margin,width] sidebar:duration-200 sidebar:ease-linear;
+    @apply [&:is(.collapsing,.expanding)]:sidebar:transition-[left,right,width] sidebar:duration-200 sidebar:ease-linear;
     @apply [&.show]:animate-in [&.hide]:animate-out max-sidebar:duration-300 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
     @apply sidebar:translate-x-0 sidebar:animate-none!;
     @apply [&:where(&:not(.sidebar-left,.sidebar-right))]:sidebar-left;
@@ -34,13 +67,21 @@
   }
 }
 
+/* Static, non-collapsing column for embedding (dialogs, cards). */
+@utility sidebar-static {
+  @layer l1.l2 {
+    @apply flex h-full w-(--sidebar-width) shrink-0 flex-col bg-sidebar text-sidebar-foreground;
+  }
+}
+
 @utility sidebar-left {
   @layer l1 {
     @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
     @apply [&.show]:slide-in-from-left [&.hide]:slide-out-to-left;
 
+    /* Offcanvas: slide the fixed panel fully off the left edge. */
     &.collapsed[data-collapse="offcanvas"] {
-      @apply sidebar:-ml-(--sidebar-width);
+      @apply sidebar:left-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
@@ -51,7 +92,7 @@
     @apply [&.show]:slide-in-from-right [&.hide]:slide-out-to-right;
 
     &.collapsed[data-collapse="offcanvas"] {
-      @apply sidebar:-mr-(--sidebar-width);
+      @apply sidebar:right-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
@@ -59,9 +100,27 @@
 @utility sidebar-page {
   @layer l1.l2 {
     @apply flex-1 min-w-0 bg-background;
-    /* Inset: the card floats on the sidebar-colored page, closed against the
-       sidebar on the left (m-2 minus ml). */
-    @apply sidebar:in-[.sidebar-inset]:my-2 sidebar:in-[.sidebar-inset]:mr-2 sidebar:in-[.sidebar-inset]:shadow-sm sidebar:in-[.sidebar-inset]:rounded-xl;
+
+    /* Inset: the card floats with a gutter on every side. The side touching the
+       panel has no margin because the gap supplies that spacing; when the panel
+       collapses offcanvas the gap is gone, so restore the gutter there. */
+    .sidebar-inset & {
+      @apply sidebar:my-2 sidebar:rounded-xl sidebar:shadow-sm;
+    }
+    /* Left panel (default): page sits to its right. */
+    .sidebar-inset:has(> .sidebar-panel:not(.sidebar-right)) & {
+      @apply sidebar:mr-2;
+    }
+    .sidebar-inset:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="offcanvas"]) & {
+      @apply sidebar:ml-2;
+    }
+    /* Right panel: page sits to its left. */
+    .sidebar-inset:has(> .sidebar-panel.sidebar-right) & {
+      @apply sidebar:ml-2;
+    }
+    .sidebar-inset:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="offcanvas"]) & {
+      @apply sidebar:mr-2;
+    }
   }
 }
 
@@ -105,7 +164,7 @@
 
 @utility sidebar-group {
   @layer l1.l2 {
-    @apply relative flex w-full min-w-0 flex-col gap-1 p-2;
+    @apply relative flex w-full min-w-0 flex-col p-2;
   }
 }
 
@@ -119,7 +178,7 @@
 
 @utility sidebar-group-content {
   @layer l1.l2 {
-    @apply w-full text-sm flex flex-col gap-1;
+    @apply w-full text-sm;
   }
 }
 
@@ -199,14 +258,6 @@
   }
 }
 
-@utility sidebar-rail {
-  @layer l1.l2 {
-    @apply max-sidebar:hidden absolute inset-y-0 z-20 w-4 -translate-x-1/2 cursor-col-resize transition-all;
-    @apply in-[.sidebar-left]:right-0 in-[.sidebar-right]:left-0;
-    @apply after:absolute after:inset-y-0 after:left-1/2 after:w-px hover:after:bg-sidebar-border;
-  }
-}
-
 @utility sidebar-backdrop {
   @layer l1.l2 {
     @apply fixed inset-0 z-40 bg-black/30 backdrop-blur-xs hidden sidebar:hidden;
@@ -225,6 +276,7 @@
     .sidebar-panel.collapsed[data-collapse="icon"] {
       .sidebar-content,
       .sidebar-group,
+      .sidebar-group-content,
       .sidebar-menu {
         @apply overflow-hidden;
       }

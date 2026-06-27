@@ -12,7 +12,7 @@ import { Escapable } from "./mixins/escapable";
 
 export const Sidebar = define({
   name: "sidebar",
-  selector: "[data-sp-sidebar]",
+  selector: ".sidebar-panel",
   mixins: [Togglable, ClickToShow, Escapable],
 
   init(this: SpInstance) {
@@ -123,10 +123,8 @@ export const Sidebar = define({
         tip.textContent = label;
         // Decorative: the button is already its own accessible name.
         tip.setAttribute("aria-hidden", "true");
-        tip.setAttribute(
-          "data-sp-tooltip",
-          `toggle: #${ensureId(button)}; placement: right`,
-        );
+        tip.setAttribute("data-sp-toggle", `#${ensureId(button)}`);
+        tip.setAttribute("data-sp-placement", "right");
         this.el.appendChild(tip);
 
         getInstance(tip, Tooltip);

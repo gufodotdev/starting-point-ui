@@ -17,7 +17,7 @@ async function mount(page: Page, html: string) {
 const BASIC = `
   <div class="sidebar">
     <div id="backdrop" class="sidebar-backdrop"></div>
-    <aside id="panel" class="sidebar-panel" data-sp-sidebar="toggle: #trigger">
+    <aside id="panel" class="sidebar-panel" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
           <div class="sidebar-menu-item">
@@ -38,7 +38,7 @@ const BASIC = `
 const ICON = `
   <div class="sidebar">
     <div id="backdrop" class="sidebar-backdrop"></div>
-    <aside id="panel" class="sidebar-panel collapsed" data-collapse="icon" data-sp-sidebar="toggle: #trigger">
+    <aside id="panel" class="sidebar-panel collapsed" data-collapse="icon" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
           <div class="sidebar-menu-item">
@@ -222,11 +222,12 @@ test.describe("desktop column", () => {
 
     test("builds a decorative tooltip per nav button", async ({ page }) => {
       await mount(page, ICON);
-      const tip = page.locator("[data-sp-tooltip]");
+      const tip = page.locator(".sidebar-panel > .tooltip");
       await expect(tip).toHaveCount(1);
       await expect(tip).toHaveText("Dashboard");
       await expect(tip).toHaveAttribute("aria-hidden", "true");
-      await expect(tip).toHaveAttribute("data-sp-tooltip", /toggle: #first-item/);
+      await expect(tip).toHaveAttribute("data-sp-toggle", "#first-item");
+      await expect(tip).toHaveAttribute("data-sp-placement", "right");
     });
 
     test("the tooltip shows only while collapsed", async ({ page }) => {
@@ -235,7 +236,7 @@ test.describe("desktop column", () => {
         page.evaluate((isCollapsed) => {
           const p = document.querySelector("#panel")!;
           p.classList.toggle("collapsed", isCollapsed);
-          const tip = document.querySelector("[data-sp-tooltip]")!;
+          const tip = document.querySelector(".sidebar-panel > .tooltip")!;
           // sp-beforeshow returns false (vetoed) when not collapsed.
           return !tip.dispatchEvent(new CustomEvent("sp-beforeshow", { cancelable: true }));
         }, collapsed);

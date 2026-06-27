@@ -1,5 +1,6 @@
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { CodeBlock } from "@/components/code-block";
+import { Callout } from "@/components/callout";
 import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -48,6 +49,17 @@ const prettyCodeOptions = {
           node.properties["data-preview"] = "true";
         }
 
+        // `frame` renders the example in an iframe; `frame=560` sets its height.
+        // Add `right` to clip to the right edge (e.g. a right-side sidebar).
+        const frameMatch = meta.match(/(?:^|\s)frame(?:=(\d+))?(?:\s|$)/);
+        if (frameMatch) {
+          node.properties["data-frame"] = "true";
+          if (frameMatch[1]) node.properties["data-frame-height"] = frameMatch[1];
+          if (/(?:^|\s)right(?:\s|$)/.test(meta)) {
+            node.properties["data-frame-align"] = "right";
+          }
+        }
+
         const labelMatch = meta.match(/label="([^"]+)"/);
         if (labelMatch) {
           node.properties["data-label"] = labelMatch[1];
@@ -58,6 +70,7 @@ const prettyCodeOptions = {
 };
 
 const components = {
+  Callout,
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
       className="mt-10 lg:mt-12 first:mt-0 scroll-mt-28 text-xl font-medium tracking-tight [&+p]:mt-4"
@@ -113,15 +126,33 @@ const components = {
     children,
     "data-code": code = "",
     "data-preview": preview,
+    "data-frame": frame,
+    "data-frame-height": frameHeight,
+    "data-frame-align": frameAlign,
     "data-label": label,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
+    "data-frame"?: string;
+    "data-frame-height"?: string;
+    "data-frame-align"?: string;
     "data-label"?: string;
   }) => {
     if (preview === "true") {
       return (
         <CodeBlock code={code} header="preview">
+          {children}
+        </CodeBlock>
+      );
+    }
+    if (frame === "true") {
+      return (
+        <CodeBlock
+          code={code}
+          header="frame"
+          frameHeight={frameHeight ? Number(frameHeight) : undefined}
+          frameAlign={frameAlign === "right" ? "right" : undefined}
+        >
           {children}
         </CodeBlock>
       );

@@ -1,5 +1,6 @@
 import { CopyButton } from "@/components/copy-button";
 import { PreviewBlock } from "@/components/preview-block";
+import { FramePreviewBlock } from "@/components/frame-preview-block";
 
 interface BaseCodeBlockProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ type CodeBlockProps = BaseCodeBlockProps &
     | { header?: null }
     | { header: "label"; label: string }
     | { header: "preview" }
+    | { header: "frame"; frameHeight?: number; frameAlign?: "right" }
   );
 
 export function CodeBlock(props: CodeBlockProps) {
@@ -18,6 +20,18 @@ export function CodeBlock(props: CodeBlockProps) {
 
   if (header === "preview") {
     return <PreviewBlock code={code}>{children}</PreviewBlock>;
+  }
+
+  if (header === "frame") {
+    return (
+      <FramePreviewBlock
+        code={code}
+        height={props.frameHeight}
+        align={props.frameAlign}
+      >
+        {children}
+      </FramePreviewBlock>
+    );
   }
 
   if (header === "label") {
