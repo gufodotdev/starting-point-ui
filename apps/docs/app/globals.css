@@ -43,7 +43,13 @@ html:has([data-no-scrollbar-gutter]) {
     width: var(--sidebar-width);
   }
 
-  /* Right table-of-contents panel: same, on the other side. */
+}
+
+/* The table-of-contents panel only docks at 2xl and up; below that it stays
+   authored-collapsed (offcanvas), so the package hides it and zeroes its gap.
+   This block is the single place its visibility is defined — it slides the
+   panel in and reserves the gap together, so the two never drift apart. */
+@media (width >= 96rem) {
   .app-shell:has(#content) > .sidebar-panel.sidebar-right.collapsed {
     right: 0;
   }

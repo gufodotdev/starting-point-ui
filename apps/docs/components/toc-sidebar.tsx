@@ -8,7 +8,7 @@ import { TableOfContents } from "@/components/table-of-contents";
 export function TocSidebar() {
   return (
     <aside
-      className="sidebar-panel sidebar-right collapsed border-l-0! bg-background sidebar:top-(--sidebar-top)! sidebar:h-[calc(100svh-var(--sidebar-top))]! max-xl:hidden"
+      className="sidebar-panel sidebar-right collapsed border-l-0! bg-background sidebar:top-(--sidebar-top)! sidebar:h-[calc(100svh-var(--sidebar-top))]!"
       data-collapse="offcanvas"
     >
       <div className="sidebar-content scrollbar-hover pt-4 lg:pt-10">
