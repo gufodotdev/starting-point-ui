@@ -8,8 +8,7 @@
 }
 
 :root {
-  --navbar-height: 4rem;
-  --sidebar-width: 18rem;
+  --navbar-height: 3.5rem;
   --toc-width: 18rem;
   --font-sans: var(--font-inter), sans-serif;
   --font-heading: var(--font-sans);
@@ -17,6 +16,42 @@
 
 html:has([data-no-scrollbar-gutter]) {
   scrollbar-gutter: auto;
+}
+
+/* App-shell sidebars are authored collapsed so they stay hidden on desktop for
+   pages without an article (the landing page). Docs pages render #content, which
+   expands the panels and restores their gaps on desktop. Below the sidebar
+   breakpoint they are drawers either way, so this only applies on desktop. This
+   is scoped to .app-shell so in-page sidebar examples keep package behavior. */
+@media (width >= 1024px) {
+  /* The desktop panels can't be toggled by the user, so the expand/collapse on
+     route change should be instant. Kill the transition on the panels and their
+     gaps; the mobile drawer animation is separate and unaffected. */
+  .app-shell > .sidebar-panel,
+  .app-shell::before,
+  .app-shell::after {
+    transition: none !important;
+  }
+
+  /* Left nav panel: slide back into place and restore its gap. */
+  .app-shell:has(#content) > .sidebar-panel:not(.sidebar-right).collapsed {
+    left: 0;
+  }
+  .app-shell:has(#content):has(
+      > .sidebar-panel:not(.sidebar-right).collapsed
+    )::before {
+    width: var(--sidebar-width);
+  }
+
+  /* Right table-of-contents panel: same, on the other side. */
+  .app-shell:has(#content) > .sidebar-panel.sidebar-right.collapsed {
+    right: 0;
+  }
+  .app-shell:has(#content):has(
+      > .sidebar-panel.sidebar-right.collapsed
+    )::after {
+    width: var(--sidebar-width);
+  }
 }
 
 .scrollbar-none {
@@ -48,37 +83,79 @@ html:has([data-no-scrollbar-gutter]) {
   border-radius: 6px;
 }
 
-/* Table of Contents */
+/* Like scrollbar-thin, but the track (light) and thumb (darker, muted) only
+   appear while the area is hovered. The doubled class raises specificity so it
+   overrides the always-on scrollbar baked into .sidebar-content. */
+.scrollbar-hover.scrollbar-hover {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scrollbar-hover.scrollbar-hover:hover,
+.scrollbar-hover.scrollbar-hover:focus-within {
+  scrollbar-color: color-mix(in oklab, var(--muted-foreground) 30%, transparent)
+    var(--muted);
+}
+
+.scrollbar-hover.scrollbar-hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-hover.scrollbar-hover::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-hover.scrollbar-hover:hover::-webkit-scrollbar-track,
+.scrollbar-hover.scrollbar-hover:focus-within::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+.scrollbar-hover.scrollbar-hover::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.scrollbar-hover.scrollbar-hover:hover::-webkit-scrollbar-thumb,
+.scrollbar-hover.scrollbar-hover:focus-within::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
+}
+
+/* Table of Contents — a minimal outline with a vertical guide line; the active
+   item highlights its segment of the line and turns the text primary. */
 .toc {
   @apply overflow-hidden;
 }
 
 .toc-list {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col;
 }
 
-.toc-list .toc-list {
-  @apply gap-2 pt-2;
+/* The top-level list draws the guide line; each link overlays its own border
+   segment so the active one can recolor that part of the line. */
+.toc > .toc-list {
+  @apply border-l border-border;
 }
 
 .toc-list-item {
-  @apply leading-normal min-w-0;
+  @apply min-w-0;
 }
 
 .toc-link {
-  @apply block truncate text-[0.8rem] text-muted-foreground no-underline transition-colors hover:text-foreground;
+  @apply -ml-px block truncate border-l border-transparent py-1.5 pl-4 text-[0.8rem] leading-snug text-muted-foreground no-underline transition-colors;
+  @apply hover:text-foreground;
 }
 
 .toc-link.node-name--H3 {
-  @apply pl-4;
+  @apply pl-8;
 }
 
 .toc-link.node-name--H4 {
-  @apply pl-6;
+  @apply pl-12;
 }
 
-.is-active-link {
-  @apply font-medium text-foreground;
+.toc-link.is-active-link {
+  @apply border-primary font-medium text-primary;
 }
 
 /* Syntax highlighting - shiki dual theme */

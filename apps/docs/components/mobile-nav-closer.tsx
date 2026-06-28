@@ -3,14 +3,13 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
+// Close the mobile sidebar drawer when the route changes.
 export function MobileNavCloser() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const sheet = document.querySelector<HTMLDialogElement>("#mobile-nav");
-    if (sheet?.open) {
-      window.sp?.sheet(sheet)?.hide();
-    }
+    const panel = document.querySelector<HTMLElement>(".sidebar-panel");
+    if (panel) window.sp?.sidebar(panel)?.hide();
   }, [pathname]);
 
   return null;

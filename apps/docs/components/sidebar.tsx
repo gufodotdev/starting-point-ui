@@ -1,14 +1,40 @@
+import {
+  BookOpen,
+  Download,
+  Palette,
+  SlidersHorizontal,
+  LifeBuoy,
+  type LucideIcon,
+} from "lucide-react";
 import { SidebarLink } from "@/components/sidebar-link";
 
-const navigation = [
+type NavItem = {
+  title: string;
+  href: string;
+  icon?: LucideIcon;
+};
+
+const navigation: { title: string; items: NavItem[] }[] = [
   {
     title: "Guides",
     items: [
-      { title: "Introduction", href: "/docs/guides/introduction" },
-      { title: "Installation", href: "/docs/guides/installation" },
-      { title: "Theming", href: "/docs/guides/theming" },
-      { title: "Customization", href: "/docs/guides/customization" },
-      { title: "Help", href: "/docs/guides/help" },
+      {
+        title: "Introduction",
+        href: "/docs/guides/introduction",
+        icon: BookOpen,
+      },
+      {
+        title: "Installation",
+        href: "/docs/guides/installation",
+        icon: Download,
+      },
+      { title: "Theming", href: "/docs/guides/theming", icon: Palette },
+      {
+        title: "Customization",
+        href: "/docs/guides/customization",
+        icon: SlidersHorizontal,
+      },
+      { title: "Help", href: "/docs/guides/help", icon: LifeBuoy },
     ],
   },
   {
@@ -51,19 +77,25 @@ const navigation = [
 
 export function Sidebar() {
   return (
-    <nav>
+    <>
       {navigation.map((category) => (
-        <div key={category.title} className="sidebar-group first:pt-0">
-          <h4 className="sidebar-group-label">{category.title}</h4>
-          <div className="sidebar-menu">
-            {category.items.map((item) => (
-              <SidebarLink key={item.href} href={item.href}>
-                {item.title}
-              </SidebarLink>
-            ))}
+        <div key={category.title} className="sidebar-group">
+          <span className="sidebar-group-label">{category.title}</span>
+          <div className="sidebar-group-content">
+            <nav className="sidebar-menu">
+              {category.items.map((item) => (
+                <SidebarLink
+                  key={item.href}
+                  href={item.href}
+                  icon={item.icon ? <item.icon /> : undefined}
+                >
+                  {item.title}
+                </SidebarLink>
+              ))}
+            </nav>
           </div>
         </div>
       ))}
-    </nav>
+    </>
   );
 }

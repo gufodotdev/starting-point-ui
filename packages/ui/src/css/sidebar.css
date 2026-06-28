@@ -126,8 +126,9 @@
 
 @utility sidebar-content {
   @layer l1.l2 {
-    /* min-h-0 lets the scroller shrink so it scrolls and header/footer pin. */
-    @apply flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto;
+    /* min-h-0 lets the scroller shrink so it scrolls and header/footer pin.
+       overscroll-contain stops the wheel from chaining to the page at the end. */
+    @apply flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto overscroll-contain;
     scrollbar-width: thin;
     scrollbar-color: color-mix(in oklab, currentColor 20%, transparent) transparent;
 
