@@ -56,9 +56,9 @@ export function CopyButton({
       aria-label={copied ? "Copied" : "Copy code"}
     >
       {copied ? (
-        <Check className="size-3.5 text-green-600" />
+        <Check className="text-green-600" />
       ) : (
-        <Copy className="size-3.5 text-foreground" />
+        <Copy className="text-muted-foreground" />
       )}
     </button>
   );

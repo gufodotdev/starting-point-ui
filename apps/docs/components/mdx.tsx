@@ -47,6 +47,12 @@ const prettyCodeOptions = {
 
         if (meta.includes("preview")) {
           node.properties["data-preview"] = "true";
+          // `name="..."` (not `title="..."`, which rehype-pretty-code reserves
+          // for its own figcaption) sets the preview's header title.
+          const nameMatch = meta.match(/name="([^"]+)"/);
+          if (nameMatch) {
+            node.properties["data-title"] = nameMatch[1];
+          }
         }
 
         // `frame` renders the example in an iframe; `frame=560` sets its height.
@@ -88,10 +94,15 @@ const components = {
     </h3>
   ),
   p: ({ children }: React.ComponentProps<"p">) => (
-    <p className="not-first:mt-6">{children}</p>
+    <p className="max-w-prose text-base/7 text-muted-foreground not-first:mt-6">
+      {children}
+    </p>
   ),
   a: ({ children, ...props }: React.ComponentProps<"a">) => (
-    <a className="font-medium underline underline-offset-4" {...props}>
+    <a
+      className="font-medium text-foreground underline underline-offset-4"
+      {...props}
+    >
       {children}
     </a>
   ),
@@ -117,7 +128,7 @@ const components = {
       return <code {...props}>{children}</code>;
     }
     return (
-      <code className="relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-[0.75rem] font-medium text-[#116329] dark:text-[#38bdf8] wrap-break-word outline-none">
+      <code className="badge badge-outline rounded-sm px-1.5 py-0 align-[0.05em] font-mono text-[0.8125rem] font-normal whitespace-normal max-md:break-all">
         {children}
       </code>
     );
@@ -130,6 +141,7 @@ const components = {
     "data-frame-height": frameHeight,
     "data-frame-align": frameAlign,
     "data-label": label,
+    "data-title": title,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
@@ -137,10 +149,11 @@ const components = {
     "data-frame-height"?: string;
     "data-frame-align"?: string;
     "data-label"?: string;
+    "data-title"?: string;
   }) => {
     if (preview === "true") {
       return (
-        <CodeBlock code={code} header="preview">
+        <CodeBlock code={code} header="preview" title={title}>
           {children}
         </CodeBlock>
       );
@@ -167,14 +180,14 @@ const components = {
     return <CodeBlock code={code}>{children}</CodeBlock>;
   },
   table: ({ children }: React.ComponentProps<"table">) => (
-    <div className="scrollbar-thin my-6 w-full overflow-y-auto">
+    <div className="scrollbar-thin my-6 w-full overflow-x-auto rounded-2xl border">
       <table className="relative w-full [&_tbody_tr]:border-b [&_tbody_tr:last-child]:border-b-0">
         {children}
       </table>
     </div>
   ),
   thead: ({ children }: React.ComponentProps<"thead">) => (
-    <thead className="bg-muted">{children}</thead>
+    <thead className="border-b bg-muted/60">{children}</thead>
   ),
   tr: ({ children }: React.ComponentProps<"tr">) => (
     <tr className="m-0">{children}</tr>
@@ -183,7 +196,9 @@ const components = {
     <th className="px-4 py-3 text-left font-medium">{children}</th>
   ),
   td: ({ children }: React.ComponentProps<"td">) => (
-    <td className="px-4 py-3 text-left whitespace-nowrap">{children}</td>
+    <td className="px-4 py-3 text-left whitespace-nowrap text-muted-foreground">
+      {children}
+    </td>
   ),
 };
 

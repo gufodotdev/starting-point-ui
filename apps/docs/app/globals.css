@@ -172,5 +172,5 @@ code[data-theme] span {
 }
 
 pre {
-  @apply text-[0.8rem]/5;
+  @apply text-sm/6;
 }
