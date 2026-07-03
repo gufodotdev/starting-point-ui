@@ -8,42 +8,19 @@ import { ensureId } from "./utils";
 import { Tooltip } from "./tooltip";
 import { Togglable } from "./mixins/togglable";
 import { ClickToShow } from "./mixins/click-to-show";
+import { ClickOutsideHide } from "./mixins/click-outside-hide";
 import { Escapable } from "./mixins/escapable";
 
 export const Sidebar = define({
   name: "sidebar",
   selector: ".sidebar-panel",
-  mixins: [Togglable, ClickToShow, Escapable],
+  mixins: [Togglable, ClickToShow, ClickOutsideHide, Escapable],
 
   init(this: SpInstance) {
     // Authored on the panel so the collapse mode's first paint is correct
     // pre-JS; default here only fills it in for CSS that reads the attribute.
     if (!this.el.hasAttribute("data-collapse")) {
       this.el.setAttribute("data-collapse", "offcanvas");
-    }
-
-    const backdrop = this.el.closest(".sidebar")?.querySelector<HTMLElement>(".sidebar-backdrop");
-    if (backdrop) {
-      this.on(backdrop, "click", () => this.hide());
-      // Ignore lifecycle events bubbling up from nested components (e.g. a
-      // collapsible submenu); only the panel's own drive the backdrop.
-      this.on(this.el, "sp-show", (e) => {
-        if (e.target !== this.el) return;
-        backdrop.classList.add("show");
-      });
-      this.on(this.el, "sp-shown", (e) => {
-        if (e.target !== this.el) return;
-        backdrop.classList.replace("show", "shown");
-      });
-      this.on(this.el, "sp-hide", (e) => {
-        if (e.target !== this.el) return;
-        backdrop.classList.remove("show", "shown");
-        backdrop.classList.add("hide");
-      });
-      this.on(this.el, "sp-hidden", (e) => {
-        if (e.target !== this.el) return;
-        backdrop.classList.remove("hide");
-      });
     }
 
     // The open drawer is a modal dialog: announce it as one and manage focus,
@@ -136,15 +113,26 @@ export const Sidebar = define({
       }
     },
 
-    // No top layer; mounted is a marker attribute, visibility is class-driven.
+    // Mounted tracks data-open (stable through the exit animation), not
+    // :popover-open which flips the instant hidePopover() runs.
     _isMounted(this: SpInstance): boolean {
       return this.el.hasAttribute("data-open");
     },
     _mount(this: SpInstance): void {
-      this.el.setAttribute("data-open", "");
+      const el = this.el as HTMLElement & {
+        showPopover(): void;
+      };
+      el.setAttribute("popover", "manual");
+      if (!el.matches(":popover-open")) el.showPopover();
+      el.setAttribute("data-open", "");
     },
     _unmount(this: SpInstance): void {
-      this.el.removeAttribute("data-open");
+      const el = this.el as HTMLElement & {
+        hidePopover(): void;
+      };
+      el.removeAttribute("data-open");
+      if (el.matches(":popover-open")) el.hidePopover();
+      el.removeAttribute("popover");
     },
   },
 });

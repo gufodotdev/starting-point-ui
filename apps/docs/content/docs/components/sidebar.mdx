@@ -11,7 +11,6 @@ This is a full-screen component, so the previews on this page are limited and ma
 
 ```html preview flush
 <div class="sidebar">
-  <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel" data-collapse="icon" data-sp-toggle="#sidebar-demo-trigger">
     <header class="sidebar-header">
       <button id="team-trigger" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
@@ -118,14 +117,13 @@ This is a full-screen component, so the previews on this page are limited and ma
 
 ## Usage
 
-A sidebar layout pairs a `sidebar` root with a `sidebar-backdrop`, a `sidebar-panel`, and the `sidebar-page` content area. Point the panel at its trigger with `data-sp-toggle`.
+A sidebar layout pairs a `sidebar` root with a `sidebar-panel` and the `sidebar-page` content area. Point the panel at its trigger with `data-sp-toggle`.
 
-The panel is a flex column of three pieces: a `sidebar-header` and `sidebar-footer` that stay pinned, and a scrollable `sidebar-content` between them holding the menu. Below the sidebar breakpoint (1024px by default) the trigger opens the panel as a modal drawer; above it, the trigger collapses and expands the column in place.
+The panel is a flex column of three pieces: a `sidebar-header` and `sidebar-footer` that stay pinned, and a scrollable `sidebar-content` between them holding the menu. Below the sidebar breakpoint (1024px by default) the trigger opens the panel as a modal drawer with a dimmed backdrop; above it, the trigger collapses and expands the column in place.
 
 | Class                  | Applies to                                              |
 | ---------------------- | ------------------------------------------------------- |
 | `sidebar`              | The layout root wrapping the panel and page             |
-| `sidebar-backdrop`     | The mobile drawer's dimmed overlay                      |
 | `sidebar-panel`        | The panel itself; carries `data-sp-toggle`              |
 | `sidebar-header`       | A pinned region at the top of the panel                 |
 | `sidebar-content`      | The scrollable middle holding the groups                |
@@ -140,7 +138,6 @@ The panel is a flex column of three pieces: a `sidebar-header` and `sidebar-foot
 
 ```html
 <div class="sidebar">
-  <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel" data-sp-toggle="#sidebar-trigger">
     <header class="sidebar-header">
       <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">...</a>
@@ -187,7 +184,6 @@ Set `data-collapse="icon"` on the panel to shrink it to a rail of icons. Each bu
 
 ```html preview flush
 <div class="sidebar">
-  <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel" data-collapse="icon" data-sp-toggle="#icon-trigger">
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
@@ -253,7 +249,6 @@ Set `data-collapse="icon"` on the panel to shrink it to a rail of icons. Each bu
 
 ```html preview flush
 <div class="sidebar">
-  <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel" data-collapse="offcanvas" data-sp-toggle="#offcanvas-trigger">
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
@@ -319,7 +314,6 @@ Add the `collapsed` class to the panel to render it collapsed on first paint, be
 
 ```html preview flush
 <div class="sidebar">
-  <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel collapsed" data-collapse="icon" data-sp-toggle="#collapsed-trigger">
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
@@ -383,7 +377,6 @@ A panel defaults to the left. Add `sidebar-right` to move it to the right instea
 
 ```html preview flush
 <div class="sidebar">
-  <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel sidebar-right" data-collapse="offcanvas" data-sp-toggle="#right-trigger">
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
@@ -436,7 +429,6 @@ You can also use both at once, e.g. a navigation panel on the left and a table o
 
 ```html
 <div class="sidebar">
-  <div class="sidebar-backdrop"></div>
 
   <!-- Left navigation -->
   <aside class="sidebar-panel sidebar-left" data-sp-toggle="#nav-trigger">...</aside>
@@ -458,7 +450,6 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
 
 ```html preview flush
 <div class="sidebar sidebar-inset">
-  <div class="sidebar-backdrop"></div>
   <aside class="sidebar-panel" data-collapse="icon" data-sp-toggle="#inset-trigger">
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">

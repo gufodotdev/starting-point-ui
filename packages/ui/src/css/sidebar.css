@@ -56,6 +56,19 @@
       @apply flex;
     }
 
+    &:where([popover]) {
+      @apply m-0 overflow-visible border-0 p-0;
+    }
+    &::backdrop {
+      @apply bg-black/30 backdrop-blur-xs;
+    }
+    &.show::backdrop {
+      @apply animate-in fade-in-0 duration-300 [animation-fill-mode:forwards];
+    }
+    &.hide::backdrop {
+      @apply animate-out fade-out-0 duration-300 [animation-fill-mode:forwards];
+    }
+
     &.collapsed[data-collapse="icon"] {
       @apply sidebar:w-(--sidebar-width-icon) sidebar:overflow-hidden;
       /* Inset adds p-2; widen the rail by that 1rem so the icon isn't clipped. */
@@ -256,17 +269,6 @@
     @apply focus-visible:ring-ring/50 focus-visible:ring-[3px];
     @apply [&.active]:bg-sidebar-accent [&.active]:text-sidebar-accent-foreground;
     @apply [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground;
-  }
-}
-
-@utility sidebar-backdrop {
-  @layer l1.l2 {
-    @apply fixed inset-0 z-40 bg-black/30 backdrop-blur-xs hidden sidebar:hidden;
-    @apply [&.show]:animate-in [&.hide]:animate-out [&.show]:fade-in-0 [&.hide]:fade-out-0 max-sidebar:duration-300 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
-
-    &:is(.show, .shown, .hide) {
-      @apply block pointer-events-auto;
-    }
   }
 }
 

@@ -47,8 +47,6 @@ export default function MainLayout({
           on desktop it is hidden until a docs page expands it (see globals.css
           .app-shell:has(#content)); on mobile the header toggle opens it. */}
       <div className="sidebar app-shell min-h-0 flex-1">
-        <div className="sidebar-backdrop" />
-
         <aside
           className="sidebar-panel collapsed border-r-0! bg-background sidebar:top-(--sidebar-top)! sidebar:h-[calc(100svh-var(--sidebar-top))]!"
           data-collapse="offcanvas"

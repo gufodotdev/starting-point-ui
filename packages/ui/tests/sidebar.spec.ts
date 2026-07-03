@@ -16,7 +16,6 @@ async function mount(page: Page, html: string) {
 
 const BASIC = `
   <div class="sidebar">
-    <div id="backdrop" class="sidebar-backdrop"></div>
     <aside id="panel" class="sidebar-panel" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
@@ -37,7 +36,6 @@ const BASIC = `
 // Icon-collapse fixture, authored collapsed for first-paint checks.
 const ICON = `
   <div class="sidebar">
-    <div id="backdrop" class="sidebar-backdrop"></div>
     <aside id="panel" class="sidebar-panel collapsed" data-collapse="icon" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
@@ -62,25 +60,26 @@ const activeId = (page: Page) => page.evaluate(() => document.activeElement?.id 
 test.describe("mobile drawer", () => {
   test.use({ viewport: { width: 500, height: 800 } });
 
-  test("opens and closes from the trigger with the backdrop in sync", async ({ page }) => {
+  test("opens and closes from the trigger", async ({ page }) => {
     await mount(page, BASIC);
     await trigger(page).click();
     await expect(panel(page)).toHaveClass(/shown/);
-    await expect(page.locator("#backdrop")).toHaveClass(/shown/);
     await expect(trigger(page)).toHaveAttribute("aria-expanded", "true");
 
     await trigger(page).click();
     await expect(panel(page)).not.toHaveClass(/shown/);
-    await expect(page.locator("#backdrop")).not.toHaveClass(/shown|show|hide/);
     await expect(trigger(page)).toHaveAttribute("aria-expanded", "false");
   });
 
-  test("the backdrop click closes the drawer", async ({ page }) => {
+  test("a press outside the drawer closes it", async ({ page }) => {
     await mount(page, BASIC);
     await trigger(page).click();
     await expect(panel(page)).toHaveClass(/shown/);
-    // The backdrop is sized by CSS the harness doesn't load; dispatch directly.
-    await page.locator("#backdrop").dispatchEvent("click");
+    await page.evaluate(() =>
+      document.body.dispatchEvent(
+        new PointerEvent("pointerdown", { bubbles: true }),
+      ),
+    );
     await expect(panel(page)).not.toHaveClass(/shown/);
   });
 
