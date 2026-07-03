@@ -13,11 +13,11 @@ test.beforeEach(async ({ page }) => {
 const SCENE = `
   <button id="trigger" class="btn">Open</button>
   <div id="region">
-    <div id="pop" class="popover" data-sp-popover="toggle: #trigger"><p>Body</p></div>
+    <div id="pop" class="popover" data-sp-toggle="#trigger"><p>Body</p></div>
   </div>
   <div id="slot"></div>`;
 
-const POP_HTML = `<div id="pop" class="popover" data-sp-popover="toggle: #trigger"><p>Body</p></div>`;
+const POP_HTML = `<div id="pop" class="popover" data-sp-toggle="#trigger"><p>Body</p></div>`;
 
 async function scene(page: Page) {
   await page.evaluate(async (html) => {

@@ -47,7 +47,7 @@ test("popover removes its document listeners when detached", async ({ page }) =>
 
   await setBody(
     page,
-    `<button id="t">x</button><div id="p" class="popover" data-sp-popover="toggle: #t"></div>`,
+    `<button id="t">x</button><div id="p" class="popover" data-sp-toggle="#t"></div>`,
   );
   const mounted = await counts(page);
   // Escapable (keydown) + ClickOutsideHide (pointerdown) attach to document.
@@ -65,7 +65,7 @@ test("repeated mount/unmount does not accumulate listeners", async ({ page }) =>
   for (let i = 0; i < 5; i++) {
     await setBody(
       page,
-      `<button id="t">x</button><div id="p" class="popover" data-sp-popover="toggle: #t"></div>`,
+      `<button id="t">x</button><div id="p" class="popover" data-sp-toggle="#t"></div>`,
     );
     await setBody(page, "");
   }
@@ -77,7 +77,7 @@ test("repeated mount/unmount does not accumulate listeners", async ({ page }) =>
 test("a detached popover's listeners no longer fire", async ({ page }) => {
   await setBody(
     page,
-    `<button id="t">x</button><div id="p" class="popover" data-sp-popover="toggle: #t"></div>`,
+    `<button id="t">x</button><div id="p" class="popover" data-sp-toggle="#t"></div>`,
   );
   await page.click("#t");
   await expect(page.locator("#p")).toHaveClass(/shown/);
@@ -85,7 +85,7 @@ test("a detached popover's listeners no longer fire", async ({ page }) => {
   // Detach and re-add fresh markup; the old instance must not react to Escape.
   await setBody(
     page,
-    `<button id="t2">y</button><div id="p2" class="popover" data-sp-popover="toggle: #t2"></div>`,
+    `<button id="t2">y</button><div id="p2" class="popover" data-sp-toggle="#t2"></div>`,
   );
   // No #p anymore; pressing Escape should not throw or affect anything.
   await page.keyboard.press("Escape");
