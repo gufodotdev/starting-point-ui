@@ -47,22 +47,8 @@ const prettyCodeOptions = {
 
         if (meta.includes("preview")) {
           node.properties["data-preview"] = "true";
-          // `name="..."` (not `title="..."`, which rehype-pretty-code reserves
-          // for its own figcaption) sets the preview's header title.
-          const nameMatch = meta.match(/name="([^"]+)"/);
-          if (nameMatch) {
-            node.properties["data-title"] = nameMatch[1];
-          }
-        }
-
-        // `frame` renders the example in an iframe; `frame=560` sets its height.
-        // Add `right` to clip to the right edge (e.g. a right-side sidebar).
-        const frameMatch = meta.match(/(?:^|\s)frame(?:=(\d+))?(?:\s|$)/);
-        if (frameMatch) {
-          node.properties["data-frame"] = "true";
-          if (frameMatch[1]) node.properties["data-frame-height"] = frameMatch[1];
-          if (/(?:^|\s)right(?:\s|$)/.test(meta)) {
-            node.properties["data-frame-align"] = "right";
+          if (/(?:^|\s)flush(?:\s|$)/.test(meta)) {
+            node.properties["data-flush"] = "true";
           }
         }
 
@@ -79,7 +65,7 @@ const components = {
   Callout,
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
-      className="mt-10 lg:mt-12 first:mt-0 scroll-mt-28 text-xl font-medium tracking-tight [&+p]:mt-4"
+      className="mt-10 lg:mt-12 first:mt-0 scroll-m-28 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
       {...props}
     >
       {children}
@@ -87,35 +73,44 @@ const components = {
   ),
   h3: ({ children, ...props }: React.ComponentProps<"h3">) => (
     <h3
-      className="mt-8 scroll-mt-28 text-lg font-medium tracking-tight [&+p]:mt-4"
+      className="mt-12 scroll-m-28 text-lg font-medium tracking-tight [&+p]:mt-4!"
       {...props}
     >
       {children}
     </h3>
   ),
-  p: ({ children }: React.ComponentProps<"p">) => (
-    <p className="max-w-prose text-base/7 text-muted-foreground not-first:mt-6">
-      {children}
-    </p>
-  ),
-  a: ({ children, ...props }: React.ComponentProps<"a">) => (
-    <a
-      className="font-medium text-foreground underline underline-offset-4"
+  h4: ({ children, ...props }: React.ComponentProps<"h4">) => (
+    <h4
+      className="mt-8 scroll-m-28 text-base font-medium tracking-tight"
       {...props}
     >
       {children}
+    </h4>
+  ),
+  p: ({ children }: React.ComponentProps<"p">) => (
+    <p className="leading-relaxed not-first:mt-6">{children}</p>
+  ),
+  a: ({ children, ...props }: React.ComponentProps<"a">) => (
+    <a className="font-medium underline underline-offset-4" {...props}>
+      {children}
     </a>
+  ),
+  strong: ({ children }: React.ComponentProps<"strong">) => (
+    <strong className="font-medium">{children}</strong>
   ),
   blockquote: ({ children }: React.ComponentProps<"blockquote">) => (
     <blockquote className="mt-6 border-l-2 pl-6 italic">{children}</blockquote>
   ),
   ul: ({ children }: React.ComponentProps<"ul">) => (
-    <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
+    <ul className="my-6 ml-6 list-disc">{children}</ul>
   ),
   ol: ({ children }: React.ComponentProps<"ol">) => (
-    <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
+    <ol className="my-6 ml-6 list-decimal">{children}</ol>
   ),
-  hr: () => <hr className="mt-10 lg:mt-12 mb-10 lg:mb-12 [&+*]:mt-0!" />,
+  li: ({ children }: React.ComponentProps<"li">) => (
+    <li className="mt-2">{children}</li>
+  ),
+  hr: () => <hr className="my-4 md:my-8" />,
   code: ({
     children,
     ...props
@@ -128,7 +123,7 @@ const components = {
       return <code {...props}>{children}</code>;
     }
     return (
-      <code className="badge badge-outline rounded-sm px-1.5 py-0 align-[0.05em] font-mono text-[0.8125rem] font-normal whitespace-normal max-md:break-all">
+      <code className="relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none">
         {children}
       </code>
     );
@@ -137,35 +132,17 @@ const components = {
     children,
     "data-code": code = "",
     "data-preview": preview,
-    "data-frame": frame,
-    "data-frame-height": frameHeight,
-    "data-frame-align": frameAlign,
     "data-label": label,
-    "data-title": title,
+    "data-flush": flush,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
-    "data-frame"?: string;
-    "data-frame-height"?: string;
-    "data-frame-align"?: string;
     "data-label"?: string;
-    "data-title"?: string;
+    "data-flush"?: string;
   }) => {
     if (preview === "true") {
       return (
-        <CodeBlock code={code} header="preview" title={title}>
-          {children}
-        </CodeBlock>
-      );
-    }
-    if (frame === "true") {
-      return (
-        <CodeBlock
-          code={code}
-          header="frame"
-          frameHeight={frameHeight ? Number(frameHeight) : undefined}
-          frameAlign={frameAlign === "right" ? "right" : undefined}
-        >
+        <CodeBlock code={code} header="preview" flush={flush === "true"}>
           {children}
         </CodeBlock>
       );
@@ -180,25 +157,20 @@ const components = {
     return <CodeBlock code={code}>{children}</CodeBlock>;
   },
   table: ({ children }: React.ComponentProps<"table">) => (
-    <div className="scrollbar-thin my-6 w-full overflow-x-auto rounded-2xl border">
-      <table className="relative w-full [&_tbody_tr]:border-b [&_tbody_tr:last-child]:border-b-0">
+    <div className="scrollbar-thin my-6 w-full overflow-y-auto rounded-xl border">
+      <table className="relative w-full overflow-hidden border-none text-sm [&_tbody_tr:last-child]:border-b-0">
         {children}
       </table>
     </div>
   ),
-  thead: ({ children }: React.ComponentProps<"thead">) => (
-    <thead className="border-b bg-muted/60">{children}</thead>
-  ),
   tr: ({ children }: React.ComponentProps<"tr">) => (
-    <tr className="m-0">{children}</tr>
+    <tr className="m-0 border-b">{children}</tr>
   ),
   th: ({ children }: React.ComponentProps<"th">) => (
-    <th className="px-4 py-3 text-left font-medium">{children}</th>
+    <th className="px-4 py-2 text-left font-bold">{children}</th>
   ),
   td: ({ children }: React.ComponentProps<"td">) => (
-    <td className="px-4 py-3 text-left whitespace-nowrap text-muted-foreground">
-      {children}
-    </td>
+    <td className="px-4 py-2 text-left whitespace-nowrap">{children}</td>
   ),
 };
 

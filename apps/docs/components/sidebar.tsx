@@ -1,40 +1,19 @@
-import {
-  BookOpen,
-  Download,
-  Palette,
-  SlidersHorizontal,
-  LifeBuoy,
-  type LucideIcon,
-} from "lucide-react";
 import { SidebarLink } from "@/components/sidebar-link";
 
 type NavItem = {
   title: string;
   href: string;
-  icon?: LucideIcon;
 };
 
 const navigation: { title: string; items: NavItem[] }[] = [
   {
     title: "Guides",
     items: [
-      {
-        title: "Introduction",
-        href: "/docs/guides/introduction",
-        icon: BookOpen,
-      },
-      {
-        title: "Installation",
-        href: "/docs/guides/installation",
-        icon: Download,
-      },
-      { title: "Theming", href: "/docs/guides/theming", icon: Palette },
-      {
-        title: "Customization",
-        href: "/docs/guides/customization",
-        icon: SlidersHorizontal,
-      },
-      { title: "Help", href: "/docs/guides/help", icon: LifeBuoy },
+      { title: "Introduction", href: "/docs/guides/introduction" },
+      { title: "Installation", href: "/docs/guides/installation" },
+      { title: "Theming", href: "/docs/guides/theming" },
+      { title: "Customization", href: "/docs/guides/customization" },
+      { title: "Help", href: "/docs/guides/help" },
     ],
   },
   {
@@ -84,11 +63,7 @@ export function Sidebar() {
           <div className="sidebar-group-content">
             <nav className="sidebar-menu">
               {category.items.map((item) => (
-                <SidebarLink
-                  key={item.href}
-                  href={item.href}
-                  icon={item.icon ? <item.icon /> : undefined}
-                >
+                <SidebarLink key={item.href} href={item.href}>
                   {item.title}
                 </SidebarLink>
               ))}

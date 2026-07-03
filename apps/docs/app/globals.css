@@ -5,6 +5,7 @@
 
 @theme inline {
   --breakpoint-xxs: 400px;
+  --color-code: var(--code);
 }
 
 :root {
@@ -12,6 +13,13 @@
   --toc-width: 18rem;
   --font-sans: var(--font-inter), sans-serif;
   --font-heading: var(--font-sans);
+  --code: oklch(0.98 0 0);
+  --code-number: oklch(0.56 0 0);
+}
+
+.dark {
+  --code: oklch(0.2 0 0);
+  --code-number: oklch(0.72 0 0);
 }
 
 html:has([data-no-scrollbar-gutter]) {
@@ -127,41 +135,33 @@ html:has([data-no-scrollbar-gutter]) {
   background: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
 }
 
-/* Table of Contents — a minimal outline with a vertical guide line; the active
-   item highlights its segment of the line and turns the text primary. */
 .toc {
   @apply overflow-hidden;
 }
 
 .toc-list {
-  @apply flex flex-col;
-}
-
-/* The top-level list draws the guide line; each link overlays its own border
-   segment so the active one can recolor that part of the line. */
-.toc > .toc-list {
-  @apply border-l border-border;
+  @apply flex flex-col gap-2;
 }
 
 .toc-list-item {
-  @apply min-w-0;
+  @apply flex min-w-0 flex-col gap-2;
 }
 
 .toc-link {
-  @apply -ml-px block truncate border-l border-transparent py-1.5 pl-4 text-[0.8rem] leading-snug text-muted-foreground no-underline transition-colors;
+  @apply block truncate px-2 text-[0.8rem] text-muted-foreground no-underline transition-colors;
   @apply hover:text-foreground;
 }
 
 .toc-link.node-name--H3 {
-  @apply pl-8;
+  @apply pl-5;
 }
 
 .toc-link.node-name--H4 {
-  @apply pl-12;
+  @apply pl-7;
 }
 
 .toc-link.is-active-link {
-  @apply border-primary font-medium text-primary;
+  @apply font-medium text-foreground;
 }
 
 /* Syntax highlighting - shiki dual theme */
