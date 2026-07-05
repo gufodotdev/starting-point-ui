@@ -2,6 +2,11 @@ import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { CodeBlock } from "@/components/code-block";
 import { Callout } from "@/components/callout";
 import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
+import {
+  exampleId,
+  isPreviewMeta,
+  presetFromMeta,
+} from "@/lib/examples-registry";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
@@ -21,35 +26,14 @@ const prettyCodeOptions = {
 
         // @ts-expect-error - this context from transformer
         const source: string = this.source;
-        node.properties["data-code"] = source.replace(
-          /^\s*<!-- (?:START|END) https:\/\/startingpointui\.com\/\S+ -->\n?/gm,
-          "",
-        );
+        node.properties["data-code"] = source;
 
-        const code = node.children?.[0];
-        if (code?.children) {
-          code.children = code.children.filter(
-            (line: { children?: { children?: { value?: string }[] }[] }) => {
-              const text =
-                line.children
-                  ?.flatMap(
-                    (span: { children?: { value?: string }[] }) =>
-                      span.children ?? [],
-                  )
-                  .map((child: { value?: string }) => child.value ?? "")
-                  .join("") ?? "";
-              return !/^\s*<!-- (?:START|END) https:\/\/startingpointui\.com\/\S+ -->$/.test(
-                text,
-              );
-            },
-          );
-        }
-
-        if (meta.includes("preview")) {
+        if (isPreviewMeta(meta)) {
           node.properties["data-preview"] = "true";
-          if (/(?:^|\s)flush(?:\s|$)/.test(meta)) {
-            node.properties["data-flush"] = "true";
-          }
+          node.properties["data-frame-id"] = exampleId(
+            source,
+            presetFromMeta(meta),
+          );
         }
 
         const labelMatch = meta.match(/label="([^"]+)"/);
@@ -133,16 +117,16 @@ const components = {
     "data-code": code = "",
     "data-preview": preview,
     "data-label": label,
-    "data-flush": flush,
+    "data-frame-id": frameId,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
     "data-label"?: string;
-    "data-flush"?: string;
+    "data-frame-id"?: string;
   }) => {
-    if (preview === "true") {
+    if (preview === "true" && frameId) {
       return (
-        <CodeBlock code={code} header="preview" flush={flush === "true"}>
+        <CodeBlock code={code} header="preview" frameId={frameId}>
           {children}
         </CodeBlock>
       );

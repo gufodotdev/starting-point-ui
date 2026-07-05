@@ -1,72 +1,162 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useEffect } from "react";
+import { useTheme } from "next-themes";
+import { Monitor, Tablet, Smartphone, Fullscreen } from "lucide-react";
+import {
+  Group,
+  Panel,
+  Separator,
+  type PanelImperativeHandle,
+} from "react-resizable-panels";
 import { CopyButton } from "@/components/copy-button";
+
+const TABLET_WIDTH = 768;
+const MOBILE_WIDTH = 375;
+
+function FrameExample({ id }: { id: string }) {
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const sync = () => {
+      frame.contentDocument?.documentElement.classList.toggle(
+        "dark",
+        resolvedTheme === "dark",
+      );
+    };
+
+    frame.addEventListener("load", sync);
+    if (frame.contentDocument?.readyState === "complete") sync();
+    return () => frame.removeEventListener("load", sync);
+  }, [id, resolvedTheme]);
+
+  return (
+    <iframe
+      ref={frameRef}
+      src={`/frame/${id}`}
+      title="Example preview"
+      className="h-96 w-full border-0"
+      suppressHydrationWarning
+    />
+  );
+}
+
+function DeviceButtons({
+  panelRef,
+}: {
+  panelRef: React.RefObject<PanelImperativeHandle | null>;
+}) {
+  const resize = (size: string) => panelRef.current?.resize(size);
+
+  return (
+    <>
+      <button
+        type="button"
+        title="Desktop"
+        className="btn btn-ghost btn-icon-xs text-muted-foreground"
+        onClick={() => resize("100%")}
+      >
+        <Monitor />
+      </button>
+      <button
+        type="button"
+        title="Tablet"
+        className="btn btn-ghost btn-icon-xs hidden text-muted-foreground @min-[768px]:inline-flex"
+        onClick={() => resize(`${TABLET_WIDTH}px`)}
+      >
+        <Tablet />
+      </button>
+      <button
+        type="button"
+        title="Mobile"
+        className="btn btn-ghost btn-icon-xs hidden text-muted-foreground @min-[375px]:inline-flex"
+        onClick={() => resize(`${MOBILE_WIDTH}px`)}
+      >
+        <Smartphone />
+      </button>
+      <div className="separator separator-vertical self-auto! h-4" />
+    </>
+  );
+}
 
 export function PreviewBlock({
   children,
   code,
-  flush = false,
+  frameId,
 }: {
   children: React.ReactNode;
   code: string;
-  flush?: boolean;
+  frameId: string;
 }) {
-  const [expanded, setExpanded] = useState(false);
-
-  const collapsible = code.trimEnd().split("\n").length > 4;
-  const showCollapsed = collapsible && !expanded;
+  const panelRef = useRef<PanelImperativeHandle>(null);
+  const previewId = `preview-${frameId}`;
+  const codeId = `code-${frameId}`;
 
   return (
-    <div className="group relative my-6 flex flex-col overflow-hidden rounded-xl border">
-      {flush ? (
-        <div
-          className="relative h-130 transform-gpu overflow-hidden [&_.sidebar-panel]:h-full! [&_.sidebar]:h-full [&_.sidebar]:min-h-full"
-          dangerouslySetInnerHTML={{ __html: code }}
-        />
-      ) : (
-        <div className="flex min-h-96 w-full items-center justify-center p-10">
-          <div
-            className="flex flex-wrap items-center justify-center gap-4"
-            dangerouslySetInnerHTML={{ __html: code }}
-          />
+    <div className="@container my-6">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="tab-list h-8 rounded-md">
+          <button
+            type="button"
+            className="tab active px-3"
+            data-sp-toggle={`#${previewId}`}
+          >
+            Preview
+          </button>
+          <button
+            type="button"
+            className="tab px-3"
+            data-sp-toggle={`#${codeId}`}
+          >
+            Code
+          </button>
         </div>
-      )}
 
-      <div className="relative border-t bg-code text-sm">
-        <pre
-          className={`scrollbar-thin px-4 py-3.5 ${
-            showCollapsed
-              ? "max-h-27 overflow-hidden select-none"
-              : "max-h-96 overflow-auto"
-          }`}
-        >
-          {children}
-        </pre>
-        {!showCollapsed && (
-          <CopyButton
-            code={code}
-            className="absolute top-3 right-3 z-20 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100"
-          />
-        )}
-        {showCollapsed && (
-          <div className="absolute inset-0 flex items-center justify-center pb-4">
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to top, var(--code), color-mix(in oklab, var(--code) 60%, transparent), transparent)",
-              }}
-            />
-            <button
-              type="button"
-              className="btn btn-outline btn-sm relative z-10 rounded-lg bg-background shadow-none hover:bg-muted"
-              onClick={() => setExpanded(true)}
+        <div className="flex h-8 items-center gap-1 rounded-md border p-0.75">
+          <DeviceButtons panelRef={panelRef} />
+          <a
+            href={`/frame/${frameId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open in new tab"
+            aria-label="Open preview in a new tab"
+            className="btn btn-ghost btn-icon-xs text-muted-foreground"
+          >
+            <Fullscreen />
+          </a>
+          <div className="separator separator-vertical self-auto! h-4" />
+          <CopyButton code={code} className="text-muted-foreground" />
+        </div>
+      </div>
+
+      <div id={previewId} className="tab-content active">
+        <div className="relative md:-mr-3">
+          <div className="absolute inset-0 bg-[radial-gradient(var(--border)_1px,transparent_1px)] bg-size-[16px_16px] md:right-3" />
+          <Group orientation="horizontal" className="relative">
+            <Panel
+              panelRef={panelRef}
+              defaultSize="100%"
+              minSize={`${MOBILE_WIDTH}px`}
+              className="overflow-hidden rounded-xl border bg-background"
             >
-              View Code
-            </button>
-          </div>
-        )}
+              <FrameExample id={frameId} />
+            </Panel>
+            <Separator className="relative hidden w-3 bg-transparent p-0 after:absolute after:top-1/2 after:right-0 after:h-8 after:w-1.5 after:-translate-x-px after:-translate-y-1/2 after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
+            <Panel defaultSize="0%" minSize="0%" />
+          </Group>
+        </div>
+      </div>
+
+      <div id={codeId} className="tab-content">
+        <div className="overflow-hidden rounded-xl bg-code text-sm">
+          <pre className="scrollbar-thin max-h-96 overflow-auto px-4 py-3.5">
+            {children}
+          </pre>
+        </div>
       </div>
     </div>
   );

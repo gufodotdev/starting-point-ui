@@ -9,7 +9,7 @@ A layout for dashboards and admin panels: an in-flow collapsible column on deskt
 This is a full-screen component, so the previews on this page are limited and may not work on mobile. For full, ready-to-use examples, visit the [sidebar examples](/examples/components/sidebar).
 </Callout>
 
-```html preview flush
+```html preview preset=sidebar
 <div class="sidebar">
   <aside class="sidebar-panel" data-collapse="icon" data-sp-toggle="#sidebar-demo-trigger">
     <header class="sidebar-header">
@@ -182,7 +182,7 @@ See it running in the [sidebar examples](/examples/components/sidebar).
 
 Set `data-collapse="icon"` on the panel to shrink it to a rail of icons. Each button needs a leading icon and a `<span>` label; the rail keeps the icon and shows the label in a tooltip on hover.
 
-```html preview flush
+```html preview preset=sidebar
 <div class="sidebar">
   <aside class="sidebar-panel" data-collapse="icon" data-sp-toggle="#icon-trigger">
     <header class="sidebar-header">
@@ -247,7 +247,7 @@ Set `data-collapse="icon"` on the panel to shrink it to a rail of icons. Each bu
 
 `data-collapse="offcanvas"` (the default) slides the panel fully off-screen and the page reclaims the space.
 
-```html preview flush
+```html preview preset=sidebar
 <div class="sidebar">
   <aside class="sidebar-panel" data-collapse="offcanvas" data-sp-toggle="#offcanvas-trigger">
     <header class="sidebar-header">
@@ -312,7 +312,7 @@ Set `data-collapse="icon"` on the panel to shrink it to a rail of icons. Each bu
 
 Add the `collapsed` class to the panel to render it collapsed on first paint, before JavaScript loads, and set `aria-expanded="false"` on the trigger so its state matches. This example starts as the icon rail.
 
-```html preview flush
+```html preview preset=sidebar
 <div class="sidebar">
   <aside class="sidebar-panel collapsed" data-collapse="icon" data-sp-toggle="#collapsed-trigger">
     <header class="sidebar-header">
@@ -375,7 +375,7 @@ Add the `collapsed` class to the panel to render it collapsed on first paint, be
 
 A panel defaults to the left. Add `sidebar-right` to move it to the right instead. The trigger can live anywhere; here it sits in the page header on the right.
 
-```html preview flush
+```html preview preset=sidebar
 <div class="sidebar">
   <aside class="sidebar-panel sidebar-right" data-collapse="offcanvas" data-sp-toggle="#right-trigger">
     <header class="sidebar-header">
@@ -448,7 +448,7 @@ You can also use both at once, e.g. a navigation panel on the left and a table o
 
 Add `sidebar-inset` to the root for an inset main content area with rounded corners and a shadow. It pairs well with `data-collapse="icon"`, leaving the rail floating beside the inset page.
 
-```html preview flush
+```html preview preset=sidebar
 <div class="sidebar sidebar-inset">
   <aside class="sidebar-panel" data-collapse="icon" data-sp-toggle="#inset-trigger">
     <header class="sidebar-header">
