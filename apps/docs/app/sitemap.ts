@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://startingpointui.com";
 
   const docUrls = getAllDocSlugs().map((slug) => ({
-    url: `${baseUrl}/docs/${slug.join("/")}`,
+    url: `${baseUrl}/${slug.join("/")}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 1,

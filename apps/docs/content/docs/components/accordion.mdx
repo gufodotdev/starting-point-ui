@@ -45,7 +45,7 @@ A stack of collapsible sections. Opening one closes the others, unless you allow
 
 ## Usage
 
-An accordion is a group of [collapsibles](/docs/components/collapsible) that close each other. Each section is a trigger and a collapsible that points back at it with `data-sp-toggle`, exactly as a standalone collapsible. Wrapping them in `accordion` adds the single-open rule and the accordion ARIA roles.
+An accordion is a group of [collapsibles](/components/collapsible) that close each other. Each section is a trigger and a collapsible that points back at it with `data-sp-toggle`, exactly as a standalone collapsible. Wrapping them in `accordion` adds the single-open rule and the accordion ARIA roles.
 
 Per the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/), wrap each trigger in a heading (`h2`-`h6`) that matches your page outline. Add `accordion-trigger` to the button for the header styling and `accordion-content` to the panel body for its spacing.
 
@@ -250,7 +250,7 @@ Set each option with its own `data-sp-*` attribute on the accordion.
 
 ## Events
 
-Each panel is a [Collapsible](/docs/components/collapsible), so the full lifecycle (`sp-beforeshow` through `sp-hidden`) fires on the panels and bubbles to the accordion container.
+Each panel is a [Collapsible](/components/collapsible), so the full lifecycle (`sp-beforeshow` through `sp-hidden`) fires on the panels and bubbles to the accordion container.
 
 ```js
 accordion.addEventListener("sp-shown", (e) => {

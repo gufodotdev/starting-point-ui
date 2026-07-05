@@ -88,7 +88,7 @@ export function SearchDialog({
 
   function navigateToResult(result: SearchResult) {
     closeDialog();
-    router.push(`/docs/${result.slug}`);
+    router.push(`/${result.slug}`);
   }
 
   return (

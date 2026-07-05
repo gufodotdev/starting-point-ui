@@ -31,7 +31,7 @@ export default function Home() {
           </p>
           <div className="mt-6 lg:mt-8 grid xs:flex gap-3">
             <Link
-              href="/docs/guides/installation"
+              href="/guides/installation"
               className="btn btn-primary lg:btn-lg"
             >
               Get Started

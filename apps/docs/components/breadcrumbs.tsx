@@ -13,7 +13,6 @@ function humanize(segment: string) {
 }
 
 const SECTION_LABELS: Record<string, string> = {
-  docs: "Docs",
   guides: "Guides",
   components: "Components",
   examples: "Examples",

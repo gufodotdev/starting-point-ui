@@ -36,7 +36,7 @@ export async function Navbar() {
           <div className="flex items-center gap-2 -mr-2">
             <SearchDialog />
             <Link
-              href="/docs/guides/introduction"
+              href="/guides/introduction"
               className="btn btn-ghost btn-sm max-lg:hidden"
             >
               Docs

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: doc.metadata.title,
     description: doc.metadata.description,
     alternates: {
-      canonical: `/docs/${slug.join("/")}`,
+      canonical: `/${slug.join("/")}`,
     },
   };
 }

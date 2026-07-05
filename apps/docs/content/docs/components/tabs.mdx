@@ -45,7 +45,7 @@ A set of tabs switching between content panels in place.
 
 ## Usage
 
-A `tab-list` holds the `tab` buttons. Each tab points at its `tab-content` panel with `data-sp-toggle`, the same wiring a [collapsible](/docs/components/collapsible) uses. Because the link is by id, the panels can live anywhere on the page, not just next to the list. Mark the initially selected tab and its panel with `active` so the markup renders correctly before JavaScript loads.
+A `tab-list` holds the `tab` buttons. Each tab points at its `tab-content` panel with `data-sp-toggle`, the same wiring a [collapsible](/components/collapsible) uses. Because the link is by id, the panels can live anywhere on the page, not just next to the list. Mark the initially selected tab and its panel with `active` so the markup renders correctly before JavaScript loads.
 
 Clicking a tab or moving through the list with the arrow keys switches the panels. All ids, roles, and ARIA attributes are generated, so the only markup the component asks for is the `data-sp-toggle` link and `active` on the starting pair.
 

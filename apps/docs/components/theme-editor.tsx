@@ -205,7 +205,7 @@ export function ThemeEditor({ className }: { className?: string }) {
               Tweak the colors, fonts, and style to match your project. Learn
               more in the{" "}
               <a
-                href="/docs/guides/theming"
+                href="/guides/theming"
                 className="underline underline-offset-4 hover:text-foreground"
               >
                 theming guide
@@ -453,7 +453,7 @@ export function ThemeEditor({ className }: { className?: string }) {
                   <li>
                     For more info see the{" "}
                     <a
-                      href="/docs/guides/theming"
+                      href="/guides/theming"
                       className="underline underline-offset-4 hover:text-foreground"
                     >
                       theming guide
