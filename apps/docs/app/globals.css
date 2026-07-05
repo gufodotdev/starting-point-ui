@@ -10,7 +10,7 @@
 
 :root {
   --navbar-height: 3.5rem;
-  --toc-width: 18rem;
+  --sidebar-width: 15.5rem;
   --font-sans: var(--font-inter), sans-serif;
   --font-heading: var(--font-sans);
   --code: oklch(0.98 0 0);
@@ -24,48 +24,6 @@
 
 html:has([data-no-scrollbar-gutter]) {
   scrollbar-gutter: auto;
-}
-
-/* App-shell sidebars are authored collapsed so they stay hidden on desktop for
-   pages without an article (the landing page). Docs pages render #content, which
-   expands the panels and restores their gaps on desktop. Below the sidebar
-   breakpoint they are drawers either way, so this only applies on desktop. This
-   is scoped to .app-shell so in-page sidebar examples keep package behavior. */
-@media (width >= 1024px) {
-  /* The desktop panels can't be toggled by the user, so the expand/collapse on
-     route change should be instant. Kill the transition on the panels and their
-     gaps; the mobile drawer animation is separate and unaffected. */
-  .app-shell > .sidebar-panel,
-  .app-shell::before,
-  .app-shell::after {
-    transition: none !important;
-  }
-
-  /* Left nav panel: slide back into place and restore its gap. */
-  .app-shell:has(#content) > .sidebar-panel:not(.sidebar-right).collapsed {
-    left: 0;
-  }
-  .app-shell:has(#content):has(
-      > .sidebar-panel:not(.sidebar-right).collapsed
-    )::before {
-    width: var(--sidebar-width);
-  }
-
-}
-
-/* The table-of-contents panel only docks at 2xl and up; below that it stays
-   authored-collapsed (offcanvas), so the package hides it and zeroes its gap.
-   This block is the single place its visibility is defined — it slides the
-   panel in and reserves the gap together, so the two never drift apart. */
-@media (width >= 96rem) {
-  .app-shell:has(#content) > .sidebar-panel.sidebar-right.collapsed {
-    right: 0;
-  }
-  .app-shell:has(#content):has(
-      > .sidebar-panel.sidebar-right.collapsed
-    )::after {
-    width: var(--sidebar-width);
-  }
 }
 
 .scrollbar-none {
@@ -148,16 +106,16 @@ html:has([data-no-scrollbar-gutter]) {
 }
 
 .toc-link {
-  @apply block truncate px-2 text-[0.8rem] text-muted-foreground no-underline transition-colors;
+  @apply block truncate text-[0.8rem] text-muted-foreground no-underline transition-colors;
   @apply hover:text-foreground;
 }
 
 .toc-link.node-name--H3 {
-  @apply pl-5;
+  @apply pl-4;
 }
 
 .toc-link.node-name--H4 {
-  @apply pl-7;
+  @apply pl-8;
 }
 
 .toc-link.is-active-link {

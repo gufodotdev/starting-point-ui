@@ -16,7 +16,7 @@ export function SidebarLink({
     <div className="sidebar-menu-item">
       <Link
         href={href}
-        className={`sidebar-menu-button w-fit! ${pathname === href ? "active" : ""}`}
+        className={`sidebar-menu-button ${pathname === href ? "active" : ""}`}
       >
         <span>{children}</span>
       </Link>

@@ -1,17 +1,26 @@
+import { AlignLeft } from "lucide-react";
 import { TableOfContents } from "@/components/table-of-contents";
 
-export function TocSidebar() {
+export function TocSidebar({
+  variant = "wide",
+}: {
+  variant?: "guide" | "wide";
+}) {
   return (
     <aside
-      className="sidebar-panel sidebar-right collapsed border-l-0! bg-background sidebar:top-(--sidebar-top)! sidebar:h-[calc(100svh-var(--sidebar-top))]!"
-      data-collapse="offcanvas"
+      className={`sticky top-(--navbar-height) hidden h-[calc(100svh-var(--navbar-height))] w-54 shrink-0 ${
+        variant === "guide" ? "xl:block" : "min-[1800px]:block"
+      }`}
     >
-      <div className="sidebar-content scrollbar-hover">
-        <div className="sidebar-group">
-          <span className="sidebar-group-label mb-1">On This Page</span>
-          <div className="sidebar-group-content">
-            <TableOfContents />
-          </div>
+      <div className="scrollbar-hover flex h-full flex-col overflow-y-auto pt-10 pb-10 lg:pt-16">
+        <div className="flex items-center gap-1.5">
+          <AlignLeft className="size-4 text-muted-foreground" />
+          <p className="text-xs font-medium text-muted-foreground">
+            On this page
+          </p>
+        </div>
+        <div className="pt-4">
+          <TableOfContents />
         </div>
       </div>
     </aside>

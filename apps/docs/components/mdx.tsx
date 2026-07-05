@@ -72,7 +72,7 @@ const components = {
     </h4>
   ),
   p: ({ children }: React.ComponentProps<"p">) => (
-    <p className="leading-relaxed not-first:mt-6">{children}</p>
+    <p className="max-w-3xl leading-relaxed not-first:mt-6">{children}</p>
   ),
   a: ({ children, ...props }: React.ComponentProps<"a">) => (
     <a className="font-medium underline underline-offset-4" {...props}>
