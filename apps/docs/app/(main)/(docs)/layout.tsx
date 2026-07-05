@@ -14,7 +14,7 @@ export default function DocsLayout({
   return (
     <div className="sidebar">
       <aside
-        className="sidebar-panel bg-background"
+        className="sidebar-panel bg-background px-2"
         data-sp-toggle="#sidebar-trigger"
       >
         <header className="sidebar-header">
