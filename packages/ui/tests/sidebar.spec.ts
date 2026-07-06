@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 
-// The sidebar switches behavior at --breakpoint-sidebar (default 1024px):
+// The sidebar switches behavior at --breakpoint-sidebar (default 768px):
 // an off-canvas drawer below it, a collapsible in-flow column above it.
 
 test.beforeEach(async ({ page }) => {
