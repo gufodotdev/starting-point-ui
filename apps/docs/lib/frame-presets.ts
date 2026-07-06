@@ -21,7 +21,6 @@ export const framePresets: Record<string, CSSProperties> = {
     minHeight: "20rem",
   },
   sidebar: {
-    height: "640px",
-    overflow: "hidden",
+    minHeight: "640px",
   },
 };

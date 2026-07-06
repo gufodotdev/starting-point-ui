@@ -4,10 +4,12 @@
 
     /* The panel is fixed, so a pseudo-element gap reserves its width in the flow
        (otherwise the page renders under it): ::before for a left panel, ::after
-       for a right one, so one layout can host both. Width tracks the collapse. */
+       for a right one, so one layout can host both. Width tracks the collapse.
+       Its dvh height sets the flex line, so the page stretches to fill the
+       viewport (flex items stretch to the tallest sibling, not to min-height). */
     &:has(> .sidebar:not(.sidebar-right))::before,
     &:has(> .sidebar.sidebar-right)::after {
-      @apply sidebar:block sidebar:w-(--sidebar-width) sidebar:shrink-0;
+      @apply block h-dvh sidebar:w-(--sidebar-width) sidebar:shrink-0;
       @apply sidebar:transition-[width] sidebar:duration-200 sidebar:ease-linear;
       content: "";
     }
