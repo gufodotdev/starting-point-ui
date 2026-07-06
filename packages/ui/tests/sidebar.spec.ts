@@ -242,5 +242,33 @@ test.describe("desktop column", () => {
       expect(await vetoed(false)).toBe(true);
       expect(await vetoed(true)).toBe(false);
     });
+
+    test("an sr-only label keeps its tooltip while expanded", async ({ page }) => {
+      // Icon-only rail buttons hide their label from sight entirely, so the
+      // tooltip must show even though the panel is not collapsed.
+      await mount(page, `
+        <div class="sidebar-layout">
+          <aside id="panel" class="sidebar" data-collapse="icon" data-sp-toggle="#trigger">
+            <div class="sidebar-content">
+              <div class="sidebar-menu">
+                <div class="sidebar-menu-item">
+                  <a id="first-item" href="#" class="sidebar-menu-button">
+                    <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/></svg>
+                    <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Inbox</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <main class="sidebar-page">
+            <button id="trigger" class="btn" aria-expanded="true">Toggle</button>
+          </main>
+        </div>`);
+      const vetoed = await page.evaluate(() => {
+        const tip = document.querySelector(".sidebar > .tooltip")!;
+        return !tip.dispatchEvent(new CustomEvent("sp-beforeshow", { cancelable: true }));
+      });
+      expect(vetoed).toBe(false);
+    });
   });
 });

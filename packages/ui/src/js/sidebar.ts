@@ -88,12 +88,14 @@ export const Sidebar = define({
     },
 
     // A tooltip per nav button (header/footer brand rows excluded), showing the
-    // button's label only while the rail is collapsed and that label is hidden.
+    // button's label only while that label is hidden: while the rail is
+    // collapsed, or always for icon-only buttons with an sr-only label.
     _buildTooltips(this: SpInstance): void {
       const buttons = this.el.querySelectorAll<HTMLElement>(".sidebar-menu .sidebar-menu-button");
       for (const button of buttons) {
-        const label = button.querySelector(":scope > span")?.textContent?.trim();
-        if (!label) continue;
+        const span = button.querySelector<HTMLElement>(":scope > span");
+        const label = span?.textContent?.trim();
+        if (!span || !label) continue;
 
         const tip = document.createElement("div");
         tip.className = "tooltip";
@@ -106,9 +108,9 @@ export const Sidebar = define({
 
         getInstance(tip, Tooltip);
         this.on(tip, "sp-beforeshow", (e) => {
-          if (this._isMobile() || !this.el.classList.contains("collapsed")) {
-            e.preventDefault();
-          }
+          const labelHidden =
+            this.el.classList.contains("collapsed") || span.offsetWidth <= 1;
+          if (this._isMobile() || !labelHidden) e.preventDefault();
         });
       }
     },
