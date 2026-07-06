@@ -13,7 +13,7 @@ import { Escapable } from "./mixins/escapable";
 
 export const Sidebar = define({
   name: "sidebar",
-  selector: ".sidebar-panel",
+  selector: ".sidebar",
   mixins: [Togglable, ClickToShow, ClickOutsideHide, Escapable],
 
   init(this: SpInstance) {

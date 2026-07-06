@@ -12,9 +12,9 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="sidebar">
+    <div className="sidebar-layout">
       <aside
-        className="sidebar-panel bg-background px-2"
+        className="sidebar bg-background px-2"
         data-sp-toggle="#sidebar-trigger"
       >
         <header className="sidebar-header">

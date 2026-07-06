@@ -1,42 +1,42 @@
-@utility sidebar {
+@utility sidebar-layout {
   @layer l1.l2 {
     @apply flex min-h-dvh w-full overflow-x-clip bg-sidebar;
 
     /* The panel is fixed, so a pseudo-element gap reserves its width in the flow
        (otherwise the page renders under it): ::before for a left panel, ::after
        for a right one, so one layout can host both. Width tracks the collapse. */
-    &:has(> .sidebar-panel:not(.sidebar-right))::before,
-    &:has(> .sidebar-panel.sidebar-right)::after {
+    &:has(> .sidebar:not(.sidebar-right))::before,
+    &:has(> .sidebar.sidebar-right)::after {
       @apply sidebar:block sidebar:w-(--sidebar-width) sidebar:shrink-0;
       @apply sidebar:transition-[width] sidebar:duration-200 sidebar:ease-linear;
       content: "";
     }
 
     /* Left gap (::before) mirrors the left panel's collapsed width. */
-    &:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="offcanvas"])::before {
+    &:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="offcanvas"])::before {
       @apply sidebar:w-0;
     }
-    &:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
+    &:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
       @apply sidebar:w-(--sidebar-width-icon);
     }
-    &.sidebar-inset:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
+    &.sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
       @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
 
     /* Right gap (::after) mirrors the right panel's collapsed width. */
-    &:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="offcanvas"])::after {
+    &:has(> .sidebar.sidebar-right.collapsed[data-collapse="offcanvas"])::after {
       @apply sidebar:w-0;
     }
-    &:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="icon"])::after {
+    &:has(> .sidebar.sidebar-right.collapsed[data-collapse="icon"])::after {
       @apply sidebar:w-(--sidebar-width-icon);
     }
-    &.sidebar-inset:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="icon"])::after {
+    &.sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-collapse="icon"])::after {
       @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
   }
 }
 
-@utility sidebar-panel {
+@utility sidebar {
   @layer l1.l2 {
     @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 hidden;
     /* Cap the drawer at its token but shrink on narrow screens, leaving a gutter. */
@@ -121,17 +121,17 @@
       @apply sidebar:my-2 sidebar:rounded-xl sidebar:shadow-sm;
     }
     /* Left panel (default): page sits to its right. */
-    .sidebar-inset:has(> .sidebar-panel:not(.sidebar-right)) & {
+    .sidebar-inset:has(> .sidebar:not(.sidebar-right)) & {
       @apply sidebar:mr-2;
     }
-    .sidebar-inset:has(> .sidebar-panel:not(.sidebar-right).collapsed[data-collapse="offcanvas"]) & {
+    .sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="offcanvas"]) & {
       @apply sidebar:ml-2;
     }
     /* Right panel: page sits to its left. */
-    .sidebar-inset:has(> .sidebar-panel.sidebar-right) & {
+    .sidebar-inset:has(> .sidebar.sidebar-right) & {
       @apply sidebar:ml-2;
     }
-    .sidebar-inset:has(> .sidebar-panel.sidebar-right.collapsed[data-collapse="offcanvas"]) & {
+    .sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-collapse="offcanvas"]) & {
       @apply sidebar:mr-2;
     }
   }
@@ -213,7 +213,7 @@
 @utility sidebar-menu-button {
   @layer l1.l2 {
     @apply flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none;
-    @apply in-[.sidebar-panel:is(.collapsing,.expanding)]:transition-[width,height,padding];
+    @apply in-[.sidebar:is(.collapsing,.expanding)]:transition-[width,height,padding];
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
     @apply focus-visible:ring-ring/50 focus-visible:ring-[3px];
     @apply active:bg-sidebar-accent active:text-sidebar-accent-foreground;
@@ -276,7 +276,7 @@
    and clips the rest. The button keeps p-2 so the icon never shifts. */
 @layer l1.l2 {
   @media (width >= theme(--breakpoint-sidebar)) {
-    .sidebar-panel.collapsed[data-collapse="icon"] {
+    .sidebar.collapsed[data-collapse="icon"] {
       .sidebar-content,
       .sidebar-group,
       .sidebar-group-content,

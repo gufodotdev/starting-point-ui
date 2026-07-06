@@ -15,8 +15,8 @@ async function mount(page: Page, html: string) {
 }
 
 const BASIC = `
-  <div class="sidebar">
-    <aside id="panel" class="sidebar-panel" data-sp-toggle="#trigger">
+  <div class="sidebar-layout">
+    <aside id="panel" class="sidebar" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
           <div class="sidebar-menu-item">
@@ -35,8 +35,8 @@ const BASIC = `
 
 // Icon-collapse fixture, authored collapsed for first-paint checks.
 const ICON = `
-  <div class="sidebar">
-    <aside id="panel" class="sidebar-panel collapsed" data-collapse="icon" data-sp-toggle="#trigger">
+  <div class="sidebar-layout">
+    <aside id="panel" class="sidebar collapsed" data-collapse="icon" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
           <div class="sidebar-menu-item">
@@ -190,7 +190,7 @@ test.describe("desktop column", () => {
   });
 
   test("an authored collapsed panel renders collapsed and syncs the trigger", async ({ page }) => {
-    await mount(page, BASIC.replace('class="sidebar-panel"', 'class="sidebar-panel collapsed"'));
+    await mount(page, BASIC.replace('class="sidebar"', 'class="sidebar collapsed"'));
     await expect(panel(page)).toHaveClass(/collapsed/);
     await expect(trigger(page)).toHaveAttribute("aria-expanded", "false");
   });
@@ -221,7 +221,7 @@ test.describe("desktop column", () => {
 
     test("builds a decorative tooltip per nav button", async ({ page }) => {
       await mount(page, ICON);
-      const tip = page.locator(".sidebar-panel > .tooltip");
+      const tip = page.locator(".sidebar > .tooltip");
       await expect(tip).toHaveCount(1);
       await expect(tip).toHaveText("Dashboard");
       await expect(tip).toHaveAttribute("aria-hidden", "true");
@@ -235,7 +235,7 @@ test.describe("desktop column", () => {
         page.evaluate((isCollapsed) => {
           const p = document.querySelector("#panel")!;
           p.classList.toggle("collapsed", isCollapsed);
-          const tip = document.querySelector(".sidebar-panel > .tooltip")!;
+          const tip = document.querySelector(".sidebar > .tooltip")!;
           // sp-beforeshow returns false (vetoed) when not collapsed.
           return !tip.dispatchEvent(new CustomEvent("sp-beforeshow", { cancelable: true }));
         }, collapsed);

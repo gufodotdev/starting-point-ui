@@ -205,7 +205,7 @@
 
   /* The mobile sidebar drawer is modal; lock scroll while it's open. */
   @media (width < theme(--breakpoint-sidebar)) {
-    html:has(.sidebar-panel[data-open]) {
+    html:has(.sidebar[data-open]) {
       @apply overflow-hidden;
     }
   }
