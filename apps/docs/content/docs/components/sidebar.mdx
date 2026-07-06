@@ -100,13 +100,21 @@ A layout for dashboards and admin panels: an in-flow collapsible column on deskt
       </div>
     </footer>
   </aside>
-  <main class="sidebar-page">
+  <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
       <button id="sidebar-demo-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+      </div>
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
   </main>
 </div>
 ```
@@ -226,13 +234,21 @@ Set `data-collapse="icon"` on the panel to shrink it to a rail of icons. Each bu
       </button>
     </footer>
   </aside>
-  <main class="sidebar-page">
+  <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
       <button id="icon-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+      </div>
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
   </main>
 </div>
 ```
@@ -291,13 +307,21 @@ Set `data-collapse="icon"` on the panel to shrink it to a rail of icons. Each bu
       </button>
     </footer>
   </aside>
-  <main class="sidebar-page">
+  <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
       <button id="offcanvas-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+      </div>
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
   </main>
 </div>
 ```
@@ -354,13 +378,21 @@ Add the `collapsed` class to the panel to render it collapsed on first paint, be
       </button>
     </footer>
   </aside>
-  <main class="sidebar-page">
+  <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
       <button id="collapsed-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+      </div>
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
   </main>
 </div>
 ```
@@ -408,13 +440,21 @@ A sidebar defaults to the left. Add `sidebar-right` to move it to the right inst
       </div>
     </div>
   </aside>
-  <main class="sidebar-page">
+  <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center justify-end gap-2 px-4">
       <h1 class="mr-auto text-sm font-medium">Dashboard</h1>
       <button id="right-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
       </button>
     </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+      </div>
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
   </main>
 </div>
 ```
@@ -462,7 +502,7 @@ You can also use both at once, e.g. a navigation sidebar on the left and a table
       </div>
     </div>
   </aside>
-  <main class="sidebar-page">
+  <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
       <button id="nav-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle navigation">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
@@ -472,6 +512,10 @@ You can also use both at once, e.g. a navigation sidebar on the left and a table
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
       </button>
     </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="h-32 rounded-xl bg-muted/50"></div>
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
   </main>
   <aside class="sidebar sidebar-right" data-collapse="offcanvas" data-sp-toggle="#toc-trigger">
     <div class="sidebar-content">
@@ -556,13 +600,21 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
       </button>
     </footer>
   </aside>
-  <main class="sidebar-page">
+  <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
       <button id="inset-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+        <div class="aspect-video rounded-xl bg-muted/50"></div>
+      </div>
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
   </main>
 </div>
 ```
@@ -897,22 +949,29 @@ Add a `sidebar-menu-action` for a secondary button on a menu item, or a `sidebar
 
 ### Header
 
-The `sidebar-header` is a pinned region at the top of the panel, typically a brand row built with a large menu button and a logo.
+The `sidebar-header` is a pinned region at the top of the panel, typically a brand row built with a large menu button and a logo. Pair it with a [dropdown](/components/dropdown) to switch between versions, teams, or workspaces.
 
 ```html preview
-<aside class="sidebar-static w-64 rounded-lg border">
-  <header class="sidebar-header">
-    <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
-      <span class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
-      </span>
-      <span class="grid flex-1 text-left leading-tight">
-        <span class="truncate font-medium">Acme Inc</span>
-        <span class="truncate text-xs">Enterprise</span>
-      </span>
+<header class="sidebar-header w-64">
+  <button id="header-version" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
+    <span class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+    </span>
+    <span class="grid flex-1 text-left leading-tight">
+      <span class="truncate font-medium">Acme Inc</span>
+      <span class="truncate text-xs">v1.0.1</span>
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+  </button>
+  <div class="dropdown min-w-56" data-sp-toggle="#header-version" data-sp-placement="bottom-start">
+    <a href="#" class="dropdown-item">
+      v1.0.1
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="M20 6 9 17l-5-5"/></svg>
     </a>
-  </header>
-</aside>
+    <a href="#" class="dropdown-item">v1.1.0-alpha</a>
+    <a href="#" class="dropdown-item">v2.0.0-beta1</a>
+  </div>
+</header>
 ```
 
 ### Footer
@@ -920,24 +979,22 @@ The `sidebar-header` is a pinned region at the top of the panel, typically a bra
 The `sidebar-footer` is a pinned region at the bottom of the panel, often a user row with an [avatar](/components/avatar). Pair it with a [dropdown](/components/dropdown) for an account menu.
 
 ```html preview
-<aside class="sidebar-static w-64 rounded-lg border">
-  <footer class="sidebar-footer">
-    <button id="footer-user" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
-      <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
-      <span class="grid flex-1 text-left leading-tight">
-        <span class="truncate font-medium">Sarah Johnson</span>
-        <span class="truncate text-xs">sarah@example.com</span>
-      </span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
-    </button>
-    <div id="footer-user-menu" class="dropdown min-w-56" data-sp-toggle="#footer-user" data-sp-placement="top-start">
-      <a href="#" class="dropdown-item">Account</a>
-      <a href="#" class="dropdown-item">Billing</a>
-      <div class="dropdown-separator"></div>
-      <a href="#" class="dropdown-item">Log out</a>
-    </div>
-  </footer>
-</aside>
+<footer class="sidebar-footer w-64">
+  <button id="footer-user" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
+    <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+    <span class="grid flex-1 text-left leading-tight">
+      <span class="truncate font-medium">Sarah Johnson</span>
+      <span class="truncate text-xs">sarah@example.com</span>
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+  </button>
+  <div class="dropdown min-w-56" data-sp-toggle="#footer-user" data-sp-placement="top-start">
+    <a href="#" class="dropdown-item">Account</a>
+    <a href="#" class="dropdown-item">Billing</a>
+    <div class="dropdown-separator"></div>
+    <a href="#" class="dropdown-item">Log out</a>
+  </div>
+</footer>
 ```
 
 ---
