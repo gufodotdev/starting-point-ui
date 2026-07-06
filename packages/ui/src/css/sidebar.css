@@ -56,8 +56,10 @@
       @apply flex;
     }
 
+    /* Undo the UA popover styles; the explicit height beats the UA's
+       fit-content, which would otherwise shrink the drawer to its content. */
     &:where([popover]) {
-      @apply m-0 overflow-visible border-0 p-0;
+      @apply m-0 h-full overflow-visible border-0 p-0;
     }
     &::backdrop {
       @apply bg-black/30 backdrop-blur-xs;
