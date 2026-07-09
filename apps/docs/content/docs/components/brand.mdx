@@ -1,0 +1,254 @@
+---
+title: Brand
+description: A Tailwind CSS brand component for displaying your company or application's logo and name consistently across your interface.
+---
+
+The brand is your product's identity block: a logo box paired with a name that renders consistently wherever it goes, from the [navbar](/components/navbar) and [sidebar](/components/sidebar) to footers and login pages.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo">
+    <i class="font-serif font-bold not-italic">A</i>
+  </span>
+  <span class="brand-name">Acme Inc.</span>
+</a>
+```
+
+## Usage
+
+A brand pairs a `brand-logo` with a `brand-name` inside a `brand` row, usually an anchor pointing home. The logo box fits an image, an inline SVG, or any custom content.
+
+| Class            | Description                                                        |
+| ---------------- | ------------------------------------------------------------------ |
+| `brand`          | Add to the row wrapping the logo and name, usually a link          |
+| `brand-logo`     | Add to the logo box; holds an image, SVG, or custom markup         |
+| `brand-logo-lg`  | Add to `brand-logo` for tall rows like `sidebar-menu-button-lg`    |
+| `brand-name`     | Add to the company or application name                             |
+| `brand-text`     | Add to stack the name with a subtitle in a two-line block          |
+| `brand-subtitle` | Add to a muted second line under the name                          |
+
+```html
+<!-- This is the brand, usually a link pointing home -->
+<a href="/" class="brand">
+  <!-- The logo box: an image, an inline SVG, or custom markup -->
+  <span class="brand-logo">
+    <img src="/logo.png" alt="" />
+  </span>
+  <span class="brand-name">Acme Inc.</span>
+</a>
+```
+
+## Examples
+
+### Drawn mark
+
+An original SVG glyph on the default box, here a soft diagonal band with a dot.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="17" cy="17" r="2.5"/>
+    </svg>
+  </span>
+  <span class="brand-name">Starting Point</span>
+</a>
+```
+
+### Solid circle
+
+A filled circle carrying a simple white glyph. The logo box goes transparent and the SVG becomes the whole mark.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo size-7 bg-transparent">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" class="size-7">
+      <circle cx="14" cy="14" r="14" fill="#e11d48"/>
+      <path d="M6.5 14h3l2.5-5 4 10 2.5-5h3" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+  <span class="brand-name">Pulse</span>
+</a>
+```
+
+### Two-tone
+
+Offset shapes in a color and its lighter tints add depth without any detail work.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo size-7 bg-transparent">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" class="size-7">
+      <circle cx="14" cy="14" r="14" fill="#7c3aed"/>
+      <circle cx="16.5" cy="14" r="9" fill="#c4b5fd"/>
+      <circle cx="19" cy="14" r="4.5" fill="#fff"/>
+    </svg>
+  </span>
+  <span class="brand-name">Eclipse</span>
+</a>
+```
+
+### Boxless shape
+
+A standalone shape with no container at all, letting the silhouette be the identity.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo size-7 bg-transparent">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" class="size-7">
+      <path d="M12 6q1.5 7.5 9 9-7.5 1.5-9 9-1.5-7.5-9-9 7.5-1.5 9-9Z" fill="#c026d3"/>
+      <path d="M21 2.5q.8 3.7 4.5 4.5-3.7.8-4.5 4.5-.8-3.7-4.5-4.5 3.7-.8 4.5-4.5Z" fill="#f0abfc"/>
+    </svg>
+  </span>
+  <span class="brand-name">Northstar</span>
+</a>
+```
+
+### Monogram
+
+A single well-set letter on the default box. Type does the work.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo">
+    <i class="font-serif font-bold not-italic">M</i>
+  </span>
+  <span class="brand-name">Meridian</span>
+</a>
+```
+
+### With subtitle
+
+Pair a `brand-logo-lg` with a `brand-text` stack to add a muted `brand-subtitle` under the name.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo brand-logo-lg">
+    <i class="font-serif font-bold not-italic">A</i>
+  </span>
+  <span class="brand-text">
+    <span class="brand-name">Acme Inc.</span>
+    <span class="brand-subtitle">Enterprise</span>
+  </span>
+</a>
+```
+
+### Logo only
+
+Display just the logo by omitting the name.
+
+```html preview
+<a href="#" class="brand">
+  <span class="brand-logo">
+    <i class="font-serif font-bold not-italic">A</i>
+  </span>
+  <span class="sr-only">Acme Inc.</span>
+</a>
+```
+
+### Navbar with brand
+
+The brand slots into a [navbar](/components/navbar) as the leading element.
+
+```html preview
+<header class="navbar w-full rounded-lg border">
+  <button class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Toggle navigation">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
+  </button>
+  <a href="#" class="brand mr-2">
+    <span class="brand-logo">
+      <i class="font-serif font-bold not-italic">A</i>
+    </span>
+    <span class="brand-name">Acme Inc.</span>
+  </a>
+  <nav class="navbar-menu max-sidebar:hidden">
+    <a href="#" class="navbar-menu-item active">Home</a>
+    <a href="#" class="navbar-menu-item">Inbox <span class="badge badge-secondary">12</span></a>
+  </nav>
+  <img class="avatar ml-auto size-8 rounded-full" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+</header>
+```
+
+### Sidebar with brand
+
+In a [sidebar](/components/sidebar), make the brand a `sidebar-menu-button` holding the logo and name. The button supplies the padding that aligns the logo with the menu below, plus the hover state.
+
+```html preview
+<aside class="sidebar-static">
+  <header class="sidebar-header">
+    <a href="#" class="sidebar-menu-button">
+      <span class="brand-logo">
+        <i class="font-serif font-bold not-italic">A</i>
+      </span>
+      <span class="brand-name">Acme Inc.</span>
+    </a>
+  </header>
+  <div class="sidebar-content">
+    <div class="sidebar-group">
+      <nav class="sidebar-menu">
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button active">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            <span>Inbox</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+            <span>Documents</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</aside>
+```
+
+For a larger brand row with a subtitle, use the `sidebar-menu-button-lg` variant with a `brand-logo-lg`, like an app switcher.
+
+```html preview
+<aside class="sidebar-static">
+  <header class="sidebar-header">
+    <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
+      <span class="brand-logo brand-logo-lg">
+        <i class="font-serif font-bold not-italic">A</i>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Acme Inc.</span>
+        <span class="brand-subtitle">Enterprise</span>
+      </span>
+    </a>
+  </header>
+  <div class="sidebar-content">
+    <div class="sidebar-group">
+      <nav class="sidebar-menu">
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button active">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            <span>Inbox</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</aside>
+```
+
+## Accessibility
+
+The brand is usually a link, so give it an accessible name. The visible `brand-name` provides one automatically; for a logo-only brand, keep the name in the markup with an `sr-only` class, as in the example above.
+
+When the logo is an image, use an empty `alt=""` if the name is visible beside it, so screen readers do not announce the brand twice. For a logo-only image brand, put the name in the `alt` text instead.

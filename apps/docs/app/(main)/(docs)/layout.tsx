@@ -19,10 +19,26 @@ export default function DocsLayout({
       >
         <header className="sidebar-header">
           <Link href="/" className="sidebar-menu-button sidebar-menu-button-lg">
-            <span className="flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-primary text-sm font-bold text-primary-foreground">
-              ui
+            <span className="brand-logo brand-logo-lg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M6.5 16.5 16.5 6.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+                <circle cx="17" cy="17" r="2.5" />
+              </svg>
             </span>
-            <span className="truncate text-sm font-medium">Starting Point</span>
+            <span className="brand-text">
+              <span className="brand-name">Starting Point</span>
+              <span className="brand-subtitle">v0.24.1</span>
+            </span>
           </Link>
         </header>
         <div className="sidebar-content scrollbar-none">
@@ -31,7 +47,7 @@ export default function DocsLayout({
       </aside>
 
       <main className="sidebar-page min-w-0">
-        <header className="sticky top-0 z-30 flex h-(--navbar-height) items-center gap-2 border-b bg-background px-4">
+        <header className="navbar sticky top-0 z-30 h-(--navbar-height)">
           <button
             type="button"
             id="sidebar-trigger"

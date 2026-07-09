@@ -77,3 +77,29 @@ export function findNextEnabled(
   }
   return null;
 }
+
+// Mirrors the authored .active class onto aria-current="page" for nav items,
+// and keeps it in sync as the class moves between items.
+export function announceCurrent(
+  root: HTMLElement,
+  selector: string,
+): MutationObserver {
+  const sync = () => {
+    for (const item of root.querySelectorAll<HTMLElement>(selector)) {
+      if (item.classList.contains("active")) {
+        item.setAttribute("aria-current", "page");
+      } else if (item.getAttribute("aria-current") === "page") {
+        item.removeAttribute("aria-current");
+      }
+    }
+  };
+  sync();
+  const observer = new MutationObserver(sync);
+  observer.observe(root, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return observer;
+}

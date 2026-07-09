@@ -9,8 +9,9 @@ export const framePresets: Record<string, CSSProperties> = {
     gap: "1rem",
     width: "100%",
     padding: "2.5rem",
+    minHeight: "12rem",
   },
-  popover: {
+  "default-tall": {
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
@@ -18,7 +19,12 @@ export const framePresets: Record<string, CSSProperties> = {
     gap: "1rem",
     width: "100%",
     padding: "2.5rem",
-    minHeight: "20rem",
+    minHeight: "24rem",
+  },
+  navbar: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "667px",
   },
   sidebar: {
     minHeight: "667px",

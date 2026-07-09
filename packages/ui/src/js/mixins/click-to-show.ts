@@ -1,5 +1,5 @@
 // Click / Enter / Space on the trigger toggles the panel and syncs
-// aria-expanded / aria-controls. Needs Togglable.
+// aria-expanded / aria-controls. Needs Togglable or Expandable.
 
 import type { Mixin, SpInstance } from "../define";
 import { ensureId, resolveTrigger } from "../utils";
@@ -37,13 +37,18 @@ export const ClickToShow: Mixin = {
     });
 
     // Guard against nested collapsibles: their lifecycle events bubble through
-    // this panel, so only react to our own.
-    this.on(this.el, "sp-beforeshow", (e) => {
-      if (e.target === this.el) trigger.setAttribute("aria-expanded", "true");
-    });
-    this.on(this.el, "sp-beforehide", (e) => {
-      if (e.target === this.el) trigger.setAttribute("aria-expanded", "false");
-    });
+    // this panel, so only react to our own. Both lifecycle dialects are wired
+    // (overlays show/hide, disclosure expands/collapses).
+    for (const type of ["sp-beforeshow", "sp-beforeexpand"]) {
+      this.on(this.el, type, (e) => {
+        if (e.target === this.el) trigger.setAttribute("aria-expanded", "true");
+      });
+    }
+    for (const type of ["sp-beforehide", "sp-beforecollapse"]) {
+      this.on(this.el, type, (e) => {
+        if (e.target === this.el) trigger.setAttribute("aria-expanded", "false");
+      });
+    }
   },
 
   destroy(this: SpInstance) {

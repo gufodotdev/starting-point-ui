@@ -4,7 +4,7 @@
 import { define } from "./define";
 import type { OpenOptions, SpInstance } from "./define";
 import { getInstance } from "./observer";
-import { ensureId } from "./utils";
+import { announceCurrent, ensureId } from "./utils";
 import { Tooltip } from "./tooltip";
 import { Togglable } from "./mixins/togglable";
 import { ClickToShow } from "./mixins/click-to-show";
@@ -19,8 +19,8 @@ export const Sidebar = define({
   init(this: SpInstance) {
     // Authored on the panel so the collapse mode's first paint is correct
     // pre-JS; default here only fills it in for CSS that reads the attribute.
-    if (!this.el.hasAttribute("data-collapse")) {
-      this.el.setAttribute("data-collapse", "offcanvas");
+    if (!this.el.hasAttribute("data-sp-collapse")) {
+      this.el.setAttribute("data-sp-collapse", "offcanvas");
     }
 
     // The open drawer is a modal dialog: announce it as one and manage focus,
@@ -44,13 +44,21 @@ export const Sidebar = define({
 
     // Resizing up to desktop discards an open drawer.
     this.on(window, "resize", () => {
-      if (!this._isMobile() && this._isMounted()) this.hide();
+      if (!this._isMobile() && this._isMounted()) this._hideDrawer();
       this._syncAria();
     });
 
-    if (this.el.getAttribute("data-collapse") === "icon") this._buildTooltips();
+    if (this.el.getAttribute("data-sp-collapse") === "icon") this._buildTooltips();
 
+    this._current = announceCurrent(
+      this.el,
+      ".sidebar-menu-button, .sidebar-menu-sub-button",
+    );
     this._syncAria();
+  },
+
+  destroy(this: SpInstance) {
+    this._current?.disconnect();
   },
 
   methods: {
@@ -69,22 +77,54 @@ export const Sidebar = define({
       this.trigger?.setAttribute("aria-expanded", String(expanded));
     },
 
+    // Each axis speaks its own dialect: show/hide drive the mobile drawer
+    // (an overlay), expand/collapse drive the desktop column (disclosure).
+    // toggle follows the viewport, like the trigger does.
+    show(this: SpInstance, opts?: OpenOptions): void {
+      if (!this._isMobile()) return;
+      (Togglable.methods!.show as (this: SpInstance, opts?: OpenOptions) => void).call(this, opts);
+    },
+
+    hide(this: SpInstance): void {
+      if (this._isMounted()) this._hideDrawer();
+    },
+
+    expand(this: SpInstance): void {
+      this._setCollapsed(false);
+    },
+
+    collapse(this: SpInstance): void {
+      this._setCollapsed(true);
+    },
+
     toggle(this: SpInstance, opts?: OpenOptions): void {
       if (this._isMobile()) {
         if (this._isShown()) this.hide();
         else this.show(opts);
-        return;
       }
-      const collapsed = this.el.classList.contains("collapsed");
-      if (!this.emit(collapsed ? "expand" : "collapse")) return;
+      else if (this.el.classList.contains("collapsed")) this.expand();
+      else this.collapse();
+    },
+
+    _hideDrawer(this: SpInstance): void {
+      Togglable.methods!.hide!.call(this);
+    },
+
+    _setCollapsed(this: SpInstance, collapsed: boolean): void {
+      if (this.el.classList.contains("collapsed") === collapsed) return;
+      if (!this.emit(collapsed ? "beforecollapse" : "beforeexpand")) return;
 
       // Transition is armed only on the transient class, so a user toggle
       // animates but an authored .collapsed settles instantly (dialog model).
-      const transient = collapsed ? "expanding" : "collapsing";
+      const transient = collapsed ? "collapsing" : "expanding";
       this.el.classList.add(transient);
-      this.el.classList.toggle("collapsed", !collapsed);
+      this.el.classList.toggle("collapsed", collapsed);
       this._syncAria();
-      this._afterTransition(() => this.el.classList.remove(transient));
+      this.emit(collapsed ? "collapse" : "expand");
+      this._afterTransition(() => {
+        this.el.classList.remove(transient);
+        this.emit(collapsed ? "collapsed" : "expanded");
+      });
     },
 
     // A tooltip per nav button (header/footer brand rows excluded), showing the
@@ -115,10 +155,10 @@ export const Sidebar = define({
       }
     },
 
-    // Mounted tracks data-open (stable through the exit animation), not
+    // Mounted tracks data-sp-open (stable through the exit animation), not
     // :popover-open which flips the instant hidePopover() runs.
     _isMounted(this: SpInstance): boolean {
-      return this.el.hasAttribute("data-open");
+      return this.el.hasAttribute("data-sp-open");
     },
     _mount(this: SpInstance): void {
       const el = this.el as HTMLElement & {
@@ -126,13 +166,13 @@ export const Sidebar = define({
       };
       el.setAttribute("popover", "manual");
       if (!el.matches(":popover-open")) el.showPopover();
-      el.setAttribute("data-open", "");
+      el.setAttribute("data-sp-open", "");
     },
     _unmount(this: SpInstance): void {
       const el = this.el as HTMLElement & {
         hidePopover(): void;
       };
-      el.removeAttribute("data-open");
+      el.removeAttribute("data-sp-open");
       if (el.matches(":popover-open")) el.hidePopover();
       el.removeAttribute("popover");
     },

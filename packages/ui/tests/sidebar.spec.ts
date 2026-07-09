@@ -36,7 +36,7 @@ const BASIC = `
 // Icon-collapse fixture, authored collapsed for first-paint checks.
 const ICON = `
   <div class="sidebar-layout">
-    <aside id="panel" class="sidebar collapsed" data-collapse="icon" data-sp-toggle="#trigger">
+    <aside id="panel" class="sidebar collapsed" data-sp-collapse="icon" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
           <div class="sidebar-menu-item">
@@ -56,6 +56,11 @@ const ICON = `
 const panel = (page: Page) => page.locator("#panel");
 const trigger = (page: Page) => page.locator("#trigger");
 const activeId = (page: Page) => page.evaluate(() => document.activeElement?.id ?? null);
+
+test("the active menu button is announced as the current page", async ({ page }) => {
+  await mount(page, BASIC.replace('class="sidebar-menu-button"', 'class="sidebar-menu-button active"'));
+  await expect(page.locator("#first-item")).toHaveAttribute("aria-current", "page");
+});
 
 test.describe("mobile drawer", () => {
   test.use({ viewport: { width: 500, height: 800 } });
@@ -147,7 +152,7 @@ test.describe("mobile drawer", () => {
       await trigger(page).click();
       await expect(panel(page)).toHaveClass(/shown/);
       await page.keyboard.press("Escape");
-      await page.waitForFunction(() => !document.querySelector("#panel")!.hasAttribute("data-open"));
+      await page.waitForFunction(() => !document.querySelector("#panel")!.hasAttribute("data-sp-open"));
       await expect(panel(page)).not.toHaveAttribute("role", "dialog");
       await expect(panel(page)).not.toHaveAttribute("aria-modal", "true");
       expect(await activeId(page)).toBe("trigger");
@@ -171,22 +176,50 @@ test.describe("desktop column", () => {
     await expect(trigger(page)).toHaveAttribute("aria-expanded", "true");
   });
 
-  test("emits cancelable sp-collapse and sp-expand", async ({ page }) => {
+  test("emits the collapse and expand lifecycle events in order", async ({ page }) => {
     await mount(page, BASIC);
-    const collapsed = await page.evaluate(() => {
+    const order = await page.evaluate(() => {
       return new Promise((resolve) => {
         const el = document.querySelector("#panel")!;
-        el.addEventListener("sp-collapse", () => resolve(true));
+        const seen: string[] = [];
+        for (const type of ["sp-beforecollapse", "sp-collapse", "sp-collapsed"]) {
+          el.addEventListener(type, () => {
+            seen.push(type);
+            if (type === "sp-collapsed") resolve(seen);
+          });
+        }
         (document.querySelector("#trigger") as HTMLElement).click();
       });
     });
-    expect(collapsed).toBe(true);
+    expect(order).toEqual(["sp-beforecollapse", "sp-collapse", "sp-collapsed"]);
 
     await page.evaluate(() => {
-      document.querySelector("#panel")!.addEventListener("sp-expand", (e) => e.preventDefault());
+      document.querySelector("#panel")!.addEventListener("sp-beforeexpand", (e) => e.preventDefault());
     });
     await trigger(page).click();
     await expect(panel(page)).toHaveClass(/collapsed/);
+  });
+
+  test("expand and collapse drive the column; show and hide are drawer-only", async ({ page }) => {
+    await mount(page, BASIC);
+    const call = (method: string) =>
+      page.evaluate((m) => {
+        (window as any).sp.sidebar(document.querySelector("#panel"))![m]();
+      }, method);
+    await call("collapse");
+    await expect(panel(page)).toHaveClass(/collapsed/);
+    await expect(trigger(page)).toHaveAttribute("aria-expanded", "false");
+    await call("collapse");
+    await expect(panel(page)).toHaveClass(/collapsed/);
+    await call("expand");
+    await expect(panel(page)).not.toHaveClass(/collapsed/);
+    await expect(trigger(page)).toHaveAttribute("aria-expanded", "true");
+
+    // The drawer methods leave the desktop column alone.
+    await call("hide");
+    await expect(panel(page)).not.toHaveClass(/collapsed/);
+    await call("show");
+    await expect(panel(page)).not.toHaveAttribute("data-sp-open");
   });
 
   test("an authored collapsed panel renders collapsed and syncs the trigger", async ({ page }) => {
@@ -248,7 +281,7 @@ test.describe("desktop column", () => {
       // tooltip must show even though the panel is not collapsed.
       await mount(page, `
         <div class="sidebar-layout">
-          <aside id="panel" class="sidebar" data-collapse="icon" data-sp-toggle="#trigger">
+          <aside id="panel" class="sidebar" data-sp-collapse="icon" data-sp-toggle="#trigger">
             <div class="sidebar-content">
               <div class="sidebar-menu">
                 <div class="sidebar-menu-item">

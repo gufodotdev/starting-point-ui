@@ -1,0 +1,38 @@
+@utility brand {
+  @layer l1.l2 {
+    @apply flex h-10 min-w-0 items-center gap-2 text-foreground;
+  }
+}
+
+@utility brand-logo {
+  @layer l1.l2 {
+    @apply flex h-6 min-w-6 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-primary text-base leading-none text-primary-foreground;
+    @apply [&>img]:h-full [&>img]:w-auto;
+    @apply [&>svg]:size-4 [&>svg]:shrink-0;
+  }
+}
+
+@utility brand-logo-lg {
+  @layer l1 {
+    @apply size-8 rounded-md text-lg;
+    @apply [&>svg]:size-5;
+  }
+}
+
+@utility brand-name {
+  @layer l1.l2 {
+    @apply truncate text-sm font-medium;
+  }
+}
+
+@utility brand-text {
+  @layer l1.l2 {
+    @apply grid min-w-0 flex-1 text-left leading-tight;
+  }
+}
+
+@utility brand-subtitle {
+  @layer l1.l2 {
+    @apply truncate text-xs text-muted-foreground;
+  }
+}

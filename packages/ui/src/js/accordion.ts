@@ -40,13 +40,13 @@ export const Accordion = define({
       }
     }
 
-    // Single open: a panel starting to show closes its open siblings.
-    this.on(this.el, "sp-beforeshow", (e) => {
+    // Single open: a panel starting to expand collapses its open siblings.
+    this.on(this.el, "sp-beforeexpand", (e) => {
       if (this.config.multiple) return;
       const target = e.target as HTMLElement;
       if (!panels.includes(target)) return;
       for (const panel of panels) {
-        if (panel !== target) getInstance(panel, Collapsible)?.hide();
+        if (panel !== target) getInstance(panel, Collapsible)?.collapse();
       }
     });
   },

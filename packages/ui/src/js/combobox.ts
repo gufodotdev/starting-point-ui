@@ -80,7 +80,7 @@ export const Combobox = define({
 
     this.on(this.el, "keydown", (e) => {
       if ((e as KeyboardEvent).key !== "Enter") return;
-      const item = this.el.querySelector<HTMLElement>(`${ITEM}[data-highlighted]`);
+      const item = this.el.querySelector<HTMLElement>(`${ITEM}[data-sp-highlighted]`);
       if (!item) return;
       e.preventDefault();
       if (!isDisabled(item)) this.select(item);
@@ -153,14 +153,14 @@ export const Combobox = define({
     },
 
     // Virtual highlight (cmdk-style): focus stays in the search input while
-    // aria-activedescendant and [data-highlighted] track the active option.
+    // aria-activedescendant and [data-sp-highlighted] track the active option.
     _activeIndex(this: SpInstance, items: HTMLElement[]): number {
-      return items.findIndex((item) => item.hasAttribute("data-highlighted"));
+      return items.findIndex((item) => item.hasAttribute("data-sp-highlighted"));
     },
 
     _setActive(this: SpInstance, item: HTMLElement): void {
-      this.el.querySelector(`${ITEM}[data-highlighted]`)?.removeAttribute("data-highlighted");
-      item.setAttribute("data-highlighted", "");
+      this.el.querySelector(`${ITEM}[data-sp-highlighted]`)?.removeAttribute("data-sp-highlighted");
+      item.setAttribute("data-sp-highlighted", "");
       this.el
         .querySelector(".combobox-input")
         ?.setAttribute("aria-activedescendant", ensureId(item));
@@ -168,7 +168,7 @@ export const Combobox = define({
     },
 
     _clearActive(this: SpInstance): void {
-      this.el.querySelector(`${ITEM}[data-highlighted]`)?.removeAttribute("data-highlighted");
+      this.el.querySelector(`${ITEM}[data-sp-highlighted]`)?.removeAttribute("data-sp-highlighted");
       this.el.querySelector(".combobox-input")?.removeAttribute("aria-activedescendant");
     },
 

@@ -8,7 +8,7 @@ export function MobileNavCloser() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const panel = document.querySelector<HTMLElement>(".sidebar");
+    const panel = document.querySelector<HTMLElement>(".sidebar[data-sp-open]");
     if (panel) window.sp?.sidebar(panel)?.hide();
   }, [pathname]);
 

@@ -24,10 +24,10 @@
 @utility collapsible {
   @layer l1.l2 {
     @apply invisible h-0 overflow-hidden;
-    @apply [&.show]:visible [&.show]:animate-collapse-down;
-    @apply [&.hide]:visible [&.hide]:animate-collapse-up;
+    @apply [&.expanding]:visible [&.expanding]:animate-collapse-down;
+    @apply [&.collapsing]:visible [&.collapsing]:animate-collapse-up;
 
-    &.shown {
+    &.expanded {
       @apply visible h-auto;
     }
   }

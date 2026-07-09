@@ -4,6 +4,7 @@ import matter from "gray-matter";
 
 export type DocMetadata = {
   title: string;
+  seoTitle?: string;
   description: string;
 };
 

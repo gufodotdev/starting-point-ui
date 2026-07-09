@@ -122,8 +122,8 @@ function updateOffsets(position: string) {
     t.element.style.setProperty("--offset", `${lift * offset}px`);
     t.element.style.setProperty("--index", `${i}`);
     t.element.style.zIndex = `${entry.toasts.length - i}`;
-    t.element.toggleAttribute("data-stacked", i > 0);
-    t.element.toggleAttribute("data-stack-overflow", i >= VISIBLE);
+    t.element.toggleAttribute("data-sp-stacked", i > 0);
+    t.element.toggleAttribute("data-sp-stack-overflow", i >= VISIBLE);
     offset += t.height + GAP;
   });
 
@@ -182,7 +182,7 @@ function createToastElement(
   const el = document.createElement("li");
   el.classList.add("toast");
   el.setAttribute("role", "status");
-  el.setAttribute("data-toast-id", id);
+  el.setAttribute("data-sp-toast-id", id);
 
   if (options.dismissible !== false) {
     const close = document.createElement("button");
@@ -377,7 +377,7 @@ export const ToastTrigger = define({
 if (typeof document !== "undefined") {
   document.addEventListener("click", (e) => {
     const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-sp-toast-dismiss]");
-    const id = btn?.closest<HTMLElement>("[data-toast-id]")?.getAttribute("data-toast-id");
+    const id = btn?.closest<HTMLElement>("[data-sp-toast-id]")?.getAttribute("data-sp-toast-id");
     if (id) dismiss(id);
   });
 }

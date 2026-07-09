@@ -6,6 +6,7 @@
 @import "./avatar.css";
 @import "./avatar-group.css";
 @import "./badge.css";
+@import "./brand.css";
 @import "./breadcrumb.css";
 @import "./button.css";
 @import "./button-group.css";
@@ -19,6 +20,7 @@
 @import "./input.css";
 @import "./input-group.css";
 @import "./label.css";
+@import "./navbar.css";
 @import "./popover.css";
 @import "./radio.css";
 @import "./select.css";
@@ -205,7 +207,7 @@
 
   /* The mobile sidebar drawer is modal; lock scroll while it's open. */
   @media (width < theme(--breakpoint-sidebar)) {
-    html:has(.sidebar[data-open]) {
+    html:has(.sidebar[data-sp-open]) {
       @apply overflow-hidden;
     }
   }

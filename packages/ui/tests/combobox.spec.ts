@@ -133,7 +133,7 @@ const formValues = (page: Page, name: string) =>
 const activeId = (page: Page) => page.evaluate(() => document.activeElement?.id ?? null);
 
 const highlightedId = (page: Page) =>
-  page.evaluate(() => document.querySelector("[data-highlighted]")?.id ?? null);
+  page.evaluate(() => document.querySelector("[data-sp-highlighted]")?.id ?? null);
 
 test("opens from its trigger and focuses the search input", async ({ page }) => {
   await mount(page, SINGLE);

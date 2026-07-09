@@ -48,8 +48,8 @@ test("computes the collapsed stack variables", async ({ page }) => {
       title: el.querySelector(".toast-title")?.textContent,
       index: el.style.getPropertyValue("--index"),
       z: el.style.zIndex,
-      stacked: el.hasAttribute("data-stacked"),
-      overflow: el.hasAttribute("data-stack-overflow"),
+      stacked: el.hasAttribute("data-sp-stacked"),
+      overflow: el.hasAttribute("data-sp-stack-overflow"),
     })),
   );
   // DOM order is oldest-first; the newest toast gets index 0 and the top z.

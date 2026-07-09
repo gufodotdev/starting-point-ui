@@ -1,9 +1,9 @@
 ---
 title: Accordion
-description: An accessible accordion for Tailwind CSS, stacking collapsible sections with one or many open.
+description: A Tailwind CSS accordion component for FAQs and stacked collapsible sections, opening one at a time or several at once.
 ---
 
-A stack of collapsible sections. Opening one closes the others, unless you allow multiple to stay open.
+The accordion stacks sections vertically and opens one at a time, closing the others. It is the familiar pattern for FAQs, product details, and settings groups. For a single standalone panel, reach for the [collapsible](/components/collapsible).
 
 ```html preview
 <div class="accordion max-w-md">
@@ -49,11 +49,11 @@ An accordion is a group of [collapsibles](/components/collapsible) that close ea
 
 Per the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/), wrap each trigger in a heading (`h2`-`h6`) that matches your page outline. Add `accordion-trigger` to the button for the header styling and `accordion-content` to the panel body for its spacing.
 
-| Class               | Applies to                                              |
-| ------------------- | ------------------------------------------------------- |
-| `accordion`         | The container that coordinates the sections             |
-| `accordion-trigger` | The header button inside each heading                   |
-| `accordion-content` | The panel body, alongside `collapsible-content`         |
+| Class               | Description                                                    |
+| ------------------- | -------------------------------------------------------------- |
+| `accordion`         | Add to the container wrapping the sections; carries `data-sp-multiple` |
+| `accordion-trigger` | Add to the header button inside each heading                   |
+| `accordion-content` | Add to the panel body, alongside `collapsible-content`         |
 
 ```html
 <div class="accordion">
@@ -72,13 +72,11 @@ Per the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/),
 </div>
 ```
 
----
-
 ## Examples
 
 ### Multiple open sections
 
-Add `data-sp-multiple` so opening a section keeps the others open. Combine it with the `shown` class to start several sections expanded.
+Add `data-sp-multiple` so opening a section keeps the others open. Combine it with the `expanded` class to start several sections expanded.
 
 ```html preview
 <div class="accordion max-w-md" data-sp-multiple>
@@ -88,7 +86,7 @@ Add `data-sp-multiple` so opening a section keeps the others open. Combine it wi
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
   </h3>
-  <div class="collapsible shown" data-sp-toggle="#accordion-multiple-1">
+  <div class="collapsible expanded" data-sp-toggle="#accordion-multiple-1">
     <div class="collapsible-content accordion-content">Free shipping on orders over $50.</div>
   </div>
   <h3>
@@ -97,7 +95,7 @@ Add `data-sp-multiple` so opening a section keeps the others open. Combine it wi
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
   </h3>
-  <div class="collapsible shown" data-sp-toggle="#accordion-multiple-2">
+  <div class="collapsible expanded" data-sp-toggle="#accordion-multiple-2">
     <div class="collapsible-content accordion-content">Returns are accepted within 30 days.</div>
   </div>
   <h3>
@@ -184,7 +182,7 @@ Add `disabled` to a trigger to prevent interaction.
 
 ### Initially open
 
-Add the `shown` class to a panel so it renders open on first paint, before JavaScript loads. Also set `aria-expanded="true"` on its trigger so the header and its icon paint in the open state too. On init the accordion settles the state without replaying the enter animation.
+Add the `expanded` class to a panel so it renders open on first paint, before JavaScript loads. Also set `aria-expanded="true"` on its trigger so the header and its icon paint in the open state too.
 
 ```html preview
 <div class="accordion max-w-md">
@@ -194,7 +192,7 @@ Add the `shown` class to a panel so it renders open on first paint, before JavaS
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
   </h3>
-  <div class="collapsible shown" data-sp-toggle="#accordion-open-1">
+  <div class="collapsible expanded" data-sp-toggle="#accordion-open-1">
     <div class="collapsible-content accordion-content">This section starts expanded.</div>
   </div>
   <h3>
@@ -236,47 +234,60 @@ Add `accordion-no-divider` to drop the lines between sections.
 </div>
 ```
 
----
-
 ## Options
 
-Set each option with its own `data-sp-*` attribute on the accordion.
+### Accordion
 
-| Attribute          | Type    | Default | Description                             |
-| ------------------ | ------- | ------- | --------------------------------------- |
-| `data-sp-multiple` | Boolean | `false` | Opening a section keeps the others open |
+Set each option with its own `data-sp-*` attribute on the `accordion` element.
 
----
+| Attribute          | Values  | Default |
+| ------------------ | ------- | ------- |
+| `data-sp-multiple` | Boolean | `false` |
 
-## Events
+```html
+<div class="accordion" data-sp-multiple>
+```
 
-Each panel is a [Collapsible](/components/collapsible), so the full lifecycle (`sp-beforeshow` through `sp-hidden`) fires on the panels and bubbles to the accordion container.
+### Collapsible
+
+Each section's panel is a [collapsible](/components/collapsible) and takes its options; point it at its trigger with `data-sp-toggle`.
+
+| Attribute        | Values       | Default |
+| ---------------- | ------------ | ------- |
+| `data-sp-toggle` | CSS selector | —       |
+
+```html
+<div class="collapsible" data-sp-toggle="#section-1">
+```
+
+## JavaScript
+
+### Events
+
+Each panel is a [Collapsible](/components/collapsible), so the full lifecycle (`sp-beforeexpand` through `sp-collapsed`) fires on the panels and bubbles to the accordion container.
 
 ```js
-accordion.addEventListener("sp-shown", (e) => {
+accordion.addEventListener("sp-expanded", (e) => {
   console.log("opened:", e.target); // the collapsible panel
 });
 ```
 
----
+### Methods
 
-## Methods
+Each panel is a Collapsible instance; get one with `sp.collapsible(panel)`, then call its methods:
 
-Each panel is a Collapsible instance; control one with `sp.collapsible(panel)`:
+| Method       | Description                        |
+| ------------ | ---------------------------------- |
+| `expand()`   | Expand the panel                   |
+| `collapse()` | Collapse the panel                 |
+| `toggle()`   | Expand if collapsed, else collapse |
 
 ```js
 const panel = document.querySelector("#my-accordion .collapsible");
 
-sp.collapsible(panel).show();
+sp.collapsible(panel).expand();
 ```
-
----
 
 ## Accessibility
 
-The accordion adheres to the [Accordion WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/). Each trigger gets `aria-expanded` and `aria-controls`, and each panel is labelled as a `region` by its trigger, automatically. Wrap each trigger in a heading matching your page's structure, as in the examples.
-
-| Key               | Action                               |
-| ----------------- | ------------------------------------ |
-| `Enter` / `Space` | Toggles the focused section          |
-| `Tab`             | Moves focus to the next trigger      |
+The accordion adheres to the [Accordion WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) and sets the appropriate roles and properties automatically. Wrap each trigger in a heading (`h2`-`h6`) that matches your page outline, as in the examples.

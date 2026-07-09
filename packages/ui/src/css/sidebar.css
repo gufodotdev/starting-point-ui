@@ -15,24 +15,24 @@
     }
 
     /* Left gap (::before) mirrors the left panel's collapsed width. */
-    &:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="offcanvas"])::before {
+    &:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="offcanvas"])::before {
       @apply sidebar:w-0;
     }
-    &:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
+    &:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="icon"])::before {
       @apply sidebar:w-(--sidebar-width-icon);
     }
-    &.sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="icon"])::before {
+    &.sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="icon"])::before {
       @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
 
     /* Right gap (::after) mirrors the right panel's collapsed width. */
-    &:has(> .sidebar.sidebar-right.collapsed[data-collapse="offcanvas"])::after {
+    &:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="offcanvas"])::after {
       @apply sidebar:w-0;
     }
-    &:has(> .sidebar.sidebar-right.collapsed[data-collapse="icon"])::after {
+    &:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="icon"])::after {
       @apply sidebar:w-(--sidebar-width-icon);
     }
-    &.sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-collapse="icon"])::after {
+    &.sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="icon"])::after {
       @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
   }
@@ -73,7 +73,7 @@
       @apply animate-out fade-out-0 duration-300 [animation-fill-mode:forwards];
     }
 
-    &.collapsed[data-collapse="icon"] {
+    &.collapsed[data-sp-collapse="icon"] {
       @apply sidebar:w-(--sidebar-width-icon) sidebar:overflow-hidden;
       /* Inset adds p-2; widen the rail by that 1rem so the icon isn't clipped. */
       @apply sidebar:in-[.sidebar-inset]:w-[calc(var(--sidebar-width-icon)+1rem)];
@@ -97,7 +97,7 @@
     @apply [&.show]:slide-in-from-left [&.hide]:slide-out-to-left;
 
     /* Offcanvas: slide the fixed panel fully off the left edge. */
-    &.collapsed[data-collapse="offcanvas"] {
+    &.collapsed[data-sp-collapse="offcanvas"] {
       @apply sidebar:left-[calc(var(--sidebar-width)*-1)];
     }
   }
@@ -108,7 +108,7 @@
     @apply right-0 border-l in-[.sidebar-inset]:border-l-0;
     @apply [&.show]:slide-in-from-right [&.hide]:slide-out-to-right;
 
-    &.collapsed[data-collapse="offcanvas"] {
+    &.collapsed[data-sp-collapse="offcanvas"] {
       @apply sidebar:right-[calc(var(--sidebar-width)*-1)];
     }
   }
@@ -128,14 +128,14 @@
     .sidebar-inset:has(> .sidebar:not(.sidebar-right)) & {
       @apply sidebar:mr-2;
     }
-    .sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-collapse="offcanvas"]) & {
+    .sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="offcanvas"]) & {
       @apply sidebar:ml-2;
     }
     /* Right panel: page sits to its left. */
     .sidebar-inset:has(> .sidebar.sidebar-right) & {
       @apply sidebar:ml-2;
     }
-    .sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-collapse="offcanvas"]) & {
+    .sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="offcanvas"]) & {
       @apply sidebar:mr-2;
     }
   }
@@ -280,7 +280,7 @@
    and clips the rest. The button keeps p-2 so the icon never shifts. */
 @layer l1.l2 {
   @media (width >= theme(--breakpoint-sidebar)) {
-    .sidebar.collapsed[data-collapse="icon"] {
+    .sidebar.collapsed[data-sp-collapse="icon"] {
       .sidebar-content,
       .sidebar-group,
       .sidebar-group-content,
@@ -300,7 +300,7 @@
       }
 
       /* A text-only button would show as clipped text, so hide it in the rail. */
-      .sidebar-menu-button:not(:has(> :first-child:is(svg, .avatar, [class*="size-8"]))) {
+      .sidebar-menu-button:not(:has(> :first-child:is(svg, .avatar, .brand-logo, [class*="size-8"]))) {
         @apply hidden;
       }
 

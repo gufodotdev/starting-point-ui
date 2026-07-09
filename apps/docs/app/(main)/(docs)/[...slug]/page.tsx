@@ -18,7 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!doc) return {};
 
   return {
-    title: doc.metadata.title,
+    title:
+      doc.metadata.seoTitle ??
+      (slug[0] === "components"
+        ? `Tailwind CSS ${doc.metadata.title}`
+        : doc.metadata.title),
     description: doc.metadata.description,
     alternates: {
       canonical: `/${slug.join("/")}`,

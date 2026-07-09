@@ -24,11 +24,11 @@
 
     /* While collapsed, back toasts take the front toast's height and the
        stack shows at most three. */
-    &:not(:hover) .toast[data-stacked] {
+    &:not(:hover) .toast[data-sp-stacked] {
       height: var(--front-toast-height, auto);
       overflow: hidden;
     }
-    &:not(:hover) .toast[data-stack-overflow] {
+    &:not(:hover) .toast[data-sp-stack-overflow] {
       opacity: 0;
     }
   }

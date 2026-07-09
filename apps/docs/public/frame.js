@@ -8,4 +8,8 @@ if (window.frameElement) {
 
   new ResizeObserver(resize).observe(document.body);
   resize();
+} else {
+  document
+    .querySelector("[data-no-scrollbar-gutter]")
+    ?.style.setProperty("min-height", "100dvh");
 }
