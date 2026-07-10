@@ -174,10 +174,10 @@ export function ThemeEditor({ className }: { className?: string }) {
       <dialog
         id="theme-editor"
         data-sp-sheet="toggle: #theme-editor-trigger"
-        className="sheet sheet-left w-110 max-w-full! overflow-y-auto px-6 backdrop:bg-transparent! backdrop:backdrop-blur-none!"
+        className="sheet sheet-left bg-transparent supports-backdrop-filter:backdrop-blur-none"
         aria-labelledby="theme-editor-title"
       >
-        <div className="flex min-h-full flex-col">
+        <div className="sheet-content w-110 max-w-full gap-0 overflow-y-auto px-6">
           <button
             type="button"
             className={`btn btn-ghost btn-icon-sm absolute top-2 right-2 z-20 ${showCode ? "hidden" : ""}`}

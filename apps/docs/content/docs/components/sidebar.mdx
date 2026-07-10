@@ -7,9 +7,17 @@ The sidebar places your navigation in a column beside the page, the standard lay
 
 ```html preview preset=sidebar
 <div class="sidebar-layout">
-  <aside class="sidebar" data-sp-collapse="icon" data-sp-toggle="#sidebar-demo-trigger">
+  <aside
+    class="sidebar"
+    data-sp-collapse="icon"
+    data-sp-toggle="#sidebar-demo-trigger"
+  >
     <header class="sidebar-header">
-      <button id="team-trigger" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
+      <button
+        id="team-trigger"
+        class="sidebar-menu-button sidebar-menu-button-lg"
+        aria-expanded="false"
+      >
         <span class="brand-logo brand-logo-lg">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
@@ -19,7 +27,12 @@ The sidebar places your navigation in a column beside the page, the standard lay
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
       </button>
-      <div id="team-menu" class="dropdown min-w-56" data-sp-toggle="#team-trigger" data-sp-placement="right-start">
+      <div
+        id="team-menu"
+        class="dropdown min-w-56"
+        data-sp-toggle="#team-trigger"
+        data-sp-placement="right-start"
+      >
         <div class="dropdown-label text-xs text-muted-foreground">Teams</div>
         <a href="#" class="dropdown-item">Acme Inc</a>
         <a href="#" class="dropdown-item">Acme Corp.</a>
@@ -35,15 +48,30 @@ The sidebar places your navigation in a column beside the page, the standard lay
         <span class="sidebar-group-label">Platform</span>
         <nav class="sidebar-menu">
           <div class="sidebar-menu-item">
-            <button id="playground-trigger" class="sidebar-menu-button" aria-expanded="true">
+            <button
+              id="playground-trigger"
+              class="sidebar-menu-button"
+              aria-expanded="true"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
               <span>Playground</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto in-aria-expanded:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
             </button>
-            <div class="collapsible expanded" data-sp-toggle="#playground-trigger">
+            <div
+              class="collapsible expanded"
+              data-sp-toggle="#playground-trigger"
+            >
               <ul class="sidebar-menu-sub">
-                <li class="sidebar-menu-sub-item"><a href="#" class="sidebar-menu-sub-button"><span>History</span></a></li>
-                <li class="sidebar-menu-sub-item"><a href="#" class="sidebar-menu-sub-button"><span>Settings</span></a></li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span>History</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span>Settings</span>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -64,7 +92,9 @@ The sidebar places your navigation in a column beside the page, the standard lay
           </div>
         </nav>
       </div>
-      <div class="sidebar-group in-[.sidebar.collapsed[data-sp-collapse=icon]]:hidden">
+      <div
+        class="sidebar-group in-[.sidebar.collapsed[data-sp-collapse=icon]]:hidden"
+      >
         <span class="sidebar-group-label">Projects</span>
         <nav class="sidebar-menu">
           <div class="sidebar-menu-item">
@@ -83,15 +113,28 @@ The sidebar places your navigation in a column beside the page, the standard lay
       </div>
     </div>
     <footer class="sidebar-footer">
-      <button id="user-trigger" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
-        <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+      <button
+        id="user-trigger"
+        class="sidebar-menu-button sidebar-menu-button-lg"
+        aria-expanded="false"
+      >
+        <img
+          class="avatar size-8 rounded-lg"
+          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+          alt="Sarah Johnson"
+        />
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
       </button>
-      <div id="user-menu" class="dropdown min-w-56" data-sp-toggle="#user-trigger" data-sp-placement="right-end">
+      <div
+        id="user-menu"
+        class="dropdown min-w-56"
+        data-sp-toggle="#user-trigger"
+        data-sp-placement="right-end"
+      >
         <a href="#" class="dropdown-item">Account</a>
         <a href="#" class="dropdown-item">Billing</a>
         <a href="#" class="dropdown-item">Notifications</a>
@@ -102,16 +145,26 @@ The sidebar places your navigation in a column beside the page, the standard lay
   </aside>
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
-      <button id="sidebar-demo-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+      <button
+        id="sidebar-demo-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
     <div class="flex flex-1 flex-col gap-4 p-4">
       <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
       </div>
       <div class="flex-1 rounded-xl bg-muted/50"></div>
     </div>
@@ -125,26 +178,26 @@ Add the `sidebar` class to an `<aside>` element and pair it with a `sidebar-page
 
 Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle while an optional `sidebar-header` and `sidebar-footer` stay pinned. Their contents are up to you, typically a [brand](/components/brand) up top, grouped menus of links, and a user row at the bottom.
 
-| Class                  | Description                                             |
-| ---------------------- | ------------------------------------------------------- |
-| `sidebar-layout`       | Add to the root element wrapping the sidebar and page   |
-| `sidebar`              | Add to an `<aside>` element to create the sidebar; carries `data-sp-toggle` |
-| `sidebar-header`       | Add for a pinned region at the top of the sidebar       |
-| `sidebar-content`      | Add for the scrollable middle of the sidebar            |
-| `sidebar-footer`       | Add for a pinned region at the bottom of the sidebar    |
-| `sidebar-group`        | Add to create a labelled section of the content         |
-| `sidebar-group-label`  | Add to the group's heading                              |
-| `sidebar-group-content`| Add to the wrapper around the group's menu              |
-| `sidebar-menu`         | Add to a `<nav>` element to create a menu               |
-| `sidebar-menu-item`    | Add to each row in the menu                             |
-| `sidebar-menu-button`  | Add to the link or button in a row; `active` marks the current page |
-| `sidebar-page`         | Add to the `<main>` content area beside the sidebar     |
+| Class                   | Description                                                                 |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `sidebar-layout`        | Add to the root element wrapping the sidebar and page                       |
+| `sidebar`               | Add to an `<aside>` element to create the sidebar; carries `data-sp-toggle` |
+| `sidebar-header`        | Add for a pinned region at the top of the sidebar                           |
+| `sidebar-content`       | Add for the scrollable middle of the sidebar                                |
+| `sidebar-footer`        | Add for a pinned region at the bottom of the sidebar                        |
+| `sidebar-input`         | Add to an `input` for a search field that fits the sidebar                  |
+| `sidebar-group`         | Add to create a labelled section of the content                             |
+| `sidebar-group-label`   | Add to the group's heading                                                  |
+| `sidebar-group-content` | Add to the wrapper around the group's menu                                  |
+| `sidebar-menu`          | Add to a `<nav>` element to create a menu                                   |
+| `sidebar-menu-item`     | Add to each row in the menu                                                 |
+| `sidebar-menu-button`   | Add to the link or button in a row; `active` marks the current page         |
+| `sidebar-page`          | Add to the `<main>` content area beside the sidebar                         |
 
 ```html
 <div class="sidebar-layout">
   <!-- The sidebar, pointing at its trigger -->
   <aside class="sidebar" data-sp-toggle="#sidebar-trigger">
-
     <!-- Pinned at the top, typically a brand row -->
     <header class="sidebar-header">
       <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">...</a>
@@ -179,7 +232,13 @@ Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle wh
 
   <!-- The page content beside the sidebar, holding the trigger -->
   <main class="sidebar-page">
-    <button id="sidebar-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">...</button>
+    <button
+      id="sidebar-trigger"
+      class="btn btn-ghost btn-icon"
+      aria-label="Toggle sidebar"
+    >
+      ...
+    </button>
     ...
   </main>
 </div>
@@ -232,7 +291,11 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+        <img
+          class="avatar size-8 rounded-lg"
+          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+          alt="Sarah Johnson"
+        />
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -243,16 +306,26 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
   </aside>
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
-      <button id="icon-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+      <button
+        id="icon-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
     <div class="flex flex-1 flex-col gap-4 p-4">
       <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
       </div>
       <div class="flex-1 rounded-xl bg-muted/50"></div>
     </div>
@@ -266,7 +339,11 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
 
 ```html preview preset=sidebar
 <div class="sidebar-layout">
-  <aside class="sidebar" data-sp-collapse="offcanvas" data-sp-toggle="#offcanvas-trigger">
+  <aside
+    class="sidebar"
+    data-sp-collapse="offcanvas"
+    data-sp-toggle="#offcanvas-trigger"
+  >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
         <span class="brand-logo brand-logo-lg">
@@ -305,7 +382,11 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+        <img
+          class="avatar size-8 rounded-lg"
+          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+          alt="Sarah Johnson"
+        />
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -316,16 +397,26 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
   </aside>
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
-      <button id="offcanvas-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+      <button
+        id="offcanvas-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
     <div class="flex flex-1 flex-col gap-4 p-4">
       <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
       </div>
       <div class="flex-1 rounded-xl bg-muted/50"></div>
     </div>
@@ -339,7 +430,11 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
 
 ```html preview preset=sidebar
 <div class="sidebar-layout">
-  <aside class="sidebar collapsed" data-sp-collapse="icon" data-sp-toggle="#collapsed-trigger">
+  <aside
+    class="sidebar collapsed"
+    data-sp-collapse="icon"
+    data-sp-toggle="#collapsed-trigger"
+  >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
         <span class="brand-logo brand-logo-lg">
@@ -377,7 +472,11 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+        <img
+          class="avatar size-8 rounded-lg"
+          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+          alt="Sarah Johnson"
+        />
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -387,16 +486,26 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
   </aside>
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
-      <button id="collapsed-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+      <button
+        id="collapsed-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
     <div class="flex flex-1 flex-col gap-4 p-4">
       <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
       </div>
       <div class="flex-1 rounded-xl bg-muted/50"></div>
     </div>
@@ -410,7 +519,11 @@ A sidebar defaults to the left. Add `sidebar-right` to move it to the right inst
 
 ```html preview preset=sidebar
 <div class="sidebar-layout">
-  <aside class="sidebar sidebar-right" data-sp-collapse="offcanvas" data-sp-toggle="#right-trigger">
+  <aside
+    class="sidebar sidebar-right"
+    data-sp-collapse="offcanvas"
+    data-sp-toggle="#right-trigger"
+  >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
         <span class="brand-logo brand-logo-lg">
@@ -450,15 +563,25 @@ A sidebar defaults to the left. Add `sidebar-right` to move it to the right inst
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center justify-end gap-2 px-4">
       <h1 class="mr-auto text-sm font-medium">Dashboard</h1>
-      <button id="right-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+      <button
+        id="right-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
       </button>
     </header>
     <div class="flex flex-1 flex-col gap-4 p-4">
       <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
       </div>
       <div class="flex-1 rounded-xl bg-muted/50"></div>
     </div>
@@ -472,7 +595,11 @@ A layout can hold two sidebars at once, for example navigation on the left and a
 
 ```html preview preset=sidebar
 <div class="sidebar-layout">
-  <aside class="sidebar" data-sp-collapse="offcanvas" data-sp-toggle="#nav-trigger">
+  <aside
+    class="sidebar"
+    data-sp-collapse="offcanvas"
+    data-sp-toggle="#nav-trigger"
+  >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
         <span class="brand-logo brand-logo-lg">
@@ -511,11 +638,19 @@ A layout can hold two sidebars at once, for example navigation on the left and a
   </aside>
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
-      <button id="nav-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle navigation">
+      <button
+        id="nav-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle navigation"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="mr-auto text-sm font-medium">Dashboard</h1>
-      <button id="toc-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle table of contents">
+      <button
+        id="toc-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle table of contents"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
       </button>
     </header>
@@ -524,7 +659,11 @@ A layout can hold two sidebars at once, for example navigation on the left and a
       <div class="flex-1 rounded-xl bg-muted/50"></div>
     </div>
   </main>
-  <aside class="sidebar sidebar-right" data-sp-collapse="offcanvas" data-sp-toggle="#toc-trigger">
+  <aside
+    class="sidebar sidebar-right"
+    data-sp-collapse="offcanvas"
+    data-sp-toggle="#toc-trigger"
+  >
     <div class="sidebar-content">
       <div class="sidebar-group">
         <span class="sidebar-group-label">On this page</span>
@@ -558,9 +697,18 @@ A layout can hold two sidebars at once, for example navigation on the left and a
 Nest two `sidebar-static` columns inside a single collapsible sidebar to build inbox-style layouts: a narrow icon rail for switching sections and a wider list beside it. Collapsing to icon mode leaves just the rail.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout" style="--sidebar-width: 21.5rem; --sidebar-width-mobile: 21.5rem;">
-  <aside class="sidebar flex-row overflow-hidden" data-sp-collapse="icon" data-sp-toggle="#double-trigger">
-    <div class="sidebar-static w-[calc(var(--sidebar-width-icon)+1px)] border-r">
+<div
+  class="sidebar-layout"
+  style="--sidebar-width: 21.5rem; --sidebar-width-mobile: 21.5rem;"
+>
+  <aside
+    class="sidebar flex-row overflow-hidden"
+    data-sp-collapse="icon"
+    data-sp-toggle="#double-trigger"
+  >
+    <div
+      class="sidebar-static w-[calc(var(--sidebar-width-icon)+1px)] border-r"
+    >
       <header class="sidebar-header">
         <a href="#" class="sidebar-menu-button sidebar-menu-button-lg h-8 p-0">
           <span class="brand-logo brand-logo-lg">
@@ -602,30 +750,71 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
     <div class="sidebar-static flex-1">
       <header class="sidebar-header gap-3.5 border-b p-4">
         <span class="text-base font-medium text-foreground">Inbox</span>
-        <input type="search" class="input h-8" placeholder="Type to search..." />
+        <input
+          type="search"
+          class="input h-8"
+          placeholder="Type to search..."
+        />
       </header>
       <div class="sidebar-content">
         <div class="sidebar-group p-0">
           <div class="sidebar-group-content">
-            <a href="#" class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
-              <span class="flex w-full items-center gap-2">William Smith <span class="ml-auto text-xs">09:34 AM</span></span>
+            <a
+              href="#"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            >
+              <span class="flex w-full items-center gap-2">
+                William Smith
+                <span class="ml-auto text-xs">09:34 AM</span>
+              </span>
               <span class="font-medium">Meeting Tomorrow</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">Hi team, just a reminder about our meeting tomorrow at 10 AM. Please come prepared with your project updates.</span>
+              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+                Hi team, just a reminder about our meeting tomorrow at 10 AM.
+                Please come prepared with your project updates.
+              </span>
             </a>
-            <a href="#" class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
-              <span class="flex w-full items-center gap-2">Alice Smith <span class="ml-auto text-xs">Yesterday</span></span>
+            <a
+              href="#"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            >
+              <span class="flex w-full items-center gap-2">
+                Alice Smith
+                <span class="ml-auto text-xs">Yesterday</span>
+              </span>
               <span class="font-medium">Re: Project Update</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">Thanks for the update. The progress looks great so far. Let's schedule a call to discuss the next steps.</span>
+              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+                Thanks for the update. The progress looks great so far. Let's
+                schedule a call to discuss the next steps.
+              </span>
             </a>
-            <a href="#" class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
-              <span class="flex w-full items-center gap-2">Bob Johnson <span class="ml-auto text-xs">2 days ago</span></span>
+            <a
+              href="#"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            >
+              <span class="flex w-full items-center gap-2">
+                Bob Johnson
+                <span class="ml-auto text-xs">2 days ago</span>
+              </span>
               <span class="font-medium">Weekend Plans</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">Hey everyone! I'm thinking of organizing a team outing this weekend. Would you be interested in a hiking trip or a beach day?</span>
+              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+                Hey everyone! I'm thinking of organizing a team outing this
+                weekend. Would you be interested in a hiking trip or a beach
+                day?
+              </span>
             </a>
-            <a href="#" class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
-              <span class="flex w-full items-center gap-2">Emily Davis <span class="ml-auto text-xs">1 week ago</span></span>
+            <a
+              href="#"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            >
+              <span class="flex w-full items-center gap-2">
+                Emily Davis
+                <span class="ml-auto text-xs">1 week ago</span>
+              </span>
               <span class="font-medium">Re: Question about Budget</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">I've reviewed the budget numbers you sent over. Can we set up a quick call to discuss some potential adjustments?</span>
+              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+                I've reviewed the budget numbers you sent over. Can we set up a
+                quick call to discuss some potential adjustments?
+              </span>
             </a>
           </div>
         </div>
@@ -634,7 +823,11 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
   </aside>
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
-      <button id="double-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+      <button
+        id="double-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Inbox</h1>
@@ -653,7 +846,11 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
 
 ```html preview preset=sidebar
 <div class="sidebar-layout sidebar-inset">
-  <aside class="sidebar" data-sp-collapse="icon" data-sp-toggle="#inset-trigger">
+  <aside
+    class="sidebar"
+    data-sp-collapse="icon"
+    data-sp-toggle="#inset-trigger"
+  >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
         <span class="brand-logo brand-logo-lg">
@@ -692,7 +889,11 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+        <img
+          class="avatar size-8 rounded-lg"
+          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+          alt="Sarah Johnson"
+        />
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -703,16 +904,26 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
   </aside>
   <main class="sidebar-page flex flex-col">
     <header class="flex h-16 items-center gap-2 px-4">
-      <button id="inset-trigger" class="btn btn-ghost btn-icon" aria-label="Toggle sidebar">
+      <button
+        id="inset-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <h1 class="text-sm font-medium">Dashboard</h1>
     </header>
     <div class="flex flex-1 flex-col gap-4 p-4">
       <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
-        <div class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
+        <div
+          class="aspect-video rounded-xl bg-muted/50 max-md:aspect-auto max-md:h-40"
+        ></div>
       </div>
       <div class="flex-1 rounded-xl bg-muted/50"></div>
     </div>
@@ -724,108 +935,112 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
 
 Use `sidebar-static` for a non-collapsing column that embeds anywhere, like a settings [dialog](/components/dialog).
 
-```html preview
+```html preview preset=dialog open=.dialog
 <button id="settings-trigger" class="btn">Open Dialog</button>
 
-<dialog class="dialog max-w-3xl overflow-hidden" data-sp-toggle="#settings-trigger">
-  <div class="flex h-[480px] items-start">
-    <aside class="sidebar-static border-r">
-      <div class="sidebar-content">
-        <div class="sidebar-group">
-          <nav class="sidebar-menu">
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
-                <span>Notifications</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-                <span>Navigation</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-                <span>Home</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.622 17.897-10.68-2.913"/><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z"/><path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15"/></svg>
-                <span>Appearance</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button active">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-                <span>Messages &amp; media</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                <span>Language &amp; region</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8h.01"/><path d="M12 12h.01"/><path d="M14 8h.01"/><path d="M16 12h.01"/><path d="M18 8h.01"/><path d="M6 8h.01"/><path d="M7 16h10"/><path d="M8 12h.01"/><rect width="20" height="16" x="2" y="4" rx="2"/></svg>
-                <span>Accessibility</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                <span>Mark as read</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
-                <span>Audio &amp; video</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                <span>Connected accounts</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>Privacy &amp; visibility</span>
-              </a>
-            </div>
-            <div class="sidebar-menu-item">
-              <a href="#" class="sidebar-menu-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                <span>Advanced</span>
-              </a>
-            </div>
-          </nav>
+<dialog class="dialog" data-sp-toggle="#settings-trigger">
+  <div class="dialog-content max-w-3xl gap-0 overflow-hidden p-0">
+    <div class="flex h-[480px] items-start">
+      <aside class="sidebar-static border-r">
+        <div class="sidebar-content">
+          <div class="sidebar-group">
+            <nav class="sidebar-menu">
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+                  <span>Notifications</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                  <span>Navigation</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                  <span>Home</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.622 17.897-10.68-2.913"/><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z"/><path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15"/></svg>
+                  <span>Appearance</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button active">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                  <span>Messages &amp; media</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>Language &amp; region</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8h.01"/><path d="M12 12h.01"/><path d="M14 8h.01"/><path d="M16 12h.01"/><path d="M18 8h.01"/><path d="M6 8h.01"/><path d="M7 16h10"/><path d="M8 12h.01"/><rect width="20" height="16" x="2" y="4" rx="2"/></svg>
+                  <span>Accessibility</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span>Mark as read</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+                  <span>Audio &amp; video</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  <span>Connected accounts</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span>Privacy &amp; visibility</span>
+                </a>
+              </div>
+              <div class="sidebar-menu-item">
+                <a href="#" class="sidebar-menu-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <span>Advanced</span>
+                </a>
+              </div>
+            </nav>
+          </div>
         </div>
-      </div>
-    </aside>
-    <main class="flex h-[480px] flex-1 flex-col overflow-hidden">
-      <header class="flex h-16 shrink-0 items-center gap-2 px-4">
-        <nav class="breadcrumb text-sm">
-          <a href="#" class="breadcrumb-link">Settings</a>
-          <span class="breadcrumb-separator" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-          </span>
-          <span class="breadcrumb-page">Messages &amp; media</span>
-        </nav>
-      </header>
-      <div class="flex flex-1 flex-col gap-4 overflow-y-auto p-4 pt-0">
-        <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
-        <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
-        <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
-        <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
-      </div>
-    </main>
+      </aside>
+      <main class="flex h-[480px] flex-1 flex-col overflow-hidden">
+        <header class="flex h-16 shrink-0 items-center gap-2 px-4">
+          <nav class="breadcrumb text-sm">
+            <a href="#" class="breadcrumb-link">Settings</a>
+            <span class="breadcrumb-separator" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </span>
+            <span class="breadcrumb-page">Messages &amp; media</span>
+          </nav>
+        </header>
+        <div
+          class="scrollbar scrollbar-sm flex flex-1 flex-col gap-4 overflow-y-auto p-4 pt-0"
+        >
+          <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
+          <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
+          <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
+          <div class="aspect-video max-w-lg rounded-xl bg-muted/50"></div>
+        </div>
+      </main>
+    </div>
   </div>
 </dialog>
 ```
@@ -875,9 +1090,19 @@ A `sidebar-menu-sub` is a nested list of `sidebar-menu-sub-item`s.
           <span>Playground</span>
         </a>
         <ul class="sidebar-menu-sub">
-          <li class="sidebar-menu-sub-item"><a href="#" class="sidebar-menu-sub-button active"><span>History</span></a></li>
-          <li class="sidebar-menu-sub-item"><a href="#" class="sidebar-menu-sub-button"><span>Starred</span></a></li>
-          <li class="sidebar-menu-sub-item"><a href="#" class="sidebar-menu-sub-button"><span>Settings</span></a></li>
+          <li class="sidebar-menu-sub-item">
+            <a href="#" class="sidebar-menu-sub-button active">
+              <span>History</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-sub-item">
+            <a href="#" class="sidebar-menu-sub-button"><span>Starred</span></a>
+          </li>
+          <li class="sidebar-menu-sub-item">
+            <a href="#" class="sidebar-menu-sub-button">
+              <span>Settings</span>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -892,7 +1117,11 @@ Wrap it in a [collapsible](/components/collapsible) to make it expandable, and n
   <div class="sidebar-group">
     <nav class="sidebar-menu">
       <div class="sidebar-menu-item">
-        <button id="tree-components" class="sidebar-menu-button" aria-expanded="true">
+        <button
+          id="tree-components"
+          class="sidebar-menu-button"
+          aria-expanded="true"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform [[aria-expanded=true]>&]:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
           <span>components</span>
@@ -901,7 +1130,11 @@ Wrap it in a [collapsible](/components/collapsible) to make it expandable, and n
           <div class="collapsible-content">
             <ul class="sidebar-menu-sub">
               <li class="sidebar-menu-sub-item">
-                <button id="tree-icons" class="sidebar-menu-sub-button w-full" aria-expanded="true">
+                <button
+                  id="tree-icons"
+                  class="sidebar-menu-sub-button w-full"
+                  aria-expanded="true"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform [[aria-expanded=true]>&]:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
                   <span>icons</span>
@@ -990,20 +1223,33 @@ Wrap a labelled section of the menu in a `sidebar-group` with a `sidebar-group-l
 <aside class="sidebar-static">
   <div class="sidebar-group">
     <span class="sidebar-group-label">Projects</span>
-    <button id="group-action" class="sidebar-group-action" aria-label="Add project">
+    <button
+      id="group-action"
+      class="sidebar-group-action"
+      aria-label="Add project"
+    >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
     </button>
-    <div id="group-action-menu" class="dropdown w-44" data-sp-toggle="#group-action" data-sp-placement="right-start">
+    <div
+      id="group-action-menu"
+      class="dropdown w-44"
+      data-sp-toggle="#group-action"
+      data-sp-placement="right-start"
+    >
       <a href="#" class="dropdown-item">New project</a>
       <a href="#" class="dropdown-item">Import project</a>
     </div>
     <div class="sidebar-group-content">
       <nav class="sidebar-menu">
         <div class="sidebar-menu-item">
-          <a href="#" class="sidebar-menu-button"><span>Design Engineering</span></a>
+          <a href="#" class="sidebar-menu-button">
+            <span>Design Engineering</span>
+          </a>
         </div>
         <div class="sidebar-menu-item">
-          <a href="#" class="sidebar-menu-button"><span>Sales &amp; Marketing</span></a>
+          <a href="#" class="sidebar-menu-button">
+            <span>Sales &amp; Marketing</span>
+          </a>
         </div>
       </nav>
     </div>
@@ -1040,7 +1286,12 @@ Add a `sidebar-menu-action` for a secondary button on a menu item, or a `sidebar
         <button id="docs-action" class="sidebar-menu-action" aria-label="More">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
         </button>
-        <div id="docs-action-menu" class="dropdown w-44" data-sp-toggle="#docs-action" data-sp-placement="right-start">
+        <div
+          id="docs-action-menu"
+          class="dropdown w-44"
+          data-sp-toggle="#docs-action"
+          data-sp-placement="right-start"
+        >
           <a href="#" class="dropdown-item">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
             <span>Open</span>
@@ -1075,7 +1326,11 @@ The `sidebar-header` is a pinned region at the top of the panel, typically a bra
 ```html preview
 <aside class="sidebar-static">
   <header class="sidebar-header">
-    <button id="header-version" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
+    <button
+      id="header-version"
+      class="sidebar-menu-button sidebar-menu-button-lg"
+      aria-expanded="false"
+    >
       <span class="brand-logo brand-logo-lg">
         <i class="font-serif font-bold not-italic">A</i>
       </span>
@@ -1085,7 +1340,11 @@ The `sidebar-header` is a pinned region at the top of the panel, typically a bra
       </span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
     </button>
-    <div class="dropdown min-w-56" data-sp-toggle="#header-version" data-sp-placement="bottom-start">
+    <div
+      class="dropdown min-w-56"
+      data-sp-toggle="#header-version"
+      data-sp-placement="bottom-start"
+    >
       <a href="#" class="dropdown-item">
         v1.0.1
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="M20 6 9 17l-5-5"/></svg>
@@ -1097,6 +1356,42 @@ The `sidebar-header` is a pinned region at the top of the panel, typically a bra
 </aside>
 ```
 
+### Search
+
+Add `sidebar-input` to an [input](/components/input) for a search field that fits the sidebar, typically in the header.
+
+```html preview
+<aside class="sidebar-static">
+  <header class="sidebar-header">
+    <input class="input sidebar-input" type="search" placeholder="Search..." />
+  </header>
+  <div class="sidebar-content">
+    <div class="sidebar-group">
+      <nav class="sidebar-menu">
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button active">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            <span>Inbox</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span>Settings</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</aside>
+```
+
 ### Footer
 
 The `sidebar-footer` is a pinned region at the bottom of the panel, often a user row with an [avatar](/components/avatar). Pair it with a [dropdown](/components/dropdown) for an account menu.
@@ -1104,15 +1399,27 @@ The `sidebar-footer` is a pinned region at the bottom of the panel, often a user
 ```html preview
 <aside class="sidebar-static">
   <footer class="sidebar-footer">
-    <button id="footer-user" class="sidebar-menu-button sidebar-menu-button-lg" aria-expanded="false">
-      <img class="avatar size-8 rounded-lg" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+    <button
+      id="footer-user"
+      class="sidebar-menu-button sidebar-menu-button-lg"
+      aria-expanded="false"
+    >
+      <img
+        class="avatar size-8 rounded-lg"
+        src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+        alt="Sarah Johnson"
+      />
       <span class="grid flex-1 text-left leading-tight">
         <span class="truncate font-medium">Sarah Johnson</span>
         <span class="truncate text-xs">sarah@example.com</span>
       </span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
     </button>
-    <div class="dropdown min-w-56" data-sp-toggle="#footer-user" data-sp-placement="top-start">
+    <div
+      class="dropdown min-w-56"
+      data-sp-toggle="#footer-user"
+      data-sp-placement="top-start"
+    >
       <a href="#" class="dropdown-item">Account</a>
       <a href="#" class="dropdown-item">Billing</a>
       <div class="dropdown-separator"></div>
@@ -1128,13 +1435,17 @@ The `sidebar-footer` is a pinned region at the bottom of the panel, often a user
 
 Set each option with its own `data-sp-*` attribute on the `sidebar` element.
 
-| Attribute          | Values                  | Default     |
-| ------------------ | ----------------------- | ----------- |
-| `data-sp-toggle`   | CSS selector            | —           |
-| `data-sp-collapse` | `offcanvas` \| `icon`   | `offcanvas` |
+| Attribute          | Values                | Default     |
+| ------------------ | --------------------- | ----------- |
+| `data-sp-toggle`   | CSS selector          | —           |
+| `data-sp-collapse` | `offcanvas` \| `icon` | `offcanvas` |
 
 ```html
-<aside class="sidebar" data-sp-toggle="#my-trigger" data-sp-collapse="icon">
+<aside
+  class="sidebar"
+  data-sp-toggle="#my-trigger"
+  data-sp-collapse="icon"
+></aside>
 ```
 
 ## JavaScript
@@ -1143,20 +1454,20 @@ Set each option with its own `data-sp-*` attribute on the `sidebar` element.
 
 All events fire on the panel; `before*` events are cancelable. The mobile drawer fires the show/hide lifecycle, the desktop column fires the collapse/expand lifecycle.
 
-| Event                | When                                        |
-| -------------------- | ------------------------------------------- |
-| `sp-beforeshow`      | Before the drawer opens (cancelable)        |
-| `sp-show`            | Drawer opening                              |
-| `sp-shown`           | Drawer open and settled                     |
-| `sp-beforehide`      | Before the drawer closes (cancelable)       |
-| `sp-hide`            | Drawer closing                              |
-| `sp-hidden`          | Drawer closed                               |
-| `sp-beforecollapse`  | Before the column collapses (cancelable)    |
-| `sp-collapse`        | Column collapsing                           |
-| `sp-collapsed`       | Column collapsed and settled                |
-| `sp-beforeexpand`    | Before the column expands (cancelable)      |
-| `sp-expand`          | Column expanding                            |
-| `sp-expanded`        | Column expanded and settled                 |
+| Event               | When                                     |
+| ------------------- | ---------------------------------------- |
+| `sp-beforeshow`     | Before the drawer opens (cancelable)     |
+| `sp-show`           | Drawer opening                           |
+| `sp-shown`          | Drawer open and settled                  |
+| `sp-beforehide`     | Before the drawer closes (cancelable)    |
+| `sp-hide`           | Drawer closing                           |
+| `sp-hidden`         | Drawer closed                            |
+| `sp-beforecollapse` | Before the column collapses (cancelable) |
+| `sp-collapse`       | Column collapsing                        |
+| `sp-collapsed`      | Column collapsed and settled             |
+| `sp-beforeexpand`   | Before the column expands (cancelable)   |
+| `sp-expand`         | Column expanding                         |
+| `sp-expanded`       | Column expanded and settled              |
 
 ```js
 // Persist the desktop state, e.g. into a cookie the server can render from.
@@ -1168,13 +1479,13 @@ panel.addEventListener("sp-expand", () => saveState("expanded"));
 
 Get the instance with `sp.sidebar(el)`, then call its methods:
 
-| Method       | Description                                            |
-| ------------ | ------------------------------------------------------ |
-| `show()`     | Open the mobile drawer                                  |
-| `hide()`     | Close the mobile drawer                                 |
-| `expand()`   | Expand the desktop column                               |
-| `collapse()` | Collapse the desktop column                             |
-| `toggle()`   | Toggle the drawer on mobile, the column on desktop      |
+| Method       | Description                                        |
+| ------------ | -------------------------------------------------- |
+| `show()`     | Open the mobile drawer                             |
+| `hide()`     | Close the mobile drawer                            |
+| `expand()`   | Expand the desktop column                          |
+| `collapse()` | Collapse the desktop column                        |
+| `toggle()`   | Toggle the drawer on mobile, the column on desktop |
 
 ```js
 const sidebar = sp.sidebar(document.querySelector(".sidebar"));

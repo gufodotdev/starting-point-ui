@@ -5,6 +5,7 @@ import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
 import {
   exampleId,
   isPreviewMeta,
+  openFromMeta,
   presetFromMeta,
 } from "@/lib/examples-registry";
 import rehypeSlug from "rehype-slug";
@@ -33,6 +34,7 @@ const prettyCodeOptions = {
           node.properties["data-frame-id"] = exampleId(
             source,
             presetFromMeta(meta),
+            openFromMeta(meta),
           );
         }
 

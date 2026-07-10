@@ -246,8 +246,17 @@ test.describe("desktop column", () => {
 
     test("toggling drives the transient class then settles", async ({ page }) => {
       await mount(page, ICON);
+      // The transient window is a single frame in the CSS-less harness, so
+      // sample the classes when sp-expand fires instead of racing the poll.
+      const during = page.evaluate(
+        () =>
+          new Promise<string>((resolve) => {
+            const el = document.querySelector("#panel")!;
+            el.addEventListener("sp-expand", () => resolve(el.className));
+          }),
+      );
       await trigger(page).click();
-      await expect(panel(page)).toHaveClass(/expanding/);
+      expect(await during).toMatch(/expanding/);
       await expect(panel(page)).not.toHaveClass(/collapsed/);
       await expect(panel(page)).not.toHaveClass(/expanding/);
     });

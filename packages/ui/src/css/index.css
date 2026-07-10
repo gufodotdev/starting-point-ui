@@ -23,6 +23,7 @@
 @import "./navbar.css";
 @import "./popover.css";
 @import "./radio.css";
+@import "./scrollbar.css";
 @import "./select.css";
 @import "./separator.css";
 @import "./sheet.css";
@@ -88,6 +89,11 @@
   --badge-radius: 9999px;
   --track: oklch(0.922 0 0);
   --thumb: oklch(1 0 0);
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: var(--border);
+  --scrollbar-width: 0.625rem;
+  --scrollbar-sm-width: 0.375rem;
+  --scrollbar-radius: 9999px;
   --font-heading: var(--font-sans);
 }
 
@@ -199,9 +205,12 @@
     scrollbar-gutter: stable;
   }
 
-  /* showModal() doesn't lock body scroll; do it ourselves. */
+  /* showModal() doesn't lock body scroll; do it ourselves. .shown covers
+     authored-open dialogs before the runtime promotes them with showModal(). */
   html:has(dialog.dialog[open]),
-  html:has(dialog.sheet[open]) {
+  html:has(dialog.dialog.shown),
+  html:has(dialog.sheet[open]),
+  html:has(dialog.sheet.shown) {
     @apply overflow-hidden;
   }
 

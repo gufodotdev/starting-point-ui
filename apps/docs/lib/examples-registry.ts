@@ -6,6 +6,7 @@ export type PreviewExample = {
   id: string;
   html: string;
   preset: string;
+  open?: string;
 };
 
 export function isPreviewMeta(meta: string): boolean {
@@ -22,9 +23,28 @@ export function presetFromMeta(meta: string): string {
   return preset;
 }
 
-export function exampleId(source: string, preset: string): string {
+// open=<.class> renders the frame with the matching overlays already shown:
+// the frame page authors the settled class into the served markup. Only the
+// frame is affected; the code tab keeps the clean fence source.
+export function openFromMeta(meta: string): string | undefined {
+  const open = meta.match(/open="([^"]+)"|open=(\S+)/)?.slice(1).find(Boolean);
+  if (open && !/^\.[\w-]+$/.test(open)) {
+    throw new Error(`Invalid open selector "${open}". Use a single class, e.g. open=.dialog`);
+  }
+  return open;
+}
+
+// Adds the settled "shown" class to every element carrying the given class.
+export function withShownClass(html: string, open: string): string {
+  const cls = open.slice(1);
+  return html.replace(/class="([^"]*)"/g, (match, value: string) =>
+    value.split(/\s+/).includes(cls) ? `class="${value} shown"` : match,
+  );
+}
+
+export function exampleId(source: string, preset: string, open?: string): string {
   return createHash("sha1")
-    .update(`${preset}\n${source.trim()}`)
+    .update(`${preset}\n${open ?? ""}\n${source.trim()}`)
     .digest("hex")
     .slice(0, 12);
 }
@@ -45,8 +65,9 @@ function collect(): Map<string, PreviewExample> {
       if (!isPreviewMeta(meta)) continue;
       const html = match[2].trimEnd();
       const preset = presetFromMeta(meta);
-      const id = exampleId(html, preset);
-      if (!examples.has(id)) examples.set(id, { id, html, preset });
+      const open = openFromMeta(meta);
+      const id = exampleId(html, preset, open);
+      if (!examples.has(id)) examples.set(id, { id, html, preset, open });
     }
   }
 

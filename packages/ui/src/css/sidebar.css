@@ -49,7 +49,8 @@
     /* Transition only on the transient classes, so an authored .collapsed
        settles instantly with no animation (mirrors the dialog .show model). */
     @apply [&:is(.collapsing,.expanding)]:sidebar:transition-[left,right,width] sidebar:duration-200 sidebar:ease-linear;
-    @apply [&.show]:animate-in [&.hide]:animate-out max-sidebar:duration-300 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
+    @apply [&.show]:animate-in [&.show]:fade-in-0 max-sidebar:duration-200 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0;
     @apply sidebar:translate-x-0 sidebar:animate-none!;
     @apply [&:where(&:not(.sidebar-left,.sidebar-right))]:sidebar-left;
 
@@ -64,13 +65,13 @@
       @apply m-0 h-full overflow-visible border-0 p-0;
     }
     &::backdrop {
-      @apply bg-black/30 backdrop-blur-xs;
+      @apply bg-black/10 supports-backdrop-filter:backdrop-blur-xs;
     }
     &.show::backdrop {
-      @apply animate-in fade-in-0 duration-300 [animation-fill-mode:forwards];
+      @apply animate-in fade-in-0 duration-200 [animation-fill-mode:forwards];
     }
     &.hide::backdrop {
-      @apply animate-out fade-out-0 duration-300 [animation-fill-mode:forwards];
+      @apply animate-out fade-out-0 duration-200 [animation-fill-mode:forwards];
     }
 
     &.collapsed[data-sp-collapse="icon"] {
@@ -94,7 +95,7 @@
 @utility sidebar-left {
   @layer l1 {
     @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
-    @apply [&.show]:slide-in-from-left [&.hide]:slide-out-to-left;
+    @apply [&.show]:slide-in-from-left-10 [&.hide]:slide-out-to-left-10;
 
     /* Offcanvas: slide the fixed panel fully off the left edge. */
     &.collapsed[data-sp-collapse="offcanvas"] {
@@ -105,8 +106,8 @@
 
 @utility sidebar-right {
   @layer l1 {
-    @apply right-0 border-l in-[.sidebar-inset]:border-l-0;
-    @apply [&.show]:slide-in-from-right [&.hide]:slide-out-to-right;
+    @apply right-0 left-auto border-l in-[.sidebar-inset]:border-l-0;
+    @apply [&.show]:slide-in-from-right-10 [&.hide]:slide-out-to-right-10;
 
     &.collapsed[data-sp-collapse="offcanvas"] {
       @apply sidebar:right-[calc(var(--sidebar-width)*-1)];
@@ -145,8 +146,7 @@
   @layer l1.l2 {
     /* min-h-0 lets the scroller shrink so it scrolls and header/footer pin.
        overscroll-contain stops the wheel from chaining to the page at the end. */
-    @apply flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto overscroll-contain;
-    scrollbar-width: thin;
+    @apply scrollbar-none flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto overscroll-contain;
     scrollbar-color: color-mix(in oklab, currentColor 20%, transparent) transparent;
 
     &::-webkit-scrollbar {
@@ -174,6 +174,12 @@
   }
 }
 
+@utility sidebar-input {
+  @layer l1 {
+    @apply h-8 w-full bg-background shadow-none;
+  }
+}
+
 @utility sidebar-menu {
   @layer l1.l2 {
     @apply flex w-full min-w-0 flex-col gap-1;
@@ -189,6 +195,7 @@
 @utility sidebar-group-label {
   @layer l1.l2 {
     @apply text-sidebar-foreground/70 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium;
+    @apply ring-sidebar-ring focus-visible:ring-2;
     @apply transition-[margin,opacity] duration-200 ease-linear;
     @apply [&>svg]:size-4 [&>svg]:shrink-0;
   }
@@ -203,6 +210,8 @@
 @utility sidebar-group-action {
   @layer l1.l2 {
     @apply text-sidebar-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0;
+    @apply ring-sidebar-ring focus-visible:ring-2 transition-transform;
+    @apply after:absolute after:-inset-2 md:after:hidden;
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
     @apply [&>svg]:size-4 [&>svg]:shrink-0;
   }
@@ -219,11 +228,11 @@
     @apply flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none;
     @apply in-[.sidebar:is(.collapsing,.expanding)]:transition-[width,height,padding];
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
-    @apply focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply ring-sidebar-ring focus-visible:ring-2;
     @apply active:bg-sidebar-accent active:text-sidebar-accent-foreground;
     @apply disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
     @apply [&.active]:bg-sidebar-accent [&.active]:font-medium [&.active]:text-sidebar-accent-foreground;
-    @apply [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0;
+    @apply [&>span:last-child]:truncate [&_svg]:size-4 [&_svg]:shrink-0;
     @apply [&:where(&:not(.sidebar-menu-button-sm,.sidebar-menu-button-lg))]:h-8;
   }
 }
@@ -243,6 +252,8 @@
 @utility sidebar-menu-action {
   @layer l1.l2 {
     @apply text-sidebar-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0;
+    @apply ring-sidebar-ring focus-visible:ring-2 transition-transform;
+    @apply after:absolute after:-inset-2 md:after:hidden;
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
     @apply [&>svg]:size-4 [&>svg]:shrink-0;
   }
@@ -270,7 +281,7 @@
   @layer l1.l2 {
     @apply text-sidebar-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sm outline-none;
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
-    @apply focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply ring-sidebar-ring focus-visible:ring-2;
     @apply [&.active]:bg-sidebar-accent [&.active]:text-sidebar-accent-foreground;
     @apply [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground;
   }

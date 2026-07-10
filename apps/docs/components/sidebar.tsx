@@ -41,6 +41,7 @@ const navigation: { title: string; items: NavItem[] }[] = [
       { title: "Pagination", href: "/components/pagination" },
       { title: "Popover", href: "/components/popover" },
       { title: "Radio Group", href: "/components/radio-group" },
+      { title: "Scrollbar", href: "/components/scrollbar" },
       { title: "Select", href: "/components/select" },
       { title: "Separator", href: "/components/separator" },
       { title: "Sheet", href: "/components/sheet" },

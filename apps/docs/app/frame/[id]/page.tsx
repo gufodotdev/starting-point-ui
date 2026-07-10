@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
   getAllPreviewExamples,
   getPreviewExample,
+  withShownClass,
 } from "@/lib/examples-registry";
 import { framePresets } from "@/lib/frame-presets";
 
@@ -27,12 +28,19 @@ export default async function FramePage({
   const example = getPreviewExample(id);
   if (!example) notFound();
 
+  // Author the settled class into the served markup, so init settles the
+  // matching overlays open without the enter animation (same path as
+  // user-authored .shown markup). The code tab keeps the clean fence source.
+  const html = example.open
+    ? withShownClass(example.html, example.open)
+    : example.html;
+
   return (
     <>
       <div
         data-no-scrollbar-gutter
         style={framePresets[example.preset]}
-        dangerouslySetInnerHTML={{ __html: example.html }}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
       <script dangerouslySetInnerHTML={{ __html: frameScript }} />
     </>

@@ -39,6 +39,14 @@ test("opens from its trigger and settles to .shown", async ({ page }) => {
   expect(await sheet(page).evaluate((el: HTMLDialogElement) => el.open)).toBe(true);
 });
 
+test("settles an authored .shown sheet into a real modal", async ({ page }) => {
+  await mount(page, BASIC.replace('class="sheet"', 'class="sheet shown"'));
+  await expect(sheet(page)).toHaveClass(/shown/);
+  expect(
+    await sheet(page).evaluate((el: HTMLDialogElement) => el.open && el.matches(":modal")),
+  ).toBe(true);
+});
+
 test("closes from a dismiss button", async ({ page }) => {
   await mount(page, BASIC);
   await page.click("#trigger");

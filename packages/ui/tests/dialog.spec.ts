@@ -46,6 +46,17 @@ test("opens from its trigger and settles to .shown", async ({ page }) => {
   expect(await dialog(page).evaluate((el: HTMLDialogElement) => el.open)).toBe(true);
 });
 
+test("settles an authored .shown dialog into a real modal", async ({ page }) => {
+  await mount(page, BASIC.replace('class="dialog"', 'class="dialog shown"'));
+  await expect(dialog(page)).toHaveClass(/shown/);
+  expect(
+    await dialog(page).evaluate((el: HTMLDialogElement) => el.open && el.matches(":modal")),
+  ).toBe(true);
+  await page.keyboard.press("Escape");
+  await waitClosed(page);
+  await expect(dialog(page)).not.toHaveClass(/shown/);
+});
+
 test("closes from a dismiss button", async ({ page }) => {
   await mount(page, BASIC);
   await page.click("#trigger");
