@@ -1,11 +1,9 @@
 ---
 title: Theming
-description: Learn how to customize the Starting Point UI theme to match your brand.
+description: Theme your Tailwind CSS components with shadcn/ui-compatible CSS variables. Paste any shadcn theme and every component follows.
 ---
 
-Starting Point UI uses CSS variables for theming. Override any variable in your CSS to customize the look and feel. Use the **theme editor** in the top right to preview changes and export your theme.
-
----
+Starting Point UI uses CSS variables for theming, and the variables are exactly the ones shadcn/ui uses. That means any shadcn-compatible theme works here unchanged: paste a theme from [tweakcn](https://tweakcn.com) or the shadcn theme registry into your CSS and every component follows. Use the **theme editor** in the top right to preview changes and export your theme.
 
 ## Convention
 
@@ -20,15 +18,13 @@ Given the following CSS variables:
 
 The `background` color of the following component will be `var(--primary)` and the `foreground` color will be `var(--primary-foreground)`.
 
-```tsx
-<div className="bg-primary text-primary-foreground">Hello</div>
+```html
+<div class="bg-primary text-primary-foreground">Hello</div>
 ```
-
----
 
 ## List of variables
 
-Here's the full list of variables available for customization:
+The full theme surface, with its default values:
 
 ```css
 :root {
@@ -37,32 +33,25 @@ Here's the full list of variables available for customization:
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
-  --card-border: oklch(0.922 0 0);
-  --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --card-radius: 0.875rem;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --popover-border: oklch(0.922 0 0);
-  --popover-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --popover-radius: 0.5rem;
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.556 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0);
-  --input: oklch(1 0 0 / 0%);
-  --input-foreground: oklch(0.145 0 0);
-  --input-placeholder: oklch(0.556 0 0);
-  --input-border: oklch(0.922 0 0);
-  --input-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --input-radius: 0.5rem;
+  --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -71,15 +60,6 @@ Here's the full list of variables available for customization:
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --sidebar-width: 16rem;
-  --btn: oklch(1 0 0);
-  --btn-foreground: oklch(0.145 0 0);
-  --btn-border: oklch(0.922 0 0);
-  --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --btn-radius: 0.5rem;
-  --badge-radius: 9999px;
-  --track: oklch(0.922 0 0);
-  --thumb: oklch(1 0 0);
   --font-heading: var(--font-sans);
 }
 
@@ -88,47 +68,45 @@ Here's the full list of variables available for customization:
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --card-border: oklch(1 0 0 / 10%);
-  --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --popover-border: oklch(1 0 0 / 10%);
-  --popover-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.708 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 4.5%);
-  --input-foreground: oklch(0.985 0 0);
-  --input-placeholder: oklch(0.708 0 0);
-  --input-border: oklch(1 0 0 / 15%);
-  --input-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.922 0 0);
-  --sidebar-primary-foreground: oklch(0.205 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --btn: oklch(1 0 0 / 4.5%);
-  --btn-foreground: oklch(0.985 0 0);
-  --btn-border: oklch(1 0 0 / 15%);
-  --btn-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --track: oklch(1 0 0 / 12%);
-  --thumb: oklch(1 0 0);
 }
 ```
 
----
+## Radius
+
+The single `--radius` variable drives the whole radius scale: `rounded-sm` through `rounded-4xl` are derived from it multiplicatively, so changing one value reshapes every component consistently.
+
+```css
+:root {
+  --radius: 0.5rem; /* sharper */
+}
+```
 
 ## Customizing the theme
 
@@ -151,14 +129,31 @@ Override any of these variables after importing the library styles:
 }
 ```
 
----
+## Component-local variables
+
+A few structural knobs live on their components rather than in the theme, so the theme stays purely shadcn. Override them on the element, with a utility or a rule:
+
+- `--sidebar-width`, `--sidebar-width-mobile`, `--sidebar-width-icon` on `sidebar` / `sidebar-container`
+- `--scrollbar-width`, `--scrollbar-thumb`, `--scrollbar-track`, `--scrollbar-radius` on `scrollbar`
+- `--card-spacing` on `card`
+- `--dialog-spacing` on `dialog`
+
+```html
+<div class="sidebar-container [--sidebar-width:14rem]">
+```
+
+```css
+.sidebar-container {
+  --sidebar-width: 14rem;
+}
+```
 
 ## Fonts
 
 The library uses two font variables:
 
 - `--font-sans` — Tailwind's default body font token. Defaults to the system sans-serif stack. Set this to use a custom body font.
-- `--font-heading` — applied to `h1` through `h6`. Inherits from `--font-sans` by default, so headings follow the body font unless you override it.
+- `--font-heading` — applied to `h1` through `h6` and to component titles like the card, dialog, and sheet titles. Inherits from `--font-sans` by default, so headings follow the body font unless you override it.
 
 Override them to use different fonts:
 
@@ -168,8 +163,6 @@ Override them to use different fonts:
   --font-heading: "Playfair Display", serif;
 }
 ```
-
----
 
 ## Adding new colors
 
@@ -194,6 +187,6 @@ To add new colors, define them in your CSS and use the `@theme inline` directive
 
 You can now use the `warning` utility class in your components:
 
-```tsx
-<div className="bg-warning text-warning-foreground" />
+```html
+<div class="bg-warning text-warning-foreground"></div>
 ```
