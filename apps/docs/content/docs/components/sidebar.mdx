@@ -1,12 +1,12 @@
 ---
 title: Sidebar
-description: A Tailwind CSS sidebar component for app navigation, a responsive collapsible menu column that becomes a drawer on mobile.
+description: A sidebar component for Tailwind CSS with beautiful shadcn/ui styling. Use it to put app navigation beside the page, collapsing to an icon rail or a mobile drawer.
 ---
 
 The sidebar places your navigation in a column beside the page, the standard layout for dashboards, admin panels, and apps with many destinations. It collapses out of the way when the content needs room, and becomes a drawer on mobile. For shallow navigation that fits in a top bar, reach for the [navbar](/components/navbar) instead.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <aside
     class="sidebar"
     data-sp-collapse="icon"
@@ -118,11 +118,14 @@ The sidebar places your navigation in a column beside the page, the standard lay
         class="sidebar-menu-button sidebar-menu-button-lg"
         aria-expanded="false"
       >
-        <img
-          class="avatar size-8 rounded-lg"
-          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-          alt="Sarah Johnson"
-        />
+        <span class="avatar size-8 rounded-lg">
+          <img
+            class="avatar-image"
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+            alt="Sarah Johnson"
+          />
+          <span class="avatar-fallback">SJ</span>
+        </span>
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -174,28 +177,28 @@ The sidebar places your navigation in a column beside the page, the standard lay
 
 ## Usage
 
-Add the `sidebar` class to an `<aside>` element and pair it with a `sidebar-page` content area inside a `sidebar-layout` root. Point the sidebar at its trigger with `data-sp-toggle`: on desktop the trigger collapses the column in place, on mobile it opens the sidebar as a drawer.
+Add the `sidebar` class to an `<aside>` element and pair it with a `sidebar-page` content area inside a `sidebar-container` root. Point the sidebar at its trigger with `data-sp-toggle`: on desktop the trigger collapses the column in place, on mobile it opens the sidebar as a drawer.
 
 Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle while an optional `sidebar-header` and `sidebar-footer` stay pinned. Their contents are up to you, typically a [brand](/components/brand) up top, grouped menus of links, and a user row at the bottom.
 
 | Class                   | Description                                                                 |
 | ----------------------- | --------------------------------------------------------------------------- |
-| `sidebar-layout`        | Add to the root element wrapping the sidebar and page                       |
+| `sidebar-container`     | Add to the root element wrapping the sidebar and page                       |
 | `sidebar`               | Add to an `<aside>` element to create the sidebar; carries `data-sp-toggle` |
 | `sidebar-header`        | Add for a pinned region at the top of the sidebar                           |
-| `sidebar-content`       | Add for the scrollable middle of the sidebar                                |
-| `sidebar-footer`        | Add for a pinned region at the bottom of the sidebar                        |
 | `sidebar-input`         | Add to an `input` for a search field that fits the sidebar                  |
+| `sidebar-content`       | Add for the scrollable middle of the sidebar                                |
 | `sidebar-group`         | Add to create a labelled section of the content                             |
 | `sidebar-group-label`   | Add to the group's heading                                                  |
 | `sidebar-group-content` | Add to the wrapper around the group's menu                                  |
 | `sidebar-menu`          | Add to a `<nav>` element to create a menu                                   |
 | `sidebar-menu-item`     | Add to each row in the menu                                                 |
 | `sidebar-menu-button`   | Add to the link or button in a row; `active` marks the current page         |
+| `sidebar-footer`        | Add for a pinned region at the bottom of the sidebar                        |
 | `sidebar-page`          | Add to the `<main>` content area beside the sidebar                         |
 
 ```html
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <!-- The sidebar, pointing at its trigger -->
   <aside class="sidebar" data-sp-toggle="#sidebar-trigger">
     <!-- Pinned at the top, typically a brand row -->
@@ -251,7 +254,7 @@ Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle wh
 Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each button needs a leading icon and a `<span>` label; the rail keeps the icon and shows the label in a tooltip on hover.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <aside class="sidebar" data-sp-collapse="icon" data-sp-toggle="#icon-trigger">
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
@@ -291,11 +294,14 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img
-          class="avatar size-8 rounded-lg"
-          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-          alt="Sarah Johnson"
-        />
+        <span class="avatar size-8 rounded-lg">
+          <img
+            class="avatar-image"
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+            alt="Sarah Johnson"
+          />
+          <span class="avatar-fallback">SJ</span>
+        </span>
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -338,7 +344,7 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
 `data-sp-collapse="offcanvas"` (the default) slides the panel fully off-screen and the page reclaims the space.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <aside
     class="sidebar"
     data-sp-collapse="offcanvas"
@@ -382,11 +388,14 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img
-          class="avatar size-8 rounded-lg"
-          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-          alt="Sarah Johnson"
-        />
+        <span class="avatar size-8 rounded-lg">
+          <img
+            class="avatar-image"
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+            alt="Sarah Johnson"
+          />
+          <span class="avatar-fallback">SJ</span>
+        </span>
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -429,7 +438,7 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
 Add the `collapsed` class to the panel to render it collapsed on first paint.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <aside
     class="sidebar collapsed"
     data-sp-collapse="icon"
@@ -472,11 +481,14 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img
-          class="avatar size-8 rounded-lg"
-          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-          alt="Sarah Johnson"
-        />
+        <span class="avatar size-8 rounded-lg">
+          <img
+            class="avatar-image"
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+            alt="Sarah Johnson"
+          />
+          <span class="avatar-fallback">SJ</span>
+        </span>
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -518,7 +530,7 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
 A sidebar defaults to the left. Add `sidebar-right` to move it to the right instead.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <aside
     class="sidebar sidebar-right"
     data-sp-collapse="offcanvas"
@@ -591,10 +603,10 @@ A sidebar defaults to the left. Add `sidebar-right` to move it to the right inst
 
 ### Two sidebars
 
-A layout can hold two sidebars at once, for example navigation on the left and a table of contents on the right. Put both in the same `sidebar-layout`, each with its own trigger, and they collapse independently.
+A layout can hold two sidebars at once, for example navigation on the left and a table of contents on the right. Put both in the same `sidebar-container`, each with its own trigger, and they collapse independently.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <aside
     class="sidebar"
     data-sp-collapse="offcanvas"
@@ -698,7 +710,7 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
 
 ```html preview preset=sidebar
 <div
-  class="sidebar-layout"
+  class="sidebar-container"
   style="--sidebar-width: 21.5rem; --sidebar-width-mobile: 21.5rem;"
 >
   <aside
@@ -739,6 +751,12 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
             </div>
             <div class="sidebar-menu-item">
               <a href="#" class="sidebar-menu-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="m9.5 17 5-5"/><path d="m9.5 12 5 5"/></svg>
+                <span class="sr-only">Junk</span>
+              </a>
+            </div>
+            <div class="sidebar-menu-item">
+              <a href="#" class="sidebar-menu-button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                 <span class="sr-only">Trash</span>
               </a>
@@ -746,13 +764,35 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
           </nav>
         </div>
       </div>
+      <footer class="sidebar-footer">
+        <button class="sidebar-menu-button sidebar-menu-button-lg p-0">
+          <span class="avatar rounded-lg">
+            <img
+              class="avatar-image"
+              src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+              alt="Sarah Johnson"
+            />
+            <span class="avatar-fallback">SJ</span>
+          </span>
+          <span class="grid flex-1 text-left leading-tight">
+            <span class="truncate font-medium">Sarah Johnson</span>
+            <span class="truncate text-xs">sarah@example.com</span>
+          </span>
+        </button>
+      </footer>
     </div>
     <div class="sidebar-static flex-1">
       <header class="sidebar-header gap-3.5 border-b p-4">
-        <span class="text-base font-medium text-foreground">Inbox</span>
+        <div class="flex w-full items-center justify-between">
+          <span class="text-base font-medium text-foreground">Inbox</span>
+          <label class="label">
+            Unreads
+            <input type="checkbox" role="switch" class="switch shadow-none" />
+          </label>
+        </div>
         <input
           type="search"
-          class="input h-8"
+          class="input sidebar-input"
           placeholder="Type to search..."
         />
       </header>
@@ -761,42 +801,42 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
           <div class="sidebar-group-content">
             <a
               href="#"
-              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
               <span class="flex w-full items-center gap-2">
                 William Smith
                 <span class="ml-auto text-xs">09:34 AM</span>
               </span>
               <span class="font-medium">Meeting Tomorrow</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+              <span class="line-clamp-2 text-xs whitespace-normal">
                 Hi team, just a reminder about our meeting tomorrow at 10 AM.
                 Please come prepared with your project updates.
               </span>
             </a>
             <a
               href="#"
-              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
               <span class="flex w-full items-center gap-2">
                 Alice Smith
                 <span class="ml-auto text-xs">Yesterday</span>
               </span>
               <span class="font-medium">Re: Project Update</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+              <span class="line-clamp-2 text-xs whitespace-normal">
                 Thanks for the update. The progress looks great so far. Let's
                 schedule a call to discuss the next steps.
               </span>
             </a>
             <a
               href="#"
-              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
               <span class="flex w-full items-center gap-2">
                 Bob Johnson
                 <span class="ml-auto text-xs">2 days ago</span>
               </span>
               <span class="font-medium">Weekend Plans</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+              <span class="line-clamp-2 text-xs whitespace-normal">
                 Hey everyone! I'm thinking of organizing a team outing this
                 weekend. Would you be interested in a hiking trip or a beach
                 day?
@@ -804,14 +844,14 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
             </a>
             <a
               href="#"
-              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              class="flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
               <span class="flex w-full items-center gap-2">
                 Emily Davis
                 <span class="ml-auto text-xs">1 week ago</span>
               </span>
               <span class="font-medium">Re: Question about Budget</span>
-              <span class="line-clamp-2 text-xs whitespace-break-spaces">
+              <span class="line-clamp-2 text-xs whitespace-normal">
                 I've reviewed the budget numbers you sent over. Can we set up a
                 quick call to discuss some potential adjustments?
               </span>
@@ -845,7 +885,7 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
 Add `sidebar-inset` to the root for an inset main content area with rounded corners and a shadow. It pairs well with `data-sp-collapse="icon"`, leaving the rail floating beside the inset page.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout sidebar-inset">
+<div class="sidebar-container sidebar-inset">
   <aside
     class="sidebar"
     data-sp-collapse="icon"
@@ -889,11 +929,14 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
     </div>
     <footer class="sidebar-footer">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <img
-          class="avatar size-8 rounded-lg"
-          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-          alt="Sarah Johnson"
-        />
+        <span class="avatar size-8 rounded-lg">
+          <img
+            class="avatar-image"
+            src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+            alt="Sarah Johnson"
+          />
+          <span class="avatar-fallback">SJ</span>
+        </span>
         <span class="grid flex-1 text-left leading-tight">
           <span class="truncate font-medium">Sarah Johnson</span>
           <span class="truncate text-xs">sarah@example.com</span>
@@ -936,10 +979,10 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
 Use `sidebar-static` for a non-collapsing column that embeds anywhere, like a settings [dialog](/components/dialog).
 
 ```html preview preset=dialog open=.dialog
-<button id="settings-trigger" class="btn">Open Dialog</button>
+<button id="settings-trigger" class="btn btn-outline">Open Dialog</button>
 
 <dialog class="dialog" data-sp-toggle="#settings-trigger">
-  <div class="dialog-content max-w-3xl gap-0 overflow-hidden p-0">
+  <div class="dialog-panel max-w-3xl gap-0 overflow-hidden p-0">
     <div class="flex h-[480px] items-start">
       <aside class="sidebar-static border-r">
         <div class="sidebar-content">
@@ -1404,11 +1447,14 @@ The `sidebar-footer` is a pinned region at the bottom of the panel, often a user
       class="sidebar-menu-button sidebar-menu-button-lg"
       aria-expanded="false"
     >
-      <img
-        class="avatar size-8 rounded-lg"
-        src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-        alt="Sarah Johnson"
-      />
+      <span class="avatar size-8 rounded-lg">
+        <img
+          class="avatar-image"
+          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
+          alt="Sarah Johnson"
+        />
+        <span class="avatar-fallback">SJ</span>
+      </span>
       <span class="grid flex-1 text-left leading-tight">
         <span class="truncate font-medium">Sarah Johnson</span>
         <span class="truncate text-xs">sarah@example.com</span>
@@ -1427,6 +1473,20 @@ The `sidebar-footer` is a pinned region at the bottom of the panel, often a user
     </div>
   </footer>
 </aside>
+```
+
+## CSS variables
+
+The sidebar reads its dimensions from component-local variables declared on `sidebar-container` and `sidebar-static`. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+
+| Variable                 | Default | Description                      |
+| ------------------------ | ------- | -------------------------------- |
+| `--sidebar-width`        | `16rem` | Width of the expanded sidebar    |
+| `--sidebar-width-mobile` | `18rem` | Width of the mobile drawer       |
+| `--sidebar-width-icon`   | `3rem`  | Width of the collapsed icon rail |
+
+```html
+<div class="sidebar-container [--sidebar-width:18rem]"></div>
 ```
 
 ## Options
@@ -1492,7 +1552,3 @@ const sidebar = sp.sidebar(document.querySelector(".sidebar"));
 
 sidebar.toggle();
 ```
-
-## Accessibility
-
-The mobile drawer adheres to the [Dialog (Modal) WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) and sets the appropriate roles and properties automatically. The menu is a [navigation landmark](https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html) through its `<nav>` element. Mark the current page's menu button with the `active` class and it is announced with [`aria-current`](https://www.w3.org/TR/wai-aria-1.2/#aria-current) automatically.
