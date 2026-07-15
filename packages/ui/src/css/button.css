@@ -2,45 +2,53 @@
 
 @utility btn {
   @layer l1.l2 {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-btn text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
-    @apply [&:where(&:not(.btn-default,.btn-primary,.btn-destructive,.btn-secondary,.btn-ghost,.btn-outline,.btn-link))]:btn-default;
-    @apply [&:where(&:not(.btn-base,.btn-sm,.btn-xs,.btn-lg,.btn-icon,.btn-icon-sm,.btn-icon-xs,.btn-icon-lg))]:btn-base;
+    @apply inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+    @apply active:not-aria-[haspopup]:translate-y-px;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+    @apply aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
+    @apply [&:where(&:not(.btn-default,.btn-destructive,.btn-secondary,.btn-ghost,.btn-outline,.btn-link))]:btn-default;
+    @apply [&:where(&:not(.btn-base,.btn-sm,.btn-xs,.btn-lg))]:btn-base;
   }
 }
 
 @utility btn-default {
   @layer l1 {
-    @apply border bg-btn text-btn-foreground border-btn-border shadow-btn hover:bg-btn-foreground/5 dark:hover:bg-btn-foreground/10;
-  }
-}
-
-@utility btn-primary {
-  @layer l1 {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+    @apply bg-primary text-primary-foreground hover:bg-primary/80;
   }
 }
 
 @utility btn-destructive {
   @layer l1 {
-    @apply bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60;
+    @apply bg-destructive/10 text-destructive hover:bg-destructive/20;
+    @apply focus-visible:border-destructive/40 focus-visible:ring-destructive/20;
+    @apply dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40;
   }
 }
 
 @utility btn-secondary {
   @layer l1 {
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+    @apply bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)];
+    /* Open-state highlight only for popup triggers (dropdowns, popovers),
+       not disclosure toggles like a sidebar or collapsible trigger where
+       expanded is the resting state. */
+    @apply [&[aria-haspopup][aria-expanded=true]]:bg-secondary [&[aria-haspopup][aria-expanded=true]]:text-secondary-foreground;
   }
 }
 
 @utility btn-ghost {
   @layer l1 {
     @apply hover:bg-muted hover:text-foreground dark:hover:bg-muted/50;
+    @apply [&[aria-haspopup][aria-expanded=true]]:bg-muted [&[aria-haspopup][aria-expanded=true]]:text-foreground;
   }
 }
 
 @utility btn-outline {
   @layer l1 {
-    @apply border bg-transparent text-foreground hover:bg-muted hover:text-foreground dark:hover:bg-muted/50;
+    @apply border-border bg-background shadow-xs hover:bg-muted hover:text-foreground;
+    @apply [&[aria-haspopup][aria-expanded=true]]:bg-muted [&[aria-haspopup][aria-expanded=true]]:text-foreground;
+    @apply dark:border-input dark:bg-input/30 dark:hover:bg-input/50;
   }
 }
 
@@ -52,48 +60,39 @@
 
 @utility btn-xs {
   @layer l1 {
-    @apply h-7 gap-1 px-2 text-xs has-[>svg]:px-1.5;
+    @apply h-6 gap-1 rounded-[min(var(--radius-md),8px)] px-2 text-xs has-[.icon-start]:pl-1.5 has-[.icon-end]:pr-1.5 in-[.btn-group]:rounded-md;
+    @apply [&_svg:not([class*='size-'])]:size-3;
   }
 }
 
 @utility btn-sm {
   @layer l1 {
-    @apply h-8 gap-1.5 px-3 has-[>svg]:px-2.5;
+    @apply h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2.5 has-[.icon-start]:pl-1.5 has-[.icon-end]:pr-1.5 in-[.btn-group]:rounded-md;
   }
 }
 
 @utility btn-base {
   @layer l1 {
-    @apply h-9 px-4 py-2 has-[>svg]:px-3;
+    @apply h-9 gap-1.5 px-2.5 has-[.icon-start]:pl-2 has-[.icon-end]:pr-2;
   }
 }
 
 @utility btn-lg {
   @layer l1 {
-    @apply h-10 px-6 has-[>svg]:px-4;
+    @apply h-10 gap-1.5 px-2.5 has-[.icon-start]:pl-2 has-[.icon-end]:pr-2;
   }
 }
 
-@utility btn-icon-xs {
-  @layer l1 {
-    @apply size-7;
-  }
-}
-
-@utility btn-icon-sm {
-  @layer l1 {
-    @apply size-8;
-  }
-}
-
+/* Orthogonal to the sizes: squares whatever size is active, so a small icon
+   button is btn btn-sm btn-icon. */
 @utility btn-icon {
   @layer l1 {
-    @apply size-9;
-  }
-}
+    @apply aspect-square;
 
-@utility btn-icon-lg {
-  @layer l1 {
-    @apply size-10;
+    /* The repeated class outranks the sizes' padding rules (incl. their
+       icon-start/icon-end variants) regardless of the generated order. */
+    &.btn-icon.btn-icon {
+      @apply p-0;
+    }
   }
 }
