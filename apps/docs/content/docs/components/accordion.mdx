@@ -1,43 +1,49 @@
 ---
 title: Accordion
-description: A Tailwind CSS accordion component for FAQs and stacked collapsible sections, opening one at a time or several at once.
+description: An accordion component for Tailwind CSS with beautiful shadcn/ui styling. Use it to stack sections that expand one at a time, like the questions of an FAQ.
 ---
 
-The accordion stacks sections vertically and opens one at a time, closing the others. It is the familiar pattern for FAQs, product details, and settings groups. For a single standalone panel, reach for the [collapsible](/components/collapsible).
+The accordion stacks sections that expand and collapse in place, opening one at a time unless told otherwise, like an FAQ. For a single independent section, use a [collapsible](/components/collapsible).
 
-```html preview
-<div class="accordion max-w-md">
-  <h3>
-    <button id="accordion-1" class="accordion-trigger">
-      Is it accessible?
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-1">
-    <div class="collapsible-content accordion-content">
-      Yes. It adheres to the WAI-ARIA accordion pattern with all wiring done for you.
+```html preview preset=accordion
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-shipping" class="accordion-trigger" aria-expanded="true">
+        What are your shipping options?
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-shipping">
+      <div class="accordion-content">
+        We offer standard (5-7 days), express (2-3 days), and overnight
+        shipping. Free shipping on international orders.
+      </div>
     </div>
   </div>
-  <h3>
-    <button id="accordion-2" class="accordion-trigger">
-      Is it styled?
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-2">
-    <div class="collapsible-content accordion-content">
-      Yes. It ships with default styles you can override with utilities.
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-returns" class="accordion-trigger">
+        What is your return policy?
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-returns">
+      <div class="accordion-content">
+        Returns accepted within 30 days. Items must be unused and in original
+        packaging. Refunds processed within 5-7 business days.
+      </div>
     </div>
   </div>
-  <h3>
-    <button id="accordion-3" class="accordion-trigger">
-      Is it animated?
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-3">
-    <div class="collapsible-content accordion-content">
-      Yes. The height transition is animated by default.
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-support" class="accordion-trigger">
+        How can I contact customer support?
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-support">
+      <div class="accordion-content">
+        Reach us via email, live chat, or phone. We respond within 24 hours
+        during business days.
+      </div>
     </div>
   </div>
 </div>
@@ -45,191 +51,234 @@ The accordion stacks sections vertically and opens one at a time, closing the ot
 
 ## Usage
 
-An accordion is a group of [collapsibles](/components/collapsible) that close each other. Each section is a trigger and a collapsible that points back at it with `data-sp-toggle`, exactly as a standalone collapsible. Wrapping them in `accordion` adds the single-open rule and the accordion ARIA roles.
+Add the `accordion` class to the wrapper and compose each section from an item, a trigger, and a panel; the panel points at its trigger with `data-sp-toggle`. The rotating chevron is added to every trigger automatically (a trailing svg you author takes its place), and opening a section closes the others. Author `expanded` on a panel and `aria-expanded="true"` on its trigger to start open.
 
-Per the [WAI-ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/), wrap each trigger in a heading (`h2`-`h6`) that matches your page outline. Add `accordion-trigger` to the button for the header styling and `accordion-content` to the panel body for its spacing.
-
-| Class               | Description                                                    |
-| ------------------- | -------------------------------------------------------------- |
-| `accordion`         | Add to the container wrapping the sections; carries `data-sp-multiple` |
-| `accordion-trigger` | Add to the header button inside each heading                   |
-| `accordion-content` | Add to the panel body, alongside `collapsible-content`         |
+| Class               | Description                                              |
+| ------------------- | -------------------------------------------------------- |
+| `accordion`         | Add to the wrapper; carries the `data-sp-*` options      |
+| `accordion-item`    | Add to each section; draws the divider to the next one   |
+| `accordion-trigger` | Add to the `<button>`, wrapped in a heading              |
+| `accordion-panel`   | Add to the collapsing element; `expanded` starts it open |
+| `accordion-content` | Add to the inner wrapper holding the section's content   |
 
 ```html
 <div class="accordion">
-  <h3>
-    <button id="section-1" class="accordion-trigger">Section one</button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#section-1">
-    <div class="collapsible-content accordion-content">First panel</div>
-  </div>
-  <h3>
-    <button id="section-2" class="accordion-trigger">Section two</button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#section-2">
-    <div class="collapsible-content accordion-content">Second panel</div>
+  <div class="accordion-item">
+    <h3>
+      <button id="section-1" class="accordion-trigger">Section title</button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#section-1">
+      <div class="accordion-content">Section content.</div>
+    </div>
   </div>
 </div>
 ```
 
 ## Examples
 
-### Multiple open sections
+### Multiple
 
-Add `data-sp-multiple` so opening a section keeps the others open. Combine it with the `expanded` class to start several sections expanded.
+Add `data-sp-multiple` and sections open independently.
 
-```html preview
-<div class="accordion max-w-md" data-sp-multiple>
-  <h3>
-    <button id="accordion-multiple-1" class="accordion-trigger" aria-expanded="true">
-      Shipping
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible expanded" data-sp-toggle="#accordion-multiple-1">
-    <div class="collapsible-content accordion-content">Free shipping on orders over $50.</div>
+```html preview preset=accordion
+<div class="accordion" data-sp-multiple>
+  <div class="accordion-item">
+    <h3>
+      <button
+        id="acc-notifications"
+        class="accordion-trigger"
+        aria-expanded="true"
+      >
+        Notification Settings
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-notifications">
+      <div class="accordion-content">
+        Choose which updates you want to receive and how: email, push, or in-app
+        notifications.
+      </div>
+    </div>
   </div>
-  <h3>
-    <button id="accordion-multiple-2" class="accordion-trigger" aria-expanded="true">
-      Returns
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible expanded" data-sp-toggle="#accordion-multiple-2">
-    <div class="collapsible-content accordion-content">Returns are accepted within 30 days.</div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-privacy" class="accordion-trigger">
+        Privacy & Security
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-privacy">
+      <div class="accordion-content">
+        Control who can see your profile and activity, and manage two-factor
+        authentication.
+      </div>
+    </div>
   </div>
-  <h3>
-    <button id="accordion-multiple-3" class="accordion-trigger">
-      Warranty
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-multiple-3">
-    <div class="collapsible-content accordion-content">Every order includes a one-year limited warranty.</div>
-  </div>
-</div>
-```
-
-### Icons
-
-Add any SVG icon inside the trigger. Use `in-aria-expanded:` variants to react to the open state, or omit the icon entirely.
-
-```html preview
-<div class="accordion max-w-md">
-  <h3>
-    <button id="accordion-icons-1" class="accordion-trigger">
-      Rotating chevron
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-icons-1">
-    <div class="collapsible-content accordion-content">The chevron rotates 180° when expanded.</div>
-  </div>
-  <h3>
-    <button id="accordion-icons-2" class="accordion-trigger">
-      Plus/minus swap
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden text-muted-foreground in-aria-expanded:block"><path d="M5 12h14"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-icons-2">
-    <div class="collapsible-content accordion-content">Swap between plus and minus icons.</div>
-  </div>
-  <h3>
-    <button id="accordion-icons-3" class="accordion-trigger">No icon</button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-icons-3">
-    <div class="collapsible-content accordion-content">You can also omit the icon entirely.</div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-billing-m" class="accordion-trigger">
+        Billing & Subscription
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-billing-m">
+      <div class="accordion-content">
+        Update your payment method, view invoices, and manage your subscription
+        plan.
+      </div>
+    </div>
   </div>
 </div>
 ```
 
 ### Disabled
 
-Add `disabled` to a trigger to prevent interaction.
+Add `disabled` to a trigger to lock its section.
 
-```html preview
-<div class="accordion max-w-md">
-  <h3>
-    <button id="accordion-disabled-1" class="accordion-trigger">
-      Enabled section
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-disabled-1">
-    <div class="collapsible-content accordion-content">This section can be toggled.</div>
+```html preview preset=accordion
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-history" class="accordion-trigger">
+        Can I access my account history?
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-history">
+      <div class="accordion-content">
+        Yes, you can view your complete account history including all
+        transactions, plan changes, and support tickets in the Account History
+        section of your dashboard.
+      </div>
+    </div>
   </div>
-  <h3>
-    <button id="accordion-disabled-2" class="accordion-trigger" disabled>
-      Disabled section
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-disabled-2">
-    <div class="collapsible-content accordion-content">This section cannot be opened.</div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-premium" class="accordion-trigger" disabled>
+        Premium feature information
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-premium">
+      <div class="accordion-content">
+        This section contains information about premium features. Upgrade your
+        plan to access this content.
+      </div>
+    </div>
   </div>
-  <h3>
-    <button id="accordion-disabled-3" class="accordion-trigger">
-      Another enabled section
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-disabled-3">
-    <div class="collapsible-content accordion-content">This section can also be toggled.</div>
-  </div>
-</div>
-```
-
-### Initially open
-
-Add the `expanded` class to a panel so it renders open on first paint, before JavaScript loads. Also set `aria-expanded="true"` on its trigger so the header and its icon paint in the open state too.
-
-```html preview
-<div class="accordion max-w-md">
-  <h3>
-    <button id="accordion-open-1" class="accordion-trigger" aria-expanded="true">
-      Open by default
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible expanded" data-sp-toggle="#accordion-open-1">
-    <div class="collapsible-content accordion-content">This section starts expanded.</div>
-  </div>
-  <h3>
-    <button id="accordion-open-2" class="accordion-trigger">
-      Closed by default
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-open-2">
-    <div class="collapsible-content accordion-content">This section starts collapsed.</div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-email" class="accordion-trigger">
+        How do I update my email address?
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-email">
+      <div class="accordion-content">
+        You can update your email address in your account settings. You'll
+        receive a verification email at your new address to confirm the change.
+      </div>
+    </div>
   </div>
 </div>
 ```
 
-### Without dividers
+### Borders
 
-Add `accordion-no-divider` to drop the lines between sections.
+Wrap the accordion in a border and inset the items.
 
-```html preview
-<div class="accordion accordion-no-divider max-w-md">
-  <h3>
-    <button id="accordion-flush-1" class="accordion-trigger">
-      First section
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-flush-1">
-    <div class="collapsible-content accordion-content">No divider sits above this section.</div>
+```html preview preset=accordion
+<div class="accordion rounded-lg border">
+  <div class="accordion-item px-4">
+    <h3>
+      <button id="acc-billing-b" class="accordion-trigger" aria-expanded="true">
+        How does billing work?
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-billing-b">
+      <div class="accordion-content">
+        We bill monthly or annually, with a discount for annual plans. Your card
+        is charged at the start of each cycle.
+      </div>
+    </div>
   </div>
-  <h3>
-    <button id="accordion-flush-2" class="accordion-trigger">
-      Second section
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </h3>
-  <div class="collapsible" data-sp-toggle="#accordion-flush-2">
-    <div class="collapsible-content accordion-content">The sections run together with no lines between them.</div>
+  <div class="accordion-item px-4">
+    <h3>
+      <button id="acc-security-b" class="accordion-trigger">
+        Is my data secure?
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-security-b">
+      <div class="accordion-content">
+        All data is encrypted in transit and at rest, and we run independent
+        security audits every year.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item px-4">
+    <h3>
+      <button id="acc-integration-b" class="accordion-trigger">
+        What integrations do you support?
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-integration-b">
+      <div class="accordion-content">
+        We integrate with the major productivity, analytics, and communication
+        tools your team already uses.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Card
+
+An accordion slots into a [card](/components/card) for a framed FAQ.
+
+```html preview preset=accordion
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Subscription &amp; Billing</h3>
+    <p class="card-description">
+      Common questions about your account, plans, payments and cancellations.
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="accordion">
+      <div class="accordion-item">
+        <h3>
+          <button id="acc-plans" class="accordion-trigger" aria-expanded="true">
+            What subscription plans do you offer?
+          </button>
+        </h3>
+        <div class="accordion-panel expanded" data-sp-toggle="#acc-plans">
+          <div class="accordion-content">
+            We offer Free, Pro, and Enterprise plans. Each tier adds more seats,
+            storage, and support options.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h3>
+          <button id="acc-billing-c" class="accordion-trigger">
+            How does billing work?
+          </button>
+        </h3>
+        <div class="accordion-panel" data-sp-toggle="#acc-billing-c">
+          <div class="accordion-content">
+            We bill monthly or annually, with a discount for annual plans. Your
+            card is charged at the start of each cycle.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h3>
+          <button id="acc-cancel" class="accordion-trigger">
+            How do I cancel my subscription?
+          </button>
+        </h3>
+        <div class="accordion-panel" data-sp-toggle="#acc-cancel">
+          <div class="accordion-content">
+            Cancel anytime from your billing settings. Your plan stays active
+            until the end of the paid period.
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 ```
@@ -244,50 +293,39 @@ Set each option with its own `data-sp-*` attribute on the `accordion` element.
 | ------------------ | ------- | ------- |
 | `data-sp-multiple` | Boolean | `false` |
 
-```html
-<div class="accordion" data-sp-multiple>
-```
-
-### Collapsible
-
-Each section's panel is a [collapsible](/components/collapsible) and takes its options; point it at its trigger with `data-sp-toggle`.
-
-| Attribute        | Values       | Default |
-| ---------------- | ------------ | ------- |
-| `data-sp-toggle` | CSS selector | —       |
-
-```html
-<div class="collapsible" data-sp-toggle="#section-1">
-```
+Each `accordion-panel` points at its trigger with its own `data-sp-toggle` attribute.
 
 ## JavaScript
 
 ### Events
 
-Each panel is a [Collapsible](/components/collapsible), so the full lifecycle (`sp-beforeexpand` through `sp-collapsed`) fires on the panels and bubbles to the accordion container.
+The panels are collapsibles, so their lifecycle events fire on each panel and bubble; `before*` events are cancelable.
+
+| Event               | When                           |
+| ------------------- | ------------------------------ |
+| `sp-beforeexpand`   | Before expanding (cancelable)  |
+| `sp-expand`         | Expanding                      |
+| `sp-expanded`       | Expanded and settled           |
+| `sp-beforecollapse` | Before collapsing (cancelable) |
+| `sp-collapse`       | Collapsing                     |
+| `sp-collapsed`      | Collapsed and settled          |
 
 ```js
-accordion.addEventListener("sp-expanded", (e) => {
-  console.log("opened:", e.target); // the collapsible panel
+accordion.addEventListener("sp-expand", (e) => {
+  console.log("opening", e.target.id);
 });
 ```
 
 ### Methods
 
-Each panel is a Collapsible instance; get one with `sp.collapsible(panel)`, then call its methods:
+Each panel is a collapsible; drive one with `sp.collapsible(panel)`:
 
-| Method       | Description                        |
-| ------------ | ---------------------------------- |
-| `expand()`   | Expand the panel                   |
-| `collapse()` | Collapse the panel                 |
-| `toggle()`   | Expand if collapsed, else collapse |
+| Method       | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `expand()`   | Expand the panel (closing siblings unless multiple) |
+| `collapse()` | Collapse the panel                                  |
+| `toggle()`   | Expand if collapsed, else collapse                  |
 
 ```js
-const panel = document.querySelector("#my-accordion .collapsible");
-
-sp.collapsible(panel).expand();
+sp.collapsible(document.querySelector("#section-1-panel")).expand();
 ```
-
-## Accessibility
-
-The accordion adheres to the [Accordion WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) and sets the appropriate roles and properties automatically. Wrap each trigger in a heading (`h2`-`h6`) that matches your page outline, as in the examples.
