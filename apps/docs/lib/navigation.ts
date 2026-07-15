@@ -1,11 +1,21 @@
-import { SidebarLink } from "@/components/sidebar-link";
-
-type NavItem = {
+export type NavItem = {
   title: string;
   href: string;
 };
 
-const navigation: { title: string; items: NavItem[] }[] = [
+export type NavGroup = {
+  title: string;
+  items: NavItem[];
+};
+
+export const mainNav: NavItem[] = [
+  { title: "Home", href: "/" },
+  { title: "Docs", href: "/guides/introduction" },
+  { title: "Components", href: "/components/accordion" },
+  { title: "Examples", href: "/examples" },
+];
+
+export const docsNav: NavGroup[] = [
   {
     title: "Guides",
     items: [
@@ -36,6 +46,7 @@ const navigation: { title: string; items: NavItem[] }[] = [
       { title: "Forms", href: "/components/forms" },
       { title: "Input", href: "/components/input" },
       { title: "Input Group", href: "/components/input-group" },
+      { title: "Kbd", href: "/components/kbd" },
       { title: "Label", href: "/components/label" },
       { title: "Navbar", href: "/components/navbar" },
       { title: "Pagination", href: "/components/pagination" },
@@ -56,24 +67,3 @@ const navigation: { title: string; items: NavItem[] }[] = [
     ],
   },
 ];
-
-export function Sidebar() {
-  return (
-    <>
-      {navigation.map((category) => (
-        <div key={category.title} className="sidebar-group">
-          <span className="sidebar-group-label">{category.title}</span>
-          <div className="sidebar-group-content">
-            <nav className="sidebar-menu">
-              {category.items.map((item) => (
-                <SidebarLink key={item.href} href={item.href}>
-                  {item.title}
-                </SidebarLink>
-              ))}
-            </nav>
-          </div>
-        </div>
-      ))}
-    </>
-  );
-}

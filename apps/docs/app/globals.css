@@ -6,11 +6,19 @@
 @theme inline {
   --breakpoint-xxs: 400px;
   --color-code: var(--code);
+  --breakpoint-xs: 540px;
+}
+
+@utility container-wrapper {
+  @apply mx-auto w-full;
+}
+
+@utility container {
+  @apply mx-auto max-w-350 px-4 lg:px-8;
 }
 
 :root {
   --navbar-height: 3.5rem;
-  --sidebar-width: 15.5rem;
   --font-sans: var(--font-inter), sans-serif;
   --font-heading: var(--font-sans);
   --code: oklch(0.98 0 0);
@@ -115,7 +123,7 @@ html:has([data-no-scrollbar-gutter]) {
 }
 
 .toc-link.node-name--H4 {
-  @apply pl-8;
+  @apply pl-6;
 }
 
 .toc-link.is-active-link {

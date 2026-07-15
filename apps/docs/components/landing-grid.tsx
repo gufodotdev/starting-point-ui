@@ -8,11 +8,11 @@ export function LandingGrid() {
           <img
             src="https://cdn.gufo.dev/stockphotos/1fb406af.webp"
             alt="Product"
-            className="aspect-3/2 object-cover rounded-t-card w-full"
+            className="aspect-3/2 object-cover w-full"
           />
           <div className="card-content grid gap-6">
             <div>
-              <span className="flex items-center gap-1.5 text-xs font-medium tracking-tight text-accent">
+              <span className="flex items-center gap-1.5 text-xs font-medium tracking-tight text-muted-foreground">
                 <span>Furniture</span>
               </span>
               <h3 className="text-lg font-semibold tracking-tight mt-2">
@@ -40,7 +40,7 @@ export function LandingGrid() {
                   $199
                 </span>
               </div>
-              <button className="btn btn-primary btn-sm">Add to Cart</button>
+              <button className="btn btn-sm">Add to Cart</button>
             </div>
           </div>
         </div>
@@ -73,11 +73,10 @@ export function LandingGrid() {
               <span className="text-sm font-medium">People with access</span>
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <img
-                    className="avatar"
-                    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-                    alt="Sarah Johnson"
-                  />
+                  <span className="avatar">
+                    <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+                    <span className="avatar-fallback">SJ</span>
+                  </span>
                   <div className="text-sm">
                     <p className="font-semibold text-foreground">
                       Sarah Johnson
@@ -92,11 +91,10 @@ export function LandingGrid() {
               </div>
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <img
-                    className="avatar"
-                    src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
-                    alt="Michael Chen"
-                  />
+                  <span className="avatar">
+                    <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp" alt="Michael Chen" />
+                    <span className="avatar-fallback">MC</span>
+                  </span>
                   <div className="text-sm">
                     <p className="font-semibold text-foreground">
                       Michael Chen
@@ -111,11 +109,10 @@ export function LandingGrid() {
               </div>
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <img
-                    className="avatar"
-                    src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
-                    alt="Emma Wilson"
-                  />
+                  <span className="avatar">
+                    <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp" alt="Emma Wilson" />
+                    <span className="avatar-fallback">EW</span>
+                  </span>
                   <div className="text-sm">
                     <p className="font-semibold text-foreground">Emma Wilson</p>
                     <p className="text-muted-foreground">emma@example.com</p>
@@ -243,7 +240,7 @@ export function LandingGrid() {
                   />
                 </div>
               </div>
-              <button className="btn btn-primary" type="submit">
+              <button className="btn" type="submit">
                 Continue
               </button>
             </form>
@@ -315,7 +312,7 @@ export function LandingGrid() {
                 />
               </div>
             </div>
-            <button className="btn btn-primary">Save preferences</button>
+            <button className="btn">Save preferences</button>
           </div>
         </div>
       </div>
@@ -324,11 +321,11 @@ export function LandingGrid() {
           <img
             src="https://cdn.gufo.dev/stockphotos/fdab3fb9.webp"
             alt="Blog post cover"
-            className="aspect-3/2 object-cover rounded-t-card w-full"
+            className="aspect-3/2 object-cover w-full"
           />
           <div className="card-content grid gap-6">
             <div>
-              <span className="flex items-center gap-1.5 text-xs font-medium tracking-tight text-accent">
+              <span className="flex items-center gap-1.5 text-xs font-medium tracking-tight text-muted-foreground">
                 <span>Mar 15, 2024</span>
                 <span>·</span>
                 <span>Design</span>
@@ -342,11 +339,10 @@ export function LandingGrid() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <img
-                className="avatar"
-                src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-                alt="Sarah Johnson"
-              />
+              <span className="avatar">
+                    <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+                    <span className="avatar-fallback">SJ</span>
+                  </span>
               <div className="text-sm">
                 <p className="font-semibold text-foreground">Sarah Johnson</p>
                 <p className="text-muted-foreground">Product Designer</p>
@@ -409,7 +405,7 @@ export function LandingGrid() {
                   name="password"
                 />
               </div>
-              <button className="btn btn-primary" type="submit">
+              <button className="btn" type="submit">
                 Create Account
               </button>
             </form>
@@ -475,7 +471,7 @@ export function LandingGrid() {
                 <button className="btn" type="button">
                   Cancel
                 </button>
-                <button className="btn btn-primary" type="submit">
+                <button className="btn" type="submit">
                   Submit
                 </button>
               </div>
@@ -485,7 +481,7 @@ export function LandingGrid() {
       </div>
       <div className="mb-4 break-inside-avoid">
         <div className="card w-full max-w-sm">
-          <div className="card-content grid gap-6 card-content-lg">
+          <div className="card-content grid gap-6">
             <h3 className="text-lg/snug font-semibold tracking-tight">
               Premium Plan
             </h3>
@@ -520,7 +516,7 @@ export function LandingGrid() {
                 <span>API access</span>
               </li>
             </ul>
-            <button className="btn btn-primary btn-lg w-full mt-2">
+            <button className="btn btn-lg w-full mt-2">
               Buy Now
             </button>
           </div>
@@ -532,7 +528,7 @@ export function LandingGrid() {
             <img
               src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
               alt="Sarah Johnson"
-              className="w-full aspect-square object-cover rounded-card"
+              className="w-full aspect-square object-cover rounded-xl"
             />
             <div>
               <h3 className="text-lg font-semibold tracking-tight">
@@ -552,7 +548,7 @@ export function LandingGrid() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 text-muted-foreground"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
                 <span>48</span>
               </div>
-              <button className="btn btn-primary btn-sm ml-auto">
+              <button className="btn btn-sm ml-auto">
                 Follow
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
               </button>
@@ -577,11 +573,10 @@ export function LandingGrid() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <img
-                className="avatar"
-                src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-                alt="Sarah Johnson"
-              />
+              <span className="avatar">
+                    <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+                    <span className="avatar-fallback">SJ</span>
+                  </span>
               <div className="text-sm">
                 <p className="font-semibold text-foreground">Sarah Johnson</p>
                 <p className="text-muted-foreground">Product Designer</p>
@@ -595,7 +590,7 @@ export function LandingGrid() {
           <img
             src="https://cdn.gufo.dev/stockphotos/f5ddf336.webp"
             alt="Album cover"
-            className="aspect-square object-cover rounded-t-card w-full"
+            className="aspect-square object-cover w-full"
           />
           <div className="card-content grid gap-6">
             <div className="text-center">
@@ -622,7 +617,7 @@ export function LandingGrid() {
               <button className="btn btn-ghost btn-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z"/><path d="M3 20V4"/></svg>
               </button>
-              <button className="btn btn-primary btn-icon">
+              <button className="btn btn-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
               </button>
               <button className="btn btn-ghost btn-icon">
@@ -676,7 +671,7 @@ export function LandingGrid() {
                   name="password"
                 />
               </div>
-              <button className="btn btn-primary" type="submit">
+              <button className="btn" type="submit">
                 Sign In
               </button>
             </form>
