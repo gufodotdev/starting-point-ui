@@ -7,7 +7,7 @@ import { ClickToShow } from "./mixins/click-to-show";
 
 export const Collapsible = define({
   name: "collapsible",
-  selector: ".collapsible",
+  selector: ".collapsible, .accordion-panel",
   mixins: [Expandable, ClickToShow],
 
   init(this: SpInstance) {
