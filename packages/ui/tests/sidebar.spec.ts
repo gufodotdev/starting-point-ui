@@ -15,7 +15,7 @@ async function mount(page: Page, html: string) {
 }
 
 const BASIC = `
-  <div class="sidebar-layout">
+  <div class="sidebar-container">
     <aside id="panel" class="sidebar" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
@@ -35,7 +35,7 @@ const BASIC = `
 
 // Icon-collapse fixture, authored collapsed for first-paint checks.
 const ICON = `
-  <div class="sidebar-layout">
+  <div class="sidebar-container">
     <aside id="panel" class="sidebar collapsed" data-sp-collapse="icon" data-sp-toggle="#trigger">
       <div class="sidebar-content">
         <div class="sidebar-menu">
@@ -289,7 +289,7 @@ test.describe("desktop column", () => {
       // Icon-only rail buttons hide their label from sight entirely, so the
       // tooltip must show even though the panel is not collapsed.
       await mount(page, `
-        <div class="sidebar-layout">
+        <div class="sidebar-container">
           <aside id="panel" class="sidebar" data-sp-collapse="icon" data-sp-toggle="#trigger">
             <div class="sidebar-content">
               <div class="sidebar-menu">
