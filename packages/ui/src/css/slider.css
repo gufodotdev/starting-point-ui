@@ -6,51 +6,42 @@
     @apply disabled:cursor-not-allowed disabled:opacity-50;
 
     &::-webkit-slider-runnable-track {
-      @apply h-1 w-full rounded-full;
+      @apply h-1.5 w-full rounded-full;
       background: linear-gradient(
         to right,
         var(--primary) 0% var(--val, 0%),
-        var(--track) var(--val, 0%) 100%
+        var(--muted) var(--val, 0%) 100%
       );
     }
 
     &::-moz-range-track {
-      @apply h-1 w-full rounded-full;
+      @apply h-1.5 w-full rounded-full;
       background: linear-gradient(
         to right,
         var(--primary) 0% var(--val, 0%),
-        var(--track) var(--val, 0%) 100%
+        var(--muted) var(--val, 0%) 100%
       );
     }
 
     &::-webkit-slider-thumb {
-      @apply size-3 appearance-none rounded-full bg-thumb border border-primary shadow-sm transition-[box-shadow];
-      margin-top: calc((0.25rem - 0.75rem) / 2);
+      @apply size-4 appearance-none rounded-full border border-primary bg-white shadow-sm transition-[color,box-shadow];
+      margin-top: calc((0.375rem - 1rem) / 2);
     }
 
     &::-moz-range-thumb {
-      @apply size-3 rounded-full bg-thumb border border-primary shadow-sm transition-[box-shadow];
+      @apply size-4 rounded-full border border-primary bg-white shadow-sm transition-[color,box-shadow];
     }
 
-    &:hover::-webkit-slider-thumb {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
-    }
-    &:hover::-moz-range-thumb {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
-    }
-
-    &:focus-visible::-webkit-slider-thumb {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
-    }
-    &:focus-visible::-moz-range-thumb {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
-    }
-
+    &:hover::-webkit-slider-thumb,
+    &:focus-visible::-webkit-slider-thumb,
     &:active::-webkit-slider-thumb {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
     }
+
+    &:hover::-moz-range-thumb,
+    &:focus-visible::-moz-range-thumb,
     &:active::-moz-range-thumb {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 50%, transparent);
     }
 
     &[aria-invalid="true"]::-webkit-slider-thumb {
@@ -58,6 +49,71 @@
     }
     &[aria-invalid="true"]::-moz-range-thumb {
       border-color: var(--destructive);
+    }
+  }
+}
+
+@utility slider-vertical {
+  @layer l1 {
+    /* Standard vertical range: vertical writing mode, bottom-to-top via rtl. */
+    writing-mode: vertical-lr;
+    direction: rtl;
+    @apply h-40 w-4;
+
+    &::-webkit-slider-runnable-track {
+      @apply h-full w-1.5;
+      background: linear-gradient(
+        to top,
+        var(--primary) 0% var(--val, 0%),
+        var(--muted) var(--val, 0%) 100%
+      );
+    }
+
+    &::-moz-range-track {
+      @apply h-full w-1.5;
+      background: linear-gradient(
+        to top,
+        var(--primary) 0% var(--val, 0%),
+        var(--muted) var(--val, 0%) 100%
+      );
+    }
+
+    &::-webkit-slider-thumb {
+      margin-top: 0;
+      margin-left: calc((0.375rem - 1rem) / 2);
+    }
+  }
+}
+
+@utility slider-range {
+  @layer l1.l2 {
+    @apply relative h-4 w-full;
+
+    &::before {
+      content: "";
+      @apply absolute top-1/2 h-1.5 w-full -translate-y-1/2 rounded-full;
+      background: linear-gradient(
+        to right,
+        var(--muted) 0% var(--val-min, 0%),
+        var(--primary) var(--val-min, 0%) var(--val-max, 100%),
+        var(--muted) var(--val-max, 100%) 100%
+      );
+    }
+
+    & > .slider {
+      @apply pointer-events-none absolute inset-0 h-4;
+    }
+    & > .slider::-webkit-slider-runnable-track {
+      background: transparent;
+    }
+    & > .slider::-moz-range-track {
+      background: transparent;
+    }
+    & > .slider::-webkit-slider-thumb {
+      pointer-events: auto;
+    }
+    & > .slider::-moz-range-thumb {
+      pointer-events: auto;
     }
   }
 }
