@@ -1,0 +1,42 @@
+/* Starting Point UI Pagination Styles */
+
+@utility pagination {
+  @layer l1.l2 {
+    @apply flex flex-wrap items-center gap-1;
+  }
+}
+
+@utility pagination-item {
+  @layer l1.l2 {
+    @apply inline-flex size-9 shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none;
+    @apply hover:bg-muted hover:text-foreground dark:hover:bg-muted/50;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+    @apply disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
+
+    /* The authored .active marks the current page; the JS mirrors it onto
+       aria-current="page". Styled as the outline button variant. */
+    &.active {
+      @apply border-border bg-background shadow-xs dark:border-input dark:bg-input/30 dark:hover:bg-input/50;
+    }
+  }
+}
+
+@utility pagination-previous {
+  @layer l1 {
+    @apply w-auto gap-1.5 px-2.5 pl-2;
+  }
+}
+
+@utility pagination-next {
+  @layer l1 {
+    @apply w-auto gap-1.5 px-2.5 pr-2;
+  }
+}
+
+@utility pagination-ellipsis {
+  @layer l1.l2 {
+    @apply flex size-9 items-center justify-center;
+    @apply [&_svg:not([class*='size-'])]:size-4;
+  }
+}
