@@ -119,7 +119,7 @@ export function Example({ breadcrumb, description, viewSrc, html }: Props) {
       <div className="sticky top-(--navbar-height) z-30 bg-background border-t border-b">
         <div className="px-4 sm:px-6 h-12 flex items-center gap-4">
           <nav className="breadcrumb text-sm">
-            <Link href="/examples" className="breadcrumb-link">
+            <Link href="/examples" className="breadcrumb-item">
               Examples
             </Link>
             <span className="breadcrumb-separator" aria-hidden="true">
@@ -127,14 +127,14 @@ export function Example({ breadcrumb, description, viewSrc, html }: Props) {
             </span>
             <Link
               href={`/examples/${breadcrumb.type}/${breadcrumb.category}`}
-              className="breadcrumb-link"
+              className="breadcrumb-item"
             >
               {breadcrumb.categoryLabel}
             </Link>
             <span className="breadcrumb-separator" aria-hidden="true">
               <ChevronRight className="size-4" />
             </span>
-            <span className="breadcrumb-page">{breadcrumb.variant}</span>
+            <span className="breadcrumb-item active">{breadcrumb.variant}</span>
           </nav>
 
           <div className="ml-auto -mr-2 flex items-center gap-2">
@@ -164,7 +164,7 @@ export function Example({ breadcrumb, description, viewSrc, html }: Props) {
             {view === "preview" && (
               <button
                 onClick={() => setIsMobile(!isMobile)}
-                className="btn btn-ghost btn-icon-sm hidden md:flex"
+                className="btn btn-ghost btn-sm btn-icon hidden md:flex"
                 aria-label={isMobile ? "Desktop view" : "Mobile view"}
               >
                 {isMobile ? (
@@ -177,7 +177,7 @@ export function Example({ breadcrumb, description, viewSrc, html }: Props) {
             {view === "code" && (
               <button
                 onClick={handleCopy}
-                className="btn btn-ghost btn-icon-sm hidden md:flex"
+                className="btn btn-ghost btn-sm btn-icon hidden md:flex"
                 aria-label={copied ? "Copied" : "Copy code"}
               >
                 {copied ? (

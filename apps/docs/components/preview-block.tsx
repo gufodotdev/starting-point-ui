@@ -57,7 +57,7 @@ function DeviceButtons({
       <button
         type="button"
         title="Desktop"
-        className="btn btn-ghost btn-icon-xs text-muted-foreground"
+        className="btn btn-outline btn-sm btn-icon"
         onClick={() => resize("100%")}
       >
         <Monitor />
@@ -65,7 +65,7 @@ function DeviceButtons({
       <button
         type="button"
         title="Tablet"
-        className="btn btn-ghost btn-icon-xs hidden text-muted-foreground @min-[768px]:inline-flex"
+        className="btn btn-outline btn-sm btn-icon hidden @min-[768px]:inline-flex"
         onClick={() => resize(`${TABLET_WIDTH}px`)}
       >
         <Tablet />
@@ -73,12 +73,11 @@ function DeviceButtons({
       <button
         type="button"
         title="Mobile"
-        className="btn btn-ghost btn-icon-xs hidden text-muted-foreground @min-[375px]:inline-flex"
+        className="btn btn-outline btn-sm btn-icon hidden @min-[375px]:inline-flex"
         onClick={() => resize(`${MOBILE_WIDTH}px`)}
       >
         <Smartphone />
       </button>
-      <div className="separator separator-vertical self-auto! h-4" />
     </>
   );
 }
@@ -116,7 +115,7 @@ export function PreviewBlock({
           </button>
         </div>
 
-        <div className="flex h-8 items-center gap-1 rounded-md border p-0.75">
+        <div className="btn-group" role="group" aria-label="Preview options">
           <DeviceButtons panelRef={panelRef} />
           <a
             href={`/frame/${frameId}`}
@@ -124,12 +123,11 @@ export function PreviewBlock({
             rel="noopener noreferrer"
             title="Open in new tab"
             aria-label="Open preview in a new tab"
-            className="btn btn-ghost btn-icon-xs text-muted-foreground"
+            className="btn btn-outline btn-sm btn-icon"
           >
             <Fullscreen />
           </a>
-          <div className="separator separator-vertical self-auto! h-4" />
-          <CopyButton code={code} className="text-muted-foreground" />
+          <CopyButton code={code} classes="btn btn-outline btn-sm btn-icon" />
         </div>
       </div>
 

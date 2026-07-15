@@ -33,7 +33,7 @@ export async function ExampleGallery({
         <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
           <Link
             href="/examples"
-            className={`btn btn-sm rounded-full ${!activeCategory ? "btn-primary" : "btn-secondary"}`}
+            className={`btn btn-sm rounded-full ${!activeCategory ? "" : "btn-secondary"}`}
           >
             Featured
           </Link>
@@ -41,7 +41,7 @@ export async function ExampleGallery({
             <Link
               key={c.category}
               href={`/examples/${c.type}/${c.category}`}
-              className={`btn btn-sm rounded-full ${c.category === activeCategory ? "btn-primary" : "btn-secondary"}`}
+              className={`btn btn-sm rounded-full ${c.category === activeCategory ? "" : "btn-secondary"}`}
             >
               {categoryLabel(c.category)}
             </Link>
