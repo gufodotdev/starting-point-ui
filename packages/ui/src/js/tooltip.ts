@@ -18,6 +18,9 @@ export const Tooltip = define({
   props: {
     mode: { type: String, default: "hover" }, // override: activate the hover mixins
     placement: { type: String, default: "top" },
+    // Panel-to-trigger distance lands at 10px with the arrow half included
+    // (measured against the reference).
+    offset: { type: Number, default: 5 },
   },
 
   init(this: SpInstance) {
