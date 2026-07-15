@@ -49,6 +49,7 @@ export const docsNav: NavGroup[] = [
       { title: "Label", href: "/components/label" },
       { title: "Pagination", href: "/components/pagination" },
       { title: "Popover", href: "/components/popover" },
+      { title: "Progress", href: "/components/progress" },
       { title: "Radio Group", href: "/components/radio-group" },
       { title: "Scrollbar", href: "/components/scrollbar" },
       { title: "Select", href: "/components/select" },

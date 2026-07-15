@@ -1,0 +1,19 @@
+/* Starting Point UI Progress Styles */
+
+@utility progress {
+  @layer l1.l2 {
+    @apply h-1.5 w-full appearance-none overflow-hidden rounded-full border-none bg-muted align-middle;
+
+    &::-webkit-progress-bar {
+      @apply bg-transparent;
+    }
+
+    &::-webkit-progress-value {
+      @apply bg-primary transition-all;
+    }
+
+    &::-moz-progress-bar {
+      @apply bg-primary;
+    }
+  }
+}
