@@ -20,7 +20,12 @@ export const HoverToShow: Mixin = {
       this._hoverT = setTimeout(() => this.show({ trigger }), 60);
     };
     this.on(trigger, "pointerenter", show);
-    this.on(trigger, "focusin", show);
+    this.on(trigger, "focusin", () => {
+      // A menu-item trigger gets focus during plain arrow navigation; its
+      // submenu opens with ArrowRight/Enter instead (APG menu pattern).
+      if (trigger.matches('[role^="menuitem"]')) return;
+      show();
+    });
 
     // On touch, a tap also fires a click that would toggle us shut; flag it so
     // ClickToShow swallows that click.

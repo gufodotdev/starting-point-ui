@@ -37,6 +37,20 @@ export function ensureId(el: HTMLElement, prefix = "sp"): string {
   return el.id;
 }
 
+// The panel plus every open panel anchored to a trigger inside it, recursively
+// (ClickToShow wires triggers to their panels via aria-controls). Dismiss
+// mixins use this so a nested panel counts as inside its ancestors.
+export function anchoredPanels(root: HTMLElement): HTMLElement[] {
+  const panels = [root];
+  for (let i = 0; i < panels.length; i++) {
+    for (const trigger of panels[i].querySelectorAll('[aria-controls][aria-expanded="true"]')) {
+      const panel = document.getElementById(trigger.getAttribute("aria-controls") as string);
+      if (panel && !panels.includes(panel)) panels.push(panel);
+    }
+  }
+  return panels;
+}
+
 // Point `attr` at the first element matching `selector` (by id), unless the
 // author already set it. Used to wire aria-labelledby/describedby to a title.
 export function linkAria(host: HTMLElement, selector: string, attr: string): void {

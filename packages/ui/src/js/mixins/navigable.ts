@@ -50,6 +50,11 @@ export const Navigable: Mixin = {
     const trigger = resolveTrigger(this);
     if (!trigger) return;
     this.on(trigger, "keydown", (e) => {
+      // A menu-item trigger belongs to the parent menu's arrow navigation;
+      // the component opens its submenu with its own keys (e.g. ArrowRight).
+      // Text-control triggers (combobox fields) also own their keys.
+      if (trigger.matches('[role^="menuitem"], input, textarea')) return;
+      if (trigger.querySelector("input, textarea")) return;
       const key = (e as KeyboardEvent).key;
       if (key === "Enter" || key === " ") {
         if (this._isShown() || this.el.classList.contains("show")) {

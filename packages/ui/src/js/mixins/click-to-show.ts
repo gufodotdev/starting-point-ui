@@ -16,6 +16,10 @@ export const ClickToShow: Mixin = {
     }
     trigger.setAttribute("aria-controls", ensureId(this.el));
 
+    // A trigger that is (or wraps) a text control owns its open behavior:
+    // clicking a combobox field must never toggle-close it, and its keys type.
+    if (trigger.matches("input, textarea") || trigger.querySelector("input, textarea")) return;
+
     this.on(trigger, "click", (e) => {
       // The browser default is never wanted on a toggle trigger: an untyped
       // <button> in a form would submit it, a link would navigate.
@@ -29,6 +33,9 @@ export const ClickToShow: Mixin = {
       this.toggle({ trigger });
     });
     this.on(trigger, "keydown", (e) => {
+      // A menu-item trigger's keys are the parent menu's to handle; it opens
+      // the submenu itself (and focuses the first item) on Enter/Space.
+      if (trigger.matches('[role^="menuitem"]')) return;
       const key = (e as KeyboardEvent).key;
       if (key === "Enter" || key === " ") {
         e.preventDefault();

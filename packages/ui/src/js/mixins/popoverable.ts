@@ -13,7 +13,10 @@ export const Popoverable: Mixin = {
       return this.el.matches(":popover-open");
     },
     _mount(this: SpInstance): void {
-      (this.el as HTMLElement & { showPopover(): void }).showPopover();
+      // Reopening mid-hide finds the popover still open; showPopover would throw.
+      if (!this._isMounted()) {
+        (this.el as HTMLElement & { showPopover(): void }).showPopover();
+      }
       this._position?.();
     },
     _unmount(this: SpInstance): void {

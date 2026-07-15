@@ -2,7 +2,7 @@
 // crossing the gap between them doesn't hide it. Wired only when mode:hover.
 
 import type { Mixin, SpInstance } from "../define";
-import { resolveTrigger } from "../utils";
+import { anchoredPanels, resolveTrigger } from "../utils";
 
 export const HoverOutHide: Mixin = {
   props: {
@@ -15,11 +15,18 @@ export const HoverOutHide: Mixin = {
     const trigger = resolveTrigger(this);
     if (!trigger) return;
 
-    const overEither = () => trigger.matches(":hover") || this.el.matches(":hover");
+    // Hover or focus anywhere on the trigger or the panel chain keeps it open;
+    // a keyboard-opened panel has focus inside but the pointer elsewhere.
+    const stillActive = () =>
+      trigger.matches(":hover") ||
+      trigger.contains(document.activeElement) ||
+      anchoredPanels(this.el).some(
+        (panel) => panel.matches(":hover") || panel.contains(document.activeElement),
+      );
     const scheduleHide = () => {
       clearTimeout(this._hoverT as ReturnType<typeof setTimeout>);
       this._hoverT = setTimeout(() => {
-        if (!overEither()) this.hide();
+        if (!stillActive()) this.hide();
       }, 120);
     };
 

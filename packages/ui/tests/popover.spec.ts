@@ -58,6 +58,27 @@ test("closes on an outside click", async ({ page }) => {
   await expect(popover(page)).not.toHaveClass(/shown/);
 });
 
+test("data-sp-static skips anchoring and leaves positioning to author CSS", async ({ page }) => {
+  await mount(
+    page,
+    `
+    <button id="trigger" class="btn">Open</button>
+    <div id="pop" class="popover" data-sp-toggle="#trigger" data-sp-static>
+      <p>Static content</p>
+    </div>
+    <button id="outside">Outside</button>`,
+  );
+  await page.click("#trigger");
+  await expect(popover(page)).toHaveClass(/shown/);
+  const styles = await popover(page).evaluate((el) => ({
+    left: el.style.left,
+    top: el.style.top,
+  }));
+  expect(styles).toEqual({ left: "", top: "" });
+  await page.click("#outside");
+  await expect(popover(page)).not.toHaveClass(/shown/);
+});
+
 test("stays open when clicking inside the panel", async ({ page }) => {
   await mount(page, BASIC);
   await page.click("#trigger");
