@@ -1,8 +1,16 @@
-/* Starting Point UI Table Styles */
+@utility table-container {
+  @layer l1.l2 {
+    @apply relative w-full overflow-x-auto;
+  }
+}
 
 @utility table {
   @layer l1.l2 {
-    @apply w-max min-w-full caption-bottom text-sm;
+    @apply w-full caption-bottom text-sm;
+
+    & > caption {
+      @apply mt-4 text-sm text-muted-foreground;
+    }
   }
 }
 
@@ -29,19 +37,21 @@
     @apply border-b transition-colors hover:bg-muted/50;
 
     &:has(input[type="checkbox"]:checked):not(:has(input[data-sp-toggle-all])) {
-      @apply bg-muted/50;
+      @apply bg-muted;
     }
   }
 }
 
 @utility table-head {
   @layer l1.l2 {
-    @apply px-4 py-3 text-left align-middle font-medium text-foreground whitespace-nowrap;
+    @apply h-10 px-2 text-left align-middle font-medium text-foreground whitespace-nowrap;
+    @apply [&:has(input[type="checkbox"])]:pr-0;
   }
 }
 
 @utility table-cell {
   @layer l1.l2 {
-    @apply px-4 py-3 align-middle whitespace-nowrap;
+    @apply p-2 align-middle whitespace-nowrap;
+    @apply [&:has(input[type="checkbox"])]:pr-0;
   }
 }
