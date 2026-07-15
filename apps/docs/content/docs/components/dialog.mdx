@@ -1,6 +1,6 @@
 ---
 title: Dialog
-description: A Tailwind CSS modal dialog component for confirmations, forms, and alerts, rendered in the top layer with an accessible backdrop.
+description: A dialog component for Tailwind CSS with beautiful shadcn/ui styling. Use it to open a modal window for confirmations, short forms, and alerts.
 ---
 
 The dialog opens a modal window above the page and blocks interaction with everything behind it. Use it for confirmations, short forms, and alerts that need a decision; for a panel that slides in from the edge, reach for the [sheet](/components/sheet).
@@ -9,40 +9,50 @@ The dialog opens a modal window above the page and blocks interaction with every
 <button id="dialog-1-trigger" class="btn btn-outline">Open Dialog</button>
 
 <dialog class="dialog" data-sp-toggle="#dialog-1-trigger">
-  <div class="dialog-content">
+  <form class="dialog-panel">
     <button
-      class="btn btn-ghost btn-icon-xs absolute top-3 right-3"
+      type="button"
+      class="btn btn-ghost btn-xs btn-icon absolute top-3 right-3"
       aria-label="Close"
       data-sp-dismiss
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
-    <div class="avatar-group justify-center">
-      <img
-        class="avatar avatar-group-item"
-        src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-        alt="Sarah Johnson"
-      />
-      <img
-        class="avatar avatar-group-item"
-        src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
-        alt="Emma Wilson"
-      />
-      <img
-        class="avatar avatar-group-item"
-        src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
-        alt="Michael Chen"
-      />
-    </div>
-    <div class="dialog-header text-center">
-      <h2 class="dialog-title">Welcome to Team Atlas</h2>
+    <div class="dialog-header">
+      <h2 class="dialog-title">Edit profile</h2>
       <p class="dialog-description">
-        You've been added as a Member. Say hi to your new teammates and start
-        collaborating.
+        Make changes to your profile here. Click save when you're done.
       </p>
     </div>
-    <button class="btn btn-primary w-full" data-sp-dismiss>Get started</button>
-  </div>
+    <div class="dialog-content">
+      <div class="field-group">
+        <div class="field">
+          <label class="label" for="dialog-profile-name">Name</label>
+          <input
+            class="input"
+            id="dialog-profile-name"
+            name="name"
+            value="Pedro Duarte"
+          />
+        </div>
+        <div class="field">
+          <label class="label" for="dialog-profile-username">Username</label>
+          <input
+            class="input"
+            id="dialog-profile-username"
+            name="username"
+            value="@peduarte"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn btn-outline" data-sp-dismiss>
+        Cancel
+      </button>
+      <button type="submit" class="btn">Save changes</button>
+    </div>
+  </form>
 </dialog>
 ```
 
@@ -53,25 +63,26 @@ Add the `dialog` class to a `<dialog>` element. Give your trigger an `id`, then 
 | Class                | Description                                                         |
 | -------------------- | ------------------------------------------------------------------- |
 | `dialog`             | Add to the `<dialog>` element; fills the viewport and dims the page |
-| `dialog-content`     | Add to a child element to create the visible panel                  |
+| `dialog-panel`       | Add to the child element that is the visible panel                  |
 | `dialog-header`      | Add to the block holding the title and description                  |
 | `dialog-title`       | Add to a heading element to create the dialog title                 |
 | `dialog-description` | Add to a paragraph to create the supporting description             |
+| `dialog-content`     | Add to the body section between header and footer                   |
 | `dialog-footer`      | Add to the action row at the bottom of the panel                    |
 
 ```html
 <!-- This is a button toggling the dialog -->
-<button id="my-trigger" class="btn">Open Dialog</button>
+<button id="my-trigger" class="btn btn-outline">Open Dialog</button>
 
 <!-- This is the dialog -->
 <dialog class="dialog" data-sp-toggle="#my-trigger">
-  <div class="dialog-content">
+  <div class="dialog-panel">
     <div class="dialog-header">
       <h2 class="dialog-title">Title</h2>
       <p class="dialog-description">Description</p>
     </div>
     <div class="dialog-footer">
-      <button class="btn" data-sp-dismiss>Close</button>
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
     </div>
   </div>
 </dialog>
@@ -79,195 +90,217 @@ Add the `dialog` class to a `<dialog>` element. Give your trigger an `id`, then 
 
 ## Examples
 
+### Custom close button
+
+Any element with `data-sp-dismiss` closes the dialog, so put close buttons wherever the layout needs them.
+
+```html preview preset=dialog open=.dialog
+<button id="dialog-share-trigger" class="btn btn-outline">Share</button>
+
+<dialog class="dialog" data-sp-toggle="#dialog-share-trigger">
+  <div class="dialog-panel">
+    <button
+      class="btn btn-ghost btn-xs btn-icon absolute top-3 right-3"
+      aria-label="Close"
+      data-sp-dismiss
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="dialog-header">
+      <h2 class="dialog-title">Share link</h2>
+      <p class="dialog-description">
+        Anyone who has this link will be able to view this.
+      </p>
+    </div>
+    <div class="dialog-content">
+      <div class="field">
+        <label class="label sr-only" for="dialog-share-link">Link</label>
+        <input
+          class="input"
+          id="dialog-share-link"
+          value="https://startingpointui.com/guides/installation"
+          readonly
+        />
+      </div>
+    </div>
+    <div class="dialog-footer sm:justify-start">
+      <button class="btn" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
+### Sticky footer
+
+Cap the body's height and let it scroll on its own: the header and footer stay pinned while the content scrolls between them.
+
+```html preview preset=dialog open=.dialog
+<button id="dialog-sticky-trigger" class="btn btn-outline">
+  Sticky Footer
+</button>
+
+<dialog class="dialog" data-sp-toggle="#dialog-sticky-trigger">
+  <div class="dialog-panel">
+    <button
+      class="btn btn-ghost btn-xs btn-icon absolute top-3 right-3"
+      aria-label="Close"
+      data-sp-dismiss
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="dialog-header">
+      <h2 class="dialog-title">Sticky Footer</h2>
+      <p class="dialog-description">
+        This dialog has a sticky footer that stays visible while the content
+        scrolls.
+      </p>
+    </div>
+    <div
+      class="dialog-content scrollbar-none max-h-[50vh] overflow-y-auto leading-normal"
+    >
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </div>
+    <div class="dialog-footer">
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
 ### Scrollable content
 
-Give long content its own scroller inside the panel: the header and footer stay pinned, like a sticky footer, while the content scrolls between them.
+The same scrolling body without a footer.
 
 ```html preview preset=dialog open=.dialog
 <button id="dialog-scroll-trigger" class="btn btn-outline">
-  Terms of Service
+  Scrollable Content
 </button>
 
 <dialog class="dialog" data-sp-toggle="#dialog-scroll-trigger">
-  <div class="dialog-content max-w-md">
-    <div class="dialog-header">
-      <h2 class="dialog-title">Terms of Service</h2>
-      <p class="dialog-description">
-        Please read our terms of service before continuing.
-      </p>
-    </div>
-    <div class="scrollbar scrollbar-sm -mx-6 max-h-[50vh] overflow-y-auto px-6 text-sm/6">
-      <h3 class="mb-2 font-medium">1. Acceptance of terms</h3>
-      <p class="mb-4 text-muted-foreground">
-        By accessing or using the service, you agree to be bound by these terms.
-        If you do not agree to all of the terms, you may not access or use the
-        service.
-      </p>
-      <h3 class="mb-2 font-medium">2. Use of the service</h3>
-      <p class="mb-4 text-muted-foreground">
-        You may use the service only in compliance with these terms and all
-        applicable laws. You are responsible for your conduct and any content
-        you submit, post, or display on or via the service.
-      </p>
-      <h3 class="mb-2 font-medium">3. Your account</h3>
-      <p class="mb-4 text-muted-foreground">
-        You are responsible for safeguarding your account credentials and for
-        any activity that occurs under your account. Notify us immediately if
-        you suspect unauthorized use of your account.
-      </p>
-      <h3 class="mb-2 font-medium">4. Subscriptions and billing</h3>
-      <p class="mb-4 text-muted-foreground">
-        Paid plans renew automatically at the end of each billing period unless
-        cancelled. You can cancel at any time from your account settings, and
-        your plan remains active until the period ends.
-      </p>
-      <h3 class="mb-2 font-medium">5. Termination</h3>
-      <p class="mb-4 text-muted-foreground">
-        We may suspend or terminate your access to the service at any time for
-        conduct that violates these terms. You may stop using the service at any
-        time, and you can request deletion of your data.
-      </p>
-    </div>
-    <div class="dialog-footer">
-      <button class="btn btn-outline" data-sp-dismiss>Decline</button>
-      <button class="btn btn-primary" data-sp-dismiss>Accept</button>
-    </div>
-  </div>
-</dialog>
-```
-
-### Image
-
-Add an image as the first child of the panel. To make it full bleed, pull it out of the padding with negative margins.
-
-```html preview preset=dialog open=.dialog
-<button id="dialog-image-trigger" class="btn btn-outline">Publish</button>
-
-<dialog class="dialog" data-sp-toggle="#dialog-image-trigger">
-  <div class="dialog-content">
-    <img
-      class="-mx-6 -mt-6 aspect-2/1 w-[calc(100%+3rem)] max-w-none rounded-t-xl object-cover"
-      src="https://cdn.gufo.dev/stockphotos/fdab3fb9.webp"
-      alt="Article cover"
-    />
-    <div class="dialog-header">
-      <h2 class="dialog-title">Article published</h2>
-      <p class="dialog-description">
-        Working with constraints is now live on your blog. Share the link to get
-        it in front of more people.
-      </p>
-    </div>
-    <div class="dialog-footer">
-      <button class="btn btn-outline flex-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        Copy link
-      </button>
-      <button class="btn btn-primary flex-1" data-sp-dismiss>Finish</button>
-    </div>
-  </div>
-</dialog>
-```
-
-### Form
-
-Make the panel a `<form>` and lay out the fields with a [field group](/components/field).
-
-```html preview preset=dialog open=.dialog
-<button id="dialog-form-trigger" class="btn btn-outline">Sign In</button>
-
-<dialog class="dialog" data-sp-toggle="#dialog-form-trigger">
-  <form class="dialog-content">
+  <div class="dialog-panel">
     <button
-      type="button"
-      class="btn btn-ghost btn-icon-xs absolute top-3 right-3"
+      class="btn btn-ghost btn-xs btn-icon absolute top-3 right-3"
       aria-label="Close"
       data-sp-dismiss
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
     <div class="dialog-header">
-      <h2 class="dialog-title">Sign in</h2>
+      <h2 class="dialog-title">Scrollable Content</h2>
       <p class="dialog-description">
-        Enter credentials to access your account.
+        This is a dialog with scrollable content.
       </p>
     </div>
-    <div class="field-group">
-      <div class="field">
-        <label class="label" for="signin-email">Email</label>
-        <input
-          class="input"
-          id="signin-email"
-          type="email"
-          placeholder="m@example.com"
-        />
-      </div>
-      <div class="field">
-        <div class="flex items-center">
-          <label class="label" for="signin-password">Password</label>
-          <a
-            href="#"
-            class="ml-auto text-sm underline-offset-4 hover:underline"
-          >
-            Forgot password?
-          </a>
-        </div>
-        <input class="input" id="signin-password" type="password" />
-      </div>
-    </div>
-    <button type="button" class="btn btn-primary w-full" data-sp-dismiss>
-      Sign In
-    </button>
-    <div class="flex items-center gap-3 text-xs text-muted-foreground">
-      <span class="h-px flex-1 bg-border"></span>
-      OR CONTINUE WITH
-      <span class="h-px flex-1 bg-border"></span>
-    </div>
-    <div class="grid grid-cols-2 gap-2">
-      <button type="button" class="btn btn-outline">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h4.84c-.2 1.13-1.46 3.31-4.84 3.31-2.91 0-5.29-2.41-5.29-5.38s2.38-5.38 5.29-5.38c1.66 0 2.77.71 3.4 1.32l2.32-2.24C16.73 4.42 14.82 3.5 12.48 3.5c-4.97 0-9 4.03-9 9s4.03 9 9 9c5.2 0 8.64-3.65 8.64-8.79 0-.59-.06-1.04-.14-1.49h-8.5z"/></svg>
-        Google
-      </button>
-      <button type="button" class="btn btn-outline">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-        GitHub
-      </button>
-    </div>
-    <p class="text-center text-sm text-muted-foreground">
-      Don't have an account?
-      <a href="#" class="text-foreground underline underline-offset-4">
-        Sign up
-      </a>
-    </p>
-  </form>
-</dialog>
-```
-
-### Size
-
-Change the panel size with width and height utilities, like a larger `max-w-*` for a wider dialog. Here `h-full max-w-none` makes it fullscreen.
-
-```html preview preset=dialog open=.dialog
-<button id="dialog-full-trigger" class="btn btn-outline">Fullscreen</button>
-
-<dialog class="dialog" data-sp-toggle="#dialog-full-trigger">
-  <div class="dialog-content h-full max-w-none grid-rows-[auto_1fr_auto]">
-    <button
-      class="btn btn-ghost btn-icon-xs absolute top-3 right-3"
-      aria-label="Close"
-      data-sp-dismiss
+    <div
+      class="dialog-content scrollbar-none max-h-[50vh] overflow-y-auto leading-normal"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="dialog-header">
-      <h2 class="dialog-title">Document preview</h2>
-      <p class="dialog-description">
-        Review the document before sending it out.
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
       </p>
-    </div>
-    <div class="rounded-lg border border-dashed"></div>
-    <div class="dialog-footer">
-      <button class="btn btn-outline" data-sp-dismiss>Close</button>
-      <button class="btn btn-primary" data-sp-dismiss>Send</button>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
     </div>
   </div>
 </dialog>
@@ -286,7 +319,7 @@ An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interru
   data-sp-toggle="#alert-trigger"
   data-sp-static
 >
-  <div class="dialog-content">
+  <div class="dialog-panel">
     <div class="dialog-header">
       <h2 class="dialog-title">Are you absolutely sure?</h2>
       <p class="dialog-description">
@@ -296,10 +329,22 @@ An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interru
     </div>
     <div class="dialog-footer">
       <button class="btn btn-outline" data-sp-dismiss autofocus>Cancel</button>
-      <button class="btn btn-primary" data-sp-dismiss>Continue</button>
+      <button class="btn" data-sp-dismiss>Continue</button>
     </div>
   </div>
 </dialog>
+```
+
+## CSS variables
+
+The panel's spacing rhythm is one component-local variable: the panel derives its vertical padding and section gap from it, and each section its horizontal padding. Override it per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+
+| Variable           | Default  | Description                                          |
+| ------------------ | -------- | ---------------------------------------------------- |
+| `--dialog-spacing` | `1.5rem` | Padding and gap rhythm of the panel and its sections |
+
+```html
+<div class="dialog-panel [--dialog-spacing:--spacing(4)]"></div>
 ```
 
 ## Options
@@ -354,7 +399,3 @@ const dialog = sp.dialog(document.querySelector("#my-dialog"));
 
 dialog.show();
 ```
-
-## Accessibility
-
-The dialog adheres to the [Dialog (Modal) WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) and sets the appropriate roles and properties automatically.
