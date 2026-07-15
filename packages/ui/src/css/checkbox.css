@@ -2,14 +2,15 @@
 
 @utility checkbox {
   @layer l1.l2 {
-    @apply border-input-border bg-input size-4 shrink-0 rounded-[4px] border shadow-input transition-[box-shadow,background-color,border-color] outline-none appearance-none cursor-pointer;
+    @apply size-4 shrink-0 rounded-[4px] border border-input shadow-xs transition-shadow outline-none appearance-none cursor-pointer;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
     @apply disabled:cursor-not-allowed disabled:opacity-50;
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
-    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+    @apply aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:checked:border-primary;
+    @apply dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
 
     &:is(:checked, :indeterminate) {
-      @apply bg-primary border-primary;
-      background-size: 100% 100%;
+      @apply bg-primary border-primary dark:bg-primary;
+      background-size: 0.875rem;
       background-position: center;
       background-repeat: no-repeat;
     }
