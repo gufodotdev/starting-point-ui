@@ -1,258 +1,292 @@
 ---
 title: Card
-description: A Tailwind CSS card component for grouping content.
+description: A card component for Tailwind CSS with beautiful shadcn/ui styling. Use it to group related content on one surface, like a login form or a stat.
 ---
 
-A Tailwind CSS card component for grouping content. See more [card examples](/examples/components/card).
+The card groups related content on one surface, like a login form, a stat, or a settings section.
 
-```html preview
-<div class="card w-full max-w-sm">
-  <img
-    src="https://cdn.gufo.dev/stockphotos/fdab3fb9.webp"
-    alt="Blog post cover"
-    class="aspect-3/2 object-cover rounded-t-card w-full"
-  />
-  <div class="card-content grid gap-6">
-    <div>
-      <span
-        class="flex items-center gap-1.5 text-xs font-medium tracking-tight text-accent"
-      >
-        <span>Mar 15, 2024</span>
-        <span>·</span>
-        <span>Design</span>
-      </span>
-      <h3 class="text-lg font-semibold tracking-tight mt-2">
-        Design Systems with Tailwind
-      </h3>
-      <p class="text-sm/6 text-muted-foreground mt-2">
-        Learn how utility classes can help you build and scale a beautiful
-        design system across projects.
-      </p>
-    </div>
-    <div class="flex items-center gap-3">
-      <img
-        class="avatar"
-        src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-        alt="Sarah Johnson"
-      />
-      <div class="text-sm">
-        <p class="font-semibold text-foreground">Sarah Johnson</p>
-        <p class="text-muted-foreground">Product Designer</p>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
----
-
-## Sizes
-
-Card content comes in three sizes for different use cases.
-
-```html preview
-<div class="grid gap-6 w-full max-w-sm">
-  <div class="card w-full max-w-sm">
-    <div class="card-content card-content-sm flex items-center gap-4">
-      <div class="flex items-center gap-3 flex-1">
-        <img
-          class="avatar"
-          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-          alt="Sarah Johnson"
-        />
-        <div class="text-sm">
-          <p class="font-semibold text-foreground">Sarah Johnson</p>
-          <p class="text-muted-foreground">Product Designer</p>
-        </div>
-      </div>
-      <button class="btn btn-ghost btn-icon-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-      </button>
-    </div>
-  </div>
-  <div class="card w-full max-w-sm">
-    <img
-      src="https://cdn.gufo.dev/stockphotos/1fb406af.webp"
-      alt="Product"
-      class="aspect-3/2 object-cover rounded-t-card w-full"
-    />
-    <div class="card-content grid gap-6">
-      <div>
-        <span
-          class="flex items-center gap-1.5 text-xs font-medium tracking-tight text-accent"
-        >
-          <span>Furniture</span>
-        </span>
-        <h3 class="text-lg font-semibold tracking-tight mt-2">
-          Classic Wooden Table
-        </h3>
-        <p class="text-sm/6 text-muted-foreground mt-2">
-          Handcrafted solid oak table with ergonomic design and natural finish.
-        </p>
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="flex gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4.5 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4.5 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4.5 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4.5 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4.5 text-muted"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-        </div>
-        <span class="text-sm text-muted-foreground">(128)</span>
-      </div>
-      <div class="flex items-center justify-between">
-        <div class="flex items-baseline gap-2">
-          <span class="text-lg font-bold">$149</span>
-          <span class="text-sm text-muted-foreground line-through">$199</span>
-        </div>
-        <button class="btn btn-primary btn-sm">Add to Cart</button>
-      </div>
-    </div>
-  </div>
-  <div class="card w-full max-w-sm">
-    <div class="card-content grid gap-6 card-content-lg">
-      <h3 class="text-lg/snug font-semibold tracking-tight">Premium Plan</h3>
-      <div>
-        <span class="text-4xl font-bold sm:text-5xl">$29</span>
-        <span class="text-muted-foreground ml-1">/ month</span>
-      </div>
-      <p class="text-sm/6 text-muted-foreground">
-        Everything you need to scale your project and collaborate with your
-        entire team.
-      </p>
-      <div class="separator"></div>
-      <ul class="grid gap-4 text-sm">
-        <li class="text-muted-foreground flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-          <span>Up to 10 team members</span>
-        </li>
-        <li class="text-muted-foreground flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-          <span>50GB cloud storage</span>
-        </li>
-        <li class="text-muted-foreground flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-          <span>Priority email support</span>
-        </li>
-        <li class="text-muted-foreground flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-          <span>Advanced analytics dashboard</span>
-        </li>
-        <li class="text-muted-foreground flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 mr-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
-          <span>API access</span>
-        </li>
-      </ul>
-      <button class="btn btn-primary btn-lg w-full mt-2">Buy Now</button>
-    </div>
-  </div>
-</div>
-```
-
----
-
-## Variants
-
-Cards come in two variants for different contexts.
-
-```html preview
-<div class="grid gap-6 w-full max-w-sm">
-  <div class="card">
-    <div class="card-content card-content-sm flex items-center gap-4">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 text-muted-foreground"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-      <div class="flex-1 grid gap-1">
-        <h3 class="font-semibold text-sm leading-none">Payment Method</h3>
-        <p class="text-muted-foreground text-sm">Visa ending in 4242</p>
-      </div>
-      <a href="#" class="btn btn-ghost btn-sm">Edit</a>
-    </div>
-  </div>
-  <div class="card card-muted">
-    <div class="card-content card-content-sm flex items-center gap-4">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5 text-muted-foreground"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div class="flex-1 grid gap-1">
-        <h3 class="font-semibold text-sm leading-none">Quick Tip</h3>
-        <p class="text-muted-foreground text-sm">Press ⌘K to open search</p>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
----
-
-## Customization
-
-You can combine card classes with Tailwind utilities for custom styling.
-
-```html preview
-<div
-  class="card bg-linear-to-br from-pink-500 via-purple-500 to-indigo-500 border-0 text-white w-full max-w-sm shadow-xl"
->
-  <div class="card-content grid gap-6">
-    <div class="flex items-center justify-between">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg>
-      <span class="text-xs font-medium bg-white/20 px-2 py-1 rounded-full">
-        Limited
-      </span>
-    </div>
-    <div class="grid gap-2">
-      <h3 class="font-semibold text-xl">Early Access</h3>
-      <p class="text-white/80 text-sm">
-        Be among the first to try our new AI-powered features.
-      </p>
-    </div>
-    <button class="btn bg-white text-purple-600 hover:bg-white/90 border-0">
-      Join Waitlist
-    </button>
-  </div>
-</div>
-```
-
----
-
-## How it works
-
-The card component is a CSS-only component for grouping related content. It includes variant and size classes for different visual styles and padding options.
-
-### Structure
-
-A card consists of a container and content sections:
-
-```html
+```html preview preset=form
 <div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Login to your account</h3>
+    <p class="card-description">
+      Enter your email below to login to your account
+    </p>
+    <div class="card-action">
+      <button class="btn btn-link">Sign Up</button>
+    </div>
+  </div>
   <div class="card-content">
-    <h3>Title</h3>
-    <p>Content goes here.</p>
+    <form class="flex flex-col gap-6">
+      <div class="field">
+        <label class="label" for="card-demo-email">Email</label>
+        <input
+          class="input"
+          id="card-demo-email"
+          type="email"
+          placeholder="m@example.com"
+          required
+        />
+      </div>
+      <div class="field">
+        <div class="flex w-full items-center">
+          <label class="label" for="card-demo-password">Password</label>
+          <a
+            href="#"
+            class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+          >
+            Forgot your password?
+          </a>
+        </div>
+        <input class="input" id="card-demo-password" type="password" required />
+      </div>
+    </form>
+  </div>
+  <div class="card-footer flex-col gap-2">
+    <button type="submit" class="btn w-full">Login</button>
+    <button class="btn btn-outline w-full">Login with Google</button>
   </div>
 </div>
 ```
 
-Cards can include images or other elements alongside content:
+## Usage
+
+Add the `card` class to the surface and compose the sections inside.
+
+| Class              | Description                                                       |
+| ------------------ | ----------------------------------------------------------------- |
+| `card`             | Add to the surface; spacing derives from `--card-spacing`         |
+| `card-sm`          | Add to `card` for compact spacing and a smaller title             |
+| `card-header`      | Add to the top section holding title, description, and action     |
+| `card-title`       | Add to a heading element                                          |
+| `card-description` | Add to a paragraph with supporting text                           |
+| `card-action`      | Add to an element in the header to pin it to the top-right corner |
+| `card-content`     | Add to the main section                                           |
+| `card-footer`      | Add to the bottom section, a horizontal row by default            |
 
 ```html
 <div class="card">
-  <img src="..." alt="..." class="rounded-t-card" />
-  <div class="card-content">...</div>
+  <div class="card-header">
+    <h3 class="card-title">Card Title</h3>
+    <p class="card-description">Card Description</p>
+    <div class="card-action">Card Action</div>
+  </div>
+  <div class="card-content">Card Content</div>
+  <div class="card-footer">Card Footer</div>
 </div>
 ```
 
-### Class reference
+## Examples
 
-All available classes for the card component.
+### Size
 
-| Class               | Description                                                        |
-| ------------------- | ------------------------------------------------------------------ |
-| `card`              | Add to container element for base card styles with rounded corners |
-| `card-default`      | Add to `.card` for border style (default)                          |
-| `card-muted`        | Add to `.card` for muted background, no border                     |
-| `card-content`      | Add to inner element for content section with padding              |
-| `card-content-sm`   | Add to `.card-content` for small padding                           |
-| `card-content-base` | Add to `.card-content` for base padding (default)                  |
-| `card-content-lg`   | Add to `.card-content` for large padding                           |
+Add `card-sm` for a more compact card: the spacing tightens and the title drops a step.
+
+```html preview preset=form
+<div class="card card-sm mx-auto w-full max-w-xs">
+  <div class="card-header">
+    <h3 class="card-title">Scheduled reports</h3>
+    <p class="card-description">Weekly snapshots. No manual exports.</p>
+  </div>
+  <div class="card-content">
+    <ul class="grid gap-2 py-2 text-sm">
+      <li class="flex gap-2">
+        <svg class="mt-0.5 size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Choose a schedule (daily, or weekly).</span>
+      </li>
+      <li class="flex gap-2">
+        <svg class="mt-0.5 size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Send to channels or specific teammates.</span>
+      </li>
+      <li class="flex gap-2">
+        <svg class="mt-0.5 size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        <span>Include charts, tables, and key metrics.</span>
+      </li>
+    </ul>
+  </div>
+  <div class="card-footer flex-col gap-2">
+    <button class="btn btn-sm w-full">Set up scheduled reports</button>
+    <button class="btn btn-outline btn-sm w-full">See what's new</button>
+  </div>
+</div>
+```
+
+### Spacing
+
+Set `--card-spacing` to control the section gaps and edge insets in one place.
+
+```html preview preset=form
+<div class="btn-group mx-auto" role="group" aria-label="Card spacing">
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="4"
+    aria-pressed="false"
+  >
+    16px
+  </button>
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="5"
+    aria-pressed="false"
+  >
+    20px
+  </button>
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="6"
+    aria-pressed="true"
+  >
+    24px
+  </button>
+  <button
+    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+    data-spacing="8"
+    aria-pressed="false"
+  >
+    32px
+  </button>
+</div>
+
+<div class="card" id="card-spacing-demo">
+  <div class="card-header">
+    <h3 class="card-title">Login to your account</h3>
+    <p class="card-description">
+      Enter your email below to login to your account
+    </p>
+    <div class="card-action">
+      <button class="btn btn-link">Sign Up</button>
+    </div>
+  </div>
+  <div class="card-content">
+    <form class="flex flex-col gap-6">
+      <div class="field">
+        <label class="label" for="card-spacing-email">Email</label>
+        <input
+          class="input"
+          id="card-spacing-email"
+          type="email"
+          placeholder="m@example.com"
+          required
+        />
+      </div>
+      <div class="field">
+        <div class="flex w-full items-center">
+          <label class="label" for="card-spacing-password">Password</label>
+          <a
+            href="#"
+            class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+          >
+            Forgot your password?
+          </a>
+        </div>
+        <input
+          class="input"
+          id="card-spacing-password"
+          type="password"
+          required
+        />
+      </div>
+    </form>
+  </div>
+  <div class="card-footer flex-col gap-2">
+    <button type="submit" class="btn w-full">Login</button>
+    <button class="btn btn-outline w-full">Login with Google</button>
+  </div>
+</div>
+
+<script>
+  const card = document.getElementById("card-spacing-demo");
+const buttons = document.querySelectorAll("[data-spacing]");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    buttons.forEach((b) =>
+      b.setAttribute("aria-pressed", String(b === button)));
+    card.style.setProperty(
+      "--card-spacing",
+      `calc(var(--spacing) * ${button.dataset.spacing})`,
+    );
+  });
+});
+</script>
+```
+
+### Edge to edge
+
+Use negative margins with `-mx-(--card-spacing)` to run content to the card edges while keeping it aligned with the inset.
+
+```html preview preset=form
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Terms of Service</h3>
+    <p class="card-description">
+      Review the terms before accepting the agreement.
+    </p>
+  </div>
+  <div class="card-content">
+    <div
+      class="-mx-(--card-spacing) max-h-48 space-y-4 overflow-y-scroll border-y bg-muted/50 px-(--card-spacing) py-4 text-sm leading-relaxed"
+    >
+      <p>
+        These terms govern your use of the workspace, including access to shared
+        documents, project files, and collaboration tools.
+      </p>
+      <p>
+        You are responsible for the content you upload and for ensuring that
+        your team has the appropriate permissions to view or edit it.
+      </p>
+      <p>
+        We may update features or limits as the service evolves. When those
+        changes materially affect your workflow, we will notify your workspace
+        administrators.
+      </p>
+      <p>
+        By continuing, you agree to keep your account credentials secure and to
+        follow your organization's acceptable use policies.
+      </p>
+    </div>
+  </div>
+  <div class="card-footer justify-end gap-2">
+    <button class="btn btn-outline">Decline</button>
+    <button class="btn">Accept</button>
+  </div>
+</div>
+```
+
+### Image
+
+Add an image before the card header to create a card with an image.
+
+```html preview preset=form
+<div class="card relative pt-0">
+  <div class="absolute inset-0 z-30 aspect-video bg-black/35"></div>
+  <img
+    src="https://avatar.vercel.sh/shadcn1"
+    alt="Event cover"
+    class="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+  />
+  <div class="card-header">
+    <div class="card-action">
+      <span class="badge badge-secondary">Featured</span>
+    </div>
+    <h3 class="card-title">Design systems meetup</h3>
+    <p class="card-description">
+      A practical talk on component APIs, accessibility, and shipping faster.
+    </p>
+  </div>
+  <div class="card-footer">
+    <button class="btn w-full">View Event</button>
+  </div>
+</div>
+```
+
+## CSS variables
+
+The card's spacing rhythm is one component-local variable: the card derives its vertical padding and section gap from it, and each section its horizontal inset. Override it per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+
+| Variable         | Default                          | Description                                         |
+| ---------------- | -------------------------------- | --------------------------------------------------- |
+| `--card-spacing` | `1.5rem` (`1rem` with `card-sm`) | Padding and gap rhythm of the card and its sections |
 
 ```html
-<div class="card card-muted">
-  <div class="card-content card-content-sm">...</div>
-</div>
+<div class="card [--card-spacing:--spacing(8)]"></div>
 ```
