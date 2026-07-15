@@ -1,44 +1,56 @@
-/* Starting Point UI Card Styles */
-
 @utility card {
   @layer l1.l2 {
-    @apply text-card-foreground rounded-card;
-    @apply [&:where(&:not(.card-default,.card-muted))]:card-default;
+    @apply flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground shadow-xs ring-1 ring-foreground/10;
+    @apply [--card-spacing:--spacing(6)];
+    @apply has-[>img:first-child]:pt-0 [&>img:first-child]:rounded-t-xl [&>img:last-child]:rounded-b-xl;
   }
 }
 
-@utility card-default {
+@utility card-sm {
   @layer l1 {
-    @apply bg-card border border-card-border shadow-card;
+    @apply [--card-spacing:--spacing(4)];
+
+    & .card-title {
+      @apply text-sm;
+    }
   }
 }
 
-@utility card-muted {
-  @layer l1 {
-    @apply bg-muted/50;
+@utility card-header {
+  @layer l1.l2 {
+    @apply @container grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing);
+    @apply has-[.card-action]:grid-cols-[1fr_auto] has-[.card-description]:grid-rows-[auto_auto];
+    @apply [&.border-b]:pb-(--card-spacing);
+  }
+}
+
+@utility card-title {
+  @layer l1.l2 {
+    @apply font-heading text-base leading-normal font-medium;
+  }
+}
+
+@utility card-description {
+  @layer l1.l2 {
+    @apply text-sm text-muted-foreground;
+  }
+}
+
+@utility card-action {
+  @layer l1.l2 {
+    @apply col-start-2 row-span-2 row-start-1 self-start justify-self-end;
   }
 }
 
 @utility card-content {
   @layer l1.l2 {
-    @apply [&:where(&:not(.card-content-sm,.card-content-base,.card-content-lg))]:card-content-base;
+    @apply px-(--card-spacing);
   }
 }
 
-@utility card-content-sm {
-  @layer l1 {
-    @apply p-4;
-  }
-}
-
-@utility card-content-base {
-  @layer l1 {
-    @apply p-6;
-  }
-}
-
-@utility card-content-lg {
-  @layer l1 {
-    @apply p-8;
+@utility card-footer {
+  @layer l1.l2 {
+    @apply flex items-center rounded-b-xl px-(--card-spacing);
+    @apply [&.border-t]:pt-(--card-spacing);
   }
 }
