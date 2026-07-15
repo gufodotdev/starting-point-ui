@@ -1,245 +1,407 @@
 ---
 title: Field
-description: A Tailwind CSS field component for building structured, accessible form layouts.
+description: A field component for Tailwind CSS with beautiful shadcn/ui styling. Use it to wrap a form control with its label, description, and error message.
 ---
 
-A Tailwind CSS field component for building structured, accessible form layouts with labels, descriptions, and error messages.
+The field wraps a form control with its label, description, and error message, and lines everything up for you. It works around any control: [inputs](/components/input), [selects](/components/select), [textareas](/components/textarea), checkboxes, switches, and more.
 
 ```html preview
-<div class="w-full max-w-sm">
-  <div class="field">
-    <label class="label" for="field-email">Email</label>
-    <input
-      class="input"
-      id="field-email"
-      type="email"
-      placeholder="you@example.com"
-      name="email"
-    />
-  </div>
-</div>
-```
-
----
-
-## With description
-
-Add a description below the input. Use `aria-describedby` on the input pointing to the description's `id` so screen readers announce the help text.
-
-```html preview
-<div class="w-full max-w-sm">
-  <div class="field">
-    <label class="label" for="field-username">Username</label>
-    <input
-      class="input"
-      id="field-username"
-      type="text"
-      placeholder="johndoe"
-      aria-describedby="field-username-desc"
-      name="username"
-    />
-    <p class="field-description" id="field-username-desc">This is your public display name.</p>
-  </div>
-</div>
-```
-
----
-
-## With error
-
-Use `.field-error` to display validation errors. Add `aria-invalid="true"` to the input and connect the error message using `aria-describedby` so screen readers announce it when the input is focused.
-
-```html preview
-<div class="w-full max-w-sm">
-  <div class="field">
-    <label class="label" for="field-password">Password</label>
-    <input
-      class="input"
-      id="field-password"
-      type="password"
-      placeholder="Enter your password"
-      aria-invalid="true"
-      aria-describedby="field-password-error"
-      name="password"
-    />
-    <p class="field-error" id="field-password-error">
-      Password must be at least 8 characters.
+<form class="field-group w-full max-w-md">
+  <fieldset class="field-set">
+    <legend class="field-legend">Payment Method</legend>
+    <p class="field-description">All transactions are secure and encrypted</p>
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="checkout-card-name">Name on Card</label>
+        <input class="input" id="checkout-card-name" placeholder="Evil Rabbit" required />
+      </div>
+      <div class="field">
+        <label class="label" for="checkout-card-number">Card Number</label>
+        <input class="input" id="checkout-card-number" placeholder="1234 5678 9012 3456" required />
+        <p class="field-description">Enter your 16-digit card number</p>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="field">
+          <label class="label" for="checkout-exp-month">Month</label>
+          <select class="select" id="checkout-exp-month">
+            <option value="">MM</option>
+            <option>01</option>
+            <option>02</option>
+            <option>03</option>
+            <option>04</option>
+            <option>05</option>
+            <option>06</option>
+            <option>07</option>
+            <option>08</option>
+            <option>09</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="checkout-exp-year">Year</label>
+          <select class="select" id="checkout-exp-year">
+            <option value="">YYYY</option>
+            <option>2024</option>
+            <option>2025</option>
+            <option>2026</option>
+            <option>2027</option>
+            <option>2028</option>
+            <option>2029</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="checkout-cvv">CVV</label>
+          <input class="input" id="checkout-cvv" placeholder="123" required />
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field-separator"></div>
+  <fieldset class="field-set">
+    <legend class="field-legend">Billing Address</legend>
+    <p class="field-description">
+      The billing address associated with your payment method
     </p>
+    <div class="field-group">
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="checkout-same-as-shipping" checked />
+        <label class="label font-normal" for="checkout-same-as-shipping">
+          Same as shipping address
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="field-set">
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="checkout-comments">Comments</label>
+        <textarea class="textarea resize-none" id="checkout-comments" placeholder="Add any additional comments"></textarea>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field field-horizontal">
+    <button type="submit" class="btn">Submit</button>
+    <button type="button" class="btn btn-outline">Cancel</button>
   </div>
+</form>
+```
+
+## Usage
+
+Add the `field` class to a wrapper and put the label, control, and supporting text inside. Fields stack vertically by default; group several with `field-group`.
+
+| Class               | Description                                                     |
+| ------------------- | ---------------------------------------------------------------- |
+| `field`             | Add to the wrapper around a label, control, and supporting text  |
+| `field-horizontal` `field-responsive` | Add to `field` to lay it out in a row, always or from the `md` container size |
+| `field-content`     | Add to a block holding a title and description inside a field    |
+| `field-title`       | Add to a heading inside `field-content`                          |
+| `field-description` | Add to a paragraph with supporting text                          |
+| `field-error`       | Add to a paragraph with a validation message                     |
+| `field-group`       | Add to a container stacking several fields                       |
+| `field-set`         | Add to a `<fieldset>` wrapping related fields                    |
+| `field-legend`      | Add to the `<legend>` of a field set                             |
+| `field-legend-label` | Add to `field-legend` for a label-sized legend                  |
+| `field-separator`   | Add to a divider between fields; put text in a `<span>` inside   |
+
+```html
+<div class="field">
+  <label class="label" for="my-input">Label</label>
+  <input class="input" id="my-input" />
+  <p class="field-description">Description</p>
 </div>
 ```
 
----
+## Examples
 
-## Field group
+### Input
 
-Use `.field-group` to stack multiple fields with consistent spacing.
+Stack the label, control, and description in any order; the field spaces them consistently.
 
-```html preview
-<div class="w-full max-w-sm">
+```html preview preset=form
+<fieldset class="field-set">
   <div class="field-group">
     <div class="field">
-      <label class="label" for="fg-first-name">First name</label>
-      <input
-        class="input"
-        id="fg-first-name"
-        type="text"
-        placeholder="John"
-        name="first-name"
-      />
+      <label class="label" for="field-username">Username</label>
+      <input class="input" id="field-username" type="text" placeholder="Max Leiter" />
+      <p class="field-description">Choose a unique username for your account.</p>
     </div>
     <div class="field">
-      <label class="label" for="fg-last-name">Last name</label>
-      <input
-        class="input"
-        id="fg-last-name"
-        type="text"
-        placeholder="Smith"
-        name="last-name"
-      />
-    </div>
-    <div class="field">
-      <label class="label" for="fg-email">Email</label>
-      <input
-        class="input"
-        id="fg-email"
-        type="email"
-        placeholder="you@example.com"
-        aria-describedby="fg-email-desc"
-        name="email"
-      />
-      <p class="field-description" id="fg-email-desc">We'll never share your email.</p>
+      <label class="label" for="field-password">Password</label>
+      <p class="field-description">Must be at least 8 characters long.</p>
+      <input class="input" id="field-password" type="password" placeholder="••••••••" />
     </div>
   </div>
+</fieldset>
+```
+
+### Textarea
+
+A [textarea](/components/textarea) fields like any other control.
+
+```html preview preset=form
+<fieldset class="field-set">
+  <div class="field-group">
+    <div class="field">
+      <label class="label" for="field-feedback">Feedback</label>
+      <textarea class="textarea" id="field-feedback" rows="4" placeholder="Your feedback helps us improve..."></textarea>
+      <p class="field-description">Share your thoughts about our service.</p>
+    </div>
+  </div>
+</fieldset>
+```
+
+### Select
+
+A [select](/components/select) with a label and supporting text.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="field-department">Department</label>
+  <select class="select" id="field-department">
+    <option value="">Choose department</option>
+    <option>Engineering</option>
+    <option>Design</option>
+    <option>Marketing</option>
+    <option>Sales</option>
+    <option>Customer Support</option>
+    <option>Human Resources</option>
+    <option>Finance</option>
+    <option>Operations</option>
+  </select>
+  <p class="field-description">Select your department or area of work.</p>
 </div>
 ```
 
----
+### Slider
 
-## Horizontal
+Fields also wrap controls without a `<label>` element, like a [slider](/components/slider) titled with a `field-title`.
 
-Use `.field-horizontal` for inline fields like checkboxes and switches.
+```html preview preset=form
+<div class="field">
+  <span class="field-title">Budget</span>
+  <p class="field-description">
+    Set your maximum budget ($<span class="font-medium tabular-nums" data-sp-slider-value="field-budget">500</span>).
+  </p>
+  <input type="range" class="slider mt-2" id="field-budget" min="0" max="1000" step="10" value="500" style="--val: 50%" aria-label="Maximum budget" />
+</div>
+```
 
-```html preview
-<div class="w-full max-w-sm">
+### Fieldset
+
+Group related fields in a `field-set` with a `field-legend` so they are announced together.
+
+```html preview preset=form
+<fieldset class="field-set">
+  <legend class="field-legend">Address Information</legend>
+  <p class="field-description">We need your address to deliver your order.</p>
   <div class="field-group">
-    <div class="field field-horizontal">
-      <input type="checkbox" class="checkbox" id="field-terms" name="terms" />
-      <label class="label" for="field-terms">Accept terms and conditions</label>
+    <div class="field">
+      <label class="label" for="field-street">Street Address</label>
+      <input class="input" id="field-street" type="text" placeholder="123 Main St" />
     </div>
-    <div class="field field-horizontal">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="field-marketing"
-        aria-describedby="field-marketing-desc"
-        name="marketing"
-      />
-      <div class="field-content">
-        <label class="label" for="field-marketing">Marketing emails</label>
-        <p class="field-description" id="field-marketing-desc">
-          Receive emails about new products and features.
-        </p>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="field">
+        <label class="label" for="field-city">City</label>
+        <input class="input" id="field-city" type="text" placeholder="New York" />
+      </div>
+      <div class="field">
+        <label class="label" for="field-zip">Postal Code</label>
+        <input class="input" id="field-zip" type="text" placeholder="90502" />
       </div>
     </div>
   </div>
-</div>
+</fieldset>
 ```
 
----
+### Checkbox
 
-## Disabled
+Horizontal fields lay out [checkboxes](/components/checkbox), with a `field-separator` dividing sections.
 
-Add `disabled` to the form element.
-
-```html preview
-<div class="w-full max-w-sm">
-  <div class="field">
-    <label class="label" for="field-disabled">Email</label>
-    <input
-      class="input"
-      id="field-disabled"
-      type="email"
-      placeholder="you@example.com"
-      disabled=""
-      name="email"
-    />
+```html preview preset=form
+<div class="field-group">
+  <fieldset class="field-set">
+    <legend class="field-legend field-legend-label">Show these items on the desktop</legend>
+    <p class="field-description">Select the items you want to show on the desktop.</p>
+    <div class="field-group gap-3">
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="finder-pref-hard-disks" />
+        <label class="label font-normal" for="finder-pref-hard-disks">Hard disks</label>
+      </div>
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="finder-pref-external-disks" />
+        <label class="label font-normal" for="finder-pref-external-disks">External disks</label>
+      </div>
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="finder-pref-cds-dvds" />
+        <label class="label font-normal" for="finder-pref-cds-dvds">CDs, DVDs, and iPods</label>
+      </div>
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="finder-pref-connected-servers" />
+        <label class="label font-normal" for="finder-pref-connected-servers">Connected servers</label>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field-separator"></div>
+  <div class="field field-horizontal">
+    <input type="checkbox" class="checkbox" id="finder-pref-sync-folders" checked />
+    <div class="field-content">
+      <label class="label" for="finder-pref-sync-folders">Sync Desktop &amp; Documents folders</label>
+      <p class="field-description">
+        Your Desktop &amp; Documents folders are being synced with iCloud
+        Drive. You can access them from other devices.
+      </p>
+    </div>
   </div>
 </div>
 ```
 
----
+### Radio
 
-## How it works
+A [radio group](/components/radio-group) in a field set, one horizontal field per option.
 
-The field component is a set of CSS-only utility classes for composing structured form layouts.
+```html preview preset=form
+<fieldset class="field-set">
+  <legend class="field-legend field-legend-label">Subscription Plan</legend>
+  <p class="field-description">Yearly and lifetime plans offer significant savings.</p>
+  <div class="field-group gap-3">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-monthly" name="plan" checked />
+      <label class="label font-normal" for="plan-monthly">Monthly ($9.99/month)</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-yearly" name="plan" />
+      <label class="label font-normal" for="plan-yearly">Yearly ($99.99/year)</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-lifetime" name="plan" />
+      <label class="label font-normal" for="plan-lifetime">Lifetime ($299.99)</label>
+    </div>
+  </div>
+</fieldset>
+```
 
-### Structure
+### Switch
 
-A field consists of a wrapper, label, input, and optional descriptions and errors:
+A horizontal field puts a [switch](/components/switch) beside its label.
 
-```html
-<div class="field">
-  <label class="label" for="name">Name</label>
-  <input class="input" id="name" type="text" aria-describedby="name-desc name-error" />
-  <p class="field-description" id="name-desc">Help text goes here.</p>
-  <p class="field-error" id="name-error">Error message goes here.</p>
+```html preview preset=form
+<div class="field field-horizontal">
+  <input type="checkbox" role="switch" class="switch" id="field-2fa" />
+  <label class="label" for="field-2fa">Multi-factor authentication</label>
 </div>
 ```
 
-### Grouping
+### Choice card
 
-Use `.field-group` to stack multiple fields with consistent spacing:
+Wrap a horizontal field in a [label](/components/label) and the whole card becomes clickable, tinting itself while checked.
 
-```html
+```html preview preset=form
 <div class="field-group">
-  <div class="field">...</div>
-  <div class="field">...</div>
+  <fieldset class="field-set">
+    <legend class="field-legend field-legend-label">Compute Environment</legend>
+    <p class="field-description">Select the compute environment for your cluster.</p>
+    <div class="field-group gap-3">
+      <label class="label">
+        <div class="field field-horizontal">
+          <div class="field-content">
+            <span class="field-title">Kubernetes</span>
+            <p class="field-description">Run GPU workloads on a K8s cluster.</p>
+          </div>
+          <input type="radio" class="radio" name="field-compute" checked />
+        </div>
+      </label>
+      <label class="label">
+        <div class="field field-horizontal">
+          <div class="field-content">
+            <span class="field-title">Virtual Machine</span>
+            <p class="field-description">Access a cluster to run GPU workloads.</p>
+          </div>
+          <input type="radio" class="radio" name="field-compute" />
+        </div>
+      </label>
+    </div>
+  </fieldset>
 </div>
 ```
 
-### Disabled state
+### Field group
 
-Add `disabled` to the form element:
+Stack sections of fields with a `field-group` and divide them with separators.
 
-```html
+```html preview preset=form
+<div class="field-group">
+  <fieldset class="field-set">
+    <legend class="field-legend field-legend-label">Responses</legend>
+    <p class="field-description">
+      Get notified when ChatGPT responds to requests that take time, like
+      research or image generation.
+    </p>
+    <div class="field-group gap-3">
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="notif-push" checked disabled />
+        <label class="label font-normal" for="notif-push">Push notifications</label>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field-separator"></div>
+  <fieldset class="field-set">
+    <legend class="field-legend field-legend-label">Tasks</legend>
+    <p class="field-description">
+      Get notified when tasks you've created have updates.
+      <a href="#">Manage tasks</a>
+    </p>
+    <div class="field-group gap-3">
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="notif-push-tasks" />
+        <label class="label font-normal" for="notif-push-tasks">Push notifications</label>
+      </div>
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="notif-email-tasks" />
+        <label class="label font-normal" for="notif-email-tasks">Email notifications</label>
+      </div>
+    </div>
+  </fieldset>
+</div>
+```
+
+### Responsive
+
+Add `field-responsive` and the field stacks on narrow containers and becomes a row from the `md` container size. Resize the preview to see it switch.
+
+```html preview
+<form class="w-full max-w-lg">
+  <fieldset class="field-set">
+    <legend class="field-legend">Profile</legend>
+    <p class="field-description">Fill in your profile information.</p>
+    <div class="field-group">
+      <div class="field field-responsive">
+        <div class="field-content">
+          <label class="label" for="field-resp-name">Name</label>
+          <p class="field-description">Provide your full name for identification</p>
+        </div>
+        <input class="input" id="field-resp-name" placeholder="Evil Rabbit" required />
+      </div>
+      <div class="field field-responsive">
+        <button type="submit" class="btn">Submit</button>
+        <button type="button" class="btn btn-outline">Cancel</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+```
+
+### Invalid
+
+Set `aria-invalid` on the control for the error ring and put the message in a `field-error`.
+
+```html preview preset=form
 <div class="field">
-  <label class="label" for="name">Name</label>
-  <input class="input" id="name" disabled />
+  <label class="label" for="field-invalid-email">Email</label>
+  <input class="input" id="field-invalid-email" type="email" value="not-an-email" aria-invalid="true" />
+  <p class="field-error">Enter a valid email address.</p>
 </div>
 ```
 
-### Validation
-
-Use `aria-invalid="true"` on the input and `aria-describedby` pointing to the error element:
-
-```html
-<div class="field">
-  <label class="label" for="email">Email</label>
-  <input
-    class="input"
-    id="email"
-    aria-invalid="true"
-    aria-describedby="email-error"
-  />
-  <p class="field-error" id="email-error">Please enter a valid email.</p>
-</div>
-```
-
-### Accessibility
-
-- Connect `<label>` to the input using matching `for` and `id` attributes so clicking the label focuses the input and screen readers announce it correctly.
-- Use `aria-describedby` on the input to link help text (`.field-description`) and error messages (`.field-error`) so screen readers announce them when the input is focused.
-- Use `aria-invalid="true"` on the input to indicate an error state. This also triggers the input's built-in error styling.
-
-### Class reference
-
-| Class               | Description                                    |
-| ------------------- | ---------------------------------------------- |
-| `field`             | Field wrapper with flex layout                 |
-| `field-vertical`    | Vertical layout (default)                      |
-| `field-horizontal`  | Horizontal layout for checkboxes, switches     |
-| `field-content`     | Groups label + description in horizontal fields |
-| `field-group`       | Groups multiple fields with consistent spacing |
-| `field-description` | Help text below an input                       |
-| `field-error`       | Error message in destructive color             |
