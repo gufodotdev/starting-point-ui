@@ -1,7 +1,8 @@
 import { test, expect, type Page } from "@playwright/test";
 
-// The accordion is a thin coordinator over plain collapsibles: each panel is a
-// Collapsible toggled by its own trigger (lifecycle covered by collapsible.spec).
+// The accordion coordinates accordion-panel elements: each panel runs the
+// Collapsible mechanism toggled by its own trigger (lifecycle covered by
+// collapsible.spec); the accordion adds single-open, ARIA, and the chevron.
 // These tests verify the accordion's two jobs: single-open coordination and the
 // region ARIA wiring it layers on top.
 
@@ -18,11 +19,11 @@ async function mount(page: Page, html: string) {
 
 const items = `
   <h3><button id="t1" class="accordion-trigger">One</button></h3>
-  <div id="p1" class="collapsible" data-sp-toggle="#t1"><div class="collapsible-content">First</div></div>
+  <div id="p1" class="accordion-panel" data-sp-toggle="#t1"><div class="accordion-content">First</div></div>
   <h3><button id="t2" class="accordion-trigger">Two</button></h3>
-  <div id="p2" class="collapsible" data-sp-toggle="#t2"><div class="collapsible-content">Second</div></div>
+  <div id="p2" class="accordion-panel" data-sp-toggle="#t2"><div class="accordion-content">Second</div></div>
   <h3><button id="t3" class="accordion-trigger">Three</button></h3>
-  <div id="p3" class="collapsible" data-sp-toggle="#t3"><div class="collapsible-content">Third</div></div>`;
+  <div id="p3" class="accordion-panel" data-sp-toggle="#t3"><div class="accordion-content">Third</div></div>`;
 
 const BASIC = `<div id="acc" class="accordion">${items}</div>`;
 
@@ -31,18 +32,18 @@ const MULTIPLE = `<div id="acc" class="accordion" data-sp-multiple>${items}</div
 const PREEXPANDED = `
   <div id="acc" class="accordion">
     <h3><button id="t1" class="accordion-trigger">One</button></h3>
-    <div id="p1" class="collapsible" data-sp-toggle="#t1"><div class="collapsible-content">First</div></div>
+    <div id="p1" class="accordion-panel" data-sp-toggle="#t1"><div class="accordion-content">First</div></div>
     <h3><button id="t2" class="accordion-trigger" aria-expanded="true">Two</button></h3>
-    <div id="p2" class="collapsible expanded" data-sp-toggle="#t2"><div class="collapsible-content">Second</div></div>
+    <div id="p2" class="accordion-panel expanded" data-sp-toggle="#t2"><div class="accordion-content">Second</div></div>
   </div>`;
 
 const NESTED = `
   <div id="outer" class="accordion">
     <h3><button id="t1" class="accordion-trigger">One</button></h3>
-    <div id="p1" class="collapsible" data-sp-toggle="#t1"><div class="collapsible-content">First</div></div>
+    <div id="p1" class="accordion-panel" data-sp-toggle="#t1"><div class="accordion-content">First</div></div>
     <div id="inner" class="accordion">
       <h3><button id="t2" class="accordion-trigger">Two</button></h3>
-      <div id="p2" class="collapsible" data-sp-toggle="#t2"><div class="collapsible-content">Second</div></div>
+      <div id="p2" class="accordion-panel" data-sp-toggle="#t2"><div class="accordion-content">Second</div></div>
     </div>
   </div>`;
 

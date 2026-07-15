@@ -1,36 +1,47 @@
 @utility accordion {
   @layer l1.l2 {
     @apply w-full;
-
-    /* Dividers between sections: each heading after the first carries one, so
-       an open panel pushes the next section's divider down with it. */
-    & > :has(> .accordion-trigger):not(:first-child) {
-      @apply border-t;
-    }
   }
 }
 
-/* Drop the dividers between sections. */
-@utility accordion-no-divider {
+@utility accordion-item {
   @layer l1.l2 {
-    & > :has(> .accordion-trigger):not(:first-child) {
-      @apply border-t-0;
-    }
+    @apply [&:not(:last-child)]:border-b;
   }
 }
 
 @utility accordion-trigger {
   @layer l1.l2 {
-    @apply flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&_svg]:transition-transform [&_svg]:duration-200;
+    @apply flex w-full flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+
+    /* The chevron is injected by JS unless the trigger ends with its own svg. */
+    & > svg:last-child {
+      @apply pointer-events-none ml-auto size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200;
+    }
+
+    &[aria-expanded="true"] > svg:last-child {
+      @apply rotate-180;
+    }
+  }
+}
+
+@utility accordion-panel {
+  @layer l1.l2 {
+    /* Same collapse mechanism as .collapsible; see collapsible.css. */
+    @apply invisible h-0 overflow-hidden;
+    @apply [&.expanding]:visible [&.expanding]:animate-collapse-down;
+    @apply [&.collapsing]:visible [&.collapsing]:animate-collapse-up;
+
+    &.expanded {
+      @apply visible h-auto;
+    }
   }
 }
 
 @utility accordion-content {
   @layer l1.l2 {
-    /* Sits on the collapsible-content inside each panel for the section's
-       spacing and typography; the collapse itself is the plain Collapsible. */
-    @apply pb-4 text-sm/6 text-muted-foreground;
+    @apply pt-0 pb-4 text-sm;
   }
 }
