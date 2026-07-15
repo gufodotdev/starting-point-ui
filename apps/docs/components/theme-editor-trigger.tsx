@@ -6,7 +6,7 @@ export function ThemeEditorTrigger() {
   return (
     <button
       type="button"
-      className="btn lg:btn-lg"
+      className="btn btn-outline btn-sm"
       onClick={() => {
         const el = document.getElementById("theme-editor");
         if (el) window.sp?.sheet(el)?.show();

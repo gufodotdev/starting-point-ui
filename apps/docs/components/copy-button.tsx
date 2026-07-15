@@ -6,12 +6,14 @@ import { Check, Copy } from "lucide-react";
 interface CopyButtonProps {
   code: string;
   className?: string;
+  classes?: string;
   adjustForScrollbar?: boolean;
 }
 
 export function CopyButton({
   code,
   className,
+  classes = "btn btn-ghost btn-xs btn-icon",
   adjustForScrollbar,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -52,13 +54,13 @@ export function CopyButton({
       ref={ref}
       type="button"
       onClick={handleCopy}
-      className={`btn btn-ghost btn-icon-xs cursor-pointer ${scrollbarClass} ${className ?? ""}`}
+      className={`${classes} cursor-pointer ${scrollbarClass} ${className ?? ""}`}
       aria-label={copied ? "Copied" : "Copy code"}
     >
       {copied ? (
         <Check className="text-green-600" />
       ) : (
-        <Copy className="text-muted-foreground" />
+        <Copy />
       )}
     </button>
   );

@@ -112,7 +112,7 @@ export function SearchDialog({
           {/* Mobile: icon button */}
           <button
             type="button"
-            className="btn btn-ghost btn-icon-sm md:hidden"
+            className="btn btn-ghost btn-sm btn-icon md:hidden"
             aria-label="Search documentation"
             onClick={openDialog}
           >
@@ -141,7 +141,7 @@ export function SearchDialog({
         data-sp-dialog
         className="dialog"
       >
-        <div className="dialog-content max-w-lg gap-0 bg-card p-2 pb-11 shadow-2xl ring-4 ring-border/80 dark:bg-card">
+        <div className="dialog-panel max-w-lg gap-0 bg-card p-2 pb-11 shadow-2xl ring-4 ring-border/80 dark:bg-card">
           <div className="relative">
             <div className="flex h-9 items-center gap-2 rounded-md border bg-muted/50 px-3">
               <Search

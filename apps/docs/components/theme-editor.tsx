@@ -166,7 +166,7 @@ export function ThemeEditor({ className }: { className?: string }) {
       <button
         type="button"
         id="theme-editor-trigger"
-        className={`btn btn-ghost btn-icon-sm${className ? ` ${className}` : ""}`}
+        className={`btn btn-ghost btn-sm btn-icon${className ? ` ${className}` : ""}`}
         aria-label="Open theme editor"
       >
         <WandSparkles />
@@ -177,10 +177,10 @@ export function ThemeEditor({ className }: { className?: string }) {
         className="sheet sheet-left bg-transparent supports-backdrop-filter:backdrop-blur-none"
         aria-labelledby="theme-editor-title"
       >
-        <div className="sheet-content w-110 max-w-full gap-0 overflow-y-auto px-6">
+        <div className="sheet-panel w-110 max-w-full gap-0 overflow-y-auto px-6">
           <button
             type="button"
-            className={`btn btn-ghost btn-icon-sm absolute top-2 right-2 z-20 ${showCode ? "hidden" : ""}`}
+            className={`btn btn-ghost btn-sm btn-icon absolute top-2 right-2 z-20 ${showCode ? "hidden" : ""}`}
             aria-label="Close"
             data-sp-dismiss
           >
@@ -188,7 +188,7 @@ export function ThemeEditor({ className }: { className?: string }) {
           </button>
           <button
             type="button"
-            className={`btn btn-ghost btn-icon-sm absolute top-2 right-2 z-20 ${showCode ? "" : "hidden"}`}
+            className={`btn btn-ghost btn-sm btn-icon absolute top-2 right-2 z-20 ${showCode ? "" : "hidden"}`}
             aria-label="Back"
             onClick={() => setShowCode(false)}
           >
@@ -419,7 +419,7 @@ export function ThemeEditor({ className }: { className?: string }) {
             </button>
             <button
               type="button"
-              className="btn btn-primary btn-sm flex-1"
+              className="btn btn-sm flex-1"
               onClick={() => setShowCode(true)}
             >
               <Copy className="size-3.5" />
@@ -465,7 +465,7 @@ export function ThemeEditor({ className }: { className?: string }) {
             <div className="p-6 border-t">
               <button
                 type="button"
-                className="btn btn-primary btn-sm w-full"
+                className="btn btn-sm w-full"
                 onClick={handleCopy}
               >
                 {copied ? (
