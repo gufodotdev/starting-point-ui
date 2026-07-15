@@ -1,161 +1,299 @@
 ---
 title: Input
-description: A Tailwind CSS input component for text, email, password, and other form fields.
+description: An input component for Tailwind CSS with beautiful shadcn/ui styling. Use it to capture single-line text like names, emails, and search queries.
 ---
 
-A Tailwind CSS input component for single-line text entry.
+The input captures a single line of text, from names and emails to search queries. Pair it with a [field](/components/field) for a label and description; for multi-line text, reach for the [textarea](/components/textarea).
 
-```html preview
-<div class="w-full max-w-xs">
-  <input class="input" type="text" placeholder="Full name" />
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-demo-api-key">API Key</label>
+  <input
+    class="input"
+    id="input-demo-api-key"
+    type="password"
+    placeholder="sk-..."
+  />
+  <p class="field-description">
+    Your API key is encrypted and stored securely.
+  </p>
 </div>
 ```
 
----
+## Usage
 
-## With label
+Add the `input` class to an `<input>` element. It styles all the textual types plus file inputs, and reads validation state from `aria-invalid`.
 
-Pair with a [Label](/components/label) and wrap in a [Field](/components/field) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label focuses the input and screen readers announce it correctly.
+| Class   | Description                 |
+| ------- | --------------------------- |
+| `input` | Add to an `<input>` element |
 
-```html preview
-<div class="w-full max-w-xs">
+```html
+<input class="input" type="email" placeholder="Email" />
+```
+
+## Examples
+
+### Basic
+
+A bare input with only a placeholder.
+
+```html preview preset=form
+<input class="input" placeholder="Enter text" />
+```
+
+### Field
+
+Wrap the input in a [field](/components/field) with a [label](/components/label) and description.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-field-username">Username</label>
+  <input
+    class="input"
+    id="input-field-username"
+    type="text"
+    placeholder="Enter your username"
+  />
+  <p class="field-description">Choose a unique username for your account.</p>
+</div>
+```
+
+### Field group
+
+Stack several fields with a [field group](/components/field).
+
+```html preview preset=form
+<div class="field-group">
   <div class="field">
-    <label class="label" for="full-name">Full name</label>
+    <label class="label" for="fieldgroup-name">Name</label>
+    <input class="input" id="fieldgroup-name" placeholder="Jordan Lee" />
+  </div>
+  <div class="field">
+    <label class="label" for="fieldgroup-email">Email</label>
     <input
       class="input"
-      id="full-name"
-      type="text"
-      placeholder="John Smith"
-      name="full-name"
-    />
-  </div>
-</div>
-```
-
----
-
-## Types
-
-The `.input` class works with all native input types. Set the `type` attribute to change the behavior.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="field-group">
-    <div class="field">
-      <label class="label" for="email">Email</label>
-      <input
-        class="input"
-        id="email"
-        type="email"
-        placeholder="you@example.com"
-        name="email"
-      />
-    </div>
-    <div class="field">
-      <label class="label" for="password">Password</label>
-      <input
-        class="input"
-        id="password"
-        type="password"
-        placeholder="Enter your password"
-        name="password"
-      />
-    </div>
-    <div class="field">
-      <label class="label" for="date">Date</label>
-      <input class="input" id="date" type="date" name="date" />
-    </div>
-    <div class="field">
-      <label class="label" for="cover-image">Cover image</label>
-      <input class="input" id="cover-image" type="file" name="cover-image" />
-    </div>
-  </div>
-</div>
-```
-
----
-
-## Disabled
-
-Add `disabled` to prevent interaction. The input appears faded automatically.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="field">
-    <label class="label" for="disabled-email">Email</label>
-    <input
-      class="input"
-      id="disabled-email"
+      id="fieldgroup-email"
       type="email"
-      placeholder="you@example.com"
-      disabled=""
-      name="email"
+      placeholder="name@example.com"
     />
+    <p class="field-description">We'll send updates to this address.</p>
+  </div>
+  <div class="field field-horizontal">
+    <button type="reset" class="btn btn-outline">Reset</button>
+    <button type="submit" class="btn">Submit</button>
   </div>
 </div>
 ```
 
----
+### Disabled
 
-## Validation
+Add `disabled` and the input mutes itself and blocks interaction.
 
-Add `aria-invalid="true"` to show the input in an error state. Connect an error message using `aria-describedby` on the input, pointing to the `id` of the error element. This lets screen readers announce the error when the input is focused.
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-demo-disabled">Email</label>
+  <input
+    class="input"
+    id="input-demo-disabled"
+    type="email"
+    placeholder="Email"
+    disabled
+  />
+  <p class="field-description">This field is currently disabled.</p>
+</div>
+```
 
-```html preview
-<div class="w-full max-w-xs">
+### Invalid
+
+Set `aria-invalid` on the input for the error ring.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-invalid">Invalid Input</label>
+  <input
+    class="input"
+    id="input-invalid"
+    placeholder="Error"
+    aria-invalid="true"
+  />
+  <p class="field-description">This field contains validation errors.</p>
+</div>
+```
+
+### File
+
+File inputs get matching button-like styling for the browse control.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-picture">Picture</label>
+  <input class="input" id="input-picture" type="file" />
+  <p class="field-description">Select a picture to upload.</p>
+</div>
+```
+
+### Inline
+
+Lay the input out beside a [button](/components/button) with a horizontal field.
+
+```html preview preset=form
+<div class="field field-horizontal">
+  <input class="input" type="search" placeholder="Search..." />
+  <button class="btn">Search</button>
+</div>
+```
+
+### Grid
+
+Arrange fields in columns with grid utilities on a [field group](/components/field).
+
+```html preview preset=form
+<div class="field-group grid grid-cols-2">
   <div class="field">
-    <label class="label" for="phone-number">Phone number</label>
+    <label class="label" for="input-first-name">First Name</label>
+    <input class="input" id="input-first-name" placeholder="Jordan" />
+  </div>
+  <div class="field">
+    <label class="label" for="input-last-name">Last Name</label>
+    <input class="input" id="input-last-name" placeholder="Lee" />
+  </div>
+</div>
+```
+
+### Required
+
+Mark the label and add `required` so the browser enforces the field.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-required">
+    Required Field
+    <span class="text-destructive">*</span>
+  </label>
+  <input
+    class="input"
+    id="input-required"
+    placeholder="This field is required"
+    required
+  />
+  <p class="field-description">This field must be filled out.</p>
+</div>
+```
+
+### Badge
+
+Labels are flex rows, so a [badge](/components/badge) slots in next to the text.
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-badge">
+    Webhook URL
+    <span class="badge badge-secondary ml-auto">Beta</span>
+  </label>
+  <input
+    class="input"
+    id="input-badge"
+    type="url"
+    placeholder="https://api.example.com/webhook"
+  />
+</div>
+```
+
+### Input group
+
+Prefix or suffix the input with an [input group](/components/input-group).
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-group-url">Website URL</label>
+  <div class="input-group">
+    <span class="input-group-addon">
+      <span class="input-group-text">https://</span>
+    </span>
+    <input class="input" id="input-group-url" placeholder="example.com" />
+    <span class="input-group-addon input-group-addon-end">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    </span>
+  </div>
+</div>
+```
+
+### Button group
+
+Attach a button to the input with a [button group](/components/button-group).
+
+```html preview preset=form
+<div class="field">
+  <label class="label" for="input-button-group">Search</label>
+  <div class="btn-group">
     <input
       class="input"
-      id="phone-number"
-      type="text"
-      placeholder="+1 (555) 000-0000"
-      aria-invalid="true"
-      aria-describedby="phone-number-error"
-      name="phone-number"
+      id="input-button-group"
+      placeholder="Type to search..."
     />
-    <p class="field-error" id="phone-number-error">
-      Please enter a valid phone number
-    </p>
+    <button class="btn btn-outline">Search</button>
   </div>
 </div>
 ```
 
----
+### Form
 
-## How it works
+Compose inputs, a [select](/components/select), and actions into a full form.
 
-The input component is a CSS-only utility class applied to a native `<input>` element.
-
-### Structure
-
-Use the `.input` class on an `<input>` element. Pair it with a `.label` element connected via `for` and `id`:
-
-```html
-<label class="label" for="name">Name</label>
-<input class="input" id="name" type="text" placeholder="Enter your name" />
+```html preview preset=form
+<form class="field-group">
+  <div class="field">
+    <label class="label" for="form-name">Name</label>
+    <input
+      class="input"
+      id="form-name"
+      type="text"
+      placeholder="Evil Rabbit"
+      required
+    />
+  </div>
+  <div class="field">
+    <label class="label" for="form-email">Email</label>
+    <input
+      class="input"
+      id="form-email"
+      type="email"
+      placeholder="john@example.com"
+    />
+    <p class="field-description">We'll never share your email with anyone.</p>
+  </div>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="field">
+      <label class="label" for="form-phone">Phone</label>
+      <input
+        class="input"
+        id="form-phone"
+        type="tel"
+        placeholder="+1 (555) 123-4567"
+      />
+    </div>
+    <div class="field">
+      <label class="label" for="form-country">Country</label>
+      <select class="select" id="form-country">
+        <option>United States</option>
+        <option>United Kingdom</option>
+        <option>Canada</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label" for="form-address">Address</label>
+    <input
+      class="input"
+      id="form-address"
+      type="text"
+      placeholder="123 Main St"
+    />
+  </div>
+  <div class="field field-horizontal">
+    <button type="button" class="btn btn-outline">Cancel</button>
+    <button type="submit" class="btn">Submit</button>
+  </div>
+</form>
 ```
-
-### Disabled state
-
-Add `disabled` to the input:
-
-```html
-<input class="input" type="text" disabled />
-```
-
-### Validation
-
-Add `aria-invalid="true"` to show the input in an error state:
-
-```html
-<input class="input" type="text" aria-invalid="true" />
-```
-
-For decorating inputs with icons or text addons, see [Input Group](/components/input-group).
-
-### Class reference
-
-| Class        | Description         |
-| ------------ | ------------------- |
-| `input`      | Base input styles   |
