@@ -1,4 +1,7 @@
+import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
+import { docsNav } from "@/lib/navigation";
+import { getDocBySlug } from "@/lib/mdx";
 import { CodeBlock } from "@/components/code-block";
 import { Callout } from "@/components/callout";
 import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
@@ -47,8 +50,33 @@ const prettyCodeOptions = {
   ],
 };
 
+function ComponentsList() {
+  const items = docsNav.find((group) => group.title === "Components")?.items ?? [];
+  return (
+    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => {
+        const doc = getDocBySlug(item.href.slice(1).split("/"));
+        const blurb = doc?.metadata.description.split(". ").slice(1).join(". ").replace(/^Use it to /, "").replace(/^./, (c) => c.toUpperCase());
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="card card-sm transition-colors hover:bg-accent/50"
+          >
+            <div className="card-header">
+              <h3 className="card-title">{item.title}</h3>
+              {blurb && <p className="card-description line-clamp-2">{blurb}</p>}
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 const components = {
   Callout,
+  ComponentsList,
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
       className="mt-10 lg:mt-12 first:mt-0 scroll-m-28 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
