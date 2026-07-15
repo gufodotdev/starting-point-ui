@@ -23,24 +23,35 @@
   }
 }
 
-@utility dialog-content {
+@utility dialog-panel {
   @layer l1.l2 {
-    @apply relative grid max-h-full w-full gap-6 overflow-y-auto rounded-xl bg-popover p-6 text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none max-w-sm;
+    /* Card spacing contract: the panel owns the vertical inset and the gap
+       between sections, the sections own the horizontal inset. Children like
+       a leading <img> can span the full width and sit flush with the top. */
+    @apply relative grid max-h-full w-full max-w-sm gap-(--dialog-spacing) overflow-y-auto rounded-xl bg-popover py-(--dialog-spacing) text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none;
+    @apply [--dialog-spacing:--spacing(6)];
+    @apply has-[>img:first-child]:pt-0 [&>img:first-child]:rounded-t-xl [&>img:last-child]:rounded-b-xl;
 
     @apply in-[.dialog.show]:animate-in in-[.dialog.show]:fade-in-0 in-[.dialog.show]:zoom-in-95 in-[.dialog.show]:duration-100 in-[.dialog.show]:[animation-fill-mode:forwards];
     @apply in-[.dialog.hide]:animate-out in-[.dialog.hide]:fade-out-0 in-[.dialog.hide]:zoom-out-95 in-[.dialog.hide]:duration-100 in-[.dialog.hide]:[animation-fill-mode:forwards];
   }
 }
 
+@utility dialog-content {
+  @layer l1.l2 {
+    @apply flex flex-col gap-4 px-(--dialog-spacing);
+  }
+}
+
 @utility dialog-header {
   @layer l1.l2 {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 px-(--dialog-spacing);
   }
 }
 
 @utility dialog-footer {
   @layer l1.l2 {
-    @apply flex flex-col-reverse gap-2 sm:flex-row sm:justify-end;
+    @apply flex flex-col-reverse gap-2 px-(--dialog-spacing) sm:flex-row sm:justify-end;
   }
 }
 
