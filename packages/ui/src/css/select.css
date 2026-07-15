@@ -15,3 +15,9 @@
     background-size: 1rem;
   }
 }
+
+@utility select-sm {
+  @layer l1 {
+    @apply h-8;
+  }
+}
