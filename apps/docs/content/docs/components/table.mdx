@@ -1,349 +1,336 @@
 ---
 title: Table
-description: A Tailwind CSS table component for displaying tabular data.
+description: A table component for Tailwind CSS with beautiful shadcn/ui styling. Use it to present tabular data, like invoices, users, or transactions.
 ---
 
-A Tailwind CSS table component for displaying tabular data.
+The table presents tabular data on native table elements, with styled headers, footers, captions, and hoverable rows.
 
 ```html preview
-<div class="w-full overflow-x-auto">
+<div class="table-container">
   <table class="table">
+    <caption>A list of your recent invoices.</caption>
     <thead class="table-header">
       <tr class="table-row">
-        <th class="table-head">Product</th>
+        <th class="table-head w-[100px]">Invoice</th>
         <th class="table-head">Status</th>
-        <th class="table-head text-right">Price</th>
-      </tr>
-    </thead>
-    <tbody class="table-body">
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <img
-              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80&amp;h=80&amp;fit=crop"
-              alt="Classic Watch"
-              class="size-10 rounded-md object-cover"
-            />
-            <div>
-              <div class="font-medium">Classic Watch</div>
-              <div class="text-muted-foreground text-sm">SKU: WCH-001</div>
-            </div>
-          </div>
-        </td>
-        <td class="table-cell">
-          <span class="badge bg-green-500/10 text-green-500 border-transparent">
-            Delivered
-          </span>
-        </td>
-        <td class="table-cell text-right font-medium">$249.00</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <img
-              src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=80&amp;h=80&amp;fit=crop"
-              alt="Eau de Parfum"
-              class="size-10 rounded-md object-cover"
-            />
-            <div>
-              <div class="font-medium">Eau de Parfum</div>
-              <div class="text-muted-foreground text-sm">SKU: PRF-042</div>
-            </div>
-          </div>
-        </td>
-        <td class="table-cell">
-          <span
-            class="badge bg-yellow-500/10 text-yellow-500 border-transparent"
-          >
-            Shipping
-          </span>
-        </td>
-        <td class="table-cell text-right font-medium">$89.00</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <img
-              src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=80&amp;h=80&amp;fit=crop"
-              alt="Smartphone Pro"
-              class="size-10 rounded-md object-cover"
-            />
-            <div>
-              <div class="font-medium">Smartphone Pro</div>
-              <div class="text-muted-foreground text-sm">SKU: PHN-128</div>
-            </div>
-          </div>
-        </td>
-        <td class="table-cell">
-          <span class="badge bg-blue-500/10 text-blue-500 border-transparent">
-            Processing
-          </span>
-        </td>
-        <td class="table-cell text-right font-medium">$999.00</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <img
-              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&amp;h=80&amp;fit=crop"
-              alt="Wireless Headphones"
-              class="size-10 rounded-md object-cover"
-            />
-            <div>
-              <div class="font-medium">Wireless Headphones</div>
-              <div class="text-muted-foreground text-sm">SKU: HPH-256</div>
-            </div>
-          </div>
-        </td>
-        <td class="table-cell">
-          <span class="badge bg-red-500/10 text-red-500 border-transparent">
-            Cancelled
-          </span>
-        </td>
-        <td class="table-cell text-right font-medium">$349.00</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-```
-
----
-
-## Striped rows
-
-Add `even:bg-muted/50` to table rows for alternating row backgrounds.
-
-```html preview
-<div class="w-full overflow-x-auto">
-  <table class="table">
-    <thead class="table-header">
-      <tr class="table-row">
-        <th class="table-head">Invoice</th>
-        <th class="table-head">Status</th>
+        <th class="table-head">Method</th>
         <th class="table-head text-right">Amount</th>
       </tr>
     </thead>
     <tbody class="table-body">
-      <tr class="table-row even:bg-muted/50">
-        <td class="table-cell font-medium">INV-001</td>
-        <td class="table-cell text-muted-foreground">Paid</td>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
         <td class="table-cell text-right">$250.00</td>
       </tr>
-      <tr class="table-row even:bg-muted/50">
-        <td class="table-cell font-medium">INV-002</td>
-        <td class="table-cell text-muted-foreground">Pending</td>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell">Pending</td>
+        <td class="table-cell">PayPal</td>
         <td class="table-cell text-right">$150.00</td>
       </tr>
-      <tr class="table-row even:bg-muted/50">
-        <td class="table-cell font-medium">INV-003</td>
-        <td class="table-cell text-muted-foreground">Paid</td>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV003</td>
+        <td class="table-cell">Unpaid</td>
+        <td class="table-cell">Bank Transfer</td>
         <td class="table-cell text-right">$350.00</td>
       </tr>
-      <tr class="table-row even:bg-muted/50">
-        <td class="table-cell font-medium">INV-004</td>
-        <td class="table-cell text-muted-foreground">Unpaid</td>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV004</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
         <td class="table-cell text-right">$450.00</td>
       </tr>
-      <tr class="table-row even:bg-muted/50">
-        <td class="table-cell font-medium">INV-005</td>
-        <td class="table-cell text-muted-foreground">Paid</td>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV005</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">PayPal</td>
         <td class="table-cell text-right">$550.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV006</td>
+        <td class="table-cell">Pending</td>
+        <td class="table-cell">Bank Transfer</td>
+        <td class="table-cell text-right">$200.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV007</td>
+        <td class="table-cell">Unpaid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$300.00</td>
       </tr>
     </tbody>
     <tfoot class="table-footer">
       <tr class="table-row">
-        <td class="table-cell font-medium" colspan="2">Total</td>
-        <td class="table-cell text-right font-medium">$1,750.00</td>
+        <td class="table-cell" colspan="3">Total</td>
+        <td class="table-cell text-right">$2,500.00</td>
       </tr>
     </tfoot>
   </table>
 </div>
 ```
 
----
+## Usage
 
-## Customization
+Add the classes to their native table elements, and wrap the table in a `table-container` so wide tables scroll horizontally instead of breaking the layout. A `<caption>` needs no class.
 
-Combine table classes with Tailwind utilities and other components for custom styling. This example uses the [Card](/components/card) component to create a GitHub-style file browser.
+| Class             | Description                                       |
+| ----------------- | ------------------------------------------------- |
+| `table-container` | Add to a wrapper `<div>` for horizontal scrolling |
+| `table`           | Add to the `<table>`                              |
+| `table-header`    | Add to the `<thead>`                              |
+| `table-body`      | Add to the `<tbody>`                              |
+| `table-footer`    | Add to the `<tfoot>`                              |
+| `table-row`       | Add to each `<tr>`                                |
+| `table-head`      | Add to each `<th>`                                |
+| `table-cell`      | Add to each `<td>`                                |
 
-```html preview
-<div class="card w-full overflow-x-auto">
+```html
+<div class="table-container">
   <table class="table">
     <thead class="table-header">
-      <tr class="table-row bg-muted/30">
-        <th class="table-head" colspan="3">
-          <div class="flex items-center gap-2">
-            <img
-              src="https://github.com/gufodotdev.png"
-              alt="gufodotdev"
-              class="size-6 rounded-full"
-            />
-            <span class="font-semibold">gufodotdev</span>
-            <span class="text-muted-foreground font-normal">
-              chore: release v0.0.2
-            </span>
-          </div>
-        </th>
-        <th class="table-head text-right">
-          <span
-            class="font-mono text-xs text-muted-foreground bg-muted px-2 py-1 rounded"
-          >
-            300cd92
-          </span>
-          <span class="text-muted-foreground font-normal ml-2">
-            2 hours ago
-          </span>
-        </th>
+      <tr class="table-row">
+        <th class="table-head">Name</th>
       </tr>
     </thead>
     <tbody class="table-body">
       <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-blue-400"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-            <a href="#" class="hover:underline hover:text-blue-500">
-              apps/docs
-            </a>
-          </div>
-        </td>
-        <td class="table-cell text-muted-foreground" colspan="2">
-          chore: add vercel analytics
-        </td>
-        <td class="table-cell text-muted-foreground text-right">3 hours ago</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-blue-400"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-            <a href="#" class="hover:underline hover:text-blue-500">
-              packages/ui
-            </a>
-          </div>
-        </td>
-        <td class="table-cell text-muted-foreground" colspan="2">
-          chore: release v0.0.2
-        </td>
-        <td class="table-cell text-muted-foreground text-right">2 hours ago</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
-            <a href="#" class="hover:underline hover:text-blue-500">
-              .gitignore
-            </a>
-          </div>
-        </td>
-        <td class="table-cell text-muted-foreground" colspan="2">
-          initial setup
-        </td>
-        <td class="table-cell text-muted-foreground text-right">last week</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
-            <a href="#" class="hover:underline hover:text-blue-500">LICENSE</a>
-          </div>
-        </td>
-        <td class="table-cell text-muted-foreground" colspan="2">
-          chore: prepare package for npm publishing
-        </td>
-        <td class="table-cell text-muted-foreground text-right">3 hours ago</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
-            <a href="#" class="hover:underline hover:text-blue-500">
-              README.md
-            </a>
-          </div>
-        </td>
-        <td class="table-cell text-muted-foreground" colspan="2">
-          initial setup
-        </td>
-        <td class="table-cell text-muted-foreground text-right">last week</td>
-      </tr>
-      <tr class="table-row">
-        <td class="table-cell">
-          <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
-            <a href="#" class="hover:underline hover:text-blue-500">
-              package.json
-            </a>
-          </div>
-        </td>
-        <td class="table-cell text-muted-foreground" colspan="2">
-          initial setup
-        </td>
-        <td class="table-cell text-muted-foreground text-right">last week</td>
+        <td class="table-cell">Sarah Johnson</td>
       </tr>
     </tbody>
   </table>
 </div>
 ```
 
----
+## Examples
 
-## How it works
+### Footer
 
-The table component is a CSS-only set of classes for styling native HTML tables. It includes hover states on rows and consistent spacing for cells.
+Summarize columns in a `table-footer`.
 
-### Structure
-
-A table uses native HTML table elements with corresponding classes:
-
-```html
-<table class="table">
-  <thead class="table-header">
-    <tr class="table-row">
-      <th class="table-head">Header</th>
-    </tr>
-  </thead>
-  <tbody class="table-body">
-    <tr class="table-row">
-      <td class="table-cell">Cell</td>
-    </tr>
-  </tbody>
-</table>
-```
-
-For horizontal scrolling on small screens, wrap the table in a container with `overflow-x-auto`:
-
-```html
-<div class="overflow-x-auto">
-  <table class="table">...</table>
+```html preview
+<div class="table-container">
+  <table class="table">
+    <caption>A list of your recent invoices.</caption>
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head w-[100px]">Invoice</th>
+        <th class="table-head">Status</th>
+        <th class="table-head">Method</th>
+        <th class="table-head text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$250.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell">Pending</td>
+        <td class="table-cell">PayPal</td>
+        <td class="table-cell text-right">$150.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV003</td>
+        <td class="table-cell">Unpaid</td>
+        <td class="table-cell">Bank Transfer</td>
+        <td class="table-cell text-right">$350.00</td>
+      </tr>
+    </tbody>
+    <tfoot class="table-footer">
+      <tr class="table-row">
+        <td class="table-cell" colspan="3">Total</td>
+        <td class="table-cell text-right">$2,500.00</td>
+      </tr>
+    </tfoot>
+  </table>
 </div>
 ```
 
-### Class reference
+### Actions
 
-All available classes for the table component.
+End rows with a [dropdown](/components/dropdown) of row actions.
 
-| Class          | Description                                           |
-| -------------- | ----------------------------------------------------- |
-| `table`        | Add to `<table>` element for base table styles        |
-| `table-header` | Add to `<thead>` element for header section styles    |
-| `table-body`   | Add to `<tbody>` element for body section styles      |
-| `table-footer` | Add to `<tfoot>` element for footer section styles    |
-| `table-row`    | Add to `<tr>` element for row styles with hover state |
-| `table-head`   | Add to `<th>` element for header cell styles          |
-| `table-cell`   | Add to `<td>` element for data cell styles            |
+```html preview preset=popover
+<div class="table-container">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head">Product</th>
+        <th class="table-head">Price</th>
+        <th class="table-head text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell font-medium">Wireless Mouse</td>
+        <td class="table-cell">$29.99</td>
+        <td class="table-cell text-right">
+          <button
+            id="table-action-1"
+            class="btn btn-ghost btn-sm btn-icon"
+            aria-label="Open menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </button>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">Mechanical Keyboard</td>
+        <td class="table-cell">$129.99</td>
+        <td class="table-cell text-right">
+          <button
+            id="table-action-2"
+            class="btn btn-ghost btn-sm btn-icon"
+            aria-label="Open menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </button>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">USB-C Hub</td>
+        <td class="table-cell">$49.99</td>
+        <td class="table-cell text-right">
+          <button
+            id="table-action-3"
+            class="btn btn-ghost btn-sm btn-icon"
+            aria-label="Open menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-```html
-<table class="table">
-  <thead class="table-header">
-    <tr class="table-row">
-      <th class="table-head">Name</th>
-      <th class="table-head">Email</th>
-    </tr>
-  </thead>
-  <tbody class="table-body">
-    <tr class="table-row">
-      <td class="table-cell">John</td>
-      <td class="table-cell">john@example.com</td>
-    </tr>
-  </tbody>
-</table>
+<div
+  class="dropdown"
+  data-sp-toggle="#table-action-1"
+  data-sp-placement="bottom-end"
+>
+  <button class="dropdown-item">Edit</button>
+  <button class="dropdown-item">Duplicate</button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item dropdown-item-destructive">Delete</button>
+</div>
+
+<div
+  class="dropdown"
+  data-sp-toggle="#table-action-2"
+  data-sp-placement="bottom-end"
+>
+  <button class="dropdown-item">Edit</button>
+  <button class="dropdown-item">Duplicate</button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item dropdown-item-destructive">Delete</button>
+</div>
+
+<div
+  class="dropdown"
+  data-sp-toggle="#table-action-3"
+  data-sp-placement="bottom-end"
+>
+  <button class="dropdown-item">Edit</button>
+  <button class="dropdown-item">Duplicate</button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item dropdown-item-destructive">Delete</button>
+</div>
+```
+
+### Striped
+
+Stripe alternating rows with an `odd:` utility.
+
+```html preview
+<div class="table-container">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head w-[100px]">Invoice</th>
+        <th class="table-head">Status</th>
+        <th class="table-head">Method</th>
+        <th class="table-head text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row odd:bg-muted/50">
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$250.00</td>
+      </tr>
+      <tr class="table-row odd:bg-muted/50">
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell">Pending</td>
+        <td class="table-cell">PayPal</td>
+        <td class="table-cell text-right">$150.00</td>
+      </tr>
+      <tr class="table-row odd:bg-muted/50">
+        <td class="table-cell font-medium">INV003</td>
+        <td class="table-cell">Unpaid</td>
+        <td class="table-cell">Bank Transfer</td>
+        <td class="table-cell text-right">$350.00</td>
+      </tr>
+      <tr class="table-row odd:bg-muted/50">
+        <td class="table-cell font-medium">INV004</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$450.00</td>
+      </tr>
+      <tr class="table-row odd:bg-muted/50">
+        <td class="table-cell font-medium">INV005</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">PayPal</td>
+        <td class="table-cell text-right">$550.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+### Selected rows
+
+A row containing a checked checkbox tints itself; see the [checkbox](/components/checkbox) page for the full row-selection pattern.
+
+```html preview
+<div class="table-container">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head w-10">
+          <input type="checkbox" class="checkbox" aria-label="Select all" />
+        </th>
+        <th class="table-head">Invoice</th>
+        <th class="table-head text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell">
+          <input
+            type="checkbox"
+            class="checkbox"
+            aria-label="Select INV001"
+            checked
+          />
+        </td>
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell text-right">$250.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <input type="checkbox" class="checkbox" aria-label="Select INV002" />
+        </td>
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell text-right">$150.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 ```
