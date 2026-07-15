@@ -1,94 +1,155 @@
 ---
 title: Forms
-description: Tailwind CSS form components including inputs, textareas, selects, checkboxes, radios, switches, and more.
+description: Form components for Tailwind CSS with beautiful shadcn/ui styling. Use them to build complete forms from fields, inputs, selects, and more.
 ---
 
-Tailwind CSS form components for building accessible, styled forms.
+Forms compose from small pieces: a [field](/components/field) lays out each label, control, and description, and the controls build on native form elements, so values submit with the form. This page shows the pieces working together and links out to each one.
 
-```html preview
-<div class="w-full max-w-xs">
-  <form class="field-group">
-    <div class="field">
-      <label class="label" for="full-name">Full name</label>
-      <input
-        class="input"
-        id="full-name"
-        type="text"
-        placeholder="John Smith"
-        name="full-name"
-      />
+```html preview preset=form
+<form class="field-group">
+  <fieldset class="field-set">
+    <legend class="field-legend">Contact</legend>
+    <p class="field-description">How we can reach you about your booking.</p>
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="forms-name">Full name</label>
+        <input class="input" id="forms-name" name="name" placeholder="John Smith" />
+      </div>
+      <div class="field">
+        <label class="label" for="forms-email">Email address</label>
+        <input class="input" id="forms-email" name="email" type="email" placeholder="john@example.com" />
+        <p class="field-description">We only use this for the booking confirmation.</p>
+      </div>
+      <div class="field">
+        <label class="label" for="forms-website">Website</label>
+        <div class="input-group">
+          <span class="input-group-addon"><span class="input-group-text">https://</span></span>
+          <input class="input pl-0.5!" id="forms-website" name="website" placeholder="example.com" />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="forms-country-input">Country</label>
+        <div class="input-group" id="forms-country-field">
+          <input class="input" id="forms-country-input" placeholder="Select a country" />
+          <span class="input-group-addon input-group-addon-end">
+            <button class="btn btn-ghost btn-xs btn-icon" type="button" tabindex="-1" aria-label="Open list"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          </span>
+        </div>
+      </div>
+      <div class="combobox" data-sp-toggle="#forms-country-field">
+        <div class="combobox-empty">No countries found.</div>
+        <div class="combobox-list">
+          <div class="combobox-item"><input type="radio" name="country" value="de" /> Germany</div>
+          <div class="combobox-item"><input type="radio" name="country" value="se" /> Sweden</div>
+          <div class="combobox-item"><input type="radio" name="country" value="uk" /> United Kingdom</div>
+          <div class="combobox-item"><input type="radio" name="country" value="us" /> United States</div>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <label class="label" for="email-address">Email address</label>
-      <input
-        class="input"
-        id="email-address"
-        type="email"
-        placeholder="john@example.com"
-        name="email-address"
-      />
+  </fieldset>
+  <div class="field-separator"></div>
+  <fieldset class="field-set">
+    <legend class="field-legend">Event details</legend>
+    <p class="field-description">What we are planning together.</p>
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="forms-type">Event type</label>
+        <select class="select" id="forms-type" name="type">
+          <option value="">Select event type</option>
+          <option value="wedding">Wedding Reception</option>
+          <option value="corporate">Corporate Event</option>
+          <option value="birthday">Birthday Party</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="forms-date">Event date</label>
+        <input class="input" id="forms-date" name="date" type="date" />
+      </div>
+      <div class="field">
+        <span class="field-title">Guests</span>
+        <p class="field-description">
+          Up to <span class="font-medium tabular-nums" data-sp-slider-value="forms-guests">50</span> guests.
+        </p>
+        <input type="range" class="slider mt-2" id="forms-guests" name="guests" min="0" max="200" step="10" value="50" style="--val: 25%" aria-label="Guests" />
+      </div>
+      <div class="field">
+        <label class="label" for="forms-budget">Budget</label>
+        <div class="input-group">
+          <span class="input-group-addon"><span class="input-group-text">$</span></span>
+          <input class="input" id="forms-budget" name="budget" placeholder="0.00" />
+          <span class="input-group-addon input-group-addon-end"><span class="input-group-text">USD</span></span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="forms-promo">Promo code</label>
+        <div class="btn-group">
+          <input class="input" id="forms-promo" name="promo" placeholder="SUMMER25" />
+          <button class="btn btn-outline" type="button">Apply</button>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="forms-details">Additional details</label>
+        <textarea class="textarea" id="forms-details" name="details" placeholder="Tell us about your event..."></textarea>
+      </div>
     </div>
-    <div class="field">
-      <label class="label" for="event-date">Event date</label>
-      <input class="input" id="event-date" type="date" name="event-date" />
+  </fieldset>
+  <div class="field-separator"></div>
+  <fieldset class="field-set">
+    <legend class="field-legend">Preferences</legend>
+    <p class="field-description">Fine-tune the event to your liking.</p>
+    <div class="field-group">
+      <fieldset class="field-set">
+        <legend class="field-legend field-legend-label">Seating</legend>
+        <div class="field-group gap-3">
+          <div class="field field-horizontal">
+            <input type="radio" class="radio" id="forms-seating-indoor" name="seating" value="indoor" checked />
+            <label class="label font-normal" for="forms-seating-indoor">Indoor</label>
+          </div>
+          <div class="field field-horizontal">
+            <input type="radio" class="radio" id="forms-seating-outdoor" name="seating" value="outdoor" />
+            <label class="label font-normal" for="forms-seating-outdoor">Outdoor</label>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="field-set">
+        <legend class="field-legend field-legend-label">Add-ons</legend>
+        <div class="field-group gap-3">
+          <div class="field field-horizontal">
+            <input type="checkbox" class="checkbox" id="forms-addon-catering" name="addons" value="catering" checked />
+            <label class="label font-normal" for="forms-addon-catering">Catering</label>
+          </div>
+          <div class="field field-horizontal">
+            <input type="checkbox" class="checkbox" id="forms-addon-photo" name="addons" value="photography" />
+            <label class="label font-normal" for="forms-addon-photo">Photography</label>
+          </div>
+        </div>
+      </fieldset>
+      <div class="field field-horizontal">
+        <input type="checkbox" role="switch" class="switch" id="forms-offers" name="offers" />
+        <label class="label" for="forms-offers">Email me news and special offers</label>
+      </div>
     </div>
-    <div class="field">
-      <label class="label" for="event-type">Event type</label>
-      <select class="select" id="event-type" name="event-type">
-        <option value="">Select event type</option>
-        <option value="wedding">Wedding Reception</option>
-        <option value="corporate">Corporate Event</option>
-        <option value="birthday">Birthday Party</option>
-      </select>
-    </div>
-    <div class="field">
-      <label class="label" for="additional-details">Additional details</label>
-      <textarea
-        class="textarea"
-        id="additional-details"
-        name="additional-details"
-        placeholder="Tell us about your event..."
-      ></textarea>
-    </div>
-    <div class="field field-horizontal">
-      <input
-        type="checkbox"
-        class="checkbox"
-        id="email-me-news-and-special-offers"
-        name="email-me-news-and-special-offers"
-      />
-      <label class="label" for="email-me-news-and-special-offers">
-        Email me news and special offers
-      </label>
-    </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
-  </form>
-</div>
+  </fieldset>
+  <div class="field field-horizontal">
+    <button class="btn btn-outline" type="reset">Reset</button>
+    <button class="btn" type="submit">Submit</button>
+  </div>
+</form>
 ```
-
----
 
 ## Components
 
+- [Field](/components/field) — Structured layout for labels, controls, descriptions, and errors
+- [Label](/components/label) — Accessible labels for form fields
 - [Input](/components/input) — Single-line text entry for text, email, password, and other types
-- [Input Group](/components/input-group) — Decorate inputs with icons, text, or other addons
+- [Input Group](/components/input-group) — Compose icons, text, and buttons inside one field
 - [Textarea](/components/textarea) — Multi-line text input
 - [Select](/components/select) — Native dropdown for choosing from a list of options
-- [Field](/components/field) — Structured form field layout with labels, descriptions, and errors
-- [Combobox](/components/combobox) — Searchable, keyboard-navigable dropdown with single and multi-select
-- [Checkbox](/components/checkbox) — Toggle options on and off, with card and list select variants
-- [Radio Group](/components/radio-group) — Select a single option from a group, with card and list select variants
+- [Combobox](/components/combobox) — Searchable option list with single and multi select
+- [Checkbox](/components/checkbox) — Toggle options on and off, with card and table variants
+- [Radio Group](/components/radio-group) — Pick a single option from a set
 - [Switch](/components/switch) — Toggle settings on and off
-- [Label](/components/label) — Accessible labels for form fields
+- [Slider](/components/slider) — Pick a value or range along a track
 - [Button](/components/button) — Actions and form submissions
-- [Button Group](/components/button-group) — Group related buttons together
+- [Button Group](/components/button-group) — Attach related buttons and fields together
 
-## Accessibility
-
-All form components support standard accessibility patterns:
-
-- Use [Label](/components/label) with matching `for` and `id` attributes to connect labels to inputs
-- Use `aria-invalid="true"` for validation error states
-- Use `aria-describedby` to connect error messages to their fields
-- Use `disabled` to prevent interaction on any form element
-- Use `peer` on disabled toggles so labels dim automatically via `peer-disabled`
