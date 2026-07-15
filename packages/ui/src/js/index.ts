@@ -15,6 +15,7 @@ import { Accordion } from "./accordion";
 import { toast, ToastTrigger } from "./toast";
 import { Slider, SliderRange } from "./slider";
 import { Avatar } from "./avatar";
+import { Breadcrumb } from "./breadcrumb";
 import { Navbar } from "./navbar";
 import { Pagination } from "./pagination";
 import { Sidebar } from "./sidebar";
@@ -31,6 +32,7 @@ const components: ComponentFactory[] = [
   Accordion,
   ToastTrigger,
   Avatar,
+  Breadcrumb,
   Slider,
   SliderRange,
   Navbar,
@@ -50,12 +52,14 @@ const accordion = (el: HTMLElement): SpInstance | null => getInstance(el, Accord
 const slider = (el: HTMLElement): SpInstance | null => getInstance(el, Slider);
 const sliderRange = (el: HTMLElement): SpInstance | null => getInstance(el, SliderRange);
 const avatar = (el: HTMLElement): SpInstance | null => getInstance(el, Avatar);
+const breadcrumb = (el: HTMLElement): SpInstance | null => getInstance(el, Breadcrumb);
 const navbar = (el: HTMLElement): SpInstance | null => getInstance(el, Navbar);
 const pagination = (el: HTMLElement): SpInstance | null => getInstance(el, Pagination);
 const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar);
 
 export {
   Avatar,
+  Breadcrumb,
   Dialog,
   Sheet,
   Popover,
@@ -80,6 +84,7 @@ export {
   slider,
   sliderRange,
   avatar,
+  breadcrumb,
   navbar,
   pagination,
   sidebar,
@@ -103,6 +108,7 @@ declare global {
       slider: typeof slider;
       sliderRange: typeof sliderRange;
       avatar: typeof avatar;
+      breadcrumb: typeof breadcrumb;
       navbar: typeof navbar;
       pagination: typeof pagination;
       sidebar: typeof sidebar;
@@ -125,6 +131,7 @@ if (typeof document !== "undefined") {
     slider,
   sliderRange,
     avatar,
+    breadcrumb,
     navbar,
     pagination,
     sidebar,
