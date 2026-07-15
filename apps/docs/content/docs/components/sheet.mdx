@@ -1,85 +1,43 @@
 ---
 title: Sheet
-description: A Tailwind CSS sheet component for slide-out panels, a modal drawer anchored to any edge of the screen.
+description: A sheet component for Tailwind CSS with beautiful shadcn/ui styling. Use it to slide out a panel for edit forms, filters, and mobile navigation.
 ---
 
 The sheet slides a modal panel in from a screen edge. Use it for edit forms, filters, carts, and mobile navigation; for a centered window, reach for the [dialog](/components/dialog).
 
 ```html preview preset=sheet open=.sheet
-<button id="sheet-1-trigger" class="btn btn-outline">Open Cart</button>
+<button id="sheet-1-trigger" class="btn btn-outline">Open</button>
 
 <dialog class="sheet" data-sp-toggle="#sheet-1-trigger">
-  <div class="sheet-content">
+  <div class="sheet-panel">
     <button
-      class="btn btn-ghost btn-icon-xs absolute top-3 right-3"
+      class="btn btn-ghost btn-xs btn-icon absolute top-3 right-3"
       aria-label="Close"
       data-sp-dismiss
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
     <div class="sheet-header">
-      <h2 class="sheet-title">Shopping cart</h2>
+      <h2 class="sheet-title">Edit profile</h2>
+      <p class="sheet-description">
+        Make changes to your profile here. Click save when you're done.
+      </p>
     </div>
-    <ul class="scrollbar scrollbar-sm flex-1 divide-y overflow-y-auto px-4">
-      <li class="flex py-6 first:pt-2">
-        <img class="size-24 shrink-0 rounded-md border object-cover" src="https://images.pexels.com/photos/2899839/pexels-photo-2899839.jpeg?auto=compress&cs=tinysrgb&w=192&h=192&fit=crop" alt="Silver ring in a black velvet jewelry box." />
-        <div class="ml-4 flex flex-1 flex-col">
-          <div>
-            <div class="flex justify-between font-medium">
-              <h3><a href="#">Silver Ring</a></h3>
-              <p class="ml-4">$150.00</p>
-            </div>
-            <p class="mt-1 text-muted-foreground">Sterling</p>
-          </div>
-          <div class="flex flex-1 items-end justify-between">
-            <p class="text-muted-foreground">Qty 1</p>
-            <button class="font-medium text-primary hover:underline">Remove</button>
-          </div>
+    <div class="sheet-content">
+      <div class="field-group">
+        <div class="field">
+          <label class="label" for="sheet-profile-name">Name</label>
+          <input class="input" id="sheet-profile-name" value="Pedro Duarte" />
         </div>
-      </li>
-      <li class="flex py-6">
-        <img class="size-24 shrink-0 rounded-md border object-cover" src="https://images.pexels.com/photos/26954379/pexels-photo-26954379.jpeg?auto=compress&cs=tinysrgb&w=192&h=192&fit=crop" alt="Tan leather handbag with a shoulder strap." />
-        <div class="ml-4 flex flex-1 flex-col">
-          <div>
-            <div class="flex justify-between font-medium">
-              <h3><a href="#">Leather Handbag</a></h3>
-              <p class="ml-4">$180.00</p>
-            </div>
-            <p class="mt-1 text-muted-foreground">Tan</p>
-          </div>
-          <div class="flex flex-1 items-end justify-between">
-            <p class="text-muted-foreground">Qty 1</p>
-            <button class="font-medium text-primary hover:underline">Remove</button>
-          </div>
+        <div class="field">
+          <label class="label" for="sheet-profile-username">Username</label>
+          <input class="input" id="sheet-profile-username" value="@peduarte" />
         </div>
-      </li>
-      <li class="flex py-6">
-        <img class="size-24 shrink-0 rounded-md border object-cover" src="https://images.pexels.com/photos/27609339/pexels-photo-27609339.jpeg?auto=compress&cs=tinysrgb&w=192&h=192&fit=crop" alt="Pair of brown leather loafers." />
-        <div class="ml-4 flex flex-1 flex-col">
-          <div>
-            <div class="flex justify-between font-medium">
-              <h3><a href="#">Penny Loafers</a></h3>
-              <p class="ml-4">$95.00</p>
-            </div>
-            <p class="mt-1 text-muted-foreground">Brown</p>
-          </div>
-          <div class="flex flex-1 items-end justify-between">
-            <p class="text-muted-foreground">Qty 1</p>
-            <button class="font-medium text-primary hover:underline">Remove</button>
-          </div>
-        </div>
-      </li>
-    </ul>
+      </div>
+    </div>
     <div class="sheet-footer">
-      <div class="flex items-center justify-between text-base font-medium">
-        <span>Subtotal</span>
-        <span>$425.00</span>
-      </div>
-      <p class="text-muted-foreground">Shipping and taxes calculated at checkout.</p>
-      <div class="mt-4 grid grid-cols-2 gap-2">
-        <button class="btn btn-outline" data-sp-dismiss>View Cart (3)</button>
-        <button class="btn btn-primary" data-sp-dismiss>Checkout</button>
-      </div>
+      <button class="btn">Save changes</button>
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
     </div>
   </div>
 </dialog>
@@ -93,25 +51,26 @@ Add the `sheet` class to a `<dialog>` element. Give your trigger an `id`, then p
 | ------------------- | -------------------------------------------------------------- |
 | `sheet`             | Add to the `<dialog>` element; fills the viewport and dims the page |
 | `sheet-left` `sheet-right` `sheet-top` `sheet-bottom` | Add to `sheet` to pick the edge; right is the default |
-| `sheet-content`     | Add to a child element to create the visible panel             |
+| `sheet-panel`       | Add to the child element that is the visible panel             |
 | `sheet-header`      | Add to the block holding the title and description             |
 | `sheet-title`       | Add to a heading element to create the sheet title             |
 | `sheet-description` | Add to a paragraph to create the supporting description        |
+| `sheet-content`     | Add to the body section between header and footer              |
 | `sheet-footer`      | Add to the action block; it sticks to the bottom of the panel  |
 
 ```html
 <!-- This is a button toggling the sheet -->
-<button id="my-trigger" class="btn">Open Sheet</button>
+<button id="my-trigger" class="btn btn-outline">Open Sheet</button>
 
 <!-- This is the sheet -->
 <dialog class="sheet" data-sp-toggle="#my-trigger">
-  <div class="sheet-content">
+  <div class="sheet-panel">
     <div class="sheet-header">
       <h2 class="sheet-title">Title</h2>
       <p class="sheet-description">Description</p>
     </div>
     <div class="sheet-footer">
-      <button class="btn" data-sp-dismiss>Close</button>
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
     </div>
   </div>
 </dialog>
@@ -128,7 +87,7 @@ Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top
 <button id="side-left" class="btn btn-outline">Left</button>
 
 <dialog class="sheet sheet-left" data-sp-toggle="#side-left">
-  <div class="sheet-content">
+  <div class="sheet-panel">
     <div class="sheet-header">
       <h2 class="sheet-title">Left</h2>
       <p class="sheet-description">Great for navigation menus.</p>
@@ -143,7 +102,7 @@ Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top
 <button id="side-right" class="btn btn-outline">Right</button>
 
 <dialog class="sheet sheet-right" data-sp-toggle="#side-right">
-  <div class="sheet-content">
+  <div class="sheet-panel">
     <div class="sheet-header">
       <h2 class="sheet-title">Right</h2>
       <p class="sheet-description">Great for details and settings.</p>
@@ -158,7 +117,7 @@ Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top
 <button id="side-top" class="btn btn-outline">Top</button>
 
 <dialog class="sheet sheet-top" data-sp-toggle="#side-top">
-  <div class="sheet-content">
+  <div class="sheet-panel">
     <div class="sheet-header">
       <h2 class="sheet-title">Top</h2>
       <p class="sheet-description">Great for notifications.</p>
@@ -173,7 +132,7 @@ Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top
 <button id="side-bottom" class="btn btn-outline">Bottom</button>
 
 <dialog class="sheet sheet-bottom" data-sp-toggle="#side-bottom">
-  <div class="sheet-content">
+  <div class="sheet-panel">
     <div class="sheet-header">
       <h2 class="sheet-title">Bottom</h2>
       <p class="sheet-description">Great for actions on mobile.</p>
@@ -181,68 +140,6 @@ Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top
     <div class="sheet-footer">
       <button class="btn btn-outline self-start" data-sp-dismiss>Close</button>
     </div>
-  </div>
-</dialog>
-```
-
-### Size
-
-Change the panel size with width and height utilities on `sheet-content`, like a larger `max-w-*` for a wider sheet.
-
-```html preview preset=sheet open=.sheet
-<button id="sheet-size-trigger" class="btn btn-outline">Open Profile</button>
-
-<dialog class="sheet" data-sp-toggle="#sheet-size-trigger">
-  <div class="sheet-content gap-0 max-w-xl">
-    <button
-      class="btn btn-ghost btn-icon-xs absolute top-3 right-3"
-      aria-label="Close"
-      data-sp-dismiss
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div class="sheet-header">
-      <h2 class="sheet-title">Profile</h2>
-    </div>
-    <div class="h-24 bg-primary sm:h-20 lg:h-28"></div>
-    <div class="-mt-12 flow-root px-4 sm:-mt-8 sm:flex sm:items-end lg:-mt-16">
-      <img class="size-24 shrink-0 rounded-lg border-4 border-b-0 border-popover bg-muted object-cover sm:size-40 lg:size-48" src="https://images.pexels.com/photos/37876787/pexels-photo-37876787.jpeg?auto=compress&cs=tinysrgb&w=384&h=384&fit=crop" alt="Sarah Johnson" />
-      <div class="mt-6 sm:ml-6 sm:flex-1">
-        <div class="flex items-center gap-2">
-          <h3 class="text-xl font-bold sm:text-2xl">Sarah Johnson</h3>
-          <span class="size-2 shrink-0 rounded-full bg-green-500"><span class="sr-only">Online</span></span>
-        </div>
-        <p class="text-muted-foreground">@sarahjohnson</p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <button class="btn btn-primary w-full sm:flex-1">Message</button>
-          <button class="btn btn-outline flex-1">Call</button>
-          <button class="btn btn-outline btn-icon" aria-label="Open options menu">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <dl class="mt-4 space-y-6 border-t px-4 py-4 sm:space-y-0 sm:divide-y sm:p-0">
-      <div class="sm:flex sm:px-4 sm:py-4">
-        <dt class="font-medium text-muted-foreground sm:w-32 sm:shrink-0">Bio</dt>
-        <dd class="mt-1 sm:mt-0 sm:ml-6">
-          Product designer at Acme. Building accessible interfaces and design
-          systems. Coffee first, pixels second.
-        </dd>
-      </div>
-      <div class="sm:flex sm:px-4 sm:py-4">
-        <dt class="font-medium text-muted-foreground sm:w-32 sm:shrink-0">Location</dt>
-        <dd class="mt-1 sm:mt-0 sm:ml-6">New York, NY, USA</dd>
-      </div>
-      <div class="sm:flex sm:px-4 sm:py-4">
-        <dt class="font-medium text-muted-foreground sm:w-32 sm:shrink-0">Website</dt>
-        <dd class="mt-1 sm:mt-0 sm:ml-6">sarahjohnson.com</dd>
-      </div>
-      <div class="sm:flex sm:px-4 sm:py-4">
-        <dt class="font-medium text-muted-foreground sm:w-32 sm:shrink-0">Birthday</dt>
-        <dd class="mt-1 sm:mt-0 sm:ml-6"><time datetime="1982-06-23">June 23, 1982</time></dd>
-      </div>
-    </dl>
   </div>
 </dialog>
 ```
@@ -257,9 +154,9 @@ Pair a left sheet with the [sidebar menu](/components/sidebar) classes for a sim
 </button>
 
 <dialog class="sheet sheet-left" aria-label="Main menu" data-sp-toggle="#sheet-nav-trigger">
-  <div class="sheet-content">
+  <div class="sheet-panel">
     <button
-      class="btn btn-ghost btn-icon-xs absolute top-3 right-3"
+      class="btn btn-ghost btn-xs btn-icon absolute top-3 right-3"
       aria-label="Close"
       data-sp-dismiss
     >
@@ -273,34 +170,37 @@ Pair a left sheet with the [sidebar menu](/components/sidebar) classes for a sim
         <span class="brand-name">Acme Inc.</span>
       </a>
     </div>
-    <nav class="sidebar-menu px-2">
-      <div class="sidebar-menu-item">
-        <a href="#" class="sidebar-menu-button active">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          <span>Home</span>
-        </a>
-      </div>
-      <div class="sidebar-menu-item">
-        <a href="#" class="sidebar-menu-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
-          <span>Inbox</span>
-        </a>
-      </div>
-      <div class="sidebar-menu-item">
-        <a href="#" class="sidebar-menu-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-          <span>Calendar</span>
-        </a>
-      </div>
-      <div class="sidebar-menu-item">
-        <a href="#" class="sidebar-menu-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-          <span>Settings</span>
-        </a>
-      </div>
-    </nav>
+    <div class="sheet-content px-2">
+      <nav class="sidebar-menu">
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button active">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            <span>Inbox</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+            <span>Calendar</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span>Settings</span>
+          </a>
+        </div>
+
+      </nav>
+    </div>
     <div class="sheet-footer">
-      <button class="btn btn-primary">Upgrade to Pro</button>
+      <button class="btn">Upgrade to Pro</button>
     </div>
   </div>
 </dialog>
@@ -359,6 +259,3 @@ const sheet = sp.sheet(document.querySelector("#my-sheet"));
 sheet.show();
 ```
 
-## Accessibility
-
-The sheet adheres to the [Dialog (Modal) WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) and sets the appropriate roles and properties automatically.
