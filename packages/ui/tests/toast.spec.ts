@@ -150,14 +150,32 @@ test("loading toasts are sticky and not dismissible", async ({ page }) => {
   expect(await page.locator(".toast-close").count()).toBe(0);
 });
 
-test("dismissAll clears every toast", async ({ page }) => {
+test("dismiss with no argument clears every toast", async ({ page }) => {
   await page.evaluate(() => {
     (window as any).sp.toast("One", { duration: 0 });
     (window as any).sp.toast("Two", { duration: 0, position: "top-left" });
   });
   await expect(toasts(page)).toHaveCount(2);
-  await page.evaluate(() => (window as any).sp.toast.dismissAll());
+  await page.evaluate(() => (window as any).sp.toast.dismiss());
   await expect(toasts(page)).toHaveCount(0);
+});
+
+test("promise shows loading, then swaps to the settled state", async ({ page }) => {
+  await page.evaluate(() => {
+    (window as any).sp.toast.promise(
+      new Promise((resolve) => setTimeout(() => resolve({ name: "report.pdf" }), 300)),
+      {
+        loading: "Uploading...",
+        success: (data: any) => `Uploaded ${data.name}`,
+        error: "Upload failed",
+      },
+    );
+  });
+  await expect(toasts(page)).toHaveText(/Uploading/);
+  await expect(toasts(page)).toHaveClass(/toast-loading/);
+  await expect(toasts(page)).toHaveText(/Uploaded report.pdf/);
+  await expect(toasts(page)).toHaveClass(/toast-success/);
+  expect(await page.locator(".toast-close").count()).toBe(1);
 });
 
 test("a [data-sp-toast] element fires as a toast and removes itself", async ({ page }) => {

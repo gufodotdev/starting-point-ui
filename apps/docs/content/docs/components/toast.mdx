@@ -133,6 +133,27 @@ if (res.ok) {
 }
 ```
 
+### Promise
+
+Wrap a promise with `sp.toast.promise()`: it shows a loading toast, then swaps to the success or error state when the promise settles. The messages can be strings or functions of the resolved value.
+
+```html preview preset=default-tall
+<button
+  class="btn btn-outline"
+  onclick="sp.toast.promise(new Promise(function (resolve) { setTimeout(resolve, 2000) }), { loading: 'Uploading file...', success: 'File uploaded', error: 'Upload failed' })"
+>
+  Upload
+</button>
+```
+
+```js
+sp.toast.promise(fetch("/api/posts", { method: "POST", body }), {
+  loading: "Creating post...",
+  success: "Post created",
+  error: (err) => `Failed: ${err.message}`,
+});
+```
+
 ### Duration
 
 Control how long the toast stays (milliseconds, default 4000); `0` keeps it until dismissed.
@@ -283,5 +304,5 @@ Lifecycle events fire on each toast element and bubble to `document`.
 | `sp.toast.success(title, options)` | Shorthand for each type (`success`, `error`, `warning`, `info`, `loading`) |
 | `instance.update(options)`         | Swap title, type, description, and duration in place                       |
 | `instance.dismiss()`               | Dismiss this toast                                                         |
-| `sp.toast.dismiss(id)`             | Dismiss a toast by id                                                      |
-| `sp.toast.dismissAll()`            | Dismiss every toast                                                        |
+| `sp.toast.dismiss(id)`             | Dismiss a toast by id, or every toast when called without one              |
+| `sp.toast.promise(promise, messages)` | Show a loading toast that settles with the promise                     |

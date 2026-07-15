@@ -51,6 +51,7 @@ interface ToastEntry {
   timer: ReturnType<typeof setTimeout> | null;
   duration: number;
   position: string;
+  type: ToastType;
 }
 
 let toastCounter = 0;
@@ -184,13 +185,7 @@ function createToastElement(
   el.setAttribute("role", "status");
   el.setAttribute("data-sp-toast-id", id);
 
-  if (options.dismissible !== false) {
-    const close = document.createElement("button");
-    close.className = "toast-close";
-    close.setAttribute("aria-label", "Close");
-    close.setAttribute("data-sp-toast-dismiss", "");
-    el.appendChild(close);
-  }
+  if (options.dismissible !== false) addCloseButton(el);
 
   const content = document.createElement("div");
   content.className = "toast-content";
@@ -231,7 +226,7 @@ function show(title: string, type: ToastType, options: ToastOptions): ToastInsta
   const height = element.getBoundingClientRect().height;
 
   // Add to front of list (newest first = closest to edge)
-  const entry: ToastEntry = { id, element, height, timer: null, duration, position };
+  const entry: ToastEntry = { id, element, height, timer: null, duration, position, type };
   container.toasts.unshift(entry);
   byId.set(id, entry);
 
@@ -261,7 +256,12 @@ function show(title: string, type: ToastType, options: ToastOptions): ToastInsta
   };
 }
 
-export async function dismiss(id: string) {
+export async function dismiss(id?: string) {
+  if (id === undefined) {
+    await Promise.all([...byId.keys()].map((each) => dismiss(each)));
+    return;
+  }
+
   const entry = byId.get(id);
   if (!entry) return;
 
@@ -295,9 +295,12 @@ export async function dismiss(id: string) {
   }
 }
 
-export async function dismissAll() {
-  const ids = [...byId.keys()];
-  await Promise.all(ids.map((id) => dismiss(id)));
+function addCloseButton(el: HTMLElement) {
+  const close = document.createElement("button");
+  close.className = "toast-close";
+  close.setAttribute("aria-label", "Close");
+  close.setAttribute("data-sp-toast-dismiss", "");
+  el.appendChild(close);
 }
 
 export function update(id: string, options: ToastUpdateOptions) {
@@ -306,6 +309,13 @@ export function update(id: string, options: ToastUpdateOptions) {
 
   const type = options.type ?? "default";
   renderContent(entry.element, options.title, type, options.description);
+
+  // A loading toast is created without a close button; leaving the loading
+  // state makes it dismissible like any other toast.
+  if (entry.type === "loading" && type !== "loading" && !entry.element.querySelector(".toast-close")) {
+    addCloseButton(entry.element);
+  }
+  entry.type = type;
 
   entry.height = entry.element.getBoundingClientRect().height;
   updateOffsets(entry.position);
@@ -331,7 +341,29 @@ const sugar = (type: ToastType) => (title: string, options: ToastOptions = {}) =
 
 toast.update = update;
 toast.dismiss = dismiss;
-toast.dismissAll = dismissAll;
+toast.promise = <T,>(
+  promise: Promise<T>,
+  messages: {
+    loading: string;
+    success: string | ((data: T) => string);
+    error: string | ((error: unknown) => string);
+  },
+): ToastInstance => {
+  const instance = toast(messages.loading, { type: "loading" });
+  promise.then(
+    (data) =>
+      instance.update({
+        title: typeof messages.success === "function" ? messages.success(data) : messages.success,
+        type: "success",
+      }),
+    (error) =>
+      instance.update({
+        title: typeof messages.error === "function" ? messages.error(error) : messages.error,
+        type: "error",
+      }),
+  );
+  return instance;
+};
 toast.success = sugar("success");
 toast.error = sugar("error");
 toast.warning = sugar("warning");
