@@ -14,6 +14,7 @@ import { Accordion } from "./accordion";
 
 import { toast, ToastTrigger } from "./toast";
 import { Slider, SliderRange } from "./slider";
+import { Avatar } from "./avatar";
 import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
 
@@ -28,6 +29,7 @@ const components: ComponentFactory[] = [
   Collapsible,
   Accordion,
   ToastTrigger,
+  Avatar,
   Slider,
   SliderRange,
   Navbar,
@@ -45,10 +47,12 @@ const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Coll
 const accordion = (el: HTMLElement): SpInstance | null => getInstance(el, Accordion);
 const slider = (el: HTMLElement): SpInstance | null => getInstance(el, Slider);
 const sliderRange = (el: HTMLElement): SpInstance | null => getInstance(el, SliderRange);
+const avatar = (el: HTMLElement): SpInstance | null => getInstance(el, Avatar);
 const navbar = (el: HTMLElement): SpInstance | null => getInstance(el, Navbar);
 const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar);
 
 export {
+  Avatar,
   Dialog,
   Sheet,
   Popover,
@@ -72,6 +76,7 @@ export {
   accordion,
   slider,
   sliderRange,
+  avatar,
   navbar,
   sidebar,
   toast,
@@ -93,6 +98,7 @@ declare global {
       accordion: typeof accordion;
       slider: typeof slider;
       sliderRange: typeof sliderRange;
+      avatar: typeof avatar;
       navbar: typeof navbar;
       sidebar: typeof sidebar;
       toast: typeof toast;
@@ -113,6 +119,7 @@ if (typeof document !== "undefined") {
     accordion,
     slider,
   sliderRange,
+    avatar,
     navbar,
     sidebar,
     toast,

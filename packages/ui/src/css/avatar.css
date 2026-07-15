@@ -1,34 +1,55 @@
-/* Starting Point UI Avatar Styles */
-
 @utility avatar {
   @layer l1.l2 {
-    @apply aspect-square shrink-0 rounded-full object-cover;
-    @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
+    @apply relative flex size-8 shrink-0 rounded-full select-none;
+    /* Subtle inner border blended over the image. */
+    @apply after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten;
+
+    /* The fallback yields to a working image; JS hides the image on error. */
+    &:has(> .avatar-image:not([hidden])) > .avatar-fallback {
+      @apply hidden;
+    }
+  }
+}
+
+@utility avatar-image {
+  @layer l1.l2 {
+    @apply aspect-square size-full rounded-[inherit] object-cover;
   }
 }
 
 @utility avatar-fallback {
   @layer l1.l2 {
-    @apply inline-flex items-center justify-center rounded-full bg-muted text-muted-foreground font-medium;
-    @apply [&_svg:not([class*='size-'])]:size-5;
-    @apply [&:where(&:not(.avatar-sm,.avatar-base,.avatar-lg))]:avatar-base;
+    @apply flex size-full items-center justify-center rounded-[inherit] bg-muted text-sm text-muted-foreground;
+  }
+}
+
+@utility avatar-badge {
+  @layer l1.l2 {
+    @apply absolute right-0 bottom-0 z-10 inline-flex size-2.5 items-center justify-center rounded-full bg-primary text-primary-foreground ring-2 ring-background select-none;
+    @apply [&>svg]:size-2;
   }
 }
 
 @utility avatar-sm {
   @layer l1 {
-    @apply size-8 text-xs;
-  }
-}
+    @apply size-6;
 
-@utility avatar-base {
-  @layer l1 {
-    @apply size-9 text-sm;
+    & > .avatar-fallback {
+      @apply text-xs;
+    }
+
+    & > .avatar-badge {
+      @apply size-2 [&>svg]:hidden;
+    }
   }
 }
 
 @utility avatar-lg {
   @layer l1 {
-    @apply size-10 text-base;
+    @apply size-10;
+
+    & > .avatar-badge {
+      @apply size-3;
+    }
   }
 }

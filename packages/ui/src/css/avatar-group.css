@@ -1,9 +1,24 @@
-/* Starting Point UI Avatar Group Styles */
-
 @utility avatar-group {
-  @apply flex -space-x-2;
+  @layer l1.l2 {
+    @apply flex -space-x-2;
+
+    & > .avatar {
+      @apply ring-2 ring-background;
+    }
+
+    &:has(.avatar-sm) > .avatar-group-count {
+      @apply size-6 [&>svg]:size-3;
+    }
+
+    &:has(.avatar-lg) > .avatar-group-count {
+      @apply size-10 [&>svg]:size-5;
+    }
+  }
 }
 
-@utility avatar-group-item {
-  @apply ring-2 ring-background;
+@utility avatar-group-count {
+  @layer l1.l2 {
+    @apply relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background;
+    @apply [&>svg]:size-4;
+  }
 }
