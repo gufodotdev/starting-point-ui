@@ -1,27 +1,29 @@
 ---
 title: Scrollbar
-description: A Tailwind CSS scrollbar utility for styling native scrollbars with a slim, themeable thumb that matches your design.
+description: A scrollbar component for Tailwind CSS with beautiful shadcn/ui styling. Use it to restyle native scrollbars with a slim, themeable thumb.
 ---
 
-The scrollbar restyles the native scrollbar on any scrollable element: a rounded thumb in the border color on a transparent track, adapting to dark mode and themes automatically.
+The scrollbar restyles the native scrollbar on any scrollable element, adapting to dark mode and themes automatically.
 
 ```html preview
-<div class="scrollbar h-48 w-full max-w-sm overflow-y-auto rounded-lg border p-4 text-sm/6 text-muted-foreground">
+<div
+  class="scrollbar h-48 w-full max-w-sm overflow-y-auto rounded-lg border p-4 text-sm/6 text-muted-foreground"
+>
   <p class="mb-4">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-    commodo consequat.
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
   </p>
   <p class="mb-4">
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+    sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
   <p>
     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-    inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+    veritatis et quasi architecto beatae vitae dicta sunt explicabo.
   </p>
 </div>
 ```
@@ -30,10 +32,10 @@ The scrollbar restyles the native scrollbar on any scrollable element: a rounded
 
 Add the `scrollbar` class to an element that scrolls and its scrollbars are styled, vertical and horizontal alike. Add `scrollbar-sm` for a thinner thumb in tighter spaces.
 
-| Class          | Description                                        |
-| -------------- | -------------------------------------------------- |
-| `scrollbar`    | Add to a scrollable element to style its scrollbar |
-| `scrollbar-sm` | Add to `scrollbar` for a thinner variant           |
+| Class            | Description                                                   |
+| ---------------- | ------------------------------------------------------------- |
+| `scrollbar`      | Add to a scrollable element to style its scrollbar            |
+| `scrollbar-sm`   | Add to `scrollbar` for a thinner variant                      |
 | `scrollbar-none` | Add to hide the scrollbar entirely; the element still scrolls |
 
 ```html
@@ -47,22 +49,41 @@ Add the `scrollbar` class to an element that scrolls and its scrollbars are styl
 The small variant suits panels and popups where the default width feels heavy.
 
 ```html preview
-<div class="scrollbar scrollbar-sm h-48 w-full max-w-sm overflow-y-auto rounded-lg border p-4 text-sm/6 text-muted-foreground">
+<div
+  class="scrollbar scrollbar-sm h-48 w-full max-w-sm overflow-y-auto rounded-lg border p-4 text-sm/6 text-muted-foreground"
+>
   <p class="mb-4">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-    commodo consequat.
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
   </p>
   <p class="mb-4">
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+    sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
   <p>
     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-    inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+    veritatis et quasi architecto beatae vitae dicta sunt explicabo.
   </p>
+</div>
+```
+
+## CSS variables
+
+The scrollbar reads its colors and metrics from component-local variables. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+
+| Variable             | Default                                     | Description         |
+| -------------------- | ------------------------------------------- | ------------------- |
+| `--scrollbar-track`  | `transparent`                               | Track color         |
+| `--scrollbar-thumb`  | `var(--border)`                             | Thumb color         |
+| `--scrollbar-width`  | `0.625rem` (`0.375rem` with `scrollbar-sm`) | Scrollbar thickness |
+| `--scrollbar-radius` | `9999px`                                    | Thumb corner radius |
+
+```html
+<div class="scrollbar [--scrollbar-thumb:var(--primary)] h-48 overflow-y-auto">
+  Long content
 </div>
 ```
