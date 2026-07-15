@@ -235,3 +235,232 @@ test("sp.dropdown(el) returns the instance with the public API", async ({ page }
   });
   expect(api).toEqual({ show: "function", hide: "function", toggle: "function" });
 });
+
+const CHECKABLE = `
+  <button id="trigger" class="btn">Open</button>
+  <div id="menu" class="dropdown" data-sp-toggle="#trigger">
+    <div id="c1" class="dropdown-item dropdown-item-checkbox"><input type="checkbox" name="statusbar" checked /> Status Bar</div>
+    <div id="c2" class="dropdown-item dropdown-item-checkbox"><input type="checkbox" name="panel" /> Panel</div>
+    <div id="r1" class="dropdown-item dropdown-item-radio"><input type="radio" name="position" value="top" checked /> Top</div>
+    <div id="r2" class="dropdown-item dropdown-item-radio"><input type="radio" name="position" value="bottom" /> Bottom</div>
+    <div id="r3" class="dropdown-item dropdown-item-radio"><input type="radio" name="position" value="right" /> Right</div>
+  </div>`;
+
+test.describe("checkable items", () => {
+  test("assigns menu roles and mirrors the inputs onto aria-checked", async ({ page }) => {
+    await mount(page, CHECKABLE);
+    await expect(page.locator("#c1")).toHaveRole("menuitemcheckbox");
+    await expect(page.locator("#c1")).toHaveAttribute("aria-checked", "true");
+    await expect(page.locator("#c2")).toHaveAttribute("aria-checked", "false");
+    await expect(page.locator("#r1")).toHaveRole("menuitemradio");
+    await expect(page.locator("#r2")).toHaveAttribute("aria-checked", "false");
+  });
+
+  test("clicking a checkbox item toggles its input, fires change, and keeps the menu open", async ({ page }) => {
+    await mount(page, CHECKABLE);
+    await page.evaluate(() => {
+      (window as any).changes = [];
+      document.addEventListener("change", (e) => {
+        const input = e.target as HTMLInputElement;
+        (window as any).changes.push(`${input.name}:${input.checked}`);
+      });
+    });
+    await page.click("#trigger");
+    await expect(menu(page)).toHaveClass(/shown/);
+    await page.click("#c2");
+    await expect(page.locator("#c2 input")).toBeChecked();
+    await expect(page.locator("#c2")).toHaveAttribute("aria-checked", "true");
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await page.evaluate(() => (window as any).changes)).toEqual(["panel:true"]);
+    await page.click("#c2");
+    await expect(page.locator("#c2 input")).not.toBeChecked();
+    await expect(page.locator("#c2")).toHaveAttribute("aria-checked", "false");
+    expect(await page.evaluate(() => (window as any).changes)).toEqual(["panel:true", "panel:false"]);
+    await expect(menu(page)).toHaveClass(/shown/);
+  });
+
+  test("clicking a radio item checks its input and unchecks same-name peers", async ({ page }) => {
+    await mount(page, CHECKABLE);
+    await page.click("#trigger");
+    await page.click("#r2");
+    await expect(page.locator("#r1 input")).not.toBeChecked();
+    await expect(page.locator("#r2 input")).toBeChecked();
+    await expect(page.locator("#r1")).toHaveAttribute("aria-checked", "false");
+    await expect(page.locator("#r2")).toHaveAttribute("aria-checked", "true");
+    await expect(page.locator("#r3")).toHaveAttribute("aria-checked", "false");
+    await expect(page.locator("#c1 input")).toBeChecked();
+    expect(
+      await page.evaluate(
+        () => document.querySelector<HTMLInputElement>("input[name=position]:checked")?.value,
+      ),
+    ).toBe("bottom");
+    await expect(menu(page)).toHaveClass(/shown/);
+  });
+
+  test("Space on a focused checkbox item toggles it", async ({ page }) => {
+    await mount(page, CHECKABLE);
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    expect(await activeId(page)).toBe("c1");
+    await page.keyboard.press(" ");
+    await expect(page.locator("#c1 input")).not.toBeChecked();
+    await expect(page.locator("#c1")).toHaveAttribute("aria-checked", "false");
+    await expect(menu(page)).toHaveClass(/shown/);
+  });
+});
+
+const SUBMENU = `
+  <button id="trigger" class="btn">Open</button>
+  <div id="menu" class="dropdown" data-sp-toggle="#trigger">
+    <button id="i1" class="dropdown-item">Team</button>
+    <button id="subtrigger" class="dropdown-item">Invite users</button>
+    <button id="i2" class="dropdown-item">New Team</button>
+  </div>
+  <div id="submenu" class="dropdown dropdown-sub" data-sp-toggle="#subtrigger" data-sp-mode="hover" data-sp-placement="right-start">
+    <button id="s1" class="dropdown-item">Email</button>
+    <button id="subtrigger2" class="dropdown-item">More options</button>
+  </div>
+  <div id="submenu2" class="dropdown dropdown-sub" data-sp-toggle="#subtrigger2" data-sp-mode="hover" data-sp-placement="right-start">
+    <button id="s2" class="dropdown-item">Slack</button>
+  </div>`;
+
+test.describe("submenu composition", () => {
+  test("clicking the sub trigger opens the submenu without closing the parent", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await expect(menu(page)).toHaveClass(/shown/);
+    await page.click("#subtrigger");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await expect(menu(page)).toHaveClass(/shown/);
+  });
+
+  test("choosing a submenu item closes both menus", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.click("#subtrigger");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await page.click("#s1");
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+    await expect(menu(page)).not.toHaveClass(/shown/);
+  });
+});
+
+test.describe("submenu keyboard navigation", () => {
+  test("arrow navigation over the sub trigger does not open the submenu", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await expect(menu(page)).toHaveClass(/shown/);
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    expect(await activeId(page)).toBe("subtrigger");
+    await page.waitForTimeout(200);
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+  });
+
+  test("arrowing past the sub trigger keeps the menu open", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await expect(menu(page)).toHaveClass(/shown/);
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    expect(await activeId(page)).toBe("i2");
+    await page.waitForTimeout(200);
+    await expect(menu(page)).toHaveClass(/shown/);
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+  });
+
+  test("ArrowRight on the sub trigger opens the submenu and focuses its first item", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowRight");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("s1");
+    // Regression: the focusout hover logic scheduled a hide right after opening.
+    await page.waitForTimeout(400);
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+  });
+
+  test("Enter on the sub trigger opens the submenu and focuses its first item", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("s1");
+    await page.waitForTimeout(400);
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+  });
+
+  test("ArrowLeft closes the submenu and returns focus to its trigger", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowRight");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await page.keyboard.press("ArrowLeft");
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+    await expect(menu(page)).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("subtrigger");
+  });
+
+  test("Escape inside the submenu closes only the submenu", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowRight");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+    await expect(menu(page)).toHaveClass(/shown/);
+    await expect
+      .poll(async () => activeId(page))
+      .toBe("subtrigger");
+  });
+
+  test("Escape in the parent closes the whole chain", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.hover("#subtrigger");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await page.keyboard.press("Escape");
+    await expect(menu(page)).not.toHaveClass(/shown/);
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+  });
+});
+
+test.describe("nested submenu hover", () => {
+  test("pointer moving through nested submenus keeps the chain open", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.hover("#subtrigger");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await page.hover("#subtrigger2");
+    await expect(page.locator("#submenu2")).toHaveClass(/shown/);
+    await page.hover("#s2");
+    await page.waitForTimeout(400);
+    await expect(menu(page)).toHaveClass(/shown/);
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await expect(page.locator("#submenu2")).toHaveClass(/shown/);
+  });
+
+  test("choosing an item in the deepest submenu closes the whole chain", async ({ page }) => {
+    await mount(page, SUBMENU);
+    await page.click("#trigger");
+    await page.hover("#subtrigger");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await page.hover("#subtrigger2");
+    await expect(page.locator("#submenu2")).toHaveClass(/shown/);
+    await page.click("#s2");
+    await expect(page.locator("#submenu2")).not.toHaveClass(/shown/);
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+    await expect(menu(page)).not.toHaveClass(/shown/);
+  });
+});

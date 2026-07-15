@@ -6,17 +6,20 @@
     }
 
     /* JS sets inline left/top; reset the native [popover] centering. */
-    @apply fixed inset-auto m-0 z-998 min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover p-1 text-popover-foreground shadow-popover whitespace-nowrap;
+    @apply fixed inset-auto m-0 z-998 min-w-32 overflow-x-hidden overflow-y-auto whitespace-nowrap;
+    @apply max-h-(--sp-available-height) rounded-md bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 border-none;
 
-    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-95 [&.show]:duration-150 [&.show]:[animation-fill-mode:forwards];
-    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-95 [&.hide]:duration-150 [&.hide]:[animation-fill-mode:forwards];
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-95 [&.show]:duration-100 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.show]:data-[sp-side=bottom]:slide-in-from-top-2 [&.show]:data-[sp-side=top]:slide-in-from-bottom-2 [&.show]:data-[sp-side=left]:slide-in-from-right-2 [&.show]:data-[sp-side=right]:slide-in-from-left-2;
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-95 [&.hide]:duration-100 [&.hide]:[animation-fill-mode:forwards];
   }
 }
 
 @utility dropdown-item {
   @layer l1.l2 {
-    @apply relative flex w-full cursor-default select-none items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors;
-    @apply hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground;
+    @apply relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none;
+    @apply hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground;
+    @apply aria-expanded:bg-accent aria-expanded:text-accent-foreground;
     @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
 
     &[aria-disabled="true"] {
@@ -25,14 +28,74 @@
   }
 }
 
+@utility dropdown-item-checkbox {
+  @layer l1 {
+    @apply py-1.5 pr-8 pl-2;
+
+    &::after {
+      @apply pointer-events-none absolute top-1/2 right-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      mask-size: 100% 100%;
+    }
+
+    &:has(input:checked)::after {
+      @apply block;
+    }
+
+    & > input {
+      @apply hidden;
+    }
+  }
+}
+
+@utility dropdown-item-radio {
+  @layer l1 {
+    @apply py-1.5 pr-8 pl-2;
+
+    &::after {
+      @apply pointer-events-none absolute top-1/2 right-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      mask-size: 100% 100%;
+    }
+
+    &:has(input:checked)::after {
+      @apply block;
+    }
+
+    & > input {
+      @apply hidden;
+    }
+  }
+}
+
+@utility dropdown-item-destructive {
+  @layer l1 {
+    @apply text-destructive hover:bg-destructive/10 hover:text-destructive focus:bg-destructive/10 focus:text-destructive;
+    @apply dark:hover:bg-destructive/20 dark:focus:bg-destructive/20;
+  }
+}
+
 @utility dropdown-label {
   @layer l1.l2 {
-    @apply px-2.5 py-1.5 text-sm font-medium;
+    @apply px-2 py-1.5 text-xs font-medium text-muted-foreground;
   }
 }
 
 @utility dropdown-separator {
   @layer l1.l2 {
     @apply -mx-1 my-1 h-px bg-border;
+  }
+}
+
+@utility dropdown-shortcut {
+  @layer l1.l2 {
+    @apply ml-auto text-xs tracking-widest text-muted-foreground;
+    @apply in-[.dropdown-item:hover]:text-accent-foreground in-[.dropdown-item:focus]:text-accent-foreground;
+  }
+}
+
+@utility dropdown-sub {
+  @layer l1 {
+    @apply min-w-24 shadow-lg;
   }
 }
