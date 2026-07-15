@@ -1,62 +1,69 @@
-/* Starting Point UI Input Group Styles */
-
 @utility input-group {
   @layer l1.l2 {
-    @apply relative flex w-full items-stretch;
-    /* When the input is disabled, dim any sibling addons to match. */
-    @apply has-[.input:disabled]:[&>.input-group-text]:opacity-50 has-[.input:disabled]:[&>.input-group-btn]:opacity-50 has-[.input:disabled]:[&>.input-group-icon]:opacity-50 has-[.input:disabled]:[&>.input-group-btn-icon]:opacity-50;
+    @apply relative flex h-9 w-full min-w-0 items-center rounded-md border border-input shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30;
+    @apply has-[:is(.input,.textarea):focus-visible]:border-ring has-[:is(.input,.textarea):focus-visible]:ring-3 has-[:is(.input,.textarea):focus-visible]:ring-ring/50;
+    @apply has-[[aria-invalid="true"]]:border-destructive has-[[aria-invalid="true"]]:ring-3 has-[[aria-invalid="true"]]:ring-destructive/20 dark:has-[[aria-invalid="true"]]:ring-destructive/40;
+    @apply has-[>.input-group-addon-block-start]:h-auto has-[>.input-group-addon-block-start]:flex-col has-[>.input-group-addon-block-end]:h-auto has-[>.input-group-addon-block-end]:flex-col has-[>textarea]:h-auto;
+    @apply has-[>.input-group-addon-block-start]:[&>input]:pb-3 has-[>.input-group-addon-block-end]:[&>input]:pt-3;
+    @apply has-[>.input-group-addon-end]:[&>input]:pr-1.5 has-[>.input-group-addon:not(.input-group-addon-end,.input-group-addon-block-start,.input-group-addon-block-end)]:[&>input]:pl-1.5;
+    &:has(> input:disabled, > textarea:disabled) > .input-group-addon {
+      @apply opacity-50;
+    }
+
+    /* A regular input or textarea goes borderless inside; the wrapper is
+       the field chrome. */
+    & > .input {
+      @apply flex-1 rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 aria-invalid:ring-0 dark:bg-transparent;
+    }
+
+    & > .textarea {
+      @apply flex-1 resize-none rounded-none border-0 bg-transparent py-2 shadow-none ring-0 focus-visible:ring-0 aria-invalid:ring-0 dark:bg-transparent;
+    }
   }
 }
 
-@utility input-group-icon {
+@utility input-group-addon {
   @layer l1.l2 {
-    @apply pointer-events-none absolute inset-y-0 flex items-center justify-center text-muted-foreground;
-    @apply [&:first-child]:left-3 [&:last-child]:right-3;
-    /* Make room on the input for the overlay. */
-    @apply [&+.input]:pl-9 [.input:has(+&)]:pr-9;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+    @apply flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none;
+    @apply order-first pl-2 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem];
+    @apply [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4;
+  }
+
+  /* Buttons inside an addon shrink to fit the field; use the regular button
+     classes and the addon handles the in-group metrics. */
+  @layer l1 {
+    & > .btn {
+      @apply h-6 gap-1 rounded-[calc(var(--radius)-5px)] px-1.5 shadow-none;
+      @apply [&>svg:not([class*='size-'])]:size-3.5;
+    }
+
+    & > .btn.btn-icon {
+      @apply p-0;
+    }
   }
 }
 
-@utility input-group-btn-icon {
-  @layer l1.l2 {
-    @apply absolute inset-y-0 my-auto flex size-7 items-center justify-center text-muted-foreground cursor-pointer rounded-sm transition-colors;
-    @apply hover:bg-muted hover:text-foreground dark:hover:bg-muted/50;
-    @apply focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50;
-    @apply disabled:pointer-events-none disabled:opacity-50;
-    @apply [&:first-child]:left-1 [&:last-child]:right-1;
-    /* Make room on the input for the overlay. */
-    @apply [&+.input]:pl-9 [.input:has(+&)]:pr-9;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
+@utility input-group-addon-end {
+  @layer l1 {
+    @apply order-last pr-2 pl-0 has-[>button]:mr-[-0.25rem] has-[>button]:ml-0 has-[>kbd]:mr-[-0.15rem] has-[>kbd]:ml-0;
+  }
+}
+
+@utility input-group-addon-block-start {
+  @layer l1 {
+    @apply order-first w-full justify-start px-2.5 pt-2 pb-1.5 [&.border-b]:pb-2;
+  }
+}
+
+@utility input-group-addon-block-end {
+  @layer l1 {
+    @apply order-last w-full justify-start px-2.5 pt-1.5 pb-2 [&.border-t]:pt-2;
   }
 }
 
 @utility input-group-text {
   @layer l1.l2 {
-    @apply flex shrink-0 items-center px-3 text-sm text-foreground bg-muted border-y border-input-border shadow-input select-none;
-    @apply [&:first-child]:rounded-l-input [&:first-child]:border-l [&:first-child]:border-l-input-border;
-    @apply [&:last-child]:rounded-r-input [&:last-child]:border-r [&:last-child]:border-r-input-border;
-    /* Flatten the input's touching corner. Input keeps its own border which serves as the seam; override its color to --border so it stays visible in inset theme. Skip when focused or invalid so the ring/destructive border takes over. */
-    @apply [&+.input:not([aria-invalid=true]):not(:focus-visible)]:border-l-border [&+.input]:rounded-l-none [&+.input]:relative [&+.input]:focus-visible:z-10;
-    @apply [.input:not([aria-invalid=true]):not(:focus-visible):has(+&)]:border-r-border [.input:has(+&)]:rounded-r-none [.input:has(+&)]:relative [.input:has(+&)]:focus-visible:z-10;
-    /* When the adjacent input is invalid, mirror the destructive border. */
-    @apply [&:is(:has(+.input[aria-invalid=true]),.input[aria-invalid=true]+&)]:border-destructive;
-  }
-}
-
-@utility input-group-btn {
-  @layer l1.l2 {
-    @apply flex shrink-0 items-center gap-2 px-3 text-sm font-medium text-foreground bg-input border-y border-input-border shadow-input cursor-pointer transition-colors;
-    @apply hover:bg-muted dark:hover:bg-muted/50;
-    @apply focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:z-10 focus-visible:border-ring;
-    @apply disabled:pointer-events-none disabled:opacity-50;
-    @apply [&:first-child]:rounded-l-input [&:first-child]:border-l [&:first-child]:border-l-input-border;
-    @apply [&:last-child]:rounded-r-input [&:last-child]:border-r [&:last-child]:border-r-input-border;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    /* Flatten the input's touching corner. Input keeps its own border which serves as the seam; override its color to --border so it stays visible in inset theme. Skip when focused or invalid so the ring/destructive border takes over. */
-    @apply [&+.input:not([aria-invalid=true]):not(:focus-visible)]:border-l-border [&+.input]:rounded-l-none [&+.input]:relative [&+.input]:focus-visible:z-10;
-    @apply [.input:not([aria-invalid=true]):not(:focus-visible):has(+&)]:border-r-border [.input:has(+&)]:rounded-r-none [.input:has(+&)]:relative [.input:has(+&)]:focus-visible:z-10;
-    /* When the adjacent input is invalid, mirror the destructive border. */
-    @apply [&:is(:has(+.input[aria-invalid=true]),.input[aria-invalid=true]+&)]:border-destructive;
+    @apply flex items-center gap-2 text-sm text-muted-foreground;
+    @apply [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4;
   }
 }
