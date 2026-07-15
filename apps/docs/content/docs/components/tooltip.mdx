@@ -1,100 +1,156 @@
 ---
 title: Tooltip
-description: An accessible tooltip for Tailwind CSS, shown on hover or focus and anchored to its trigger.
+description: A tooltip component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a short text hint on hover, like explaining an icon-only button.
 ---
 
-A small label anchored to a trigger, shown on hover or keyboard focus.
+The tooltip shows a short text hint next to its trigger on hover or focus, like explaining an icon-only button. It is for plain text only; for rich content or anything interactive, use a [popover](/components/popover).
 
 ```html preview
-<button id="tooltip-1-trigger" class="btn">Hover me</button>
+<button id="tooltip-demo-trigger" class="btn btn-outline">Hover</button>
 
-<div id="tooltip-1" class="tooltip" data-sp-toggle="#tooltip-1-trigger">
-  Add to library
-</div>
+<div class="tooltip" data-sp-toggle="#tooltip-demo-trigger">Add to library</div>
 ```
 
 ## Usage
 
-Add the `tooltip` class to an element and give it an `id`. Give your trigger an `id` too, then point the tooltip at it with `data-sp-toggle`. It shows on hover or focus and hides when the pointer leaves. The trigger is described by the tooltip automatically.
+Add the `tooltip` class to an element and point it at its trigger with `data-sp-toggle`.
+
+| Class     | Description                                              |
+| --------- | -------------------------------------------------------- |
+| `tooltip` | Add to the hint element; carries the `data-sp-*` options |
 
 ```html
 <!-- This is the trigger -->
-<button id="my-trigger" class="btn">Hover me</button>
+<button id="my-trigger" class="btn btn-outline">Hover me</button>
 
 <!-- This is the tooltip -->
-<div id="my-tooltip" class="tooltip" data-sp-toggle="#my-trigger">
-  Add to library
-</div>
+<div class="tooltip" data-sp-toggle="#my-trigger">Add to library</div>
 ```
-
----
 
 ## Examples
 
-### Placement
+### Side
 
-Set where the tooltip opens relative to its trigger with `data-sp-placement` (any [Floating UI placement](https://floating-ui.com/docs/computePosition#placement), e.g. `right`, `bottom`, `left`). Defaults to `top`.
+Set which side the tooltip opens on with `data-sp-placement`; it defaults to `top`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement) and flips to the opposite side on its own when there isn't room.
 
 ```html preview
-<button id="tooltip-right-trigger" class="btn">Right</button>
+<div class="flex flex-wrap justify-center gap-2">
+  <button id="tooltip-left-trigger" class="btn btn-outline">Left</button>
+  <button id="tooltip-top-trigger" class="btn btn-outline">Top</button>
+  <button id="tooltip-bottom-trigger" class="btn btn-outline">Bottom</button>
+  <button id="tooltip-right-trigger" class="btn btn-outline">Right</button>
+</div>
 
 <div
-  id="tooltip-right"
+  class="tooltip"
+  data-sp-toggle="#tooltip-left-trigger"
+  data-sp-placement="left"
+>
+  Add to library
+</div>
+<div
+  class="tooltip"
+  data-sp-toggle="#tooltip-top-trigger"
+  data-sp-placement="top"
+>
+  Add to library
+</div>
+<div
+  class="tooltip"
+  data-sp-toggle="#tooltip-bottom-trigger"
+  data-sp-placement="bottom"
+>
+  Add to library
+</div>
+<div
   class="tooltip"
   data-sp-toggle="#tooltip-right-trigger"
   data-sp-placement="right"
 >
-  Opens to the right
+  Add to library
 </div>
 ```
 
----
+### With keyboard shortcut
+
+A [kbd](/components/kbd) rides along after the text; the tooltip tightens its padding for it and the kbd switches to a translucent treatment automatically.
+
+```html preview
+<button
+  id="tooltip-kbd-trigger"
+  class="btn btn-outline btn-sm btn-icon"
+  aria-label="Save"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
+</button>
+
+<div class="tooltip" data-sp-toggle="#tooltip-kbd-trigger">
+  Save Changes
+  <kbd class="kbd">S</kbd>
+</div>
+```
+
+### Disabled button
+
+Disabled elements don't fire pointer events, so wrap the trigger in a focusable span and point the tooltip at that.
+
+```html preview
+<span id="tooltip-disabled-wrap" class="inline-block w-fit" tabindex="0">
+  <button class="btn btn-outline" disabled>Disabled</button>
+</span>
+
+<div class="tooltip" data-sp-toggle="#tooltip-disabled-wrap">
+  This feature is currently unavailable
+</div>
+```
 
 ## Options
 
-Set each option with its own `data-sp-*` attribute on the tooltip.
+### Tooltip
 
-| Attribute           | Type   | Default | Description                                              |
-| ------------------- | ------ | ------- | -------------------------------------------------------- |
-| `data-sp-toggle`    | String | —       | Selector for the element the tooltip describes           |
-| `data-sp-placement` | String | `top`   | Position relative to the trigger (Floating UI placement) |
-| `data-sp-offset`    | Number | `6`     | Gap in pixels between the trigger and the tooltip        |
+Set each option with its own `data-sp-*` attribute on the `tooltip` element.
 
----
+| Attribute           | Values                | Default |
+| ------------------- | --------------------- | ------- |
+| `data-sp-toggle`    | CSS selector          | —       |
+| `data-sp-placement` | Floating UI placement | `top`   |
+| `data-sp-offset`    | Number                | `5`     |
 
-## Events
+```html
+<div
+  class="tooltip"
+  data-sp-toggle="#my-trigger"
+  data-sp-placement="right"
+></div>
+```
+
+## JavaScript
+
+### Events
 
 Lifecycle events fire on the tooltip element; `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
 | `sp-beforeshow` | Before showing (cancelable) |
-| `sp-show`       | Opening                     |
-| `sp-shown`      | Open and settled            |
+| `sp-show`       | Showing                     |
+| `sp-shown`      | Shown and settled           |
 | `sp-beforehide` | Before hiding (cancelable)  |
-| `sp-hide`       | Closing                     |
-| `sp-hidden`     | Closed                      |
+| `sp-hide`       | Hiding                      |
+| `sp-hidden`     | Hidden                      |
 
----
-
-## Methods
+### Methods
 
 Get the instance with `sp.tooltip(el)`, then call its methods:
 
-| Method     | Description                |
-| ---------- | -------------------------- |
-| `show()`   | Show the tooltip           |
-| `hide()`   | Hide the tooltip           |
-| `toggle()` | Show if hidden, else hide  |
+| Method     | Description               |
+| ---------- | ------------------------- |
+| `show()`   | Show the tooltip          |
+| `hide()`   | Hide the tooltip          |
+| `toggle()` | Show if hidden, else hide |
 
 ```js
 const tooltip = sp.tooltip(document.querySelector("#my-tooltip"));
 
 tooltip.show();
 ```
-
----
-
-## Accessibility
-
-The tooltip follows the WAI-ARIA [tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/): it sets `role="tooltip"` on itself and `aria-describedby` on the trigger automatically, and shows on focus as well as hover so it works for keyboard users.
