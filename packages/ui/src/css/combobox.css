@@ -1,126 +1,109 @@
-/* Starting Point UI Combobox Styles */
+@utility combobox {
+  @layer l1.l2 {
+    /* Hidden until JS upgrades it to a [popover], so it doesn't flash on load. */
+    &:not([popover]) {
+      @apply hidden;
+    }
 
-@utility combobox-trigger {
-    @layer l1.l2 {
-      @apply h-9 inline-flex w-full min-w-0 cursor-pointer items-center gap-2 rounded-input border border-input-border bg-input text-input-foreground px-3 text-sm shadow-input transition-[color,box-shadow] outline-none;
+    /* JS sets inline left/top; reset the native [popover] centering. */
+    @apply fixed inset-auto m-0 z-998 overflow-hidden;
+    @apply max-h-(--sp-available-height) rounded-md bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 border-none;
+
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-95 [&.show]:duration-100 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.show]:data-[sp-side=bottom]:slide-in-from-top-2 [&.show]:data-[sp-side=top]:slide-in-from-bottom-2 [&.show]:data-[sp-side=left]:slide-in-from-right-2 [&.show]:data-[sp-side=right]:slide-in-from-left-2;
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-95 [&.hide]:duration-100 [&.hide]:[animation-fill-mode:forwards];
+  }
+}
+
+@utility combobox-list {
+  @layer l1.l2 {
+    @apply max-h-72 scroll-py-1 overflow-y-auto overscroll-contain p-1;
+
+    /* When the filter empties the list, collapse the padding so only the
+       empty message shows. */
+    &:not(:has(.combobox-item:not([hidden]))) {
+      @apply p-0;
+    }
+  }
+}
+
+@utility combobox-item {
+  @layer l1.l2 {
+    @apply relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none;
+    @apply hover:bg-accent hover:text-accent-foreground data-sp-highlighted:bg-accent data-sp-highlighted:text-accent-foreground;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
+
+    /* The state-holding radio/checkbox is hidden; selection shows via ::after. */
+    & > input {
+      @apply sr-only;
+    }
+
+    &[aria-disabled="true"] {
+      @apply pointer-events-none opacity-50;
+    }
+
+    &::after {
+      @apply pointer-events-none absolute top-1/2 right-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      mask-size: 100% 100%;
+    }
+
+    &:has(input:checked)::after {
+      @apply block;
+    }
+  }
+}
+
+@utility combobox-label {
+  @layer l1.l2 {
+    @apply px-2 py-1.5 text-xs text-muted-foreground;
+  }
+}
+
+@utility combobox-separator {
+  @layer l1.l2 {
+    @apply -mx-1 my-1 h-px bg-border;
+  }
+}
+
+@utility combobox-empty {
+  @layer l1.l2 {
+    @apply hidden py-2 text-center text-sm text-muted-foreground;
+
+    &.visible {
+      @apply block;
+    }
+  }
+}
+
+@utility combobox-chips {
+  @layer l1.l2 {
+    @apply flex min-h-9 flex-wrap items-center gap-1.5 rounded-md border border-input bg-transparent bg-clip-padding px-2.5 py-1.5 text-sm shadow-xs transition-[color,box-shadow];
+    @apply focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50;
+    @apply has-[[aria-invalid="true"]]:border-destructive has-[[aria-invalid="true"]]:ring-3 has-[[aria-invalid="true"]]:ring-destructive/20 dark:has-[[aria-invalid="true"]]:border-destructive/50 dark:has-[[aria-invalid="true"]]:ring-destructive/40;
+    @apply has-[.combobox-chip]:px-1.5 dark:bg-input/30;
+
+    /* The chips input needs no class: a bare input inside works as the
+       query field. Once something is selected, the chips speak for it. */
+    & > input {
+      @apply min-w-16 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground;
       @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
-      @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
-      @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
-      @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
-      /* End-align the trailing chevron even when the label is plain text
-         (static trigger) instead of a flex-1 value span. */
-      @apply [&_svg:last-child]:ml-auto;
+    }
+
+    &:has(> .combobox-chip) > input::placeholder {
+      @apply text-transparent;
+    }
+
+    /* The chips are rendered by JS, so their styles live here where the
+       author-written class guarantees Tailwind emits them. */
+    & > .combobox-chip {
+      @apply flex h-5.5 w-fit items-center justify-center gap-1 rounded-sm bg-muted px-1.5 pr-0 text-xs font-medium whitespace-nowrap text-foreground;
+    }
+
+    & .combobox-chip-remove {
+      @apply -ml-1 flex size-5.5 shrink-0 cursor-pointer items-center justify-center rounded-sm opacity-50 transition-opacity outline-none;
+      @apply hover:opacity-100 focus-visible:opacity-100;
+      @apply [&>svg]:size-3.5 [&>svg]:shrink-0;
     }
   }
-
-  @utility combobox-value {
-    @layer l1.l2 {
-      @apply flex flex-1 items-center truncate text-left;
-      counter-reset: items;
-
-      /* Render placeholder text from data-sp-placeholder when no children are present */
-      &[data-sp-placeholder]:not(:has(> *))::before {
-        content: attr(data-sp-placeholder);
-        @apply text-muted-foreground;
-      }
-
-      /* Each direct child increments the counter */
-      & > * {
-        counter-increment: items;
-      }
-
-      /* When 2+ children, hide them off-screen (display:none would skip counter-increment) and render "N selected" via counter */
-      &:has(> *:nth-child(2)) > * {
-        @apply sr-only;
-      }
-
-      &:has(> *:nth-child(2))::after {
-        content: counter(items) " selected";
-      }
-    }
-  }
-  
-  @utility combobox {
-    @layer l1.l2 {
-      /* Hidden until JS upgrades it to a [popover], so it doesn't flash on load. */
-      &:not([popover]) {
-        @apply hidden;
-      }
-
-      /* JS sets inline left/top; reset the native [popover] centering. */
-      @apply fixed inset-auto m-0 z-998 min-w-40 overflow-hidden rounded-popover border border-popover-border bg-popover text-popover-foreground shadow-popover;
-
-      @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-95 [&.show]:duration-150 [&.show]:[animation-fill-mode:forwards];
-      @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-95 [&.hide]:duration-150 [&.hide]:[animation-fill-mode:forwards];
-    }
-  }
-  
-  @utility combobox-search {
-    @layer l1.l2 {
-      @apply flex items-center gap-2 border-b px-3;
-      @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4 [&_svg]:text-muted-foreground;
-    }
-  }
-  
-  @utility combobox-input {
-    @layer l1.l2 {
-      @apply h-9 w-full min-w-0 bg-transparent py-2 text-sm outline-none placeholder:text-muted-foreground;
-      @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
-    }
-  }
-  
-  @utility combobox-list {
-    @layer l1.l2 {
-      @apply max-h-60 overflow-y-auto p-1;
-    }
-  }
-  
-  @utility combobox-item {
-    @layer l1.l2 {
-      @apply relative flex cursor-default select-none items-center gap-2.5 rounded-sm py-1.5 pr-2.5 pl-8 text-sm outline-none transition-colors;
-      @apply hover:bg-secondary hover:text-secondary-foreground data-sp-highlighted:bg-secondary data-sp-highlighted:text-secondary-foreground;
-      @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
-
-      /* The state-holding radio/checkbox is hidden; selection shows via ::before. */
-      & > input {
-        @apply sr-only;
-      }
-
-      &[aria-disabled="true"] {
-        @apply pointer-events-none opacity-50;
-      }
-
-      &::before {
-        @apply absolute left-2 size-4 opacity-0 content-[''];
-        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-      }
-
-      &:has(input:checked)::before {
-        @apply opacity-100;
-      }
-    }
-  }
-  
-  @utility combobox-label {
-    @layer l1.l2 {
-      @apply px-2.5 py-1.5 text-sm font-medium text-muted-foreground;
-    }
-  }
-  
-  @utility combobox-separator {
-    @layer l1.l2 {
-      @apply -mx-1 my-1 h-px bg-border;
-    }
-  }
-  
-  @utility combobox-empty {
-    @layer l1.l2 {
-      @apply hidden py-6 text-center text-sm text-muted-foreground;
-  
-      &.visible {
-        @apply block;
-      }
-    }
-  }  
+}
