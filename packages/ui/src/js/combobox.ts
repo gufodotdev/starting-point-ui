@@ -78,6 +78,8 @@ export const Combobox = define({
     });
 
     this.on(this.el, "click", (e) => {
+      // select() re-clicks the hidden input; skip that synthetic pass.
+      if (e.target instanceof HTMLInputElement) return;
       const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
       if (!item) return;
       if (isDisabled(item)) {
@@ -182,8 +184,9 @@ export const Combobox = define({
       const multiple = input.type === "checkbox";
       // Multi select toggles; single select settles (clearing is the clear
       // button's job) and the shared radio name unchecks the previous pick.
-      input.checked = multiple ? !input.checked : true;
-      input.dispatchEvent(new Event("change", { bubbles: true }));
+      // click() keeps the change event native so every listener hears it,
+      // including React's click-based onChange.
+      if (multiple || !input.checked) input.click();
       this._syncSelected();
       this._renderChips();
       this._syncClear();
@@ -205,8 +208,13 @@ export const Combobox = define({
     // Unchecks every option and empties the field.
     clear(this: SpInstance): void {
       this.el.querySelectorAll<HTMLInputElement>(`${ITEM} input:checked`).forEach((input) => {
-        input.checked = false;
-        input.dispatchEvent(new Event("change", { bubbles: true }));
+        // click() unchecks a checkbox natively; radios can't un-click, so
+        // they fall back to assignment plus a dispatched change.
+        if (input.type === "checkbox") input.click();
+        else {
+          input.checked = false;
+          input.dispatchEvent(new Event("change", { bubbles: true }));
+        }
       });
       const anchorInput = this._anchorInput as HTMLInputElement | null;
       if (anchorInput) anchorInput.value = "";
@@ -254,8 +262,11 @@ export const Combobox = define({
     _uncheck(this: SpInstance, item: HTMLElement): void {
       const input = item.querySelector<HTMLInputElement>("input");
       if (!input) return;
-      input.checked = false;
-      input.dispatchEvent(new Event("change", { bubbles: true }));
+      if (input.type === "checkbox" && input.checked) input.click();
+      else {
+        input.checked = false;
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
       this._syncSelected();
       this._renderChips();
       this._syncClear();

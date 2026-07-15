@@ -127,10 +127,9 @@ export const Dropdown = define({
         'input[type="checkbox"], input[type="radio"]',
       );
       if (input) {
-        if (e.target !== input) {
-          input.checked = input.type === "radio" ? true : !input.checked;
-          input.dispatchEvent(new Event("change", { bubbles: true }));
-        }
+        // Toggle through click() so the change event is native and reaches
+        // every listener, including React's click-based onChange.
+        if (e.target !== input) input.click();
         // Toggles are settings, not commands: the menu stays open so the
         // user can flip several or change their mind.
         return;
