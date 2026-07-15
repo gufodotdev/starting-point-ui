@@ -76,3 +76,36 @@ test("sp.slider(el).update() refreshes after programmatic changes", async ({ pag
   expect(await val(page)).toBe("90%");
   await expect(page.locator("#out")).toHaveText("90");
 });
+
+test.describe("slider range", () => {
+  const RANGE = `
+    <div id="range" class="slider-range" style="--val-min: 25%; --val-max: 75%">
+      <input id="lo" type="range" class="slider" max="100" value="25" />
+      <input id="hi" type="range" class="slider" max="100" value="75" />
+    </div>`;
+
+  test("paints the shared fill from both values", async ({ page }) => {
+    await mount(page, RANGE);
+    await page.evaluate(() => {
+      const lo = document.querySelector("#lo") as HTMLInputElement;
+      lo.value = "40";
+      lo.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    const vars = await page.evaluate(() => {
+      const el = document.querySelector("#range") as HTMLElement;
+      return [el.style.getPropertyValue("--val-min"), el.style.getPropertyValue("--val-max")];
+    });
+    expect(vars).toEqual(["40%", "75%"]);
+  });
+
+  test("thumbs may meet but never cross", async ({ page }) => {
+    await mount(page, RANGE);
+    const value = await page.evaluate(() => {
+      const lo = document.querySelector("#lo") as HTMLInputElement;
+      lo.value = "90";
+      lo.dispatchEvent(new Event("input", { bubbles: true }));
+      return lo.value;
+    });
+    expect(value).toBe("75");
+  });
+});
