@@ -1,199 +1,207 @@
 ---
 title: Switch
-description: A Tailwind CSS switch component for toggling settings on and off.
+description: A switch component for Tailwind CSS with beautiful shadcn/ui styling. Use it to turn a setting on or off, like notifications or airplane mode.
 ---
 
-A Tailwind CSS switch component for toggling settings on and off.
+The switch turns a setting on or off with immediate effect, like enabling notifications. For options that are submitted with a form, reach for the [checkbox](/components/checkbox) instead.
 
-```html preview
-<input type="checkbox" role="switch" class="switch" />
+```html preview preset=form
+<div class="field field-horizontal">
+  <input type="checkbox" role="switch" class="switch" id="airplane-mode" />
+  <label class="label" for="airplane-mode">Airplane Mode</label>
+</div>
 ```
 
----
+## Usage
 
-## With label
+Add the `switch` class to an `<input type="checkbox">` with `role="switch"`, so it looks and announces like a toggle.
 
-Pair with a [Label](/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so clicking the label toggles the switch and screen readers announce it correctly.
+| Class       | Description                                       |
+| ----------- | ------------------------------------------------- |
+| `switch`    | Add to an `<input type="checkbox" role="switch">` |
+| `switch-sm` | Add to `switch` for a smaller size                |
 
-```html preview
-<div class="flex items-center gap-3">
+```html
+<input type="checkbox" role="switch" class="switch" id="my-switch" />
+<label class="label" for="my-switch">Airplane Mode</label>
+```
+
+## Examples
+
+### Description
+
+Pair the switch with a label and description in a horizontal [field](/components/field).
+
+```html preview preset=form
+<div class="field field-horizontal">
+  <div class="field-content">
+    <label class="label" for="switch-focus-mode">Share across devices</label>
+    <p class="field-description">
+      Focus is shared across devices, and turns off when you leave the app.
+    </p>
+  </div>
+  <input type="checkbox" role="switch" class="switch" id="switch-focus-mode" />
+</div>
+```
+
+### Choice card
+
+Wrap the field in a [label](/components/label) and the whole card toggles the switch.
+
+```html preview preset=form
+<div class="field-group gap-3">
+  <label class="label" for="switch-share">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Share across devices</span>
+        <p class="field-description">
+          Focus is shared across devices, and turns off when you leave the app.
+        </p>
+      </div>
+      <input type="checkbox" role="switch" class="switch" id="switch-share" />
+    </div>
+  </label>
+  <label class="label" for="switch-notifications">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Enable notifications</span>
+        <p class="field-description">
+          Receive notifications when focus mode is enabled or disabled.
+        </p>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="switch-notifications"
+        checked
+      />
+    </div>
+  </label>
+</div>
+```
+
+### Group
+
+Stack switches in a [field set](/components/field) to build a settings group.
+
+```html preview preset=form
+<fieldset class="field-set">
+  <legend class="field-legend">Notifications</legend>
+  <p class="field-description">Manage when you'll receive notifications.</p>
+  <div class="field-group">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <label class="label" for="switch-disputes">Disputes</label>
+        <p class="field-description">
+          Receive a notification if a payment is disputed by a customer.
+        </p>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="switch-disputes"
+        checked
+      />
+    </div>
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <label class="label" for="switch-fraudulent">Fraudulent payments</label>
+        <p class="field-description">
+          Receive a notification when Radar detects a fraudulent payment.
+        </p>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="switch-fraudulent"
+        checked
+      />
+    </div>
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <label class="label" for="switch-successful">Successful payments</label>
+        <p class="field-description">
+          Receive a notification for every payment that is processed on your
+          account.
+        </p>
+      </div>
+      <input
+        type="checkbox"
+        role="switch"
+        class="switch"
+        id="switch-successful"
+      />
+    </div>
+  </div>
+</fieldset>
+```
+
+### Disabled
+
+Add `disabled` and the label dims with the switch.
+
+```html preview preset=form
+<div class="field field-horizontal">
   <input
     type="checkbox"
     role="switch"
     class="switch"
-    id="enable-notifications"
-    name="enable-notifications"
+    id="switch-disabled"
+    disabled
   />
-  <label class="label" for="enable-notifications">Enable notifications</label>
+  <label class="label" for="switch-disabled">Disabled</label>
 </div>
 ```
 
----
+### Invalid
 
-## Group
+Set `aria-invalid` on the switch for the error state.
 
-Use a group of switches for managing multiple settings with descriptions.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="grid gap-5">
-    <div class="flex items-start justify-between gap-4">
-      <div class="grid gap-2">
-        <label class="label" for="email">Email notifications</label>
-        <span class="text-sm text-muted-foreground">
-          Receive updates and alerts via email
-        </span>
-      </div>
-      <input
-        type="checkbox"
-        role="switch"
-        class="switch"
-        id="email"
-        name="email"
-        checked=""
-      />
-    </div>
-    <div class="flex items-start justify-between gap-4">
-      <div class="grid gap-2">
-        <label class="label" for="push">Push notifications</label>
-        <span class="text-sm text-muted-foreground">
-          Get instant alerts on your mobile device
-        </span>
-      </div>
-      <input
-        type="checkbox"
-        role="switch"
-        class="switch"
-        id="push"
-        name="push"
-      />
-    </div>
-    <div class="flex items-start justify-between gap-4">
-      <div class="grid gap-2">
-        <label class="label" for="marketing">Marketing emails</label>
-        <span class="text-sm text-muted-foreground">
-          Stay informed about new features and offers
-        </span>
-      </div>
-      <input
-        type="checkbox"
-        role="switch"
-        class="switch"
-        id="marketing"
-        name="marketing"
-      />
-    </div>
+```html preview preset=form
+<div class="field field-horizontal">
+  <div class="field-content">
+    <label class="label" for="switch-terms">Accept terms and conditions</label>
+    <p class="field-description">
+      You must accept the terms and conditions before continuing with your
+      registration.
+    </p>
   </div>
-</div>
-```
-
----
-
-## Separated group
-
-Add separators between switch items for visual distinction.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="grid gap-5">
-    <div class="flex items-start justify-between gap-4">
-      <div class="grid gap-2">
-        <label class="label" for="analytics">Usage analytics</label>
-        <span class="text-sm text-muted-foreground">
-          Help us improve by sharing anonymous usage data
-        </span>
-      </div>
-      <input
-        type="checkbox"
-        role="switch"
-        class="switch"
-        id="analytics"
-        name="analytics"
-        checked=""
-      />
-    </div>
-    <div class="separator" role="separator"></div>
-    <div class="flex items-start justify-between gap-4">
-      <div class="grid gap-2">
-        <label class="label" for="cookies">Third-party cookies</label>
-        <span class="text-sm text-muted-foreground">
-          Allow cookies from external services
-        </span>
-      </div>
-      <input
-        type="checkbox"
-        role="switch"
-        class="switch"
-        id="cookies"
-        name="cookies"
-      />
-    </div>
-    <div class="separator" role="separator"></div>
-    <div class="flex items-start justify-between gap-4">
-      <div class="grid gap-2">
-        <label class="label" for="tracking">Ad tracking</label>
-        <span class="text-sm text-muted-foreground">
-          Enable personalized advertising
-        </span>
-      </div>
-      <input
-        type="checkbox"
-        role="switch"
-        class="switch"
-        id="tracking"
-        name="tracking"
-      />
-    </div>
-  </div>
-</div>
-```
-
----
-
-## Disabled
-
-Add `disabled` to the switch and `peer` so the label dims to match.
-
-```html preview
-<div class="flex items-center gap-3">
   <input
     type="checkbox"
     role="switch"
-    class="switch peer"
-    id="disabled-switch"
-    disabled=""
-    name="disabled-switch"
+    class="switch"
+    id="switch-terms"
+    aria-invalid="true"
   />
-  <label class="label" for="disabled-switch">Disabled switch</label>
 </div>
 ```
 
----
+### Size
 
-## How it works
+Add `switch-sm` for a smaller size.
 
-The switch component is a CSS-only utility class applied to a native `<input type="checkbox">` element with `role="switch"`.
-
-### Structure
-
-Use the `.switch` class on an `<input type="checkbox">` with `role="switch"`. Pair it with a `.label` element connected via `for` and `id`:
-
-```html
-<input type="checkbox" role="switch" class="switch" id="notifications" />
-<label class="label" for="notifications">Enable notifications</label>
+```html preview preset=form
+<div class="field-group gap-3">
+  <div class="field field-horizontal">
+    <input
+      type="checkbox"
+      role="switch"
+      class="switch switch-sm"
+      id="switch-size-sm"
+    />
+    <label class="label" for="switch-size-sm">Small</label>
+  </div>
+  <div class="field field-horizontal">
+    <input
+      type="checkbox"
+      role="switch"
+      class="switch"
+      id="switch-size-default"
+    />
+    <label class="label" for="switch-size-default">Default</label>
+  </div>
+</div>
 ```
-
-### Disabled state
-
-Add `disabled` to the switch. Use `peer` on the switch so the label automatically dims via `peer-disabled`:
-
-```html
-<input type="checkbox" role="switch" class="switch peer" id="sw" disabled />
-<label class="label" for="sw">Disabled</label>
-```
-
-### Class reference
-
-| Class    | Description        |
-| -------- | ------------------ |
-| `switch` | Base switch styles |
