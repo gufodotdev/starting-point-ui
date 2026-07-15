@@ -1,80 +1,123 @@
 ---
 title: Toast
-description: An accessible toast component for Tailwind CSS, showing temporary notifications and feedback messages.
+description: A toast component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show brief notifications, like "Changes saved" or "Copied to clipboard".
 ---
 
-Temporary notifications created from JavaScript, stacked per position and auto-dismissed after a configurable duration.
+The toast shows a brief notification that stacks in a corner and dismisses itself, like "Changes saved" after a form submit. It is created from JavaScript rather than authored markup; for a message that must interrupt and be acknowledged, use a [dialog](/components/dialog) instead.
 
-## Basic Usage
-
-Call `sp.toast()` with a title. The toast, its stacking container, and all accessibility wiring are created for you. Multiple toasts collapse into a stack with the newest in front; hovering the stack expands it to the full list and pauses every auto-dismiss timer.
-
-```html preview
-<button class="btn" onclick="sp.toast('Event has been created')">
+```html preview preset=default-tall
+<button
+  class="btn btn-outline"
+  onclick="sp.toast('Event has been created', { description: 'Sunday, December 03, 2023 at 9:00 AM', action: { label: 'Undo', onClick: () => console.log('Undo') } })"
+>
   Show Toast
 </button>
 ```
 
-## Types
+## Usage
 
-Set the `type` option, or use the shorthand methods `sp.toast.success()`, `sp.toast.error()`, `sp.toast.warning()`, `sp.toast.info()`, and `sp.toast.loading()`.
+Call `sp.toast()` with a message and an optional configuration object, and everything is created for you: toasts stack with the newest in front, and hovering the stack expands it. The rendered elements carry these classes:
 
-```html preview
-<div class="flex flex-wrap gap-2">
-  <button class="btn" onclick="sp.toast('A default toast notification')">
+| Class                               | Description                              |
+| ----------------------------------- | ---------------------------------------- |
+| `toaster`                           | The stacking container, one per position |
+| `toast`                             | Each notification panel                  |
+| `toast-icon`                        | The type icon                            |
+| `toast-title` / `toast-description` | The text slots                           |
+| `toast-action`                      | The action button wrapper                |
+| `toast-close`                       | The dismiss button, shown on hover       |
+
+```js
+sp.toast("Event has been created");
+```
+
+## Examples
+
+### Types
+
+Use the shorthand methods for a leading status icon, or pass the `type` option.
+
+```html preview preset=default-tall
+<div class="flex flex-wrap justify-center gap-2">
+  <button class="btn btn-outline" onclick="sp.toast('Event has been created')">
     Default
   </button>
-  <button class="btn" onclick="sp.toast.success('Changes saved successfully')">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast.success('Event has been created')"
+  >
     Success
   </button>
-  <button class="btn" onclick="sp.toast.error('Failed to save changes')">
-    Error
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast.info('Be at the area 10 minutes before the event time')"
+  >
+    Info
   </button>
-  <button class="btn" onclick="sp.toast.warning('This action cannot be undone')">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast.warning('Event start time cannot be earlier than 8am')"
+  >
     Warning
   </button>
-  <button class="btn" onclick="sp.toast.info('A new version is available')">
-    Info
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast.error('Event has not been created')"
+  >
+    Error
   </button>
 </div>
 ```
 
-## With description
+### Description
 
 Add a secondary line of text with the `description` option.
 
-```html preview
+```html preview preset=default-tall
 <button
-  class="btn"
-  onclick="sp.toast.success('Profile updated', { description: 'Your changes have been saved and are now live.' })"
+  class="btn btn-outline"
+  onclick="sp.toast('Profile updated', { description: 'Your changes have been saved and are now live.' })"
 >
   With Description
 </button>
 ```
 
-## With action
+### Type with description
 
-Add a clickable action button to the toast.
+A status icon next to a title and description.
 
-```html preview
+```html preview preset=default-tall
 <button
-  class="btn"
+  class="btn btn-outline"
+  onclick="sp.toast.success('Event has been created', { description: 'Sunday, December 03, 2023 at 9:00 AM' })"
+>
+  Success with Description
+</button>
+```
+
+### Action
+
+Add a clickable action button; choosing it also dismisses the toast.
+
+```html preview preset=default-tall
+<button
+  class="btn btn-outline"
   onclick="sp.toast('File deleted', { description: 'report-2024.pdf was moved to trash.', action: { label: 'Undo', onClick: () => sp.toast.success('File restored') } })"
 >
   With Action
 </button>
 ```
 
-## Loading and update
+### Loading and update
 
-Use `sp.toast.loading()` to show a spinner. Loading toasts don't auto-dismiss and aren't dismissible by default. Use `update()` on the returned toast instance to swap it to a different state.
+`sp.toast.loading()` shows a spinner and stays put; call `update()` on the returned instance to swap it to a result state.
 
-```html preview
+```html preview preset=default-tall
 <button
-  class="btn"
+  class="btn btn-outline"
   onclick="(function(){ var t = sp.toast.loading('Loading data...'); setTimeout(function(){ t.update({ title: 'Data loaded successfully', type: 'success' }) }, 2000) })()"
 >
-  Loading → Success
+  Loading then Success
 </button>
 ```
 
@@ -90,72 +133,101 @@ if (res.ok) {
 }
 ```
 
-## Duration
+### Duration
 
-Control how long the toast stays visible (in milliseconds). Default is 4000ms. Set `0` for a persistent toast that must be dismissed manually.
+Control how long the toast stays (milliseconds, default 4000); `0` keeps it until dismissed.
 
-```html preview
-<div class="flex flex-wrap gap-2">
-  <button class="btn" onclick="sp.toast('Gone in 2 seconds', { duration: 2000 })">
+```html preview preset=default-tall
+<div class="flex flex-wrap justify-center gap-2">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Gone in 2 seconds', { duration: 2000 })"
+  >
     Short (2s)
   </button>
-  <button class="btn" onclick="sp.toast('Staying for 10 seconds', { duration: 10000 })">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Staying for 10 seconds', { duration: 10000 })"
+  >
     Long (10s)
   </button>
-  <button class="btn" onclick="sp.toast('I won\'t go away on my own', { duration: 0 })">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('I won\'t go away on my own', { duration: 0 })"
+  >
     Persistent
   </button>
 </div>
 ```
 
-## Position
+### Position
 
-Place the toast container in any corner or centered at the top or bottom. Default is `bottom-right`.
+Place the stack in any corner or centered at the top or bottom; default is `bottom-right`.
 
-```html preview
-<div class="flex flex-wrap gap-2">
-  <button class="btn" onclick="sp.toast('Top left', { position: 'top-left' })">
+```html preview preset=default-tall
+<div class="flex flex-wrap justify-center gap-2">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Top left', { position: 'top-left' })"
+  >
     Top Left
   </button>
-  <button class="btn" onclick="sp.toast('Top center', { position: 'top-center' })">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Top center', { position: 'top-center' })"
+  >
     Top Center
   </button>
-  <button class="btn" onclick="sp.toast('Top right', { position: 'top-right' })">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Top right', { position: 'top-right' })"
+  >
     Top Right
   </button>
-  <button class="btn" onclick="sp.toast('Bottom left', { position: 'bottom-left' })">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Bottom left', { position: 'bottom-left' })"
+  >
     Bottom Left
   </button>
-  <button class="btn" onclick="sp.toast('Bottom center', { position: 'bottom-center' })">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Bottom center', { position: 'bottom-center' })"
+  >
     Bottom Center
   </button>
-  <button class="btn" onclick="sp.toast('Bottom right', { position: 'bottom-right' })">
+  <button
+    class="btn btn-outline"
+    onclick="sp.toast('Bottom right', { position: 'bottom-right' })"
+  >
     Bottom Right
   </button>
 </div>
 ```
 
-## Non-dismissible
+### Non-dismissible
 
-Set `dismissible: false` to hide the close button. The toast disappears only when its duration expires.
+Set `dismissible: false` to hide the close button; the toast leaves only when its duration expires.
 
-```html preview
+```html preview preset=default-tall
 <button
-  class="btn"
+  class="btn btn-outline"
   onclick="sp.toast.info('Processing your request...', { dismissible: false, duration: 3000 })"
 >
   Non-dismissible
 </button>
 ```
 
-## Declarative toasts
+### Declarative toasts
 
-Add a `data-sp-toast` attribute to any element to fire it as a toast and remove the element, with a plain string or a JSON config. New elements are picked up as they enter the DOM, so server-rendered redirects can queue flash messages with no JavaScript.
+Add `data-sp-toast` to any element to fire it as a toast and remove the element, with a plain string or a JSON config. New elements are picked up as they enter the DOM, so server-rendered redirects can queue flash messages with no JavaScript of their own.
 
 ```html
 <div data-sp-toast="Changes saved"></div>
 
-<div data-sp-toast='{"title":"Post created","type":"success","description":"Your post is now live."}'></div>
+<div
+  data-sp-toast='{"title":"Post created","type":"success","description":"Your post is now live."}'
+></div>
 ```
 
 For example, in Laravel Blade:
@@ -179,39 +251,37 @@ Toasts queued this way survive being rendered by React, Livewire, HTMX, or anyth
 
 Pass options as the second argument to `sp.toast()`.
 
-| Option        | Type     | Default        | Description                                                       |
-| ------------- | -------- | -------------- | ----------------------------------------------------------------- |
-| `type`        | String   | `default`      | `success`, `error`, `warning`, `info`, or `loading`               |
-| `description` | String   | —              | Secondary text under the title                                    |
-| `duration`    | Number   | `4000`         | Milliseconds before auto-dismiss; `0` keeps the toast until dismissed |
-| `action`      | Object   | —              | `{ label, onClick }` rendered as a button; clicking also dismisses |
-| `position`    | String   | `bottom-right` | `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right` |
-| `dismissible` | Boolean  | `true`         | Show the close button                                             |
+| Option        | Type    | Default        | Description                                                                           |
+| ------------- | ------- | -------------- | ------------------------------------------------------------------------------------- |
+| `type`        | String  | `default`      | `success`, `error`, `warning`, `info`, or `loading`                                   |
+| `description` | String  | —              | Secondary text under the title                                                        |
+| `duration`    | Number  | `4000`         | Milliseconds before auto-dismiss; `0` keeps the toast until dismissed                 |
+| `action`      | Object  | —              | `{ label, onClick }` rendered as a button; clicking also dismisses                    |
+| `position`    | String  | `bottom-right` | `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right` |
+| `dismissible` | Boolean | `true`         | Show the close button                                                                 |
 
-## Events
+## JavaScript
+
+### Events
 
 Lifecycle events fire on each toast element and bubble to `document`.
 
-| Event       | When               |
-| ----------- | ------------------ |
-| `sp-show`   | Entering           |
-| `sp-shown`  | Shown and settled  |
-| `sp-hide`   | Leaving            |
-| `sp-hidden` | Removed            |
+| Event       | When              |
+| ----------- | ----------------- |
+| `sp-show`   | Entering          |
+| `sp-shown`  | Shown and settled |
+| `sp-hide`   | Leaving           |
+| `sp-hidden` | Removed           |
 
-## Methods
+### Methods
 
 `sp.toast()` returns a toast instance; the module also exposes global helpers.
 
-| Method                      | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| `sp.toast(title, options)`  | Show a toast, returns `{ id, update, dismiss }` |
+| Method                             | Description                                                                |
+| ---------------------------------- | -------------------------------------------------------------------------- |
+| `sp.toast(title, options)`         | Show a toast, returns `{ id, update, dismiss }`                            |
 | `sp.toast.success(title, options)` | Shorthand for each type (`success`, `error`, `warning`, `info`, `loading`) |
-| `instance.update(options)`  | Swap title, type, description, and duration in place |
-| `instance.dismiss()`        | Dismiss this toast                           |
-| `sp.toast.dismiss(id)`      | Dismiss a toast by id                        |
-| `sp.toast.dismissAll()`     | Dismiss every toast                          |
-
-## Accessibility
-
-Toasts render as `role="status"` items inside an `aria-live="polite"` region, so screen readers announce them without interrupting the user. Hovering or focusing a toast pauses its auto-dismiss timer.
+| `instance.update(options)`         | Swap title, type, description, and duration in place                       |
+| `instance.dismiss()`               | Dismiss this toast                                                         |
+| `sp.toast.dismiss(id)`             | Dismiss a toast by id                                                      |
+| `sp.toast.dismissAll()`            | Dismiss every toast                                                        |
