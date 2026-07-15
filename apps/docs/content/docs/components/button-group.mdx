@@ -1,124 +1,227 @@
 ---
 title: Button Group
-description: A Tailwind CSS button group component for grouping related buttons together.
+description: A button group component for Tailwind CSS with beautiful shadcn/ui styling. Use it to attach related buttons into one row, like a split button or a search input with its action.
 ---
 
-A Tailwind CSS button group component for grouping related [buttons](/components/button) together.
+The button group attaches related controls into one segmented row, like a split button, a set of toolbar actions, or an input with its button. For choices that toggle on and off, reach for [tabs](/components/tabs) or a [radio group](/components/radio-group) instead.
 
 ```html preview
 <div class="btn-group">
-  <button class="btn">Left</button>
-  <button class="btn">Center</button>
-  <button class="btn">Right</button>
+  <div class="btn-group">
+    <button class="btn btn-outline btn-icon" aria-label="Go back">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </button>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-outline">Archive</button>
+    <button class="btn btn-outline">Report</button>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-outline">Snooze</button>
+    <button
+      id="bg-more-trigger"
+      class="btn btn-outline btn-icon"
+      aria-label="More options"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    </button>
+  </div>
+</div>
+
+<div
+  class="dropdown min-w-40"
+  data-sp-toggle="#bg-more-trigger"
+  data-sp-placement="bottom-end"
+>
+  <a href="#" class="dropdown-item">Mark as read</a>
+  <a href="#" class="dropdown-item">Archive</a>
 </div>
 ```
 
----
+## Usage
 
-## Sizes
+Add the `btn-group` class to a container and put [buttons](/components/button) directly inside it. The group removes the inner radii and collapses the shared borders.
 
-Button groups work with all [button sizes](/components/button#sizes).
+| Class                 | Description                                          |
+| --------------------- | ---------------------------------------------------- |
+| `btn-group`           | Add to the container wrapping the buttons            |
+| `btn-group-vertical`  | Add to `btn-group` to stack the buttons vertically   |
+| `btn-group-separator` | Add to an element between buttons to divide them     |
+| `btn-group-text`      | Add to a child for static text alongside the buttons |
 
-```html preview
-<div class="flex flex-col gap-4">
-  <div class="btn-group">
-    <button class="btn btn-sm">Left</button>
-    <button class="btn btn-sm">Center</button>
-    <button class="btn btn-sm">Right</button>
-  </div>
-  <div class="btn-group">
-    <button class="btn">Left</button>
-    <button class="btn">Center</button>
-    <button class="btn">Right</button>
-  </div>
-  <div class="btn-group">
-    <button class="btn btn-lg">Left</button>
-    <button class="btn btn-lg">Center</button>
-    <button class="btn btn-lg">Right</button>
-  </div>
+```html
+<div class="btn-group">
+  <button class="btn btn-outline">Left</button>
+  <button class="btn btn-outline">Center</button>
+  <button class="btn btn-outline">Right</button>
 </div>
 ```
 
----
+## Examples
 
-## Vertical
+### Orientation
 
-Stack buttons vertically using `btn-group-vertical`.
+Add `btn-group-vertical` to stack the buttons vertically.
 
 ```html preview
 <div class="btn-group btn-group-vertical">
-  <button class="btn btn-icon" aria-label="Increase">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  <button class="btn btn-outline btn-icon" aria-label="Zoom in">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
   </button>
-  <button class="btn btn-icon" aria-label="Decrease">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+  <button class="btn btn-outline btn-icon" aria-label="Zoom out">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
   </button>
 </div>
 ```
 
----
+### Size
 
-## With separator
+Size the group through the buttons themselves.
 
-Add visual separation between buttons using `btn-group-separator`. Recommended for variants without borders like `btn-secondary`.
+```html preview preset=default-stacked
+<div class="btn-group">
+  <button class="btn btn-outline btn-xs">Extra Small</button>
+  <button class="btn btn-outline btn-xs">Button</button>
+  <button class="btn btn-outline btn-xs">Group</button>
+  <button class="btn btn-outline btn-xs btn-icon" aria-label="Add">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </button>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-outline btn-sm">Small</button>
+  <button class="btn btn-outline btn-sm">Button</button>
+  <button class="btn btn-outline btn-sm">Group</button>
+  <button class="btn btn-outline btn-sm btn-icon" aria-label="Add">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </button>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-outline">Base</button>
+  <button class="btn btn-outline">Button</button>
+  <button class="btn btn-outline">Group</button>
+  <button class="btn btn-outline btn-icon" aria-label="Add">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </button>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-outline btn-lg">Large</button>
+  <button class="btn btn-outline btn-lg">Button</button>
+  <button class="btn btn-outline btn-lg">Group</button>
+  <button class="btn btn-outline btn-lg btn-icon" aria-label="Add">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </button>
+</div>
+```
+
+### Nested
+
+Nest groups inside a group and they separate with a small gap. Anything groupable nests the same way, like the [input group](/components/input-group) holding the message field here.
 
 ```html preview
 <div class="btn-group">
-  <button class="btn btn-secondary">Save</button>
+  <div class="btn-group">
+    <button class="btn btn-outline btn-icon" aria-label="Add attachment">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+    </button>
+  </div>
+  <div class="btn-group">
+    <div class="input-group">
+      <input class="input" placeholder="Send a message..." />
+      <span id="bg-voice-addon" class="input-group-addon input-group-addon-end">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" data-sp-toggle="#bg-voice-addon">Voice Mode</div>
+```
+
+### Split
+
+Pair a main action with a compact secondary one. Outline buttons separate themselves with their borders; for other variants, divide the buttons with a `btn-group-separator`.
+
+```html preview
+<div class="btn-group">
+  <button class="btn btn-secondary">Button</button>
   <div class="btn-group-separator"></div>
-  <button class="btn btn-secondary btn-icon" aria-label="More options">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  <button class="btn btn-secondary btn-icon" aria-label="Add">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
   </button>
 </div>
 ```
 
----
+### Input
 
-## With text addon
-
-Use `btn-group-text` for non-interactive text labels alongside inputs.
+Group an [input](/components/input) with its action.
 
 ```html preview
 <div class="btn-group">
-  <span class="btn-group-text">https://</span>
+  <input class="input" type="search" placeholder="Search..." />
+  <button class="btn btn-outline" aria-label="Search">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+  </button>
+</div>
+```
+
+### Dropdown
+
+Attach a [dropdown](/components/dropdown) trigger for secondary actions.
+
+```html preview
+<div class="btn-group">
+  <button class="btn btn-outline">Follow</button>
+  <button
+    id="bg-follow-trigger"
+    class="btn btn-outline btn-icon"
+    aria-label="More options"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+</div>
+
+<div
+  class="dropdown min-w-44"
+  data-sp-toggle="#bg-follow-trigger"
+  data-sp-placement="bottom-end"
+>
+  <a href="#" class="dropdown-item">Mute conversation</a>
+  <a href="#" class="dropdown-item">Mark as read</a>
+</div>
+```
+
+### Select
+
+Group a [select](/components/select) with an input.
+
+```html preview
+<div class="btn-group">
+  <div class="btn-group">
+    <select class="select w-fit font-mono">
+      <option>USD</option>
+      <option>EUR</option>
+      <option>GBP</option>
+    </select>
+    <input class="input" placeholder="10.00" />
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-outline btn-icon" aria-label="Send">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+```
+
+### Text
+
+Attach static text to a control with `btn-group-text`, like a prefix or a unit.
+
+```html preview
+<div class="btn-group">
+  <div class="btn-group-text">https://</div>
   <input class="input" placeholder="example.com" />
 </div>
 ```
-
----
-
-## How it works
-
-The button group component uses `.btn-group` as a container to visually connect related buttons.
-
-### Structure
-
-Wrap buttons in a `.btn-group` container:
-
-```html
-<div class="btn-group">
-  <button class="btn">Left</button>
-  <button class="btn">Right</button>
-</div>
-```
-
-### Vertical layout
-
-Add `.btn-group-vertical` for a vertical stack:
-
-```html
-<div class="btn-group btn-group-vertical">
-  <button class="btn">Top</button>
-  <button class="btn">Bottom</button>
-</div>
-```
-
-### Class reference
-
-| Class                  | Description                      |
-| ---------------------- | -------------------------------- |
-| `btn-group`            | Container for grouping buttons   |
-| `btn-group-horizontal` | Horizontal layout (default)      |
-| `btn-group-vertical`   | Vertical layout                  |
-| `btn-group-separator`  | Visual separator between buttons |
-| `btn-group-text`       | Non-interactive text addon       |
