@@ -67,3 +67,13 @@
     @apply [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4;
   }
 }
+
+@utility input-group-sm {
+  @layer l1 {
+    @apply h-8 has-[>textarea]:h-auto has-[>.input-group-addon-block-start]:h-auto has-[>.input-group-addon-block-end]:h-auto;
+
+    & > .input {
+      @apply h-8;
+    }
+  }
+}
