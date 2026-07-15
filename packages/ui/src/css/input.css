@@ -12,3 +12,9 @@
     @apply dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
   }
 }
+
+@utility input-sm {
+  @layer l1 {
+    @apply h-8 file:h-6;
+  }
+}
