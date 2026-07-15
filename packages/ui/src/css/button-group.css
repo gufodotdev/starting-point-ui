@@ -1,29 +1,30 @@
 /* Starting Point UI Button Group Styles */
 
 @utility btn-group {
-  @apply flex w-fit items-stretch;
+  @apply flex w-fit items-stretch in-[.field]:w-full;
   @apply [&>*]:focus-visible:z-10 [&>*]:focus-visible:relative;
+  @apply has-[>.btn-group]:gap-2 [&>input]:flex-1;
   @apply [&:where(&:not(.btn-group-horizontal,.btn-group-vertical))]:btn-group-horizontal;
 }
 
 @utility btn-group-horizontal {
   @apply [&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0;
   @apply [&>*:not(:last-child)]:rounded-r-none;
-  @apply [&>.btn-group-separator]:h-auto [&>.btn-group-separator]:w-px;
+  @apply [&>.btn-group-separator]:my-px [&>.btn-group-separator]:h-auto [&>.btn-group-separator]:w-px;
 }
 
 @utility btn-group-vertical {
   @apply flex-col;
   @apply [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0;
   @apply [&>*:not(:last-child)]:rounded-b-none;
-  @apply [&>.btn-group-separator]:w-auto [&>.btn-group-separator]:h-px;
+  @apply [&>.btn-group-separator]:mx-px [&>.btn-group-separator]:w-auto [&>.btn-group-separator]:h-px;
 }
 
 @utility btn-group-text {
-  @apply bg-muted flex items-center gap-2 rounded-md border px-4 text-sm font-medium shadow-xs;
+  @apply bg-muted flex items-center gap-2 rounded-md border px-2.5 text-sm font-medium shadow-xs;
   @apply [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
 }
 
 @utility btn-group-separator {
-  @apply bg-btn-border relative self-stretch;
+  @apply bg-input relative self-stretch;
 }
