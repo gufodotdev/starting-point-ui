@@ -16,7 +16,6 @@ import { toast, ToastTrigger } from "./toast";
 import { Slider, SliderRange } from "./slider";
 import { Avatar } from "./avatar";
 import { Breadcrumb } from "./breadcrumb";
-import { Navbar } from "./navbar";
 import { Pagination } from "./pagination";
 import { Sidebar } from "./sidebar";
 
@@ -35,7 +34,6 @@ const components: ComponentFactory[] = [
   Breadcrumb,
   Slider,
   SliderRange,
-  Navbar,
   Pagination,
   Sidebar,
 ];
@@ -53,7 +51,6 @@ const slider = (el: HTMLElement): SpInstance | null => getInstance(el, Slider);
 const sliderRange = (el: HTMLElement): SpInstance | null => getInstance(el, SliderRange);
 const avatar = (el: HTMLElement): SpInstance | null => getInstance(el, Avatar);
 const breadcrumb = (el: HTMLElement): SpInstance | null => getInstance(el, Breadcrumb);
-const navbar = (el: HTMLElement): SpInstance | null => getInstance(el, Navbar);
 const pagination = (el: HTMLElement): SpInstance | null => getInstance(el, Pagination);
 const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar);
 
@@ -85,7 +82,6 @@ export {
   sliderRange,
   avatar,
   breadcrumb,
-  navbar,
   pagination,
   sidebar,
   toast,
@@ -109,7 +105,6 @@ declare global {
       sliderRange: typeof sliderRange;
       avatar: typeof avatar;
       breadcrumb: typeof breadcrumb;
-      navbar: typeof navbar;
       pagination: typeof pagination;
       sidebar: typeof sidebar;
       toast: typeof toast;
@@ -132,7 +127,6 @@ if (typeof document !== "undefined") {
   sliderRange,
     avatar,
     breadcrumb,
-    navbar,
     pagination,
     sidebar,
     toast,

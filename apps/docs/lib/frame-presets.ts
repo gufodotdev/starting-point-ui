@@ -110,11 +110,6 @@ export const framePresets: Record<string, CSSProperties> = {
     padding: "clamp(1rem, 5vw, 2.5rem)",
     minHeight: "667px",
   },
-  navbar: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "667px",
-  },
   sidebar: {
     minHeight: "667px",
   },

@@ -3,7 +3,7 @@ title: Sidebar
 description: A sidebar component for Tailwind CSS with beautiful shadcn/ui styling. Use it to put app navigation beside the page, collapsing to an icon rail or a mobile drawer.
 ---
 
-The sidebar places your navigation in a column beside the page, the standard layout for dashboards, admin panels, and apps with many destinations. It collapses out of the way when the content needs room, and becomes a drawer on mobile. For shallow navigation that fits in a top bar, reach for the [navbar](/components/navbar) instead.
+The sidebar places your navigation in a column beside the page, the standard layout for dashboards, admin panels, and apps with many destinations. It collapses out of the way when the content needs room, and becomes a drawer on mobile.
 
 ```html preview preset=sidebar
 <div class="sidebar-container">
@@ -18,12 +18,12 @@ The sidebar places your navigation in a column beside the page, the standard lay
         class="sidebar-menu-button sidebar-menu-button-lg"
         aria-expanded="false"
       >
-        <span class="brand-logo brand-logo-lg">
+        <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-text">
-          <span class="brand-name">Acme Inc.</span>
-          <span class="brand-subtitle">Enterprise</span>
+        <span class="grid min-w-0 flex-1 text-left leading-tight">
+          <span class="truncate text-sm font-medium">Acme Inc.</span>
+          <span class="truncate text-xs text-muted-foreground">Enterprise</span>
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
       </button>
@@ -179,7 +179,7 @@ The sidebar places your navigation in a column beside the page, the standard lay
 
 Add the `sidebar` class to an `<aside>` element and pair it with a `sidebar-page` content area inside a `sidebar-container` root. Point the sidebar at its trigger with `data-sp-toggle`: on desktop the trigger collapses the column in place, on mobile it opens the sidebar as a drawer.
 
-Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle while an optional `sidebar-header` and `sidebar-footer` stay pinned. Their contents are up to you, typically a [brand](/components/brand) up top, grouped menus of links, and a user row at the bottom.
+Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle while an optional `sidebar-header` and `sidebar-footer` stay pinned. Their contents are up to you, typically a brand row up top, grouped menus of links, and a user row at the bottom.
 
 | Class                   | Description                                                                 |
 | ----------------------- | --------------------------------------------------------------------------- |
@@ -258,12 +258,12 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
   <aside class="sidebar" data-sp-collapse="icon" data-sp-toggle="#icon-trigger">
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <span class="brand-logo brand-logo-lg">
+        <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-text">
-          <span class="brand-name">Acme Inc.</span>
-          <span class="brand-subtitle">Enterprise</span>
+        <span class="grid min-w-0 flex-1 text-left leading-tight">
+          <span class="truncate text-sm font-medium">Acme Inc.</span>
+          <span class="truncate text-xs text-muted-foreground">Enterprise</span>
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
       </button>
@@ -352,12 +352,12 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
   >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <span class="brand-logo brand-logo-lg">
+        <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-text">
-          <span class="brand-name">Acme Inc.</span>
-          <span class="brand-subtitle">Enterprise</span>
+        <span class="grid min-w-0 flex-1 text-left leading-tight">
+          <span class="truncate text-sm font-medium">Acme Inc.</span>
+          <span class="truncate text-xs text-muted-foreground">Enterprise</span>
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
       </button>
@@ -446,12 +446,12 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
   >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <span class="brand-logo brand-logo-lg">
+        <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-text">
-          <span class="brand-name">Acme Inc.</span>
-          <span class="brand-subtitle">Enterprise</span>
+        <span class="grid min-w-0 flex-1 text-left leading-tight">
+          <span class="truncate text-sm font-medium">Acme Inc.</span>
+          <span class="truncate text-xs text-muted-foreground">Enterprise</span>
         </span>
       </button>
     </header>
@@ -538,12 +538,12 @@ A sidebar defaults to the left. Add `sidebar-right` to move it to the right inst
   >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <span class="brand-logo brand-logo-lg">
+        <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-text">
-          <span class="brand-name">Acme Inc.</span>
-          <span class="brand-subtitle">Enterprise</span>
+        <span class="grid min-w-0 flex-1 text-left leading-tight">
+          <span class="truncate text-sm font-medium">Acme Inc.</span>
+          <span class="truncate text-xs text-muted-foreground">Enterprise</span>
         </span>
       </button>
     </header>
@@ -614,12 +614,12 @@ A layout can hold two sidebars at once, for example navigation on the left and a
   >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <span class="brand-logo brand-logo-lg">
+        <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-text">
-          <span class="brand-name">Acme Inc.</span>
-          <span class="brand-subtitle">Enterprise</span>
+        <span class="grid min-w-0 flex-1 text-left leading-tight">
+          <span class="truncate text-sm font-medium">Acme Inc.</span>
+          <span class="truncate text-xs text-muted-foreground">Enterprise</span>
         </span>
       </button>
     </header>
@@ -723,7 +723,7 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
     >
       <header class="sidebar-header">
         <a href="#" class="sidebar-menu-button sidebar-menu-button-lg h-8 p-0">
-          <span class="brand-logo brand-logo-lg">
+          <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
             <i class="font-serif font-bold not-italic">A</i>
           </span>
         </a>
@@ -893,12 +893,12 @@ Add `sidebar-inset` to the root for an inset main content area with rounded corn
   >
     <header class="sidebar-header">
       <button class="sidebar-menu-button sidebar-menu-button-lg">
-        <span class="brand-logo brand-logo-lg">
+        <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-text">
-          <span class="brand-name">Acme Inc.</span>
-          <span class="brand-subtitle">Enterprise</span>
+        <span class="grid min-w-0 flex-1 text-left leading-tight">
+          <span class="truncate text-sm font-medium">Acme Inc.</span>
+          <span class="truncate text-xs text-muted-foreground">Enterprise</span>
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
       </button>
@@ -1244,12 +1244,12 @@ Use `sidebar-menu-button-sm` or `sidebar-menu-button-lg` for smaller or larger r
       </div>
       <div class="sidebar-menu-item">
         <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
-          <span class="brand-logo brand-logo-lg">
+          <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
             <i class="font-serif font-bold not-italic">A</i>
           </span>
-          <span class="brand-text">
-            <span class="brand-name">Acme Inc.</span>
-            <span class="brand-subtitle">Enterprise</span>
+          <span class="grid min-w-0 flex-1 text-left leading-tight">
+            <span class="truncate text-sm font-medium">Acme Inc.</span>
+            <span class="truncate text-xs text-muted-foreground">Enterprise</span>
           </span>
         </a>
       </div>
@@ -1374,7 +1374,7 @@ The `sidebar-header` is a pinned region at the top of the panel, typically a bra
       class="sidebar-menu-button sidebar-menu-button-lg"
       aria-expanded="false"
     >
-      <span class="brand-logo brand-logo-lg">
+      <span class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-lg leading-none text-primary-foreground">
         <i class="font-serif font-bold not-italic">A</i>
       </span>
       <span class="grid flex-1 text-left leading-tight">
