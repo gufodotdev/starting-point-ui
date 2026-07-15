@@ -9,16 +9,16 @@ The navbar places your brand, primary navigation, and actions in a bar across th
 <div class="flex flex-1 flex-col">
   <header class="navbar">
     <div class="mx-auto flex w-full max-w-7xl items-center gap-2">
-      <button id="navbar-nav-trigger" class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Toggle navigation">
+      <button id="navbar-nav-trigger" class="btn btn-ghost btn-sm btn-icon -ml-1 md:hidden" aria-label="Toggle navigation">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
       </button>
       <a href="#" class="brand mr-2">
         <span class="brand-logo">
           <i class="font-serif font-bold not-italic">A</i>
         </span>
-        <span class="brand-name max-sidebar:hidden">Acme Inc.</span>
+        <span class="brand-name max-md:hidden">Acme Inc.</span>
       </a>
-      <nav class="navbar-menu navbar-menu-underline max-sidebar:hidden">
+      <nav class="navbar-menu navbar-menu-underline max-md:hidden">
         <a href="#" class="navbar-menu-item active">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
           Home
@@ -43,11 +43,14 @@ The navbar places your brand, primary navigation, and actions in a bar across th
         </div>
       </nav>
       <div class="ml-auto flex items-center gap-1">
-        <button class="btn btn-ghost btn-icon-sm" aria-label="Search">
+        <button class="btn btn-ghost btn-sm btn-icon" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
         </button>
         <button id="navbar-user" class="ml-1 rounded-full" aria-expanded="false" aria-label="Account menu">
-          <img class="avatar size-8" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+          <span class="avatar size-8">
+            <img class="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+            <span class="avatar-fallback">SJ</span>
+          </span>
         </button>
         <div class="dropdown min-w-56" data-sp-toggle="#navbar-user" data-sp-placement="bottom-end">
           <a href="#" class="dropdown-item">Account</a>
@@ -59,7 +62,7 @@ The navbar places your brand, primary navigation, and actions in a bar across th
     </div>
   </header>
 
-  <aside class="sidebar sidebar:hidden" data-sp-toggle="#navbar-nav-trigger">
+  <aside class="sidebar md:hidden" data-sp-toggle="#navbar-nav-trigger">
     <header class="sidebar-header">
       <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
         <span class="brand-logo brand-logo-lg">
@@ -130,7 +133,7 @@ The navbar places your brand, primary navigation, and actions in a bar across th
 
 Add the `navbar` class to a `<header>` element. The bar is a plain flex row, so its contents are up to you: typically a [brand](/components/brand), a `navbar-menu` of links, and actions on the right, but breadcrumbs, a search field, or anything else works just as well. In a menu, mark the current page's item with the `active` class.
 
-On small screens a full menu rarely fits. A common pattern is to hide it with `max-sidebar:hidden` and provide the same links as a [sidebar](/components/sidebar) drawer: give the sidebar `sidebar:hidden` so it never renders as a desktop column, and point it at a trigger in the navbar that only shows on mobile.
+On small screens a full menu rarely fits. A common pattern is to hide it with `max-md:hidden` and provide the same links as a [sidebar](/components/sidebar) drawer: give the sidebar `md:hidden` so it never renders as a desktop column, and point it at a trigger in the navbar that only shows on mobile.
 
 | Class            | Description                                                   |
 | ---------------- | ------------------------------------------------------------- |
@@ -144,17 +147,17 @@ On small screens a full menu rarely fits. A common pattern is to hide it with `m
   <a href="/" class="brand">...</a>
 
   <!-- Desktop menu -->
-  <nav class="navbar-menu max-sidebar:hidden">
+  <nav class="navbar-menu max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Pricing</a>
   </nav>
 
   <!-- Mobile trigger for the drawer -->
-  <button id="nav-trigger" class="btn btn-ghost btn-icon-sm sidebar:hidden">...</button>
+  <button id="nav-trigger" class="btn btn-ghost btn-sm btn-icon md:hidden">...</button>
 </header>
 
 <!-- Mobile navigation drawer -->
-<aside class="sidebar sidebar:hidden" data-sp-toggle="#nav-trigger">...</aside>
+<aside class="sidebar md:hidden" data-sp-toggle="#nav-trigger">...</aside>
 ```
 
 ## Examples
@@ -166,7 +169,7 @@ Add the `active` class to a menu item to highlight it as the current page. If yo
 ```html preview
 <!-- Text-only active state -->
 <header class="navbar w-full rounded-lg border">
-  <button type="button" class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Open menu">
+  <button type="button" class="btn btn-ghost btn-sm btn-icon -ml-1 md:hidden" aria-label="Open menu">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
   </button>
   <a href="#" class="brand mr-2">
@@ -175,23 +178,26 @@ Add the `active` class to a menu item to highlight it as the current page. If yo
     </span>
     <span class="brand-name">Acme Inc.</span>
   </a>
-  <nav class="navbar-menu max-sidebar:hidden">
+  <nav class="navbar-menu max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Features</a>
     <a href="#" class="navbar-menu-item">Blog</a>
     <a href="#" class="navbar-menu-item">Prices</a>
   </nav>
   <div class="ml-auto flex items-center gap-2">
-    <button class="btn btn-ghost btn-icon-sm" aria-label="Notifications">
+    <button class="btn btn-ghost btn-sm btn-icon" aria-label="Notifications">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.735 7.327"/></svg>
     </button>
-    <img class="avatar size-8 rounded-full" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+    <span class="avatar size-8 rounded-full">
+      <img class="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+      <span class="avatar-fallback">SJ</span>
+    </span>
   </div>
 </header>
 
 <!-- navbar-menu-underline adds the indicator bar -->
 <header class="navbar w-full rounded-lg border">
-  <button type="button" class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Open menu">
+  <button type="button" class="btn btn-ghost btn-sm btn-icon -ml-1 md:hidden" aria-label="Open menu">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
   </button>
   <a href="#" class="brand mr-2">
@@ -200,17 +206,20 @@ Add the `active` class to a menu item to highlight it as the current page. If yo
     </span>
     <span class="brand-name">Acme Inc.</span>
   </a>
-  <nav class="navbar-menu navbar-menu-underline max-sidebar:hidden">
+  <nav class="navbar-menu navbar-menu-underline max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Features</a>
     <a href="#" class="navbar-menu-item">Blog</a>
     <a href="#" class="navbar-menu-item">Prices</a>
   </nav>
   <div class="ml-auto flex items-center gap-2">
-    <button class="btn btn-ghost btn-icon-sm" aria-label="Notifications">
+    <button class="btn btn-ghost btn-sm btn-icon" aria-label="Notifications">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.735 7.327"/></svg>
     </button>
-    <img class="avatar size-8 rounded-full" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+    <span class="avatar size-8 rounded-full">
+      <img class="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+      <span class="avatar-fallback">SJ</span>
+    </span>
   </div>
 </header>
 ```
@@ -222,7 +231,7 @@ The bar is a plain flex row, so you can arrange its contents freely with utility
 ```html preview
 <!-- Brand left, navbar centered, actions right -->
 <header class="navbar relative w-full rounded-lg border">
-  <button type="button" class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Open menu">
+  <button type="button" class="btn btn-ghost btn-sm btn-icon -ml-1 md:hidden" aria-label="Open menu">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
   </button>
   <a href="#" class="brand">
@@ -231,15 +240,15 @@ The bar is a plain flex row, so you can arrange its contents freely with utility
     </span>
     <span class="brand-name">Acme Inc.</span>
   </a>
-  <nav class="navbar-menu absolute left-1/2 -translate-x-1/2 max-sidebar:hidden">
+  <nav class="navbar-menu absolute left-1/2 -translate-x-1/2 max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Features</a>
     <a href="#" class="navbar-menu-item">Blog</a>
     <a href="#" class="navbar-menu-item">Prices</a>
   </nav>
   <div class="ml-auto flex items-center gap-2">
-    <a href="#" class="btn btn-ghost btn-sm max-sidebar:hidden">Sign in</a>
-    <a href="#" class="btn btn-primary btn-sm">Sign up</a>
+    <a href="#" class="btn btn-ghost btn-sm max-md:hidden">Sign in</a>
+    <a href="#" class="btn btn-sm">Sign up</a>
   </div>
 </header>
 
@@ -251,23 +260,23 @@ The bar is a plain flex row, so you can arrange its contents freely with utility
     </span>
     <span class="brand-name">Acme Inc.</span>
   </a>
-  <nav class="navbar-menu ml-auto max-sidebar:hidden">
+  <nav class="navbar-menu ml-auto max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Features</a>
     <a href="#" class="navbar-menu-item">Blog</a>
     <a href="#" class="navbar-menu-item">Prices</a>
   </nav>
-  <button type="button" class="btn btn-ghost btn-icon-sm ml-auto -mr-1 sidebar:hidden" aria-label="Open menu">
+  <button type="button" class="btn btn-ghost btn-sm btn-icon ml-auto -mr-1 md:hidden" aria-label="Open menu">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
   </button>
 </header>
 
 <!-- Navbar left, brand centered, search right -->
 <header class="navbar relative w-full rounded-lg border">
-  <button type="button" class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Open menu">
+  <button type="button" class="btn btn-ghost btn-sm btn-icon -ml-1 md:hidden" aria-label="Open menu">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
   </button>
-  <nav class="navbar-menu -ml-2.5 max-sidebar:hidden">
+  <nav class="navbar-menu -ml-2.5 max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Features</a>
     <a href="#" class="navbar-menu-item">Blog</a>
@@ -279,15 +288,15 @@ The bar is a plain flex row, so you can arrange its contents freely with utility
     </span>
     <span class="brand-name">Acme Inc.</span>
   </a>
-  <input type="search" class="input ml-auto h-8 w-48 max-sidebar:hidden" placeholder="Search" />
-  <button type="button" class="btn btn-ghost btn-icon-sm ml-auto -mr-1 sidebar:hidden" aria-label="Search">
+  <input type="search" class="input ml-auto h-8 w-48 max-md:hidden" placeholder="Search" />
+  <button type="button" class="btn btn-ghost btn-sm btn-icon ml-auto -mr-1 md:hidden" aria-label="Search">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
   </button>
 </header>
 
 <!-- Brand and navbar leading, social links trailing -->
 <header class="navbar w-full rounded-lg border">
-  <button type="button" class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Open menu">
+  <button type="button" class="btn btn-ghost btn-sm btn-icon -ml-1 md:hidden" aria-label="Open menu">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
   </button>
   <a href="#" class="brand">
@@ -296,20 +305,20 @@ The bar is a plain flex row, so you can arrange its contents freely with utility
     </span>
     <span class="brand-name">Acme Inc.</span>
   </a>
-  <nav class="navbar-menu max-sidebar:hidden">
+  <nav class="navbar-menu max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Features</a>
     <a href="#" class="navbar-menu-item">Blog</a>
     <a href="#" class="navbar-menu-item">Prices</a>
   </nav>
   <div class="ml-auto -mr-1 flex items-center gap-1">
-    <a href="#" class="btn btn-ghost btn-icon-sm" aria-label="X">
+    <a href="#" class="btn btn-ghost btn-sm btn-icon" aria-label="X">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
     </a>
-    <a href="#" class="btn btn-ghost btn-icon-sm" aria-label="Facebook">
+    <a href="#" class="btn btn-ghost btn-sm btn-icon" aria-label="Facebook">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"/></svg>
     </a>
-    <a href="#" class="btn btn-ghost btn-icon-sm" aria-label="Instagram">
+    <a href="#" class="btn btn-ghost btn-sm btn-icon" aria-label="Instagram">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M16.5 7.5v.01"/></svg>
     </a>
   </div>
@@ -331,10 +340,13 @@ Pair the navbar with an in-page [sidebar menu](/components/sidebar) column for s
         <span class="brand-name">Acme Inc.</span>
       </a>
       <div class="ml-auto flex items-center gap-1">
-        <button class="btn btn-ghost btn-icon-sm" aria-label="Search">
+        <button class="btn btn-ghost btn-sm btn-icon" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
         </button>
-        <img class="avatar ml-1 size-8" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+        <span class="avatar ml-1 size-8">
+          <img class="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+          <span class="avatar-fallback">SJ</span>
+        </span>
       </div>
     </div>
   </header>
@@ -375,7 +387,7 @@ Pair the navbar with an in-page [sidebar menu](/components/sidebar) column for s
 The navbar also works as the page header inside a [sidebar](/components/sidebar) layout, holding a menu of sub pages.
 
 ```html preview preset=sidebar
-<div class="sidebar-layout">
+<div class="sidebar-container">
   <aside class="sidebar" data-sp-collapse="offcanvas" data-sp-toggle="#page-trigger">
     <header class="sidebar-header">
       <a href="#" class="sidebar-menu-button">
@@ -412,7 +424,7 @@ The navbar also works as the page header inside a [sidebar](/components/sidebar)
   </aside>
   <main class="sidebar-page flex min-w-0 flex-col">
     <header class="navbar">
-      <button id="page-trigger" class="btn btn-ghost btn-icon-sm -ml-1" aria-label="Toggle sidebar">
+      <button id="page-trigger" class="btn btn-ghost btn-sm btn-icon -ml-1" aria-label="Toggle sidebar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
       </button>
       <nav class="navbar-menu navbar-menu-underline" aria-label="Settings">
@@ -420,7 +432,10 @@ The navbar also works as the page header inside a [sidebar](/components/sidebar)
         <a href="#" class="navbar-menu-item">Members</a>
         <a href="#" class="navbar-menu-item">Billing</a>
       </nav>
-      <img class="avatar ml-auto size-8 rounded-full" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+      <span class="avatar ml-auto size-8 rounded-full">
+        <img class="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+        <span class="avatar-fallback">SJ</span>
+      </span>
     </header>
     <div class="flex flex-1 flex-col gap-4 p-4">
       <div class="h-32 rounded-xl bg-muted/50"></div>

@@ -1,6 +1,6 @@
 ---
 title: Brand
-description: A Tailwind CSS brand component for displaying your company or application's logo and name consistently across your interface.
+description: A brand component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show your logo and product name consistently in navbars, sidebars, and footers.
 ---
 
 The brand is your product's identity block: a logo box paired with a name that renders consistently wherever it goes, from the [navbar](/components/navbar) and [sidebar](/components/sidebar) to footers and login pages.
@@ -153,7 +153,7 @@ The brand slots into a [navbar](/components/navbar) as the leading element.
 
 ```html preview
 <header class="navbar w-full rounded-lg border">
-  <button class="btn btn-ghost btn-icon-sm -ml-1 sidebar:hidden" aria-label="Toggle navigation">
+  <button class="btn btn-ghost btn-sm btn-icon -ml-1 md:hidden" aria-label="Toggle navigation">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
   </button>
   <a href="#" class="brand mr-2">
@@ -162,11 +162,14 @@ The brand slots into a [navbar](/components/navbar) as the leading element.
     </span>
     <span class="brand-name">Acme Inc.</span>
   </a>
-  <nav class="navbar-menu max-sidebar:hidden">
+  <nav class="navbar-menu max-md:hidden">
     <a href="#" class="navbar-menu-item active">Home</a>
     <a href="#" class="navbar-menu-item">Inbox <span class="badge badge-secondary">12</span></a>
   </nav>
-  <img class="avatar ml-auto size-8 rounded-full" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+  <span class="avatar ml-auto size-8 rounded-full">
+    <img class="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
+    <span class="avatar-fallback">SJ</span>
+  </span>
 </header>
 ```
 
@@ -251,4 +254,4 @@ For a larger brand row with a subtitle, use the `sidebar-menu-button-lg` variant
 
 The brand is usually a link, so give it an accessible name. The visible `brand-name` provides one automatically; for a logo-only brand, keep the name in the markup with an `sr-only` class, as in the example above.
 
-When the logo is an image, use an empty `alt=""` if the name is visible beside it, so screen readers do not announce the brand twice. For a logo-only image brand, put the name in the `alt` text instead.
+When the logo is an image, follow the [W3C functional images tutorial](https://www.w3.org/WAI/tutorials/images/functional/): use an empty `alt=""` if the name is visible beside it, so screen readers do not announce the brand twice, and put the name in the `alt` text for a logo-only image brand.
