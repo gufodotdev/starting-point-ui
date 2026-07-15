@@ -1,5 +1,11 @@
 @utility scrollbar {
   @layer l1.l2 {
+    /* Component-local defaults; override per instance with [--scrollbar-*:...]. */
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: var(--border);
+    --scrollbar-width: 0.625rem;
+    --scrollbar-radius: 9999px;
+
     scrollbar-width: auto;
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 
@@ -24,7 +30,7 @@
 
 @utility scrollbar-sm {
   @layer l1 {
-    --scrollbar-width: var(--scrollbar-sm-width);
+    --scrollbar-width: 0.375rem;
     scrollbar-width: thin;
   }
 }
