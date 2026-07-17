@@ -9,9 +9,7 @@ export type NavGroup = {
 };
 
 export const mainNav: NavItem[] = [
-  { title: "Home", href: "/" },
-  { title: "Docs", href: "/guides/introduction" },
-  { title: "Components", href: "/components" },
+  { title: "Documentation", href: "/guides/introduction" },
   { title: "Examples", href: "/examples" },
 ];
 

@@ -108,31 +108,14 @@ export function SearchDialog({
           </kbd>
         </button>
       ) : (
-        <>
-          {/* Mobile: icon button */}
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm btn-icon md:hidden"
-            aria-label="Search documentation"
-            onClick={openDialog}
-          >
-            <Search className="size-4" />
-          </button>
-
-          {/* Desktop: input-style button */}
-          <button
-            type="button"
-            className="hidden md:inline-flex items-center gap-2 rounded-md border bg-background hover:bg-muted/50 dark:bg-card dark:hover:bg-muted/50 px-3 py-1.5 text-sm text-muted-foreground shadow-none h-8 w-48 lg:w-56 xl:w-64 justify-start relative"
-            onClick={openDialog}
-          >
-            <Search className="size-4" />
-            <span className="hidden lg:inline-flex">Search documentation...</span>
-            <span className="inline-flex lg:hidden">Search...</span>
-            <kbd className="absolute right-1.5 top-1.5 pointer-events-none inline-flex h-5 items-center justify-center gap-1 rounded-sm bg-muted px-1 font-sans text-xs font-medium text-muted-foreground select-none">
-              ⌘K
-            </kbd>
-          </button>
-        </>
+        <button
+          type="button"
+          className="btn btn-ghost btn-sm btn-icon"
+          aria-label="Search documentation"
+          onClick={openDialog}
+        >
+          <Search className="size-4" />
+        </button>
       )}
 
       <dialog
