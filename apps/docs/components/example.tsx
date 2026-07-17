@@ -78,35 +78,6 @@ export function Example({ breadcrumb, description, viewSrc, html }: Props) {
     );
   }, [iframeState, resolvedTheme]);
 
-  useEffect(() => {
-    if (iframeState !== "ready") return;
-    let lastKey = "";
-    const send = () => {
-      const css = document.getElementById("sp-theme")?.textContent ?? "";
-      const bodyFont =
-        (document.getElementById("sp-font-body") as HTMLLinkElement | null)
-          ?.href ?? "";
-      const headingFont =
-        (document.getElementById("sp-font-heading") as HTMLLinkElement | null)
-          ?.href ?? "";
-      const key = `${css} ${bodyFont} ${headingFont}`;
-      if (key === lastKey) return;
-      lastKey = key;
-      iframeRef.current?.contentWindow?.postMessage(
-        { type: "sp:editor", css, bodyFont, headingFont },
-        "*",
-      );
-    };
-    send();
-    const obs = new MutationObserver(send);
-    obs.observe(document.head, {
-      childList: true,
-      subtree: true,
-      characterData: true,
-    });
-    return () => obs.disconnect();
-  }, [iframeState]);
-
   const handleCopy = async () => {
     const text = codeRef.current?.textContent ?? "";
     await navigator.clipboard.writeText(text);
