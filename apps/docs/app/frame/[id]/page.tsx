@@ -8,6 +8,7 @@ import {
   withShownClass,
 } from "@/lib/examples-registry";
 import { framePresets } from "@/lib/frame-presets";
+import { compilePreviewStyles } from "@/lib/preview-css";
 
 // Read per render, not at module scope, so dev picks up frame.js edits.
 const frameScript = () =>
@@ -34,10 +35,11 @@ export default async function FramePage({
   // so frame.js opens them via show() on load (data-open) instead. The code
   // tab keeps the clean fence source either way.
   const showOnLoad = example.open && showsOnLoad(example.open);
-  const html =
+  const html = await compilePreviewStyles(
     example.open && !showOnLoad
       ? withShownClass(example.html, example.open)
-      : example.html;
+      : example.html,
+  );
 
   return (
     <>
