@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ScrollIndicator } from "@/components/scroll-indicator";
 import { LandingGrid } from "@/components/landing-grid";
-import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "Beautiful Components for Tailwind CSS",
@@ -13,8 +12,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="relative grid min-h-dvh grid-cols-1 overflow-x-hidden pt-(--navbar-height) lg:grid-cols-12 lg:overflow-hidden">
-      <SiteHeader ghost />
+    <div className="relative grid min-h-[calc(100dvh-var(--navbar-height))] grid-cols-1 overflow-x-hidden lg:grid-cols-12 lg:overflow-hidden">
       <div className="relative flex flex-col justify-center px-6 py-6 lg:col-span-6 lg:items-center xl:col-span-5">
         <div className="max-w-xl lg:-mt-(--navbar-height)">
           <Link

@@ -5,15 +5,9 @@ import { SearchDialog } from "@/components/search-dialog";
 import { docsNav, mainNav } from "@/lib/navigation";
 import { version } from "@/lib/version";
 
-export function SiteHeader({ ghost = false }: { ghost?: boolean }) {
+export function SiteHeader() {
   return (
-    <header
-      className={
-        ghost
-          ? "absolute top-0 z-50 w-full"
-          : "sticky top-0 z-50 w-full bg-background"
-      }
-    >
+    <header className="sticky top-0 z-50 w-full bg-background">
       <div className="container-wrapper px-6">
         <div className="flex h-(--navbar-height) items-center gap-2">
           <Link href="/" className="flex h-10 min-w-0 items-center gap-2 text-foreground">
