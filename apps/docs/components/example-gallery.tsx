@@ -22,7 +22,7 @@ export async function ExampleGallery({
   const categories = await getAllCategories();
 
   return (
-    <div className="max-w-384 mx-auto px-4 sm:px-6 pb-12">
+    <div className="max-w-384 mx-auto px-6 pb-12">
       <div className="pb-12 pt-8 sm:py-24 max-w-2xl mx-auto text-center">
         <h1 className="text-3xl xs:text-4xl sm:text-4xl/tight lg:text-5xl/tight font-extrabold tracking-tight">
           {title}

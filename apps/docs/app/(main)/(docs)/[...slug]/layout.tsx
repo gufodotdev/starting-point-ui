@@ -11,7 +11,7 @@ export default function DocSectionLayout({
         <div className="h-(--top-spacing) shrink-0" />
         <article
           id="content"
-          className="mx-auto w-full max-w-7xl min-w-0 flex-1 px-4 py-6 sm:px-6 lg:py-8"
+          className="mx-auto w-full max-w-7xl min-w-0 flex-1 px-6 py-6 lg:py-8"
         >
           {children}
         </article>

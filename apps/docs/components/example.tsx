@@ -117,7 +117,7 @@ export function Example({ breadcrumb, description, viewSrc, html }: Props) {
   return (
     <div data-no-scrollbar-gutter>
       <div className="sticky top-(--navbar-height) z-30 bg-background border-t border-b">
-        <div className="px-4 sm:px-6 h-12 flex items-center gap-4">
+        <div className="px-6 h-12 flex items-center gap-4">
           <nav className="breadcrumb text-sm">
             <Link href="/examples" className="breadcrumb-item">
               Examples
