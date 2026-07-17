@@ -1,5 +1,4 @@
 import { DocsSidebar } from "@/components/docs-sidebar";
-import { SiteFooter } from "@/components/site-footer";
 
 export default function DocsLayout({
   children,
@@ -19,7 +18,6 @@ export default function DocsLayout({
         <DocsSidebar />
         <div className="h-full w-full">{children}</div>
       </div>
-      <SiteFooter />
     </div>
   );
 }

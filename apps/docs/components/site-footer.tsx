@@ -1,6 +1,6 @@
 export function SiteFooter() {
   return (
-    <footer className="group-has-[[data-slot=docs]]/layout:hidden">
+    <footer>
       <div className="container-wrapper px-4 xl:px-6">
         <div className="flex h-(--navbar-height) items-center justify-between">
           <div className="w-full px-1 text-center text-xs leading-loose text-muted-foreground sm:text-sm">
