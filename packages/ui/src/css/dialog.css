@@ -58,7 +58,6 @@
 @utility dialog-title {
   @layer l1.l2 {
     @apply text-base leading-none font-medium;
-    font-family: var(--font-heading);
   }
 }
 

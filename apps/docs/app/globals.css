@@ -20,7 +20,6 @@
 :root {
   --navbar-height: 3.5rem;
   --font-sans: var(--font-inter), sans-serif;
-  --font-heading: var(--font-sans);
   --code: oklch(0.98 0 0);
   --code-number: oklch(0.56 0 0);
 }

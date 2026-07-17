@@ -73,7 +73,6 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --font-heading: var(--font-sans);
 
 }
 
@@ -113,8 +112,6 @@
 }
 
 @theme inline {
-  --font-heading: var(--font-heading);
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -184,10 +181,6 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
   }
 
   .dark {

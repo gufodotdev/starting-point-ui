@@ -26,7 +26,7 @@
 
 @utility card-title {
   @layer l1.l2 {
-    @apply font-heading text-base leading-normal font-medium;
+    @apply text-base leading-normal font-medium;
   }
 }
 

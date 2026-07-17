@@ -113,7 +113,6 @@
 @utility sheet-title {
   @layer l1.l2 {
     @apply text-base font-medium text-foreground;
-    font-family: var(--font-heading);
   }
 }
 
