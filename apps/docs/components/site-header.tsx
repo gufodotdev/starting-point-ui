@@ -22,8 +22,8 @@ export function SiteHeader({ ghost = false }: { ghost?: boolean }) {
             </span>
             <span className="truncate text-sm font-medium">Starting Point</span>
           </Link>
-          <div className="separator separator-vertical self-auto! h-4" />
-          <span className="text-xs text-muted-foreground tabular-nums">
+          <div className="separator separator-vertical self-auto! h-4 max-md:hidden" />
+          <span className="text-xs text-muted-foreground tabular-nums max-md:hidden">
             v{version}
           </span>
           <div className="-mr-2 ml-auto flex items-center gap-1">
