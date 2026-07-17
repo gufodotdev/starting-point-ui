@@ -3,6 +3,7 @@ import { MobileLink } from "@/components/mobile-link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SearchDialog } from "@/components/search-dialog";
 import { docsNav, mainNav } from "@/lib/navigation";
+import { version } from "@/lib/version";
 
 export function SiteHeader({ ghost = false }: { ghost?: boolean }) {
   return (
@@ -21,6 +22,10 @@ export function SiteHeader({ ghost = false }: { ghost?: boolean }) {
             </span>
             <span className="truncate text-sm font-medium">Starting Point</span>
           </Link>
+          <div className="separator separator-vertical self-auto! h-4" />
+          <span className="text-xs text-muted-foreground tabular-nums">
+            v{version}
+          </span>
           <div className="-mr-2 ml-auto flex items-center gap-1">
             <nav className="hidden items-center md:flex">
               {mainNav.map((item) => (

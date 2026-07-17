@@ -1,4 +1,5 @@
 import fs from "fs";
+import { version } from "@/lib/version";
 import path from "path";
 import matter from "gray-matter";
 
@@ -50,7 +51,7 @@ export function getDocBySlug(slug: string[]): DocFile | null {
 
   return {
     metadata: data as DocMetadata,
-    content,
+    content: content.replaceAll("%VERSION%", version),
     slug,
   };
 }
