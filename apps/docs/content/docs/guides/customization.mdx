@@ -1,17 +1,436 @@
 ---
 title: Customization
-description: Learn how to customize Starting Point UI components.
+description: Learn how to customize Starting Point UI. Theme your Tailwind CSS components with shadcn/ui-compatible CSS variables, tweak them with utilities, and restyle them with your own CSS.
 ---
 
-All components in Starting Point UI are built as Tailwind CSS utilities using the `@utility` directive. This makes them easy to customize in two ways: per-instance with utility classes, or globally by editing the CSS.
+Every component is a semantic class built on theme variables: override the variables for colors, radius, and fonts, add utilities for one-off tweaks, or restyle the classes to build your own design system.
 
-If you're looking to customize colors, border radius, or other theme variables, see the [Theming](/guides/theming) guide.
+```html preview
+<style>
+  [data-style="nova"] .card {
+    @apply rounded-xl shadow-none [--card-spacing:--spacing(4)] has-[>.card-footer]:pb-0;
+  }
+  [data-style="nova"] .card-footer {
+    @apply rounded-b-xl border-t bg-muted/50 p-(--card-spacing);
+  }
+  [data-style="nova"] .input {
+    @apply h-8 rounded-lg shadow-none;
+  }
+  [data-style="nova"] .btn {
+    @apply h-8 rounded-lg shadow-none;
+  }
 
----
+  [data-style="lyra"] .card {
+    @apply rounded-none text-xs/relaxed shadow-none [--card-spacing:--spacing(4)] has-[>.card-footer]:pb-0;
+  }
+  [data-style="lyra"] .card-title {
+    @apply text-sm;
+  }
+  [data-style="lyra"] .card-description {
+    @apply text-xs/relaxed;
+  }
+  [data-style="lyra"] .card-footer {
+    @apply border-t p-(--card-spacing);
+  }
+  [data-style="lyra"] .label {
+    @apply text-xs font-normal;
+  }
+  [data-style="lyra"] .input {
+    @apply h-8 rounded-none text-xs shadow-none md:text-xs;
+  }
+  [data-style="lyra"] .btn {
+    @apply rounded-none text-xs shadow-none focus-visible:ring-1;
+  }
 
-## Per-instance customization
+  [data-style="maia"] .card {
+    @apply rounded-2xl;
+  }
+  [data-style="maia"] .input {
+    @apply rounded-4xl bg-input/30 px-3;
+  }
+  [data-style="maia"] .btn {
+    @apply rounded-4xl;
+  }
+  [data-style="maia"] .btn-outline {
+    @apply border-border bg-input/30 shadow-none hover:bg-input/50;
+  }
 
-Since components are just utility classes, you can override styles by adding more Tailwind classes. Later classes take precedence.
+  [data-style="mira"] .card {
+    @apply rounded-lg text-xs/relaxed [--card-spacing:--spacing(4)];
+  }
+  [data-style="mira"] .card-title {
+    @apply text-sm;
+  }
+  [data-style="mira"] .card-description {
+    @apply text-xs/relaxed;
+  }
+  [data-style="mira"] .label {
+    @apply text-xs/relaxed;
+  }
+  [data-style="mira"] .input {
+    @apply h-7 rounded-md bg-input/20 px-2 py-0.5 shadow-none md:text-xs/relaxed;
+  }
+  [data-style="mira"] .btn {
+    @apply h-7 rounded-md text-xs/relaxed focus-visible:ring-2;
+  }
+
+  [data-style="luma"] .card {
+    @apply rounded-4xl shadow-md ring-foreground/5;
+  }
+  [data-style="luma"] .input {
+    @apply rounded-3xl border-transparent bg-input/50 px-3 shadow-none;
+  }
+  [data-style="luma"] .btn {
+    @apply rounded-4xl;
+  }
+  [data-style="luma"] .btn-outline {
+    @apply shadow-none;
+  }
+
+  [data-style="sera"] .card {
+    @apply rounded-none shadow-sm ring-foreground/5 [--card-spacing:--spacing(8)];
+  }
+  [data-style="sera"] .card-title {
+    @apply text-lg font-semibold tracking-wider uppercase;
+  }
+  [data-style="sera"] .card-description {
+    @apply leading-relaxed;
+  }
+  [data-style="sera"] .label {
+    @apply text-xs font-semibold tracking-wide uppercase;
+  }
+  [data-style="sera"] .input {
+    @apply h-10 rounded-none border-transparent border-b-input bg-transparent px-0 shadow-none focus-visible:border-transparent focus-visible:border-b-ring focus-visible:ring-0;
+  }
+  [data-style="sera"] .btn {
+    @apply h-10 rounded-none text-xs font-semibold tracking-widest uppercase focus-visible:ring-2;
+  }
+
+  [data-style="rhea"] .card {
+    @apply rounded-3xl shadow-sm ring-foreground/5 [--card-spacing:--spacing(5)];
+  }
+  [data-style="rhea"] .input {
+    @apply h-8 rounded-2xl border-transparent bg-input/50 shadow-none;
+  }
+  [data-style="rhea"] .btn {
+    @apply rounded-2xl;
+  }
+  [data-style="rhea"] .btn-outline {
+    @apply shadow-none;
+  }
+</style>
+<div class="flex w-full max-w-sm flex-col gap-6">
+  <div class="flex gap-3">
+    <div class="field flex-1">
+      <label class="label" for="demo-style">Style</label>
+      <select class="select select-sm" id="demo-style">
+        <option selected>vega</option>
+        <option>nova</option>
+        <option>lyra</option>
+        <option>maia</option>
+        <option>mira</option>
+        <option>luma</option>
+        <option>sera</option>
+        <option>rhea</option>
+      </select>
+    </div>
+    <div class="field flex-1">
+      <label class="label" for="demo-color">Primary color</label>
+      <select class="select select-sm" id="demo-color">
+        <option selected>neutral</option>
+        <option>blue</option>
+        <option>green</option>
+        <option>amber</option>
+        <option>rose</option>
+        <option>purple</option>
+        <option>orange</option>
+        <option>teal</option>
+      </select>
+    </div>
+  </div>
+  <div id="demo" data-style="vega">
+    <div class="card w-full">
+      <div class="card-header">
+        <h3 class="card-title">Set a new milestone</h3>
+        <p class="card-description">
+          Define your financial target and we'll help you pace your savings.
+        </p>
+      </div>
+      <div class="card-content">
+        <div class="field-group">
+          <div class="field">
+            <label class="label" for="goal-name">Goal Name</label>
+            <input
+              class="input"
+              id="goal-name"
+              placeholder="e.g. New Car, Home Downpayment"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="field">
+              <label class="label" for="goal-amount">Target Amount</label>
+              <input class="input" id="goal-amount" value="$15,000" />
+            </div>
+            <div class="field">
+              <label class="label" for="goal-date">Target Date</label>
+              <input class="input" id="goal-date" value="Dec 2025" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer flex-col gap-2">
+        <button class="btn w-full">Create Goal</button>
+        <button class="btn btn-outline w-full">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const demo = document.getElementById("demo");
+  const colors = {
+    blue: "oklch(0.546 0.245 262.881)",
+    green: "oklch(0.627 0.194 149.214)",
+    amber: "oklch(0.769 0.188 70.08)",
+    rose: "oklch(0.586 0.253 17.585)",
+    purple: "oklch(0.558 0.288 302.321)",
+    orange: "oklch(0.646 0.222 41.116)",
+    teal: "oklch(0.6 0.118 184.704)",
+  };
+
+  document.getElementById("demo-style").addEventListener("change", (e) => {
+    demo.dataset.style = e.target.value;
+  });
+
+  document.getElementById("demo-color").addEventListener("change", (e) => {
+    const color = colors[e.target.value];
+    if (!color) {
+      demo.style.removeProperty("--primary");
+      demo.style.removeProperty("--primary-foreground");
+      demo.style.removeProperty("--ring");
+      return;
+    }
+    demo.style.setProperty("--primary", color);
+    demo.style.setProperty("--primary-foreground", "oklch(1 0 0)");
+    demo.style.setProperty("--ring", color);
+  });
+</script>
+```
+
+## Theme variables
+
+We use a simple `background` and `foreground` convention for colors. The `background` variable is used for the background color of the component and the `foreground` variable is used for the text color.
+
+Given the following CSS variables:
+
+```css
+--primary: oklch(0.205 0 0);
+--primary-foreground: oklch(0.985 0 0);
+```
+
+The `background` color of the following component will be `var(--primary)` and the `foreground` color will be `var(--primary-foreground)`:
+
+```html
+<div class="bg-primary text-primary-foreground">Hello</div>
+```
+
+The variables are exactly the ones [shadcn/ui themes](https://ui.shadcn.com/docs/theming) use, so any shadcn-compatible theme works unchanged: paste it into your stylesheet and every component follows.
+
+| Token                                | Used for                                        |
+| ------------------------------------ | ----------------------------------------------- |
+| `--background` / `--foreground`      | Default page background and text                |
+| `--card` / `--card-foreground`       | Elevated surfaces like cards                    |
+| `--popover` / `--popover-foreground` | Floating surfaces like popovers and dropdowns   |
+| `--primary` / `--primary-foreground` | High-emphasis actions like the default button   |
+| `--secondary` / `--secondary-foreground` | Lower-emphasis actions                      |
+| `--muted` / `--muted-foreground`     | Subtle backgrounds and secondary text           |
+| `--accent` / `--accent-foreground`   | Interactive states like hover and selection     |
+| `--destructive`                      | Errors and destructive actions                  |
+| `--border`, `--input`, `--ring`      | Hairlines, form control borders, and focus rings |
+| `--chart-1` … `--chart-5`            | Chart color palette                             |
+| `--sidebar` + `--sidebar-*`          | The sidebar component's own surface set         |
+| `--radius`                           | Base radius the whole radius scale derives from |
+| `--font-sans`                        | The font every component uses                   |
+
+This is the full default theme the package ships, including the base styles that apply it to the page:
+
+```css
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+```
+
+Override any of them after importing the library styles:
+
+```css label="app/globals.css"
+@import "tailwindcss";
+@import "starting-point-ui";
+
+:root {
+  --primary: oklch(0.55 0.2 250);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.2 250);
+}
+
+.dark {
+  --primary: oklch(0.65 0.18 250);
+  --primary-foreground: oklch(0.15 0 0);
+  --ring: oklch(0.65 0.18 250);
+}
+```
+
+## Radius
+
+Change the single `--radius` variable to reshape every component consistently. The whole radius scale is derived from it multiplicatively, so `rounded-sm` through `rounded-4xl` all follow along:
+
+```css
+--radius-sm: calc(var(--radius) * 0.6);
+--radius-md: calc(var(--radius) * 0.8);
+--radius-lg: var(--radius);
+--radius-xl: calc(var(--radius) * 1.4);
+--radius-2xl: calc(var(--radius) * 1.8);
+--radius-3xl: calc(var(--radius) * 2.2);
+--radius-4xl: calc(var(--radius) * 2.6);
+```
+
+Set it to `0` for square corners, or larger for a rounder look:
+
+```css
+:root {
+  --radius: 0.5rem; /* sharper */
+}
+```
+
+## Fonts
+
+Set `--font-sans` to change the font. It is Tailwind's default font token, so every component follows it:
+
+```css
+:root {
+  --font-sans: "Inter", sans-serif;
+}
+```
+
+There is no separate heading token, but adding one yourself is a few lines: define it, apply it to headings, and extend any component titles you want it on, like the card title (see [Restyling components](#restyling-components)):
+
+```css label="app/globals.css"
+:root {
+  --font-heading: "Playfair Display", serif;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@utility card-title {
+  font-family: var(--font-heading);
+}
+```
+
+## Adding new tokens
+
+To add new tokens, define the variables on `:root` and `.dark`, then register them with `@theme inline` to get the matching Tailwind utilities:
+
+```css label="app/globals.css"
+:root {
+  --warning: oklch(0.84 0.16 84);
+  --warning-foreground: oklch(0.28 0.07 46);
+}
+
+.dark {
+  --warning: oklch(0.41 0.11 46);
+  --warning-foreground: oklch(0.99 0.02 95);
+}
+
+@theme inline {
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+}
+```
+
+```html
+<div class="bg-warning text-warning-foreground">Heads up</div>
+```
+
+## Utility classes
+
+Components are utility classes, so one-off changes are just more Tailwind classes on the element. Later classes win:
 
 ```html preview
 <button class="btn">Default</button>
@@ -19,7 +438,7 @@ Since components are just utility classes, you can override styles by adding mor
 <button class="btn bg-blue-500 hover:bg-blue-600">Blue</button>
 ```
 
-You can combine component classes with any Tailwind utilities for one-off customizations:
+Combine them freely for one-off designs:
 
 ```html preview
 <button
@@ -29,11 +448,9 @@ You can combine component classes with any Tailwind utilities for one-off custom
 </button>
 ```
 
----
+## Restyling components
 
-## Global customization
-
-To change a component's styles across your entire project, you can override the utility in your CSS file. Add your overrides after importing the library:
+To change a component everywhere, redefine its utility in your CSS after importing the library. Your styles are appended to the component's own, so they win by source order while utility classes in your markup still take precedence:
 
 ```css label="app/globals.css"
 @import "tailwindcss";
@@ -44,19 +461,28 @@ To change a component's styles across your entire project, you can override the 
 }
 ```
 
-This will make all buttons rounded by default throughout your project.
+This is how the styles in the demo at the top of this page are built, and how shadcn/ui's own alternative styles restyle the same components. For example, card footers as a separated strip:
 
-You can also create new variants:
+```css
+@utility card {
+  @apply has-[>.card-footer]:pb-0;
+}
 
-```css label="app/globals.css"
-@import "tailwindcss";
-@import "starting-point-ui";
+@utility card-footer {
+  @apply border-t bg-muted/50 py-4;
+}
+```
 
-@utility btn-success {
-  @apply bg-green-500 text-white hover:bg-green-600;
+You can also create new component variants. Define the color as a theme variable pair first, like the `warning` color from [Adding new tokens](#adding-new-tokens), then build the variant on it:
+
+```css
+@utility btn-warning {
+  @apply bg-warning text-warning-foreground hover:bg-warning/90;
 }
 ```
 
 ```html
-<button class="btn btn-success">Save changes</button>
+<button class="btn btn-warning">Review changes</button>
 ```
+
+Every class listed in a component's usage table can be restyled the same way.
