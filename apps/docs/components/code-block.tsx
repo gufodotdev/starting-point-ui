@@ -62,7 +62,7 @@ export function Pre({
           {labelAction && <div className="ml-auto">{labelAction}</div>}
         </div>
       )}
-      <pre className="scrollbar-thin max-h-96 overflow-auto px-4 py-3.5">
+      <pre className="scrollbar-thin overflow-x-auto px-4 py-3.5">
         {children}
       </pre>
     </div>
