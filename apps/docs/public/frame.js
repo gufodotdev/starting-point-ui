@@ -33,8 +33,38 @@ if (openHost) {
       const instance = window.sp[name](el);
       if (!instance) continue;
       const nested = panels.some((other) => other !== el && other.contains(instance.trigger));
-      if (!nested) instance.show();
+      if (!nested) {
+        instance.show();
+        if (!window.__spBridgeTarget && instance.trigger) {
+          window.__spBridgeTarget = instance.trigger;
+        }
+      }
     }
   };
   show();
 }
+
+// The docs focus this window when the pointer enters the frame, landing on
+// body. Hand the first key press to the component the user is looking at: the
+// trigger of a panel opened on load, or the first tabbable element otherwise.
+// Focus rings only ever show for actual keyboard use.
+const FOCUSABLE =
+  'button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])';
+
+document.addEventListener("keydown", (e) => {
+  if (document.activeElement !== document.body) return;
+  let target = window.__spBridgeTarget ?? document.body.querySelector(FOCUSABLE);
+  // A panel trigger can be a wrapper (the combobox anchor); focus what's inside.
+  if (target && !target.matches(FOCUSABLE)) target = target.querySelector(FOCUSABLE);
+  if (!target) return;
+  const keys = window.__spBridgeTarget
+    ? ["ArrowDown", "ArrowUp", "Enter", " ", "Home", "End"]
+    : ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Home", "End"];
+  if (!keys.includes(e.key)) return;
+  e.preventDefault();
+  target.focus({ preventScroll: true });
+  // Synthetic events never trigger native actions, so this only reaches the
+  // component's own handlers.
+  target.dispatchEvent(new KeyboardEvent("keydown", { key: e.key, bubbles: true }));
+});
+

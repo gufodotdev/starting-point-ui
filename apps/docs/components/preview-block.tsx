@@ -34,12 +34,60 @@ function FrameExample({ id }: { id: string }) {
     return () => frame.removeEventListener("load", sync);
   }, [id, resolvedTheme]);
 
+  // Hand the frame keyboard focus while the pointer is inside it, so demos
+  // that render open (like the intro dropdown) respond to arrow keys without
+  // a click, which would dismiss them. Focusing from the pointer event keeps
+  // the focus ring away, and an accidental pass-over is undone on leave;
+  // any interaction inside the frame means intent, so focus then stays.
+  const previousFocus = useRef<HTMLElement | null>(null);
+  const engaged = useRef(false);
+  const markEngaged = () => {
+    engaged.current = true;
+  };
+
+  const handleEnter = () => {
+    const frame = frameRef.current;
+    if (!frame?.contentWindow) return;
+    const active = document.activeElement;
+    // Leave keyboard users and editable controls alone; focus merely left
+    // behind by a click (like the nav link that got us here) is fair to take.
+    if (
+      active instanceof HTMLElement &&
+      active !== document.body &&
+      active.tagName !== "IFRAME" &&
+      (active.matches(":focus-visible") ||
+        active.matches("input, textarea, select, [contenteditable]"))
+    ) {
+      return;
+    }
+    previousFocus.current = active instanceof HTMLElement ? active : null;
+    engaged.current = false;
+    frame.contentDocument?.addEventListener("pointerdown", markEngaged);
+    frame.contentDocument?.addEventListener("keydown", markEngaged);
+    frame.contentWindow.focus();
+  };
+
+  const handleLeave = () => {
+    const frame = frameRef.current;
+    frame?.contentDocument?.removeEventListener("pointerdown", markEngaged);
+    frame?.contentDocument?.removeEventListener("keydown", markEngaged);
+    if (engaged.current || document.activeElement !== frame) return;
+    const previous = previousFocus.current;
+    if (previous && previous !== document.body) {
+      previous.focus({ preventScroll: true });
+    } else {
+      frame?.blur();
+    }
+  };
+
   return (
     <iframe
       ref={frameRef}
       src={`/frame/${id}`}
       title="Example preview"
       className="h-96 w-full border-0"
+      onPointerEnter={handleEnter}
+      onPointerLeave={handleLeave}
       suppressHydrationWarning
     />
   );
