@@ -40,7 +40,7 @@ export function CodeBlock(props: CodeBlockProps) {
   return (
     <div className="relative my-4">
       <Pre>{children}</Pre>
-      <CopyButton code={code} className="absolute top-2 z-10" adjustForScrollbar />
+      <CopyButton code={code} className="absolute top-2.5 z-10" adjustForScrollbar />
     </div>
   );
 }
@@ -55,16 +55,18 @@ export function Pre({
   labelAction?: React.ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-code text-sm">
+    <div className="rounded-xl border bg-code p-1 text-sm">
       {label && (
-        <div className="flex items-center gap-2 border-b py-2 pr-2 pl-4 font-medium text-foreground">
+        <div className="flex items-center gap-2 pt-1 pr-1 pb-1.5 pl-3 font-medium text-foreground">
           {label}
           {labelAction && <div className="ml-auto">{labelAction}</div>}
         </div>
       )}
-      <pre className="scrollbar-thin overflow-x-auto px-4 py-3.5">
-        {children}
-      </pre>
+      <div className="relative overflow-hidden rounded-lg border bg-background">
+        <pre className="scrollbar-thin overflow-x-auto px-4 py-3.5">
+          {children}
+        </pre>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Monitor, Tablet, Smartphone, Fullscreen } from "lucide-react";
 import {
@@ -13,6 +13,51 @@ import { CopyButton } from "@/components/copy-button";
 
 const TABLET_WIDTH = 768;
 const MOBILE_WIDTH = 375;
+
+
+// The code tab starts at the preview's height; taller code gets a fade and a
+// button that expands it in place.
+function CodePanel({ children }: { children: React.ReactNode }) {
+  const preRef = useRef<HTMLPreElement>(null);
+  const [expanded, setExpanded] = useState(false);
+  const [overflowing, setOverflowing] = useState(false);
+
+  useEffect(() => {
+    const pre = preRef.current;
+    if (!pre) return;
+    const check = () => setOverflowing(pre.scrollHeight > pre.clientHeight + 1);
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(pre);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="rounded-xl border bg-code p-1 text-sm">
+      <div className="relative overflow-hidden rounded-lg border bg-background">
+        <pre
+          ref={preRef}
+          className={`scrollbar-thin overflow-x-auto px-4 py-3.5 ${
+            expanded ? "" : "max-h-96 overflow-y-hidden"
+          }`}
+        >
+          {children}
+        </pre>
+        {!expanded && overflowing && (
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-24 items-end justify-center bg-linear-to-t from-background to-transparent pb-3">
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              className="btn btn-outline btn-sm pointer-events-auto"
+            >
+              Show more
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 function FrameExample({ id }: { id: string }) {
   const frameRef = useRef<HTMLIFrameElement>(null);
@@ -198,11 +243,7 @@ export function PreviewBlock({
       </div>
 
       <div id={codeId} className="tab-content">
-        <div className="overflow-hidden rounded-xl border bg-code text-sm">
-          <pre className="scrollbar-thin overflow-x-auto px-4 py-3.5">
-            {children}
-          </pre>
-        </div>
+        <CodePanel>{children}</CodePanel>
       </div>
     </div>
   );

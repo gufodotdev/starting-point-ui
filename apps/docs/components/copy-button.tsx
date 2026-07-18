@@ -13,7 +13,7 @@ interface CopyButtonProps {
 export function CopyButton({
   code,
   className,
-  classes = "btn btn-ghost btn-sm btn-icon",
+  classes = "btn btn-ghost btn-sm btn-icon text-muted-foreground",
   adjustForScrollbar,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
