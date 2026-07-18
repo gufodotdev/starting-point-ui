@@ -45,6 +45,7 @@ export default async function FramePage({
     <>
       <div
         data-no-scrollbar-gutter
+        data-frame-zoom
         data-open={showOnLoad ? example.open : undefined}
         style={framePresets[example.preset]}
         // frame.js sets min-height inline before hydration on direct visits.

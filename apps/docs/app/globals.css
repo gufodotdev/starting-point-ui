@@ -146,6 +146,14 @@ pre {
   @apply text-sm/6;
 }
 
+/* Zoom narrow preview frames out a little so examples keep breathing room on
+   small screens. The media query reads the frame's own viewport. */
+@media (max-width: 480px) {
+  [data-frame-zoom] {
+    zoom: 0.8;
+  }
+}
+
 /* Lock page scroll while the mobile nav is open */
 body:has(#mobile-nav:popover-open) {
   @apply overflow-hidden;
