@@ -62,13 +62,19 @@ export function exampleId(source: string, preset: string, open?: string): string
 // as its own static /frame/[id] page.
 const FENCE = /```html\s+([^\n]*)\n([\s\S]*?)```/g;
 
-let cache: Map<string, PreviewExample> | undefined;
+let cache: Promise<Map<string, PreviewExample>> | undefined;
 
-function collect(): Map<string, PreviewExample> {
+function collect(): Promise<Map<string, PreviewExample>> {
   if (cache) return cache;
 
+  const result = build();
+  if (process.env.NODE_ENV === "production") cache = result;
+  return result;
+}
+
+async function build(): Promise<Map<string, PreviewExample>> {
   const examples = new Map<string, PreviewExample>();
-  for (const doc of getAllDocs()) {
+  for (const doc of await getAllDocs()) {
     for (const match of doc.content.matchAll(FENCE)) {
       const meta = match[1] ?? "";
       if (!isPreviewMeta(meta)) continue;
@@ -80,14 +86,15 @@ function collect(): Map<string, PreviewExample> {
     }
   }
 
-  if (process.env.NODE_ENV === "production") cache = examples;
   return examples;
 }
 
-export function getAllPreviewExamples(): PreviewExample[] {
-  return [...collect().values()];
+export async function getAllPreviewExamples(): Promise<PreviewExample[]> {
+  return [...(await collect()).values()];
 }
 
-export function getPreviewExample(id: string): PreviewExample | undefined {
-  return collect().get(id);
+export async function getPreviewExample(
+  id: string,
+): Promise<PreviewExample | undefined> {
+  return (await collect()).get(id);
 }

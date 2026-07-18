@@ -50,12 +50,15 @@ const prettyCodeOptions = {
   ],
 };
 
-function ComponentsList() {
+async function ComponentsList() {
   const items = docsNav.find((group) => group.title === "Components")?.items ?? [];
+  const docs = await Promise.all(
+    items.map((item) => getDocBySlug(item.href.slice(1).split("/"))),
+  );
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item) => {
-        const doc = getDocBySlug(item.href.slice(1).split("/"));
+      {items.map((item, index) => {
+        const doc = docs[index];
         const blurb = doc?.metadata.description.split(". ").slice(1).join(". ").replace(/^Use it to /, "").replace(/^./, (c) => c.toUpperCase());
         return (
           <Link

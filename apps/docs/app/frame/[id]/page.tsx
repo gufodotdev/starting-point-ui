@@ -14,8 +14,8 @@ import { compilePreviewStyles } from "@/lib/preview-css";
 const frameScript = () =>
   readFileSync(path.join(process.cwd(), "public", "frame.js"), "utf8");
 
-export function generateStaticParams() {
-  return getAllPreviewExamples().map((e) => ({ id: e.id }));
+export async function generateStaticParams() {
+  return (await getAllPreviewExamples()).map((e) => ({ id: e.id }));
 }
 
 export const dynamicParams = false;
@@ -26,7 +26,7 @@ export default async function FramePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const example = getPreviewExample(id);
+  const example = await getPreviewExample(id);
   if (!example) notFound();
 
   // Author the settled class into the served markup, so init settles the

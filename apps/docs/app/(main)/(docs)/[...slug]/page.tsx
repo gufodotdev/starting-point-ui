@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const doc = getDocBySlug(slug);
+  const doc = await getDocBySlug(slug);
   if (!doc) return {};
 
   return {
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DocPage({ params }: Props) {
   const { slug } = await params;
-  const doc = getDocBySlug(slug);
+  const doc = await getDocBySlug(slug);
 
   if (!doc) {
     notFound();
