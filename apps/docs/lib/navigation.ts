@@ -62,4 +62,10 @@ export const docsNav: NavGroup[] = [
       { title: "Tooltip", href: "/components/tooltip" },
     ],
   },
+  {
+    title: "Examples",
+    items: [
+      { title: "Cards", href: "/examples/cards" },
+    ],
+  },
 ];
