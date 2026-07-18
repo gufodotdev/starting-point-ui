@@ -69,6 +69,19 @@ export const framePresets: Record<string, CSSProperties> = {
     padding: "clamp(1rem, 5vw, 2.5rem)",
     minHeight: "24rem",
   },
+  // Like form, sized so card examples need no width utilities: the content
+  // area is exactly max-w-sm.
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: "1rem",
+    width: "100%",
+    maxWidth: "29rem",
+    marginInline: "auto",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "16rem",
+  },
   // Like form, but top-aligned so floating panels have room to open below.
   "form-start": {
     display: "flex",
