@@ -3,7 +3,52 @@ title: Introduction
 description: Starting Point UI is a free, open-source Tailwind CSS component library that brings the shadcn/ui design system to any web stack. No React required.
 ---
 
-A Tailwind CSS component library that brings the [shadcn/ui](https://ui.shadcn.com) design system to any web stack, no React required. You get more than 30 beautiful, accessible components as simple semantic classes, with a small vanilla JavaScript module driving the interactive ones.
+A Tailwind CSS component library that brings the [shadcn/ui](https://ui.shadcn.com) design system to any web stack, no React required. You get beautiful, accessible components as simple semantic classes, with a small vanilla JavaScript module driving the interactive ones.
+
+---
+
+## An example
+
+Here is an example of a simple dropdown menu. The classes handle the design, the data attributes wire up the behavior, and accessibility comes built in: the markup gets the right ARIA roles and attributes automatically, arrow keys move through the items, ArrowRight opens the submenu and ArrowLeft closes it, Escape dismisses, and focus is managed for you. Copy the code and it works.
+
+```html preview preset=popover open=.dropdown
+<!-- The trigger: any button or link with an id -->
+<button id="intro-demo-trigger" class="btn btn-outline">Open</button>
+
+<!-- The menu: points at its trigger, everything else is automatic -->
+<div class="dropdown w-44" data-sp-toggle="#intro-demo-trigger">
+  <div class="dropdown-label">My Account</div>
+  <button class="dropdown-item">
+    Profile
+    <span class="dropdown-shortcut">⇧⌘P</span>
+  </button>
+  <button class="dropdown-item">
+    Billing
+    <span class="dropdown-shortcut">⌘B</span>
+  </button>
+  <button id="intro-demo-invite" class="dropdown-item">
+    Invite users
+    <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item">
+    Log out
+    <span class="dropdown-shortcut">⇧⌘Q</span>
+  </button>
+</div>
+
+<!-- The submenu: another dropdown that opens from the item above -->
+<div
+  class="dropdown dropdown-sub"
+  data-sp-toggle="#intro-demo-invite"
+  data-sp-mode="hover"
+  data-sp-placement="right-start"
+>
+  <button class="dropdown-item">Email</button>
+  <button class="dropdown-item">Message</button>
+  <button class="dropdown-item">Copy link</button>
+</div>
+```
 
 ---
 
@@ -15,6 +60,19 @@ A Tailwind CSS component library that brings the [shadcn/ui](https://ui.shadcn.c
 - **Themeable** - shadcn/ui-compatible CSS variables, with dark mode out of the box; see [Customization](/guides/customization)
 - **Lightweight** - just CSS and an optional JavaScript module
 - **Clean markup** - readable class names, no class soup
+
+---
+
+## Inspiration
+
+Starting Point UI could not exist without these amazing open source projects. Much of what you find here, from the design system to the way the JavaScript is structured, comes from using them, studying their source code, and learning from the people behind them. Be sure to check them out.
+
+- [Tailwind CSS](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Radix UI](https://www.radix-ui.com)
+- [daisyUI](https://daisyui.com)
+- [Basecoat](https://basecoatui.com)
+- [UIkit](https://getuikit.com)
 
 ---
 
