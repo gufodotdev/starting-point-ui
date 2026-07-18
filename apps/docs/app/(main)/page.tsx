@@ -16,11 +16,10 @@ export default function Home() {
       <div className="relative flex flex-col justify-center px-6 py-6 lg:col-span-6 lg:items-center xl:col-span-5">
         <div className="max-w-xl lg:-mt-(--navbar-height)">
           <Link
-            href="/changelog"
-            className="badge badge-secondary gap-1 rounded-full px-3 py-1 text-sm font-normal"
+            href="/guides/introduction"
+            className="badge badge-secondary rounded-full px-3 py-1 text-sm font-normal"
           >
-            See what&apos;s new
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            The shadcn/ui look you love, in plain HTML
           </Link>
           <h1 className="xs:text-4xl/tight mt-6 text-3xl/tight font-extrabold tracking-tight lg:text-5xl/tight">
             The Starting Point <br /> for Your Next Project
