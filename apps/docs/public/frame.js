@@ -68,3 +68,22 @@ document.addEventListener("keydown", (e) => {
   target.dispatchEvent(new KeyboardEvent("keydown", { key: e.key, bubbles: true }));
 });
 
+// A modal dialog contains Tab by making the rest of its document inert, but
+// the docs page outside this frame is a different document, so Tab would walk
+// out of the preview. Wrap it within the open dialog like on a full page.
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Tab") return;
+  const dialog = document.querySelector("dialog[open]");
+  if (!dialog) return;
+  const tabbables = [...dialog.querySelectorAll(FOCUSABLE)];
+  if (!tabbables.length) return;
+  const first = tabbables[0];
+  const last = tabbables[tabbables.length - 1];
+  if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  } else if (e.shiftKey && (document.activeElement === first || document.activeElement === document.body)) {
+    e.preventDefault();
+    last.focus();
+  }
+});
