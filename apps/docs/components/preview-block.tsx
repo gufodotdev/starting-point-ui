@@ -198,7 +198,7 @@ export function PreviewBlock({
       </div>
 
       <div id={codeId} className="tab-content">
-        <div className="overflow-hidden rounded-xl bg-code text-sm">
+        <div className="overflow-hidden rounded-xl border bg-code text-sm">
           <pre className="scrollbar-thin max-h-96 overflow-auto px-4 py-3.5">
             {children}
           </pre>

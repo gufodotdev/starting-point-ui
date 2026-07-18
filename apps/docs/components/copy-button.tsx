@@ -13,7 +13,7 @@ interface CopyButtonProps {
 export function CopyButton({
   code,
   className,
-  classes = "btn btn-ghost btn-xs btn-icon",
+  classes = "btn btn-ghost btn-sm btn-icon",
   adjustForScrollbar,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -46,7 +46,7 @@ export function CopyButton({
   const scrollbarClass = adjustForScrollbar
     ? hasScrollbar
       ? "right-3"
-      : "right-1.5"
+      : "right-2"
     : "";
 
   return (
@@ -57,11 +57,7 @@ export function CopyButton({
       className={`${classes} cursor-pointer ${scrollbarClass} ${className ?? ""}`}
       aria-label={copied ? "Copied" : "Copy code"}
     >
-      {copied ? (
-        <Check className="text-green-600" />
-      ) : (
-        <Copy />
-      )}
+      {copied ? <Check className="text-green-600" /> : <Copy />}
     </button>
   );
 }
