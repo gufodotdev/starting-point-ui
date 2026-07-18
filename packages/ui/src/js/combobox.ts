@@ -17,6 +17,9 @@ import { Anchorable } from "./mixins/anchorable";
 
 const ITEM = ".combobox-item";
 
+// Chips keep a reference to their option element for the remove button.
+type ChipElement = HTMLSpanElement & { _spItem?: HTMLElement };
+
 function itemLabel(item: HTMLElement): string {
   return (item.dataset.spLabel ?? item.textContent ?? "").trim();
 }
@@ -122,7 +125,7 @@ export const Combobox = define({
       if (chips) {
         this.on(chips, "click", (e) => {
           const remove = (e.target as HTMLElement).closest<HTMLElement>(".combobox-chip-remove");
-          const item = remove ? ((remove.closest(".combobox-chip") as any)?._spItem ?? null) : null;
+          const item = remove ? (remove.closest<ChipElement>(".combobox-chip")?._spItem ?? null) : null;
           if (item) this._uncheck(item);
         });
       }
@@ -310,7 +313,7 @@ export const Combobox = define({
         remove.setAttribute("aria-label", `Remove ${itemLabel(item)}`);
         remove.innerHTML =
           '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
-        (chip as any)._spItem = item;
+        (chip as ChipElement)._spItem = item;
         chip.append(remove);
         if (input) chips.insertBefore(chip, input);
         else chips.append(chip);
