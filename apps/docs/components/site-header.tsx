@@ -65,16 +65,6 @@ export function SiteHeader() {
         data-sp-static
         className="popover scrollbar-none inset-x-0 top-(--navbar-height) bottom-0 h-auto w-auto gap-12 overflow-y-auto rounded-none bg-background/90 p-6 shadow-none ring-0 backdrop-blur md:hidden [&.show]:zoom-in-100 [&.hide]:zoom-out-100"
       >
-        <div className="flex flex-col gap-4">
-          <div className="text-sm font-medium text-muted-foreground">Menu</div>
-          <div className="flex flex-col gap-3">
-            {mainNav.map((item) => (
-              <MobileLink key={item.href} href={item.href}>
-                {item.title}
-              </MobileLink>
-            ))}
-          </div>
-        </div>
         {docsNav.map((group) => (
           <div key={group.title} className="flex flex-col gap-4">
             <div className="text-sm font-medium text-muted-foreground">
