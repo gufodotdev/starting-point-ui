@@ -53,7 +53,13 @@ export function ScrollIndicator() {
   return (
     <div className="flex gap-2 max-xs:justify-center">
       {visibilities.map((vis, i) => (
-        <button key={i} onClick={() => scrollTo(i)} className="py-2">
+        <button
+          key={i}
+          type="button"
+          aria-label={`Scroll to column ${i + 1}`}
+          onClick={() => scrollTo(i)}
+          className="py-2"
+        >
           <div
             className="h-0.5 w-12 rounded-full"
             style={{
