@@ -158,3 +158,38 @@ pre {
 body:has(#mobile-nav:popover-open) {
   @apply overflow-hidden;
 }
+
+/* Unsplash editor: orange-accent skin per the photo editor style spec.
+   Scoped token overrides recolor every primary-consuming component inside
+   the dialog; the slider rules align track and thumb metrics. */
+.sp-photo-editor {
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+  --ring: #f97316;
+}
+
+.sp-photo-editor .slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--border);
+}
+.sp-photo-editor .slider::-moz-range-track {
+  height: 4px;
+  background: var(--border);
+}
+.sp-photo-editor .slider::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: calc((4px - 14px) / 2);
+  border-color: #d4d4d4;
+}
+.sp-photo-editor .slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-color: #d4d4d4;
+}
+.sp-photo-editor .slider:focus-visible::-webkit-slider-thumb {
+  border-color: var(--primary);
+}
+.sp-photo-editor .slider:focus-visible::-moz-range-thumb {
+  border-color: var(--primary);
+}

@@ -1,0 +1,49 @@
+[
+  { "key": "original", "label": "Original", "values": {} },
+  {
+    "key": "nordic",
+    "label": "Nordic",
+    "values": {
+      "exposure": 6,
+      "brightness": 12,
+      "saturation": -12,
+      "vibrance": 12
+    }
+  },
+  {
+    "key": "kodak",
+    "label": "Kodak",
+    "values": { "exposure": 4, "contrast": 10, "vibrance": 35, "sepia": 15 }
+  },
+  { "key": "mono", "label": "Mono", "values": { "saturation": -100 } },
+  {
+    "key": "fade",
+    "label": "Fade",
+    "values": { "saturation": -35, "contrast": -20, "brightness": 10 }
+  },
+  {
+    "key": "bronze",
+    "label": "Bronze",
+    "values": { "exposure": 8, "contrast": 5, "vibrance": 25, "sepia": 40 }
+  },
+  {
+    "key": "frost",
+    "label": "Frost",
+    "values": { "brightness": 12, "contrast": -25, "saturation": -25 }
+  },
+  {
+    "key": "noir",
+    "label": "Noir",
+    "values": { "contrast": 35, "shadows": -15, "saturation": -100 }
+  },
+  {
+    "key": "bloom",
+    "label": "Bloom",
+    "values": {
+      "brightness": 10,
+      "contrast": 20,
+      "vibrance": 30,
+      "shadows": 10
+    }
+  }
+]
