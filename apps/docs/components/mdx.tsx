@@ -4,6 +4,8 @@ import { docsNav } from "@/lib/navigation";
 import { getDocBySlug } from "@/lib/mdx";
 import { CodeBlock } from "@/components/code-block";
 import { Callout } from "@/components/callout";
+import { AvatarsList } from "@/components/avatars-list";
+import { UnsplashEditor } from "@/components/unsplash-editor";
 import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
 import {
   exampleId,
@@ -50,16 +52,22 @@ const prettyCodeOptions = {
   ],
 };
 
-async function ComponentsList() {
-  const items = docsNav.find((group) => group.title === "Components")?.items ?? [];
+async function NavGroupList({
+  group,
+  transformBlurb,
+}: {
+  group: string;
+  transformBlurb?: (blurb: string) => string;
+}) {
+  const items = docsNav.find((entry) => entry.title === group)?.items ?? [];
   const docs = await Promise.all(
     items.map((item) => getDocBySlug(item.href.slice(1).split("/"))),
   );
   return (
     <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item, index) => {
-        const doc = docs[index];
-        const blurb = doc?.metadata.description.split(". ").slice(1).join(". ").replace(/^Use it to /, "").replace(/^./, (c) => c.toUpperCase());
+        const raw = docs[index]?.metadata.description.split(". ").slice(1).join(". ") ?? "";
+        const blurb = transformBlurb ? transformBlurb(raw) : raw;
         return (
           <Link
             key={item.href}
@@ -77,37 +85,32 @@ async function ComponentsList() {
   );
 }
 
-async function ExamplesList() {
-  const items = docsNav.find((group) => group.title === "Examples")?.items ?? [];
-  const docs = await Promise.all(
-    items.map((item) => getDocBySlug(item.href.slice(1).split("/"))),
-  );
+function ComponentsList() {
   return (
-    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item, index) => {
-        const doc = docs[index];
-        const blurb = doc?.metadata.description.split(". ").slice(1).join(". ");
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="card card-sm transition-colors hover:bg-accent/50"
-          >
-            <div className="card-header">
-              <h3 className="card-title">{item.title}</h3>
-              {blurb && <p className="card-description line-clamp-2">{blurb}</p>}
-            </div>
-          </Link>
-        );
-      })}
-    </div>
+    <NavGroupList
+      group="Components"
+      transformBlurb={(blurb) =>
+        blurb.replace(/^Use it to /, "").replace(/^./, (c) => c.toUpperCase())
+      }
+    />
   );
+}
+
+function ExamplesList() {
+  return <NavGroupList group="Examples" />;
+}
+
+function ResourcesList() {
+  return <NavGroupList group="Resources" />;
 }
 
 const components = {
   Callout,
   ComponentsList,
   ExamplesList,
+  ResourcesList,
+  AvatarsList,
+  UnsplashEditor,
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
       className="mt-10 lg:mt-12 first:mt-0 scroll-m-28 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
