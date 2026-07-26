@@ -21,6 +21,7 @@ export const docsNav: NavGroup[] = [
       { title: "Installation", href: "/guides/installation" },
       { title: "Customization", href: "/guides/customization" },
       { title: "Help", href: "/guides/help" },
+      { title: "Changelog", href: "/changelog" },
     ],
   },
   {
