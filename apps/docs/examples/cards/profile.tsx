@@ -1,32 +1,34 @@
+import { PlusIcon } from "@radix-ui/react-icons";
+
 export default function Profile() {
   return (
     <div className="card">
       <div className="card-content">
         <img
-          src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-          alt="Sarah Johnson"
+          src="https://images.unsplash.com/photo-1604573824303-d0177f69461f?rect=0,0,4000,4000&w=640&h=640&fit=crop&auto=format&q=100"
+          alt="Vivienne Kleinfeld"
           className="aspect-square w-full rounded-xl object-cover"
         />
       </div>
       <div className="card-header">
-        <h3 className="card-title">Sarah Johnson</h3>
+        <h3 className="card-title">Vivienne Kleinfeld</h3>
         <p className="card-description">
           Product Designer who focuses on simplicity &amp; usability.
           Currently designing at Acme Inc.
         </p>
       </div>
       <div className="card-footer gap-6">
-        <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 text-muted-foreground"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
-          <span>312</span>
+        <div className="leading-tight">
+          <p className="text-sm font-semibold tabular-nums">312</p>
+          <p className="text-xs text-muted-foreground">Followers</p>
         </div>
-        <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-4 text-muted-foreground"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
-          <span>48</span>
+        <div className="leading-tight">
+          <p className="text-sm font-semibold tabular-nums">48</p>
+          <p className="text-xs text-muted-foreground">Following</p>
         </div>
         <button className="btn btn-sm ml-auto">
           Follow
-          <svg className="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          <PlusIcon className="icon-end" stroke="currentColor" strokeWidth="0.5" />
         </button>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { CheckIcon } from "@radix-ui/react-icons";
+
 export default function PremiumPlan() {
   return (
     <div className="card">
@@ -16,23 +18,23 @@ export default function PremiumPlan() {
         <div className="separator"></div>
         <ul className="grid gap-4 text-sm">
           <li className="flex items-center text-muted-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4 size-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
+            <CheckIcon className="mr-4 size-4 text-primary" />
             <span>Up to 10 team members</span>
           </li>
           <li className="flex items-center text-muted-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4 size-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
+            <CheckIcon className="mr-4 size-4 text-primary" />
             <span>50GB cloud storage</span>
           </li>
           <li className="flex items-center text-muted-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4 size-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
+            <CheckIcon className="mr-4 size-4 text-primary" />
             <span>Priority email support</span>
           </li>
           <li className="flex items-center text-muted-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4 size-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
+            <CheckIcon className="mr-4 size-4 text-primary" />
             <span>Advanced analytics dashboard</span>
           </li>
           <li className="flex items-center text-muted-foreground">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4 size-4 text-primary"><path d="M20 6 9 17l-5-5"/></svg>
+            <CheckIcon className="mr-4 size-4 text-primary" />
             <span>API access</span>
           </li>
         </ul>

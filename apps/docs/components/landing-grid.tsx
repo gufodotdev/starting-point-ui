@@ -4,13 +4,13 @@ import Feedback from "@/examples/cards/feedback";
 import InvoicePaid from "@/examples/cards/invoice-paid";
 import Login from "@/examples/cards/login";
 import MusicPlayer from "@/examples/cards/music-player";
-import MusicQueue from "@/examples/cards/music-queue";
 import Notifications from "@/examples/cards/notifications";
 import PaymentMethod from "@/examples/cards/payment-method";
 import PremiumPlan from "@/examples/cards/premium-plan";
 import Product from "@/examples/cards/product";
 import Profile from "@/examples/cards/profile";
 import ShareDocument from "@/examples/cards/share-document";
+import ShoppingCart from "@/examples/cards/shopping-cart";
 import SignUp from "@/examples/cards/sign-up";
 import Testimonial from "@/examples/cards/testimonial";
 
@@ -57,7 +57,7 @@ export function LandingGrid() {
       </div>
       <div className="w-96 shrink-0">
         <div className="mb-4 break-inside-avoid *:w-full *:max-w-sm">
-          <MusicQueue />
+          <ShoppingCart />
         </div>
         <div className="mb-4 break-inside-avoid *:w-full *:max-w-sm">
           <InvoicePaid />

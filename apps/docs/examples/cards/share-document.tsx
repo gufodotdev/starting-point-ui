@@ -1,3 +1,5 @@
+import { CopyIcon } from "@radix-ui/react-icons";
+
 export default function ShareDocument() {
   return (
     <div className="card">
@@ -18,55 +20,55 @@ export default function ShareDocument() {
             aria-label="Document link"
           />
           <button className="btn btn-outline btn-icon" aria-label="Copy link">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <CopyIcon />
           </button>
         </div>
         <div className="separator"></div>
         <span className="text-sm font-medium">People with access</span>
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="avatar">
-            <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp" alt="Sarah Johnson" />
-            <span className="avatar-fallback">SJ</span>
+            <span className="avatar avatar-lg">
+            <img className="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+            <span className="avatar-fallback">LN</span>
           </span>
             <div className="text-sm">
-              <p className="font-medium text-foreground">Sarah Johnson</p>
-              <p className="text-muted-foreground">sarah@example.com</p>
+              <p className="font-medium text-foreground">Leila Navarro</p>
+              <p className="text-muted-foreground">leila@example.com</p>
             </div>
           </div>
-          <select className="select h-8 w-22" aria-label="Permission for Sarah Johnson">
+          <select className="select h-8 w-22" aria-label="Permission for Leila Navarro">
             <option value="write">Write</option>
             <option value="read">Read</option>
           </select>
         </div>
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="avatar">
-            <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp" alt="Michael Chen" />
-            <span className="avatar-fallback">MC</span>
+            <span className="avatar avatar-lg">
+            <img className="avatar-image" src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Theo Marchetti" />
+            <span className="avatar-fallback">TM</span>
           </span>
             <div className="text-sm">
-              <p className="font-medium text-foreground">Michael Chen</p>
-              <p className="text-muted-foreground">michael@example.com</p>
+              <p className="font-medium text-foreground">Theo Marchetti</p>
+              <p className="text-muted-foreground">theo@example.com</p>
             </div>
           </div>
-          <select className="select h-8 w-22" aria-label="Permission for Michael Chen">
+          <select className="select h-8 w-22" aria-label="Permission for Theo Marchetti">
             <option value="read">Read</option>
             <option value="write">Write</option>
           </select>
         </div>
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="avatar">
-            <img className="avatar-image" src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp" alt="Emma Wilson" />
-            <span className="avatar-fallback">EW</span>
+            <span className="avatar avatar-lg">
+            <img className="avatar-image" src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Maya Santoso" />
+            <span className="avatar-fallback">MS</span>
           </span>
             <div className="text-sm">
-              <p className="font-medium text-foreground">Emma Wilson</p>
-              <p className="text-muted-foreground">emma@example.com</p>
+              <p className="font-medium text-foreground">Camille Laurent</p>
+              <p className="text-muted-foreground">camille@example.com</p>
             </div>
           </div>
-          <select className="select h-8 w-22" aria-label="Permission for Emma Wilson">
+          <select className="select h-8 w-22" aria-label="Permission for Camille Laurent">
             <option value="read">Read</option>
             <option value="write">Write</option>
           </select>
