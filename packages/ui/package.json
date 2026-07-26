@@ -22,6 +22,7 @@
     "dev": "node build.mjs --watch",
     "check-types": "tsc --noEmit",
     "lint": "eslint src/",
+    "prepublishOnly": "npm run build && npm test",
     "test": "playwright test"
   },
   "devDependencies": {
