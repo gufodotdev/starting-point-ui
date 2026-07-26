@@ -1,0 +1,65 @@
+// Click / Enter / Space on the trigger toggles the panel and syncs
+// aria-expanded / aria-controls. Needs Togglable or Expandable.
+
+import type { Mixin, SpInstance } from "../define";
+import { ensureId, resolveTrigger } from "../utils";
+
+export const ClickToShow: Mixin = {
+  props: { toggle: String },
+
+  init(this: SpInstance) {
+    const trigger = resolveTrigger(this);
+    if (!trigger) return;
+
+    if (!trigger.hasAttribute("aria-expanded")) {
+      trigger.setAttribute("aria-expanded", "false");
+    }
+    trigger.setAttribute("aria-controls", ensureId(this.el));
+
+    // A trigger that is (or wraps) a text control owns its open behavior:
+    // clicking a combobox field must never toggle-close it, and its keys type.
+    if (trigger.matches("input, textarea") || trigger.querySelector("input, textarea")) return;
+
+    this.on(trigger, "click", (e) => {
+      // The browser default is never wanted on a toggle trigger: an untyped
+      // <button> in a form would submit it, a link would navigate.
+      e.preventDefault();
+      // On touch, HoverToShow arms _preventClick so the tap that opened us isn't
+      // toggled shut by the synthesized click.
+      if (this._preventClick) {
+        this._preventClick = null;
+        return;
+      }
+      this.toggle({ trigger });
+    });
+    this.on(trigger, "keydown", (e) => {
+      // A menu-item trigger's keys are the parent menu's to handle; it opens
+      // the submenu itself (and focuses the first item) on Enter/Space.
+      if (trigger.matches('[role^="menuitem"]')) return;
+      const key = (e as KeyboardEvent).key;
+      if (key === "Enter" || key === " ") {
+        e.preventDefault();
+        this.toggle({ trigger });
+      }
+    });
+
+    // Guard against nested collapsibles: their lifecycle events bubble through
+    // this panel, so only react to our own. Both lifecycle dialects are wired
+    // (overlays show/hide, disclosure expands/collapses).
+    for (const type of ["sp-beforeshow", "sp-beforeexpand"]) {
+      this.on(this.el, type, (e) => {
+        if (e.target === this.el) trigger.setAttribute("aria-expanded", "true");
+      });
+    }
+    for (const type of ["sp-beforehide", "sp-beforecollapse"]) {
+      this.on(this.el, type, (e) => {
+        if (e.target === this.el) trigger.setAttribute("aria-expanded", "false");
+      });
+    }
+  },
+
+  destroy(this: SpInstance) {
+    this.trigger?.removeAttribute("aria-expanded");
+    this.trigger?.removeAttribute("aria-controls");
+  },
+};

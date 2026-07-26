@@ -1,0 +1,101 @@
+---
+title: Kbd
+description: A kbd component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show keyboard keys and shortcuts, like the hints next to menu items.
+---
+
+The kbd shows a keyboard key or shortcut, like the hints next to menu items, tooltips, and search fields.
+
+```html preview
+<div class="flex flex-col items-center gap-4">
+  <span class="kbd-group">
+    <kbd class="kbd">⌘</kbd>
+    <kbd class="kbd">⇧</kbd>
+    <kbd class="kbd">⌥</kbd>
+    <kbd class="kbd">⌃</kbd>
+  </span>
+  <span class="kbd-group">
+    <kbd class="kbd">Ctrl</kbd>
+    <span>+</span>
+    <kbd class="kbd">B</kbd>
+  </span>
+</div>
+```
+
+## Usage
+
+Add the `kbd` class to a `<kbd>` element, one per key or combination.
+
+| Class       | Description                                    |
+| ----------- | ---------------------------------------------- |
+| `kbd`       | Add to a `<kbd>` element for a key             |
+| `kbd-group` | Add to a wrapper keeping several keys together |
+
+```html
+<kbd class="kbd">⌘</kbd>
+```
+
+## Examples
+
+### Group
+
+Keep a sequence of keys together in running text with `kbd-group`.
+
+```html preview
+<p class="text-sm text-muted-foreground">
+  Use
+  <span class="kbd-group">
+    <kbd class="kbd">Ctrl + B</kbd>
+    then
+    <kbd class="kbd">Ctrl + K</kbd>
+  </span>
+  to open the command palette
+</p>
+```
+
+### Button
+
+A kbd rides along inside a [button](/components/button) to hint its shortcut.
+
+```html preview
+<button class="btn btn-outline">
+  Accept <kbd class="kbd">⏎</kbd>
+</button>
+```
+
+### Tooltip
+
+Inside a [tooltip](/components/tooltip)'s inverted panel, the kbd switches to a translucent treatment automatically.
+
+```html preview
+<div class="btn-group">
+  <button id="kbd-tt-save" class="btn btn-outline">Save</button>
+  <button id="kbd-tt-print" class="btn btn-outline">Print</button>
+</div>
+
+<div class="tooltip" data-sp-toggle="#kbd-tt-save">
+  Save Changes <kbd class="kbd">S</kbd>
+</div>
+<div class="tooltip" data-sp-toggle="#kbd-tt-print">
+  Print Document
+  <span class="kbd-group">
+    <kbd class="kbd">Ctrl</kbd>
+    <kbd class="kbd">P</kbd>
+  </span>
+</div>
+```
+
+### Input group
+
+Hint a search shortcut in an [input group](/components/input-group) addon.
+
+```html preview preset=form
+<div class="input-group">
+  <input class="input" placeholder="Search..." />
+  <span class="input-group-addon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></span>
+  <span class="input-group-addon input-group-addon-end">
+    <kbd class="kbd">⌘</kbd>
+    <kbd class="kbd">K</kbd>
+  </span>
+</div>
+```
+

@@ -1,80 +1,161 @@
-/* Starting Point UI Sidebar Styles */
-
-@utility sidebar {
+@utility sidebar-container {
   @layer l1.l2 {
+    /* Component-local widths; override per instance with [--sidebar-width:...]
+       or a plain rule on the layout. */
+    --sidebar-width: 16rem;
+    --sidebar-width-mobile: 18rem;
+    --sidebar-width-icon: 3rem;
+
     @apply flex min-h-dvh w-full overflow-x-clip bg-sidebar;
+
+    /* The panel is fixed, so a pseudo-element gap reserves its width in the flow
+       (otherwise the page renders under it): ::before for a left panel, ::after
+       for a right one, so one layout can host both. Width tracks the collapse.
+       Its dvh height sets the flex line, so the page stretches to fill the
+       viewport (flex items stretch to the tallest sibling, not to min-height). */
+    &:has(> .sidebar:not(.sidebar-right))::before,
+    &:has(> .sidebar.sidebar-right)::after {
+      @apply block h-dvh md:w-(--sidebar-width) md:shrink-0;
+      @apply md:transition-[width] md:duration-200 md:ease-linear;
+      content: "";
+    }
+
+    /* Left gap (::before) mirrors the left panel's collapsed width. */
+    &:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="offcanvas"])::before {
+      @apply md:w-0;
+    }
+    &:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="icon"])::before {
+      @apply md:w-(--sidebar-width-icon);
+    }
+    &.sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="icon"])::before {
+      @apply md:w-[calc(var(--sidebar-width-icon)+1rem)];
+    }
+
+    /* Right gap (::after) mirrors the right panel's collapsed width. */
+    &:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="offcanvas"])::after {
+      @apply md:w-0;
+    }
+    &:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="icon"])::after {
+      @apply md:w-(--sidebar-width-icon);
+    }
+    &.sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="icon"])::after {
+      @apply md:w-[calc(var(--sidebar-width-icon)+1rem)];
+    }
   }
 }
 
-@utility sidebar-panel {
+@utility sidebar {
   @layer l1.l2 {
-    @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 w-(--sidebar-width) hidden;
-    @apply sidebar:relative sidebar:z-auto sidebar:block sidebar:shrink-0;
-    @apply [&:not(.no-animation)]:sidebar:transition-[margin] [&:not(.no-animation)]:sidebar:duration-200 [&:not(.no-animation)]:sidebar:ease-linear;
-    /* Mobile animations */
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:max-sidebar:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
-    /* Desktop: no animations */
-    @apply sidebar:translate-x-0 sidebar:animate-none!;
-    /* Default to left */
+    @apply max-md:bg-background text-sidebar-foreground fixed inset-y-0 z-50 hidden;
+    /* Cap the drawer at its token but shrink on narrow screens, leaving a gutter. */
+    @apply max-md:w-[min(var(--sidebar-width-mobile),100%-1.5rem)];
+    /* Desktop: a fixed full-height column (the layout's gap reserves its flow
+       space), so it can slide off or shrink without the page jumping. */
+    @apply md:fixed md:inset-y-0 md:z-10 md:block md:flex md:h-svh md:w-(--sidebar-width) flex-col;
+    /* Transition only on the transient classes, so an authored .collapsed
+       settles instantly with no animation (mirrors the dialog .show model). */
+    @apply [&:is(.collapsing,.expanding)]:md:transition-[left,right,width] md:duration-200 md:ease-linear;
+    @apply [&.show]:animate-in [&.show]:fade-in-0 max-md:duration-200 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0;
+    @apply md:translate-x-0 md:animate-none!;
     @apply [&:where(&:not(.sidebar-left,.sidebar-right))]:sidebar-left;
 
-    &.open {
-      @apply block;
+    /* The open mobile drawer is a flex column too, so header/footer pin. */
+    &:is(.show, .shown, .hide) {
+      @apply flex;
     }
+
+    /* Undo the UA popover styles; the explicit height beats the UA's
+       fit-content, which would otherwise shrink the drawer to its content. */
+    &:where([popover]) {
+      @apply m-0 h-full overflow-visible border-0 p-0;
+    }
+    &::backdrop {
+      @apply bg-black/10 supports-backdrop-filter:backdrop-blur-xs;
+    }
+    &.show::backdrop {
+      @apply animate-in fade-in-0 duration-200 [animation-fill-mode:forwards];
+    }
+    &.hide::backdrop {
+      @apply animate-out fade-out-0 duration-200 [animation-fill-mode:forwards];
+    }
+
+    &.collapsed[data-sp-collapse="icon"] {
+      @apply md:w-(--sidebar-width-icon) md:overflow-hidden;
+      /* Inset adds p-2; widen the rail by that 1rem so the icon isn't clipped. */
+      @apply md:in-[.sidebar-inset]:w-[calc(var(--sidebar-width-icon)+1rem)];
+    }
+
+    /* Inset: pad the rail so its content floats off the screen edge. */
+    @apply md:in-[.sidebar-inset]:p-2;
+  }
+}
+
+/* Static, non-collapsing column for embedding (dialogs, cards). */
+@utility sidebar-static {
+  @layer l1.l2 {
+    /* Standalone column outside a sidebar-container, so it carries its own
+       width default. */
+    --sidebar-width: 16rem;
+    @apply flex h-full w-(--sidebar-width) shrink-0 flex-col bg-sidebar text-sidebar-foreground;
   }
 }
 
 @utility sidebar-left {
   @layer l1 {
     @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
-    @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-left [&:not(.no-animation)]:data-[state=closed]:slide-out-to-left;
+    @apply [&.show]:slide-in-from-left-10 [&.hide]:slide-out-to-left-10;
 
-    &.collapsed {
-      @apply sidebar:-ml-(--sidebar-width);
+    /* Offcanvas: slide the fixed panel fully off the left edge. */
+    &.collapsed[data-sp-collapse="offcanvas"] {
+      @apply md:left-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
 
 @utility sidebar-right {
   @layer l1 {
-    @apply right-0 border-l in-[.sidebar-inset]:border-l-0;
-    @apply [&:not(.no-animation)]:data-[state=open]:slide-in-from-right [&:not(.no-animation)]:data-[state=closed]:slide-out-to-right;
+    @apply right-0 left-auto border-l in-[.sidebar-inset]:border-l-0;
+    @apply [&.show]:slide-in-from-right-10 [&.hide]:slide-out-to-right-10;
 
-    &.collapsed {
-      @apply sidebar:-mr-(--sidebar-width);
+    &.collapsed[data-sp-collapse="offcanvas"] {
+      @apply md:right-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
 
 @utility sidebar-page {
   @layer l1.l2 {
-    @apply flex-1 bg-background;
-    @apply sidebar:in-[.sidebar-inset]:m-2 sidebar:in-[.sidebar-inset]:shadow-sm sidebar:in-[.sidebar-inset]:rounded-xl;
+    @apply flex-1 min-w-0 bg-background;
+
+    /* Inset: the card floats with a gutter on every side. The side touching the
+       panel has no margin because the gap supplies that spacing; when the panel
+       collapses offcanvas the gap is gone, so restore the gutter there. */
+    .sidebar-inset & {
+      @apply md:my-2 md:rounded-xl md:shadow-sm;
+    }
+    /* Left panel (default): page sits to its right. */
+    .sidebar-inset:has(> .sidebar:not(.sidebar-right)) & {
+      @apply md:mr-2;
+    }
+    .sidebar-inset:has(> .sidebar:not(.sidebar-right).collapsed[data-sp-collapse="offcanvas"]) & {
+      @apply md:ml-2;
+    }
+    /* Right panel: page sits to its left. */
+    .sidebar-inset:has(> .sidebar.sidebar-right) & {
+      @apply md:ml-2;
+    }
+    .sidebar-inset:has(> .sidebar.sidebar-right.collapsed[data-sp-collapse="offcanvas"]) & {
+      @apply md:mr-2;
+    }
   }
 }
 
 @utility sidebar-content {
   @layer l1.l2 {
-    @apply flex flex-col h-dvh sticky top-0;
-  }
-}
-
-@utility sidebar-header {
-  @layer l1.l2 {
-    @apply flex flex-col gap-2 px-3 py-2;
-  }
-}
-
-@utility sidebar-footer {
-  @layer l1.l2 {
-    @apply flex flex-col gap-2 px-3 py-2 mt-auto;
-  }
-}
-
-@utility sidebar-menu {
-  @layer l1.l2 {
-    @apply flex-1 flex flex-col overflow-y-auto;
-    scrollbar-width: thin;
+    /* min-h-0 lets the scroller shrink so it scrolls and header/footer pin.
+       overscroll-contain stops the wheel from chaining to the page at the end. */
+    @apply scrollbar-none flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto overscroll-contain;
     scrollbar-color: color-mix(in oklab, currentColor 20%, transparent) transparent;
 
     &::-webkit-scrollbar {
@@ -90,81 +171,166 @@
   }
 }
 
-@utility menu-group {
+@utility sidebar-header {
   @layer l1.l2 {
-    @apply relative flex w-full min-w-0 flex-col gap-1;
-    @apply [.sidebar-menu_&]:px-3 [.sidebar-menu_&]:py-2;
+    @apply flex flex-col gap-2 p-2 shrink-0;
   }
 }
 
-@utility menu-subgroup {
+@utility sidebar-footer {
   @layer l1.l2 {
-    @apply border-l border-sidebar-border mx-3.5 translate-x-px px-2.5 flex flex-col gap-1 py-0.5;
-    @apply [&>.menu-btn]:-translate-x-px;
+    @apply flex flex-col gap-2 p-2 shrink-0;
   }
 }
 
-@utility menu-btn {
+@utility sidebar-input {
+  @layer l1 {
+    @apply h-8 w-full bg-background shadow-none;
+  }
+}
+
+@utility sidebar-menu {
   @layer l1.l2 {
-    @apply flex items-center gap-2 overflow-hidden rounded-md p-2 text-sm w-full;
+    @apply flex w-full min-w-0 flex-col gap-1;
+  }
+}
+
+@utility sidebar-group {
+  @layer l1.l2 {
+    @apply relative flex w-full min-w-0 flex-col p-2;
+  }
+}
+
+@utility sidebar-group-label {
+  @layer l1.l2 {
+    @apply text-sidebar-foreground/70 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium;
+    @apply ring-sidebar-ring focus-visible:ring-2;
+    @apply transition-[margin,opacity] duration-200 ease-linear;
+    @apply [&>svg]:size-4 [&>svg]:shrink-0;
+  }
+}
+
+@utility sidebar-group-content {
+  @layer l1.l2 {
+    @apply w-full text-sm;
+  }
+}
+
+@utility sidebar-group-action {
+  @layer l1.l2 {
+    @apply text-sidebar-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0;
+    @apply ring-sidebar-ring focus-visible:ring-2 transition-transform;
+    @apply after:absolute after:-inset-2 md:after:hidden;
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply [&>svg]:size-4 [&>svg]:shrink-0;
+  }
+}
+
+@utility sidebar-menu-item {
+  @layer l1.l2 {
+    @apply relative;
+  }
+}
+
+@utility sidebar-menu-button {
+  @layer l1.l2 {
+    @apply flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none;
+    @apply in-[.sidebar:is(.collapsing,.expanding)]:transition-[width,height,padding];
+    @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply ring-sidebar-ring focus-visible:ring-2;
+    @apply active:bg-sidebar-accent active:text-sidebar-accent-foreground;
+    @apply disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
     @apply [&.active]:bg-sidebar-accent [&.active]:font-medium [&.active]:text-sidebar-accent-foreground;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&:where(&:not(.menu-btn-sm,.menu-btn-lg))]:menu-btn-base;
+    @apply [&>span:last-child]:truncate [&_svg]:size-4 [&_svg]:shrink-0;
+    @apply [&:where(&:not(.sidebar-menu-button-sm,.sidebar-menu-button-lg))]:h-8;
   }
 }
 
-@utility menu-item {
-  @layer l1.l2 {
-    @apply flex items-center gap-2 overflow-hidden rounded-md px-2 text-sm w-full h-8;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-  }
-}
-
-@utility menu-item-sm {
+@utility sidebar-menu-button-sm {
   @layer l1 {
-    @apply h-7;
+    @apply h-7 text-xs;
   }
 }
 
-@utility menu-item-lg {
+@utility sidebar-menu-button-lg {
   @layer l1 {
     @apply h-12;
   }
 }
 
-@utility menu-btn-sm {
-  @layer l1 {
-    @apply h-7 -translate-x-px;
-  }
-}
-
-@utility menu-btn-base {
-  @layer l1 {
-    @apply h-8;
-  }
-}
-
-@utility menu-btn-lg {
-  @layer l1 {
-    @apply h-12;
-  }
-}
-
-@utility menu-label {
+@utility sidebar-menu-action {
   @layer l1.l2 {
-    @apply text-sidebar-foreground/70 h-8 shrink-0 rounded-md px-2 text-xs font-medium flex items-center;
+    @apply text-sidebar-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0;
+    @apply ring-sidebar-ring focus-visible:ring-2 transition-transform;
+    @apply after:absolute after:-inset-2 md:after:hidden;
+    @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply [&>svg]:size-4 [&>svg]:shrink-0;
   }
 }
 
-@utility sidebar-backdrop {
+@utility sidebar-menu-badge {
   @layer l1.l2 {
-    /* Hidden by default, always hidden on desktop */
-    @apply fixed inset-0 z-40 bg-black/30 backdrop-blur-xs hidden sidebar:hidden;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:max-sidebar:duration-300 [&:not(.no-animation)]:data-[state]:[animation-fill-mode:forwards]!;
+    @apply text-sidebar-foreground pointer-events-none absolute right-1 top-1.5 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none;
+  }
+}
 
-    &.open {
-      @apply block pointer-events-auto;
+@utility sidebar-menu-sub {
+  @layer l1.l2 {
+    @apply border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5;
+  }
+}
+
+@utility sidebar-menu-sub-item {
+  @layer l1.l2 {
+    @apply relative;
+  }
+}
+
+@utility sidebar-menu-sub-button {
+  @layer l1.l2 {
+    @apply text-sidebar-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sm outline-none;
+    @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+    @apply ring-sidebar-ring focus-visible:ring-2;
+    @apply [&.active]:bg-sidebar-accent [&.active]:text-sidebar-accent-foreground;
+    @apply [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground;
+  }
+}
+
+/* Icon collapse (desktop only): the rail shows each nav button's leading icon
+   and clips the rest. The button keeps p-2 so the icon never shifts. */
+@layer l1.l2 {
+  @media (width >= theme(--breakpoint-md)) {
+    .sidebar.collapsed[data-sp-collapse="icon"] {
+      .sidebar-content,
+      .sidebar-group,
+      .sidebar-group-content,
+      .sidebar-menu {
+        @apply overflow-hidden;
+      }
+
+      .sidebar-menu-sub,
+      .sidebar-menu-action,
+      .sidebar-menu-badge,
+      .collapsible {
+        @apply hidden;
+      }
+
+      .sidebar-group-label {
+        @apply -mt-8 opacity-0;
+      }
+
+      /* A text-only button would show as clipped text, so hide it in the rail. */
+      .sidebar-menu-button:not(:has(> :first-child:is(svg, .avatar, .brand-logo, [class*="size-8"]))) {
+        @apply hidden;
+      }
+
+      /* Large buttons drop padding so their size-8 leading box fills the rail. */
+      .sidebar-menu-button {
+        @apply size-8! p-2!;
+      }
+      .sidebar-menu-button-lg {
+        @apply p-0!;
+      }
     }
   }
 }

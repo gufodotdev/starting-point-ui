@@ -1,176 +1,290 @@
 ---
 title: Collapsible
-description: A Tailwind CSS collapsible component for showing and hiding content.
+description: A collapsible component for Tailwind CSS with beautiful shadcn/ui styling. Use it to expand and collapse content with a trigger, like details behind a "show more".
 ---
 
-A Tailwind CSS collapsible component for showing and hiding content.
+The collapsible expands and collapses a single panel of content from a trigger, like extra details behind a "show more". For a set of stacked panels where opening one closes the others, use an [accordion](/components/accordion).
 
-```html preview
-<div class="flex w-full max-w-sm flex-col gap-2">
-  <div class="flex items-center justify-between gap-4">
-    <h4 class="text-sm font-semibold">@gufodev starred 3 repositories</h4>
+```html preview preset=collapsible
+<div class="flex w-full gap-3">
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+  <div class="flex min-w-0 flex-col items-start gap-1">
+    <p class="text-sm">
+      <span class="font-medium">Leila Navarro</span>
+      <span class="text-muted-foreground">· 2h</span>
+    </p>
+    <p class="text-sm">
+      Just shipped the new onboarding flow. Huge thanks to everyone who helped
+      with the design reviews!
+    </p>
     <button
-      class="btn btn-ghost btn-icon btn-sm"
+      id="collapsible-demo-trigger"
+      class="group btn btn-ghost btn-sm -ml-2.5 text-muted-foreground"
       type="button"
-      data-sp-toggle="collapsible"
-      data-sp-target="#demo-collapsible"
-      aria-expanded="false"
-      aria-controls="demo-collapsible"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:hidden"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden in-aria-expanded:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      <span class="sr-only">Toggle</span>
+      <svg class="icon-start transition-transform group-aria-expanded:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <span class="group-aria-expanded:hidden">Show 2 replies</span>
+      <span class="hidden group-aria-expanded:inline">Hide replies</span>
     </button>
-  </div>
-  <div class="rounded-md border px-4 py-2 font-mono text-sm">
-    tailwindlabs/tailwindcss
-  </div>
-  <div id="demo-collapsible" class="collapsible-panel">
-    <div class="collapsible-content">
-      <div class="rounded-md border px-4 py-2 font-mono text-sm">
-        twbs/bootstrap
-      </div>
-      <div class="rounded-md border px-4 py-2 font-mono text-sm">
-        shadcn-ui/ui
+    <div class="collapsible" data-sp-toggle="#collapsible-demo-trigger">
+      <div class="ml-[3.5px] flex flex-col gap-4 border-l pt-2 pl-4">
+        <div class="flex gap-3">
+          <span class="avatar">
+            <img
+              class="avatar-image"
+              src="https://images.unsplash.com/photo-1752486268240-0507bb1ebc7e?w=640&h=640&fit=facearea&facepad=2.6&auto=format&q=100"
+              alt="Camille Laurent"
+            />
+            <span class="avatar-fallback">EW</span>
+          </span>
+          <div class="flex flex-col gap-1">
+            <p class="text-sm">
+              <span class="font-medium">Camille Laurent</span>
+              <span class="text-muted-foreground">· 1h</span>
+            </p>
+            <p class="text-sm">Congrats! The new flow feels so much faster.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="avatar">
+            <img
+              class="avatar-image"
+              src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100"
+              alt="Theo Marchetti"
+            />
+            <span class="avatar-fallback">MC</span>
+          </span>
+          <div class="flex flex-col gap-1">
+            <p class="text-sm">
+              <span class="font-medium">Theo Marchetti</span>
+              <span class="text-muted-foreground">· 45m</span>
+            </p>
+            <p class="text-sm">Love the progress indicators. Great work!</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 ```
 
----
+## Usage
 
-## Initially open
+Add the `collapsible` class to the panel and point it at its trigger with `data-sp-toggle`. The trigger's `aria-expanded` follows the state, which is the styling hook for rotating chevrons or swapping labels.
 
-Add the `open` class to the `.collapsible-panel` element to show the panel by default.
+| Class                 | Description                                                                  |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `collapsible`         | Add to the panel; carries the `data-sp-*` options. `expanded` starts it open |
+| `collapsible-content` | Add to an inner wrapper for consistent spacing between children              |
 
-```html preview
-<div class="flex w-full max-w-sm flex-col gap-2">
-  <div class="flex items-center justify-between gap-4">
-    <h4 class="text-sm font-semibold">@gufodev starred 3 repositories</h4>
+```html
+<!-- This is the trigger -->
+<button id="my-trigger" class="btn btn-outline">Show more</button>
+
+<!-- This is the panel -->
+<div class="collapsible" data-sp-toggle="#my-trigger">
+  <div class="collapsible-content">Hidden until expanded.</div>
+</div>
+```
+
+## Examples
+
+### Show more
+
+Reveal the rest of a long text in place; the trigger swaps its label against the expanded state.
+
+```html preview preset=collapsible
+<div class="flex w-full flex-col items-start gap-2">
+  <h4 class="text-sm font-medium">About this project</h4>
+  <p class="text-sm text-muted-foreground">
+    Starting Point UI is an open-source component library for Tailwind CSS,
+    inspired by shadcn/ui. It gives you the same beautiful design system as
+    plain HTML classes, so it works in any project.
+  </p>
+  <div class="collapsible" data-sp-toggle="#collapsible-more-trigger">
+    <div class="flex flex-col gap-2 text-sm text-muted-foreground">
+      <p>
+        Components render correctly from markup and CSS before any JavaScript
+        loads, and the optional script layer adds behavior like this collapsible
+        on top.
+      </p>
+      <p>
+        Everything is themeable with CSS variables, and plain utility classes
+        always win over component styles, so you can override anything inline.
+      </p>
+    </div>
+  </div>
+  <button
+    id="collapsible-more-trigger"
+    class="group btn btn-link btn-sm px-0"
+    type="button"
+  >
+    <span class="group-aria-expanded:hidden">Show more</span>
+    <span class="hidden group-aria-expanded:inline">Show less</span>
+  </button>
+</div>
+```
+
+### Initially open
+
+Author the `expanded` class on the panel to start it open, and mirror `aria-expanded="true"` onto the trigger so state-driven styling, like a rotated chevron, paints correctly before JavaScript loads.
+
+```html preview preset=collapsible
+<nav class="sidebar-menu mx-auto w-full max-w-64">
+  <div class="sidebar-menu-item">
     <button
-      class="btn btn-ghost btn-icon btn-sm"
+      id="collapsible-open-trigger"
+      class="group sidebar-menu-button"
       type="button"
-      data-sp-toggle="collapsible"
-      data-sp-target="#open-collapsible"
       aria-expanded="true"
-      aria-controls="open-collapsible"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:hidden"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden in-aria-expanded:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      <span class="sr-only">Toggle</span>
+      <svg class="transition-transform group-aria-expanded:rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+      <span>Documents</span>
     </button>
-  </div>
-  <div class="rounded-md border px-4 py-2 font-mono text-sm">
-    tailwindlabs/tailwindcss
-  </div>
-  <div id="open-collapsible" class="collapsible-panel open">
-    <div class="collapsible-content">
-      <div class="rounded-md border px-4 py-2 font-mono text-sm">
-        twbs/bootstrap
-      </div>
-      <div class="rounded-md border px-4 py-2 font-mono text-sm">
-        shadcn-ui/ui
-      </div>
+    <div
+      class="collapsible expanded"
+      data-sp-toggle="#collapsible-open-trigger"
+    >
+      <ul class="sidebar-menu-sub">
+        <li class="sidebar-menu-sub-item">
+          <button class="sidebar-menu-sub-button w-full" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+            <span>resume.pdf</span>
+          </button>
+        </li>
+        <li class="sidebar-menu-sub-item">
+          <button class="sidebar-menu-sub-button w-full" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+            <span>invoice.pdf</span>
+          </button>
+        </li>
+        <li class="sidebar-menu-sub-item">
+          <button class="sidebar-menu-sub-button w-full" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+            <span>notes.md</span>
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
 ```
 
----
+### Nested
 
-## How it works
+Collapsibles nest, so a file tree is triggers and panels all the way down. The [sidebar menu](/components/sidebar) classes give it a ready-made look, indent line included.
 
-The collapsible component uses a small JavaScript module that handles opening and closing content panels.
-
-### Structure
-
-A collapsible consists of three parts:
-
-1. **Trigger** - A button with `data-sp-toggle="collapsible"` and `data-sp-target`
-2. **`.collapsible-panel`** - Panel wrapper that controls visibility and animations
-3. **`.collapsible-content`** - Flex column container for collapsed items
-
-```html
-<button data-sp-toggle="collapsible" data-sp-target="#my-collapsible">
-  Toggle
-</button>
-<div id="my-collapsible" class="collapsible-panel">
-  <div class="collapsible-content">
-    <div>Item 1</div>
-    <div>Item 2</div>
+```html preview preset=collapsible
+<nav class="sidebar-menu mx-auto w-full max-w-64">
+  <div class="sidebar-menu-item">
+    <button
+      id="ct-src"
+      class="group sidebar-menu-button"
+      type="button"
+      aria-expanded="true"
+    >
+      <svg class="transition-transform group-aria-expanded:rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+      <span>src</span>
+    </button>
+    <div class="collapsible expanded" data-sp-toggle="#ct-src">
+      <ul class="sidebar-menu-sub">
+        <li class="sidebar-menu-sub-item">
+          <button
+            id="ct-components"
+            class="group sidebar-menu-sub-button w-full"
+            type="button"
+            aria-expanded="true"
+          >
+            <svg class="transition-transform group-aria-expanded:rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+            <span>components</span>
+          </button>
+          <div class="collapsible expanded" data-sp-toggle="#ct-components">
+            <ul class="sidebar-menu-sub">
+              <li class="sidebar-menu-sub-item">
+                <button class="sidebar-menu-sub-button w-full" type="button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+                  <span>button.tsx</span>
+                </button>
+              </li>
+              <li class="sidebar-menu-sub-item">
+                <button class="sidebar-menu-sub-button w-full" type="button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+                  <span>card.tsx</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="sidebar-menu-sub-item">
+          <button class="sidebar-menu-sub-button w-full" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+            <span>index.ts</span>
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>
 ```
 
-### Opening and closing
+## Options
 
-Use data attributes to control the collapsible without writing JavaScript.
+### Collapsible
 
-Add `data-sp-toggle="collapsible"` to the trigger button and `data-sp-target` to specify which panel to toggle:
+Set each option with its own `data-sp-*` attribute on the `collapsible` element.
+
+| Attribute        | Values       | Default |
+| ---------------- | ------------ | ------- |
+| `data-sp-toggle` | CSS selector | —       |
 
 ```html
-<button data-sp-toggle="collapsible" data-sp-target="#my-collapsible">
-  Toggle
-</button>
+<div class="collapsible" data-sp-toggle="#my-trigger"></div>
 ```
 
-For programmatic control, use the global `sp.collapsible` module:
+## JavaScript
+
+### Events
+
+Lifecycle events fire on the panel; `before*` events are cancelable.
+
+| Event               | When                           |
+| ------------------- | ------------------------------ |
+| `sp-beforeexpand`   | Before expanding (cancelable)  |
+| `sp-expand`         | Expanding                      |
+| `sp-expanded`       | Expanded and settled           |
+| `sp-beforecollapse` | Before collapsing (cancelable) |
+| `sp-collapse`       | Collapsing                     |
+| `sp-collapsed`      | Collapsed and settled          |
 
 ```js
-const collapsible = document.querySelector("#my-collapsible");
-
-sp.collapsible.open(collapsible);
-sp.collapsible.close(collapsible);
-sp.collapsible.toggle(collapsible);
+// Veto collapsing, e.g. while a form inside has unsaved changes.
+panel.addEventListener("sp-beforecollapse", (e) => {
+  if (unsavedChanges) e.preventDefault();
+});
 ```
 
-### Animation
+### Methods
 
-The collapsible includes a smooth height animation using CSS keyframes.
+Get the instance with `sp.collapsible(el)`, then call its methods:
 
-To disable animations, add `no-animation` to the panel:
+| Method       | Description                        |
+| ------------ | ---------------------------------- |
+| `expand()`   | Expand the panel                   |
+| `collapse()` | Collapse the panel                 |
+| `toggle()`   | Expand if collapsed, else collapse |
 
-```html
-<div class="collapsible-panel no-animation">...</div>
+```js
+const collapsible = sp.collapsible(document.querySelector("#my-panel"));
+
+collapsible.expand();
 ```
-
-### Accessibility
-
-For proper accessibility, add `aria-expanded` and `aria-controls` to the trigger button:
-
-```html
-<button
-  data-sp-toggle="collapsible"
-  data-sp-target="#my-collapsible"
-  aria-expanded="false"
-  aria-controls="my-collapsible"
->
-  Toggle
-</button>
-```
-
-The JavaScript will automatically update `aria-expanded` when the collapsible opens and closes.
-
-#### Keyboard navigation
-
-| Key               | Action                                         |
-| ----------------- | ---------------------------------------------- |
-| `Enter` / `Space` | Opens/closes the panel when trigger is focused |
-
-### Class reference
-
-| Class                 | Description                                           |
-| --------------------- | ----------------------------------------------------- |
-| `collapsible-panel`   | Panel wrapper that controls visibility and animations |
-| `collapsible-content` | Flex column container for collapsed items             |
-| `open`                | Add to `.collapsible-panel` to show by default        |
-| `no-animation`        | Add to `.collapsible-panel` to disable animations     |
-
-### Data attributes
-
-| Attribute                      | Description                                                        |
-| ------------------------------ | ------------------------------------------------------------------ |
-| `data-sp-toggle="collapsible"` | Add to trigger button to toggle the collapsible panel              |
-| `data-sp-target="#id"`         | Add to trigger button to specify which panel to toggle             |
-| `data-state`                   | Set on `.collapsible-panel` to `open` or `closed` during animation |

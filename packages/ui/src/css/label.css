@@ -3,7 +3,18 @@
 @utility label {
   @layer l1.l2 {
     @apply flex items-center gap-2 text-sm leading-none font-medium select-none;
-    @apply group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50;
-    @apply peer-disabled:cursor-not-allowed peer-disabled:opacity-50;
+    @apply in-[.field:has(:is(input,select,textarea):disabled)]:pointer-events-none in-[.field:has(:is(input,select,textarea):disabled)]:opacity-50;
+
+    /* Inside a field, labels breathe like shadcn's FieldLabel. */
+    @apply in-[.field]:leading-snug;
+
+    /* Wrapping a .field turns the label into a selectable choice card; the
+       checked tint is scoped to those cards so a plain label wrapping a
+       checkbox or switch stays untinted. */
+    @apply has-[>.field]:items-start has-[>.field]:rounded-md has-[>.field]:border has-[>.field]:leading-snug [&>.field]:p-3;
+
+    &:has(> .field) {
+      @apply has-[:checked]:border-primary/30 has-[:checked]:bg-primary/5 dark:has-[:checked]:border-primary/20 dark:has-[:checked]:bg-primary/10;
+    }
   }
 }

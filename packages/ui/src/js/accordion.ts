@@ -1,140 +1,61 @@
-// Starting Point UI Accordion Module
+// Coordinates a group of plain collapsibles: wrap any collapsibles in .accordion
+// and opening one closes the others, unless multiple is set. The collapsibles
+// keep their own toggle and lifecycle; the accordion adds the single-open rule
+// and the accordion ARIA roles (the triggers' aria-expanded/controls already
+// come from the collapsible).
 
-import { findNextEnabled, isDisabled, waitForAnimations } from "./utils";
+import { define } from "./define";
+import type { SpInstance } from "./define";
+import { getInstance } from "./observer";
+import { Collapsible } from "./collapsible";
+import { ensureId } from "./utils";
 
-function getPanel(target: HTMLElement): HTMLElement | null {
-  if (target.classList.contains("accordion-panel")) return target;
-  return target.querySelector(".accordion-panel");
-}
+const PANEL = ".accordion-panel";
 
-function getTrigger(panelId: string): HTMLElement | null {
-  return document.querySelector<HTMLElement>(`[data-sp-target="#${panelId}"]`);
-}
+const CHEVRON =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
 
-function setContentHeight(panel: HTMLElement) {
-  const height = `${panel.scrollHeight}px`;
-  panel.style.setProperty("--radix-accordion-content-height", height);
-}
+export const Accordion = define({
+  name: "accordion",
+  selector: ".accordion",
 
-export function open(target: HTMLElement) {
-  const panel = getPanel(target);
-  if (!panel || panel.classList.contains("open")) return;
+  props: {
+    multiple: Boolean,
+  },
 
-  if (panel.id) {
-    const trigger = getTrigger(panel.id);
-    trigger?.setAttribute("aria-expanded", "true");
-  }
+  init(this: SpInstance) {
+    // Nested accordions own their own panels.
+    const mine = (el: HTMLElement) => el.closest(".accordion") === this.el;
+    const panels = [...this.el.querySelectorAll<HTMLElement>(PANEL)].filter(mine);
 
-  setContentHeight(panel);
-  panel.classList.add("open");
-  panel.setAttribute("data-state", "open");
-}
-
-export async function close(target: HTMLElement) {
-  const panel = getPanel(target);
-  if (!panel || !panel.classList.contains("open")) return;
-
-  if (panel.id) {
-    const trigger = getTrigger(panel.id);
-    trigger?.setAttribute("aria-expanded", "false");
-  }
-
-  setContentHeight(panel);
-  panel.setAttribute("data-state", "closed");
-  await waitForAnimations([panel]);
-
-  panel.classList.remove("open");
-  panel.removeAttribute("data-state");
-}
-
-export function toggle(target: HTMLElement) {
-  const panel = getPanel(target);
-  if (!panel) return;
-
-  if (panel.classList.contains("open")) {
-    close(target);
-  } else {
-    open(target);
-  }
-}
-
-function handleClick(e: MouseEvent) {
-  const target = e.target as HTMLElement;
-
-  const trigger = target.closest<HTMLElement>("[data-sp-toggle='accordion']");
-  if (!trigger || isDisabled(trigger)) return;
-
-  const selector = trigger.dataset.spTarget;
-  if (!selector) return;
-
-  const panel = document.querySelector<HTMLElement>(selector);
-  if (!panel) return;
-
-  const accordion = trigger.closest<HTMLElement>(".accordion");
-  const isOpen = panel.classList.contains("open");
-
-  // Close other panels in the same accordion (unless data-sp-multiple is set)
-  if (accordion && !accordion.hasAttribute("data-sp-multiple")) {
-    const otherPanels = accordion.querySelectorAll<HTMLElement>(
-      ".accordion-panel.open",
-    );
-    for (const otherPanel of otherPanels) {
-      if (otherPanel !== panel) {
-        close(otherPanel);
+    for (const panel of panels) {
+      // Ensure the panel's collapsible is live so the trigger gets its
+      // aria-expanded / aria-controls before we add the region semantics.
+      getInstance(panel, Collapsible);
+      // The trigger is the one the collapsible points at (data-sp-toggle); label
+      // the panel as a region named by it, per the APG accordion pattern.
+      const toggle = panel.getAttribute("data-sp-toggle");
+      const trigger = toggle && document.querySelector<HTMLElement>(toggle);
+      if (!trigger) continue;
+      // Every trigger gets the rotating chevron; a trailing svg the author
+      // wrote themselves takes its place.
+      if (!(trigger.lastElementChild instanceof SVGElement)) {
+        trigger.insertAdjacentHTML("beforeend", CHEVRON);
+      }
+      if (!panel.hasAttribute("role")) panel.setAttribute("role", "region");
+      if (!panel.hasAttribute("aria-labelledby")) {
+        panel.setAttribute("aria-labelledby", ensureId(trigger));
       }
     }
-  }
 
-  if (isOpen) {
-    close(panel);
-  } else {
-    open(panel);
-  }
-}
-
-function handleKeydown(e: KeyboardEvent) {
-  const target = e.target as HTMLElement;
-  const trigger = target.closest<HTMLElement>("[data-sp-toggle='accordion']");
-  if (!trigger) return;
-
-  const accordion = trigger.closest<HTMLElement>(".accordion");
-  if (!accordion) return;
-
-  const triggers = [
-    ...accordion.querySelectorAll<HTMLElement>("[data-sp-toggle='accordion']"),
-  ];
-  const currentIndex = triggers.indexOf(trigger);
-
-  let nextTrigger: HTMLElement | null = null;
-
-  switch (e.key) {
-    case "ArrowDown":
-      nextTrigger = findNextEnabled(triggers, currentIndex, 1);
-      break;
-    case "ArrowUp":
-      nextTrigger = findNextEnabled(triggers, currentIndex, -1);
-      break;
-    case "Home":
-      nextTrigger = triggers.find((t) => !isDisabled(t)) ?? null;
-      break;
-    case "End":
-      nextTrigger = [...triggers].reverse().find((t) => !isDisabled(t)) ?? null;
-      break;
-  }
-
-  if (nextTrigger) {
-    e.preventDefault();
-    nextTrigger.focus();
-  }
-}
-
-// Initialize global listeners
-let initialized = false;
-
-(function init() {
-  if (typeof document === "undefined" || initialized) return;
-  initialized = true;
-
-  document.addEventListener("click", handleClick);
-  document.addEventListener("keydown", handleKeydown);
-})();
+    // Single open: a panel starting to expand collapses its open siblings.
+    this.on(this.el, "sp-beforeexpand", (e) => {
+      if (this.config.multiple) return;
+      const target = e.target as HTMLElement;
+      if (!panels.includes(target)) return;
+      for (const panel of panels) {
+        if (panel !== target) getInstance(panel, Collapsible)?.collapse();
+      }
+    });
+  },
+});

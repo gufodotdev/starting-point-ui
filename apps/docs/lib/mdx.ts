@@ -1,9 +1,11 @@
 import fs from "fs";
+import { version } from "@/lib/version";
 import path from "path";
 import matter from "gray-matter";
 
 export type DocMetadata = {
   title: string;
+  seoTitle?: string;
   description: string;
 };
 
@@ -36,7 +38,35 @@ function getMDXFiles(dir: string): string[] {
   return files;
 }
 
-export function getDocBySlug(slug: string[]): DocFile | null {
+// A line like %include examples/cards/music-queue.tsx% renders the example
+// component to formatted html before mdx compilation, so preview frames, code
+// tabs, and copy buttons all see the real markup. The path is relative to the
+// app root, so it is easy to find from the mdx source.
+async function renderInclude(rel: string): Promise<string> {
+  const mod = await import(`../examples/${rel.replace(/^examples\//, "")}`);
+  const { createElement } = await import("react");
+  const { renderToStaticMarkup } = await import("react-dom/server");
+  const { format } = await import("prettier");
+
+  // React 19 emits image preload hints into static markup; the include is a
+  // fragment, so they don't belong.
+  const html = renderToStaticMarkup(createElement(mod.default)).replace(
+    /<link rel="preload"[^>]*\/>/g,
+    "",
+  );
+  return (await format(html, { parser: "html" })).trim();
+}
+
+async function expandIncludes(content: string): Promise<string> {
+  const matches = [...content.matchAll(/^%include ([\w./-]+)%$/gm)];
+  let out = content;
+  for (const match of matches) {
+    out = out.replace(match[0], await renderInclude(match[1]));
+  }
+  return out;
+}
+
+export async function getDocBySlug(slug: string[]): Promise<DocFile | null> {
   const docsDir = getDocsDirectory();
   const filePath = path.join(docsDir, ...slug) + ".mdx";
 
@@ -49,25 +79,39 @@ export function getDocBySlug(slug: string[]): DocFile | null {
 
   return {
     metadata: data as DocMetadata,
-    content,
+    content: (await expandIncludes(content)).replaceAll("%VERSION%", version),
     slug,
   };
 }
 
-export function getAllDocs(): DocFile[] {
+export async function getAllDocs(): Promise<DocFile[]> {
   const docsDir = getDocsDirectory();
   if (!fs.existsSync(docsDir)) return [];
 
-  return getMDXFiles(docsDir).map((filePath) => {
-    const rawContent = fs.readFileSync(filePath, "utf-8");
-    const { data, content } = matter(rawContent);
-    const relativePath = path.relative(docsDir, filePath);
-    const slug = relativePath.replace(/\.mdx$/, "").split(path.sep);
+  return Promise.all(
+    getMDXFiles(docsDir).map(async (filePath) => {
+      const rawContent = fs.readFileSync(filePath, "utf-8");
+      const { data, content } = matter(rawContent);
+      const relativePath = path.relative(docsDir, filePath);
+      const slug = relativePath.replace(/\.mdx$/, "").split(path.sep);
 
-    return { metadata: data as DocMetadata, content, slug };
-  });
+      return {
+        metadata: data as DocMetadata,
+        content: await expandIncludes(content),
+        slug,
+      };
+    }),
+  );
 }
 
 export function getAllDocSlugs(): string[][] {
-  return getAllDocs().map((doc) => doc.slug);
+  const docsDir = getDocsDirectory();
+  if (!fs.existsSync(docsDir)) return [];
+
+  return getMDXFiles(docsDir).map((filePath) =>
+    path
+      .relative(docsDir, filePath)
+      .replace(/\.mdx$/, "")
+      .split(path.sep),
+  );
 }

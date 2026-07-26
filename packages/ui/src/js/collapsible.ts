@@ -1,84 +1,36 @@
-// Starting Point UI Collapsible Module
+// Inline panel that expands and collapses in place.
 
-import { waitForAnimations } from "./utils";
+import { define } from "./define";
+import type { SpInstance } from "./define";
+import { Expandable } from "./mixins/expandable";
+import { ClickToShow } from "./mixins/click-to-show";
 
-function getPanel(target: HTMLElement): HTMLElement | null {
-  if (target.classList.contains("collapsible-panel")) return target;
-  return target.querySelector(".collapsible-panel");
-}
+export const Collapsible = define({
+  name: "collapsible",
+  selector: ".collapsible, .accordion-panel",
+  mixins: [Expandable, ClickToShow],
 
-function getTrigger(panelId: string): HTMLElement | null {
-  return document.querySelector<HTMLElement>(`[data-sp-target="#${panelId}"]`);
-}
+  init(this: SpInstance) {
+    // The down/up keyframes animate to/from the measured content height.
+    this.on(this.el, "sp-beforeexpand", () => this._measure());
+    this.on(this.el, "sp-beforecollapse", () => this._measure());
+  },
 
-function setContentHeight(panel: HTMLElement) {
-  const height = `${panel.scrollHeight}px`;
-  panel.style.setProperty("--radix-collapsible-content-height", height);
-}
+  methods: {
+    _measure(this: SpInstance): void {
+      this.el.style.setProperty("--sp-collapse-height", `${this.el.scrollHeight}px`);
+    },
 
-export function open(target: HTMLElement) {
-  const panel = getPanel(target);
-  if (!panel || panel.classList.contains("open")) return;
-
-  if (panel.id) {
-    const trigger = getTrigger(panel.id);
-    trigger?.setAttribute("aria-expanded", "true");
-  }
-
-  setContentHeight(panel);
-  panel.classList.add("open");
-  panel.setAttribute("data-state", "open");
-}
-
-export async function close(target: HTMLElement) {
-  const panel = getPanel(target);
-  if (!panel || !panel.classList.contains("open")) return;
-
-  if (panel.id) {
-    const trigger = getTrigger(panel.id);
-    trigger?.setAttribute("aria-expanded", "false");
-  }
-
-  setContentHeight(panel);
-  panel.setAttribute("data-state", "closed");
-  await waitForAnimations([panel]);
-
-  panel.classList.remove("open");
-  panel.removeAttribute("data-state");
-}
-
-export function toggle(target: HTMLElement) {
-  const panel = getPanel(target);
-  if (!panel) return;
-
-  if (panel.classList.contains("open")) {
-    close(target);
-  } else {
-    open(target);
-  }
-}
-
-function handleClick(e: MouseEvent) {
-  const target = e.target as HTMLElement;
-
-  const trigger = target.closest<HTMLElement>("[data-sp-toggle='collapsible']");
-  if (!trigger) return;
-
-  const selector = trigger.dataset.spTarget;
-  if (!selector) return;
-
-  const panel = document.querySelector<HTMLElement>(selector);
-  if (panel) {
-    toggle(panel);
-  }
-}
-
-// Initialize global listeners
-let initialized = false;
-
-(function init() {
-  if (typeof document === "undefined" || initialized) return;
-  initialized = true;
-
-  document.addEventListener("click", handleClick);
-})();
+    // No top layer: mounted state is just a marker attribute, visibility is
+    // driven entirely by the lifecycle classes.
+    _isMounted(this: SpInstance): boolean {
+      return this.el.hasAttribute("data-sp-open");
+    },
+    _mount(this: SpInstance): void {
+      this.el.setAttribute("data-sp-open", "");
+    },
+    _unmount(this: SpInstance): void {
+      this.el.removeAttribute("data-sp-open");
+    },
+  },
+});

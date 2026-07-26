@@ -1,268 +1,177 @@
 ---
 title: Radio Group
-description: A Tailwind CSS radio group component for selecting a single option from a group.
+description: A radio group component for Tailwind CSS with beautiful shadcn/ui styling. Use it to pick exactly one option from a set, like a plan or a shipping method.
 ---
 
-A Tailwind CSS radio group component for selecting a single option from a set.
+The radio group picks exactly one option from a set, like a plan or a shipping method. For on/off settings, reach for the [checkbox](/components/checkbox) or [switch](/components/switch).
 
-```html preview
-<div class="w-fit">
-  <div class="field-group">
-    <span class="label sr-only">Delivery speed</span>
-    <div class="field-group gap-3">
-      <div class="field field-horizontal">
-        <input
-          type="radio"
-          class="radio"
-          id="delivery-speed-standard"
-          name="delivery-speed"
-          checked=""
-          value="standard"
-        />
-        <label class="label" for="delivery-speed-standard">Standard</label>
-      </div>
-      <div class="field field-horizontal">
-        <input
-          type="radio"
-          class="radio"
-          id="delivery-speed-express"
-          name="delivery-speed"
-          value="express"
-        />
-        <label class="label" for="delivery-speed-express">Express</label>
-      </div>
-      <div class="field field-horizontal">
-        <input
-          type="radio"
-          class="radio"
-          id="delivery-speed-overnight"
-          name="delivery-speed"
-          value="overnight"
-        />
-        <label class="label" for="delivery-speed-overnight">Overnight</label>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
----
-
-## With descriptions
-
-Add a description below each label for extra context.
-
-```html preview
-<div class="w-fit">
-  <div class="field-group">
-    <span class="label">Notification preferences</span>
-    <div class="field-group">
-      <div class="field field-horizontal">
-        <input
-          type="radio"
-          class="radio"
-          id="notification-preferences-all"
-          name="notification-preferences"
-          checked=""
-          value="all"
-        />
-        <div class="field-content">
-          <label class="label" for="notification-preferences-all">
-            All notifications
-          </label>
-          <p class="field-description">
-            Receive all email and push notifications
-          </p>
-        </div>
-      </div>
-      <div class="field field-horizontal">
-        <input
-          type="radio"
-          class="radio"
-          id="notification-preferences-important"
-          name="notification-preferences"
-          value="important"
-        />
-        <div class="field-content">
-          <label class="label" for="notification-preferences-important">
-            Important only
-          </label>
-          <p class="field-description">
-            Only receive notifications for important updates
-          </p>
-        </div>
-      </div>
-      <div class="field field-horizontal">
-        <input
-          type="radio"
-          class="radio"
-          id="notification-preferences-none"
-          name="notification-preferences"
-          value="none"
-        />
-        <div class="field-content">
-          <label class="label" for="notification-preferences-none">None</label>
-          <p class="field-description">
-            Do not receive any notifications
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
----
-
-## Disabled
-
-Add `disabled` to the radio and `peer` so the label dims to match.
-
-```html preview
-<div class="w-fit">
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Density">
   <div class="field field-horizontal">
-    <input type="radio" class="radio peer" id="disabled-radio" disabled="" />
-    <label class="label" for="disabled-radio">Disabled radio</label>
+    <input type="radio" class="radio" id="r1" name="density" value="default" />
+    <label class="label" for="r1">Default</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="r2" name="density" value="comfortable" checked />
+    <label class="label" for="r2">Comfortable</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="r3" name="density" value="compact" />
+    <label class="label" for="r3">Compact</label>
   </div>
 </div>
 ```
 
----
+## Usage
 
-## Card select
+Add the `radio` class to each `<input type="radio">` and give the set a shared `name`. Lay each option out with its label in a horizontal [field](/components/field), and give the group an accessible name: a `field-set` with a legend, or `role="radiogroup"` with an `aria-label`.
 
-Use radios inside cards for a visual single-select layout.
+| Class   | Description                          |
+| ------- | ------------------------------------- |
+| `radio` | Add to each `<input type="radio">`    |
 
-```html preview
-<div class="w-full max-w-md">
-  <div class="grid gap-3">
-    <span class="label">Payment method</span>
-    <div class="grid gap-5" style="grid-template-columns: repeat(3, 1fr)">
-      <label
-        class="relative flex flex-col items-center gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
-      >
-        <input
-          type="radio"
-          class="sr-only"
-          name="payment-method"
-          checked=""
-          value="card"
-        />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path d="M11.343 18.031c.058.049.12.098.181.146-1.177.783-2.59 1.238-4.107 1.238C3.32 19.416 0 16.096 0 12c0-4.095 3.32-7.416 7.416-7.416 1.518 0 2.931.456 4.105 1.238-.06.051-.12.098-.165.15C9.6 7.489 8.595 9.688 8.595 12c0 2.311 1.001 4.51 2.748 6.031zm5.241-13.447c-1.52 0-2.931.456-4.105 1.238.06.051.12.098.165.15C14.4 7.489 15.405 9.688 15.405 12c0 2.31-1.001 4.507-2.748 6.031-.058.049-.12.098-.181.146 1.177.783 2.588 1.238 4.107 1.238C20.68 19.416 24 16.096 24 12c0-4.094-3.32-7.416-7.416-7.416zM12 6.174c-.096.075-.189.15-.28.231C10.156 7.764 9.169 9.765 9.169 12c0 2.236.987 4.236 2.551 5.595.09.08.185.158.28.232.096-.074.189-.152.28-.232 1.563-1.359 2.551-3.359 2.551-5.595 0-2.235-.987-4.236-2.551-5.595-.09-.08-.184-.156-.28-.231z"/></svg>
-        <span class="label">Card</span>
-      </label>
-      <label
-        class="relative flex flex-col items-center gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
-      >
-        <input
-          type="radio"
-          class="sr-only"
-          name="payment-method"
-          value="paypal"
-        />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path d="M15.607 4.653H8.941L6.645 19.251H1.82L4.862 0h7.995c3.754 0 6.375 2.294 6.473 5.513-.648-.478-2.105-.86-3.722-.86m6.57 5.546c0 3.41-3.01 6.853-6.958 6.853h-2.493L11.595 24H6.74l1.845-11.538h3.592c4.208 0 7.346-3.634 7.153-6.949a5.24 5.24 0 0 1 2.848 4.686M9.653 5.546h6.408c.907 0 1.942.222 2.363.541-.195 2.741-2.655 5.483-6.441 5.483H8.714Z"/></svg>
-        <span class="label">PayPal</span>
-      </label>
-      <label
-        class="relative flex flex-col items-center gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
-      >
-        <input
-          type="radio"
-          class="sr-only"
-          name="payment-method"
-          value="apple"
-        />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-        <span class="label">Apple</span>
-      </label>
+```html
+<div class="field field-horizontal">
+  <input type="radio" class="radio" id="option-1" name="my-group" />
+  <label class="label" for="option-1">Option one</label>
+</div>
+```
+
+## Examples
+
+### Description
+
+Give options supporting text with `field-content`.
+
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Density">
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="desc-r1" name="desc-density" value="default" />
+    <div class="field-content">
+      <label class="label" for="desc-r1">Default</label>
+      <p class="field-description">Standard spacing for most use cases.</p>
+    </div>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="desc-r2" name="desc-density" value="comfortable" checked />
+    <div class="field-content">
+      <label class="label" for="desc-r2">Comfortable</label>
+      <p class="field-description">More space between elements.</p>
+    </div>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="desc-r3" name="desc-density" value="compact" />
+    <div class="field-content">
+      <label class="label" for="desc-r3">Compact</label>
+      <p class="field-description">Minimal spacing for dense layouts.</p>
     </div>
   </div>
 </div>
 ```
 
----
+### Choice card
 
-## List select
+Wrap each option in a [label](/components/label) and the whole card becomes clickable, tinting itself while checked.
 
-Use radios inside list items for a single-select list with descriptions.
-
-```html preview
-<div class="w-full max-w-md">
-  <div class="grid gap-3">
-    <span class="label">Shipping</span>
-    <div class="grid gap-3">
-      <label
-        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
-      >
-        <div class="flex-1 grid gap-2">
-          <div class="label">Standard</div>
-          <div class="text-sm text-muted-foreground">4-10 business days</div>
-        </div>
-        <input
-          type="radio"
-          class="radio"
-          name="shipping"
-          checked=""
-          value="standard"
-        />
-      </label>
-      <label
-        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
-      >
-        <div class="flex-1 grid gap-2">
-          <div class="label">Fast</div>
-          <div class="text-sm text-muted-foreground">2-5 business days</div>
-        </div>
-        <input type="radio" class="radio" name="shipping" value="fast" />
-      </label>
-      <label
-        class="relative flex items-start justify-between gap-3 p-4 border rounded-lg cursor-pointer has-checked:border-primary has-checked:bg-primary/[2.5%]"
-      >
-        <div class="flex-1 grid gap-2">
-          <div class="label">Next day</div>
-          <div class="text-sm text-muted-foreground">1 business day</div>
-        </div>
-        <input type="radio" class="radio" name="shipping" value="next-day" />
-      </label>
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Plan">
+  <label class="label" for="plus-plan">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Plus</span>
+        <p class="field-description">For individuals and small teams.</p>
+      </div>
+      <input type="radio" class="radio" id="plus-plan" name="plan" value="plus" checked />
     </div>
+  </label>
+  <label class="label" for="pro-plan">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Pro</span>
+        <p class="field-description">For growing businesses.</p>
+      </div>
+      <input type="radio" class="radio" id="pro-plan" name="plan" value="pro" />
+    </div>
+  </label>
+  <label class="label" for="enterprise-plan">
+    <div class="field field-horizontal">
+      <div class="field-content">
+        <span class="field-title">Enterprise</span>
+        <p class="field-description">For large teams and enterprises.</p>
+      </div>
+      <input type="radio" class="radio" id="enterprise-plan" name="plan" value="enterprise" />
+    </div>
+  </label>
+</div>
+```
+
+### Fieldset
+
+Wrap the group in a [field set](/components/field) with a legend so it is announced together.
+
+```html preview preset=form
+<fieldset class="field-set">
+  <legend class="field-legend field-legend-label">Subscription Plan</legend>
+  <p class="field-description">Yearly and lifetime plans offer significant savings.</p>
+  <div class="field-group gap-3">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-monthly" name="sub-plan" checked />
+      <label class="label font-normal" for="plan-monthly">Monthly ($9.99/month)</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-yearly" name="sub-plan" />
+      <label class="label font-normal" for="plan-yearly">Yearly ($99.99/year)</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="plan-lifetime" name="sub-plan" />
+      <label class="label font-normal" for="plan-lifetime">Lifetime ($299.99)</label>
+    </div>
+  </div>
+</fieldset>
+```
+
+### Disabled
+
+Add `disabled` to an option and its label dims with it.
+
+```html preview preset=form
+<div class="field-group gap-3" role="radiogroup" aria-label="Options">
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="disabled-1" name="disabled-group" disabled />
+    <label class="label font-normal" for="disabled-1">Disabled</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="disabled-2" name="disabled-group" checked />
+    <label class="label font-normal" for="disabled-2">Option 2</label>
+  </div>
+  <div class="field field-horizontal">
+    <input type="radio" class="radio" id="disabled-3" name="disabled-group" />
+    <label class="label font-normal" for="disabled-3">Option 3</label>
   </div>
 </div>
 ```
 
----
+### Invalid
 
-## How it works
+Set `aria-invalid` on the radios for the error state.
 
-The radio component is a CSS-only utility class applied to a native `<input type="radio">` element.
-
-### Structure
-
-Use the `.radio` class on an `<input type="radio">`. Pair it with a `.label` element connected via `for` and `id`. Use the same `name` attribute to group radios:
-
-```html
-<input type="radio" class="radio" id="option-a" name="choice" value="a" />
-<label class="label" for="option-a">Option A</label>
+```html preview preset=form
+<fieldset class="field-set">
+  <legend class="field-legend field-legend-label">Notification Preferences</legend>
+  <p class="field-description">Choose how you want to receive notifications.</p>
+  <div class="field-group gap-3">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="invalid-email" name="invalid-notifications" checked aria-invalid="true" />
+      <label class="label font-normal" for="invalid-email">Email only</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="invalid-sms" name="invalid-notifications" aria-invalid="true" />
+      <label class="label font-normal" for="invalid-sms">SMS only</label>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="invalid-both" name="invalid-notifications" aria-invalid="true" />
+      <label class="label font-normal" for="invalid-both">Both Email &amp; SMS</label>
+    </div>
+  </div>
+</fieldset>
 ```
-
-### Disabled state
-
-Add `disabled` to the radio. Use `peer` on the radio so the label automatically dims via `peer-disabled`:
-
-```html
-<input type="radio" class="radio peer" id="rb" disabled />
-<label class="label" for="rb">Disabled</label>
-```
-
-### Validation
-
-Add `aria-invalid="true"` to show the radio in an error state:
-
-```html
-<input type="radio" class="radio" aria-invalid="true" />
-```
-
-### Class reference
-
-| Class   | Description       |
-| ------- | ----------------- |
-| `radio` | Base radio styles |

@@ -11,7 +11,8 @@
       "style": "./dist/index.css",
       "import": "./dist/index.js",
       "default": "./dist/index.css"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist"
@@ -20,11 +21,13 @@
     "build": "tsc --noEmit && eslint src/ && node build.mjs && dts-bundle-generator --no-check --inline-declare-global -o dist/index.d.ts src/js/index.ts",
     "dev": "node build.mjs --watch",
     "check-types": "tsc --noEmit",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "test": "playwright test"
   },
   "devDependencies": {
     "@eslint/js": "^9",
     "@floating-ui/dom": "^1.7.4",
+    "@playwright/test": "^1.60.0",
     "dts-bundle-generator": "^9.5.1",
     "esbuild": "^0.27.4",
     "eslint": "^9",

@@ -1,17 +1,9 @@
 ---
 title: Installation
-description: Learn how to install Starting Point UI in your project.
+description: Learn how to install Starting Point UI in your Tailwind CSS project, with or without a bundler, and set up the optional JavaScript, fonts, and icons.
 ---
 
-Starting Point UI is a component library built for Tailwind CSS. It provides class names for common components such as buttons, cards, form elements, dialogs, and more.
-
----
-
-## Prerequisites
-
-- A project using Tailwind CSS v4+
-
----
+Getting started takes two steps: install the package and import the styles. All you need is a project running Tailwind CSS v4 or later. The JavaScript, fonts, and icons below are optional.
 
 ## Install the package
 
@@ -19,22 +11,20 @@ Starting Point UI is a component library built for Tailwind CSS. It provides cla
 npm install starting-point-ui
 ```
 
----
-
 ## Import the styles
 
-Add the import to your main CSS file:
+Add the import to your main CSS file, after Tailwind:
 
 ```css label="app/globals.css"
 @import "tailwindcss";
 @import "starting-point-ui";
 ```
 
----
+That's it: every component class is now available in your markup.
 
 ## Add the JavaScript (optional)
 
-For interactive components like dialogs and dropdowns, you can include the JavaScript.
+Interactive components like dialogs, dropdowns, and tabs need the JavaScript module. Static components work without it.
 
 ### Using a CDN
 
@@ -42,14 +32,14 @@ Add the script tag to your HTML file:
 
 ```html label="index.html"
 <script
-  src="https://cdn.jsdelivr.net/npm/starting-point-ui@0.24.1"
+  src="https://cdn.jsdelivr.net/npm/starting-point-ui@%VERSION%"
   type="module"
 ></script>
 ```
 
 ### Using a bundler
 
-For client-side bundlers like Vite, you can import directly in your entry file:
+For client-side bundlers like Vite, import it in your entry file:
 
 ```ts label="main.ts"
 import "starting-point-ui";
@@ -57,7 +47,7 @@ import "starting-point-ui";
 
 ### SSR frameworks
 
-If you're using a framework with server-side rendering, you may need to ensure the script only runs on the client after the DOM is ready. This is how it's loaded on this site, which is a Next.js App Router project:
+In a server-rendered framework, make sure the script runs on the client after the DOM is ready. This is how this site loads it, as a Next.js App Router project:
 
 ```tsx label="components/starting-point-ui.tsx"
 "use client";
@@ -90,11 +80,9 @@ export default function RootLayout({ children }) {
 }
 ```
 
----
-
 ## Font (optional)
 
-By default the package uses Tailwind's `--font-sans` for body text, and `--font-heading` for headings (which inherits from `--font-sans` unless overridden). The examples on this site use [Inter](https://rsms.me/inter/) — to match that look, load Inter and set it as the body font:
+The components render in your project's font through Tailwind's `--font-sans` token. The examples on this site use [Inter](https://rsms.me/inter/), and to match that look, load Inter and set it as the font:
 
 ```css
 @import url("https://fonts.bunny.net/css?family=inter:400,500,600,700");
@@ -116,16 +104,6 @@ Or load Inter via a `<link>` tag in your HTML:
 </head>
 ```
 
-To use a different font for headings, override `--font-heading`:
-
-```css
-@theme inline {
-  --font-heading: "Your Heading Font", serif;
-}
-```
-
----
-
 ## Icons (optional)
 
 Components automatically style SVG icons placed inside them, so you can drop in any inline SVG:
@@ -140,10 +118,8 @@ Components automatically style SVG icons placed inside them, so you can drop in 
 </button>
 ```
 
-The examples on this site use icons from [Lucide](https://lucide.dev/), but any SVG-based icon library works. Lucide ships official packages for most frameworks, as static SVGs, or as a plain script — see the [Lucide guide](https://lucide.dev/guide/) for all the options.
-
----
+The examples on this site use icons from [Lucide](https://lucide.dev/), but any SVG-based icon library works. Lucide ships official packages for most frameworks, as static SVGs, or as a plain script. See the [Lucide guide](https://lucide.dev/guide/) for all the options.
 
 ## You're all set
 
-You're now ready to start using Starting Point UI in your project. Explore the components in the sidebar to see what's available. If you run into any issues, check out the [Help](/docs/guides/help) section.
+Explore the components in the sidebar to see what's available, or head to the [Customization](/guides/customization) guide to make the theme your own. If you run into any issues, check out the [Help](/guides/help) section.

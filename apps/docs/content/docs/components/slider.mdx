@@ -1,11 +1,47 @@
 ---
 title: Slider
-description: A Tailwind CSS slider component for selecting a value from a range.
+description: A slider component for Tailwind CSS with beautiful shadcn/ui styling. Use it to pick a value from a range, like volume or a price cap.
 ---
 
-A Tailwind CSS slider component for selecting a value from a range.
+The slider picks a numeric value from a range by dragging a thumb along a track, like volume or a price cap.
 
-```html preview
+```html preview preset=form
+<div class="field">
+  <span class="field-title">Volume</span>
+  <p class="field-description">
+    Set the playback volume (
+    <span
+      class="font-medium tabular-nums"
+      data-sp-slider-value="slider-demo-volume"
+    >
+      75
+    </span>
+    %).
+  </p>
+  <input
+    type="range"
+    class="slider mt-2"
+    id="slider-demo-volume"
+    max="100"
+    step="1"
+    value="75"
+    style="--val: 75%"
+    aria-label="Volume"
+  />
+</div>
+```
+
+## Usage
+
+Add the `slider` class to an `<input type="range">`. The filled part of the track follows the value; set the inline `--val` to match the initial `value` so the fill paints correctly before JavaScript loads.
+
+| Class             | Description                                                     |
+| ----------------- | --------------------------------------------------------------- |
+| `slider`          | Add to an `<input type="range">`                                |
+| `slider-vertical` | Add to `slider` for a bottom-to-top slider                      |
+| `slider-range`    | Add to a wrapper around several sliders for a multi-thumb range |
+
+```html
 <input
   type="range"
   class="slider"
@@ -16,164 +52,235 @@ A Tailwind CSS slider component for selecting a value from a range.
 />
 ```
 
----
+## Examples
 
-## With label
+### Range
 
-Pair with a [Label](/docs/components/label) for accessible form fields. Connect them using matching `for` and `id` attributes so screen readers announce the control correctly.
+Overlay two sliders in a `slider-range` to pick a range with two thumbs; the wrapper paints the shared fill and keeps the thumbs from crossing.
 
-```html preview
-<div class="w-full max-w-xs">
-  <div class="grid gap-3">
-    <label class="label" for="volume">Volume</label>
+```html preview preset=form
+<div class="slider-range" style="--val-min: 25%; --val-max: 50%">
+  <input
+    type="range"
+    class="slider"
+    max="100"
+    step="5"
+    value="25"
+    aria-label="Minimum"
+  />
+  <input
+    type="range"
+    class="slider"
+    max="100"
+    step="5"
+    value="50"
+    aria-label="Maximum"
+  />
+</div>
+```
+
+### Multiple thumbs
+
+The wrapper takes any number of sliders; each thumb is clamped between its neighbors.
+
+```html preview preset=form
+<div class="slider-range" style="--val-min: 10%; --val-max: 70%">
+  <input
+    type="range"
+    class="slider"
+    max="100"
+    step="10"
+    value="10"
+    aria-label="First value"
+  />
+  <input
+    type="range"
+    class="slider"
+    max="100"
+    step="10"
+    value="20"
+    aria-label="Second value"
+  />
+  <input
+    type="range"
+    class="slider"
+    max="100"
+    step="10"
+    value="70"
+    aria-label="Third value"
+  />
+</div>
+```
+
+### Vertical
+
+Add `slider-vertical` for a bottom-to-top slider.
+
+```html preview preset=form
+<div class="flex items-center justify-center gap-6">
+  <input
+    type="range"
+    class="slider slider-vertical"
+    max="100"
+    step="1"
+    value="50"
+    style="--val: 50%"
+    aria-label="Value"
+  />
+  <input
+    type="range"
+    class="slider slider-vertical"
+    max="100"
+    step="1"
+    value="25"
+    style="--val: 25%"
+    aria-label="Value"
+  />
+</div>
+```
+
+### Controlled
+
+Point an element at the slider with `data-sp-slider-value` and it mirrors the value automatically.
+
+```html preview preset=form
+<div class="grid gap-3">
+  <div class="flex items-center justify-between gap-2">
+    <label class="label" for="slider-temperature">Temperature</label>
+    <span
+      class="text-sm text-muted-foreground tabular-nums"
+      data-sp-slider-value="slider-temperature"
+    >
+      0.3
+    </span>
+  </div>
+  <input
+    type="range"
+    class="slider"
+    id="slider-temperature"
+    min="0"
+    max="1"
+    step="0.1"
+    value="0.3"
+    style="--val: 30%"
+  />
+</div>
+```
+
+### Field
+
+Wrap the slider in a [field](/components/field) with a title and description.
+
+```html preview preset=form
+<div class="field">
+  <span class="field-title">Price Range</span>
+  <p class="field-description">
+    Set your budget range ($
+    <span
+      class="font-medium tabular-nums"
+      data-sp-slider-value="slider-price-min"
+    >
+      200
+    </span>
+    -
+    <span
+      class="font-medium tabular-nums"
+      data-sp-slider-value="slider-price-max"
+    >
+      800
+    </span>
+    ).
+  </p>
+  <div class="slider-range mt-2" style="--val-min: 20%; --val-max: 80%">
     <input
       type="range"
       class="slider"
-      id="volume"
-      name="volume"
-      min="0"
-      max="100"
-      value="60"
-      style="--val: 60%"
+      id="slider-price-min"
+      max="1000"
+      step="10"
+      value="200"
+      aria-label="Minimum price"
     />
-  </div>
-</div>
-```
-
----
-
-## With value
-
-Show the current value alongside the slider. Add `data-sp-slider-value` to any element and point it at the slider's `id` — the library keeps its text content in sync with the slider.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="grid gap-3">
-    <div class="flex items-center justify-between">
-      <label class="label" for="brightness">Brightness</label>
-      <span
-        class="text-sm text-muted-foreground"
-        data-sp-slider-value="brightness"
-      >
-        75
-      </span>
-    </div>
     <input
       type="range"
       class="slider"
-      id="brightness"
-      name="brightness"
-      min="0"
-      max="100"
-      value="75"
-      style="--val: 75%"
+      id="slider-price-max"
+      max="1000"
+      step="10"
+      value="800"
+      aria-label="Maximum price"
     />
   </div>
 </div>
 ```
 
----
+### Steps
 
-## Stepped
+Use `step` to snap the value to increments.
 
-Use the `step` attribute to snap to discrete values.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="grid gap-3">
-    <div class="flex items-center justify-between">
-      <label class="label" for="price">Max price</label>
-      <span class="text-sm text-muted-foreground" data-sp-slider-value="price">
-        250
-      </span>
-    </div>
-    <input
-      type="range"
-      class="slider"
-      id="price"
-      name="price"
-      min="0"
-      max="500"
-      step="25"
-      value="250"
-      style="--val: 50%"
-    />
-  </div>
+```html preview preset=form
+<div class="field">
+  <span class="field-title">Zoom</span>
+  <p class="field-description">
+    Snaps in steps of 25 (
+    <span
+      class="font-medium tabular-nums"
+      data-sp-slider-value="slider-steps-zoom"
+    >
+      50
+    </span>
+    %).
+  </p>
+  <input
+    type="range"
+    class="slider mt-2"
+    id="slider-steps-zoom"
+    min="0"
+    max="100"
+    step="25"
+    value="50"
+    style="--val: 50%"
+    aria-label="Zoom"
+  />
 </div>
 ```
 
----
+### Disabled
 
-## Disabled
+Add `disabled` and the slider mutes itself and blocks interaction.
 
-Add `disabled` to the slider and `peer` so the label dims to match.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="grid gap-3">
-    <label class="label peer-disabled:opacity-50" for="disabled-slider">
-      Disabled slider
-    </label>
-    <input
-      type="range"
-      class="slider peer"
-      id="disabled-slider"
-      name="disabled-slider"
-      min="0"
-      max="100"
-      value="40"
-      style="--val: 40%"
-      disabled=""
-    />
-  </div>
-</div>
-```
-
----
-
-## How it works
-
-The slider component is a utility class applied to a native `<input type="range">` element. The filled portion of the track is painted using a `--val` CSS variable, which the library's JavaScript keeps in sync with the input's current value.
-
-### Structure
-
-Use the `.slider` class on an `<input type="range">`. Always set `min`, `max`, and `value` — the library uses them to compute the fill width. Pair with a `.label` element connected via `for` and `id`, and set the initial fill by passing `--val` as an inline style matching the initial `value`:
-
-```html
-<label class="label" for="volume">Volume</label>
+```html preview preset=form
 <input
   type="range"
   class="slider"
-  id="volume"
-  min="0"
   max="100"
+  step="1"
   value="50"
   style="--val: 50%"
+  disabled
+  aria-label="Value"
 />
 ```
 
-The library updates `--val` automatically whenever the user interacts with the slider, and also when the `value`, `min`, or `max` attributes change programmatically. The inline `--val` only matters for the initial render — without it, the fill would flash empty until the JavaScript runs.
+## JavaScript
 
-### Displaying the current value
+### Events
 
-To show the slider's value in another element, add `data-sp-slider-value` pointing at the slider's `id`. The library keeps the element's text content in sync with the slider as it changes:
+The slider is a native input, so listen to the native events: `input` fires on every change while dragging, `change` once the value settles.
 
-```html
-<span data-sp-slider-value="volume">50</span>
-<input type="range" class="slider" id="volume" value="50" style="--val: 50%" />
+```js
+slider.addEventListener("input", (e) => {
+  console.log(e.target.value);
+});
 ```
 
-### Disabled state
+### Methods
 
-Add `disabled` to the slider. Use `peer` on the slider so the label automatically dims via `peer-disabled`:
+The fill updates on init and on user input. After changing `value`, `min`, or `max` programmatically, refresh with `update()`:
 
-```html
-<input type="range" class="slider peer" id="sl" disabled />
-<label class="label peer-disabled:opacity-50" for="sl">Disabled</label>
+```js
+const slider = document.querySelector("#volume");
+
+slider.value = "90";
+sp.slider(slider).update();
 ```
-
-### Class reference
-
-| Class    | Description        |
-| -------- | ------------------ |
-| `slider` | Base slider styles |

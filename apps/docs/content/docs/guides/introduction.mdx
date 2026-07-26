@@ -1,54 +1,79 @@
 ---
 title: Introduction
-description: Learn what Starting Point UI is, how it works, and why it's designed to be the starting point for your next Tailwind CSS project.
+description: Starting Point UI is a free, open-source Tailwind CSS component library that brings the shadcn/ui design system to any web stack. No React required.
 ---
 
-An open-source component library for Tailwind CSS. Inspired by [shadcn/ui](https://ui.shadcn.com), Starting Point UI gives you the same beautiful design system without locking you into a framework. React, Vue, Angular, Django, Laravel, Rails, plain HTML - if it runs Tailwind, it works.
-
----
-
-## What is Starting Point UI?
-
-Tailwind CSS is great for styling, but it doesn't include pre-built components or JavaScript for interactive elements. Starting Point UI provides both - a complete set of components like buttons, cards, form elements, dialogs, and more, along with optional JavaScript for interactive components. Everything is built as Tailwind utilities, so you style and customize components the same way you already work with Tailwind. Add classes like `btn`, `card`, or `input` and you're done.
-
-It works with any web stack, regardless of framework. The JavaScript uses event delegation, so interactive components work automatically whether elements are rendered on page load or added dynamically later. Starting Point UI is designed to be the first thing you install in any new project - regardless of what you're building, the components are always the same, so you can start every project from the same familiar foundation.
+A Tailwind CSS component library that brings the [shadcn/ui](https://ui.shadcn.com) design system to any web stack, no React required. You get beautiful, accessible components as simple semantic classes, with a small vanilla JavaScript module driving the interactive ones.
 
 ---
 
-## Features
+## An example
 
-- **Framework-agnostic** - works with any web stack that supports Tailwind
+Here is an example of a simple dropdown menu. The classes handle the design, the data attributes wire up the behavior, and accessibility comes built in: the markup gets the right ARIA roles and attributes automatically, arrow keys move through the items, ArrowRight opens the submenu and ArrowLeft closes it, Escape dismisses, and focus is managed for you. Copy the code and it works.
+
+```html preview preset=popover open=.dropdown
+<!-- The trigger: any button or link with an id -->
+<button id="intro-demo-trigger" class="btn btn-outline">Open</button>
+
+<!-- The menu: points at its trigger, everything else is automatic -->
+<div class="dropdown w-44" data-sp-toggle="#intro-demo-trigger">
+  <div class="dropdown-label">My Account</div>
+  <button class="dropdown-item">
+    Profile
+    <span class="dropdown-shortcut">⇧⌘P</span>
+  </button>
+  <button class="dropdown-item">
+    Billing
+    <span class="dropdown-shortcut">⌘B</span>
+  </button>
+  <button id="intro-demo-invite" class="dropdown-item">
+    Invite users
+    <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item">
+    Log out
+    <span class="dropdown-shortcut">⇧⌘Q</span>
+  </button>
+</div>
+
+<!-- The submenu: another dropdown that opens from the item above -->
+<div
+  class="dropdown dropdown-sub"
+  data-sp-toggle="#intro-demo-invite"
+  data-sp-mode="hover"
+  data-sp-placement="right-start"
+>
+  <button class="dropdown-item">Email</button>
+  <button class="dropdown-item">Message</button>
+  <button class="dropdown-item">Copy link</button>
+</div>
+```
+
+---
+
+## Why Starting Point UI?
+
+- **Works everywhere** - React, Vue, Angular, Laravel, Rails, Django, or plain HTML; if it runs Tailwind, it works
 - **Easy to use** - add classes like `btn`, `card`, or `input` and you're done
-- **Accessible** - built with WAI-ARIA patterns, keyboard navigation, and focus management
-- **Dark mode** - works out of the box with Tailwind's dark mode
-- **Themeable** - easy to customize and make your own, follows the same theming principles as shadcn/ui
-- **Lightweight** - just CSS and a small JavaScript module for interactive components
+- **Accessible** - WAI-ARIA patterns, keyboard navigation, and focus management built in; every example ships accessible markup you can copy as is
+- **Themeable** - shadcn/ui-compatible CSS variables, with dark mode out of the box; see [Customization](/guides/customization)
+- **Lightweight** - just CSS and an optional JavaScript module
 - **Clean markup** - readable class names, no class soup
 
 ---
 
-## FAQ
+## Inspiration
 
-### How is this different from shadcn/ui?
+Starting Point UI could not exist without these amazing open source projects. Much of what you find here, from the design system to the way the JavaScript is structured, comes from using them, studying their source code, and learning from the people behind them. Be sure to check them out.
 
-shadcn/ui is a collection of copy-paste components built for React. Starting Point UI is an installable npm package that works with any framework. The styling and theming follow the same conventions, so if you're familiar with shadcn/ui you'll feel right at home.
-
-### Do I need React to use this?
-
-No. Starting Point UI works with any web stack that supports Tailwind CSS. The JavaScript is vanilla and uses event delegation, so it works with any rendering model.
-
-### Do I need to install JavaScript?
-
-The JavaScript is optional. If you only need static components like buttons, cards, and badges, the CSS is all you need. JavaScript is only required for interactive components like dialogs, dropdowns, and tabs.
-
-### Can I customize it to match my brand?
-
-Yes, it's easy to customize. Starting Point UI uses CSS variables for colors, radius, fonts, and spacing, so you can quickly adjust everything to match your brand. Check out the [Theming](/docs/guides/theming) guide to learn more.
-
-### What version of Tailwind CSS do I need?
-
-Starting Point UI requires Tailwind CSS v4 or later.
+- [Tailwind CSS](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Radix UI](https://www.radix-ui.com)
+- [daisyUI](https://daisyui.com)
+- [Basecoat](https://basecoatui.com)
+- [UIkit](https://getuikit.com)
 
 ---
 
-Ready to get started? Head over to the [Installation](/docs/guides/installation) guide.
+Ready to get started? Head over to the [Installation](/guides/installation) guide.

@@ -1,26 +1,40 @@
-/* Starting Point UI Accordion Styles */
-
 @utility accordion {
   @layer l1.l2 {
-    @apply w-full divide-y;
+    @apply w-full;
+  }
+}
+
+@utility accordion-item {
+  @layer l1.l2 {
+    @apply [&:not(:last-child)]:border-b;
   }
 }
 
 @utility accordion-trigger {
   @layer l1.l2 {
-    @apply flex w-full flex-1 items-center justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50;
-    @apply [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0;
-    @apply [&:not(.no-animation)_svg]:transition-transform [&:not(.no-animation)_svg]:duration-200;
+    @apply flex w-full flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+
+    /* The chevron is injected by JS unless the trigger ends with its own svg. */
+    & > svg:last-child {
+      @apply pointer-events-none ml-auto size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200;
+    }
+
+    &[aria-expanded="true"] > svg:last-child {
+      @apply rotate-180;
+    }
   }
 }
 
 @utility accordion-panel {
   @layer l1.l2 {
+    /* Same collapse mechanism as .collapsible; see collapsible.css. */
     @apply invisible h-0 overflow-hidden;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-accordion-down;
-    @apply [&:not(.no-animation)]:data-[state=closed]:animate-accordion-up;
+    @apply [&.expanding]:visible [&.expanding]:animate-collapse-down;
+    @apply [&.collapsing]:visible [&.collapsing]:animate-collapse-up;
 
-    &.open {
+    &.expanded {
       @apply visible h-auto;
     }
   }
@@ -28,6 +42,6 @@
 
 @utility accordion-content {
   @layer l1.l2 {
-    @apply pb-4 text-sm/6 text-muted-foreground;
+    @apply pt-0 pb-4 text-sm;
   }
 }

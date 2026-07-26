@@ -45,8 +45,8 @@ function extractHeadings(content: string): string[] {
   return headings;
 }
 
-function generateSearchIndex(): void {
-  const docs = getAllDocs();
+async function generateSearchIndex(): Promise<void> {
+  const docs = await getAllDocs();
 
   const searchDocuments: SearchDocument[] = docs.map((doc) => ({
     id: doc.slug.join("/"),

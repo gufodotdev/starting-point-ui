@@ -1,14 +1,26 @@
+import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
+import { docsNav } from "@/lib/navigation";
+import { getDocBySlug } from "@/lib/mdx";
 import { CodeBlock } from "@/components/code-block";
-import { hashCode } from "@/lib/utils";
+import { Callout } from "@/components/callout";
+import { AvatarsList } from "@/components/avatars-list";
+import { UnsplashEditor } from "@/components/unsplash-editor";
+import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
+import {
+  exampleId,
+  isPreviewMeta,
+  openFromMeta,
+  presetFromMeta,
+} from "@/lib/examples-registry";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 
 const prettyCodeOptions = {
   theme: {
-    dark: "github-dark",
-    light: "github-light",
+    dark: codeThemeDark,
+    light: codeThemeLight,
   },
   keepBackground: false,
   transformers: [
@@ -20,32 +32,15 @@ const prettyCodeOptions = {
 
         // @ts-expect-error - this context from transformer
         const source: string = this.source;
-        node.properties["data-code"] = source.replace(
-          /^\s*<!-- (?:START|END) https:\/\/startingpointui\.com\/\S+ -->\n?/gm,
-          "",
-        );
+        node.properties["data-code"] = source;
 
-        const code = node.children?.[0];
-        if (code?.children) {
-          code.children = code.children.filter(
-            (line: { children?: { children?: { value?: string }[] }[] }) => {
-              const text =
-                line.children
-                  ?.flatMap(
-                    (span: { children?: { value?: string }[] }) =>
-                      span.children ?? [],
-                  )
-                  .map((child: { value?: string }) => child.value ?? "")
-                  .join("") ?? "";
-              return !/^\s*<!-- (?:START|END) https:\/\/startingpointui\.com\/\S+ -->$/.test(
-                text,
-              );
-            },
-          );
-        }
-
-        if (meta.includes("preview")) {
+        if (isPreviewMeta(meta)) {
           node.properties["data-preview"] = "true";
+          node.properties["data-frame-id"] = exampleId(
+            source,
+            presetFromMeta(meta),
+            openFromMeta(meta),
+          );
         }
 
         const labelMatch = meta.match(/label="([^"]+)"/);
@@ -57,10 +52,68 @@ const prettyCodeOptions = {
   ],
 };
 
+async function NavGroupList({
+  group,
+  transformBlurb,
+}: {
+  group: string;
+  transformBlurb?: (blurb: string) => string;
+}) {
+  const items = docsNav.find((entry) => entry.title === group)?.items ?? [];
+  const docs = await Promise.all(
+    items.map((item) => getDocBySlug(item.href.slice(1).split("/"))),
+  );
+  return (
+    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item, index) => {
+        const raw = docs[index]?.metadata.description.split(". ").slice(1).join(". ") ?? "";
+        const blurb = transformBlurb ? transformBlurb(raw) : raw;
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="card card-sm transition-colors hover:bg-accent/50"
+          >
+            <div className="card-header">
+              <h3 className="card-title">{item.title}</h3>
+              {blurb && <p className="card-description line-clamp-2">{blurb}</p>}
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+function ComponentsList() {
+  return (
+    <NavGroupList
+      group="Components"
+      transformBlurb={(blurb) =>
+        blurb.replace(/^Use it to /, "").replace(/^./, (c) => c.toUpperCase())
+      }
+    />
+  );
+}
+
+function ExamplesList() {
+  return <NavGroupList group="Examples" />;
+}
+
+function ResourcesList() {
+  return <NavGroupList group="Resources" />;
+}
+
 const components = {
+  Callout,
+  ComponentsList,
+  ExamplesList,
+  ResourcesList,
+  AvatarsList,
+  UnsplashEditor,
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
-      className="text-lg font-semibold tracking-tight mt-6 sm:mt-12 mb-4 scroll-mt-20"
+      className="mt-10 lg:mt-12 first:mt-0 scroll-m-28 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
       {...props}
     >
       {children}
@@ -68,37 +121,44 @@ const components = {
   ),
   h3: ({ children, ...props }: React.ComponentProps<"h3">) => (
     <h3
-      className="text-base font-semibold tracking-tight mt-6 sm:mt-12 mb-4 scroll-mt-20"
+      className="mt-12 scroll-m-28 text-lg font-medium tracking-tight [&+p]:mt-4!"
       {...props}
     >
       {children}
     </h3>
   ),
-  p: ({ children }: React.ComponentProps<"p">) => (
-    <p className="text-base/7 mb-3 sm:mb-6 text-muted-foreground [figure+&]:mt-3 sm:[figure+&]:mt-6">
-      {children}
-    </p>
-  ),
-  a: ({ children, ...props }: React.ComponentProps<"a">) => (
-    <a
-      className="text-primary font-medium underline underline-offset-4"
+  h4: ({ children, ...props }: React.ComponentProps<"h4">) => (
+    <h4
+      className="mt-8 scroll-m-28 text-base font-medium tracking-tight"
       {...props}
     >
       {children}
+    </h4>
+  ),
+  p: ({ children }: React.ComponentProps<"p">) => (
+    <p className="max-w-3xl leading-relaxed not-first:mt-6">{children}</p>
+  ),
+  a: ({ children, ...props }: React.ComponentProps<"a">) => (
+    <a className="font-medium underline underline-offset-4" {...props}>
+      {children}
     </a>
+  ),
+  strong: ({ children }: React.ComponentProps<"strong">) => (
+    <strong className="font-medium">{children}</strong>
   ),
   blockquote: ({ children }: React.ComponentProps<"blockquote">) => (
     <blockquote className="mt-6 border-l-2 pl-6 italic">{children}</blockquote>
   ),
   ul: ({ children }: React.ComponentProps<"ul">) => (
-    <ul className="my-6 ml-6 list-disc [&>li]:mt-2 [&_ul]:my-2 [&_ul]:list-[circle] [&_ul]:text-muted-foreground [&_ul]:text-sm">
-      {children}
-    </ul>
+    <ul className="my-6 ml-6 list-disc">{children}</ul>
   ),
   ol: ({ children }: React.ComponentProps<"ol">) => (
-    <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
+    <ol className="my-6 ml-6 list-decimal">{children}</ol>
   ),
-  hr: () => <hr className="my-6 sm:my-12 border-dashed" />,
+  li: ({ children }: React.ComponentProps<"li">) => (
+    <li className="mt-2">{children}</li>
+  ),
+  hr: () => <hr className="my-4 md:my-8" />,
   code: ({
     children,
     ...props
@@ -111,7 +171,7 @@ const components = {
       return <code {...props}>{children}</code>;
     }
     return (
-      <code className="font-mono rounded bg-muted px-1.5 py-0.5 text-xs text-foreground">
+      <code className="relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none">
         {children}
       </code>
     );
@@ -121,14 +181,16 @@ const components = {
     "data-code": code = "",
     "data-preview": preview,
     "data-label": label,
+    "data-frame-id": frameId,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
     "data-label"?: string;
+    "data-frame-id"?: string;
   }) => {
-    if (preview === "true") {
+    if (preview === "true" && frameId) {
       return (
-        <CodeBlock code={code} header="preview" id={hashCode(code)}>
+        <CodeBlock code={code} header="preview" frameId={frameId}>
           {children}
         </CodeBlock>
       );
@@ -143,20 +205,20 @@ const components = {
     return <CodeBlock code={code}>{children}</CodeBlock>;
   },
   table: ({ children }: React.ComponentProps<"table">) => (
-    <div className="my-4 overflow-x-auto">
-      <table className="w-full text-sm whitespace-nowrap">{children}</table>
+    <div className="scrollbar-thin my-6 w-full overflow-y-auto rounded-xl border">
+      <table className="relative w-full overflow-hidden border-none text-sm [&_tbody_tr:last-child]:border-b-0">
+        {children}
+      </table>
     </div>
   ),
-  thead: ({ children }: React.ComponentProps<"thead">) => (
-    <thead className="border-b">{children}</thead>
+  tr: ({ children }: React.ComponentProps<"tr">) => (
+    <tr className="m-0 border-b">{children}</tr>
   ),
   th: ({ children }: React.ComponentProps<"th">) => (
-    <th className="text-left font-medium py-3 pr-4 first:w-64">{children}</th>
+    <th className="px-4 py-2 text-left font-bold">{children}</th>
   ),
   td: ({ children }: React.ComponentProps<"td">) => (
-    <td className="py-3 pr-4 text-muted-foreground text-sm first:w-64">
-      {children}
-    </td>
+    <td className="px-4 py-2 text-left whitespace-nowrap">{children}</td>
   ),
 };
 

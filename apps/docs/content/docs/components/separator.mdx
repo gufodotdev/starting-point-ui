@@ -1,85 +1,98 @@
 ---
 title: Separator
-description: A Tailwind CSS separator component for visually dividing content.
+description: A separator component for Tailwind CSS with beautiful shadcn/ui styling. Use it to divide content, horizontally between sections or vertically between inline items.
 ---
 
-A Tailwind CSS separator component for visually dividing content.
+The separator draws a thin line that visually divides content, horizontally between sections or vertically between inline items.
 
-```html preview
-<div class="space-y-4">
+```html preview preset=form
+<div class="flex flex-col gap-4 text-sm">
+  <div class="flex flex-col gap-1.5">
+    <div class="leading-none font-medium">Starting Point UI</div>
+    <div class="text-muted-foreground">
+      The foundation for your design system
+    </div>
+  </div>
+  <div class="separator"></div>
   <div>
-    <h4 class="text-sm font-medium">Starting Point UI</h4>
-    <p class="text-sm text-muted-foreground mt-2">
-      A Tailwind CSS component library.
-    </p>
-  </div>
-  <div class="separator" role="separator"></div>
-  <div class="flex h-5 items-center gap-4 text-sm">
-    <div>Blog</div>
-    <div class="separator separator-vertical" role="separator"></div>
-    <div>Docs</div>
-    <div class="separator separator-vertical" role="separator"></div>
-    <div>Source</div>
+    A set of beautifully designed components that you can customize, extend, and
+    build on.
   </div>
 </div>
 ```
 
----
+## Usage
 
-## Horizontal
+Add the `separator` class to an empty element; it renders horizontally unless you add `separator-vertical`. A vertical separator stretches to its container's height, so give the row a height or let the tallest sibling define it.
 
-Separators are horizontal by default.
+| Class                  | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| `separator`            | Add to an empty element; horizontal by default  |
+| `separator-horizontal` | Add to `separator` to force the horizontal axis |
+| `separator-vertical`   | Add to `separator` for a vertical divider       |
 
-```html preview
-<div class="space-y-4">
-  <p class="text-sm">Above the separator</p>
-  <div class="separator" role="separator"></div>
-  <p class="text-sm">Below the separator</p>
-</div>
+```html
+<div class="separator"></div>
 ```
 
----
+## Examples
 
-## Vertical
+### Vertical
 
-Use `separator-vertical` to create a vertical divider between inline elements.
+Divide inline items with `separator-vertical`.
 
 ```html preview
 <div class="flex h-5 items-center gap-4 text-sm">
-  <div>Home</div>
-  <div class="separator separator-vertical" role="separator"></div>
-  <div>About</div>
-  <div class="separator separator-vertical" role="separator"></div>
-  <div>Contact</div>
+  <div>Blog</div>
+  <div class="separator separator-vertical"></div>
+  <div>Docs</div>
+  <div class="separator separator-vertical"></div>
+  <div>Source</div>
 </div>
 ```
 
----
+### Menu
 
-## How it works
+Vertical separators divide richer inline groups too; hide trailing ones responsively along with their content.
 
-The separator component is a CSS-only component for visually dividing content.
-
-### Structure
-
-A separator uses the `.separator` class. It defaults to horizontal:
-
-```html
-<div class="separator"></div>
-<div class="separator separator-vertical"></div>
+```html preview
+<div class="flex items-center gap-2 text-sm md:gap-4">
+  <div class="flex flex-col gap-1">
+    <span class="font-medium">Settings</span>
+    <span class="text-xs text-muted-foreground">Manage preferences</span>
+  </div>
+  <div class="separator separator-vertical"></div>
+  <div class="flex flex-col gap-1">
+    <span class="font-medium">Account</span>
+    <span class="text-xs text-muted-foreground">Profile &amp; security</span>
+  </div>
+  <div class="separator separator-vertical hidden md:block"></div>
+  <div class="hidden flex-col gap-1 md:flex">
+    <span class="font-medium">Help</span>
+    <span class="text-xs text-muted-foreground">Support &amp; docs</span>
+  </div>
+</div>
 ```
 
-### Class reference
+### List
 
-All available classes for the separator component.
+Separate rows of a definition list.
 
-| Class                  | Description                         |
-| ---------------------- | ----------------------------------- |
-| `separator`            | Base styles, defaults to horizontal |
-| `separator-horizontal` | Makes the separator horizontal      |
-| `separator-vertical`   | Makes the separator vertical        |
-
-```html
-<div class="separator"></div>
-<div class="separator separator-vertical"></div>
+```html preview preset=form
+<div class="flex flex-col gap-2 text-sm">
+  <dl class="flex items-center justify-between">
+    <dt>Item 1</dt>
+    <dd class="text-muted-foreground">Value 1</dd>
+  </dl>
+  <div class="separator"></div>
+  <dl class="flex items-center justify-between">
+    <dt>Item 2</dt>
+    <dd class="text-muted-foreground">Value 2</dd>
+  </dl>
+  <div class="separator"></div>
+  <dl class="flex items-center justify-between">
+    <dt>Item 3</dt>
+    <dd class="text-muted-foreground">Value 3</dd>
+  </dl>
+</div>
 ```

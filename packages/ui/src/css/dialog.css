@@ -1,31 +1,69 @@
-/* Starting Point UI Dialog Styles */
-
 @utility dialog {
   @layer l1.l2 {
-    @apply isolate pointer-events-none fixed inset-0 z-999 w-full h-dvh p-0 bg-transparent border-none max-w-none max-h-none overflow-hidden;
+    /* Full-viewport transparent container; the visible panel is
+       .dialog-content. The dim is a plain background on this element instead
+       of ::backdrop, so authored .shown paints identically before JS and
+       after showModal() promotes it to the top layer. */
+    @apply fixed inset-0 z-999 m-0 h-full max-h-none w-full max-w-none border-none bg-black/10 p-4 text-foreground supports-backdrop-filter:backdrop-blur-xs;
+
+    /* Display comes from [open] (runtime) or authored .shown (pre-JS). */
+    &[open],
+    &.shown {
+      @apply grid place-items-center;
+    }
 
     &::backdrop {
       @apply hidden;
     }
-  }
-}
 
-@utility dialog-backdrop {
-  @layer l1.l2 {
-    @apply fixed inset-0 bg-black/30 backdrop-blur-xs -z-1 pointer-events-auto [animation-fill-mode:forwards]!;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=closed]:fade-out-0;
+    /* The root fades the dim; it also drives the lifecycle timing, which
+       waits for animations on the dialog element itself. */
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:duration-100 [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:duration-100 [&.hide]:[animation-fill-mode:forwards];
   }
 }
 
 @utility dialog-panel {
   @layer l1.l2 {
-    @apply fixed pointer-events-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-popover text-popover-foreground rounded-lg shadow-lg max-w-sm w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] overflow-y-auto [animation-fill-mode:forwards]!;
-    @apply [&:not(.no-animation)]:data-[state=open]:animate-in [&:not(.no-animation)]:data-[state=closed]:animate-out [&:not(.no-animation)]:data-[state=open]:fade-in-0 [&:not(.no-animation)]:data-[state=open]:zoom-in-95 [&:not(.no-animation)]:data-[state=closed]:fade-out-0 [&:not(.no-animation)]:data-[state=closed]:zoom-out-95 [&:not(.no-animation)]:duration-200;
+    /* Card spacing contract: the panel owns the vertical inset and the gap
+       between sections, the sections own the horizontal inset. Children like
+       a leading <img> can span the full width and sit flush with the top. */
+    @apply relative grid max-h-full w-full max-w-sm gap-(--dialog-spacing) overflow-y-auto rounded-xl bg-popover py-(--dialog-spacing) text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none;
+    @apply [--dialog-spacing:--spacing(6)];
+    @apply has-[>img:first-child]:pt-0 [&>img:first-child]:rounded-t-xl [&>img:last-child]:rounded-b-xl;
+
+    @apply in-[.dialog.show]:animate-in in-[.dialog.show]:fade-in-0 in-[.dialog.show]:zoom-in-95 in-[.dialog.show]:duration-100 in-[.dialog.show]:[animation-fill-mode:forwards];
+    @apply in-[.dialog.hide]:animate-out in-[.dialog.hide]:fade-out-0 in-[.dialog.hide]:zoom-out-95 in-[.dialog.hide]:duration-100 in-[.dialog.hide]:[animation-fill-mode:forwards];
   }
 }
 
 @utility dialog-content {
   @layer l1.l2 {
-    @apply p-6;
+    @apply flex flex-col gap-4 px-(--dialog-spacing);
+  }
+}
+
+@utility dialog-header {
+  @layer l1.l2 {
+    @apply flex flex-col gap-2 px-(--dialog-spacing);
+  }
+}
+
+@utility dialog-footer {
+  @layer l1.l2 {
+    @apply flex flex-col-reverse gap-2 px-(--dialog-spacing) sm:flex-row sm:justify-end;
+  }
+}
+
+@utility dialog-title {
+  @layer l1.l2 {
+    @apply text-base leading-none font-medium;
+  }
+}
+
+@utility dialog-description {
+  @layer l1.l2 {
+    @apply text-sm text-muted-foreground;
+    @apply [&>a]:underline [&>a]:underline-offset-3 [&>a:hover]:text-foreground;
   }
 }

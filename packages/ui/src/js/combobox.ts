@@ -1,308 +1,349 @@
-// Starting Point UI Combobox Module
+// Anchored, filterable option list; selection state lives in each item's
+// hidden radio (single select) or checkbox (multi select) input.
+//
+// The data-sp-toggle target is the field the user types in: an .input-group
+// (or bare <input>) for single-select autocomplete, or a .combobox-chips
+// container for multi select, which renders one chip per checked option.
 
-import { type Placement } from "@floating-ui/dom";
-import {
-  closeAnchor,
-  closeAnchorIfOutside,
-  getAnchorTrigger,
-  getOpenAnchor,
-  getTargetContent,
-  openAnchor,
-  positionFloating,
-  toggleAnchor,
-  type AnchorOptions,
-} from "./floating";
-import { isDisabled } from "./utils";
+import { define } from "./define";
+import type { SpInstance } from "./define";
+import { ensureId, findNextEnabled, isDisabled, resolveTrigger } from "./utils";
+import { Togglable } from "./mixins/togglable";
+import { ClickOutsideHide } from "./mixins/click-outside-hide";
+import { FocusOutsideHide } from "./mixins/focus-outside-hide";
+import { Escapable } from "./mixins/escapable";
+import { Popoverable } from "./mixins/popoverable";
+import { Anchorable } from "./mixins/anchorable";
 
-const TRIGGER_SELECTOR = "[data-sp-toggle='combobox']";
-const CONTENT_SELECTOR = ".combobox";
+const ITEM = ".combobox-item";
 
-function getVisibleItems(menu: HTMLElement): HTMLElement[] {
-  return [...menu.querySelectorAll<HTMLElement>(".combobox-item")].filter(
-    (item) => !item.hidden && !isDisabled(item),
-  );
+// Chips keep a reference to their option element for the remove button.
+type ChipElement = HTMLSpanElement & { _spItem?: HTMLElement };
+
+function itemLabel(item: HTMLElement): string {
+  return (item.dataset.spLabel ?? item.textContent ?? "").trim();
 }
 
-export function filter(menu: HTMLElement, query: string) {
-  const normalizedQuery = query.trim().toLowerCase();
-  const items = menu.querySelectorAll<HTMLElement>(".combobox-item");
-  let visibleCount = 0;
+export const Combobox = define({
+  name: "combobox",
+  selector: ".combobox",
+  mixins: [Togglable, ClickOutsideHide, FocusOutsideHide, Escapable, Popoverable, Anchorable],
 
-  items.forEach((item) => {
-    const text = (item.dataset.label ?? item.textContent ?? "")
-      .trim()
-      .toLowerCase();
-    const matches = !normalizedQuery || text.includes(normalizedQuery);
-    item.hidden = !matches;
-    if (matches) visibleCount++;
-  });
-
-  const emptyEl = menu.querySelector<HTMLElement>(".combobox-empty");
-  if (emptyEl) {
-    emptyEl.classList.toggle("visible", visibleCount === 0);
-  }
-}
-
-// Build a stable key from the currently-checked items so we can detect
-// whether selections changed between open and close.
-function getSelectionKey(menu: HTMLElement): string {
-  return [
-    ...menu.querySelectorAll<HTMLInputElement>(".combobox-item input:checked"),
-  ]
-    .map((input) => `${input.name}:${input.value}`)
-    .sort()
-    .join("|");
-}
-
-// Snapshot the selection state per trigger; only used by the on-close submit
-// path to decide whether selections changed since open. The on-change path
-// submits unconditionally and doesn't need a snapshot.
-const openSnapshots = new WeakMap<HTMLElement, string>();
-
-function findFormFor(trigger: HTMLElement, attr: string): HTMLFormElement | null {
-  const formId = trigger.getAttribute(attr);
-  if (formId) {
-    const el = document.getElementById(formId);
-    return el instanceof HTMLFormElement ? el : null;
-  }
-  return trigger.closest("form");
-}
-
-function submitForm(form: HTMLFormElement) {
-  if (typeof form.requestSubmit === "function") form.requestSubmit();
-  else form.submit();
-}
-
-function submitFormForTrigger(trigger: HTMLElement, attr: string) {
-  const form = findFormFor(trigger, attr);
-  if (form) submitForm(form);
-}
-
-const OPTS: AnchorOptions = {
-  contentSelector: CONTENT_SELECTOR,
-  triggerSelector: TRIGGER_SELECTOR,
-  position: async (trigger, menu) => {
-    // Match menu width to trigger so options align with the value they populate.
-    menu.style.width = `${trigger.offsetWidth}px`;
-    await positionFloating(trigger, menu, {
-      placement: (trigger.dataset.spPlacement as Placement) || "bottom-start",
-      offset: parseInt(trigger.dataset.spOffset || "4", 10),
-    });
+  props: {
+    toggle: String,
+    offset: { type: Number, default: 4 },
+    // Arrow navigation only visits items the current filter left visible.
+    item: { type: String, default: `${ITEM}:not([hidden])` },
+    matchWidth: { type: Boolean, default: true },
+    // Highlight the first match while the user types (Base UI parity: opt-in).
+    autoHighlight: { type: Boolean, default: false },
   },
-  onAfterOpen: (trigger, menu) => {
-    if (trigger.hasAttribute("data-sp-submit-on-close")) {
-      openSnapshots.set(trigger, getSelectionKey(menu));
-    }
-  },
-  onAfterClose: (trigger, menu) => {
-    filter(menu, "");
-    const input = menu.querySelector<HTMLInputElement>(".combobox-input");
-    if (input) input.value = "";
 
-    // If the trigger opts in and the selection changed since open, submit
-    // the associated form (explicit id via attribute value, or the
-    // enclosing form when value is empty).
-    if (trigger.hasAttribute("data-sp-submit-on-close")) {
-      const before = openSnapshots.get(trigger);
-      openSnapshots.delete(trigger);
-      const after = getSelectionKey(menu);
-      if (before !== undefined && before !== after) {
-        submitFormForTrigger(trigger, "data-sp-submit-on-close");
+  init(this: SpInstance) {
+    const trigger = resolveTrigger(this);
+    const chips = trigger?.classList.contains("combobox-chips") ? trigger : null;
+    const anchorInput = trigger?.matches("input")
+      ? (trigger as HTMLInputElement)
+      : (trigger?.querySelector<HTMLInputElement>("input:not([type='hidden'])") ?? null);
+    const list = this.el.querySelector<HTMLElement>(".combobox-list");
+    this._chips = chips;
+    this._anchorInput = anchorInput;
+    this._clearBtn = trigger?.querySelector<HTMLButtonElement>(".combobox-clear") ?? null;
+
+    // WAI-ARIA combobox semantics on the field input.
+    if (list && !list.hasAttribute("role")) list.setAttribute("role", "listbox");
+    if (anchorInput) {
+      anchorInput.setAttribute("role", "combobox");
+      anchorInput.setAttribute("aria-autocomplete", "list");
+      anchorInput.setAttribute("autocomplete", "off");
+      anchorInput.setAttribute("aria-expanded", "false");
+      if (list) anchorInput.setAttribute("aria-controls", ensureId(list));
+      for (const type of ["sp-beforeshow", "sp-beforehide"]) {
+        this.on(this.el, type, (e) => {
+          if (e.target === this.el) {
+            anchorInput.setAttribute("aria-expanded", String(type === "sp-beforeshow"));
+          }
+        });
       }
     }
-  },
-};
 
-export const open = (trigger: HTMLElement) => {
-  const menu = getTargetContent(trigger);
-  if (menu) openAnchor(trigger, menu, OPTS, { viaClick: true });
-};
-export const close = (menu: HTMLElement) => closeAnchor(menu, OPTS);
-export const toggle = (trigger: HTMLElement) => {
-  const menu = getTargetContent(trigger);
-  if (menu) toggleAnchor(trigger, menu, OPTS, { viaClick: true });
-};
-
-function getItemLabel(input: HTMLInputElement): string {
-  return (
-    input.closest<HTMLElement>(".combobox-item")?.textContent?.trim() ?? ""
-  );
-}
-
-function makeValueItem(text: string): HTMLSpanElement {
-  const el = document.createElement("span");
-  el.textContent = text;
-  return el;
-}
-
-function updateTriggerText(trigger: HTMLElement, menu: HTMLElement) {
-  const valueEl = trigger.querySelector<HTMLElement>(".combobox-value");
-  if (!valueEl || valueEl.hasAttribute("data-sp-static")) return;
-
-  const checked = menu.querySelectorAll<HTMLInputElement>(
-    ".combobox-item input:checked",
-  );
-  valueEl.replaceChildren(
-    ...[...checked].map((input) => makeValueItem(getItemLabel(input))),
-  );
-}
-
-export function select(trigger: HTMLElement, menu: HTMLElement, item: HTMLElement) {
-  const input = item.querySelector<HTMLInputElement>("input");
-  if (!input) return;
-
-  const isMultiple = input.type === "checkbox";
-
-  // Radio behavior: clear sibling items' selected state before flipping this one on.
-  if (!isMultiple) {
-    menu.querySelectorAll<HTMLElement>(".combobox-item").forEach((el) => {
-      el.setAttribute("aria-selected", "false");
+    this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
+      if (!item.hasAttribute("role")) item.setAttribute("role", "option");
+      // Options are highlighted via aria-activedescendant, never focused; the
+      // state-holding input stays out of the tab order too.
+      item.tabIndex = -1;
+      const input = item.querySelector<HTMLInputElement>("input");
+      if (input) {
+        input.tabIndex = -1;
+        // aria-selected follows the input's checked state; authors only set checked.
+        item.setAttribute("aria-selected", String(input.checked));
+      }
     });
-  }
 
-  input.checked = isMultiple ? !input.checked : true;
-  input.dispatchEvent(new Event("change", { bubbles: true }));
-  item.setAttribute("aria-selected", String(input.checked));
-  updateTriggerText(trigger, menu);
+    this.on(this.el, "click", (e) => {
+      // select() re-clicks the hidden input; skip that synthetic pass.
+      if (e.target instanceof HTMLInputElement) return;
+      const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
+      if (!item) return;
+      if (isDisabled(item)) {
+        e.preventDefault();
+        return;
+      }
+      this.select(item);
+    });
 
-  if (!isMultiple) closeAnchor(menu, OPTS);
-}
+    if (anchorInput && trigger) {
+      // Clicking anywhere on the field focuses the input and opens the list;
+      // a click never toggle-closes while the user is interacting with it.
+      this.on(trigger, "click", (e) => {
+        if (anchorInput.disabled) return;
+        const target = e.target as HTMLElement;
+        if (target.closest(".combobox-clear, .combobox-chip-remove")) return;
+        anchorInput.focus();
+        this.show({ trigger });
+      });
 
-function handleClick(e: MouseEvent) {
-  const target = e.target as HTMLElement;
+      // Typing opens and filters; show() also revives a panel that is still
+      // animating shut after a selection.
+      this.on(anchorInput, "input", () => {
+        this.show({ trigger });
+        this.filter(anchorInput.value);
+      });
 
-  const trigger = target.closest<HTMLElement>(TRIGGER_SELECTOR);
-  if (trigger) {
-    const menu = getTargetContent(trigger);
-    if (menu) {
-      e.preventDefault();
-      toggleAnchor(trigger, menu, OPTS, { viaClick: true });
-    }
-    return;
-  }
+      this.on(anchorInput, "keydown", (e) => this._anchorKeydown(e as KeyboardEvent));
 
-  const item = target.closest<HTMLElement>(".combobox-item");
-  if (item) {
-    if (isDisabled(item)) {
-      e.preventDefault();
-      return;
-    }
-    const menu = item.closest<HTMLElement>(CONTENT_SELECTOR);
-    if (menu) {
-      const associatedTrigger = getAnchorTrigger(menu);
-      if (associatedTrigger) select(associatedTrigger, menu, item);
-    }
-    return;
-  }
+      if (this._clearBtn) {
+        this.on(this._clearBtn, "click", (e) => {
+          e.stopPropagation();
+          this.clear();
+          anchorInput.focus();
+        });
+      }
 
-  closeAnchorIfOutside(target, OPTS);
-}
-
-function handleKeydown(e: KeyboardEvent) {
-  const target = e.target as HTMLElement;
-
-  const openMenu = getOpenAnchor(OPTS);
-  if (e.key === "Escape" && openMenu) {
-    e.preventDefault();
-    const trigger = getAnchorTrigger(openMenu);
-    closeAnchor(openMenu, OPTS);
-    trigger?.focus();
-    return;
-  }
-
-  if (
-    (e.key === "Enter" || e.key === " ") &&
-    target.matches(TRIGGER_SELECTOR)
-  ) {
-    e.preventDefault();
-    const menu = getTargetContent(target);
-    if (menu) toggleAnchor(target, menu, OPTS, { viaClick: true });
-    return;
-  }
-
-  const menu =
-    target.closest<HTMLElement>(CONTENT_SELECTOR) ??
-    (target.matches(TRIGGER_SELECTOR) ? getTargetContent(target) : null);
-  if (!menu?.classList.contains("open")) return;
-
-  if (
-    (e.key === "Enter" || e.key === " ") &&
-    target.matches(".combobox-item")
-  ) {
-    e.preventDefault();
-    if (!isDisabled(target)) {
-      const trigger = getAnchorTrigger(menu);
-      if (trigger) select(trigger, menu, target);
-    }
-    return;
-  }
-
-  if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) {
-    e.preventDefault();
-    const items = getVisibleItems(menu);
-    if (!items.length) return;
-
-    const currentIndex = items.indexOf(target);
-    let nextItem: HTMLElement | null = null;
-
-    switch (e.key) {
-      case "ArrowDown":
-        nextItem =
-          currentIndex < 0 ? items[0] : items[currentIndex + 1] ?? items[0];
-        break;
-      case "ArrowUp":
-        nextItem =
-          currentIndex < 0
-            ? items[items.length - 1]
-            : items[currentIndex - 1] ?? items[items.length - 1];
-        break;
-      case "Home":
-        nextItem = items[0];
-        break;
-      case "End":
-        nextItem = items[items.length - 1];
-        break;
+      // The chip remove buttons are re-rendered on every change, so the
+      // listener delegates from the container.
+      if (chips) {
+        this.on(chips, "click", (e) => {
+          const remove = (e.target as HTMLElement).closest<HTMLElement>(".combobox-chip-remove");
+          const item = remove ? (remove.closest<ChipElement>(".combobox-chip")?._spItem ?? null) : null;
+          if (item) this._uncheck(item);
+        });
+      }
     }
 
-    nextItem?.focus();
-  }
-}
+    // Opening always starts from the full list; typing narrows it down.
+    this.on(this.el, "sp-show", (e) => {
+      if (e.target === this.el) this.filter("");
+    });
 
-function handleFocusOut(e: FocusEvent) {
-  closeAnchorIfOutside(e.relatedTarget as HTMLElement | null, OPTS);
-}
+    this.on(this.el, "sp-hidden", (e) => {
+      if (e.target !== this.el) return;
+      this.filter("");
+      // The field text resettles to the actual selection (Base UI focusOut
+      // behavior); a chips input just empties.
+      if (anchorInput) anchorInput.value = chips ? "" : this._selectedLabel();
+    });
 
-function handleInput(e: Event) {
-  const input = e.target as HTMLInputElement;
-  if (!input.matches(".combobox-input")) return;
+    this._renderChips();
+    this._syncClear();
+    if (anchorInput && !chips) anchorInput.value = this._selectedLabel();
+  },
 
-  const menu = input.closest<HTMLElement>(CONTENT_SELECTOR);
-  if (menu) filter(menu, input.value);
-}
+  methods: {
+    filter(this: SpInstance, query: string): void {
+      const normalized = query.trim().toLowerCase();
+      let visibleCount = 0;
 
-function handleChange(e: Event) {
-  const input = e.target as HTMLElement | null;
-  if (!(input instanceof HTMLInputElement)) return;
-  if (!input.closest(".combobox-item")) return;
+      this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
+        const matches = !normalized || itemLabel(item).toLowerCase().includes(normalized);
+        item.hidden = !matches;
+        if (matches) visibleCount++;
+      });
 
-  const menu = input.closest<HTMLElement>(CONTENT_SELECTOR);
-  if (!menu) return;
+      // A group (label + its options) disappears when the filter empties it.
+      this.el.querySelectorAll<HTMLElement>(".combobox-group").forEach((group) => {
+        group.hidden = !group.querySelector(`${ITEM}:not([hidden])`);
+      });
 
-  const trigger = getAnchorTrigger(menu);
-  if (!trigger?.hasAttribute("data-sp-submit-on-change")) return;
+      this.el
+        .querySelector<HTMLElement>(".combobox-empty")
+        ?.classList.toggle("visible", visibleCount === 0);
 
-  submitFormForTrigger(trigger, "data-sp-submit-on-change");
-}
+      // With autoHighlight, a query pre-highlights its first match so Enter
+      // selects it right away; otherwise the user arrows down first.
+      const visible = [...this.el.querySelectorAll<HTMLElement>(this.config.item as string)];
+      const target =
+        normalized && this.config.autoHighlight
+          ? (visible.find((item) => !isDisabled(item)) ?? null)
+          : null;
+      if (target) this._setActive(target);
+      else this._clearActive();
+    },
 
-let initialized = false;
+    select(this: SpInstance, item: HTMLElement): void {
+      const input = item.querySelector<HTMLInputElement>("input");
+      if (!input) return;
 
-(function init() {
-  if (typeof document === "undefined" || initialized) return;
-  initialized = true;
+      const multiple = input.type === "checkbox";
+      // Multi select toggles; single select settles (clearing is the clear
+      // button's job) and the shared radio name unchecks the previous pick.
+      // click() keeps the change event native so every listener hears it,
+      // including React's click-based onChange.
+      if (multiple || !input.checked) input.click();
+      this._syncSelected();
+      this._renderChips();
+      this._syncClear();
 
-  document.addEventListener("click", handleClick);
-  document.addEventListener("keydown", handleKeydown);
-  document.addEventListener("focusout", handleFocusOut);
-  document.addEventListener("input", handleInput);
-  document.addEventListener("change", handleChange);
-})();
+      const anchorInput = this._anchorInput as HTMLInputElement | null;
+      if (this._chips) {
+        if (anchorInput) {
+          anchorInput.value = "";
+          anchorInput.focus();
+        }
+        this.filter("");
+      } else if (anchorInput) {
+        anchorInput.value = this._selectedLabel();
+        anchorInput.focus();
+        this.hide();
+      }
+    },
+
+    // Unchecks every option and empties the field.
+    clear(this: SpInstance): void {
+      this.el.querySelectorAll<HTMLInputElement>(`${ITEM} input:checked`).forEach((input) => {
+        // click() unchecks a checkbox natively; radios can't un-click, so
+        // they fall back to assignment plus a dispatched change.
+        if (input.type === "checkbox") input.click();
+        else {
+          input.checked = false;
+          input.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+      });
+      const anchorInput = this._anchorInput as HTMLInputElement | null;
+      if (anchorInput) anchorInput.value = "";
+      this._syncSelected();
+      this._renderChips();
+      this._syncClear();
+      this.filter("");
+    },
+
+    _anchorKeydown(this: SpInstance, e: KeyboardEvent): void {
+      const key = e.key;
+
+      if (key === "ArrowDown" || key === "ArrowUp") {
+        e.preventDefault();
+        if (!this._isMounted()) this.show({ trigger: this.trigger });
+        const items = [...this.el.querySelectorAll<HTMLElement>(this.config.item as string)];
+        const current = this._activeIndex(items);
+        const forward = key === "ArrowDown";
+        const next =
+          current < 0
+            ? (forward ? items : [...items].reverse()).find((item) => !isDisabled(item))
+            : findNextEnabled(items, current, forward ? 1 : -1);
+        if (next) this._setActive(next);
+        return;
+      }
+
+      if (key === "Enter") {
+        const item = this.el.querySelector<HTMLElement>(`${ITEM}[data-sp-highlighted]`);
+        if (!this._isMounted() || !item) return;
+        e.preventDefault();
+        if (!isDisabled(item)) this.select(item);
+        return;
+      }
+
+      // Backspace in an empty chips field removes the newest chip.
+      if (key === "Backspace" && this._chips) {
+        const input = this._anchorInput as HTMLInputElement;
+        if (input.value !== "") return;
+        const checked = this.el.querySelectorAll<HTMLInputElement>(`${ITEM} input:checked`);
+        const last = checked[checked.length - 1]?.closest<HTMLElement>(ITEM);
+        if (last) this._uncheck(last);
+      }
+    },
+
+    _uncheck(this: SpInstance, item: HTMLElement): void {
+      const input = item.querySelector<HTMLInputElement>("input");
+      if (!input) return;
+      if (input.type === "checkbox" && input.checked) input.click();
+      else {
+        input.checked = false;
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      this._syncSelected();
+      this._renderChips();
+      this._syncClear();
+      (this._anchorInput as HTMLInputElement | null)?.focus();
+    },
+
+    _syncSelected(this: SpInstance): void {
+      this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
+        const input = item.querySelector<HTMLInputElement>("input");
+        if (input) item.setAttribute("aria-selected", String(input.checked));
+      });
+    },
+
+    _selectedLabel(this: SpInstance): string {
+      const input = this.el.querySelector<HTMLInputElement>(`${ITEM} input:checked`);
+      const item = input?.closest<HTMLElement>(ITEM);
+      return item ? itemLabel(item) : "";
+    },
+
+    _checkedItems(this: SpInstance): HTMLElement[] {
+      return [...this.el.querySelectorAll<HTMLInputElement>(`${ITEM} input:checked`)]
+        .map((input) => input.closest<HTMLElement>(ITEM))
+        .filter((item): item is HTMLElement => item !== null);
+    },
+
+    // One chip per checked option, rendered before the chips input; the chip
+    // keeps a reference to its option so the remove button can uncheck it.
+    _renderChips(this: SpInstance): void {
+      const chips = this._chips as HTMLElement | null;
+      if (!chips) return;
+      chips.querySelectorAll(".combobox-chip").forEach((chip) => chip.remove());
+      const input = chips.querySelector<HTMLElement>("input");
+
+      for (const item of this._checkedItems()) {
+        const chip = document.createElement("span");
+        chip.className = "combobox-chip";
+        chip.append(itemLabel(item));
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "combobox-chip-remove";
+        remove.setAttribute("aria-label", `Remove ${itemLabel(item)}`);
+        remove.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+        (chip as ChipElement)._spItem = item;
+        chip.append(remove);
+        if (input) chips.insertBefore(chip, input);
+        else chips.append(chip);
+      }
+    },
+
+    _syncClear(this: SpInstance): void {
+      const clear = this._clearBtn as HTMLElement | null;
+      if (clear) clear.hidden = this._checkedItems().length === 0;
+    },
+
+    // Virtual highlight (cmdk-style): focus stays in the field while
+    // aria-activedescendant and [data-sp-highlighted] track the active option.
+    _activeIndex(this: SpInstance, items: HTMLElement[]): number {
+      return items.findIndex((item) => item.hasAttribute("data-sp-highlighted"));
+    },
+
+    _setActive(this: SpInstance, item: HTMLElement): void {
+      this.el.querySelector(`${ITEM}[data-sp-highlighted]`)?.removeAttribute("data-sp-highlighted");
+      item.setAttribute("data-sp-highlighted", "");
+      (this._anchorInput as HTMLElement | null)?.setAttribute(
+        "aria-activedescendant",
+        ensureId(item),
+      );
+      item.scrollIntoView({ block: "nearest" });
+    },
+
+    _clearActive(this: SpInstance): void {
+      this.el.querySelector(`${ITEM}[data-sp-highlighted]`)?.removeAttribute("data-sp-highlighted");
+      (this._anchorInput as HTMLElement | null)?.removeAttribute("aria-activedescendant");
+    },
+  },
+});

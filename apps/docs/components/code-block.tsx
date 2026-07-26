@@ -1,4 +1,5 @@
 import { CopyButton } from "@/components/copy-button";
+import { PreviewBlock } from "@/components/preview-block";
 
 interface BaseCodeBlockProps {
   children: React.ReactNode;
@@ -9,100 +10,62 @@ type CodeBlockProps = BaseCodeBlockProps &
   (
     | { header?: null }
     | { header: "label"; label: string }
-    | { header: "preview"; id: string }
+    | { header: "preview"; frameId: string }
   );
 
 export function CodeBlock(props: CodeBlockProps) {
   const { children, code, header } = props;
 
   if (header === "preview") {
-    const previewId = `preview-${props.id}`;
-    const codeId = `code-${props.id}`;
-
     return (
-      <div className="my-4 rounded-lg border">
-        <Header code={code}>
-          <div className="tab-list" role="tablist">
-            <button
-              type="button"
-              className="tab active"
-              role="tab"
-              aria-selected="true"
-              data-sp-toggle="tab"
-              data-sp-target={`#${previewId}`}
-            >
-              Preview
-            </button>
-            <button
-              type="button"
-              className="tab"
-              role="tab"
-              aria-selected="false"
-              data-sp-toggle="tab"
-              data-sp-target={`#${codeId}`}
-            >
-              Code
-            </button>
-          </div>
-        </Header>
-
-        <div
-          id={previewId}
-          className="tab-panel active p-4 sm:p-12"
-          role="tabpanel"
-        >
-          <div
-            className="flex flex-wrap items-center justify-center gap-4"
-            dangerouslySetInnerHTML={{ __html: code }}
-          />
-        </div>
-
-        <div id={codeId} className="tab-panel" role="tabpanel">
-          <Pre>{children}</Pre>
-        </div>
-      </div>
+      <PreviewBlock code={code} frameId={props.frameId}>
+        {children}
+      </PreviewBlock>
     );
   }
 
   if (header === "label") {
     return (
-      <div className="my-4 overflow-hidden rounded-lg border">
-        <Header code={code}>
-          <span className="text-sm font-medium">{props.label}</span>
-        </Header>
-        <Pre>{children}</Pre>
+      <div className="my-4">
+        <Pre
+          label={props.label}
+          labelAction={<CopyButton code={code} />}
+        >
+          {children}
+        </Pre>
       </div>
     );
   }
 
   return (
-    <div className="relative my-4 overflow-hidden rounded-lg border">
+    <div className="relative my-4">
       <Pre>{children}</Pre>
-      <CopyButton code={code} className="absolute top-2" adjustForScrollbar />
+      <CopyButton code={code} className="absolute top-2.5 z-10" adjustForScrollbar />
     </div>
   );
 }
 
-function Pre({ children }: { children: React.ReactNode }) {
-  return (
-    <pre className="overflow-auto max-h-125 bg-muted/50 p-4 text-sm rounded-b-lg">
-      {children}
-    </pre>
-  );
-}
-
-function Header({
+export function Pre({
   children,
-  code,
+  label,
+  labelAction,
 }: {
   children: React.ReactNode;
-  code: string;
+  label?: React.ReactNode;
+  labelAction?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between border-b bg-muted/50 px-4 py-2 rounded-t-lg">
-      {children}
-      <div className="-mr-2">
-        <CopyButton code={code} />
+    <div className="rounded-xl border bg-code p-1 text-sm">
+      {label && (
+        <div className="flex items-center gap-2 pt-1 pr-1 pb-1.5 pl-3 font-medium text-foreground">
+          {label}
+          {labelAction && <div className="ml-auto">{labelAction}</div>}
+        </div>
+      )}
+      <div className="relative overflow-hidden rounded-lg border bg-background">
+        <pre className="scrollbar-thin overflow-x-auto px-4 py-3.5">
+          {children}
+        </pre>
       </div>
     </div>
   );

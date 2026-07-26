@@ -1,153 +1,160 @@
 ---
 title: Breadcrumb
-description: A Tailwind CSS breadcrumb component for displaying navigation hierarchy.
+description: A breadcrumb component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show users where they are on your site, with links back to each page above.
 ---
 
-A Tailwind CSS breadcrumb component for displaying navigation hierarchy.
+The breadcrumb shows where the current page sits in the hierarchy, with links back up to each ancestor. Long paths can collapse their middle into an ellipsis or a [dropdown](/components/dropdown).
 
 ```html preview
 <nav class="breadcrumb">
-  <a href="#" class="breadcrumb-link">Home</a>
-  <span class="breadcrumb-separator" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-  </span>
-  <a href="#" class="breadcrumb-link">Components</a>
-  <span class="breadcrumb-separator" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-  </span>
-  <span class="breadcrumb-page" aria-current="page">Breadcrumb</span>
-</nav>
-```
-
----
-
-## With collapsed items
-
-Use a [dropdown](/docs/components/dropdown) to show collapsed breadcrumb items.
-
-```html preview
-<nav class="breadcrumb">
-  <a href="#" class="breadcrumb-link">Home</a>
-  <span class="breadcrumb-separator" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  <a href="#" class="breadcrumb-item">Home</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </span>
   <button
+    id="bc-demo-menu"
+    class="btn btn-ghost btn-sm btn-icon"
     type="button"
-    class="breadcrumb-collapsed"
-    data-sp-toggle="dropdown"
-    data-sp-target="#breadcrumb-collapsed-menu"
-    aria-expanded="false"
+    aria-label="Toggle menu"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-    <span class="sr-only">More</span>
+    <span class="breadcrumb-ellipsis">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    </span>
   </button>
-  <div id="breadcrumb-collapsed-menu" class="dropdown">
-    <a href="#" class="dropdown-item">Documentation</a>
-    <a href="#" class="dropdown-item">Guides</a>
-  </div>
-  <span class="breadcrumb-separator" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </span>
-  <a href="#" class="breadcrumb-link">Components</a>
-  <span class="breadcrumb-separator" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  <a href="#" class="breadcrumb-item">Components</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </span>
-  <span class="breadcrumb-page" aria-current="page">Breadcrumb</span>
+  <a href="#" class="breadcrumb-item active">Breadcrumb</a>
+</nav>
+
+<div
+  class="dropdown"
+  data-sp-toggle="#bc-demo-menu"
+  data-sp-placement="bottom-start"
+>
+  <button class="dropdown-item">Documentation</button>
+  <button class="dropdown-item">Themes</button>
+</div>
+```
+
+## Usage
+
+Add the `breadcrumb` class to a `<nav>` and put one `breadcrumb-item` link per level inside, with separators between them. Mark the current page's item with the `active` class.
+
+| Class                  | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `breadcrumb`           | Add to the `<nav>` holding the trail                      |
+| `breadcrumb-item`      | Add to each `<a>`; add `active` to the current page       |
+| `breadcrumb-separator` | Add to a `<span>` between items, holding the divider icon |
+| `breadcrumb-ellipsis`  | Add to a `<span>` standing in for collapsed items         |
+
+```html
+<nav class="breadcrumb">
+  <a href="#" class="breadcrumb-item">Home</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </span>
+  <a href="#" class="breadcrumb-item active">Components</a>
 </nav>
 ```
 
----
+## Examples
 
-## With icons
+### Basic
 
-Add icons to breadcrumb links for additional visual context.
+A trail of links ending in the current page.
 
 ```html preview
 <nav class="breadcrumb">
-  <a href="#" class="breadcrumb-link">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-    Home
-  </a>
-  <span class="breadcrumb-separator" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  <a href="#" class="breadcrumb-item">Home</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </span>
-  <a href="#" class="breadcrumb-link">Settings</a>
-  <span class="breadcrumb-separator" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  <a href="#" class="breadcrumb-item">Components</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </span>
-  <span class="breadcrumb-page" aria-current="page">Profile</span>
+  <a href="#" class="breadcrumb-item active">Breadcrumb</a>
 </nav>
 ```
 
----
+### Custom separator
 
-## Custom separator
-
-Use any separator by replacing the icon with text or another character.
+Put any icon inside the separators.
 
 ```html preview
 <nav class="breadcrumb">
-  <a href="#" class="breadcrumb-link">Home</a>
-  <span class="breadcrumb-separator" aria-hidden="true">/</span>
-  <a href="#" class="breadcrumb-link">Components</a>
-  <span class="breadcrumb-separator" aria-hidden="true">/</span>
-  <span class="breadcrumb-page" aria-current="page">Breadcrumb</span>
+  <a href="#" class="breadcrumb-item">Home</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.1" cy="12.1" r="1"/></svg>
+  </span>
+  <a href="#" class="breadcrumb-item">Components</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.1" cy="12.1" r="1"/></svg>
+  </span>
+  <a href="#" class="breadcrumb-item active">Breadcrumb</a>
 </nav>
 ```
 
----
+### Dropdown
 
-## How it works
+An item can open a [dropdown](/components/dropdown) with sibling pages.
 
-The breadcrumb component is a CSS-only component for displaying navigation hierarchy.
-
-### Structure
-
-A breadcrumb is a nav element containing links and separators:
-
-```html
+```html preview
 <nav class="breadcrumb">
-  <a href="#" class="breadcrumb-link">Home</a>
-  <span class="breadcrumb-separator" aria-hidden="true">/</span>
-  <span class="breadcrumb-page">Current Page</span>
+  <a href="#" class="breadcrumb-item">Home</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.1" cy="12.1" r="1"/></svg>
+  </span>
+  <button
+    id="bc-dropdown-trigger"
+    class="flex items-center gap-1"
+    type="button"
+  >
+    Components
+    <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12.1" cy="12.1" r="1"/></svg>
+  </span>
+  <a href="#" class="breadcrumb-item active">Breadcrumb</a>
 </nav>
+
+<div
+  class="dropdown"
+  data-sp-toggle="#bc-dropdown-trigger"
+  data-sp-placement="bottom-start"
+>
+  <button class="dropdown-item">Documentation</button>
+  <button class="dropdown-item">Themes</button>
+</div>
 ```
 
-### Accessibility
+### Collapsed
 
-For proper screen reader support, add these attributes:
+Stand in for collapsed middle items with a `breadcrumb-ellipsis`.
 
-| Attribute      | Description                                                   |
-| -------------- | ------------------------------------------------------------- |
-| `aria-hidden`  | Add to separators to hide them from screen readers            |
-| `aria-current` | Add to the current page to indicate it's the current location |
-
-Separators are purely decorative - screen readers don't need to announce them.
-
-```html
+```html preview
 <nav class="breadcrumb">
-  <a href="#" class="breadcrumb-link">Home</a>
-  <span class="breadcrumb-separator" aria-hidden="true">/</span>
-  <span class="breadcrumb-page" aria-current="page">Current Page</span>
-</nav>
-```
-
-### Class reference
-
-All available classes for the breadcrumb component.
-
-| Class                  | Description                                           |
-| ---------------------- | ----------------------------------------------------- |
-| `breadcrumb`           | Add to `<nav>` element as the wrapper                 |
-| `breadcrumb-link`      | Add to `<a>` element for clickable links              |
-| `breadcrumb-page`      | Add to `<span>` element for the current page          |
-| `breadcrumb-separator` | Add to `<span>` element for separators between items  |
-| `breadcrumb-collapsed` | Add to `<button>` element for collapsed items trigger |
-
-```html
-<nav class="breadcrumb">
-  <a href="#" class="breadcrumb-link">Link</a>
-  <span class="breadcrumb-separator" aria-hidden="true">/</span>
-  <span class="breadcrumb-page">Page</span>
+  <a href="#" class="breadcrumb-item">Home</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </span>
+  <span class="breadcrumb-ellipsis">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    <span class="sr-only">More</span>
+  </span>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </span>
+  <a href="#" class="breadcrumb-item">Components</a>
+  <span class="breadcrumb-separator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </span>
+  <a href="#" class="breadcrumb-item active">Breadcrumb</a>
 </nav>
 ```

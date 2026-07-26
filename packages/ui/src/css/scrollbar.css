@@ -1,0 +1,46 @@
+@utility scrollbar {
+  @layer l1.l2 {
+    /* Component-local defaults; override per instance with [--scrollbar-*:...]. */
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: var(--border);
+    --scrollbar-width: 0.625rem;
+    --scrollbar-radius: 9999px;
+
+    scrollbar-width: auto;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+
+    &::-webkit-scrollbar {
+      width: var(--scrollbar-width);
+      height: var(--scrollbar-width);
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: var(--scrollbar-radius);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+    }
+    &::-webkit-scrollbar-corner {
+      background: var(--scrollbar-track);
+    }
+  }
+}
+
+@utility scrollbar-sm {
+  @layer l1 {
+    --scrollbar-width: 0.375rem;
+    scrollbar-width: thin;
+  }
+}
+
+@utility scrollbar-none {
+  @layer l1.l2 {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

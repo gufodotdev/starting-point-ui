@@ -1,60 +1,141 @@
-// Starting Point UI - JavaScript
+// Starting Point UI — JavaScript entry.
 
-import * as accordion from "./accordion";
-import * as collapsible from "./collapsible";
-import * as combobox from "./combobox";
-import * as dialog from "./dialog";
-import * as dropdown from "./dropdown";
-import * as popover from "./popover";
-import * as resizable from "./resizable";
-import * as sidebar from "./sidebar";
-import "./checkbox";
-import "./slider";
-import * as tabs from "./tabs";
-import { toast } from "./toast";
-import "./tooltip";
+import { getInstance, start } from "./observer";
+import type { ComponentFactory, SpInstance } from "./define";
+import { Dialog } from "./dialog";
+import { Sheet } from "./sheet";
+import { Popover } from "./popover";
+import { Tooltip } from "./tooltip";
+import { Dropdown } from "./dropdown";
+import { Combobox } from "./combobox";
+import { Tabs } from "./tabs";
+import { Collapsible } from "./collapsible";
+import { Accordion } from "./accordion";
+
+import { toast, ToastTrigger } from "./toast";
+import { Slider, SliderRange } from "./slider";
+import { Avatar } from "./avatar";
+import { Breadcrumb } from "./breadcrumb";
+import { Pagination } from "./pagination";
+import { Sidebar } from "./sidebar";
+
+const components: ComponentFactory[] = [
+  Dialog,
+  Sheet,
+  Popover,
+  Tooltip,
+  Dropdown,
+  Combobox,
+  Tabs,
+  Collapsible,
+  Accordion,
+  ToastTrigger,
+  Avatar,
+  Breadcrumb,
+  Slider,
+  SliderRange,
+  Pagination,
+  Sidebar,
+];
+
+const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
+const sheet = (el: HTMLElement): SpInstance | null => getInstance(el, Sheet);
+const popover = (el: HTMLElement): SpInstance | null => getInstance(el, Popover);
+const tooltip = (el: HTMLElement): SpInstance | null => getInstance(el, Tooltip);
+const dropdown = (el: HTMLElement): SpInstance | null => getInstance(el, Dropdown);
+const combobox = (el: HTMLElement): SpInstance | null => getInstance(el, Combobox);
+const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
+const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
+const accordion = (el: HTMLElement): SpInstance | null => getInstance(el, Accordion);
+const slider = (el: HTMLElement): SpInstance | null => getInstance(el, Slider);
+const sliderRange = (el: HTMLElement): SpInstance | null => getInstance(el, SliderRange);
+const avatar = (el: HTMLElement): SpInstance | null => getInstance(el, Avatar);
+const breadcrumb = (el: HTMLElement): SpInstance | null => getInstance(el, Breadcrumb);
+const pagination = (el: HTMLElement): SpInstance | null => getInstance(el, Pagination);
+const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar);
 
 export {
-  accordion,
-  collapsible,
-  combobox,
+  Avatar,
+  Breadcrumb,
+  Dialog,
+  Sheet,
+  Popover,
+  Tooltip,
+  Dropdown,
+  Combobox,
+  Tabs,
+  Collapsible,
+  Accordion,
+  Slider,
+  SliderRange,
+  Sidebar,
   dialog,
-  dropdown,
+  sheet,
   popover,
-  resizable,
-  sidebar,
+  tooltip,
+  dropdown,
+  combobox,
   tabs,
+  collapsible,
+  accordion,
+  slider,
+  sliderRange,
+  avatar,
+  breadcrumb,
+  pagination,
+  sidebar,
   toast,
+  start,
 };
+export type { SpInstance };
 
 declare global {
   interface Window {
     sp: {
-      accordion: typeof accordion;
-      collapsible: typeof collapsible;
-      combobox: typeof combobox;
       dialog: typeof dialog;
-      dropdown: typeof dropdown;
+      sheet: typeof sheet;
       popover: typeof popover;
-      resizable: typeof resizable;
-      sidebar: typeof sidebar;
+      tooltip: typeof tooltip;
+      dropdown: typeof dropdown;
+      combobox: typeof combobox;
       tabs: typeof tabs;
+      collapsible: typeof collapsible;
+      accordion: typeof accordion;
+      slider: typeof slider;
+      sliderRange: typeof sliderRange;
+      avatar: typeof avatar;
+      breadcrumb: typeof breadcrumb;
+      pagination: typeof pagination;
+      sidebar: typeof sidebar;
       toast: typeof toast;
     };
   }
 }
 
-if (typeof window !== "undefined") {
+if (typeof document !== "undefined") {
   window.sp = {
-    accordion,
-    collapsible,
-    combobox,
     dialog,
-    dropdown,
+    sheet,
     popover,
-    resizable,
-    sidebar,
+    tooltip,
+    dropdown,
+    combobox,
     tabs,
+    collapsible,
+    accordion,
+    slider,
+  sliderRange,
+    avatar,
+    breadcrumb,
+    pagination,
+    sidebar,
     toast,
   };
+
+  const run = () => start(components);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run, { once: true });
+  } else {
+    run();
+  }
 }

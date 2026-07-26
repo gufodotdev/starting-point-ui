@@ -2,14 +2,15 @@
 
 @utility radio {
   @layer l1.l2 {
-    @apply border-input-border bg-input text-primary size-4 shrink-0 rounded-full border shadow-input outline-none appearance-none cursor-pointer;
+    @apply aspect-square size-4 shrink-0 rounded-full border border-input text-primary outline-none appearance-none cursor-pointer;
     @apply transition-[color,box-shadow];
     @apply disabled:cursor-not-allowed disabled:opacity-50;
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
-    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+    @apply aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:checked:border-primary;
+    @apply dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
 
     &:checked {
-      @apply bg-primary border-primary;
+      @apply bg-primary border-primary dark:bg-primary;
       background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4' fill='white'/%3e%3c/svg%3e");
       background-size: 100% 100%;
       background-position: center;

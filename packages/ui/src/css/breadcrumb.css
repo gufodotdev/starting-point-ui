@@ -1,23 +1,18 @@
-/* Starting Point UI Breadcrumb Styles */
-
 @utility breadcrumb {
   @layer l1.l2 {
-    @apply text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5;
+    @apply flex flex-wrap items-center gap-1.5 text-sm break-words text-muted-foreground sm:gap-2.5;
   }
 }
 
-@utility breadcrumb-link {
+@utility breadcrumb-item {
   @layer l1.l2 {
-    @apply inline-flex items-center gap-1.5 transition-colors;
-    @apply hover:text-foreground;
-    @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
-  }
-}
+    @apply inline-flex items-center gap-1.5 transition-colors hover:text-foreground;
 
-@utility breadcrumb-page {
-  @layer l1.l2 {
-    @apply inline-flex items-center gap-1.5 text-foreground;
-    @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
+    /* The authored .active marks the current page; the JS mirrors it onto
+       aria-current="page". */
+    &.active {
+      @apply font-normal text-foreground;
+    }
   }
 }
 
@@ -27,9 +22,8 @@
   }
 }
 
-@utility breadcrumb-collapsed {
+@utility breadcrumb-ellipsis {
   @layer l1.l2 {
-    @apply flex size-9 items-center justify-center;
-    @apply [&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0;
+    @apply flex size-5 items-center justify-center [&>svg]:size-4;
   }
 }

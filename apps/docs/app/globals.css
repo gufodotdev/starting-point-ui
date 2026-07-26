@@ -5,14 +5,28 @@
 
 @theme inline {
   --breakpoint-xxs: 400px;
+  --color-code: var(--code);
+  --breakpoint-xs: 540px;
+}
+
+@utility container-wrapper {
+  @apply mx-auto w-full;
+}
+
+@utility container {
+  @apply mx-auto max-w-350 px-4 lg:px-8;
 }
 
 :root {
-  --navbar-height: 4rem;
-  --sidebar-width: 14rem;
-  --toc-width: 14rem;
+  --navbar-height: 3.5rem;
   --font-sans: var(--font-inter), sans-serif;
-  --font-heading: var(--font-sans);
+  --code: oklch(0.98 0 0);
+  --code-number: oklch(0.56 0 0);
+}
+
+.dark {
+  --code: oklch(0.2 0 0);
+  --code-number: oklch(0.72 0 0);
 }
 
 html:has([data-no-scrollbar-gutter]) {
@@ -48,25 +62,71 @@ html:has([data-no-scrollbar-gutter]) {
   border-radius: 6px;
 }
 
-/* Table of Contents */
+/* Like scrollbar-thin, but the track (light) and thumb (darker, muted) only
+   appear while the area is hovered. The doubled class raises specificity so it
+   overrides the always-on scrollbar baked into .sidebar-content. */
+.scrollbar-hover.scrollbar-hover {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scrollbar-hover.scrollbar-hover:hover,
+.scrollbar-hover.scrollbar-hover:focus-within {
+  scrollbar-color: color-mix(in oklab, var(--muted-foreground) 30%, transparent)
+    var(--muted);
+}
+
+.scrollbar-hover.scrollbar-hover::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-hover.scrollbar-hover::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-hover.scrollbar-hover:hover::-webkit-scrollbar-track,
+.scrollbar-hover.scrollbar-hover:focus-within::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+.scrollbar-hover.scrollbar-hover::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.scrollbar-hover.scrollbar-hover:hover::-webkit-scrollbar-thumb,
+.scrollbar-hover.scrollbar-hover:focus-within::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
+}
+
 .toc {
   @apply overflow-hidden;
 }
 
 .toc-list {
-  @apply flex flex-col gap-2 text-muted-foreground border-l border-dashed;
+  @apply flex flex-col gap-2;
 }
 
 .toc-list-item {
-  @apply leading-normal min-w-0;
+  @apply flex min-w-0 flex-col gap-2;
 }
 
 .toc-link {
-  @apply -ml-0.5 pl-3 border-l-2 border-transparent hover:text-foreground transition-colors block truncate text-[0.8rem];
+  @apply block truncate text-[0.8rem] text-muted-foreground no-underline transition-colors;
+  @apply hover:text-foreground;
 }
 
-.is-active-link {
-  @apply text-foreground font-medium border-foreground;
+.toc-link.node-name--H3 {
+  @apply pl-4;
+}
+
+.toc-link.node-name--H4 {
+  @apply pl-6;
+}
+
+.toc-link.is-active-link {
+  @apply font-medium text-foreground;
 }
 
 /* Syntax highlighting - shiki dual theme */
@@ -84,4 +144,52 @@ code[data-theme] span {
 
 pre {
   @apply text-sm/6;
+}
+
+/* Zoom narrow preview frames out a little so examples keep breathing room on
+   small screens. The media query reads the frame's own viewport. */
+@media (max-width: 480px) {
+  [data-frame-zoom] {
+    zoom: 0.8;
+  }
+}
+
+/* Lock page scroll while the mobile nav is open */
+body:has(#mobile-nav:popover-open) {
+  @apply overflow-hidden;
+}
+
+/* Unsplash editor: orange-accent skin per the photo editor style spec.
+   Scoped token overrides recolor every primary-consuming component inside
+   the dialog; the slider rules align track and thumb metrics. */
+.sp-photo-editor {
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+  --ring: #f97316;
+}
+
+.sp-photo-editor .slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--border);
+}
+.sp-photo-editor .slider::-moz-range-track {
+  height: 4px;
+  background: var(--border);
+}
+.sp-photo-editor .slider::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: calc((4px - 14px) / 2);
+  border-color: #d4d4d4;
+}
+.sp-photo-editor .slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-color: #d4d4d4;
+}
+.sp-photo-editor .slider:focus-visible::-webkit-slider-thumb {
+  border-color: var(--primary);
+}
+.sp-photo-editor .slider:focus-visible::-moz-range-thumb {
+  border-color: var(--primary);
 }

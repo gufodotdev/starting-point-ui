@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import { Search, CornerDownLeft } from "lucide-react";
 import { searchDocs, type SearchResult } from "@/lib/search";
 
-export function SearchDialog() {
+export function SearchDialog({
+  variant = "navbar",
+}: {
+  variant?: "navbar" | "sidebar";
+}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -16,18 +20,27 @@ export function SearchDialog() {
 
   const openDialog = useCallback(() => {
     if (dialogRef.current) {
-      window.sp?.dialog.open(dialogRef.current);
+      window.sp?.dialog(dialogRef.current)?.show();
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, []);
 
   const closeDialog = useCallback(() => {
-    if (dialogRef.current) {
-      window.sp?.dialog.close(dialogRef.current);
+    window.sp?.dialog(dialogRef.current!)?.hide();
+  }, []);
+
+  // Reset search state whenever the dialog finishes closing, however it was
+  // dismissed (Escape, backdrop, or a result navigation).
+  useEffect(() => {
+    const el = dialogRef.current;
+    if (!el) return;
+    const reset = () => {
       setQuery("");
       setResults([]);
       setSelectedIndex(0);
-    }
+    };
+    el.addEventListener("sp-hidden", reset);
+    return () => el.removeEventListener("sp-hidden", reset);
   }, []);
 
   useEffect(() => {
@@ -75,38 +88,43 @@ export function SearchDialog() {
 
   function navigateToResult(result: SearchResult) {
     closeDialog();
-    router.push(`/docs/${result.slug}`);
+    router.push(`/${result.slug}`);
   }
 
   return (
     <>
-      {/* Mobile: icon button */}
-      <button
-        type="button"
-        className="btn btn-ghost btn-icon-sm md:hidden"
-        aria-label="Search documentation"
-        onClick={openDialog}
-      >
-        <Search className="size-4" />
-      </button>
+      {variant === "sidebar" ? (
+        /* Sidebar: styled like a menu button so its icon lines up with the nav
+           items, but with a border/background so it reads as a search input. */
+        <button
+          type="button"
+          className="sidebar-menu-button border bg-background text-muted-foreground shadow-none hover:bg-background dark:bg-card dark:hover:bg-card"
+          onClick={openDialog}
+        >
+          <Search className="opacity-50" />
+          <span>Search the docs...</span>
+          <kbd className="pointer-events-none ml-auto inline-flex h-5 items-center justify-center rounded-sm bg-muted px-1 font-sans text-xs font-medium select-none">
+            ⌘K
+          </kbd>
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="btn btn-ghost btn-sm btn-icon"
+          aria-label="Search documentation"
+          onClick={openDialog}
+        >
+          <Search className="size-4" />
+        </button>
+      )}
 
-      {/* Desktop: input-style button */}
-      <button
-        type="button"
-        className="hidden md:inline-flex items-center gap-2 rounded-md border bg-background hover:bg-muted/50 dark:bg-card dark:hover:bg-muted/50 px-3 py-1.5 text-sm text-muted-foreground shadow-none h-8 w-48 lg:w-56 xl:w-64 justify-start relative"
-        onClick={openDialog}
+      <dialog
+        ref={dialogRef}
+        id="search-dialog"
+        data-sp-dialog
+        className="dialog"
       >
-        <Search className="size-4" />
-        <span className="hidden lg:inline-flex">Search documentation...</span>
-        <span className="inline-flex lg:hidden">Search...</span>
-        <kbd className="absolute right-1.5 top-1.5 pointer-events-none inline-flex h-5 items-center justify-center gap-1 rounded-sm bg-muted px-1 font-sans text-xs font-medium text-muted-foreground select-none">
-          ⌘K
-        </kbd>
-      </button>
-
-      <dialog ref={dialogRef} id="search-dialog" className="dialog">
-        <div className="dialog-backdrop" onClick={closeDialog}></div>
-        <div className="dialog-panel w-[calc(100%-2rem)] max-w-lg rounded-xl border-none bg-card p-2 pb-11 shadow-2xl ring-4 ring-border/80 dark:bg-card">
+        <div className="dialog-panel max-w-lg gap-0 bg-card p-2 pb-11 shadow-2xl ring-4 ring-border/80 dark:bg-card">
           <div className="relative">
             <div className="flex h-9 items-center gap-2 rounded-md border bg-muted/50 px-3">
               <Search

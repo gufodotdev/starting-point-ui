@@ -1,240 +1,278 @@
 ---
 title: Avatar
-description: A Tailwind CSS avatar component for displaying user profile images.
+description: An avatar component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a user's picture in profiles, comments, and menus, alone or stacked in groups.
 ---
 
-A Tailwind CSS avatar component for displaying user profile images.
+The avatar shows a user's image in a circle, falling back to initials when the image is missing or fails to load. Avatars stack into groups with an optional overflow count, and a badge can mark status.
 
 ```html preview
-<img
-  class="avatar"
-  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-  alt="Sarah Johnson"
-/>
-```
-
-Avatars work well with labels for user identification.
-
-```html preview
-<div class="flex items-center gap-3">
+<span class="avatar">
   <img
-    class="avatar"
-    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-    alt="Sarah Johnson"
+    class="avatar-image"
+    src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+    alt="Leila Navarro"
   />
-  <div class="text-sm">
-    <p class="font-semibold text-foreground">Sarah Johnson</p>
-    <p class="text-muted-foreground">Product Designer</p>
-  </div>
-</div>
-```
+  <span class="avatar-fallback">LN</span>
+</span>
 
----
-
-## With fallback
-
-When no image is available, display initials or an icon as a fallback.
-
-```html preview
-<span class="avatar-fallback">JD</span>
-<span class="avatar-fallback"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-```
-
----
-
-## Sizes
-
-Avatars come in multiple sizes.
-
-```html preview
-<img
-  class="avatar avatar-sm"
-  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-  alt="Sarah Johnson"
-/>
-<img
-  class="avatar"
-  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-  alt="Sarah Johnson"
-/>
-<img
-  class="avatar avatar-lg"
-  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-  alt="Sarah Johnson"
-/>
-```
-
-Fallbacks also scale with the size.
-
-```html preview
-<span class="avatar-fallback avatar-sm">JD</span>
-<span class="avatar-fallback">JD</span>
-<span class="avatar-fallback avatar-lg">JD</span>
-```
-
----
-
-## Avatar group
-
-Display multiple avatars in a stacked group.
-
-```html preview
-<div class="avatar-group">
+<span class="avatar">
   <img
-    class="avatar"
-    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-    alt="Sarah Johnson"
+    class="avatar-image"
+    src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+    alt="Theo Marchetti"
   />
-  <img
-    class="avatar"
-    src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
-    alt="Michael Chen"
-  />
-  <img
-    class="avatar"
-    src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
-    alt="Emma Wilson"
-  />
-  <img
-    class="avatar"
-    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-    alt="David Park"
-  />
-</div>
-```
+  <span class="avatar-fallback">TM</span>
+  <span class="avatar-badge bg-green-600 dark:bg-green-800"></span>
+</span>
 
-Avatar groups work with different sizes.
-
-```html preview
-<div class="avatar-group">
-  <img
-    class="avatar avatar-lg"
-    src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-    alt="Sarah Johnson"
-  />
-  <img
-    class="avatar avatar-lg"
-    src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
-    alt="Michael Chen"
-  />
-  <img
-    class="avatar avatar-lg"
-    src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
-    alt="Emma Wilson"
-  />
-  <span class="avatar-fallback avatar-lg">+5</span>
-</div>
-```
-
-Avatar groups work well with ratings and labels.
-
-```html preview
-<div class="flex items-center gap-4">
-  <div class="avatar-group">
+<span class="avatar-group">
+  <span class="avatar">
     <img
-      class="avatar"
-      src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-      alt=""
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
     />
+    <span class="avatar-fallback">LN</span>
+  </span>
+  <span class="avatar">
     <img
-      class="avatar"
-      src="https://cdn.gufo.dev/stockphotos/7bd8889a.webp"
-      alt=""
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Theo Marchetti"
     />
+    <span class="avatar-fallback">TM</span>
+  </span>
+  <span class="avatar">
     <img
-      class="avatar"
-      src="https://cdn.gufo.dev/stockphotos/a8a338c1.webp"
-      alt=""
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Camille Laurent"
     />
-    <img
-      class="avatar"
-      src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-      alt=""
-    />
-  </div>
-  <div class="flex flex-col gap-0.5 text-sm">
-    <div class="flex items-center gap-2">
-      <div class="flex gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-primary"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-      </div>
-      <span class="font-semibold text-foreground">5.0</span>
-    </div>
-    <p class="text-muted-foreground">From 200+ reviews</p>
-  </div>
-</div>
+    <span class="avatar-fallback">CL</span>
+  </span>
+  <span class="avatar-group-count">+3</span>
+</span>
 ```
 
----
+## Usage
 
-## Customization
+Add the `avatar` class to a wrapper holding the image and the fallback initials. The image wins while it works; when it is missing or fails to load, the fallback shows instead. Give the `<img>` a meaningful `alt`, like the person's name.
 
-Combine avatar classes with Tailwind utilities for custom styling.
-
-```html preview
-<img
-  class="avatar rounded-md"
-  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-  alt="Sarah Johnson"
-/>
-<img
-  class="avatar size-16 rounded-lg"
-  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-  alt="Sarah Johnson"
-/>
-<img
-  class="avatar ring-2 ring-primary ring-offset-2 ring-offset-background"
-  src="https://cdn.gufo.dev/stockphotos/1c7a7245.webp"
-  alt="Sarah Johnson"
-/>
-```
-
----
-
-## How it works
-
-The avatar component is a CSS-only component that styles images and fallback content. It includes size variants and an avatar group for displaying multiple avatars in a stacked layout.
-
-### Structure
-
-An avatar can be either an image or a fallback element:
+| Class                   | Description                                                        |
+| ----------------------- | ------------------------------------------------------------------ |
+| `avatar`                | Add to the wrapper `<span>`                                        |
+| `avatar-sm` `avatar-lg` | Add to `avatar` to change the size                                 |
+| `avatar-image`          | Add to the `<img>` inside                                          |
+| `avatar-fallback`       | Add to a `<span>` with initials, shown when the image can't be     |
+| `avatar-badge`          | Add to a `<span>` inside for a status dot, optionally with an icon |
+| `avatar-group`          | Add to a wrapper stacking several avatars                          |
+| `avatar-group-count`    | Add to a `<span>` in a group showing the overflow count            |
 
 ```html
-<!-- Image avatar -->
-<img class="avatar" src="..." alt="User" />
-
-<!-- Fallback avatar -->
-<span class="avatar-fallback">JD</span>
+<span class="avatar">
+  <img class="avatar-image" src="/portrait.webp" alt="Leila Navarro" />
+  <span class="avatar-fallback">LN</span>
+</span>
 ```
 
-For groups of avatars, wrap them in an `.avatar-group` container:
+## Examples
 
-```html
-<div class="avatar-group">
-  <img class="avatar" src="..." alt="User 1" />
-  <img class="avatar" src="..." alt="User 2" />
-  <span class="avatar-fallback">+3</span>
+### Basic
+
+An image with fallback initials behind it.
+
+```html preview
+<span class="avatar">
+  <img
+    class="avatar-image"
+    src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+    alt="Leila Navarro"
+  />
+  <span class="avatar-fallback">LN</span>
+</span>
+```
+
+### Size
+
+Add `avatar-sm` or `avatar-lg` to change the size.
+
+```html preview
+<div class="flex flex-wrap items-center gap-2">
+  <span class="avatar avatar-sm">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+  <span class="avatar avatar-lg">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
 </div>
 ```
 
-### Class reference
+### Fallback
 
-All available classes for the avatar component.
+When the image is missing or fails to load, the initials take over.
 
-| Class             | Description                                                                       |
-| ----------------- | --------------------------------------------------------------------------------- |
-| `avatar`          | Add to `<img>` element to apply base avatar styles                                |
-| `avatar-fallback` | Add to `<span>` element to display initials or an icon when no image is available |
-| `avatar-sm`       | Add to `.avatar` or `.avatar-fallback` for small size                             |
-| `avatar-base`     | Add to `.avatar` or `.avatar-fallback` for base size (default)                    |
-| `avatar-lg`       | Add to `.avatar` or `.avatar-fallback` for large size                             |
-| `avatar-group`    | Add to container element to stack avatars with overlapping edges                  |
+```html preview
+<span class="avatar">
+  <img class="avatar-image" src="/broken-link.webp" alt="Leila Navarro" />
+  <span class="avatar-fallback">LN</span>
+</span>
 
-```html
-<img class="avatar avatar-lg" src="..." alt="User" />
-<span class="avatar-fallback avatar-sm">AB</span>
-<div class="avatar-group">...</div>
+<span class="avatar">
+  <span class="avatar-fallback">CL</span>
+</span>
+```
+
+### Badge
+
+Mark status with an `avatar-badge`; color it with utilities.
+
+```html preview
+<span class="avatar">
+  <img
+    class="avatar-image"
+    src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+    alt="Leila Navarro"
+  />
+  <span class="avatar-fallback">LN</span>
+  <span class="avatar-badge bg-green-600 dark:bg-green-800"></span>
+</span>
+```
+
+### Badge with icon
+
+The badge fits a small icon at the default and large sizes.
+
+```html preview
+<span class="avatar">
+  <img
+    class="avatar-image"
+    src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+    alt="Theo Marchetti"
+  />
+  <span class="avatar-fallback">TM</span>
+  <span class="avatar-badge">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </span>
+</span>
+```
+
+### Group
+
+Avatars stack into a group with a ring separating them.
+
+```html preview
+<span class="avatar-group">
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Theo Marchetti"
+    />
+    <span class="avatar-fallback">TM</span>
+  </span>
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Camille Laurent"
+    />
+    <span class="avatar-fallback">CL</span>
+  </span>
+</span>
+```
+
+### Group count
+
+End the stack with an overflow count.
+
+```html preview
+<span class="avatar-group">
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Theo Marchetti"
+    />
+    <span class="avatar-fallback">TM</span>
+  </span>
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Camille Laurent"
+    />
+    <span class="avatar-fallback">CL</span>
+  </span>
+  <span class="avatar-group-count">+3</span>
+</span>
+```
+
+### Group count with icon
+
+The count slot fits an icon too.
+
+```html preview
+<span class="avatar-group">
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Theo Marchetti"
+    />
+    <span class="avatar-fallback">TM</span>
+  </span>
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Camille Laurent"
+    />
+    <span class="avatar-fallback">CL</span>
+  </span>
+  <span class="avatar-group-count">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </span>
+</span>
 ```

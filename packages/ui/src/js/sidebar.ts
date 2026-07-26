@@ -1,160 +1,180 @@
-// Starting Point UI Sidebar Module
+// App-shell panel: a backdrop drawer below the sidebar breakpoint, a
+// collapsible in-flow column above it.
 
-import { waitForAnimations } from "./utils";
+import { define } from "./define";
+import type { OpenOptions, SpInstance } from "./define";
+import { getInstance } from "./observer";
+import { announceCurrent, ensureId } from "./utils";
+import { Tooltip } from "./tooltip";
+import { Togglable } from "./mixins/togglable";
+import { ClickToShow } from "./mixins/click-to-show";
+import { ClickOutsideHide } from "./mixins/click-outside-hide";
+import { Escapable } from "./mixins/escapable";
 
-function getBreakpoint(): number {
-  const value = getComputedStyle(document.documentElement).getPropertyValue(
-    "--breakpoint-sidebar",
-  );
-  return parseInt(value, 10) || 1024;
-}
+export const Sidebar = define({
+  name: "sidebar",
+  selector: ".sidebar",
+  mixins: [Togglable, ClickToShow, ClickOutsideHide, Escapable],
 
-function isMobile(): boolean {
-  return window.innerWidth < getBreakpoint();
-}
-
-function getBackdrop(sidebarPanel: HTMLElement): HTMLElement | null {
-  const layout = sidebarPanel.closest(".sidebar");
-  return layout?.querySelector(".sidebar-backdrop") ?? null;
-}
-
-function getAnimatableElements(sidebarPanel: HTMLElement): HTMLElement[] {
-  const elements: HTMLElement[] = [sidebarPanel];
-  const backdrop = getBackdrop(sidebarPanel);
-  if (backdrop) {
-    elements.push(backdrop);
-  }
-  return elements;
-}
-
-function setOpenClass(elements: HTMLElement[], isOpen: boolean) {
-  for (const el of elements) {
-    if (isOpen) {
-      el.classList.add("open");
-    } else {
-      el.classList.remove("open");
+  init(this: SpInstance) {
+    // Authored on the panel so the collapse mode's first paint is correct
+    // pre-JS; default here only fills it in for CSS that reads the attribute.
+    if (!this.el.hasAttribute("data-sp-collapse")) {
+      this.el.setAttribute("data-sp-collapse", "offcanvas");
     }
-  }
-}
 
-function setDataState(
-  elements: HTMLElement[],
-  state: "open" | "closed" | null,
-) {
-  for (const el of elements) {
-    if (state === null) {
-      el.removeAttribute("data-state");
-    } else {
-      el.setAttribute("data-state", state);
-    }
-  }
-}
-
-export function open(sidebarPanel: HTMLElement) {
-  if (isMobile()) {
-    const elements = getAnimatableElements(sidebarPanel);
-    setOpenClass(elements, true);
-    setDataState(elements, "open");
-  } else {
-    sidebarPanel.classList.remove("collapsed");
-  }
-}
-
-export async function close(sidebarPanel: HTMLElement) {
-  if (isMobile()) {
-    const elements = getAnimatableElements(sidebarPanel);
-    setDataState(elements, "closed");
-
-    await waitForAnimations(elements);
-
-    setOpenClass(elements, false);
-    setDataState(elements, null);
-  } else {
-    sidebarPanel.classList.add("collapsed");
-  }
-}
-
-export function toggle(sidebarPanel: HTMLElement) {
-  if (isMobile()) {
-    const isOpen = sidebarPanel.classList.contains("open");
-    if (isOpen) {
-      close(sidebarPanel);
-    } else {
-      open(sidebarPanel);
-    }
-  } else {
-    const isCollapsed = sidebarPanel.classList.contains("collapsed");
-    if (isCollapsed) {
-      open(sidebarPanel);
-    } else {
-      close(sidebarPanel);
-    }
-  }
-}
-
-// Global click handler
-function handleClick(e: MouseEvent) {
-  const target = e.target as HTMLElement;
-
-  // Handle toggle button clicks
-  const toggleBtn = target.closest<HTMLElement>("[data-sp-toggle='sidebar']");
-  if (toggleBtn) {
-    const selector = toggleBtn.dataset.spTarget;
-    if (selector) {
-      const sidebarPanel = document.querySelector<HTMLElement>(selector);
-      if (sidebarPanel) {
-        toggle(sidebarPanel);
-      }
-    }
-    return;
-  }
-
-  // Handle backdrop clicks (close any open sidebar panel)
-  if (target.classList.contains("sidebar-backdrop")) {
-    const layout = target.closest(".sidebar");
-    const openPanel = layout?.querySelector<HTMLElement>(".sidebar-panel.open");
-    if (openPanel) {
-      close(openPanel);
-    }
-  }
-}
-
-// Global keyboard handler
-function handleKeydown(e: KeyboardEvent) {
-  if (e.key === "Escape") {
-    const openPanel = document.querySelector<HTMLElement>(
-      ".sidebar-panel.open",
-    );
-    if (openPanel) {
-      e.preventDefault();
-      close(openPanel);
-    }
-  }
-}
-
-// Handle window resize to clean up mobile state when transitioning to desktop
-function handleResize() {
-  if (!isMobile()) {
-    // Clean up any open mobile sidebars
-    const openPanels = document.querySelectorAll<HTMLElement>(
-      ".sidebar-panel.open",
-    );
-    openPanels.forEach((sidebarPanel) => {
-      const elements = getAnimatableElements(sidebarPanel);
-      setOpenClass(elements, false);
-      setDataState(elements, null);
+    // The open drawer is a modal dialog: announce it as one and manage focus,
+    // mirroring the dialog/sheet. These apply only on mobile (the desktop column
+    // never fires the show/hide lifecycle).
+    this.on(this.el, "sp-show", (e) => {
+      if (e.target !== this.el) return;
+      this.el.setAttribute("role", "dialog");
+      this.el.setAttribute("aria-modal", "true");
     });
-  }
-}
+    this.on(this.el, "sp-shown", (e) => {
+      if (e.target !== this.el) return;
+      (this.el.querySelector<HTMLElement>("a, button, [tabindex]") ?? this.el).focus();
+    });
+    this.on(this.el, "sp-hidden", (e) => {
+      if (e.target !== this.el) return;
+      this.el.removeAttribute("role");
+      this.el.removeAttribute("aria-modal");
+      this.trigger?.focus();
+    });
 
-// Initialize global listeners
-let initialized = false;
+    // Resizing up to desktop discards an open drawer.
+    this.on(window, "resize", () => {
+      if (!this._isMobile() && this._isMounted()) this._hideDrawer();
+      this._syncAria();
+    });
 
-(function init() {
-  if (typeof document === "undefined" || initialized) return;
-  initialized = true;
+    if (this.el.getAttribute("data-sp-collapse") === "icon") this._buildTooltips();
 
-  document.addEventListener("click", handleClick);
-  document.addEventListener("keydown", handleKeydown);
-  window.addEventListener("resize", handleResize);
-})();
+    this._current = announceCurrent(
+      this.el,
+      ".sidebar-menu-button, .sidebar-menu-sub-button",
+    );
+    this._syncAria();
+  },
+
+  destroy(this: SpInstance) {
+    this._current?.disconnect();
+  },
+
+  methods: {
+    _isMobile(this: SpInstance): boolean {
+      const value = getComputedStyle(document.documentElement).getPropertyValue(
+        "--breakpoint-sidebar",
+      );
+      return window.innerWidth < (parseInt(value, 10) || 1024);
+    },
+
+    // "Expanded" is the drawer on mobile, the un-collapsed column on desktop.
+    _syncAria(this: SpInstance): void {
+      const expanded = this._isMobile()
+        ? this._isShown()
+        : !this.el.classList.contains("collapsed");
+      this.trigger?.setAttribute("aria-expanded", String(expanded));
+    },
+
+    // Each axis speaks its own dialect: show/hide drive the mobile drawer
+    // (an overlay), expand/collapse drive the desktop column (disclosure).
+    // toggle follows the viewport, like the trigger does.
+    show(this: SpInstance, opts?: OpenOptions): void {
+      if (!this._isMobile()) return;
+      (Togglable.methods!.show as (this: SpInstance, opts?: OpenOptions) => void).call(this, opts);
+    },
+
+    hide(this: SpInstance): void {
+      if (this._isMounted()) this._hideDrawer();
+    },
+
+    expand(this: SpInstance): void {
+      this._setCollapsed(false);
+    },
+
+    collapse(this: SpInstance): void {
+      this._setCollapsed(true);
+    },
+
+    toggle(this: SpInstance, opts?: OpenOptions): void {
+      if (this._isMobile()) {
+        if (this._isShown()) this.hide();
+        else this.show(opts);
+      }
+      else if (this.el.classList.contains("collapsed")) this.expand();
+      else this.collapse();
+    },
+
+    _hideDrawer(this: SpInstance): void {
+      Togglable.methods!.hide!.call(this);
+    },
+
+    _setCollapsed(this: SpInstance, collapsed: boolean): void {
+      if (this.el.classList.contains("collapsed") === collapsed) return;
+      if (!this.emit(collapsed ? "beforecollapse" : "beforeexpand")) return;
+
+      // Transition is armed only on the transient class, so a user toggle
+      // animates but an authored .collapsed settles instantly (dialog model).
+      const transient = collapsed ? "collapsing" : "expanding";
+      this.el.classList.add(transient);
+      this.el.classList.toggle("collapsed", collapsed);
+      this._syncAria();
+      this.emit(collapsed ? "collapse" : "expand");
+      this._afterTransition(() => {
+        this.el.classList.remove(transient);
+        this.emit(collapsed ? "collapsed" : "expanded");
+      });
+    },
+
+    // A tooltip per nav button (header/footer brand rows excluded), showing the
+    // button's label only while that label is hidden: while the rail is
+    // collapsed, or always for icon-only buttons with an sr-only label.
+    _buildTooltips(this: SpInstance): void {
+      const buttons = this.el.querySelectorAll<HTMLElement>(".sidebar-menu .sidebar-menu-button");
+      for (const button of buttons) {
+        const span = button.querySelector<HTMLElement>(":scope > span");
+        const label = span?.textContent?.trim();
+        if (!span || !label) continue;
+
+        const tip = document.createElement("div");
+        tip.className = "tooltip";
+        tip.textContent = label;
+        // Decorative: the button is already its own accessible name.
+        tip.setAttribute("aria-hidden", "true");
+        tip.setAttribute("data-sp-toggle", `#${ensureId(button)}`);
+        tip.setAttribute("data-sp-placement", "right");
+        this.el.appendChild(tip);
+
+        getInstance(tip, Tooltip);
+        this.on(tip, "sp-beforeshow", (e) => {
+          const labelHidden =
+            this.el.classList.contains("collapsed") || span.offsetWidth <= 1;
+          if (this._isMobile() || !labelHidden) e.preventDefault();
+        });
+      }
+    },
+
+    // Mounted tracks data-sp-open (stable through the exit animation), not
+    // :popover-open which flips the instant hidePopover() runs.
+    _isMounted(this: SpInstance): boolean {
+      return this.el.hasAttribute("data-sp-open");
+    },
+    _mount(this: SpInstance): void {
+      const el = this.el as HTMLElement & {
+        showPopover(): void;
+      };
+      el.setAttribute("popover", "manual");
+      if (!el.matches(":popover-open")) el.showPopover();
+      el.setAttribute("data-sp-open", "");
+    },
+    _unmount(this: SpInstance): void {
+      const el = this.el as HTMLElement & {
+        hidePopover(): void;
+      };
+      el.removeAttribute("data-sp-open");
+      if (el.matches(":popover-open")) el.hidePopover();
+      el.removeAttribute("popover");
+    },
+  },
+});

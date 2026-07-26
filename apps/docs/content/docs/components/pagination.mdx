@@ -1,138 +1,90 @@
 ---
 title: Pagination
-description: A Tailwind CSS pagination component for navigating between pages.
+description: A pagination component for Tailwind CSS with beautiful shadcn/ui styling. Use it to move between pages of content, with previous and next links.
 ---
 
-A Tailwind CSS pagination component for navigating between pages, built using the [button](/docs/components/button) component.
+The pagination lets users move through pages of content, with previous and next links and direct links to nearby pages.
 
 ```html preview
-<nav class="flex flex-wrap items-center gap-1">
-  <a href="#" class="btn btn-ghost">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+<nav class="pagination">
+  <a href="#" class="pagination-item pagination-previous">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
     <span class="hidden sm:block">Previous</span>
   </a>
-  <a href="#" class="btn btn-ghost btn-icon">1</a>
-  <a href="#" class="btn btn-icon" aria-current="page">2</a>
-  <a href="#" class="btn btn-ghost btn-icon">3</a>
-  <a href="#" class="btn btn-ghost">
+  <a href="#" class="pagination-item">1</a>
+  <a href="#" class="pagination-item active">2</a>
+  <a href="#" class="pagination-item">3</a>
+  <span class="pagination-ellipsis">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    <span class="sr-only">More pages</span>
+  </span>
+  <a href="#" class="pagination-item pagination-next">
     <span class="hidden sm:block">Next</span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </a>
 </nav>
 ```
 
----
+## Usage
 
-## With ellipsis
+Add the `pagination` class to a `<nav>` and put one `pagination-item` link per page inside. Mark the current page's link with the `active` class.
 
-Use an ellipsis to indicate additional pages between visible page numbers.
+| Class                                   | Description                                              |
+| --------------------------------------- | -------------------------------------------------------- |
+| `pagination`                            | Add to the `<nav>` holding the links                     |
+| `pagination-item`                       | Add to each `<a>`; add `active` to the current page      |
+| `pagination-sm`                         | Add to `pagination` for compact items                    |
+| `pagination-previous` `pagination-next` | Add to `pagination-item` for the previous and next links |
+| `pagination-ellipsis`                   | Add to a `<span>` standing in for skipped pages          |
+
+```html
+<nav class="pagination">
+  <a href="#" class="pagination-item">1</a>
+  <a href="#" class="pagination-item active">2</a>
+  <a href="#" class="pagination-item">3</a>
+</nav>
+```
+
+## Examples
+
+### Simple
+
+A simple pagination with only page numbers.
 
 ```html preview
-<nav class="flex flex-wrap items-center gap-1">
-  <a href="#" class="btn btn-ghost">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-    <span class="hidden sm:block">Previous</span>
-  </a>
-  <a href="#" class="btn btn-ghost btn-icon">1</a>
-  <a href="#" class="btn btn-icon" aria-current="page">2</a>
-  <a href="#" class="btn btn-ghost btn-icon">3</a>
-  <span class="flex items-center justify-center size-9" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-  </span>
-  <a href="#" class="btn btn-ghost btn-icon">9</a>
-  <a href="#" class="btn btn-ghost btn-icon">10</a>
-  <a href="#" class="btn btn-ghost">
-    <span class="hidden sm:block">Next</span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-  </a>
+<nav class="pagination">
+  <a href="#" class="pagination-item">1</a>
+  <a href="#" class="pagination-item active">2</a>
+  <a href="#" class="pagination-item">3</a>
+  <a href="#" class="pagination-item">4</a>
+  <a href="#" class="pagination-item">5</a>
 </nav>
 ```
 
----
+### Icons only
 
-## Sizes
-
-Use button size classes like `btn-sm` and `btn-icon-sm` for a more compact pagination.
+Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page [select](/components/select).
 
 ```html preview
-<nav class="flex flex-wrap items-center gap-1">
-  <a href="#" class="btn btn-ghost btn-sm">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-    <span class="hidden sm:block">Previous</span>
-  </a>
-  <a href="#" class="btn btn-ghost btn-icon-sm">1</a>
-  <a href="#" class="btn btn-icon-sm" aria-current="page">2</a>
-  <a href="#" class="btn btn-ghost btn-icon-sm">3</a>
-  <a href="#" class="btn btn-ghost btn-sm">
-    <span class="hidden sm:block">Next</span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-  </a>
-</nav>
-```
-
----
-
-## How it works
-
-Pagination is just a nav element with utility classes wrapping [button](/docs/components/button) components.
-
-### Structure
-
-A pagination is a nav element with flexbox utilities and button classes for the items:
-
-```html
-<nav class="flex flex-wrap items-center gap-1">
-  <a href="#" class="btn btn-ghost">
-    <icon-chevron-left />
-    <span class="hidden sm:block">Previous</span>
-  </a>
-  <a href="#" class="btn btn-ghost btn-icon">1</a>
-  <a href="#" class="btn btn-icon" aria-current="page">2</a>
-  <a href="#" class="btn btn-ghost btn-icon">3</a>
-  <a href="#" class="btn btn-ghost">
-    <span class="hidden sm:block">Next</span>
-    <icon-chevron-right />
-  </a>
-</nav>
-```
-
-Use `btn-ghost` for page links and `btn` for the active page.
-
-### Accessibility
-
-For proper screen reader support, add these attributes:
-
-| Attribute      | Description                                               |
-| -------------- | --------------------------------------------------------- |
-| `aria-current` | Add to the current page link to indicate the active page  |
-| `aria-label`   | Add to icon-only buttons to provide accessible text       |
-| `aria-hidden`  | Add to ellipsis elements to hide them from screen readers |
-
-```html
-<nav class="flex flex-wrap items-center gap-1">
-  <a href="#" class="btn btn-ghost btn-icon" aria-label="Previous">
-    <icon-chevron-left />
-  </a>
-  <a href="#" class="btn btn-icon" aria-current="page">1</a>
-  <span class="flex size-9 items-center justify-center" aria-hidden="true">
-    <icon-more-horizontal class="size-4" />
-  </span>
-  <a href="#" class="btn btn-ghost btn-icon" aria-label="Next">
-    <icon-chevron-right />
-  </a>
-</nav>
-```
-
-### Class reference
-
-This component uses [button](/docs/components/button) classes. No additional pagination-specific classes are needed.
-
-```html
-<nav class="flex flex-wrap items-center gap-1">
-  <a href="#" class="btn btn-ghost btn-icon">1</a>
-  <span class="flex size-9 items-center justify-center" aria-hidden="true">
-    ...
-  </span>
-  <a href="#" class="btn btn-ghost btn-icon">10</a>
-</nav>
+<div class="flex w-full max-w-lg items-center justify-between gap-4">
+  <div class="field field-horizontal w-fit">
+    <label class="label" for="pagination-rows-per-page">Rows per page</label>
+    <select class="select w-20" id="pagination-rows-per-page">
+      <option>10</option>
+      <option selected>25</option>
+      <option>50</option>
+      <option>100</option>
+    </select>
+  </div>
+  <nav class="pagination">
+    <a href="#" class="pagination-item pagination-previous">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <span class="hidden sm:block">Previous</span>
+    </a>
+    <a href="#" class="pagination-item pagination-next">
+      <span class="hidden sm:block">Next</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  </nav>
+</div>
 ```

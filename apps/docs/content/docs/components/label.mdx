@@ -1,74 +1,136 @@
 ---
 title: Label
-description: A Tailwind CSS label component for accessible form fields.
+description: A label component for Tailwind CSS with beautiful shadcn/ui styling. Use it to name form controls like inputs, checkboxes, and selects.
 ---
 
-A Tailwind CSS label component for accessible form fields.
+The label names a form control. Clicking it focuses or toggles the control it points at, and screen readers announce it when the control receives focus.
 
 ```html preview
-<label class="label">Email</label>
-```
-
----
-
-## With input
-
-Connect a label to an input using matching `for` and `id` attributes. Clicking the label focuses the input, and screen readers announce it correctly. Use a [Field](/docs/components/field) wrapper for consistent spacing.
-
-```html preview
-<div class="w-full max-w-xs">
-  <div class="field">
-    <label class="label" for="email">Email</label>
-    <input
-      class="input"
-      id="email"
-      type="email"
-      placeholder="you@example.com"
-      name="email"
-    />
-  </div>
-</div>
-```
-
----
-
-## With checkbox
-
-Place the label next to a checkbox or switch for inline toggle fields.
-
-```html preview
-<div class="field field-horizontal">
-  <input
-    type="checkbox"
-    class="checkbox"
-    id="accept-terms-and-conditions"
-    name="accept-terms-and-conditions"
-  />
-  <label class="label" for="accept-terms-and-conditions">
+<div class="flex gap-2">
+  <input type="checkbox" class="checkbox" id="label-demo-terms" />
+  <label class="label" for="label-demo-terms">
     Accept terms and conditions
   </label>
 </div>
 ```
 
----
+## Usage
 
-## How it works
+Add the `label` class to a `<label>` element and connect it to a control with a `for` attribute matching the control's `id`.
 
-The label component is a CSS-only utility class applied to a `<label>` element.
-
-### Structure
-
-Use the `.label` class on a `<label>` element. The `for` attribute connects the label to a form element by matching its `id`. Clicking the label will focus or toggle the linked element:
+| Class   | Description                |
+| ------- | -------------------------- |
+| `label` | Add to a `<label>` element |
 
 ```html
 <label class="label" for="name">Name</label>
 <input class="input" id="name" type="text" />
 ```
 
-The `for` value must match the `id` of the target element exactly. This also allows screen readers to announce the label when the input is focused.
+## Examples
 
-### Class reference
+### Label in field
 
-| Class   | Description       |
-| ------- | ----------------- |
-| `label` | Base label styles |
+For form fields, use the [field](/components/field) component, which pairs the label with the control and gives you `field-description` and `field-error` slots.
+
+```html preview
+<form class="field-group w-full max-w-md">
+  <fieldset class="field-set">
+    <legend class="field-legend">Payment Method</legend>
+    <p class="field-description">All transactions are secure and encrypted</p>
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="label-card-name">Name on Card</label>
+        <input
+          class="input"
+          id="label-card-name"
+          placeholder="Evil Rabbit"
+          required
+        />
+      </div>
+      <div class="field">
+        <label class="label" for="label-card-number">Card Number</label>
+        <input
+          class="input"
+          id="label-card-number"
+          placeholder="1234 5678 9012 3456"
+          required
+        />
+        <p class="field-description">Enter your 16-digit card number</p>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="field">
+          <label class="label" for="label-exp-month">Month</label>
+          <select class="select" id="label-exp-month">
+            <option value="">MM</option>
+            <option>01</option>
+            <option>02</option>
+            <option>03</option>
+            <option>04</option>
+            <option>05</option>
+            <option>06</option>
+            <option>07</option>
+            <option>08</option>
+            <option>09</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="label-exp-year">Year</label>
+          <select class="select" id="label-exp-year">
+            <option value="">YYYY</option>
+            <option>2024</option>
+            <option>2025</option>
+            <option>2026</option>
+            <option>2027</option>
+            <option>2028</option>
+            <option>2029</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="label-cvv">CVV</label>
+          <input class="input" id="label-cvv" placeholder="123" required />
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field-separator"></div>
+  <fieldset class="field-set">
+    <legend class="field-legend">Billing Address</legend>
+    <p class="field-description">
+      The billing address associated with your payment method
+    </p>
+    <div class="field-group">
+      <div class="field field-horizontal">
+        <input
+          type="checkbox"
+          class="checkbox"
+          id="label-same-as-shipping"
+          checked
+        />
+        <label class="label font-normal" for="label-same-as-shipping">
+          Same as shipping address
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="field-set">
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="label-comments">Comments</label>
+        <textarea
+          class="textarea resize-none"
+          id="label-comments"
+          placeholder="Add any additional comments"
+        ></textarea>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field field-horizontal">
+    <button type="submit" class="btn">Submit</button>
+    <button type="button" class="btn btn-outline">Cancel</button>
+  </div>
+</form>
+```

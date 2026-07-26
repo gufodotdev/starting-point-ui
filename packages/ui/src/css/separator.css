@@ -15,6 +15,6 @@
 
 @utility separator-vertical {
   @layer l1 {
-    @apply h-full self-stretch w-px;
+    @apply w-px self-stretch;
   }
 }

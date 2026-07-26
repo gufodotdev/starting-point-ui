@@ -1,420 +1,493 @@
 ---
 title: Dropdown
-description: A Tailwind CSS dropdown component for displaying a list of actions or options.
+description: A dropdown menu component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a menu of actions behind a button, like a user menu or row actions.
 ---
 
-A Tailwind CSS dropdown component for displaying a list of actions or options.
+The dropdown displays a menu of actions anchored to its trigger, like the commands behind a "more" button or a user menu. For rich free-form content, reach for the [popover](/components/popover); for picking a value in a form, use the [select](/components/select) or [combobox](/components/combobox).
 
-```html preview
-<button
-  class="btn"
-  type="button"
-  data-sp-toggle="dropdown"
-  data-sp-target="#dropdown-options"
-  aria-expanded="false"
->
-  Options
-</button>
-<div id="dropdown-options" class="dropdown">
-  <a href="#" class="dropdown-item">New file</a>
-  <a href="#" class="dropdown-item">Copy link</a>
-  <div class="dropdown-separator"></div>
-  <a href="#" class="dropdown-item">Edit</a>
-  <a href="#" class="dropdown-item">Rename</a>
-  <div class="dropdown-separator"></div>
-  <a href="#" class="dropdown-item">Delete</a>
-</div>
-```
+```html preview preset=popover open=.dropdown
+<button id="dd-demo-trigger" class="btn btn-outline">Open</button>
 
----
-
-## With icons
-
-Add icons to dropdown items for better visual hierarchy.
-
-```html preview
-<button
-  class="btn"
-  type="button"
-  data-sp-toggle="dropdown"
-  data-sp-target="#dropdown-icons"
-  aria-expanded="false"
->
-  Options
-</button>
-<div id="dropdown-icons" class="dropdown">
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
-    New file
-  </a>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-    Copy link
-  </a>
-  <div class="dropdown-separator"></div>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
-    Edit
-  </a>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 22h-1a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h1"/><path d="M7 22h1a4 4 0 0 0 4-4v-1"/><path d="M7 2h1a4 4 0 0 1 4 4v1"/></svg>
-    Rename
-  </a>
-  <div class="dropdown-separator"></div>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-    Delete
-  </a>
-</div>
-```
-
----
-
-## With labels
-
-Use `.dropdown-label` to group items with a heading.
-
-```html preview
-<button
-  class="btn"
-  type="button"
-  data-sp-toggle="dropdown"
-  data-sp-target="#dropdown-account"
-  aria-expanded="false"
->
-  My Account
-</button>
-<div id="dropdown-account" class="dropdown">
-  <div class="dropdown-label">Settings</div>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+<div class="dropdown w-40" data-sp-toggle="#dd-demo-trigger">
+  <div class="dropdown-label">My Account</div>
+  <button class="dropdown-item">
     Profile
-  </a>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    <span class="dropdown-shortcut">⇧⌘P</span>
+  </button>
+  <button class="dropdown-item">
     Billing
-  </a>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
-    Notifications
-  </a>
+    <span class="dropdown-shortcut">⌘B</span>
+  </button>
+  <button class="dropdown-item">
+    Settings
+    <span class="dropdown-shortcut">⌘S</span>
+  </button>
   <div class="dropdown-separator"></div>
-  <div class="dropdown-label">Help</div>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
-    Documentation
-  </a>
-  <a href="#" class="dropdown-item">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
-    Support
-  </a>
-</div>
-```
-
----
-
-## Disabled items
-
-Use `aria-disabled="true"` to disable an item. Add `tabindex="-1"` to prevent tab navigation to the item.
-
-```html preview
-<button
-  class="btn"
-  type="button"
-  data-sp-toggle="dropdown"
-  data-sp-target="#dropdown-disabled"
-  aria-expanded="false"
->
-  Actions
-</button>
-<div id="dropdown-disabled" class="dropdown">
-  <a href="#" class="dropdown-item">Edit</a>
-  <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">
-    Duplicate
-  </a>
-  <a href="#" class="dropdown-item">Archive</a>
+  <button class="dropdown-item">Support</button>
+  <button class="dropdown-item" aria-disabled="true">API</button>
   <div class="dropdown-separator"></div>
-  <a href="#" class="dropdown-item" aria-disabled="true" tabindex="-1">
-    Delete
-  </a>
+  <button class="dropdown-item">
+    Log out
+    <span class="dropdown-shortcut">⇧⌘Q</span>
+  </button>
 </div>
 ```
 
----
+## Usage
 
-## Placement
+Add the `dropdown` class to the menu panel and point it at its trigger with `data-sp-toggle`. It opens on click, positions itself against the trigger, supports arrow-key navigation, and closes when an action is chosen, on an outside click, or with Escape. Checkable items are the exception: toggling one keeps the menu open.
 
-Use `data-sp-placement` on the trigger to control where the menu appears relative to it (default is `bottom-end`).
-
-```html preview
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-bottom-start" data-sp-placement="bottom-start" aria-expanded="false">bottom-start</button>
-<div id="dropdown-bottom-start" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-bottom" data-sp-placement="bottom" aria-expanded="false">bottom</button>
-<div id="dropdown-bottom" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-bottom-end" data-sp-placement="bottom-end" aria-expanded="false">bottom-end</button>
-<div id="dropdown-bottom-end" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-top-start" data-sp-placement="top-start" aria-expanded="false">top-start</button>
-<div id="dropdown-top-start" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-top" data-sp-placement="top" aria-expanded="false">top</button>
-<div id="dropdown-top" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-top-end" data-sp-placement="top-end" aria-expanded="false">top-end</button>
-<div id="dropdown-top-end" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-left-start" data-sp-placement="left-start" aria-expanded="false">left-start</button>
-<div id="dropdown-left-start" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-left" data-sp-placement="left" aria-expanded="false">left</button>
-<div id="dropdown-left" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-left-end" data-sp-placement="left-end" aria-expanded="false">left-end</button>
-<div id="dropdown-left-end" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-right-start" data-sp-placement="right-start" aria-expanded="false">right-start</button>
-<div id="dropdown-right-start" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-right" data-sp-placement="right" aria-expanded="false">right</button>
-<div id="dropdown-right" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-right-end" data-sp-placement="right-end" aria-expanded="false">right-end</button>
-<div id="dropdown-right-end" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-```
-
----
-
-## Offset
-
-Use `data-sp-offset` on the trigger to control the distance between the trigger and the menu (default is `4`).
-
-```html preview
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-offset-0" data-sp-offset="0" aria-expanded="false">No Offset</button>
-<div id="dropdown-offset-0" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-offset-default" aria-expanded="false">Default (4)</button>
-<div id="dropdown-offset-default" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-offset-12" data-sp-offset="12" aria-expanded="false">Offset 12</button>
-<div id="dropdown-offset-12" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-</div>
-```
-
----
-
-## Hover trigger
-
-Add `data-sp-trigger="hover"` to open the dropdown on pointer hover. Click still works for touch devices and keyboard users.
-
-```html preview
-<button
-  class="btn"
-  type="button"
-  data-sp-toggle="dropdown"
-  data-sp-target="#dropdown-hover"
-  data-sp-trigger="hover"
-  aria-expanded="false"
->
-  Hover me
-</button>
-<div id="dropdown-hover" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-  <a href="#" class="dropdown-item">Logout</a>
-</div>
-```
-
----
-
-## How it works
-
-The dropdown component uses a small JavaScript module that handles opening, closing, positioning, and keyboard navigation.
-
-### Structure
-
-A dropdown consists of two elements linked by id:
-
-1. **`[data-sp-toggle="dropdown"]`** with `data-sp-target="#id"` — the trigger button
-2. **`.dropdown`** with a matching `id` — the menu panel with items
+| Class                       | Description                                                                             |
+| --------------------------- | --------------------------------------------------------------------------------------- |
+| `dropdown`                  | Add to the menu panel; carries the `data-sp-*` options                                  |
+| `dropdown-label`            | Add to a heading above a group of items                                                 |
+| `dropdown-item`             | Add to each action, on a native `<button>` or `<a>`                                     |
+| `dropdown-item-destructive` | Add to `dropdown-item` for a destructive action                                         |
+| `dropdown-item-checkbox`    | Add to `dropdown-item` wrapping a hidden `<input type="checkbox">` that holds the state |
+| `dropdown-item-radio`       | Add to `dropdown-item` wrapping a hidden `<input type="radio">`; share a `name` per set |
+| `dropdown-shortcut`         | Add to a `<span>` inside an item for a keyboard hint                                    |
+| `dropdown-separator`        | Add to an element between items to divide them                                          |
+| `dropdown-sub`              | Add to a nested `dropdown` that opens from an item                                      |
 
 ```html
-<button data-sp-toggle="dropdown" data-sp-target="#my-menu" aria-expanded="false">
-  Open Menu
-</button>
-<div id="my-menu" class="dropdown">
-  <a href="#" class="dropdown-item">Item 1</a>
-  <a href="#" class="dropdown-item">Item 2</a>
+<!-- This is the trigger -->
+<button id="my-trigger" class="btn btn-outline">Open</button>
+
+<!-- This is the dropdown -->
+<div class="dropdown" data-sp-toggle="#my-trigger">
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Settings</button>
 </div>
 ```
 
-The trigger and the menu can live anywhere in the DOM as long as the id matches.
+## Examples
 
-### Opening and closing
+### Basic
 
-Add `data-sp-toggle="dropdown"` and `data-sp-target` to the trigger to toggle the linked menu on click. Clicking outside the menu or pressing Escape closes it. Clicking an item also closes it by default.
+A plain menu of actions.
 
-For programmatic control, use the global `StartingPointUI.dropdown` module:
+```html preview preset=popover open=.dropdown
+<button id="dd-basic-trigger" class="btn btn-outline">Open</button>
 
-```js
-const trigger = document.querySelector("[data-sp-target='#my-menu']");
-const menu = document.getElementById("my-menu");
-
-StartingPointUI.dropdown.open(trigger);
-StartingPointUI.dropdown.close(menu);
-StartingPointUI.dropdown.toggle(trigger);
+<div class="dropdown" data-sp-toggle="#dd-basic-trigger">
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Billing</button>
+  <button class="dropdown-item">Settings</button>
+</div>
 ```
 
-### Animation
+### Groups
 
-The dropdown includes a default fade and zoom animation. When opened, the JavaScript sets `data-state="open"` on the menu element.
+Group related items under a `dropdown-label` and divide groups with a `dropdown-separator`.
 
-To customize animations, add `no-animation` to disable the defaults and use your own classes with `data-[state=open]:` selectors:
+```html preview preset=popover open=.dropdown
+<button id="dd-groups-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown" data-sp-toggle="#dd-groups-trigger">
+  <div class="dropdown-label">My Account</div>
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Billing</button>
+  <button class="dropdown-item">Settings</button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item">GitHub</button>
+  <button class="dropdown-item">Support</button>
+</div>
+```
+
+### Submenu
+
+Nest menus by pointing a second dropdown at an item; `dropdown-sub` sizes it, and hover mode opens it when the pointer reaches the item. With the keyboard, ArrowRight, Enter, or Space opens it and ArrowLeft or Escape closes it back to its item.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-sub-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown" data-sp-toggle="#dd-sub-trigger">
+  <button class="dropdown-item">Team</button>
+  <button id="dd-sub-invite" class="dropdown-item">
+    Invite users
+    <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <button class="dropdown-item">
+    New Team
+    <span class="dropdown-shortcut">⌘+T</span>
+  </button>
+</div>
+
+<div
+  class="dropdown dropdown-sub"
+  data-sp-toggle="#dd-sub-invite"
+  data-sp-mode="hover"
+  data-sp-placement="right-start"
+>
+  <button class="dropdown-item">Email</button>
+  <button class="dropdown-item">Message</button>
+  <button id="dd-sub-more" class="dropdown-item">
+    More options
+    <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item">Advanced...</button>
+</div>
+
+<div
+  class="dropdown dropdown-sub"
+  data-sp-toggle="#dd-sub-more"
+  data-sp-mode="hover"
+  data-sp-placement="right-start"
+>
+  <button class="dropdown-item">Calendly</button>
+  <button class="dropdown-item">Slack</button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item">Webhook</button>
+</div>
+```
+
+### Shortcuts
+
+Hint an item's keyboard shortcut with `dropdown-shortcut`; it right-aligns inside the item.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-shortcuts-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown" data-sp-toggle="#dd-shortcuts-trigger">
+  <div class="dropdown-label">My Account</div>
+  <button class="dropdown-item">
+    Profile
+    <span class="dropdown-shortcut">⇧⌘P</span>
+  </button>
+  <button class="dropdown-item">
+    Billing
+    <span class="dropdown-shortcut">⌘B</span>
+  </button>
+  <button class="dropdown-item">
+    Settings
+    <span class="dropdown-shortcut">⌘S</span>
+  </button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item">
+    Log out
+    <span class="dropdown-shortcut">⇧⌘Q</span>
+  </button>
+</div>
+```
+
+### Icons
+
+Lead items with an icon; svgs inside items are sized automatically.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-icons-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown" data-sp-toggle="#dd-icons-trigger">
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Profile
+  </button>
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    Billing
+  </button>
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+    Settings
+  </button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item dropdown-item-destructive">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+    Log out
+  </button>
+</div>
+```
+
+### Checkboxes
+
+Make items checkable with `dropdown-item-checkbox`: a hidden checkbox input holds the state, so `checked`, `change` events, and form submission work like any input. Toggling doesn't close the menu, so several can be flipped in one visit.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-check-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown w-40" data-sp-toggle="#dd-check-trigger">
+  <div class="dropdown-label">Appearance</div>
+  <div class="dropdown-item dropdown-item-checkbox">
+    <input type="checkbox" name="statusbar" checked />
+    Status Bar
+  </div>
+  <div class="dropdown-item dropdown-item-checkbox" aria-disabled="true">
+    <input type="checkbox" name="activitybar" />
+    Activity Bar
+  </div>
+  <div class="dropdown-item dropdown-item-checkbox">
+    <input type="checkbox" name="panel" />
+    Panel
+  </div>
+</div>
+```
+
+### Radio group
+
+Give `dropdown-item-radio` inputs a shared `name` and the browser keeps the set exclusive; read the choice with `input[name=position]:checked`.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-radio-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown w-32" data-sp-toggle="#dd-radio-trigger">
+  <div class="dropdown-label">Panel Position</div>
+  <div class="dropdown-item dropdown-item-radio">
+    <input type="radio" name="position" value="top" />
+    Top
+  </div>
+  <div class="dropdown-item dropdown-item-radio">
+    <input type="radio" name="position" value="bottom" checked />
+    Bottom
+  </div>
+  <div class="dropdown-item dropdown-item-radio">
+    <input type="radio" name="position" value="right" />
+    Right
+  </div>
+</div>
+```
+
+### Destructive
+
+Mark a dangerous action with `dropdown-item-destructive`.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-destructive-trigger" class="btn btn-outline">Actions</button>
+
+<div class="dropdown" data-sp-toggle="#dd-destructive-trigger">
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+    Edit
+  </button>
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v13"/><path d="m16 6-4-4-4 4"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/></svg>
+    Share
+  </button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item dropdown-item-destructive">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    Delete
+  </button>
+</div>
+```
+
+### Disabled
+
+Add `aria-disabled` to disable an item.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-disabled-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown" data-sp-toggle="#dd-disabled-trigger">
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Billing</button>
+  <button class="dropdown-item" aria-disabled="true">API</button>
+</div>
+```
+
+### Avatar
+
+Any element can be the trigger, like an avatar button for a user menu.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-avatar-trigger" class="btn btn-ghost btn-icon rounded-full">
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+</button>
+
+<div class="dropdown" data-sp-toggle="#dd-avatar-trigger">
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+    Account
+  </button>
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    Billing
+  </button>
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+    Notifications
+  </button>
+  <div class="dropdown-separator"></div>
+  <button class="dropdown-item">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+    Sign Out
+  </button>
+</div>
+```
+
+### Complex
+
+Groups, submenus, checkboxes, and radio items compose into a full application menu.
+
+```html preview preset=popover open=.dropdown
+<button id="dd-complex-trigger" class="btn btn-outline">Open</button>
+
+<div class="dropdown w-44" data-sp-toggle="#dd-complex-trigger">
+  <div class="dropdown-label">File</div>
+  <button class="dropdown-item">
+    New File
+    <span class="dropdown-shortcut">⌘N</span>
+  </button>
+  <button class="dropdown-item">
+    Save
+    <span class="dropdown-shortcut">⌘S</span>
+  </button>
+  <div class="dropdown-separator"></div>
+  <div class="dropdown-label">View</div>
+  <div class="dropdown-item dropdown-item-checkbox">
+    <input type="checkbox" name="sidebar" checked />
+    Show Sidebar
+  </div>
+  <div class="dropdown-item dropdown-item-checkbox">
+    <input type="checkbox" name="statusbar" />
+    Show Status Bar
+  </div>
+  <div class="dropdown-separator"></div>
+  <button id="dd-complex-theme" class="dropdown-item">
+    Theme
+    <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+</div>
+
+<div
+  class="dropdown dropdown-sub"
+  data-sp-toggle="#dd-complex-theme"
+  data-sp-mode="hover"
+  data-sp-placement="right-start"
+>
+  <div class="dropdown-label">Appearance</div>
+  <div class="dropdown-item dropdown-item-radio">
+    <input type="radio" name="theme" value="light" checked />
+    Light
+  </div>
+  <div class="dropdown-item dropdown-item-radio">
+    <input type="radio" name="theme" value="dark" />
+    Dark
+  </div>
+  <div class="dropdown-item dropdown-item-radio">
+    <input type="radio" name="theme" value="system" />
+    System
+  </div>
+</div>
+```
+
+### Placement
+
+Set where the menu opens relative to its trigger with `data-sp-placement`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement), like `top`, `right-start`, or `bottom-end`, and the menu flips to the opposite side on its own when there isn't room.
+
+```html preview preset=popover
+<div class="flex gap-6">
+  <button id="dd-placement-start" class="btn btn-outline btn-sm">Start</button>
+  <button id="dd-placement-center" class="btn btn-outline btn-sm">
+    Center
+  </button>
+  <button id="dd-placement-end" class="btn btn-outline btn-sm">End</button>
+</div>
+
+<div
+  class="dropdown w-40"
+  data-sp-toggle="#dd-placement-start"
+  data-sp-placement="bottom-start"
+>
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Settings</button>
+</div>
+<div
+  class="dropdown w-40"
+  data-sp-toggle="#dd-placement-center"
+  data-sp-placement="bottom"
+>
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Settings</button>
+</div>
+<div
+  class="dropdown w-40"
+  data-sp-toggle="#dd-placement-end"
+  data-sp-placement="bottom-end"
+>
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Settings</button>
+</div>
+```
+
+### Hover
+
+Add `data-sp-mode="hover"` to open the menu on hover instead of click; it closes when the pointer leaves both the trigger and the menu.
+
+```html preview preset=popover
+<button id="dd-hover-trigger" class="btn btn-outline">Hover me</button>
+
+<div class="dropdown" data-sp-toggle="#dd-hover-trigger" data-sp-mode="hover">
+  <button class="dropdown-item">Profile</button>
+  <button class="dropdown-item">Settings</button>
+  <button class="dropdown-item">Logout</button>
+</div>
+```
+
+## Options
+
+### Dropdown
+
+Set each option with its own `data-sp-*` attribute on the `dropdown` element.
+
+| Attribute             | Values                | Default          |
+| --------------------- | --------------------- | ---------------- |
+| `data-sp-toggle`      | CSS selector          | —                |
+| `data-sp-placement`   | Floating UI placement | `bottom-end`     |
+| `data-sp-offset`      | Number                | `4`              |
+| `data-sp-mode`        | `click` \| `hover`    | `click`          |
+| `data-sp-match-width` | Boolean               | `false`          |
+| `data-sp-item`        | CSS selector          | `.dropdown-item` |
 
 ```html
 <div
-  id="my-menu"
-  class="dropdown no-animation data-[state=open]:animate-in data-[state=open]:slide-in-from-top-2"
->
-  <!-- Custom slide animation -->
-</div>
-```
-
-```html preview
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-anim-default" aria-expanded="false">Default</button>
-<div id="dropdown-anim-default" class="dropdown">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-  <a href="#" class="dropdown-item">Logout</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-anim-none" aria-expanded="false">No Animation</button>
-<div id="dropdown-anim-none" class="dropdown no-animation">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-  <a href="#" class="dropdown-item">Logout</a>
-</div>
-<button class="btn" type="button" data-sp-toggle="dropdown" data-sp-target="#dropdown-anim-slide" aria-expanded="false">Slide from Top</button>
-<div id="dropdown-anim-slide" class="dropdown no-animation data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2">
-  <a href="#" class="dropdown-item">Profile</a>
-  <a href="#" class="dropdown-item">Settings</a>
-  <a href="#" class="dropdown-item">Logout</a>
-</div>
-```
-
-The default animations use [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) utilities. You can customize or replace these with your own animations.
-
-### Accessibility
-
-The dropdown provides full keyboard navigation and manages the `aria-expanded` state at runtime. Add `aria-expanded="false"` to the trigger button. The JavaScript toggles it to `"true"` when the menu opens:
-
-```html
-<button data-sp-toggle="dropdown" data-sp-target="#my-menu" aria-expanded="false">
-  Open
-</button>
-```
-
-The dropdown does not add `role="menu"` or `role="menuitem"` by default. Dropdowns are used for many things in practice (actions, navigation links, search inputs, forms) and those patterns don't all fit the strict ARIA menu model. If your dropdown is exclusively a list of command actions (Edit, Delete, etc.), you can opt into true menu semantics by adding the roles yourself:
-
-```html
-<div id="my-menu" class="dropdown" role="menu">
-  <a href="#" class="dropdown-item" role="menuitem">Edit</a>
-  <a href="#" class="dropdown-item" role="menuitem">Delete</a>
-</div>
-```
-
-#### Keyboard navigation
-
-| Key               | Action                                        |
-| ----------------- | --------------------------------------------- |
-| `Enter` / `Space` | Opens/closes dropdown when trigger is focused |
-| `Escape`          | Closes the dropdown                           |
-| `ArrowDown`       | Move focus to next item                       |
-| `ArrowUp`         | Move focus to previous item                   |
-| `Home`            | Move focus to first item                      |
-| `End`             | Move focus to last item                       |
-| `Tab`             | Cycle focus through items inside the menu     |
-
-### Class reference
-
-All available classes for the dropdown component.
-
-| Class                | Description                                  |
-| -------------------- | -------------------------------------------- |
-| `dropdown`           | The menu panel that appears on toggle        |
-| `dropdown-item`      | Individual menu item                         |
-| `dropdown-label`     | Label/heading for grouping items             |
-| `dropdown-separator` | Horizontal divider between items             |
-| `no-animation`       | Disables default animation on the menu       |
-
-```html
-<button data-sp-toggle="dropdown" data-sp-target="#my-menu">Open</button>
-<div id="my-menu" class="dropdown">
-  <div class="dropdown-label">Group</div>
-  <a href="#" class="dropdown-item">Item</a>
-  <div class="dropdown-separator"></div>
-  <a href="#" class="dropdown-item">Item</a>
-</div>
-```
-
-### Data attributes
-
-All data attributes for the dropdown component.
-
-| Attribute                   | Element     | Description                                              |
-| --------------------------- | ----------- | -------------------------------------------------------- |
-| `data-sp-toggle="dropdown"` | Button      | Marks the trigger                                        |
-| `data-sp-target="#id"`      | Button      | The id of the linked `.dropdown` menu                    |
-| `data-sp-trigger`           | Button      | `"click"` (default) or `"hover"`                         |
-| `data-sp-placement`         | Button      | Menu position (default: `bottom-end`)                    |
-| `data-sp-offset`            | Button      | Distance from trigger in pixels (default: `4`)           |
-| `aria-expanded`             | Button      | Set `"false"` initially; JS toggles on open/close        |
-| `data-state`                | `.dropdown` | Set to `open` when menu is visible                       |
-| `aria-disabled="true"`      | Item        | Disables the item visually and functionally              |
-
-```html
-<button
-  data-sp-toggle="dropdown"
-  data-sp-target="#my-menu"
+  class="dropdown"
+  data-sp-toggle="#my-trigger"
   data-sp-placement="bottom-start"
-  data-sp-offset="8"
-  aria-expanded="false"
->
-  Open
-</button>
-<div id="my-menu" class="dropdown">
-  <a href="#" class="dropdown-item">Enabled</a>
-  <a href="#" class="dropdown-item" aria-disabled="true">Disabled</a>
-</div>
+></div>
 ```
+
+## JavaScript
+
+### Events
+
+Lifecycle events fire on the dropdown element; `before*` events are cancelable.
+
+| Event           | When                        |
+| --------------- | --------------------------- |
+| `sp-beforeshow` | Before opening (cancelable) |
+| `sp-show`       | Opening                     |
+| `sp-shown`      | Open and settled            |
+| `sp-beforehide` | Before closing (cancelable) |
+| `sp-hide`       | Closing                     |
+| `sp-hidden`     | Closed                      |
+
+```js
+el.addEventListener("sp-beforehide", (e) => {
+  if (unsavedChanges) e.preventDefault(); // veto the close
+});
+```
+
+### Methods
+
+Get the instance with `sp.dropdown(el)`, then call its methods:
+
+| Method     | Description                |
+| ---------- | -------------------------- |
+| `show()`   | Open the menu              |
+| `hide()`   | Close the menu             |
+| `toggle()` | Open if closed, else close |
+
+```js
+const dropdown = sp.dropdown(document.querySelector("#my-dropdown"));
+
+dropdown.show();
+```
+

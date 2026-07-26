@@ -1,0 +1,52 @@
+import {
+  LoopIcon,
+  PauseIcon,
+  ShuffleIcon,
+  TrackNextIcon,
+  TrackPreviousIcon,
+} from "@radix-ui/react-icons";
+
+export default function MusicPlayer() {
+  return (
+    <div className="card">
+      <img
+        src="https://images.unsplash.com/photo-1605084198811-7a358b91dc15?rect=0,0,4000,4000&w=640&h=640&fit=crop&auto=format&q=100"
+        alt="Album cover"
+        className="aspect-square w-full object-cover"
+      />
+      <div className="card-header text-center">
+        <h3 className="card-title">Midnight Dreams</h3>
+        <p className="card-description">Luna Eclipse</p>
+      </div>
+      <div className="card-content grid gap-2">
+        <progress
+          className="progress"
+          value={83}
+          max={225}
+          aria-label="Playback position"
+        ></progress>
+        <div className="flex justify-between text-xs text-muted-foreground">
+          <span>1:23</span>
+          <span>3:45</span>
+        </div>
+      </div>
+      <div className="card-footer justify-center gap-4">
+        <button className="btn btn-ghost btn-icon" aria-label="Shuffle">
+          <ShuffleIcon />
+        </button>
+        <button className="btn btn-ghost btn-icon" aria-label="Previous track">
+          <TrackPreviousIcon />
+        </button>
+        <button className="btn btn-icon rounded-full" aria-label="Pause">
+          <PauseIcon />
+        </button>
+        <button className="btn btn-ghost btn-icon" aria-label="Next track">
+          <TrackNextIcon />
+        </button>
+        <button className="btn btn-ghost btn-icon" aria-label="Repeat">
+          <LoopIcon />
+        </button>
+      </div>
+    </div>
+  );
+}
