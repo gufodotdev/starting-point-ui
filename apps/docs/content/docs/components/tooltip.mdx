@@ -104,6 +104,66 @@ Disabled elements don't fire pointer events, so wrap the trigger in a focusable 
 </div>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview dir=rtl
+<div id="tooltip-rtl-demo" dir="rtl">
+  <div class="flex flex-wrap justify-center gap-2">
+    <button id="tooltip-rtl-left-trigger" class="btn btn-outline" data-i18n="left">يسار</button>
+    <button id="tooltip-rtl-top-trigger" class="btn btn-outline" data-i18n="top">أعلى</button>
+    <button id="tooltip-rtl-bottom-trigger" class="btn btn-outline" data-i18n="bottom">أسفل</button>
+    <button id="tooltip-rtl-right-trigger" class="btn btn-outline" data-i18n="right">يمين</button>
+  </div>
+
+  <div
+    class="tooltip"
+    data-sp-toggle="#tooltip-rtl-left-trigger"
+    data-sp-placement="left"
+  >
+    <span data-i18n="content">إضافة إلى المكتبة</span>
+  </div>
+  <div
+    class="tooltip"
+    data-sp-toggle="#tooltip-rtl-top-trigger"
+    data-sp-placement="top"
+  >
+    <span data-i18n="content">إضافة إلى المكتبة</span>
+  </div>
+  <div
+    class="tooltip"
+    data-sp-toggle="#tooltip-rtl-bottom-trigger"
+    data-sp-placement="bottom"
+  >
+    <span data-i18n="content">إضافة إلى المكتبة</span>
+  </div>
+  <div
+    class="tooltip"
+    data-sp-toggle="#tooltip-rtl-right-trigger"
+    data-sp-placement="right"
+  >
+    <span data-i18n="content">إضافة إلى المكتبة</span>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", left: "يسار", top: "أعلى", bottom: "أسفل", right: "يمين", content: "إضافة إلى المكتبة" },
+    he: { dir: "rtl", left: "שמאל", top: "למעלה", bottom: "למטה", right: "ימין", content: "הוסף לספרייה" },
+    en: { dir: "ltr", left: "Left", top: "Top", bottom: "Bottom", right: "Right", content: "Add to library" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("tooltip-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
 ## Options
 
 ### Tooltip
