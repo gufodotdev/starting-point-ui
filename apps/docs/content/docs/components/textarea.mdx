@@ -86,3 +86,40 @@ Pair the textarea with a [button](/components/button) to submit; without a visib
   <button class="btn">Send message</button>
 </div>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="textarea-rtl-demo" class="field w-full max-w-xs" dir="rtl">
+  <label class="label" for="textarea-rtl-feedback" data-i18n="label">التعليقات</label>
+  <textarea
+    class="textarea"
+    id="textarea-rtl-feedback"
+    rows="4"
+    placeholder="تعليقاتك تساعدنا على التحسين..."
+    data-i18n-placeholder="placeholder"
+  ></textarea>
+  <p class="field-description" data-i18n="description">شاركنا أفكارك حول خدمتنا.</p>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", label: "التعليقات", description: "شاركنا أفكارك حول خدمتنا.", placeholder: "تعليقاتك تساعدنا على التحسين..." },
+    he: { dir: "rtl", label: "משוב", description: "שתף את מחשבותיך על השירות שלנו.", placeholder: "המשוב שלך עוזר לנו להשתפר..." },
+    en: { dir: "ltr", label: "Feedback", description: "Share your thoughts about our service.", placeholder: "Your feedback helps us improve..." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("textarea-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      el.placeholder = t[el.dataset.i18nPlaceholder];
+    });
+  });
+</script>
+```
