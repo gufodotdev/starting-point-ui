@@ -117,7 +117,7 @@ Nest menus by pointing a second dropdown at an item; `dropdown-sub` sizes it, an
   class="dropdown dropdown-sub"
   data-sp-toggle="#dd-sub-invite"
   data-sp-mode="hover"
-  data-sp-placement="right-start"
+  data-sp-placement="inline-end-start"
 >
   <button class="dropdown-item">Email</button>
   <button class="dropdown-item">Message</button>
@@ -133,7 +133,7 @@ Nest menus by pointing a second dropdown at an item; `dropdown-sub` sizes it, an
   class="dropdown dropdown-sub"
   data-sp-toggle="#dd-sub-more"
   data-sp-mode="hover"
-  data-sp-placement="right-start"
+  data-sp-placement="inline-end-start"
 >
   <button class="dropdown-item">Calendly</button>
   <button class="dropdown-item">Slack</button>
@@ -360,7 +360,7 @@ Groups, submenus, checkboxes, and radio items compose into a full application me
   class="dropdown dropdown-sub"
   data-sp-toggle="#dd-complex-theme"
   data-sp-mode="hover"
-  data-sp-placement="right-start"
+  data-sp-placement="inline-end-start"
 >
   <div class="dropdown-label">Appearance</div>
   <div class="dropdown-item dropdown-item-radio">
@@ -380,7 +380,7 @@ Groups, submenus, checkboxes, and radio items compose into a full application me
 
 ### Placement
 
-Set where the menu opens relative to its trigger with `data-sp-placement`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement), like `top`, `right-start`, or `bottom-end`, and the menu flips to the opposite side on its own when there isn't room.
+Set where the menu opens relative to its trigger with `data-sp-placement`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement), like `top`, `right-start`, or `bottom-end`, plus the logical sides `inline-start` and `inline-end` that follow the text direction. The menu flips to the opposite side on its own when there isn't room.
 
 ```html preview preset=popover
 <div class="flex gap-6">
@@ -429,6 +429,70 @@ Add `data-sp-mode="hover"` to open the menu on hover instead of click; it closes
   <button class="dropdown-item">Settings</button>
   <button class="dropdown-item">Logout</button>
 </div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional icons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=popover open=.dropdown dir=rtl
+<div id="dd-rtl-demo" dir="rtl">
+  <button id="dd-rtl-trigger" class="btn btn-outline" data-i18n="open">افتح القائمة</button>
+
+  <div class="dropdown" data-sp-toggle="#dd-rtl-trigger">
+    <button id="dd-rtl-account" class="dropdown-item">
+      <span data-i18n="account">الحساب</span>
+      <svg class="ms-auto rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <div class="dropdown-separator"></div>
+    <div class="dropdown-label" data-i18n="team">الفريق</div>
+    <button class="dropdown-item">
+      <span data-i18n="newTeam">فريق جديد</span>
+      <span class="dropdown-shortcut">⌘+T</span>
+    </button>
+    <div class="dropdown-separator"></div>
+    <div class="dropdown-item dropdown-item-checkbox">
+      <input type="checkbox" name="dd-rtl-status" checked />
+      <span data-i18n="showStatus">إظهار الحالة</span>
+    </div>
+  </div>
+
+  <div
+    class="dropdown dropdown-sub"
+    data-sp-toggle="#dd-rtl-account"
+    data-sp-mode="hover"
+    data-sp-placement="inline-end-start"
+  >
+    <button class="dropdown-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span data-i18n="profile">الملف الشخصي</span>
+    </button>
+    <button class="dropdown-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+      <span data-i18n="billing">الفوترة</span>
+    </button>
+    <button class="dropdown-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+      <span data-i18n="settings">الإعدادات</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", open: "افتح القائمة", account: "الحساب", team: "الفريق", newTeam: "فريق جديد", showStatus: "إظهار الحالة", profile: "الملف الشخصي", billing: "الفوترة", settings: "الإعدادات" },
+    he: { dir: "rtl", open: "פתח תפריט", account: "חשבון", team: "הצוות", newTeam: "צוות חדש", showStatus: "הצג סטטוס", profile: "פרופיל", billing: "חיוב", settings: "הגדרות" },
+    en: { dir: "ltr", open: "Open menu", account: "Account", team: "Team", newTeam: "New Team", showStatus: "Show status", profile: "Profile", billing: "Billing", settings: "Settings" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("dd-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
 ```
 
 ## Options

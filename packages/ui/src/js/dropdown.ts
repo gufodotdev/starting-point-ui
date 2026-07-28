@@ -75,9 +75,13 @@ export const Dropdown = define({
     // link items (no native Space activation) and button items (no doubling).
     // Submenu triggers open with Enter/Space/ArrowRight (focusing the first
     // sub item), and ArrowLeft in a submenu closes it back to its trigger.
+    // In RTL the arrows invert: submenus open toward the reading direction.
     this.on(this.el, "keydown", (e) => {
       const key = (e as KeyboardEvent).key;
-      if (key === "ArrowLeft" && this.trigger?.matches('[role^="menuitem"]')) {
+      const rtl = getComputedStyle(this.el).direction === "rtl";
+      const openKey = rtl ? "ArrowLeft" : "ArrowRight";
+      const closeKey = rtl ? "ArrowRight" : "ArrowLeft";
+      if (key === closeKey && this.trigger?.matches('[role^="menuitem"]')) {
         e.preventDefault();
         this.hide();
         this.trigger.focus();
@@ -85,7 +89,7 @@ export const Dropdown = define({
       }
       const item = (e.target as HTMLElement).closest<HTMLElement>(this.config.item as string);
       if (!item) return;
-      if (key === "ArrowRight" && item.hasAttribute("aria-haspopup")) {
+      if (key === openKey && item.hasAttribute("aria-haspopup")) {
         e.preventDefault();
         if (!isDisabled(item)) this._openSub(item);
         return;

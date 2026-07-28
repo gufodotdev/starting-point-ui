@@ -30,10 +30,10 @@
 
 @utility dropdown-item-checkbox {
   @layer l1 {
-    @apply py-1.5 pr-8 pl-2;
+    @apply py-1.5 pe-8 ps-2;
 
     &::after {
-      @apply pointer-events-none absolute top-1/2 right-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
+      @apply pointer-events-none absolute top-1/2 end-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
       mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
       mask-size: 100% 100%;
     }
@@ -50,10 +50,10 @@
 
 @utility dropdown-item-radio {
   @layer l1 {
-    @apply py-1.5 pr-8 pl-2;
+    @apply py-1.5 pe-8 ps-2;
 
     &::after {
-      @apply pointer-events-none absolute top-1/2 right-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
+      @apply pointer-events-none absolute top-1/2 end-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
       mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
       mask-size: 100% 100%;
     }
@@ -89,7 +89,7 @@
 
 @utility dropdown-shortcut {
   @layer l1.l2 {
-    @apply ml-auto text-xs tracking-widest text-muted-foreground;
+    @apply ms-auto text-xs tracking-widest text-muted-foreground;
     @apply in-[.dropdown-item:hover]:text-accent-foreground in-[.dropdown-item:focus]:text-accent-foreground;
   }
 }

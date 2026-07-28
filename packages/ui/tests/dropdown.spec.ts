@@ -464,3 +464,51 @@ test.describe("nested submenu hover", () => {
     await expect(menu(page)).not.toHaveClass(/shown/);
   });
 });
+
+const rtlSubmenuFixture = (dir: string) => `
+  <div ${dir}>
+    <button id="trigger" class="btn">Open</button>
+    <div id="menu" class="dropdown" data-sp-toggle="#trigger">
+      <button id="i1" class="dropdown-item">One</button>
+      <button id="subtrigger" class="dropdown-item">Invite users</button>
+    </div>
+    <div id="submenu" class="dropdown dropdown-sub" data-sp-toggle="#subtrigger" data-sp-mode="hover" data-sp-placement="inline-end-start">
+      <button id="s1" class="dropdown-item">Email</button>
+    </div>
+  </div>`;
+
+test.describe("rtl", () => {
+  test("inline-end placement resolves to the right in ltr", async ({ page }) => {
+    await mount(page, rtlSubmenuFixture(""));
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowRight");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await expect(page.locator("#submenu")).toHaveAttribute("data-sp-side", "right");
+  });
+
+  test("inline-end placement resolves to the left in rtl", async ({ page }) => {
+    await mount(page, rtlSubmenuFixture('dir="rtl"'));
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowLeft");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    await expect(page.locator("#submenu")).toHaveAttribute("data-sp-side", "left");
+  });
+
+  test("submenu arrows invert in rtl: ArrowLeft opens, ArrowRight closes", async ({ page }) => {
+    await mount(page, rtlSubmenuFixture('dir="rtl"'));
+    await page.click("#trigger");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowDown");
+    expect(await activeId(page)).toBe("subtrigger");
+    await page.keyboard.press("ArrowLeft");
+    await expect(page.locator("#submenu")).toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("s1");
+    await page.keyboard.press("ArrowRight");
+    await expect(page.locator("#submenu")).not.toHaveClass(/shown/);
+    expect(await activeId(page)).toBe("subtrigger");
+  });
+});
