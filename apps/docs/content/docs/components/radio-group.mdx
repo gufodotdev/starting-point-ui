@@ -175,3 +175,51 @@ Set `aria-invalid` on the radios for the error state.
   </div>
 </fieldset>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="radio-group-rtl-demo" dir="rtl">
+  <div class="field-group gap-3" role="radiogroup" aria-label="Density">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="radio-group-rtl-1" name="radio-group-rtl-density" value="default" />
+      <div class="field-content">
+        <label class="label" for="radio-group-rtl-1" data-i18n="default">افتراضي</label>
+        <p class="field-description" data-i18n="defaultDescription">تباعد قياسي لمعظم حالات الاستخدام.</p>
+      </div>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="radio-group-rtl-2" name="radio-group-rtl-density" value="comfortable" checked />
+      <div class="field-content">
+        <label class="label" for="radio-group-rtl-2" data-i18n="comfortable">مريح</label>
+        <p class="field-description" data-i18n="comfortableDescription">مساحة أكبر بين العناصر.</p>
+      </div>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="radio-group-rtl-3" name="radio-group-rtl-density" value="compact" />
+      <div class="field-content">
+        <label class="label" for="radio-group-rtl-3" data-i18n="compact">مضغوط</label>
+        <p class="field-description" data-i18n="compactDescription">تباعد أدنى للتخطيطات الكثيفة.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", default: "افتراضي", defaultDescription: "تباعد قياسي لمعظم حالات الاستخدام.", comfortable: "مريح", comfortableDescription: "مساحة أكبر بين العناصر.", compact: "مضغوط", compactDescription: "تباعد أدنى للتخطيطات الكثيفة." },
+    he: { dir: "rtl", default: "ברירת מחדל", defaultDescription: "ריווח סטנדרטי לרוב מקרי השימוש.", comfortable: "נוח", comfortableDescription: "יותר מקום בין האלמנטים.", compact: "קומפקטי", compactDescription: "ריווח מינימלי לפריסות צפופות." },
+    en: { dir: "ltr", default: "Default", defaultDescription: "Standard spacing for most use cases.", comfortable: "Comfortable", comfortableDescription: "More space between elements.", compact: "Compact", compactDescription: "Minimal spacing for dense layouts." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("radio-group-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
