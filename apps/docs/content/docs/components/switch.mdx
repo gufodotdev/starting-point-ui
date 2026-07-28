@@ -205,3 +205,33 @@ Add `switch-sm` for a smaller size.
   </div>
 </div>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="switch-rtl-demo" class="field field-horizontal max-w-sm" dir="rtl">
+  <div class="field-content">
+    <label class="label" for="switch-rtl-share" data-i18n="label">المشاركة عبر الأجهزة</label>
+    <p class="field-description" data-i18n="description">يتم مشاركة التركيز عبر الأجهزة، ويتم إيقاف تشغيله عند مغادرة التطبيق.</p>
+  </div>
+  <input type="checkbox" role="switch" class="switch" id="switch-rtl-share" />
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", label: "المشاركة عبر الأجهزة", description: "يتم مشاركة التركيز عبر الأجهزة، ويتم إيقاف تشغيله عند مغادرة التطبيق." },
+    he: { dir: "rtl", label: "שיתוף בין מכשירים", description: "המיקוד משותף בין מכשירים, וכבה כשאתה עוזב את האפליקציה." },
+    en: { dir: "ltr", label: "Share across devices", description: "Focus is shared across devices, and turns off when you leave the app." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("switch-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```

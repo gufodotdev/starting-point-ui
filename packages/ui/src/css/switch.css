@@ -18,6 +18,12 @@
     &:checked::before {
       @apply translate-x-[calc(100%-2px)] dark:bg-primary-foreground;
     }
+
+    /* The rtl: variant would attach :where() after ::before, an invalid
+       selector, so the direction check sits on the input instead. */
+    &:dir(rtl):checked::before {
+      @apply translate-x-[calc(-100%+2px)];
+    }
   }
 }
 
