@@ -50,7 +50,7 @@ Add the `sheet` class to a `<dialog>` element. Give your trigger an `id`, then p
 | Class               | Description                                                    |
 | ------------------- | -------------------------------------------------------------- |
 | `sheet`             | Add to the `<dialog>` element; fills the viewport and dims the page |
-| `sheet-left` `sheet-right` `sheet-top` `sheet-bottom` | Add to `sheet` to pick the edge; right is the default |
+| `sheet-start` `sheet-end` `sheet-top` `sheet-bottom` | Add to `sheet` to pick the edge; end is the default. `sheet-left` and `sheet-right` pin a physical edge |
 | `sheet-panel`       | Add to the child element that is the visible panel             |
 | `sheet-header`      | Add to the block holding the title and description             |
 | `sheet-title`       | Add to a heading element to create the sheet title             |
@@ -80,16 +80,16 @@ Add the `sheet` class to a `<dialog>` element. Give your trigger an `id`, then p
 
 ### Side
 
-Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top`, or `sheet-bottom`. Without one, it defaults to the right.
+Pick the edge the sheet slides from with `sheet-start`, `sheet-end`, `sheet-top`, or `sheet-bottom`; start and end follow the text direction, and `sheet-left` or `sheet-right` pin a physical edge. Without one, it defaults to the end.
 
 ```html preview preset=sheet
-<!-- Left -->
-<button id="side-left" class="btn btn-outline">Left</button>
+<!-- Start -->
+<button id="side-left" class="btn btn-outline">Start</button>
 
-<dialog class="sheet sheet-left" data-sp-toggle="#side-left">
+<dialog class="sheet sheet-start" data-sp-toggle="#side-left">
   <div class="sheet-panel">
     <div class="sheet-header">
-      <h2 class="sheet-title">Left</h2>
+      <h2 class="sheet-title">Start</h2>
       <p class="sheet-description">Great for navigation menus.</p>
     </div>
     <div class="sheet-footer">
@@ -98,13 +98,13 @@ Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top
   </div>
 </dialog>
 
-<!-- Right -->
-<button id="side-right" class="btn btn-outline">Right</button>
+<!-- End -->
+<button id="side-right" class="btn btn-outline">End</button>
 
-<dialog class="sheet sheet-right" data-sp-toggle="#side-right">
+<dialog class="sheet sheet-end" data-sp-toggle="#side-right">
   <div class="sheet-panel">
     <div class="sheet-header">
-      <h2 class="sheet-title">Right</h2>
+      <h2 class="sheet-title">End</h2>
       <p class="sheet-description">Great for details and settings.</p>
     </div>
     <div class="sheet-footer">
@@ -146,14 +146,14 @@ Pick the edge the sheet slides from with `sheet-left`, `sheet-right`, `sheet-top
 
 ### Mobile navigation
 
-Pair a left sheet with the [sidebar menu](/components/sidebar) classes for a simple mobile navigation drawer. For a full navigation layout with a desktop column, reach for the [sidebar](/components/sidebar) component instead.
+Pair a start-side sheet with the [sidebar menu](/components/sidebar) classes for a simple mobile navigation drawer. For a full navigation layout with a desktop column, reach for the [sidebar](/components/sidebar) component instead.
 
 ```html preview preset=sheet open=.sheet
 <button id="sheet-nav-trigger" class="btn btn-ghost btn-icon" aria-label="Open menu">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
 </button>
 
-<dialog class="sheet sheet-left" aria-label="Main menu" data-sp-toggle="#sheet-nav-trigger">
+<dialog class="sheet sheet-start" aria-label="Main menu" data-sp-toggle="#sheet-nav-trigger">
   <div class="sheet-panel">
     <button
       class="btn btn-ghost btn-xs btn-icon absolute top-3 right-3"
@@ -204,6 +204,57 @@ Pair a left sheet with the [sidebar menu](/components/sidebar) classes for a sim
     </div>
   </div>
 </dialog>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=sheet open=.sheet dir=rtl
+<div id="sheet-rtl-demo" dir="rtl">
+  <button id="sheet-rtl-trigger" class="btn btn-outline" data-i18n="open">فتح</button>
+
+  <dialog class="sheet" data-sp-toggle="#sheet-rtl-trigger">
+    <div class="sheet-panel">
+      <div class="sheet-header">
+        <h2 class="sheet-title" data-i18n="editProfile">تعديل الملف الشخصي</h2>
+        <p class="sheet-description" data-i18n="description">قم بإجراء تغييرات على ملفك الشخصي هنا. انقر حفظ عند الانتهاء.</p>
+      </div>
+      <div class="sheet-content">
+        <div class="field-group">
+          <div class="field">
+            <label class="label" for="sheet-rtl-name" data-i18n="name">الاسم</label>
+            <input class="input" id="sheet-rtl-name" value="Pedro Duarte" />
+          </div>
+          <div class="field">
+            <label class="label" for="sheet-rtl-username" data-i18n="username">اسم المستخدم</label>
+            <input class="input" id="sheet-rtl-username" value="@peduarte" />
+          </div>
+        </div>
+      </div>
+      <div class="sheet-footer">
+        <button class="btn" data-i18n="save">حفظ التغييرات</button>
+        <button class="btn btn-outline" data-sp-dismiss data-i18n="close">إغلاق</button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", open: "فتح", editProfile: "تعديل الملف الشخصي", description: "قم بإجراء تغييرات على ملفك الشخصي هنا. انقر حفظ عند الانتهاء.", name: "الاسم", username: "اسم المستخدم", save: "حفظ التغييرات", close: "إغلاق" },
+    he: { dir: "rtl", open: "פתח", editProfile: "עריכת פרופיל", description: "בצע שינויים בפרופיל שלך כאן. לחץ שמור כשתסיים.", name: "שם", username: "שם משתמש", save: "שמור שינויים", close: "סגור" },
+    en: { dir: "ltr", open: "Open", editProfile: "Edit profile", description: "Make changes to your profile here. Click save when you're done.", name: "Name", username: "Username", save: "Save changes", close: "Close" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("sheet-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
 ```
 
 ## Options

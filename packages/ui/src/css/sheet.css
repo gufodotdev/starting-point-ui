@@ -21,7 +21,7 @@
     @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:duration-200 [&.show]:[animation-fill-mode:forwards];
     @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:duration-200 [&.hide]:[animation-fill-mode:forwards];
 
-    @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom))]:sheet-right;
+    @apply [&:where(&:not(.sheet-left,.sheet-right,.sheet-top,.sheet-bottom,.sheet-start,.sheet-end))]:sheet-end;
   }
 }
 
@@ -49,6 +49,34 @@
     }
     &.hide > .sheet-panel {
       @apply slide-out-to-right-10;
+    }
+  }
+}
+
+@utility sheet-start {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-y-0 start-0 h-full w-[calc(100%-2.5rem)] max-w-sm border-e;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-start-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-start-10;
+    }
+  }
+}
+
+@utility sheet-end {
+  @layer l1 {
+    & > .sheet-panel {
+      @apply inset-y-0 end-0 h-full w-[calc(100%-2.5rem)] max-w-sm border-s;
+    }
+    &.show > .sheet-panel {
+      @apply slide-in-from-end-10;
+    }
+    &.hide > .sheet-panel {
+      @apply slide-out-to-end-10;
     }
   }
 }
