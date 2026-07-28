@@ -298,3 +298,36 @@ Compose inputs, a [select](/components/select), and actions into a full form.
   </div>
 </form>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="input-rtl-demo" class="field" dir="rtl">
+  <label class="label" for="input-rtl-api-key" data-i18n="apiKey">مفتاح API</label>
+  <input
+    class="input"
+    id="input-rtl-api-key"
+    type="password"
+    placeholder="sk-..."
+  />
+  <p class="field-description" data-i18n="description">مفتاح API الخاص بك مشفر ومخزن بأمان.</p>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", apiKey: "مفتاح API", description: "مفتاح API الخاص بك مشفر ومخزن بأمان." },
+    he: { dir: "rtl", apiKey: "מפתח API", description: "מפתח ה-API שלך מוצפן ונשמר בצורה מאובטחת." },
+    en: { dir: "ltr", apiKey: "API Key", description: "Your API key is encrypted and stored securely." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("input-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
