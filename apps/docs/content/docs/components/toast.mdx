@@ -268,6 +268,45 @@ return redirect()->back()->with('toast', [
 
 Toasts queued this way survive being rendered by React, Livewire, HTMX, or anything else that inserts nodes after page load. On Back/Forward navigation, cached flash markup does not re-fire.
 
+### RTL
+
+Toasts mount on `<body>`, outside any wrapper, so add `dir="rtl"` to the `<html>` element for the stack to follow. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=default-tall dir=rtl
+<div id="toast-rtl-demo" dir="rtl">
+  <button class="btn btn-outline" onclick="showRtlToast()" data-i18n="show">
+    عرض تنبيه
+  </button>
+</div>
+
+<script>
+  document.documentElement.dir = "rtl";
+  const translations = {
+    ar: { dir: "rtl", show: "عرض تنبيه", title: "تم إنشاء الحدث", description: "الأحد ٣ ديسمبر ٢٠٢٣ الساعة ٩:٠٠ صباحًا", undo: "تراجع" },
+    he: { dir: "rtl", show: "הצג התראה", title: "האירוע נוצר", description: "יום ראשון, 3 בדצמבר 2023 בשעה 9:00", undo: "ביטול" },
+    en: { dir: "ltr", show: "Show toast", title: "Event has been created", description: "Sunday, December 03, 2023 at 9:00 AM", undo: "Undo" },
+  };
+  let current = translations.ar;
+  document.documentElement.dir = current.dir;
+  function showRtlToast() {
+    sp.toast(current.title, {
+      description: current.description,
+      action: { label: current.undo, onClick: () => {} },
+    });
+  }
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    current = t;
+    document.documentElement.dir = t.dir;
+    document.getElementById("toast-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
 ## Options
 
 Pass options as the second argument to `sp.toast()`.
