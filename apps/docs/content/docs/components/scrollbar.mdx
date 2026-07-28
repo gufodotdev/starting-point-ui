@@ -71,6 +71,134 @@ The small variant suits panels and popups where the default width feels heavy.
 </div>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview dir=rtl
+<div id="scrollbar-rtl-demo" dir="rtl">
+  <div class="scrollbar h-72 w-48 overflow-y-auto rounded-lg border p-4 text-sm">
+    <h4 class="mb-4 leading-none font-medium" data-i18n="tags">العلامات</h4>
+    <div>v1.2.0-beta.50</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.49</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.48</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.47</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.46</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.45</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.44</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.43</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.42</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.41</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.40</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.39</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.38</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.37</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.36</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.35</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.34</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.33</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.32</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.31</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.30</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.29</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.28</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.27</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.26</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.25</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.24</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.23</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.22</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.21</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.20</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.19</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.18</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.17</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.16</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.15</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.14</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.13</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.12</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.11</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.10</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.9</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.8</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.7</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.6</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.5</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.4</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.3</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.2</div>
+    <div class="separator my-2"></div>
+    <div>v1.2.0-beta.1</div>
+    <div class="separator my-2"></div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", tags: "العلامات" },
+    he: { dir: "rtl", tags: "תגיות" },
+    en: { dir: "ltr", tags: "Tags" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("scrollbar-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
 ## CSS variables
 
 The scrollbar reads its colors and metrics from component-local variables. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
