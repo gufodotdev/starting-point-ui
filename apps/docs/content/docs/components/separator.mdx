@@ -96,3 +96,34 @@ Separate rows of a definition list.
   </dl>
 </div>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="separator-rtl-demo" dir="rtl" class="flex max-w-sm flex-col gap-4 text-sm">
+  <div class="flex flex-col gap-1.5">
+    <div class="leading-none font-medium">Starting Point UI</div>
+    <div class="text-muted-foreground" data-i18n="subtitle">الأساس لنظام التصميم الخاص بك</div>
+  </div>
+  <div class="separator"></div>
+  <div data-i18n="description">مجموعة من المكونات المصممة بشكل جميل يمكنك تخصيصها وتوسيعها والبناء عليها.</div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", subtitle: "الأساس لنظام التصميم الخاص بك", description: "مجموعة من المكونات المصممة بشكل جميل يمكنك تخصيصها وتوسيعها والبناء عليها." },
+    he: { dir: "rtl", subtitle: "הבסיס למערכת העיצוב שלך", description: "סט של רכיבים מעוצבים בצורה יפה שאתה יכול להתאים אישית, להרחיב ולבנות עליהם." },
+    en: { dir: "ltr", subtitle: "The foundation for your design system", description: "A set of beautifully designed components that you can customize, extend, and build on." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("separator-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
