@@ -24,13 +24,13 @@
 
 @utility pagination-previous {
   @layer l1 {
-    @apply w-auto gap-1.5 px-2.5 pl-2;
+    @apply w-auto gap-1.5 px-2.5 ps-2;
   }
 }
 
 @utility pagination-next {
   @layer l1 {
-    @apply w-auto gap-1.5 px-2.5 pr-2;
+    @apply w-auto gap-1.5 px-2.5 pe-2;
   }
 }
 
@@ -48,11 +48,11 @@
     }
 
     & .pagination-previous {
-      @apply w-auto px-2 pl-1.5;
+      @apply w-auto px-2 ps-1.5;
     }
 
     & .pagination-next {
-      @apply w-auto px-2 pr-1.5;
+      @apply w-auto px-2 pe-1.5;
     }
 
     & .pagination-ellipsis {

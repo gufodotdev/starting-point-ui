@@ -88,3 +88,45 @@ Use just the previous and next buttons without page numbers. This is useful for 
   </nav>
 </div>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip the previous and next chevrons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
+
+```html preview dir=rtl
+<div id="pagination-rtl-demo" dir="rtl">
+  <nav class="pagination">
+    <a href="#" class="pagination-item pagination-previous">
+      <svg class="rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <span class="hidden sm:block" data-i18n="previous">السابق</span>
+    </a>
+    <a href="#" class="pagination-item" data-i18n="p1">١</a>
+    <a href="#" class="pagination-item active" data-i18n="p2">٢</a>
+    <a href="#" class="pagination-item" data-i18n="p3">٣</a>
+    <span class="pagination-ellipsis">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      <span class="sr-only">More pages</span>
+    </span>
+    <a href="#" class="pagination-item pagination-next">
+      <span class="hidden sm:block" data-i18n="next">التالي</span>
+      <svg class="rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  </nav>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", previous: "السابق", next: "التالي", p1: "١", p2: "٢", p3: "٣" },
+    he: { dir: "rtl", previous: "הקודם", next: "הבא", p1: "1", p2: "2", p3: "3" },
+    en: { dir: "ltr", previous: "Previous", next: "Next", p1: "1", p2: "2", p3: "3" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("pagination-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
