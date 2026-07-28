@@ -25,7 +25,7 @@
 
 @utility avatar-badge {
   @layer l1.l2 {
-    @apply absolute right-0 bottom-0 z-10 inline-flex size-2.5 items-center justify-center rounded-full bg-primary text-primary-foreground ring-2 ring-background select-none;
+    @apply absolute end-0 bottom-0 z-10 inline-flex size-2.5 items-center justify-center rounded-full bg-primary text-primary-foreground ring-2 ring-background select-none;
     @apply [&>svg]:size-2;
   }
 }

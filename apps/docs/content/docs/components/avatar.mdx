@@ -276,3 +276,74 @@ The count slot fits an icon too.
   </span>
 </span>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview dir=rtl
+<div id="avatar-rtl-demo" dir="rtl" class="flex flex-wrap items-center gap-8">
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Leila Navarro"
+    />
+    <span class="avatar-fallback">LN</span>
+  </span>
+
+  <span class="avatar">
+    <img
+      class="avatar-image"
+      src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+      alt="Theo Marchetti"
+    />
+    <span class="avatar-fallback">TM</span>
+    <span class="avatar-badge bg-green-600 dark:bg-green-800"></span>
+  </span>
+
+  <span class="avatar-group">
+    <span class="avatar">
+      <img
+        class="avatar-image"
+        src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+        alt="Leila Navarro"
+      />
+      <span class="avatar-fallback">LN</span>
+    </span>
+    <span class="avatar">
+      <img
+        class="avatar-image"
+        src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+        alt="Theo Marchetti"
+      />
+      <span class="avatar-fallback">TM</span>
+    </span>
+    <span class="avatar">
+      <img
+        class="avatar-image"
+        src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+        alt="Maya Santoso"
+      />
+      <span class="avatar-fallback">MS</span>
+    </span>
+    <span class="avatar-group-count" data-i18n="moreUsers">+٣</span>
+  </span>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", moreUsers: "+٣" },
+    he: { dir: "rtl", moreUsers: "+3" },
+    en: { dir: "ltr", moreUsers: "+3" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("avatar-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
