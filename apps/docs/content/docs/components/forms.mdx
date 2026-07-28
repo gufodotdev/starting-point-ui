@@ -137,6 +137,108 @@ Forms compose from small pieces: a [field](/components/field) lays out each labe
 </form>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<form id="forms-rtl-demo" class="field-group" dir="rtl">
+  <fieldset class="field-set">
+    <legend class="field-legend" data-i18n="paymentMethod">طريقة الدفع</legend>
+    <p class="field-description" data-i18n="secureTransactions">جميع المعاملات آمنة ومشفرة</p>
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="forms-rtl-card-name" data-i18n="nameOnCard">الاسم على البطاقة</label>
+        <input class="input" id="forms-rtl-card-name" placeholder="Evil Rabbit" required />
+      </div>
+      <div class="field">
+        <label class="label" for="forms-rtl-card-number" data-i18n="cardNumber">رقم البطاقة</label>
+        <input class="input" id="forms-rtl-card-number" placeholder="1234 5678 9012 3456" required />
+        <p class="field-description" data-i18n="cardNumberDescription">أدخل رقم البطاقة المكون من 16 رقمًا</p>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="field">
+          <label class="label" for="forms-rtl-exp-month" data-i18n="month">الشهر</label>
+          <select class="select" id="forms-rtl-exp-month">
+            <option value="" data-i18n="monthPlaceholder">ش.ش</option>
+            <option value="01" data-i18n="month01">٠١</option>
+            <option value="02" data-i18n="month02">٠٢</option>
+            <option value="03" data-i18n="month03">٠٣</option>
+            <option value="04" data-i18n="month04">٠٤</option>
+            <option value="05" data-i18n="month05">٠٥</option>
+            <option value="06" data-i18n="month06">٠٦</option>
+            <option value="07" data-i18n="month07">٠٧</option>
+            <option value="08" data-i18n="month08">٠٨</option>
+            <option value="09" data-i18n="month09">٠٩</option>
+            <option value="10" data-i18n="month10">١٠</option>
+            <option value="11" data-i18n="month11">١١</option>
+            <option value="12" data-i18n="month12">١٢</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="forms-rtl-exp-year" data-i18n="year">السنة</label>
+          <select class="select" id="forms-rtl-exp-year">
+            <option value="">YYYY</option>
+            <option>2024</option>
+            <option>2025</option>
+            <option>2026</option>
+            <option>2027</option>
+            <option>2028</option>
+            <option>2029</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="forms-rtl-cvv" data-i18n="cvv">CVV</label>
+          <input class="input" id="forms-rtl-cvv" placeholder="123" required />
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field-separator"></div>
+  <fieldset class="field-set">
+    <legend class="field-legend" data-i18n="billingAddress">عنوان الفوترة</legend>
+    <p class="field-description" data-i18n="billingAddressDescription">عنوان الفوترة المرتبط بطريقة الدفع الخاصة بك</p>
+    <div class="field-group">
+      <div class="field field-horizontal">
+        <input type="checkbox" class="checkbox" id="forms-rtl-shipping" checked />
+        <label class="label font-normal" for="forms-rtl-shipping" data-i18n="sameAsShipping">نفس عنوان الشحن</label>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="field-set">
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="forms-rtl-comments" data-i18n="comments">تعليقات</label>
+        <textarea class="textarea resize-none" id="forms-rtl-comments" placeholder="أضف أي تعليقات إضافية" data-i18n-placeholder="commentsPlaceholder"></textarea>
+      </div>
+    </div>
+  </fieldset>
+  <div class="field field-horizontal">
+    <button class="btn" type="submit" data-i18n="submit">إرسال</button>
+    <button class="btn btn-outline" type="button" data-i18n="cancel">إلغاء</button>
+  </div>
+</form>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", paymentMethod: "طريقة الدفع", secureTransactions: "جميع المعاملات آمنة ومشفرة", nameOnCard: "الاسم على البطاقة", cardNumber: "رقم البطاقة", cardNumberDescription: "أدخل رقم البطاقة المكون من 16 رقمًا", month: "الشهر", year: "السنة", cvv: "CVV", monthPlaceholder: "ش.ش", month01: "٠١", month02: "٠٢", month03: "٠٣", month04: "٠٤", month05: "٠٥", month06: "٠٦", month07: "٠٧", month08: "٠٨", month09: "٠٩", month10: "١٠", month11: "١١", month12: "١٢", billingAddress: "عنوان الفوترة", billingAddressDescription: "عنوان الفوترة المرتبط بطريقة الدفع الخاصة بك", sameAsShipping: "نفس عنوان الشحن", comments: "تعليقات", commentsPlaceholder: "أضف أي تعليقات إضافية", submit: "إرسال", cancel: "إلغاء" },
+    he: { dir: "rtl", paymentMethod: "אמצעי תשלום", secureTransactions: "כל העסקאות מאובטחות ומוצפנות", nameOnCard: "שם על הכרטיס", cardNumber: "מספר כרטיס", cardNumberDescription: "הזן את מספר הכרטיס בן 16 הספרות שלך", month: "חודש", year: "שנה", cvv: "CVV", monthPlaceholder: "MM", month01: "01", month02: "02", month03: "03", month04: "04", month05: "05", month06: "06", month07: "07", month08: "08", month09: "09", month10: "10", month11: "11", month12: "12", billingAddress: "כתובת חיוב", billingAddressDescription: "כתובת החיוב המשויכת לאמצעי התשלום שלך", sameAsShipping: "זהה לכתובת המשלוח", comments: "הערות", commentsPlaceholder: "הוסף הערות נוספות", submit: "שלח", cancel: "בטל" },
+    en: { dir: "ltr", paymentMethod: "Payment Method", secureTransactions: "All transactions are secure and encrypted", nameOnCard: "Name on Card", cardNumber: "Card Number", cardNumberDescription: "Enter your 16-digit card number", month: "Month", year: "Year", cvv: "CVV", monthPlaceholder: "MM", month01: "01", month02: "02", month03: "03", month04: "04", month05: "05", month06: "06", month07: "07", month08: "08", month09: "09", month10: "10", month11: "11", month12: "12", billingAddress: "Billing Address", billingAddressDescription: "The billing address associated with your payment method", sameAsShipping: "Same as shipping address", comments: "Comments", commentsPlaceholder: "Add any additional comments", submit: "Submit", cancel: "Cancel" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("forms-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      el.placeholder = t[el.dataset.i18nPlaceholder];
+    });
+  });
+</script>
+```
+
 ## Components
 
 - [Field](/components/field) — Structured layout for labels, controls, descriptions, and errors
