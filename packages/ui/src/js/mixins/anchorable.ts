@@ -14,18 +14,35 @@ const ARROW_SIDE: Record<string, string> = {
 };
 
 // Mirrors the resolved placement so enter animations can slide from the
-// trigger's side and zoom from the anchored edge (radix parity).
+// trigger's side and zoom from the anchored edge (radix parity). Start/end
+// alignments are logical (Floating UI flips them in RTL), so the origin
+// consults the direction too.
 function applyOrigin(el: HTMLElement, placement: string): void {
   const [side, align] = placement.split("-");
   el.dataset.spSide = side;
   const edge = ARROW_SIDE[side];
   if (side === "top" || side === "bottom") {
-    const x = align === "start" ? "left" : align === "end" ? "right" : "center";
+    const rtl = getComputedStyle(el).direction === "rtl";
+    const start = rtl ? "right" : "left";
+    const end = rtl ? "left" : "right";
+    const x = align === "start" ? start : align === "end" ? end : "center";
     el.style.transformOrigin = `${x} ${edge}`;
   } else {
     const y = align === "start" ? "top" : align === "end" ? "bottom" : "center";
     el.style.transformOrigin = `${edge} ${y}`;
   }
+}
+
+// Logical sides: inline-start/inline-end resolve to the physical left/right
+// for the current direction, so one authored placement works in both ltr and
+// rtl, and a runtime language toggle re-resolves on the next position pass.
+function resolvePlacement(placement: string, el: HTMLElement): string {
+  const match = placement.match(/^inline-(start|end)(-.+)?$/);
+  if (!match) return placement;
+  const rtl = getComputedStyle(el).direction === "rtl";
+  const side =
+    match[1] === "start" ? (rtl ? "right" : "left") : (rtl ? "left" : "right");
+  return `${side}${match[2] ?? ""}`;
 }
 
 export const Anchorable: Mixin = {
@@ -74,13 +91,15 @@ export const Anchorable: Mixin = {
       ];
       if (arrowEl) middleware.push(arrow({ element: arrowEl, padding: 4 }));
 
+      const resolved = resolvePlacement(this.config.placement as string, this.el);
+
       // Applied synchronously from the configured placement so the enter
       // animation starts with the right origin; corrected below if flipped.
-      applyOrigin(this.el, this.config.placement as string);
+      applyOrigin(this.el, resolved);
 
       computePosition(this.trigger, this.el, {
         strategy: "fixed",
-        placement: this.config.placement as Placement,
+        placement: resolved as Placement,
         middleware,
       }).then(({ x, y, placement, middlewareData }) => {
         this.el.style.left = `${x}px`;
