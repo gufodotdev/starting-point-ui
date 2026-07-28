@@ -62,7 +62,7 @@
 
 @utility field-description {
   @layer l1.l2 {
-    @apply text-left text-sm leading-normal font-normal text-muted-foreground;
+    @apply text-start text-sm leading-normal font-normal text-muted-foreground;
     @apply in-[.field-horizontal]:text-balance;
     /* Pull up against a preceding legend and before a trailing group, so the
        set reads as one block. */
