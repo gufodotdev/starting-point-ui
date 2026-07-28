@@ -335,6 +335,60 @@ An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interru
 </dialog>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Position the close button with `inset-e-3` instead of `right-3` so it follows the text direction. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=dialog open=.dialog dir=rtl
+<div id="dialog-rtl-demo" dir="rtl">
+  <button id="dialog-rtl-trigger" class="btn btn-outline" data-i18n="open">فتح الحوار</button>
+
+  <dialog class="dialog" data-sp-toggle="#dialog-rtl-trigger">
+    <form class="dialog-panel">
+      <button type="button" class="btn btn-ghost btn-xs btn-icon absolute top-3 inset-e-3" aria-label="Close" data-sp-dismiss>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div class="dialog-header">
+        <h2 class="dialog-title" data-i18n="editProfile">تعديل الملف الشخصي</h2>
+        <p class="dialog-description" data-i18n="description">قم بإجراء تغييرات على ملفك الشخصي هنا. انقر فوق حفظ عند الانتهاء.</p>
+      </div>
+      <div class="dialog-content">
+        <div class="field-group">
+          <div class="field">
+            <label class="label" for="dialog-rtl-name" data-i18n="name">الاسم</label>
+            <input class="input" id="dialog-rtl-name" name="name" value="Pedro Duarte" />
+          </div>
+          <div class="field">
+            <label class="label" for="dialog-rtl-username" data-i18n="username">اسم المستخدم</label>
+            <input class="input" id="dialog-rtl-username" name="username" value="@peduarte" />
+          </div>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-outline" data-sp-dismiss data-i18n="cancel">إلغاء</button>
+        <button type="submit" class="btn" data-i18n="save">حفظ التغييرات</button>
+      </div>
+    </form>
+  </dialog>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", open: "فتح الحوار", editProfile: "تعديل الملف الشخصي", description: "قم بإجراء تغييرات على ملفك الشخصي هنا. انقر فوق حفظ عند الانتهاء.", name: "الاسم", username: "اسم المستخدم", cancel: "إلغاء", save: "حفظ التغييرات" },
+    he: { dir: "rtl", open: "פתח דיאלוג", editProfile: "ערוך פרופיל", description: "בצע שינויים בפרופיל שלך כאן. לחץ על שמור כשתסיים.", name: "שם", username: "שם משתמש", cancel: "בטל", save: "שמור שינויים" },
+    en: { dir: "ltr", open: "Open Dialog", editProfile: "Edit profile", description: "Make changes to your profile here. Click save when you're done.", name: "Name", username: "Username", cancel: "Cancel", save: "Save changes" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("dialog-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
 ## CSS variables
 
 The panel's spacing rhythm is one component-local variable: the panel derives its vertical padding and section gap from it, and each section its horizontal padding. Override it per instance with an arbitrary property, or for the whole app with a plain CSS rule.
