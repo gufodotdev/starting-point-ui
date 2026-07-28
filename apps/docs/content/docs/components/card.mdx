@@ -279,6 +279,59 @@ Add an image before the card header to create a card with an image.
 </div>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Use logical utilities like `ms-auto` so alignment follows the text direction. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="card-rtl-demo" dir="rtl">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title" data-i18n="title">تسجيل الدخول إلى حسابك</h3>
+      <p class="card-description" data-i18n="description">أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك</p>
+      <div class="card-action">
+        <button class="btn btn-link" data-i18n="signUp">إنشاء حساب</button>
+      </div>
+    </div>
+    <div class="card-content">
+      <form class="flex flex-col gap-6">
+        <div class="field">
+          <label class="label" for="card-rtl-email" data-i18n="email">البريد الإلكتروني</label>
+          <input class="input" id="card-rtl-email" type="email" placeholder="m@example.com" required />
+        </div>
+        <div class="field">
+          <div class="flex w-full items-center">
+            <label class="label" for="card-rtl-password" data-i18n="password">كلمة المرور</label>
+            <a href="#" class="ms-auto inline-block text-sm underline-offset-4 hover:underline" data-i18n="forgotPassword">نسيت كلمة المرور؟</a>
+          </div>
+          <input class="input" id="card-rtl-password" type="password" required />
+        </div>
+      </form>
+    </div>
+    <div class="card-footer flex-col gap-2">
+      <button type="submit" class="btn w-full" data-i18n="login">تسجيل الدخول</button>
+      <button class="btn btn-outline w-full" data-i18n="loginWithGoogle">تسجيل الدخول باستخدام Google</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", title: "تسجيل الدخول إلى حسابك", description: "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك", signUp: "إنشاء حساب", email: "البريد الإلكتروني", password: "كلمة المرور", forgotPassword: "نسيت كلمة المرور؟", login: "تسجيل الدخول", loginWithGoogle: "تسجيل الدخول باستخدام Google" },
+    he: { dir: "rtl", title: "התחבר לחשבון שלך", description: "הזן את האימייל שלך למטה כדי להתחבר לחשבון שלך", signUp: "הירשם", email: "אימייל", password: "סיסמה", forgotPassword: "שכחת את הסיסמה?", login: "התחבר", loginWithGoogle: "התחבר עם Google" },
+    en: { dir: "ltr", title: "Login to your account", description: "Enter your email below to login to your account", signUp: "Sign Up", email: "Email", password: "Password", forgotPassword: "Forgot your password?", login: "Login", loginWithGoogle: "Login with Google" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("card-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
 ## CSS variables
 
 The card's spacing rhythm is one component-local variable: the card derives its vertical padding and section gap from it, and each section its horizontal inset. Override it per instance with an arbitrary property, or for the whole app with a plain CSS rule.
