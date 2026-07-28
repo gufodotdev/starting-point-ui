@@ -237,6 +237,54 @@ Collapsibles nest, so a file tree is triggers and panels all the way down. The [
 </nav>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional chevrons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=collapsible dir=rtl
+<div id="collapsible-rtl-demo" class="flex w-full max-w-sm flex-col gap-2" dir="rtl">
+  <div class="flex items-center justify-between gap-4 px-4">
+    <h4 class="text-sm font-semibold" data-i18n="orderNumber">الطلب #4189</h4>
+    <button id="collapsible-rtl-trigger" class="btn btn-ghost btn-sm btn-icon" type="button" aria-expanded="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+      <span class="sr-only" data-i18n="toggle">تبديل التفاصيل</span>
+    </button>
+  </div>
+  <div class="flex items-center justify-between rounded-md border px-4 py-2 text-sm">
+    <span class="text-muted-foreground" data-i18n="status">الحالة</span>
+    <span class="font-medium" data-i18n="shipped">تم الشحن</span>
+  </div>
+  <div class="collapsible expanded" data-sp-toggle="#collapsible-rtl-trigger">
+    <div class="flex flex-col gap-2">
+      <div class="rounded-md border px-4 py-2 text-sm">
+        <p class="font-medium" data-i18n="shippingAddress">عنوان الشحن</p>
+        <p class="text-muted-foreground" data-i18n="address">100 Market St, San Francisco</p>
+      </div>
+      <div class="rounded-md border px-4 py-2 text-sm">
+        <p class="font-medium" data-i18n="items">العناصر</p>
+        <p class="text-muted-foreground" data-i18n="itemsDescription">2x سماعات الاستوديو</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", orderNumber: "الطلب #4189", toggle: "تبديل التفاصيل", status: "الحالة", shipped: "تم الشحن", shippingAddress: "عنوان الشحن", address: "100 Market St, San Francisco", items: "العناصر", itemsDescription: "2x سماعات الاستوديو" },
+    he: { dir: "rtl", orderNumber: "הזמנה #4189", toggle: "החלף פרטים", status: "סטטוס", shipped: "נשלח", shippingAddress: "כתובת משלוח", address: "100 Market St, San Francisco", items: "פריטים", itemsDescription: "2x אוזניות סטודיו" },
+    en: { dir: "ltr", orderNumber: "Order #4189", toggle: "Toggle details", status: "Status", shipped: "Shipped", shippingAddress: "Shipping address", address: "100 Market St, San Francisco", items: "Items", itemsDescription: "2x Studio Headphones" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("collapsible-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
 ## Options
 
 ### Collapsible
