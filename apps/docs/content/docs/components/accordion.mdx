@@ -283,6 +283,99 @@ An accordion slots into a [card](/components/card) for a framed FAQ.
 </div>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=accordion dir=rtl
+<div id="accordion-rtl-demo" class="accordion" dir="rtl">
+  <div class="accordion-item">
+    <h3>
+      <button
+        id="accordion-rtl-password"
+        class="accordion-trigger"
+        aria-expanded="true"
+      >
+        <span data-i18n="q1">كيف يمكنني إعادة تعيين كلمة المرور؟</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#accordion-rtl-password">
+      <div class="accordion-content" data-i18n="a1">
+        انقر على «نسيت كلمة المرور» في صفحة تسجيل الدخول وسنرسل لك رابطًا
+        لإعادة تعيين كلمة المرور.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="accordion-rtl-plan" class="accordion-trigger">
+        <span data-i18n="q2">هل يمكنني تغيير خطة الاشتراك الخاصة بي؟</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#accordion-rtl-plan">
+      <div class="accordion-content" data-i18n="a2">
+        نعم، يمكنك ترقية أو تخفيض خطتك في أي وقت من إعدادات حسابك.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="accordion-rtl-payment" class="accordion-trigger">
+        <span data-i18n="q3">ما هي طرق الدفع التي تقبلونها؟</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#accordion-rtl-payment">
+      <div class="accordion-content" data-i18n="a3">
+        نقبل جميع بطاقات الائتمان الرئيسية و PayPal والتحويلات المصرفية.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: {
+      dir: "rtl",
+      q1: "كيف يمكنني إعادة تعيين كلمة المرور؟",
+      a1: "انقر على «نسيت كلمة المرور» في صفحة تسجيل الدخول وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+      q2: "هل يمكنني تغيير خطة الاشتراك الخاصة بي؟",
+      a2: "نعم، يمكنك ترقية أو تخفيض خطتك في أي وقت من إعدادات حسابك.",
+      q3: "ما هي طرق الدفع التي تقبلونها؟",
+      a3: "نقبل جميع بطاقات الائتمان الرئيسية و PayPal والتحويلات المصرفية.",
+    },
+    he: {
+      dir: "rtl",
+      q1: "איך אני מאפס את הסיסמה שלי?",
+      a1: "לחץ על 'שכחתי סיסמה' בעמוד ההתחברות ונשלח לך קישור לאיפוס הסיסמה.",
+      q2: "האם אני יכול לשנות את תוכנית המנוי שלי?",
+      a2: "כן, אתה יכול לשדרג או להוריד את התוכנית שלך בכל עת מהגדרות החשבון.",
+      q3: "אילו אמצעי תשלום אתם מקבלים?",
+      a3: "אנו מקבלים כרטיסי אשראי, PayPal והעברות בנקאיות.",
+    },
+    en: {
+      dir: "ltr",
+      q1: "How do I reset my password?",
+      a1: "Click 'Forgot Password' on the login page and we'll send you a link to reset your password.",
+      q2: "Can I change my subscription plan?",
+      a2: "Yes, you can upgrade or downgrade your plan at any time from your account settings.",
+      q3: "What payment methods do you accept?",
+      a3: "We accept all major credit cards, PayPal, and bank transfers.",
+    },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("accordion-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
 ## Options
 
 ### Accordion
