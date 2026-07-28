@@ -561,6 +561,53 @@ The hidden inputs are real form fields, so the selections submit with the form: 
 </script>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form-start open=.combobox dir=rtl
+<div id="combobox-rtl-demo" dir="rtl">
+  <div class="field">
+    <label class="label" for="combobox-rtl-input" data-i18n="label">الفئات</label>
+    <div class="combobox-chips" id="combobox-rtl-chips">
+      <span class="combobox-chip"><span data-i18n="technology">التكنولوجيا</span> <button class="combobox-chip-remove" type="button" aria-label="Remove Technology"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></span>
+      <input id="combobox-rtl-input" placeholder="أضف فئات" data-i18n-placeholder="placeholder" />
+    </div>
+  </div>
+
+  <div class="combobox" data-sp-toggle="#combobox-rtl-chips" data-sp-auto-highlight="true">
+    <div class="combobox-empty" data-i18n="empty">لم يتم العثور على فئات.</div>
+    <div class="combobox-list">
+      <div class="combobox-item"><input type="checkbox" name="combobox-rtl" value="technology" checked /> <span data-i18n="technology">التكنولوجيا</span></div>
+      <div class="combobox-item"><input type="checkbox" name="combobox-rtl" value="design" /> <span data-i18n="design">التصميم</span></div>
+      <div class="combobox-item"><input type="checkbox" name="combobox-rtl" value="business" /> <span data-i18n="business">الأعمال</span></div>
+      <div class="combobox-item"><input type="checkbox" name="combobox-rtl" value="marketing" /> <span data-i18n="marketing">التسويق</span></div>
+      <div class="combobox-item"><input type="checkbox" name="combobox-rtl" value="education" /> <span data-i18n="education">التعليم</span></div>
+      <div class="combobox-item"><input type="checkbox" name="combobox-rtl" value="health" /> <span data-i18n="health">الصحة</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", label: "الفئات", placeholder: "أضف فئات", empty: "لم يتم العثور على فئات.", technology: "التكنولوجيا", design: "التصميم", business: "الأعمال", marketing: "التسويق", education: "التعليم", health: "الصحة" },
+    he: { dir: "rtl", label: "קטגוריות", placeholder: "הוסף קטגוריות", empty: "לא נמצאו קטגוריות.", technology: "טכנולוגיה", design: "עיצוב", business: "עסקים", marketing: "שיווק", education: "חינוך", health: "בריאות" },
+    en: { dir: "ltr", label: "Categories", placeholder: "Add categories", empty: "No categories found.", technology: "Technology", design: "Design", business: "Business", marketing: "Marketing", education: "Education", health: "Health" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("combobox-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      el.placeholder = t[el.dataset.i18nPlaceholder];
+    });
+  });
+</script>
+```
+
 ## Options
 
 ### Combobox

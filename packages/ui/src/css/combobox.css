@@ -29,7 +29,7 @@
 
 @utility combobox-item {
   @layer l1.l2 {
-    @apply relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none;
+    @apply relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pe-8 ps-2 text-sm outline-hidden select-none;
     @apply hover:bg-accent hover:text-accent-foreground data-sp-highlighted:bg-accent data-sp-highlighted:text-accent-foreground;
     @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
 
@@ -43,7 +43,7 @@
     }
 
     &::after {
-      @apply pointer-events-none absolute top-1/2 right-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
+      @apply pointer-events-none absolute top-1/2 end-2 hidden size-4 -translate-y-1/2 bg-current content-[''];
       mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
       mask-size: 100% 100%;
     }
@@ -97,11 +97,11 @@
     /* The chips are rendered by JS, so their styles live here where the
        author-written class guarantees Tailwind emits them. */
     & > .combobox-chip {
-      @apply flex h-5.5 w-fit items-center justify-center gap-1 rounded-sm bg-muted px-1.5 pr-0 text-xs font-medium whitespace-nowrap text-foreground;
+      @apply flex h-5.5 w-fit items-center justify-center gap-1 rounded-sm bg-muted px-1.5 pe-0 text-xs font-medium whitespace-nowrap text-foreground;
     }
 
     & .combobox-chip-remove {
-      @apply -ml-1 flex size-5.5 shrink-0 cursor-pointer items-center justify-center rounded-sm opacity-50 transition-opacity outline-none;
+      @apply -ms-1 flex size-5.5 shrink-0 cursor-pointer items-center justify-center rounded-sm opacity-50 transition-opacity outline-none;
       @apply hover:opacity-100 focus-visible:opacity-100;
       @apply [&>svg]:size-3.5 [&>svg]:shrink-0;
     }
