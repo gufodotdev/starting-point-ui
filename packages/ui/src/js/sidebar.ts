@@ -143,7 +143,7 @@ export const Sidebar = define({
         // Decorative: the button is already its own accessible name.
         tip.setAttribute("aria-hidden", "true");
         tip.setAttribute("data-sp-toggle", `#${ensureId(button)}`);
-        tip.setAttribute("data-sp-placement", "right");
+        tip.setAttribute("data-sp-placement", "inline-end");
         this.el.appendChild(tip);
 
         getInstance(tip, Tooltip);

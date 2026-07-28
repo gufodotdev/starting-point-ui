@@ -268,7 +268,7 @@ test.describe("desktop column", () => {
       await expect(tip).toHaveText("Dashboard");
       await expect(tip).toHaveAttribute("aria-hidden", "true");
       await expect(tip).toHaveAttribute("data-sp-toggle", "#first-item");
-      await expect(tip).toHaveAttribute("data-sp-placement", "right");
+      await expect(tip).toHaveAttribute("data-sp-placement", "inline-end");
     });
 
     test("the tooltip shows only while collapsed", async ({ page }) => {

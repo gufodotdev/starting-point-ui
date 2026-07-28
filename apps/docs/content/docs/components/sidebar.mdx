@@ -533,14 +533,14 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
 </div>
 ```
 
-### Right sidebar
+### End sidebar
 
-A sidebar defaults to the left. Add `sidebar-right` to move it to the right instead.
+A sidebar defaults to the start side, the left in LTR. Add `sidebar-end` to move it to the other side; `sidebar-left` and `sidebar-right` pin a physical edge.
 
 ```html preview preset=sidebar
 <div class="sidebar-container">
   <aside
-    class="sidebar sidebar-right"
+    class="sidebar sidebar-end"
     data-sp-collapse="offcanvas"
     data-sp-toggle="#right-trigger"
   >
@@ -684,7 +684,7 @@ A layout can hold two sidebars at once, for example navigation on the left and a
     </div>
   </main>
   <aside
-    class="sidebar sidebar-right"
+    class="sidebar sidebar-end"
     data-sp-collapse="offcanvas"
     data-sp-toggle="#toc-trigger"
   >
@@ -1495,6 +1495,291 @@ The `sidebar-footer` is a pinned region at the bottom of the panel, often a user
     </div>
   </footer>
 </aside>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=sidebar dir=rtl
+<div id="sidebar-rtl-demo" class="sidebar-container" dir="rtl">
+  <aside
+    class="sidebar"
+    data-sp-collapse="icon"
+    data-sp-toggle="#sidebar-rtl-trigger"
+  >
+    <header class="sidebar-header">
+      <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
+        <span
+          class="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-primary text-primary-foreground"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M7 2h10"/><path d="M5 6h14"/><rect width="18" height="12" x="3" y="10" rx="2"/></svg>
+        </span>
+        <span class="grid min-w-0 flex-1 text-start leading-tight">
+          <span class="truncate text-sm font-medium" data-i18n="teamName">شركة أكمي</span>
+          <span class="truncate text-xs text-muted-foreground" data-i18n="teamPlan">المؤسسة</span>
+        </span>
+      </a>
+    </header>
+    <div class="sidebar-content">
+      <div class="sidebar-group">
+        <span class="sidebar-group-label" data-i18n="platform">المنصة</span>
+        <nav class="sidebar-menu">
+          <div class="sidebar-menu-item">
+            <button
+              id="sidebar-rtl-playground"
+              class="sidebar-menu-button"
+              aria-expanded="true"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
+              <span data-i18n="playground">ملعب</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-auto in-aria-expanded:rotate-90 rtl:rotate-180 rtl:in-aria-expanded:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <div
+              class="collapsible expanded"
+              data-sp-toggle="#sidebar-rtl-playground"
+            >
+              <ul class="sidebar-menu-sub">
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="history">السجل</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="starred">المميز</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="settings">الإعدادات</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sidebar-menu-item">
+            <button
+              id="sidebar-rtl-models"
+              class="sidebar-menu-button"
+              aria-expanded="false"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+              <span data-i18n="models">النماذج</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-auto in-aria-expanded:rotate-90 rtl:rotate-180 rtl:in-aria-expanded:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <div class="collapsible" data-sp-toggle="#sidebar-rtl-models">
+              <ul class="sidebar-menu-sub">
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="genesis">جينيسيس</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="explorer">إكسبلورر</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="quantum">كوانتوم</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sidebar-menu-item">
+            <button
+              id="sidebar-rtl-documentation"
+              class="sidebar-menu-button"
+              aria-expanded="false"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+              <span data-i18n="documentation">التوثيق</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-auto in-aria-expanded:rotate-90 rtl:rotate-180 rtl:in-aria-expanded:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <div class="collapsible" data-sp-toggle="#sidebar-rtl-documentation">
+              <ul class="sidebar-menu-sub">
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="introduction">مقدمة</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="getStarted">ابدأ</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="tutorials">الدروس</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="changelog">سجل التغييرات</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sidebar-menu-item">
+            <button
+              id="sidebar-rtl-settings"
+              class="sidebar-menu-button"
+              aria-expanded="false"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 17H5"/><path d="M19 7h-9"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+              <span data-i18n="settings">الإعدادات</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-auto in-aria-expanded:rotate-90 rtl:rotate-180 rtl:in-aria-expanded:rotate-90"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <div class="collapsible" data-sp-toggle="#sidebar-rtl-settings">
+              <ul class="sidebar-menu-sub">
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="general">عام</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="team">الفريق</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="billing">الفوترة</span>
+                  </a>
+                </li>
+                <li class="sidebar-menu-sub-item">
+                  <a href="#" class="sidebar-menu-sub-button">
+                    <span data-i18n="limits">الحدود</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div
+        class="sidebar-group in-[.sidebar.collapsed[data-sp-collapse=icon]]:hidden"
+      >
+        <span class="sidebar-group-label" data-i18n="projects">المشاريع</span>
+        <nav class="sidebar-menu">
+          <div class="sidebar-menu-item">
+            <a href="#" class="sidebar-menu-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="6" y2="6"/><line x1="22" x2="2" y1="18" y2="18"/><line x1="6" x2="6" y1="2" y2="22"/><line x1="18" x2="18" y1="2" y2="22"/></svg>
+              <span data-i18n="designEngineering">هندسة التصميم</span>
+            </a>
+          </div>
+          <div class="sidebar-menu-item">
+            <a href="#" class="sidebar-menu-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/></svg>
+              <span data-i18n="salesMarketing">المبيعات والتسويق</span>
+            </a>
+          </div>
+          <div class="sidebar-menu-item">
+            <a href="#" class="sidebar-menu-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>
+              <span data-i18n="travel">السفر</span>
+            </a>
+          </div>
+          <div class="sidebar-menu-item">
+            <button class="sidebar-menu-button text-muted-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              <span data-i18n="more">المزيد</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <footer class="sidebar-footer">
+      <button
+        id="sidebar-rtl-user"
+        class="sidebar-menu-button sidebar-menu-button-lg"
+        aria-expanded="false"
+      >
+        <span class="avatar size-8 rounded-lg">
+          <span class="avatar-fallback">CN</span>
+        </span>
+        <span class="grid flex-1 text-start leading-tight">
+          <span class="truncate font-medium">shadcn</span>
+          <span class="truncate text-xs">m@example.com</span>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-auto"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+      </button>
+      <div
+        class="dropdown min-w-56"
+        data-sp-toggle="#sidebar-rtl-user"
+        data-sp-placement="top-start"
+      >
+        <a href="#" class="dropdown-item" data-i18n="upgradeToPro">ترقية إلى Pro</a>
+        <div class="dropdown-separator"></div>
+        <a href="#" class="dropdown-item" data-i18n="account">الحساب</a>
+        <a href="#" class="dropdown-item" data-i18n="billing">الفوترة</a>
+        <a href="#" class="dropdown-item" data-i18n="notifications">الإشعارات</a>
+        <div class="dropdown-separator"></div>
+        <a href="#" class="dropdown-item" data-i18n="logOut">تسجيل الخروج</a>
+      </div>
+    </footer>
+  </aside>
+  <main class="sidebar-page flex flex-col">
+    <header class="flex h-16 items-center gap-2 px-4">
+      <button
+        id="sidebar-rtl-trigger"
+        class="btn btn-ghost btn-icon"
+        aria-label="Toggle sidebar"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      </button>
+    </header>
+    <div class="flex flex-1 flex-col gap-4 p-4">
+      <div class="flex-1 rounded-xl bg-muted/50"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+  const translations = {
+    ar: {
+      dir: "rtl",
+      teamName: "شركة أكمي", teamPlan: "المؤسسة",
+      platform: "المنصة", playground: "ملعب", history: "السجل", starred: "المميز", settings: "الإعدادات",
+      models: "النماذج", genesis: "جينيسيس", explorer: "إكسبلورر", quantum: "كوانتوم",
+      documentation: "التوثيق", introduction: "مقدمة", getStarted: "ابدأ", tutorials: "الدروس", changelog: "سجل التغييرات",
+      general: "عام", team: "الفريق", billing: "الفوترة", limits: "الحدود",
+      projects: "المشاريع", designEngineering: "هندسة التصميم", salesMarketing: "المبيعات والتسويق", travel: "السفر", more: "المزيد",
+      upgradeToPro: "ترقية إلى Pro", account: "الحساب", notifications: "الإشعارات", logOut: "تسجيل الخروج",
+    },
+    he: {
+      dir: "rtl",
+      teamName: "אקמי בע״מ", teamPlan: "ארגוני",
+      platform: "פלטפורמה", playground: "מגרש משחקים", history: "היסטוריה", starred: "מועדפים", settings: "הגדרות",
+      models: "מודלים", genesis: "ג'נסיס", explorer: "אקספלורר", quantum: "קוונטום",
+      documentation: "תיעוד", introduction: "מבוא", getStarted: "התחל", tutorials: "מדריכים", changelog: "יומן שינויים",
+      general: "כללי", team: "צוות", billing: "חיוב", limits: "מגבלות",
+      projects: "פרויקטים", designEngineering: "הנדסת עיצוב", salesMarketing: "מכירות ושיווק", travel: "נסיעות", more: "עוד",
+      upgradeToPro: "שדרג ל-Pro", account: "חשבון", notifications: "התראות", logOut: "התנתק",
+    },
+    en: {
+      dir: "ltr",
+      teamName: "Acme Inc", teamPlan: "Enterprise",
+      platform: "Platform", playground: "Playground", history: "History", starred: "Starred", settings: "Settings",
+      models: "Models", genesis: "Genesis", explorer: "Explorer", quantum: "Quantum",
+      documentation: "Documentation", introduction: "Introduction", getStarted: "Get Started", tutorials: "Tutorials", changelog: "Changelog",
+      general: "General", team: "Team", billing: "Billing", limits: "Limits",
+      projects: "Projects", designEngineering: "Design Engineering", salesMarketing: "Sales & Marketing", travel: "Travel", more: "More",
+      upgradeToPro: "Upgrade to Pro", account: "Account", notifications: "Notifications", logOut: "Log out",
+    },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("sidebar-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
 ```
 
 ## CSS variables
