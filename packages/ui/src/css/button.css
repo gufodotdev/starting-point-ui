@@ -60,26 +60,26 @@
 
 @utility btn-xs {
   @layer l1 {
-    @apply h-6 gap-1 rounded-[min(var(--radius-md),8px)] px-2 text-xs has-[.icon-start]:pl-1.5 has-[.icon-end]:pr-1.5 in-[.btn-group]:rounded-md;
+    @apply h-6 gap-1 rounded-[min(var(--radius-md),8px)] px-2 text-xs has-[.icon-start]:ps-1.5 has-[.icon-end]:pe-1.5 in-[.btn-group]:rounded-md;
     @apply [&_svg:not([class*='size-'])]:size-3;
   }
 }
 
 @utility btn-sm {
   @layer l1 {
-    @apply h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2.5 has-[.icon-start]:pl-1.5 has-[.icon-end]:pr-1.5 in-[.btn-group]:rounded-md;
+    @apply h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2.5 has-[.icon-start]:ps-1.5 has-[.icon-end]:pe-1.5 in-[.btn-group]:rounded-md;
   }
 }
 
 @utility btn-base {
   @layer l1 {
-    @apply h-9 gap-1.5 px-2.5 has-[.icon-start]:pl-2 has-[.icon-end]:pr-2;
+    @apply h-9 gap-1.5 px-2.5 has-[.icon-start]:ps-2 has-[.icon-end]:pe-2;
   }
 }
 
 @utility btn-lg {
   @layer l1 {
-    @apply h-10 gap-1.5 px-2.5 has-[.icon-start]:pl-2 has-[.icon-end]:pr-2;
+    @apply h-10 gap-1.5 px-2.5 has-[.icon-start]:ps-2 has-[.icon-end]:pe-2;
   }
 }
 
