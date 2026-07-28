@@ -8,6 +8,7 @@ import { AvatarsList } from "@/components/avatars-list";
 import { UnsplashEditor } from "@/components/unsplash-editor";
 import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
 import {
+  dirFromMeta,
   exampleId,
   isPreviewMeta,
   openFromMeta,
@@ -40,7 +41,10 @@ const prettyCodeOptions = {
             source,
             presetFromMeta(meta),
             openFromMeta(meta),
+            dirFromMeta(meta),
           );
+          const dir = dirFromMeta(meta);
+          if (dir) node.properties["data-frame-dir"] = dir;
         }
 
         const labelMatch = meta.match(/label="([^"]+)"/);
@@ -182,15 +186,17 @@ const components = {
     "data-preview": preview,
     "data-label": label,
     "data-frame-id": frameId,
+    "data-frame-dir": frameDir,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
     "data-label"?: string;
     "data-frame-id"?: string;
+    "data-frame-dir"?: string;
   }) => {
     if (preview === "true" && frameId) {
       return (
-        <CodeBlock code={code} header="preview" frameId={frameId}>
+        <CodeBlock code={code} header="preview" frameId={frameId} frameDir={frameDir}>
           {children}
         </CodeBlock>
       );

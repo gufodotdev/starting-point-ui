@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { Monitor, Tablet, Smartphone, Fullscreen } from "lucide-react";
+import { Monitor, Tablet, Smartphone, Fullscreen, Languages } from "lucide-react";
 import {
   Group,
   Panel,
@@ -13,6 +13,12 @@ import { CopyButton } from "@/components/copy-button";
 
 const TABLET_WIDTH = 768;
 const MOBILE_WIDTH = 375;
+
+const LANGUAGES = [
+  { value: "en", label: "English", dir: "ltr" },
+  { value: "ar", label: "Arabic (العربية)", dir: "rtl" },
+  { value: "he", label: "Hebrew (עברית)", dir: "rtl" },
+];
 
 
 // The code tab starts at the preview's height; taller code gets a fade and a
@@ -59,8 +65,13 @@ function CodePanel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function FrameExample({ id }: { id: string }) {
-  const frameRef = useRef<HTMLIFrameElement>(null);
+function FrameExample({
+  id,
+  frameRef,
+}: {
+  id: string;
+  frameRef: React.RefObject<HTMLIFrameElement | null>;
+}) {
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
@@ -166,7 +177,7 @@ function DeviceButtons({
       <button
         type="button"
         title="Mobile"
-        className="btn btn-outline btn-sm btn-icon hidden @min-[375px]:inline-flex"
+        className="btn btn-outline btn-sm btn-icon hidden @min-[520px]:inline-flex"
         onClick={() => resize(`${MOBILE_WIDTH}px`)}
       >
         <Smartphone />
@@ -179,18 +190,21 @@ export function PreviewBlock({
   children,
   code,
   frameId,
+  frameDir,
 }: {
   children: React.ReactNode;
   code: string;
   frameId: string;
+  frameDir?: string;
 }) {
   const panelRef = useRef<PanelImperativeHandle>(null);
+  const frameRef = useRef<HTMLIFrameElement>(null);
   const previewId = `preview-${frameId}`;
   const codeId = `code-${frameId}`;
 
   return (
     <div className="@container my-6">
-      <div className="mb-3 flex items-center justify-between gap-3">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div className="tab-list h-8 rounded-md">
           <button
             type="button"
@@ -208,19 +222,57 @@ export function PreviewBlock({
           </button>
         </div>
 
-        <div className="btn-group" role="group" aria-label="Preview options">
-          <DeviceButtons panelRef={panelRef} />
-          <a
-            href={`/frame/${frameId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Open in new tab"
-            aria-label="Open preview in a new tab"
-            className="btn btn-outline btn-sm btn-icon"
-          >
-            <Fullscreen />
-          </a>
-          <CopyButton code={code} classes="btn btn-outline btn-sm btn-icon" />
+        <div className="flex items-center gap-2">
+          <div className="btn-group" role="group" aria-label="Preview options">
+            {frameDir === "rtl" && (
+              <button
+                type="button"
+                id={`lang-${frameId}`}
+                title="Example language"
+                aria-label="Example language"
+                className="btn btn-outline btn-sm btn-icon"
+              >
+                <Languages />
+              </button>
+            )}
+            <a
+              href={`/frame/${frameId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open in new tab"
+              aria-label="Open preview in a new tab"
+              className="btn btn-outline btn-sm btn-icon"
+            >
+              <Fullscreen />
+            </a>
+            <DeviceButtons panelRef={panelRef} />
+            <CopyButton code={code} classes="btn btn-outline btn-sm btn-icon" />
+          </div>
+          {frameDir === "rtl" && (
+            <div
+              className="dropdown"
+              data-sp-toggle={`#lang-${frameId}`}
+              data-sp-placement="bottom-end"
+            >
+              {LANGUAGES.map((language) => (
+                <label key={language.value} className="dropdown-item dropdown-item-radio">
+                  <input
+                    type="radio"
+                    name={`lang-${frameId}`}
+                    value={language.value}
+                    defaultChecked={language.value === "ar"}
+                    onChange={() =>
+                      frameRef.current?.contentWindow?.postMessage(
+                        { type: "sp-language", lang: language.value },
+                        "*",
+                      )
+                    }
+                  />
+                  {language.label}
+                </label>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -234,7 +286,7 @@ export function PreviewBlock({
               minSize={`${MOBILE_WIDTH}px`}
               className="overflow-hidden rounded-xl border bg-background"
             >
-              <FrameExample id={frameId} />
+              <FrameExample id={frameId} frameRef={frameRef} />
             </Panel>
             <Separator className="relative hidden w-3 bg-transparent p-0 after:absolute after:top-1/2 after:right-0 after:h-8 after:w-1.5 after:-translate-x-px after:-translate-y-1/2 after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
             <Panel defaultSize="0%" minSize="0%" />

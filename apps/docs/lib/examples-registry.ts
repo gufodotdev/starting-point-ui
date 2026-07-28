@@ -7,6 +7,7 @@ export type PreviewExample = {
   html: string;
   preset: string;
   open?: string;
+  dir?: "rtl";
 };
 
 export function isPreviewMeta(meta: string): boolean {
@@ -21,6 +22,11 @@ export function presetFromMeta(meta: string): string {
     );
   }
   return preset;
+}
+
+// dir=rtl renders the frame in right-to-left mode to demo mirrored layouts.
+export function dirFromMeta(meta: string): "rtl" | undefined {
+  return /(?:^|\s)dir=rtl(?:\s|$)/.test(meta) ? "rtl" : undefined;
 }
 
 // open=<.class> renders the frame with the matching overlays already shown:
@@ -51,9 +57,14 @@ export function withShownClass(html: string, open: string): string {
   );
 }
 
-export function exampleId(source: string, preset: string, open?: string): string {
+export function exampleId(
+  source: string,
+  preset: string,
+  open?: string,
+  dir?: string,
+): string {
   return createHash("sha1")
-    .update(`${preset}\n${open ?? ""}\n${source.trim()}`)
+    .update(`${preset}\n${open ?? ""}\n${dir ?? ""}\n${source.trim()}`)
     .digest("hex")
     .slice(0, 12);
 }
@@ -81,8 +92,9 @@ async function build(): Promise<Map<string, PreviewExample>> {
       const html = match[2].trimEnd();
       const preset = presetFromMeta(meta);
       const open = openFromMeta(meta);
-      const id = exampleId(html, preset, open);
-      if (!examples.has(id)) examples.set(id, { id, html, preset, open });
+      const dir = dirFromMeta(meta);
+      const id = exampleId(html, preset, open, dir);
+      if (!examples.has(id)) examples.set(id, { id, html, preset, open, dir });
     }
   }
 
