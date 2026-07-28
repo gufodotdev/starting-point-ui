@@ -15,10 +15,13 @@ export const Navigable: Mixin = {
   },
 
   init(this: SpInstance) {
-    const [nextKey, prevKey] =
-      this.config.orientation === "horizontal"
-        ? ["ArrowRight", "ArrowLeft"]
-        : ["ArrowDown", "ArrowUp"];
+    // Resolved per keypress: horizontal arrows follow the reading direction,
+    // so ArrowLeft advances in rtl, and a runtime dir change just works.
+    const keys = (): [string, string] => {
+      if (this.config.orientation !== "horizontal") return ["ArrowDown", "ArrowUp"];
+      const rtl = getComputedStyle(this.el).direction === "rtl";
+      return rtl ? ["ArrowLeft", "ArrowRight"] : ["ArrowRight", "ArrowLeft"];
+    };
 
     const items = () => [...this.el.querySelectorAll<HTMLElement>(this.config.item as string)];
     const first = (list: HTMLElement[]) => list.find((item) => !isDisabled(item)) ?? null;
@@ -26,6 +29,7 @@ export const Navigable: Mixin = {
 
     const navigate = (e: Event) => {
       const key = (e as KeyboardEvent).key;
+      const [nextKey, prevKey] = keys();
       if (![nextKey, prevKey, "Home", "End"].includes(key)) return;
       if (!this._isMounted()) return;
       // Home/End in a text field move the caret, not the active item.
@@ -67,6 +71,7 @@ export const Navigable: Mixin = {
         navigate(e);
         return;
       }
+      const [nextKey, prevKey] = keys();
       if (key !== nextKey && key !== prevKey) return;
       e.preventDefault();
       this.show({ trigger });

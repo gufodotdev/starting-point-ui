@@ -14,7 +14,7 @@
 
     & .tab {
       @apply w-full justify-start;
-      @apply after:inset-x-auto after:inset-y-0 after:-right-1 after:bottom-auto after:h-auto after:w-0.5;
+      @apply after:inset-x-auto after:inset-y-0 after:-end-1 after:bottom-auto after:h-auto after:w-0.5;
     }
 
     & .tab-content.active {
@@ -46,7 +46,7 @@
 
 @utility tab {
   @layer l1.l2 {
-    @apply relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all has-[.icon-start]:pl-1.5 has-[.icon-end]:pr-1.5;
+    @apply relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all has-[.icon-start]:ps-1.5 has-[.icon-end]:pe-1.5;
     @apply hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground;
     @apply disabled:pointer-events-none disabled:opacity-50;
     @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;

@@ -231,3 +231,40 @@ test.describe("WAI-ARIA compliance", () => {
     expect(await activeId(page)).toBe("p1");
   });
 });
+
+test.describe("rtl", () => {
+  const RTL = `
+    <div dir="rtl">
+      <div id="root" class="tab-list" aria-label="Example">
+        <button id="t1" class="tab" data-sp-toggle="#p1">One</button>
+        <button id="t2" class="tab" data-sp-toggle="#p2">Two</button>
+        <button id="t3" class="tab" data-sp-toggle="#p3">Three</button>
+      </div>
+      <div id="p1" class="tab-content">Panel one</div>
+      <div id="p2" class="tab-content">Panel two</div>
+      <div id="p3" class="tab-content">Panel three</div>
+    </div>`;
+
+  test("horizontal arrows follow the reading direction", async ({ page }) => {
+    await mount(page, RTL);
+    await page.focus("#t1");
+    await page.keyboard.press("ArrowLeft");
+    expect(await activeId(page)).toBe("t2");
+    await expect(page.locator("#t2")).toHaveClass(/active/);
+
+    await page.keyboard.press("ArrowRight");
+    expect(await activeId(page)).toBe("t1");
+    await expect(page.locator("#t1")).toHaveClass(/active/);
+  });
+
+  test("a runtime direction change flips the arrows without re-init", async ({ page }) => {
+    await mount(page, RTL);
+    await page.focus("#t1");
+    await page.keyboard.press("ArrowLeft");
+    expect(await activeId(page)).toBe("t2");
+
+    await page.evaluate(() => document.querySelector("[dir]")!.setAttribute("dir", "ltr"));
+    await page.keyboard.press("ArrowRight");
+    expect(await activeId(page)).toBe("t3");
+  });
+});
