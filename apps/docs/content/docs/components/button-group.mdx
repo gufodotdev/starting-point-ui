@@ -225,3 +225,49 @@ Attach static text to a control with `btn-group-text`, like a prefix or a unit.
   <input class="input" placeholder="example.com" />
 </div>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional icons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
+
+```html preview dir=rtl
+<div id="button-group-rtl-demo" dir="rtl">
+  <div class="btn-group">
+    <div class="btn-group hidden sm:flex">
+      <button class="btn btn-outline btn-icon" aria-label="Go back">
+        <svg class="rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </button>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-outline" data-i18n="archive">أرشفة</button>
+      <button class="btn btn-outline" data-i18n="report">تقرير</button>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-outline" data-i18n="snooze">تأجيل</button>
+      <button
+        id="bg-rtl-more-trigger"
+        class="btn btn-outline btn-icon"
+        aria-label="More options"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      </button>
+    </div>
+  </div>
+
+</div>
+<script>
+  const translations = {
+    ar: { dir: "rtl", archive: "أرشفة", report: "تقرير", snooze: "تأجيل" },
+    he: { dir: "rtl", archive: "ארכיון", report: "דווח", snooze: "נודניק" },
+    en: { dir: "ltr", archive: "Archive", report: "Report", snooze: "Snooze" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("button-group-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```

@@ -8,8 +8,8 @@
 }
 
 @utility btn-group-horizontal {
-  @apply [&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0;
-  @apply [&>*:not(:last-child)]:rounded-r-none;
+  @apply [&>*:not(:first-child)]:rounded-s-none [&>*:not(:first-child)]:border-s-0;
+  @apply [&>*:not(:last-child)]:rounded-e-none;
   @apply [&>.btn-group-separator]:my-px [&>.btn-group-separator]:h-auto [&>.btn-group-separator]:w-px;
 }
 
