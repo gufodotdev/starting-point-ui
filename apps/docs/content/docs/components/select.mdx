@@ -132,3 +132,48 @@ Put the label beside the select with a horizontal field, like a rows per page co
   </select>
 </div>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="select-rtl-demo" dir="rtl" class="field">
+  <label class="label" for="select-rtl-fruit" data-i18n="label">فاكهة</label>
+  <select class="select" id="select-rtl-fruit">
+    <option value="" data-i18n="selectFruit">اختر فاكهة</option>
+    <optgroup label="الفواكه" data-i18n-optgroup="fruits">
+      <option value="apple" data-i18n="apple">تفاح</option>
+      <option value="banana" data-i18n="banana">موز</option>
+      <option value="blueberry" data-i18n="blueberry">توت أزرق</option>
+      <option value="grapes" data-i18n="grapes">عنب</option>
+      <option value="pineapple" data-i18n="pineapple">أناناس</option>
+    </optgroup>
+    <optgroup label="الخضروات" data-i18n-optgroup="vegetables">
+      <option value="carrot" data-i18n="carrot">جزر</option>
+      <option value="broccoli" data-i18n="broccoli">بروكلي</option>
+      <option value="spinach" data-i18n="spinach">سبانخ</option>
+    </optgroup>
+  </select>
+  <p class="field-description" data-i18n="description">اختر فاكهتك المفضلة.</p>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", label: "فاكهة", description: "اختر فاكهتك المفضلة.", selectFruit: "اختر فاكهة", fruits: "الفواكه", apple: "تفاح", banana: "موز", blueberry: "توت أزرق", grapes: "عنب", pineapple: "أناناس", vegetables: "الخضروات", carrot: "جزر", broccoli: "بروكلي", spinach: "سبانخ" },
+    he: { dir: "rtl", label: "פרי", description: "בחר את הפרי האהוב עליך.", selectFruit: "בחר פרי", fruits: "פירות", apple: "תפוח", banana: "בננה", blueberry: "אוכמניה", grapes: "ענבים", pineapple: "אננס", vegetables: "ירקות", carrot: "גזר", broccoli: "ברוקולי", spinach: "תרד" },
+    en: { dir: "ltr", label: "Fruit", description: "Choose your favorite fruit.", selectFruit: "Select a fruit", fruits: "Fruits", apple: "Apple", banana: "Banana", blueberry: "Blueberry", grapes: "Grapes", pineapple: "Pineapple", vegetables: "Vegetables", carrot: "Carrot", broccoli: "Broccoli", spinach: "Spinach" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("select-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+    document.querySelectorAll("[data-i18n-optgroup]").forEach((el) => {
+      el.label = t[el.dataset.i18nOptgroup];
+    });
+  });
+</script>
+```

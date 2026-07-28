@@ -2,7 +2,7 @@
 
 @utility select {
   @layer l1.l2 {
-    @apply h-9 w-full min-w-0 appearance-none rounded-md border border-input bg-transparent py-1 pr-8 pl-2.5 text-sm shadow-xs transition-[color,box-shadow] outline-none select-none;
+    @apply h-9 w-full min-w-0 appearance-none rounded-md border border-input bg-transparent py-1 pe-8 ps-2.5 text-sm shadow-xs transition-[color,box-shadow] outline-none select-none;
     @apply placeholder:text-muted-foreground;
     @apply selection:bg-primary selection:text-primary-foreground;
     @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
@@ -12,6 +12,10 @@
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 0.625rem center;
+
+    &:dir(rtl) {
+      background-position: left 0.625rem center;
+    }
     background-size: 1rem;
   }
 }
