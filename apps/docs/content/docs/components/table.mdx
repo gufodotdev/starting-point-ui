@@ -334,3 +334,110 @@ A row containing a checked checkbox tints itself; see the [checkbox](/components
   </table>
 </div>
 ```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Use `text-end` instead of `text-right` on numeric columns. See the [RTL guide](/guides/rtl) for details.
+
+```html preview dir=rtl
+<div id="table-rtl-demo" class="table-container" dir="rtl">
+  <table class="table">
+    <caption data-i18n="caption">قائمة بفواتيرك الأخيرة.</caption>
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head w-[100px]" data-i18n="invoice">الفاتورة</th>
+        <th class="table-head" data-i18n="status">الحالة</th>
+        <th class="table-head" data-i18n="method">الطريقة</th>
+        <th class="table-head text-end" data-i18n="amount">المبلغ</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell" data-i18n="paid">مدفوع</td>
+        <td class="table-cell" data-i18n="creditCard">بطاقة ائتمانية</td>
+        <td class="table-cell text-end">$250.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell" data-i18n="pending">قيد الانتظار</td>
+        <td class="table-cell" data-i18n="paypal">PayPal</td>
+        <td class="table-cell text-end">$150.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV003</td>
+        <td class="table-cell" data-i18n="unpaid">غير مدفوع</td>
+        <td class="table-cell" data-i18n="bankTransfer">تحويل بنكي</td>
+        <td class="table-cell text-end">$350.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV004</td>
+        <td class="table-cell" data-i18n="paid">مدفوع</td>
+        <td class="table-cell" data-i18n="creditCard">بطاقة ائتمانية</td>
+        <td class="table-cell text-end">$450.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV005</td>
+        <td class="table-cell" data-i18n="paid">مدفوع</td>
+        <td class="table-cell" data-i18n="paypal">PayPal</td>
+        <td class="table-cell text-end">$550.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV006</td>
+        <td class="table-cell" data-i18n="pending">قيد الانتظار</td>
+        <td class="table-cell" data-i18n="bankTransfer">تحويل بنكي</td>
+        <td class="table-cell text-end">$200.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV007</td>
+        <td class="table-cell" data-i18n="unpaid">غير مدفوع</td>
+        <td class="table-cell" data-i18n="creditCard">بطاقة ائتمانية</td>
+        <td class="table-cell text-end">$300.00</td>
+      </tr>
+    </tbody>
+    <tfoot class="table-footer">
+      <tr class="table-row">
+        <td class="table-cell" colspan="3" data-i18n="total">المجموع</td>
+        <td class="table-cell text-end">$2,500.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<script>
+  const translations = {
+    ar: {
+      dir: "rtl",
+      caption: "قائمة بفواتيرك الأخيرة.",
+      invoice: "الفاتورة", status: "الحالة", method: "الطريقة", amount: "المبلغ",
+      paid: "مدفوع", pending: "قيد الانتظار", unpaid: "غير مدفوع",
+      creditCard: "بطاقة ائتمانية", paypal: "PayPal", bankTransfer: "تحويل بنكي",
+      total: "المجموع",
+    },
+    he: {
+      dir: "rtl",
+      caption: "רשימת החשבוניות האחרונות שלך.",
+      invoice: "חשבונית", status: "סטטוס", method: "שיטה", amount: "סכום",
+      paid: "שולם", pending: "ממתין", unpaid: "לא שולם",
+      creditCard: "כרטיס אשראי", paypal: "PayPal", bankTransfer: "העברה בנקאית",
+      total: 'סה"כ',
+    },
+    en: {
+      dir: "ltr",
+      caption: "A list of your recent invoices.",
+      invoice: "Invoice", status: "Status", method: "Method", amount: "Amount",
+      paid: "Paid", pending: "Pending", unpaid: "Unpaid",
+      creditCard: "Credit Card", paypal: "PayPal", bankTransfer: "Bank Transfer",
+      total: "Total",
+    },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("table-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
