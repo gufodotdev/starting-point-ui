@@ -328,3 +328,60 @@ Any element works as the control; our textarea autosizes natively via `field-siz
 </div>
 ```
 
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div id="input-group-rtl-demo" class="grid w-full max-w-sm gap-6" dir="rtl">
+  <div class="input-group max-w-xs">
+    <input class="input" placeholder="بحث..." data-i18n-placeholder="placeholder" />
+    <span class="input-group-addon"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></span>
+    <span class="input-group-addon input-group-addon-end" data-i18n="results">١٢ نتيجة</span>
+  </div>
+  <div class="input-group">
+    <input class="input" placeholder="جاري البحث..." data-i18n-placeholder="searching" />
+    <span class="input-group-addon input-group-addon-end"><svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg></span>
+  </div>
+  <div class="input-group">
+    <input class="input" placeholder="جاري حفظ التغييرات..." data-i18n-placeholder="savingChanges" />
+    <span class="input-group-addon input-group-addon-end">
+      <span class="input-group-text" data-i18n="saving">جاري الحفظ...</span>
+      <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    </span>
+  </div>
+  <div class="field-group max-w-sm">
+    <div class="field">
+      <label class="label" for="ig-rtl-textarea" data-i18n="textareaLabel">منطقة النص</label>
+      <div class="input-group">
+        <textarea class="textarea" id="ig-rtl-textarea" placeholder="اكتب تعليقًا..." data-i18n-placeholder="textareaPlaceholder"></textarea>
+        <span class="input-group-addon input-group-addon-block-end">
+          <span class="input-group-text" data-i18n="characterCount">٠/٢٨٠</span>
+          <button class="btn btn-sm ms-auto shadow-none" type="button" data-i18n="post">نشر</button>
+        </span>
+      </div>
+      <p class="field-description" data-i18n="textareaDescription">تذييل موضع أسفل منطقة النص.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", placeholder: "بحث...", results: "١٢ نتيجة", searching: "جاري البحث...", saving: "جاري الحفظ...", savingChanges: "جاري حفظ التغييرات...", textareaLabel: "منطقة النص", textareaPlaceholder: "اكتب تعليقًا...", characterCount: "٠/٢٨٠", post: "نشر", textareaDescription: "تذييل موضع أسفل منطقة النص." },
+    he: { dir: "rtl", placeholder: "חפש...", results: "12 תוצאות", searching: "מחפש...", saving: "שומר...", savingChanges: "שומר שינויים...", textareaLabel: "אזור טקסט", textareaPlaceholder: "כתוב תגובה...", characterCount: "0/280", post: "פרסם", textareaDescription: "כותרת תחתונה ממוקמת מתחת לאזור הטקסט." },
+    en: { dir: "ltr", placeholder: "Search...", results: "12 results", searching: "Searching...", saving: "Saving...", savingChanges: "Saving changes...", textareaLabel: "Textarea", textareaPlaceholder: "Write a comment...", characterCount: "0/280", post: "Post", textareaDescription: "Footer positioned below the textarea." },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("input-group-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      el.placeholder = t[el.dataset.i18nPlaceholder];
+    });
+  });
+</script>
+```
+

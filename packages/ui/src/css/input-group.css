@@ -5,7 +5,7 @@
     @apply has-[[aria-invalid="true"]]:border-destructive has-[[aria-invalid="true"]]:ring-3 has-[[aria-invalid="true"]]:ring-destructive/20 dark:has-[[aria-invalid="true"]]:ring-destructive/40;
     @apply has-[>.input-group-addon-block-start]:h-auto has-[>.input-group-addon-block-start]:flex-col has-[>.input-group-addon-block-end]:h-auto has-[>.input-group-addon-block-end]:flex-col has-[>textarea]:h-auto;
     @apply has-[>.input-group-addon-block-start]:[&>input]:pb-3 has-[>.input-group-addon-block-end]:[&>input]:pt-3;
-    @apply has-[>.input-group-addon-end]:[&>input]:pr-1.5 has-[>.input-group-addon:not(.input-group-addon-end,.input-group-addon-block-start,.input-group-addon-block-end)]:[&>input]:pl-1.5;
+    @apply has-[>.input-group-addon-end]:[&>input]:pe-1.5 has-[>.input-group-addon:not(.input-group-addon-end,.input-group-addon-block-start,.input-group-addon-block-end)]:[&>input]:ps-1.5;
     &:has(> input:disabled, > textarea:disabled) > .input-group-addon {
       @apply opacity-50;
     }
@@ -25,7 +25,7 @@
 @utility input-group-addon {
   @layer l1.l2 {
     @apply flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none;
-    @apply order-first pl-2 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem];
+    @apply order-first ps-2 has-[>button]:-ms-1 has-[>kbd]:ms-[-0.15rem];
     @apply [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4;
   }
 
@@ -45,7 +45,7 @@
 
 @utility input-group-addon-end {
   @layer l1 {
-    @apply order-last pr-2 pl-0 has-[>button]:mr-[-0.25rem] has-[>button]:ml-0 has-[>kbd]:mr-[-0.15rem] has-[>kbd]:ml-0;
+    @apply order-last pe-2 ps-0 has-[>button]:me-[-0.25rem] has-[>button]:ms-0 has-[>kbd]:me-[-0.15rem] has-[>kbd]:ms-0;
   }
 }
 
