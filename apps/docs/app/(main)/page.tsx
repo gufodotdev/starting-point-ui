@@ -19,7 +19,7 @@ export default function Home() {
             href="/guides/introduction"
             className="badge badge-secondary rounded-full px-3 py-1 text-sm font-normal"
           >
-            The shadcn/ui look you love, in plain HTML
+            The shadcn/ui you love, in plain HTML
           </Link>
           <h1 className="xs:text-4xl/tight mt-6 text-3xl/tight font-extrabold tracking-tight lg:text-5xl/tight">
             The Starting Point <br /> for Your Next Project
