@@ -6,7 +6,7 @@ export default function DocSectionLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-stretch pb-8 text-[1.05rem] sm:text-[15px] xl:w-full">
+    <div className="flex items-stretch pb-8 text-[1.05rem] sm:text-[15px] lg:w-full">
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="h-(--top-spacing) shrink-0" />
         <article

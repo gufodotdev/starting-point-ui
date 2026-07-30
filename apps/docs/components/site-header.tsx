@@ -21,7 +21,7 @@ export function SiteHeader() {
             v{version}
           </span>
           <div className="-mr-2 ml-auto flex items-center gap-1">
-            <nav className="hidden items-center md:flex">
+            <nav className="hidden items-center lg:flex">
               {mainNav.map((item) => (
                 <Link
                   key={item.href}
@@ -46,7 +46,7 @@ export function SiteHeader() {
             <button
               type="button"
               id="mobile-nav-trigger"
-              className="group btn btn-ghost btn-sm btn-icon md:hidden"
+              className="group btn btn-ghost btn-sm btn-icon lg:hidden"
               aria-label="Toggle navigation menu"
             >
               <div className="relative size-4">
@@ -63,7 +63,7 @@ export function SiteHeader() {
         id="mobile-nav"
         data-sp-toggle="#mobile-nav-trigger"
         data-sp-static
-        className="popover scrollbar-none inset-x-0 top-(--navbar-height) bottom-0 h-auto w-auto gap-12 overflow-y-auto rounded-none bg-background/90 p-6 shadow-none ring-0 backdrop-blur md:hidden [&.show]:zoom-in-100 [&.hide]:zoom-out-100"
+        className="popover scrollbar-none inset-x-0 top-(--navbar-height) bottom-0 h-auto w-auto gap-12 overflow-y-auto rounded-none bg-background/90 p-6 shadow-none ring-0 backdrop-blur lg:hidden [&.show]:zoom-in-100 [&.hide]:zoom-out-100"
       >
         {docsNav.map((group) => (
           <div key={group.title} className="flex flex-col gap-4">
