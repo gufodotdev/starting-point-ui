@@ -311,8 +311,6 @@ export const Combobox = define({
         remove.type = "button";
         remove.className = "combobox-chip-remove";
         remove.setAttribute("aria-label", `Remove ${itemLabel(item)}`);
-        remove.innerHTML =
-          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
         (chip as ChipElement)._spItem = item;
         chip.append(remove);
         if (input) chips.insertBefore(chip, input);

@@ -81,7 +81,7 @@ const GROUPED = `${FIELD}
 
 const CHIPS = `
   <div id="chips" class="combobox-chips">
-    <span class="combobox-chip">Next.js <button class="combobox-chip-remove" type="button" aria-label="Remove Next.js">x</button></span>
+    <span class="combobox-chip">Next.js <button class="combobox-chip-remove" type="button" aria-label="Remove Next.js"></button></span>
     <input id="chin" placeholder="Add framework" />
   </div>
   <div id="cb" class="combobox" data-sp-toggle="#chips">

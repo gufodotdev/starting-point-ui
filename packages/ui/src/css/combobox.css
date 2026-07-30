@@ -103,7 +103,14 @@
     & .combobox-chip-remove {
       @apply -ms-1 flex size-5.5 shrink-0 cursor-pointer items-center justify-center rounded-sm opacity-50 transition-opacity outline-none;
       @apply hover:opacity-100 focus-visible:opacity-100;
-      @apply [&>svg]:size-3.5 [&>svg]:shrink-0;
+
+      &::before {
+        @apply block size-3.5;
+        content: "";
+        background-color: currentColor;
+        mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M18 6 6 18'/%3e%3cpath d='m6 6 12 12'/%3e%3c/svg%3e");
+        mask-size: 100% 100%;
+      }
     }
   }
 }
