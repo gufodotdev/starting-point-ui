@@ -12,7 +12,7 @@ export async function GET() {
         group.items.map(async (item) => {
           const doc = await getDocBySlug(item.href.slice(1).split("/"));
           const description = doc?.metadata.description;
-          return `- [${item.title}](${baseUrl}${item.href})${description ? `: ${description}` : ""}`;
+          return `- [${item.title}](${baseUrl}${item.href}.md)${description ? `: ${description}` : ""}`;
         }),
       );
       return `## ${group.title}\n\n${lines.join("\n")}`;

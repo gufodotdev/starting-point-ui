@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@tailwindcss/node", "@tailwindcss/oxide", "lightningcss"],
+  async rewrites() {
+    return [{ source: "/:path*.md", destination: "/llms.md/:path*" }];
+  },
   async redirects() {
     return [
       { source: "/docs", destination: "/guides/introduction", permanent: true },
