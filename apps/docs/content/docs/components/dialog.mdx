@@ -306,6 +306,56 @@ The same scrolling body without a footer.
 </dialog>
 ```
 
+### Initially open
+
+Add the `shown` class to the dialog and it renders open, with no enter animation. Useful when the server re-renders the page mid-flow, like a submitted form coming back with validation errors, so the dialog is still open exactly where the user left it.
+
+```html preview preset=dialog
+<button id="dialog-open-trigger" class="btn btn-outline">Create account</button>
+
+<dialog class="dialog shown" data-sp-toggle="#dialog-open-trigger">
+  <form class="dialog-panel">
+    <div class="dialog-header">
+      <h2 class="dialog-title">Create account</h2>
+      <p class="dialog-description">
+        Pick a username and enter your email to get started.
+      </p>
+    </div>
+    <div class="dialog-content">
+      <div class="field-group">
+        <div class="field">
+          <label class="label" for="dialog-open-username">Username</label>
+          <input
+            class="input"
+            id="dialog-open-username"
+            name="username"
+            value="pedro"
+            aria-invalid="true"
+          />
+          <p class="field-error">This username is already taken.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="dialog-open-email">Email</label>
+          <input
+            class="input"
+            id="dialog-open-email"
+            name="email"
+            type="email"
+            value="pedro@example.com"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button type="button" class="btn btn-outline" data-sp-dismiss>
+        Cancel
+      </button>
+      <button type="submit" class="btn">Create account</button>
+    </div>
+  </form>
+</dialog>
+```
+
 ### Alert dialog
 
 An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interrupts the user and requires a choice. Add `data-sp-static` so a backdrop click won't dismiss it (Escape still closes, so keyboard users are never stuck) and author `role="alertdialog"` on the element. Put `autofocus` on the least destructive action and skip the close button.
