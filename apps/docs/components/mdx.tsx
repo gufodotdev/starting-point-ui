@@ -43,6 +43,7 @@ const prettyCodeOptions = {
             openFromMeta(meta),
             dirFromMeta(meta),
           );
+          node.properties["data-frame-preset"] = presetFromMeta(meta);
           const dir = dirFromMeta(meta);
           if (dir) node.properties["data-frame-dir"] = dir;
         }
@@ -187,16 +188,24 @@ const components = {
     "data-label": label,
     "data-frame-id": frameId,
     "data-frame-dir": frameDir,
+    "data-frame-preset": framePreset,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
     "data-label"?: string;
     "data-frame-id"?: string;
     "data-frame-dir"?: string;
+    "data-frame-preset"?: string;
   }) => {
     if (preview === "true" && frameId) {
       return (
-        <CodeBlock code={code} header="preview" frameId={frameId} frameDir={frameDir}>
+        <CodeBlock
+          code={code}
+          header="preview"
+          frameId={frameId}
+          frameDir={frameDir}
+          framePreset={framePreset}
+        >
           {children}
         </CodeBlock>
       );

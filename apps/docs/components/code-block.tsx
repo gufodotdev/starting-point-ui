@@ -10,7 +10,7 @@ type CodeBlockProps = BaseCodeBlockProps &
   (
     | { header?: null }
     | { header: "label"; label: string }
-    | { header: "preview"; frameId: string; frameDir?: string }
+    | { header: "preview"; frameId: string; frameDir?: string; framePreset?: string }
   );
 
 export function CodeBlock(props: CodeBlockProps) {
@@ -18,7 +18,12 @@ export function CodeBlock(props: CodeBlockProps) {
 
   if (header === "preview") {
     return (
-      <PreviewBlock code={code} frameId={props.frameId} frameDir={props.frameDir}>
+      <PreviewBlock
+        code={code}
+        frameId={props.frameId}
+        frameDir={props.frameDir}
+        framePreset={props.framePreset}
+      >
         {children}
       </PreviewBlock>
     );
