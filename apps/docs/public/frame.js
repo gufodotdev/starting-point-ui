@@ -14,9 +14,7 @@ if (window.frameElement) {
     ?.style.setProperty("min-height", "100dvh");
 }
 
-// Floating components (popover, dropdown, ...) can't be authored open since
-// JS positions them, so open= is passed through as data-open and shown here
-// once the runtime has loaded.
+// data-open panels open via show() so the enter animation plays.
 const openHost = document.querySelector("[data-open]");
 if (openHost) {
   const selector = openHost.dataset.open;

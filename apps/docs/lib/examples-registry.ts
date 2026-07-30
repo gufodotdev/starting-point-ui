@@ -29,32 +29,13 @@ export function dirFromMeta(meta: string): "rtl" | undefined {
   return /(?:^|\s)dir=rtl(?:\s|$)/.test(meta) ? "rtl" : undefined;
 }
 
-// open=<.class> renders the frame with the matching overlays already shown:
-// the frame page authors the settled class into the served markup. Only the
-// frame is affected; the code tab keeps the clean fence source.
+// open=<.class> makes the frame open the matching overlays on load.
 export function openFromMeta(meta: string): string | undefined {
   const open = meta.match(/open="([^"]+)"|open=(\S+)/)?.slice(1).find(Boolean);
   if (open && !/^\.[\w-]+$/.test(open)) {
     throw new Error(`Invalid open selector "${open}". Use a single class, e.g. open=.dialog`);
   }
   return open;
-}
-
-// Floating UI components can't be authored open: their position comes from JS.
-// The frame page passes these through as data-open and frame.js calls show()
-// on load instead of baking .shown into the markup.
-const SHOW_ON_LOAD = new Set([".popover", ".dropdown", ".combobox"]);
-
-export function showsOnLoad(open: string): boolean {
-  return SHOW_ON_LOAD.has(open);
-}
-
-// Adds the settled "shown" class to every element carrying the given class.
-export function withShownClass(html: string, open: string): string {
-  const cls = open.slice(1);
-  return html.replace(/class="([^"]*)"/g, (match, value: string) =>
-    value.split(/\s+/).includes(cls) ? `class="${value} shown"` : match,
-  );
 }
 
 export function exampleId(
