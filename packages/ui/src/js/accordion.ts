@@ -12,9 +12,6 @@ import { ensureId } from "./utils";
 
 const PANEL = ".accordion-panel";
 
-const CHEVRON =
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
-
 export const Accordion = define({
   name: "accordion",
   selector: ".accordion",
@@ -37,18 +34,12 @@ export const Accordion = define({
       const toggle = panel.getAttribute("data-sp-toggle");
       const trigger = toggle && document.querySelector<HTMLElement>(toggle);
       if (!trigger) continue;
-      // Every trigger gets the rotating chevron; a trailing svg the author
-      // wrote themselves takes its place.
-      if (!(trigger.lastElementChild instanceof SVGElement)) {
-        trigger.insertAdjacentHTML("beforeend", CHEVRON);
-      }
       if (!panel.hasAttribute("role")) panel.setAttribute("role", "region");
       if (!panel.hasAttribute("aria-labelledby")) {
         panel.setAttribute("aria-labelledby", ensureId(trigger));
       }
     }
 
-    // Single open: a panel starting to expand collapses its open siblings.
     this.on(this.el, "sp-beforeexpand", (e) => {
       if (this.config.multiple) return;
       const target = e.target as HTMLElement;

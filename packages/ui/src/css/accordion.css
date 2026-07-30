@@ -16,13 +16,8 @@
     @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
     @apply disabled:pointer-events-none disabled:opacity-50;
 
-    /* The chevron is injected by JS unless the trigger ends with its own svg. */
     & > svg:last-child {
       @apply pointer-events-none ms-auto size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200;
-    }
-
-    &[aria-expanded="true"] > svg:last-child {
-      @apply rotate-180;
     }
   }
 }

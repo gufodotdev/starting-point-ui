@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 
 // The accordion coordinates accordion-panel elements: each panel runs the
 // Collapsible mechanism toggled by its own trigger (lifecycle covered by
-// collapsible.spec); the accordion adds single-open, ARIA, and the chevron.
+// collapsible.spec); the accordion adds single-open and ARIA.
 // These tests verify the accordion's two jobs: single-open coordination and the
 // region ARIA wiring it layers on top.
 

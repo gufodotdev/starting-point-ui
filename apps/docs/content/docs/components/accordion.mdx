@@ -11,6 +11,7 @@ The accordion stacks sections that expand and collapse in place, opening one at 
     <h3>
       <button id="acc-shipping" class="accordion-trigger" aria-expanded="true">
         What are your shipping options?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel expanded" data-sp-toggle="#acc-shipping">
@@ -24,6 +25,7 @@ The accordion stacks sections that expand and collapse in place, opening one at 
     <h3>
       <button id="acc-returns" class="accordion-trigger">
         What is your return policy?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-returns">
@@ -37,6 +39,7 @@ The accordion stacks sections that expand and collapse in place, opening one at 
     <h3>
       <button id="acc-support" class="accordion-trigger">
         How can I contact customer support?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-support">
@@ -51,7 +54,7 @@ The accordion stacks sections that expand and collapse in place, opening one at 
 
 ## Usage
 
-Add the `accordion` class to the wrapper and compose each section from an item, a trigger, and a panel; the panel points at its trigger with `data-sp-toggle`. The rotating chevron is added to every trigger automatically (a trailing svg you author takes its place), and opening a section closes the others. Author `expanded` on a panel and `aria-expanded="true"` on its trigger to start open.
+Add the `accordion` class to the wrapper and compose each section from an item, a trigger, and a panel; the panel points at its trigger with `data-sp-toggle`. Opening a section closes the others.
 
 | Class               | Description                                              |
 | ------------------- | -------------------------------------------------------- |
@@ -74,6 +77,15 @@ Add the `accordion` class to the wrapper and compose each section from an item, 
 </div>
 ```
 
+You can include an icon in the trigger, most commonly a chevron as its last child, which is sized and styled for you. The trigger's `aria-expanded` follows the state, so `in-aria-expanded:rotate-180` rotates it while the section is open:
+
+```html
+<button id="section-1" class="accordion-trigger">
+  Section title
+  <svg class="in-aria-expanded:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+```
+
 ## Examples
 
 ### Multiple
@@ -90,6 +102,7 @@ Add `data-sp-multiple` and sections open independently.
         aria-expanded="true"
       >
         Notification Settings
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel expanded" data-sp-toggle="#acc-notifications">
@@ -103,6 +116,7 @@ Add `data-sp-multiple` and sections open independently.
     <h3>
       <button id="acc-privacy" class="accordion-trigger">
         Privacy & Security
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-privacy">
@@ -116,6 +130,7 @@ Add `data-sp-multiple` and sections open independently.
     <h3>
       <button id="acc-billing-m" class="accordion-trigger">
         Billing & Subscription
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-billing-m">
@@ -138,6 +153,7 @@ Add `disabled` to a trigger to lock its section.
     <h3>
       <button id="acc-history" class="accordion-trigger">
         Can I access my account history?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-history">
@@ -152,6 +168,7 @@ Add `disabled` to a trigger to lock its section.
     <h3>
       <button id="acc-premium" class="accordion-trigger" disabled>
         Premium feature information
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-premium">
@@ -165,6 +182,7 @@ Add `disabled` to a trigger to lock its section.
     <h3>
       <button id="acc-email" class="accordion-trigger">
         How do I update my email address?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-email">
@@ -187,6 +205,7 @@ Wrap the accordion in a border and inset the items.
     <h3>
       <button id="acc-billing-b" class="accordion-trigger" aria-expanded="true">
         How does billing work?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel expanded" data-sp-toggle="#acc-billing-b">
@@ -200,6 +219,7 @@ Wrap the accordion in a border and inset the items.
     <h3>
       <button id="acc-security-b" class="accordion-trigger">
         Is my data secure?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-security-b">
@@ -213,6 +233,7 @@ Wrap the accordion in a border and inset the items.
     <h3>
       <button id="acc-integration-b" class="accordion-trigger">
         What integrations do you support?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-integration-b">
@@ -243,6 +264,7 @@ An accordion slots into a [card](/components/card) for a framed FAQ.
         <h3>
           <button id="acc-plans" class="accordion-trigger" aria-expanded="true">
             What subscription plans do you offer?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
           </button>
         </h3>
         <div class="accordion-panel expanded" data-sp-toggle="#acc-plans">
@@ -256,6 +278,7 @@ An accordion slots into a [card](/components/card) for a framed FAQ.
         <h3>
           <button id="acc-billing-c" class="accordion-trigger">
             How does billing work?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
           </button>
         </h3>
         <div class="accordion-panel" data-sp-toggle="#acc-billing-c">
@@ -269,6 +292,7 @@ An accordion slots into a [card](/components/card) for a framed FAQ.
         <h3>
           <button id="acc-cancel" class="accordion-trigger">
             How do I cancel my subscription?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
           </button>
         </h3>
         <div class="accordion-panel" data-sp-toggle="#acc-cancel">
@@ -297,7 +321,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
         aria-expanded="true"
       >
         <span data-i18n="q1">كيف يمكنني إعادة تعيين كلمة المرور؟</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
     </h3>
     <div class="accordion-panel expanded" data-sp-toggle="#accordion-rtl-password">
@@ -311,7 +335,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
     <h3>
       <button id="accordion-rtl-plan" class="accordion-trigger">
         <span data-i18n="q2">هل يمكنني تغيير خطة الاشتراك الخاصة بي؟</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#accordion-rtl-plan">
@@ -324,7 +348,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
     <h3>
       <button id="accordion-rtl-payment" class="accordion-trigger">
         <span data-i18n="q3">ما هي طرق الدفع التي تقبلونها؟</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
     </button>
     </h3>
     <div class="accordion-panel" data-sp-toggle="#accordion-rtl-payment">
