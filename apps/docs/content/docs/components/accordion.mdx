@@ -143,6 +143,43 @@ Add `data-sp-multiple` and sections open independently.
 </div>
 ```
 
+### Initially open
+
+Author the `expanded` class on a panel to start it open, and mirror `aria-expanded="true"` onto its trigger so state-driven styling, like the rotated chevron, paints correctly before JavaScript loads.
+
+```html preview preset=accordion
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-open-trial" class="accordion-trigger">
+        Is there a free trial?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel" data-sp-toggle="#acc-open-trial">
+      <div class="accordion-content">
+        Yes, every plan starts with a 14-day free trial. No credit card
+        required.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3>
+      <button id="acc-open-refund" class="accordion-trigger" aria-expanded="true">
+        Can I get a refund?
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="in-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </h3>
+    <div class="accordion-panel expanded" data-sp-toggle="#acc-open-refund">
+      <div class="accordion-content">
+        Contact us within 30 days of purchase and we refund you in full, no
+        questions asked.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
 ### Disabled
 
 Add `disabled` to a trigger to lock its section.
