@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="relative grid min-h-[calc(100dvh-var(--navbar-height))] grid-cols-1 overflow-x-hidden lg:grid-cols-12 lg:overflow-hidden">
+    <div className="relative grid min-h-[calc(100dvh-var(--navbar-height))] grid-cols-1 overflow-x-clip lg:grid-cols-12 lg:overflow-clip">
       <div className="relative flex flex-col justify-center px-6 py-6 lg:col-span-6 lg:items-center xl:col-span-5">
         <div className="max-w-xl lg:-mt-(--navbar-height)">
           <Link
@@ -57,7 +57,7 @@ export default function Home() {
       <div
         id="landing-grid"
         data-nosnippet=""
-        className="relative flex items-start overflow-x-auto px-6 max-lg:mask-[linear-gradient(to_right,black_90%,transparent)] lg:col-span-6 lg:max-h-[calc(100dvh-var(--navbar-height))] lg:overflow-hidden lg:px-0 xl:col-span-7"
+        className="relative flex items-start overflow-x-auto px-6 max-lg:mask-[linear-gradient(to_right,black_90%,transparent)] lg:col-span-6 lg:max-h-[calc(100dvh-var(--navbar-height))] lg:overflow-clip lg:px-0 xl:col-span-7"
       >
         <LandingGrid />
       </div>
