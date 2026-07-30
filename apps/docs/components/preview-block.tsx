@@ -141,7 +141,8 @@ function FrameExample({
       ref={frameRef}
       src={`/frame/${id}`}
       title="Example preview"
-      className="h-96 w-full border-0"
+      loading="lazy"
+      className="h-96 w-full border-0 bg-background opacity-0 transition-opacity duration-200"
       onPointerEnter={handleEnter}
       onPointerLeave={handleLeave}
       suppressHydrationWarning

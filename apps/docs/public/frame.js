@@ -8,6 +8,8 @@ if (window.frameElement) {
 
   new ResizeObserver(resize).observe(document.body);
   resize();
+  // Reveal the opacity-0 embed, preventing a white flash in dark mode.
+  frame.style.opacity = "1";
 } else {
   document
     .querySelector("[data-no-scrollbar-gutter]")
