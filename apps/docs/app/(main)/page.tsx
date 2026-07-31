@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { ScrollIndicator } from "@/components/scroll-indicator";
+import { version } from "@/lib/version";
 import { LandingGrid } from "@/components/landing-grid";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function Home() {
             className="badge badge-secondary gap-1.5 rounded-full px-3 py-1 text-sm font-normal"
           >
             <span className="size-2 rounded-full bg-blue-500" />
-            New: RTL support
+            New in v{version}
             <ArrowRight />
           </Link>
           <h1 className="xs:text-4xl/tight mt-6 text-3xl/tight font-extrabold tracking-tight lg:text-5xl/tight">
