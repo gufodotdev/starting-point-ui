@@ -2,21 +2,21 @@
 
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import {
-  BlendingModeIcon,
-  CheckIcon,
-  CopyIcon,
-  CropIcon,
-  Cross2Icon,
-  DownloadIcon,
-  HeightIcon,
-  ImageIcon,
-  Link2Icon,
-  LoopIcon,
-  MagicWandIcon,
-  MixerHorizontalIcon,
-  RotateCounterClockwiseIcon,
-  WidthIcon,
-} from "@radix-ui/react-icons";
+  Blend,
+  Check,
+  Copy,
+  Crop as CropIcon,
+  Download,
+  Image,
+  Link2,
+  MoveHorizontal,
+  MoveVertical,
+  Repeat,
+  RotateCcw,
+  SlidersHorizontal,
+  WandSparkles,
+  X,
+} from "lucide-react";
 import filterPresets from "@/lib/unsplash-filters.json";
 import { CropStage } from "@/components/unsplash-crop-stage";
 import type { Crop, ImageMeta, OutputOptions } from "@/lib/unsplash-crop";
@@ -80,11 +80,11 @@ const SIZES = [
 
 const TOOLS = [
   { key: "crop", label: "Crop", Icon: CropIcon },
-  { key: "adjust", label: "Adjust", Icon: MixerHorizontalIcon },
-  { key: "filters", label: "Filters", Icon: BlendingModeIcon },
-  { key: "effects", label: "Effects", Icon: MagicWandIcon },
-  { key: "background", label: "Background", Icon: ImageIcon },
-  { key: "export", label: "Export", Icon: DownloadIcon },
+  { key: "adjust", label: "Adjust", Icon: SlidersHorizontal },
+  { key: "filters", label: "Filters", Icon: Blend },
+  { key: "effects", label: "Effects", Icon: WandSparkles },
+  { key: "background", label: "Background", Icon: Image },
+  { key: "export", label: "Export", Icon: Download },
 ] as const;
 
 type Panel = (typeof TOOLS)[number]["key"];
@@ -606,7 +606,7 @@ export function UnsplashEditor() {
                 applyCustomAspect(customH, customW);
               }}
             >
-              <LoopIcon />
+              <Repeat />
             </button>
           </div>
         )}
@@ -652,7 +652,7 @@ export function UnsplashEditor() {
             title="Rotate left"
             onClick={() => rotate(-90)}
           >
-            <RotateCounterClockwiseIcon />
+            <RotateCcw />
           </button>
           <button
             type="button"
@@ -661,7 +661,7 @@ export function UnsplashEditor() {
             title="Rotate right"
             onClick={() => rotate(90)}
           >
-            <RotateCounterClockwiseIcon className="-scale-x-100" />
+            <RotateCcw className="-scale-x-100" />
           </button>
           <button
             type="button"
@@ -670,7 +670,7 @@ export function UnsplashEditor() {
             title="Flip horizontal"
             onClick={() => setFlipH((v) => !v)}
           >
-            <WidthIcon />
+            <MoveHorizontal />
           </button>
           <button
             type="button"
@@ -679,7 +679,7 @@ export function UnsplashEditor() {
             title="Flip vertical"
             onClick={() => setFlipV((v) => !v)}
           >
-            <HeightIcon />
+            <MoveVertical />
           </button>
         </div>
       </div>
@@ -911,12 +911,12 @@ export function UnsplashEditor() {
         <button type="button" className="btn btn-sm w-full" onClick={copy}>
           {copied ? (
             <>
-              <CheckIcon className="text-green-600" />
+              <Check className="text-green-600" />
               Copied
             </>
           ) : (
             <>
-              <CopyIcon />
+              <Copy />
               Copy URL
             </>
           )}
@@ -927,7 +927,7 @@ export function UnsplashEditor() {
           disabled={downloading}
           onClick={download}
         >
-          <DownloadIcon />
+          <Download />
           {downloading ? "Preparing..." : "Download"}
         </button>
       </div>
@@ -947,7 +947,7 @@ export function UnsplashEditor() {
     <div className="mt-6">
       <div className="input-group h-12 rounded-full border-transparent bg-muted shadow-none transition-colors has-[input:focus]:bg-background dark:bg-muted dark:has-[input:focus]:bg-input/30">
         <div className="input-group-addon pl-4">
-          <Link2Icon />
+          <Link2 />
         </div>
         <input
           className="input"
@@ -983,7 +983,7 @@ export function UnsplashEditor() {
                     aria-label="Clear"
                     onClick={() => setInput("")}
                   >
-                    <Cross2Icon />
+                    <X />
                   </button>
                   <span className="mx-1 h-4 w-px bg-border" />
                 </>
@@ -1029,7 +1029,7 @@ export function UnsplashEditor() {
                   aria-label="Close"
                   onClick={closeEditor}
                 >
-                  <Cross2Icon />
+                  <X />
                 </button>
               </header>
 
