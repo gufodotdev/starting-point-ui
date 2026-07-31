@@ -12,6 +12,8 @@ export function MobileLink({
   return (
     <Link
       href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       className="text-2xl font-medium"
       onClick={() => {
         const menu = document.getElementById("mobile-nav");

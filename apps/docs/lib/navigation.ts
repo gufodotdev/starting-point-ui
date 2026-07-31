@@ -8,6 +8,8 @@ export type NavGroup = {
   items: NavItem[];
 };
 
+export const discordUrl = "https://discord.gg/ZMc7k8RWe";
+
 export const mainNav: NavItem[] = [
   { title: "Documentation", href: "/guides/introduction" },
   { title: "Examples", href: "/examples" },
@@ -15,7 +17,7 @@ export const mainNav: NavItem[] = [
 
 export const docsNav: NavGroup[] = [
   {
-    title: "Guides",
+    title: "Getting Started",
     items: [
       { title: "Introduction", href: "/guides/introduction" },
       { title: "Installation", href: "/guides/installation" },
@@ -23,6 +25,7 @@ export const docsNav: NavGroup[] = [
       { title: "RTL", href: "/guides/rtl" },
       { title: "Help", href: "/guides/help" },
       { title: "Changelog", href: "/changelog" },
+      { title: "Discord", href: discordUrl },
     ],
   },
   {

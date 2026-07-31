@@ -25,6 +25,8 @@ export function DocsSidebar() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   data-active={pathname === item.href}
                   className="flex h-7.5 w-fit items-center gap-2 rounded-md border border-transparent px-2 text-[0.8rem] font-medium hover:bg-accent hover:text-accent-foreground data-[active=true]:border-accent data-[active=true]:bg-accent data-[active=true]:text-accent-foreground"
                 >

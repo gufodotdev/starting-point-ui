@@ -9,7 +9,9 @@ export async function GET() {
   const sections = await Promise.all(
     docsNav.map(async (group) => {
       const lines = await Promise.all(
-        group.items.map(async (item) => {
+        group.items
+          .filter((item) => !item.href.startsWith("http"))
+          .map(async (item) => {
           const doc = await getDocBySlug(item.href.slice(1).split("/"));
           const description = doc?.metadata.description;
           return `- [${item.title}](${baseUrl}${item.href}.md)${description ? `: ${description}` : ""}`;
