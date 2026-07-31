@@ -41,27 +41,36 @@ function getMDXFiles(dir: string): string[] {
 // A line like %include examples/cards/music-queue.tsx% renders the example
 // component to formatted html before mdx compilation, so preview frames, code
 // tabs, and copy buttons all see the real markup. The path is relative to the
-// app root, so it is easy to find from the mdx source.
-async function renderInclude(rel: string): Promise<string> {
-  const mod = await import(`../examples/${rel.replace(/^examples\//, "")}`);
-  const { createElement } = await import("react");
-  const { renderToStaticMarkup } = await import("react-dom/server");
+// app root, so it is easy to find from the mdx source. Rendering happens in a
+// child process outside the server-component bundle, which turns "use client"
+// imports (like lucide-react icons) into stubs the static renderer can't call.
+async function renderIncludes(rels: string[]): Promise<Record<string, string>> {
+  const { execFile } = await import("node:child_process");
+  const { promisify } = await import("node:util");
+  const script = path.join(process.cwd(), "scripts", "render-example.mts");
+  const { stdout } = await promisify(execFile)("npx", ["tsx", script, ...rels], {
+    maxBuffer: 16 * 1024 * 1024,
+  });
+  return JSON.parse(stdout);
+}
+
+async function formatInclude(html: string): Promise<string> {
   const { format } = await import("prettier");
 
   // React 19 emits image preload hints into static markup; the include is a
   // fragment, so they don't belong.
-  const html = renderToStaticMarkup(createElement(mod.default)).replace(
-    /<link rel="preload"[^>]*\/>/g,
-    "",
-  );
-  return (await format(html, { parser: "html" })).trim();
+  const clean = html.replace(/<link rel="preload"[^>]*\/>/g, "");
+  return (await format(clean, { parser: "html" })).trim();
 }
 
 async function expandIncludes(content: string): Promise<string> {
   const matches = [...content.matchAll(/^%include ([\w./-]+)%$/gm)];
+  if (matches.length === 0) return content;
+
+  const rendered = await renderIncludes([...new Set(matches.map((m) => m[1]))]);
   let out = content;
   for (const match of matches) {
-    out = out.replace(match[0], await renderInclude(match[1]));
+    out = out.replace(match[0], await formatInclude(rendered[match[1]]));
   }
   return out;
 }
