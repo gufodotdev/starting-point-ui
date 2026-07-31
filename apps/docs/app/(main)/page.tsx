@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArrowRight } from "lucide-react";
 import { ScrollIndicator } from "@/components/scroll-indicator";
 import { LandingGrid } from "@/components/landing-grid";
 
@@ -16,10 +17,12 @@ export default function Home() {
       <div className="relative flex flex-col justify-center px-6 py-6 lg:col-span-6 lg:items-center xl:col-span-5">
         <div className="max-w-xl lg:-mt-(--navbar-height)">
           <Link
-            href="/guides/introduction"
-            className="badge badge-secondary rounded-full px-3 py-1 text-sm font-normal"
+            href="/changelog"
+            className="badge badge-secondary gap-1.5 rounded-full px-3 py-1 text-sm font-normal"
           >
-            The shadcn/ui you love, in plain HTML
+            <span className="size-2 rounded-full bg-blue-500" />
+            New: RTL support
+            <ArrowRight />
           </Link>
           <h1 className="xs:text-4xl/tight mt-6 text-3xl/tight font-extrabold tracking-tight lg:text-5xl/tight">
             The Starting Point <br /> for Your Next Project
