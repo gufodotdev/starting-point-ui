@@ -1,11 +1,11 @@
-import { CheckIcon } from "@radix-ui/react-icons";
+import { Check } from "lucide-react";
 
 export default function InvoicePaid() {
   return (
     <div className="card">
       <div className="card-content flex flex-col items-center gap-4 text-center text-balance">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
-          <CheckIcon className="size-6" />
+          <Check className="size-6" />
         </div>
         <div className="flex max-w-sm flex-col items-center gap-1">
           <div className="text-lg font-medium tracking-tight">

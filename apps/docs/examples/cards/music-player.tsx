@@ -1,10 +1,4 @@
-import {
-  LoopIcon,
-  PauseIcon,
-  ShuffleIcon,
-  TrackNextIcon,
-  TrackPreviousIcon,
-} from "@radix-ui/react-icons";
+import { Pause, Repeat, Shuffle, SkipBack, SkipForward } from "lucide-react";
 
 export default function MusicPlayer() {
   return (
@@ -32,19 +26,19 @@ export default function MusicPlayer() {
       </div>
       <div className="card-footer justify-center gap-4">
         <button className="btn btn-ghost btn-icon" aria-label="Shuffle">
-          <ShuffleIcon />
+          <Shuffle />
         </button>
         <button className="btn btn-ghost btn-icon" aria-label="Previous track">
-          <TrackPreviousIcon />
+          <SkipBack fill="currentColor" />
         </button>
         <button className="btn btn-icon rounded-full" aria-label="Pause">
-          <PauseIcon />
+          <Pause fill="currentColor" />
         </button>
         <button className="btn btn-ghost btn-icon" aria-label="Next track">
-          <TrackNextIcon />
+          <SkipForward fill="currentColor" />
         </button>
         <button className="btn btn-ghost btn-icon" aria-label="Repeat">
-          <LoopIcon />
+          <Repeat />
         </button>
       </div>
     </div>

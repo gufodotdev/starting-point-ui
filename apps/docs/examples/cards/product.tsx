@@ -1,4 +1,4 @@
-import { PlusIcon, StarFilledIcon } from "@radix-ui/react-icons";
+import { Plus, Star } from "lucide-react";
 
 export default function Product() {
   return (
@@ -21,11 +21,11 @@ export default function Product() {
       </div>
       <div className="card-content flex items-center gap-2">
         <div className="flex gap-1">
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-muted" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-muted" fill="currentColor" />
         </div>
         <span className="text-sm text-muted-foreground">(128)</span>
       </div>
@@ -38,7 +38,7 @@ export default function Product() {
         </div>
         <button className="btn btn-sm">
           Add to Cart
-          <PlusIcon className="icon-end" stroke="currentColor" strokeWidth="0.5" />
+          <Plus className="icon-end" />
         </button>
       </div>
     </div>

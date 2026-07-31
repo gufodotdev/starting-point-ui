@@ -1,4 +1,4 @@
-import { CopyIcon } from "@radix-ui/react-icons";
+import { Copy } from "lucide-react";
 
 export default function ShareDocument() {
   return (
@@ -20,7 +20,7 @@ export default function ShareDocument() {
             aria-label="Document link"
           />
           <button className="btn btn-outline btn-icon" aria-label="Copy link">
-            <CopyIcon />
+            <Copy />
           </button>
         </div>
         <div className="separator"></div>

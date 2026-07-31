@@ -1,15 +1,15 @@
-import { StarFilledIcon } from "@radix-ui/react-icons";
+import { Star } from "lucide-react";
 
 export default function Testimonial() {
   return (
     <div className="card">
       <div className="card-content flex flex-col gap-6">
         <div className="flex gap-1">
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-primary" />
-          <StarFilledIcon className="size-4.5 text-primary" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
+          <Star className="size-4.5 text-primary" fill="currentColor" />
         </div>
         <p className="text-sm/6 text-muted-foreground">
           Starting Point UI has transformed how we build interfaces. The

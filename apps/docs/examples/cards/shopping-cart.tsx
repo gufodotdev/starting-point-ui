@@ -1,4 +1,4 @@
-import { Cross2Icon, MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import { Minus, Plus, X } from "lucide-react";
 
 type CartItem = {
   name: string;
@@ -69,7 +69,7 @@ export default function ShoppingCart() {
                   className="btn btn-ghost btn-icon -mt-1.5 -mr-1.5 size-6 text-muted-foreground"
                   aria-label={`Remove ${item.name}`}
                 >
-                  <Cross2Icon className="size-3.5" />
+                  <X className="size-3.5" />
                 </button>
               </div>
               <p className="mt-1 truncate text-xs text-muted-foreground">
@@ -82,7 +82,7 @@ export default function ShoppingCart() {
                     className="btn btn-ghost btn-xs btn-icon"
                     aria-label={`Decrease quantity of ${item.name}`}
                   >
-                    <MinusIcon className="size-3" />
+                    <Minus />
                   </button>
                   <div className="btn-group-text border-0 bg-transparent px-2 text-xs shadow-none tabular-nums">
                     {item.qty}
@@ -92,7 +92,7 @@ export default function ShoppingCart() {
                     className="btn btn-ghost btn-xs btn-icon"
                     aria-label={`Increase quantity of ${item.name}`}
                   >
-                    <PlusIcon className="size-3" />
+                    <Plus />
                   </button>
                 </div>
                 <p className="text-sm font-medium tabular-nums">

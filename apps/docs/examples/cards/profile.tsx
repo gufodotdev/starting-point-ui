@@ -1,4 +1,4 @@
-import { PlusIcon } from "@radix-ui/react-icons";
+import { Plus } from "lucide-react";
 
 export default function Profile() {
   return (
@@ -28,7 +28,7 @@ export default function Profile() {
         </div>
         <button className="btn btn-sm ml-auto">
           Follow
-          <PlusIcon className="icon-end" stroke="currentColor" strokeWidth="0.5" />
+          <Plus className="icon-end" />
         </button>
       </div>
     </div>
