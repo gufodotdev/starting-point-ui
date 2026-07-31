@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .bg { fill: #171717; }
+    .line { stroke: #fafafa; }
+    .dot { fill: #fafafa; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #e5e5e5; }
+      .line { stroke: #171717; }
+      .dot { fill: #171717; }
+    }
+  </style>
+  <rect class="bg" width="32" height="32" rx="7" />
+  <g transform="translate(5.333 5.333) scale(0.889)">
+    <path class="line" d="M6.5 16.5 16.5 6.5" fill="none" stroke-width="4" stroke-linecap="round" />
+    <circle class="dot" cx="17" cy="17" r="2.5" />
+  </g>
+</svg>
