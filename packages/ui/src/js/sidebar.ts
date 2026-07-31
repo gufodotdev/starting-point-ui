@@ -63,10 +63,11 @@ export const Sidebar = define({
 
   methods: {
     _isMobile(this: SpInstance): boolean {
-      const value = getComputedStyle(document.documentElement).getPropertyValue(
-        "--breakpoint-sidebar",
-      );
-      return window.innerWidth < (parseInt(value, 10) || 1024);
+      const value = getComputedStyle(document.documentElement)
+        .getPropertyValue("--breakpoint-sidebar")
+        .trim();
+      if (!value) return window.innerWidth < 768;
+      return window.matchMedia(`(width < ${value})`).matches;
     },
 
     // "Expanded" is the drawer on mobile, the un-collapsed column on desktop.

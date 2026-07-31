@@ -15,49 +15,49 @@
        viewport (flex items stretch to the tallest sibling, not to min-height). */
     &:has(> .sidebar:not(.sidebar-right, .sidebar-end))::before,
     &:has(> .sidebar:is(.sidebar-right, .sidebar-end))::after {
-      @apply block h-dvh md:w-(--sidebar-width) md:shrink-0;
-      @apply md:transition-[width] md:duration-200 md:ease-linear;
+      @apply block h-dvh sidebar:w-(--sidebar-width) sidebar:shrink-0;
+      @apply sidebar:transition-[width] sidebar:duration-200 sidebar:ease-linear;
       content: "";
     }
 
     /* Left gap (::before) mirrors the left panel's collapsed width. */
     &:has(> .sidebar:not(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="offcanvas"])::before {
-      @apply md:w-0;
+      @apply sidebar:w-0;
     }
     &:has(> .sidebar:not(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="icon"])::before {
-      @apply md:w-(--sidebar-width-icon);
+      @apply sidebar:w-(--sidebar-width-icon);
     }
     &.sidebar-inset:has(> .sidebar:not(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="icon"])::before {
-      @apply md:w-[calc(var(--sidebar-width-icon)+1rem)];
+      @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
 
     /* Right gap (::after) mirrors the right panel's collapsed width. */
     &:has(> .sidebar:is(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="offcanvas"])::after {
-      @apply md:w-0;
+      @apply sidebar:w-0;
     }
     &:has(> .sidebar:is(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="icon"])::after {
-      @apply md:w-(--sidebar-width-icon);
+      @apply sidebar:w-(--sidebar-width-icon);
     }
     &.sidebar-inset:has(> .sidebar:is(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="icon"])::after {
-      @apply md:w-[calc(var(--sidebar-width-icon)+1rem)];
+      @apply sidebar:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
   }
 }
 
 @utility sidebar {
   @layer l1.l2 {
-    @apply max-md:bg-background text-sidebar-foreground fixed inset-y-0 z-50 hidden;
+    @apply max-sidebar:bg-background text-sidebar-foreground fixed inset-y-0 z-50 hidden;
     /* Cap the drawer at its token but shrink on narrow screens, leaving a gutter. */
-    @apply max-md:w-[min(var(--sidebar-width-mobile),100%-1.5rem)];
+    @apply max-sidebar:w-[min(var(--sidebar-width-mobile),100%-1.5rem)];
     /* Desktop: a fixed full-height column (the layout's gap reserves its flow
        space), so it can slide off or shrink without the page jumping. */
-    @apply md:fixed md:inset-y-0 md:z-10 md:block md:flex md:h-svh md:w-(--sidebar-width) flex-col;
+    @apply sidebar:fixed sidebar:inset-y-0 sidebar:z-10 sidebar:block sidebar:flex sidebar:h-svh sidebar:w-(--sidebar-width) flex-col;
     /* Transition only on the transient classes, so an authored .collapsed
        settles instantly with no animation (mirrors the dialog .show model). */
-    @apply [&:is(.collapsing,.expanding)]:md:transition-[left,right,inset-inline-start,inset-inline-end,width] md:duration-200 md:ease-linear;
-    @apply [&.show]:animate-in [&.show]:fade-in-0 max-md:duration-200 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
+    @apply [&:is(.collapsing,.expanding)]:sidebar:transition-[left,right,inset-inline-start,inset-inline-end,width] sidebar:duration-200 sidebar:ease-linear;
+    @apply [&.show]:animate-in [&.show]:fade-in-0 max-sidebar:duration-200 [&:is(.show,.hide)]:[animation-fill-mode:forwards]!;
     @apply [&.hide]:animate-out [&.hide]:fade-out-0;
-    @apply md:translate-x-0 md:animate-none!;
+    @apply sidebar:translate-x-0 sidebar:animate-none!;
     @apply [&:where(&:not(.sidebar-left,.sidebar-right,.sidebar-start,.sidebar-end))]:sidebar-start;
 
     /* The open mobile drawer is a flex column too, so header/footer pin. */
@@ -81,13 +81,13 @@
     }
 
     &.collapsed[data-sp-collapse="icon"] {
-      @apply md:w-(--sidebar-width-icon) md:overflow-hidden;
+      @apply sidebar:w-(--sidebar-width-icon) sidebar:overflow-hidden;
       /* Inset adds p-2; widen the rail by that 1rem so the icon isn't clipped. */
-      @apply md:in-[.sidebar-inset]:w-[calc(var(--sidebar-width-icon)+1rem)];
+      @apply sidebar:in-[.sidebar-inset]:w-[calc(var(--sidebar-width-icon)+1rem)];
     }
 
     /* Inset: pad the rail so its content floats off the screen edge. */
-    @apply md:in-[.sidebar-inset]:p-2;
+    @apply sidebar:in-[.sidebar-inset]:p-2;
   }
 }
 
@@ -108,7 +108,7 @@
 
     /* Offcanvas: slide the fixed panel fully off the left edge. */
     &.collapsed[data-sp-collapse="offcanvas"] {
-      @apply md:left-[calc(var(--sidebar-width)*-1)];
+      @apply sidebar:left-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
@@ -119,7 +119,7 @@
     @apply [&.show]:slide-in-from-right-10 [&.hide]:slide-out-to-right-10;
 
     &.collapsed[data-sp-collapse="offcanvas"] {
-      @apply md:right-[calc(var(--sidebar-width)*-1)];
+      @apply sidebar:right-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
@@ -130,7 +130,7 @@
     @apply [&.show]:slide-in-from-start-10 [&.hide]:slide-out-to-start-10;
 
     &.collapsed[data-sp-collapse="offcanvas"] {
-      @apply md:start-[calc(var(--sidebar-width)*-1)];
+      @apply sidebar:start-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
@@ -141,7 +141,7 @@
     @apply [&.show]:slide-in-from-end-10 [&.hide]:slide-out-to-end-10;
 
     &.collapsed[data-sp-collapse="offcanvas"] {
-      @apply md:end-[calc(var(--sidebar-width)*-1)];
+      @apply sidebar:end-[calc(var(--sidebar-width)*-1)];
     }
   }
 }
@@ -154,21 +154,21 @@
        panel has no margin because the gap supplies that spacing; when the panel
        collapses offcanvas the gap is gone, so restore the gutter there. */
     .sidebar-inset & {
-      @apply md:my-2 md:rounded-xl md:shadow-sm;
+      @apply sidebar:my-2 sidebar:rounded-xl sidebar:shadow-sm;
     }
     /* Left panel (default): page sits to its right. */
     .sidebar-inset:has(> .sidebar:not(.sidebar-right, .sidebar-end)) & {
-      @apply md:me-2;
+      @apply sidebar:me-2;
     }
     .sidebar-inset:has(> .sidebar:not(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="offcanvas"]) & {
-      @apply md:ms-2;
+      @apply sidebar:ms-2;
     }
     /* Right panel: page sits to its left. */
     .sidebar-inset:has(> .sidebar:is(.sidebar-right, .sidebar-end)) & {
-      @apply md:ms-2;
+      @apply sidebar:ms-2;
     }
     .sidebar-inset:has(> .sidebar:is(.sidebar-right, .sidebar-end).collapsed[data-sp-collapse="offcanvas"]) & {
-      @apply md:me-2;
+      @apply sidebar:me-2;
     }
   }
 }
@@ -242,7 +242,7 @@
   @layer l1.l2 {
     @apply text-sidebar-foreground absolute top-3.5 end-3 flex aspect-square w-5 items-center justify-center rounded-md p-0;
     @apply ring-sidebar-ring focus-visible:ring-2 transition-transform;
-    @apply after:absolute after:-inset-2 md:after:hidden;
+    @apply after:absolute after:-inset-2 sidebar:after:hidden;
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
     @apply [&>svg]:size-4 [&>svg]:shrink-0;
   }
@@ -284,7 +284,7 @@
   @layer l1.l2 {
     @apply text-sidebar-foreground absolute top-1.5 end-1 flex aspect-square w-5 items-center justify-center rounded-md p-0;
     @apply ring-sidebar-ring focus-visible:ring-2 transition-transform;
-    @apply after:absolute after:-inset-2 md:after:hidden;
+    @apply after:absolute after:-inset-2 sidebar:after:hidden;
     @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
     @apply [&>svg]:size-4 [&>svg]:shrink-0;
   }
@@ -321,7 +321,7 @@
 /* Icon collapse (desktop only): the rail shows each nav button's leading icon
    and clips the rest. The button keeps p-2 so the icon never shifts. */
 @layer l1.l2 {
-  @media (width >= theme(--breakpoint-md)) {
+  @media (width >= theme(--breakpoint-sidebar)) {
     .sidebar.collapsed[data-sp-collapse="icon"] {
       .sidebar-content,
       .sidebar-group,

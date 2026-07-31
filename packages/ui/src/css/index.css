@@ -111,6 +111,12 @@
 
 }
 
+@theme static {
+  /* Where the sidebar switches between the mobile drawer and the desktop
+     column; static so the variable always emits for the JS to read. */
+  --breakpoint-sidebar: theme(--breakpoint-md);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -173,7 +179,7 @@
   }
 
   /* The mobile sidebar drawer is modal; lock scroll while it's open. */
-  @media (width < theme(--breakpoint-md)) {
+  @media (width < theme(--breakpoint-sidebar)) {
     html:has(.sidebar[data-sp-open]) {
       @apply overflow-hidden;
     }

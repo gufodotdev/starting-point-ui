@@ -1796,6 +1796,14 @@ The sidebar reads its dimensions from component-local variables declared on `sid
 <div class="sidebar-container [--sidebar-width:18rem]"></div>
 ```
 
+The breakpoint where the sidebar switches between the mobile drawer and the desktop column is the `--breakpoint-sidebar` theme token. It follows your `md` breakpoint by default; override it in your theme to give the sidebar its own value, and the styles and the JavaScript both follow.
+
+```css
+@theme {
+  --breakpoint-sidebar: 64rem;
+}
+```
+
 ## Options
 
 ### Sidebar
