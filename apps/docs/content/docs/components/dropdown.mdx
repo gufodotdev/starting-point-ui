@@ -8,7 +8,7 @@ The dropdown displays a menu of actions anchored to its trigger, like the comman
 ```html preview preset=popover open=.dropdown
 <button id="dd-demo-trigger" class="btn btn-outline">Open</button>
 
-<div class="dropdown w-40" data-sp-toggle="#dd-demo-trigger">
+<div class="dropdown w-44" data-sp-toggle="#dd-demo-trigger">
   <div class="dropdown-label">My Account</div>
   <button class="dropdown-item">
     Profile
@@ -18,18 +18,26 @@ The dropdown displays a menu of actions anchored to its trigger, like the comman
     Billing
     <span class="dropdown-shortcut">⌘B</span>
   </button>
-  <button class="dropdown-item">
-    Settings
-    <span class="dropdown-shortcut">⌘S</span>
+  <button id="dd-demo-invite" class="dropdown-item">
+    Invite users
+    <svg class="ms-auto rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
   </button>
-  <div class="dropdown-separator"></div>
-  <button class="dropdown-item">Support</button>
-  <button class="dropdown-item" aria-disabled="true">API</button>
   <div class="dropdown-separator"></div>
   <button class="dropdown-item">
     Log out
     <span class="dropdown-shortcut">⇧⌘Q</span>
   </button>
+</div>
+
+<div
+  class="dropdown dropdown-sub"
+  data-sp-toggle="#dd-demo-invite"
+  data-sp-mode="hover"
+  data-sp-placement="right-start"
+>
+  <button class="dropdown-item">Email</button>
+  <button class="dropdown-item">Message</button>
+  <button class="dropdown-item">Copy link</button>
 </div>
 ```
 
