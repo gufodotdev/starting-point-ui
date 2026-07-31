@@ -1,26 +1,26 @@
 # Starting Point UI
 
-An open-source component library for Tailwind CSS. Inspired by [shadcn/ui](https://ui.shadcn.com), Starting Point UI gives you the same beautiful design system without locking you into a framework. React, Vue, Angular, Django, Laravel, Rails, plain HTML - if it runs Tailwind, it works.
+A Tailwind CSS component library that brings the [shadcn/ui](https://ui.shadcn.com) design system to any web stack, no React required. You get beautiful, accessible components as simple semantic classes, with a small vanilla JavaScript module driving the interactive ones. React, Vue, Angular, Laravel, Rails, Django, or plain HTML - if it runs Tailwind, it works.
 
-Visit [startingpointui.com](https://startingpointui.com) for full documentation, live examples, and an interactive theme editor.
+Visit [startingpointui.com](https://startingpointui.com) for full documentation and live examples.
 
 ![Starting Point UI](https://raw.githubusercontent.com/gufodotdev/starting-point-ui/main/.github/startingpointui.png)
 
 ## Features
 
-- **Framework-agnostic** - works with any web stack. Build with React, Vue, Laravel, plain HTML, or anything else that supports Tailwind
-- **Easy to use** - add classes like `btn`, `card`, or `input` and you're done
-- **Accessible** - built with WAI-ARIA patterns, keyboard navigation, and focus management
-- **Dark mode** - works out of the box with Tailwind's dark mode
-- **Themeable** - easy to customize and make your own, follows the same theming principles as shadcn/ui
-- **Lightweight** - just CSS and a small JavaScript module for interactive components
-- **Clean markup** - readable class names, no class soup
+- **CSS components** - semantic classes like `btn`, `card`, and `dialog` that style your markup.
+- **No framework required** - built with Tailwind CSS and vanilla JavaScript, works in any web stack.
+- **Accessible** - aria attributes, keyboard navigation, and focus management are wired up for you.
+- **RTL support** - layouts and interactions mirror when `dir="rtl"` is set.
+- **Dark mode** - light and dark color schemes out of the box.
+- **Customizable** - theme with shadcn/ui-compatible CSS variables or adjust with Tailwind utilities.
+- **Lightweight** - only the classes you use are compiled, and the JavaScript module is optional.
 
 ## Components
 
 Beautiful components for building complete interfaces:
 
-Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Card, Checkbox, Collapsible, Combobox, Dialog, Dropdown, Field, Input, Input Group, Label, Pagination, Popover, Radio Group, Resizable, Select, Separator, Sheet, Sidebar, Slider, Switch, Table, Tabs, Textarea, Tooltip
+Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Card, Checkbox, Collapsible, Combobox, Dialog, Dropdown, Field, Input, Input Group, Kbd, Label, Pagination, Popover, Progress, Radio Group, Scrollbar, Select, Separator, Sheet, Sidebar, Slider, Switch, Table, Tabs, Textarea, Toast, Tooltip
 
 ## Quick Start
 
@@ -47,7 +47,7 @@ For interactive components (dialogs, dropdowns, tabs, etc.), add the JavaScript:
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/starting-point-ui@0.24.1"
+  src="https://cdn.jsdelivr.net/npm/starting-point-ui@0.26.0"
   type="module"
 ></script>
 ```
@@ -64,6 +64,7 @@ Starting Point UI is designed to be the first thing you install in any new proje
 
 ## Community
 
+- [Discord](https://discord.gg/ZMc7k8RWe) - Hang out, get help, and share what you've built
 - [GitHub Discussions](https://github.com/gufodotdev/starting-point-ui/discussions) - Ask questions or suggest features
 - [GitHub Issues](https://github.com/gufodotdev/starting-point-ui/issues) - Report bugs
 
