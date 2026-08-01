@@ -4,7 +4,7 @@
        .sheet-panel, positioned by the side modifiers on this element.
        The dim is a plain background instead of ::backdrop, so authored
        .shown paints identically before JS and after showModal(). */
-    @apply fixed inset-0 z-999 m-0 h-full max-h-none w-full max-w-none overflow-hidden border-none bg-black/10 p-0 text-foreground supports-backdrop-filter:backdrop-blur-xs;
+    @apply fixed inset-0 z-999 m-0 h-full max-h-none w-full max-w-none overflow-clip border-none bg-black/10 p-0 text-foreground supports-backdrop-filter:backdrop-blur-xs;
 
     /* Display comes from [open] (runtime) or authored .shown (pre-JS). */
     &[open],
