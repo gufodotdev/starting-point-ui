@@ -1,0 +1,465 @@
+---
+title: Drawer
+description: A drawer component for Tailwind CSS with beautiful shadcn/ui styling. Use it for actions and details that slide in from the screen edge, with drag to dismiss like a native mobile sheet.
+---
+
+The drawer slides a panel in from the screen edge and follows your finger: drag it toward the edge to dismiss it, like a native mobile sheet. For a desktop-first side panel without dragging, use a [sheet](/components/sheet); for a centered window, use a [dialog](/components/dialog).
+
+```html preview preset=drawer open=.drawer
+<button id="drawer-demo-trigger" class="btn btn-outline">Open Drawer</button>
+
+<dialog class="drawer drawer-end" data-sp-toggle="#drawer-demo-trigger">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Pick a delivery time</h2>
+      <p class="drawer-description">
+        We'll prepare your order as soon as possible.
+      </p>
+    </div>
+    <div class="drawer-content scroll-fade">
+      <div
+        class="field-group gap-3"
+        role="radiogroup"
+        aria-label="Delivery time"
+      >
+        <label class="label" for="delivery-asap">
+          <div class="field field-horizontal">
+            <div class="field-content">
+              <span class="field-title">
+                Standard delivery
+                <span class="badge badge-secondary">Fastest</span>
+              </span>
+              <p class="field-description">25-35 min. Driver assigned now.</p>
+            </div>
+            <input
+              type="radio"
+              class="radio"
+              id="delivery-asap"
+              name="delivery"
+              checked
+            />
+          </div>
+        </label>
+        <label class="label" for="delivery-500">
+          <div class="field field-horizontal">
+            <div class="field-content">
+              <span class="field-title">5:00 PM - 5:15 PM</span>
+              <p class="field-description">Prep starts at 4:45 PM.</p>
+            </div>
+            <input
+              type="radio"
+              class="radio"
+              id="delivery-500"
+              name="delivery"
+            />
+          </div>
+        </label>
+        <label class="label" for="delivery-600">
+          <div class="field field-horizontal">
+            <div class="field-content">
+              <span class="field-title">
+                6:00 PM - 6:15 PM
+                <span class="badge badge-secondary">Popular</span>
+              </span>
+              <p class="field-description">Most popular. High demand.</p>
+            </div>
+            <input
+              type="radio"
+              class="radio"
+              id="delivery-600"
+              name="delivery"
+            />
+          </div>
+        </label>
+        <label class="label" for="delivery-630">
+          <div class="field field-horizontal">
+            <div class="field-content">
+              <span class="field-title">6:30 PM - 6:45 PM</span>
+              <p class="field-description">
+                Last slot before the kitchen closes.
+              </p>
+            </div>
+            <input
+              type="radio"
+              class="radio"
+              id="delivery-630"
+              name="delivery"
+            />
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn" data-sp-dismiss>Confirm time</button>
+    </div>
+  </div>
+</dialog>
+```
+
+## Usage
+
+Add the `drawer` class to a native `<dialog>`, put the visible surface in a `drawer-panel`, and point the dialog at its trigger with `data-sp-toggle`. It opens as a modal and slides in from the bottom by default. Dragging the panel toward its edge dismisses it: past a quarter of its size, or with a quick flick from anywhere. Interactive elements like buttons, inputs, and labels never start a drag; add `data-sp-no-drag` to any custom widget that should behave the same.
+
+| Class                | Description                                                   |
+| -------------------- | ------------------------------------------------------------- |
+| `drawer`             | Add to the `<dialog>`; carries the `data-sp-*` options        |
+| `drawer-panel`       | Add to the visible surface inside the dialog                  |
+| `drawer-header`      | Add to the block holding the title and description            |
+| `drawer-title`       | Add to a heading element to create the drawer title           |
+| `drawer-description` | Add to a paragraph to create the supporting description       |
+| `drawer-content`     | Add to the body section between header and footer; it scrolls |
+| `drawer-footer`      | Add to the action block; it sticks to the end of the panel    |
+| `drawer-bottom`      | Add to `drawer` to slide from the bottom (the default)        |
+| `drawer-top`         | Add to `drawer` to slide from the top                         |
+| `drawer-start`       | Add to `drawer` to slide from the reading-direction start     |
+| `drawer-end`         | Add to `drawer` to slide from the reading-direction end       |
+| `drawer-left`        | Add to `drawer` to slide from the left, in any direction      |
+| `drawer-right`       | Add to `drawer` to slide from the right, in any direction     |
+
+```html
+<!-- This is a button toggling the drawer -->
+<button id="my-trigger" class="btn btn-outline">Open Drawer</button>
+
+<!-- This is the drawer -->
+<dialog class="drawer" data-sp-toggle="#my-trigger">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Title</h2>
+      <p class="drawer-description">Description</p>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
+## Examples
+
+### Position
+
+Add a side class to slide from another edge. `drawer-start` and `drawer-end` follow the reading direction; `drawer-left` and `drawer-right` pin a physical edge. Side drawers drag horizontally, and below the `--breakpoint-drawer` theme token (your `sm` breakpoint) they render as the bottom sheet, like a native mobile drawer.
+
+```html preview preset=drawer
+<button id="drawer-pos-bottom" class="btn btn-outline">Bottom</button>
+<button id="drawer-pos-top" class="btn btn-outline">Top</button>
+<button id="drawer-pos-start" class="btn btn-outline">Start</button>
+<button id="drawer-pos-end" class="btn btn-outline">End</button>
+
+<dialog class="drawer" data-sp-toggle="#drawer-pos-bottom">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Bottom Drawer</h2>
+      <p class="drawer-description">Drag toward the edge to dismiss.</p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="h-40 w-full rounded-2xl bg-muted"></div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer drawer-top" data-sp-toggle="#drawer-pos-top">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Top Drawer</h2>
+      <p class="drawer-description">Drag toward the edge to dismiss.</p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="h-40 w-full rounded-2xl bg-muted"></div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer drawer-start" data-sp-toggle="#drawer-pos-start">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Start Drawer</h2>
+      <p class="drawer-description">Drag toward the edge to dismiss.</p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="size-full rounded-2xl bg-muted max-drawer:h-40"></div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer drawer-end" data-sp-toggle="#drawer-pos-end">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">End Drawer</h2>
+      <p class="drawer-description">Drag toward the edge to dismiss.</p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="size-full rounded-2xl bg-muted max-drawer:h-40"></div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
+### Nested
+
+A drawer opened from inside another drawer stacks on top and shrinks the one behind it to a peek strip. Drawers can nest as deep as needed.
+
+```html preview preset=drawer open=.drawer
+<button id="drawer-nested-trigger" class="btn btn-outline">Open Drawer</button>
+
+<dialog class="drawer drawer-end" data-sp-toggle="#drawer-nested-trigger">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Drawer</h2>
+      <p class="drawer-description">
+        Open another drawer from the same direction.
+      </p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="size-full rounded-2xl bg-muted max-drawer:h-40"></div>
+    </div>
+    <div class="drawer-footer">
+      <button id="drawer-nested-2" class="btn btn-outline">
+        Open Nested Drawer
+      </button>
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer drawer-end" data-sp-toggle="#drawer-nested-2">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Nested Drawer</h2>
+      <p class="drawer-description">
+        The parent drawer stays mounted behind this one.
+      </p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="size-full rounded-2xl bg-muted max-drawer:h-40"></div>
+    </div>
+    <div class="drawer-footer">
+      <button id="drawer-nested-3" class="btn btn-outline">
+        Open Third Drawer
+      </button>
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer drawer-end" data-sp-toggle="#drawer-nested-3">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Third Drawer</h2>
+      <p class="drawer-description">Two drawers are stacked behind this one.</p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="size-full rounded-2xl bg-muted max-drawer:h-40"></div>
+    </div>
+    <div class="drawer-footer">
+      <button id="drawer-nested-4" class="btn btn-outline">
+        Open Fourth Drawer
+      </button>
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer drawer-end" data-sp-toggle="#drawer-nested-4">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Fourth Drawer</h2>
+      <p class="drawer-description">
+        Three drawers are stacked behind this one.
+      </p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="size-full rounded-2xl bg-muted max-drawer:h-40"></div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-outline" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
+### Snap points
+
+Add `data-sp-snap-points` with comma-separated fractions of the panel size. The drawer opens at the first point, dragging settles on the nearest one, and the backdrop only dims fully at the last. Dragging past the first point toward the edge dismisses.
+
+```html preview preset=drawer open=.drawer
+<button id="drawer-snap-trigger" class="btn btn-outline">
+  Open Snap Drawer
+</button>
+
+<dialog
+  class="drawer"
+  data-sp-toggle="#drawer-snap-trigger"
+  data-sp-snap-points="0.5,1"
+>
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Snap points</h2>
+      <p class="drawer-description">
+        Drag the drawer to snap between a compact peek and a near full-height
+        view.
+      </p>
+    </div>
+    <div class="flex-1 p-4">
+      <div class="h-80 w-full rounded-2xl bg-muted"></div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn" data-sp-dismiss>Close</button>
+    </div>
+  </div>
+</dialog>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. The `drawer-start` and `drawer-end` sides follow the text direction, and dragging mirrors with them. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=drawer open=.drawer dir=rtl
+<div id="drawer-rtl-demo" dir="rtl">
+  <button id="drawer-rtl-trigger" class="btn btn-outline" data-i18n="open">
+    فتح
+  </button>
+
+  <dialog class="drawer drawer-end" data-sp-toggle="#drawer-rtl-trigger">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h2 class="drawer-title" data-i18n="title">تعديل الملف الشخصي</h2>
+        <p class="drawer-description" data-i18n="description">
+          قم بإجراء تغييرات على ملفك الشخصي هنا.
+        </p>
+      </div>
+      <div class="flex-1 p-4">
+        <div class="size-full rounded-2xl bg-muted max-drawer:h-40"></div>
+      </div>
+      <div class="drawer-footer">
+        <button class="btn" data-sp-dismiss data-i18n="save">
+          حفظ التغييرات
+        </button>
+        <button class="btn btn-outline" data-sp-dismiss data-i18n="close">
+          إغلاق
+        </button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  const translations = {
+  ar: {
+    dir: "rtl",
+    open: "فتح",
+    title: "تعديل الملف الشخصي",
+    description: "قم بإجراء تغييرات على ملفك الشخصي هنا.",
+    save: "حفظ التغييرات",
+    close: "إغلاق",
+  },
+  he: {
+    dir: "rtl",
+    open: "פתח",
+    title: "עריכת פרופיל",
+    description: "בצע שינויים בפרופיל שלך כאן.",
+    save: "שמור שינויים",
+    close: "סגור",
+  },
+  en: {
+    dir: "ltr",
+    open: "Open",
+    title: "Edit profile",
+    description: "Make changes to your profile here.",
+    save: "Save changes",
+    close: "Close",
+  },
+};
+window.addEventListener("message", (e) => {
+  const t = translations[e.data?.lang];
+  if (e.data?.type !== "sp-language" || !t) return;
+  document.getElementById("drawer-rtl-demo").dir = t.dir;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t[el.dataset.i18n];
+  });
+});
+</script>
+```
+
+## CSS variables
+
+The drawer reads its motion from component-local variables, shared by the enter and exit animations and the settle after a drag. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+
+| Variable            | Default                          | Description                                       |
+| ------------------- | -------------------------------- | ------------------------------------------------- |
+| `--drawer-duration` | `500ms`                          | Length of the open, close, and settle animations  |
+| `--drawer-ease`     | `cubic-bezier(0.32, 0.72, 0, 1)` | Easing curve for the same                         |
+
+```html
+<dialog class="drawer [--drawer-duration:300ms]" data-sp-toggle="#my-trigger">
+```
+
+## Options
+
+### Drawer
+
+Set each option with its own `data-sp-*` attribute on the `drawer` element.
+
+| Attribute             | Values                         | Default |
+| --------------------- | ------------------------------ | ------- |
+| `data-sp-toggle`      | CSS selector                   | —       |
+| `data-sp-snap-points` | Comma-separated fractions, 0-1 | —       |
+| `data-sp-static`      | Boolean                        | `false` |
+
+```html
+<dialog
+  class="drawer"
+  data-sp-toggle="#my-trigger"
+  data-sp-snap-points="0.5,1"
+></dialog>
+```
+
+## JavaScript
+
+### Events
+
+Lifecycle events fire on the drawer element; `before*` events are cancelable.
+
+| Event              | When                                       |
+| ------------------ | ------------------------------------------ |
+| `sp-beforeshow`    | Before showing (cancelable)                |
+| `sp-show`          | Opening                                    |
+| `sp-shown`         | Open and settled                           |
+| `sp-beforehide`    | Before hiding (cancelable)                 |
+| `sp-hide`          | Closing                                    |
+| `sp-hidden`        | Closed                                     |
+| `sp-hideprevented` | A static drawer refused a backdrop dismiss |
+
+```js
+el.addEventListener("sp-beforeshow", (e) => {
+  if (!ready) e.preventDefault(); // veto the open
+});
+```
+
+### Methods
+
+Get the instance with `sp.drawer(el)`, then call its methods:
+
+| Method     | Description                |
+| ---------- | -------------------------- |
+| `show()`   | Open the drawer            |
+| `hide()`   | Close the drawer           |
+| `toggle()` | Open if closed, else close |
+
+```js
+const drawer = sp.drawer(document.querySelector("#my-drawer"));
+
+drawer.show();
+```

@@ -113,6 +113,16 @@ export const framePresets: Record<string, CSSProperties> = {
     padding: "clamp(1rem, 5vw, 2.5rem)",
     minHeight: "36rem",
   },
+  drawer: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    width: "100%",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "667px",
+  },
   sheet: {
     display: "flex",
     flexWrap: "wrap",

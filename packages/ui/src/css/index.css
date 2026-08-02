@@ -14,6 +14,7 @@
 @import "./collapsible.css";
 @import "./combobox.css";
 @import "./dialog.css";
+@import "./drawer.css";
 @import "./dropdown.css";
 @import "./field.css";
 @import "./input.css";
@@ -114,8 +115,10 @@
 
 @theme static {
   /* Where the sidebar switches between the mobile drawer and the desktop
-     column; static so the variable always emits for the JS to read. */
+     column, and where side drawers give way to the bottom sheet; static so
+     the variables always emit for the JS to read. */
   --breakpoint-sidebar: theme(--breakpoint-md);
+  --breakpoint-drawer: theme(--breakpoint-sm);
 }
 
 @theme inline {
@@ -175,7 +178,9 @@
   html:has(dialog.dialog[open]),
   html:has(dialog.dialog.shown),
   html:has(dialog.sheet[open]),
-  html:has(dialog.sheet.shown) {
+  html:has(dialog.sheet.shown),
+  html:has(dialog.drawer[open]),
+  html:has(dialog.drawer.shown) {
     @apply overflow-hidden;
   }
 

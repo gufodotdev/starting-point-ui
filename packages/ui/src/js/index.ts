@@ -3,6 +3,7 @@
 import { getInstance, start } from "./observer";
 import type { ComponentFactory, SpInstance } from "./define";
 import { Dialog } from "./dialog";
+import { Drawer } from "./drawer";
 import { Sheet } from "./sheet";
 import { Popover } from "./popover";
 import { Tooltip } from "./tooltip";
@@ -21,6 +22,7 @@ import { Sidebar } from "./sidebar";
 
 const components: ComponentFactory[] = [
   Dialog,
+  Drawer,
   Sheet,
   Popover,
   Tooltip,
@@ -39,6 +41,7 @@ const components: ComponentFactory[] = [
 ];
 
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
+const drawer = (el: HTMLElement): SpInstance | null => getInstance(el, Drawer);
 const sheet = (el: HTMLElement): SpInstance | null => getInstance(el, Sheet);
 const popover = (el: HTMLElement): SpInstance | null => getInstance(el, Popover);
 const tooltip = (el: HTMLElement): SpInstance | null => getInstance(el, Tooltip);
@@ -58,6 +61,7 @@ export {
   Avatar,
   Breadcrumb,
   Dialog,
+  Drawer,
   Sheet,
   Popover,
   Tooltip,
@@ -70,6 +74,7 @@ export {
   SliderRange,
   Sidebar,
   dialog,
+  drawer,
   sheet,
   popover,
   tooltip,
@@ -93,6 +98,7 @@ declare global {
   interface Window {
     sp: {
       dialog: typeof dialog;
+      drawer: typeof drawer;
       sheet: typeof sheet;
       popover: typeof popover;
       tooltip: typeof tooltip;
@@ -115,6 +121,7 @@ declare global {
 if (typeof document !== "undefined") {
   window.sp = {
     dialog,
+    drawer,
     sheet,
     popover,
     tooltip,

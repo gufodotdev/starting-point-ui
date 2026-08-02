@@ -1,0 +1,214 @@
+@utility drawer {
+  @layer l1.l2 {
+    /* Same container mechanism as .sheet: the dialog is a transparent
+       full-viewport box, the visible surface is .drawer-panel, and the dim is
+       the dialog's own background so authored .shown paints before JS. The
+       fade variable lets a drag dim and unblur the scene in step with the
+       panel. */
+    --sp-drawer-fade: 1;
+    --drawer-duration: 500ms;
+    --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
+    @apply fixed inset-0 z-999 m-0 h-full max-h-none w-full max-w-none overflow-clip border-none bg-[rgb(0_0_0/calc(0.1*var(--sp-drawer-fade)))] p-0 text-foreground supports-backdrop-filter:backdrop-blur-[calc(4px*var(--sp-drawer-fade))];
+
+    /* Display comes from [open] (runtime) or authored .shown (pre-JS). */
+    &[open],
+    &.shown {
+      @apply block;
+    }
+
+    &::backdrop {
+      @apply hidden;
+    }
+
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:duration-(--drawer-duration) [&.show]:ease-(--drawer-ease) [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:duration-(--drawer-duration) [&.hide]:ease-(--drawer-ease) [&.hide]:[animation-fill-mode:forwards];
+
+    /* A drag release animates the exit itself; the lifecycle classes must not
+       replay it. */
+    &.dragged,
+    &.dragged > .drawer-panel {
+      @apply animate-none!;
+    }
+
+    /* Only the stack root dims and blurs the page. */
+    &.drawer-nested {
+      @apply bg-transparent backdrop-filter-none;
+    }
+
+    /* A drawer opened from inside this one shrinks to a peek strip; size
+       and origin come from the runtime. */
+    &.drawer-stacked > .drawer-panel {
+      @apply overflow-hidden;
+
+      & > * {
+        @apply opacity-0;
+      }
+    }
+
+    /* While the front drawer drags, the one behind shows its content. */
+    &.drawer-revealing > .drawer-panel > * {
+      @apply opacity-100;
+    }
+
+    @apply [&:where(&:not(.drawer-top,.drawer-bottom,.drawer-left,.drawer-right,.drawer-start,.drawer-end))]:drawer-bottom;
+  }
+}
+
+@utility drawer-bottom {
+  @layer l1 {
+    & > .drawer-panel {
+      @apply inset-x-2 bottom-2 h-auto max-h-[80vh] rounded-xl border;
+
+      &::before {
+        @apply mx-auto mt-4 block h-1.5 w-[100px] shrink-0 rounded-full bg-muted;
+        content: "";
+      }
+    }
+    & .drawer-header {
+      @apply text-center drawer:text-start;
+    }
+    &.show > .drawer-panel {
+      @apply slide-in-from-bottom-[calc(100%+1rem)];
+    }
+    &.hide > .drawer-panel {
+      @apply slide-out-to-bottom-[calc(100%+1rem)];
+    }
+  }
+}
+
+@utility drawer-top {
+  @layer l1 {
+    & > .drawer-panel {
+      @apply inset-x-2 top-2 h-auto max-h-[80vh] rounded-xl border;
+
+      &::after {
+        @apply mx-auto mb-4 block h-1.5 w-[100px] shrink-0 rounded-full bg-muted;
+        content: "";
+      }
+    }
+    & .drawer-header {
+      @apply text-center drawer:text-start;
+    }
+    &.show > .drawer-panel {
+      @apply slide-in-from-top-[calc(100%+1rem)];
+    }
+    &.hide > .drawer-panel {
+      @apply slide-out-to-top-[calc(100%+1rem)];
+    }
+  }
+}
+
+@utility drawer-left {
+  @layer l1 {
+    @apply max-drawer:drawer-bottom;
+
+    & > .drawer-panel {
+      @apply drawer:inset-y-2 drawer:left-2 drawer:h-auto drawer:w-3/4 drawer:max-w-sm drawer:rounded-xl drawer:border;
+    }
+    &.show > .drawer-panel {
+      @apply drawer:slide-in-from-left-[calc(100%+1rem)];
+    }
+    &.hide > .drawer-panel {
+      @apply drawer:slide-out-to-left-[calc(100%+1rem)];
+    }
+  }
+}
+
+@utility drawer-right {
+  @layer l1 {
+    @apply max-drawer:drawer-bottom;
+
+    & > .drawer-panel {
+      @apply drawer:inset-y-2 drawer:right-2 drawer:h-auto drawer:w-3/4 drawer:max-w-sm drawer:rounded-xl drawer:border;
+    }
+    &.show > .drawer-panel {
+      @apply drawer:slide-in-from-right-[calc(100%+1rem)];
+    }
+    &.hide > .drawer-panel {
+      @apply drawer:slide-out-to-right-[calc(100%+1rem)];
+    }
+  }
+}
+
+@utility drawer-start {
+  @layer l1 {
+    @apply max-drawer:drawer-bottom;
+
+    & > .drawer-panel {
+      @apply drawer:inset-y-2 drawer:start-2 drawer:h-auto drawer:w-3/4 drawer:max-w-sm drawer:rounded-xl drawer:border;
+    }
+    &.show > .drawer-panel {
+      @apply drawer:slide-in-from-start-[calc(100%+1rem)];
+    }
+    &.hide > .drawer-panel {
+      @apply drawer:slide-out-to-start-[calc(100%+1rem)];
+    }
+  }
+}
+
+@utility drawer-end {
+  @layer l1 {
+    @apply max-drawer:drawer-bottom;
+
+    & > .drawer-panel {
+      @apply drawer:inset-y-2 drawer:end-2 drawer:h-auto drawer:w-3/4 drawer:max-w-sm drawer:rounded-xl drawer:border;
+    }
+    &.show > .drawer-panel {
+      @apply drawer:slide-in-from-end-[calc(100%+1rem)];
+    }
+    &.hide > .drawer-panel {
+      @apply drawer:slide-out-to-end-[calc(100%+1rem)];
+    }
+  }
+}
+
+@utility drawer-panel {
+  @layer l1.l2 {
+    @apply absolute flex touch-none flex-col bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg;
+
+    /* Always transitioning, so the first frame of a stack shrink animates;
+       drags override with an inline none. */
+    @apply transition-[transform,height,width] duration-(--drawer-duration) ease-(--drawer-ease);
+
+    & > * {
+      @apply transition-opacity duration-300;
+    }
+
+    @apply in-[.drawer.show]:animate-in in-[.drawer.show]:duration-(--drawer-duration) in-[.drawer.show]:ease-(--drawer-ease) in-[.drawer.show]:[animation-fill-mode:forwards];
+    @apply in-[.drawer.hide]:animate-out in-[.drawer.hide]:duration-(--drawer-duration) in-[.drawer.hide]:ease-(--drawer-ease) in-[.drawer.hide]:[animation-fill-mode:forwards];
+  }
+}
+
+@utility drawer-content {
+  @layer l1.l2 {
+    /* pan-y hands vertical touches to the scroller until it sits at its
+       edge; only then can a drag begin here. */
+    @apply flex min-h-0 flex-1 touch-pan-y flex-col gap-4 overflow-y-auto overscroll-contain px-4;
+    scrollbar-color: color-mix(in oklab, currentColor 20%, transparent) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+@utility drawer-header {
+  @layer l1.l2 {
+    @apply flex flex-col gap-0.5 p-4 drawer:gap-1.5;
+  }
+}
+
+@utility drawer-footer {
+  @layer l1.l2 {
+    @apply mt-auto flex flex-col gap-2 p-4;
+  }
+}
+
+@utility drawer-title {
+  @layer l1.l2 {
+    @apply font-medium text-foreground;
+  }
+}
+
+@utility drawer-description {
+  @layer l1.l2 {
+    @apply text-sm text-muted-foreground;
+  }
+}
