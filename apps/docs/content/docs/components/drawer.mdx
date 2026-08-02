@@ -91,6 +91,29 @@ The drawer slides a panel in from the screen edge and follows your finger: drag 
     </div>
     <div class="drawer-footer">
       <button class="btn" data-sp-dismiss>Confirm time</button>
+      <button id="drawer-demo-note" class="btn btn-outline">
+        Add delivery note
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer drawer-end" data-sp-toggle="#drawer-demo-note">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Delivery note</h2>
+      <p class="drawer-description">Anything the driver should know?</p>
+    </div>
+    <div class="drawer-content">
+      <textarea
+        class="textarea my-1 min-h-28"
+        placeholder="Leave it at the door, ring the bell twice..."
+        aria-label="Delivery note"
+      ></textarea>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn" data-sp-dismiss>Save note</button>
+      <button class="btn btn-outline" data-sp-dismiss>Back</button>
     </div>
   </div>
 </dialog>
