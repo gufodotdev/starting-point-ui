@@ -1,0 +1,473 @@
+---
+title: Scroll Fade
+description: A scroll fade utility for Tailwind CSS with beautiful shadcn/ui styling. Use it to fade scrollable content at its edges, so users can see there is more to scroll.
+---
+
+The scroll fade masks the edges of a scroller so content melts away instead of clipping, hinting that there is more to scroll. Use it for long lists, chat feeds, and horizontal tag rows, anywhere clipped content should read as scrollable.
+
+```html preview preset=form
+<div class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border">
+  <div class="scroll-fade scrollbar-none h-72 overflow-y-auto">
+    <div class="flex flex-col gap-1.5 p-1.5">
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 2</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 3</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 4</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 5</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 6</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 7</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 8</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 9</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 10</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 11</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 12</div>
+    </div>
+  </div>
+</div>
+```
+
+## Usage
+
+Add `scroll-fade` to any vertical scroller; use the directional variants for horizontal scrollers or a single edge. The fades follow the scroll position, so an edge only fades while more content lies in that direction. The fade size defaults to 12% of the scroller, capped at `2.5rem`; override it with the size utilities, like `scroll-fade-16` for a spacing-scale value or `scroll-fade-[15%]` for an arbitrary one. In browsers without scroll-driven animations, the edges fade statically instead, no JavaScript involved.
+
+| Class                           | Description                                     |
+| ------------------------------- | ----------------------------------------------- |
+| `scroll-fade` / `scroll-fade-y` | Add to a vertical scroller to fade both edges   |
+| `scroll-fade-x`                 | Add to a horizontal scroller to fade both edges |
+| `scroll-fade-t`                 | Fade only the top edge                          |
+| `scroll-fade-b`                 | Fade only the bottom edge                       |
+| `scroll-fade-s`                 | Fade only the reading-direction start edge      |
+| `scroll-fade-e`                 | Fade only the reading-direction end edge        |
+| `scroll-fade-l`                 | Fade only the physical left edge                |
+| `scroll-fade-r`                 | Fade only the physical right edge               |
+| `scroll-fade-{n}`               | Fade size, spacing scale or arbitrary value     |
+| `scroll-fade-t-{n}`             | Fade size for one edge, also `b`, `s`, and `e`  |
+| `scroll-fade-none`              | Remove the fade, for example at a breakpoint    |
+
+```html
+<div class="scroll-fade h-64 overflow-y-auto">
+  <!-- long content -->
+</div>
+```
+
+## Examples
+
+### No overflow, no fade
+
+The fades are driven by the scroll position, so a scroller whose content fits shows no fade at all.
+
+```html preview preset=form
+<div class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border">
+  <div class="scroll-fade scrollbar-none overflow-y-auto">
+    <div class="flex flex-col gap-1.5 p-1.5">
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 2</div>
+      <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 3</div>
+    </div>
+  </div>
+</div>
+```
+
+### Horizontal scrolling
+
+Add `scroll-fade-x` to a horizontal scroller. The fades follow the reading direction.
+
+```html preview preset=form
+<div class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border">
+  <div class="scroll-fade-x scrollbar-none overflow-x-auto">
+    <div class="flex w-max gap-1.5 p-1.5">
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">Design</div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Engineering
+      </div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Marketing
+      </div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Product
+      </div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Research
+      </div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">Sales</div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Support
+      </div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Operations
+      </div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Finance
+      </div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">Legal</div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">People</div>
+      <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+        Security
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Edge fades
+
+Fade a single edge with the directional variants: `scroll-fade-t` and `scroll-fade-b` for vertical scrollers, `scroll-fade-s` and `scroll-fade-e` for horizontal ones.
+
+```html preview preset=form
+<div class="mx-auto flex w-full max-w-xs min-w-0 flex-col gap-6">
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div class="scroll-fade-t scrollbar-none h-36 overflow-y-auto">
+        <div class="flex flex-col gap-1.5 p-1.5">
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Inbox triage
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Design review
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            API contract
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">QA pass</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Launch notes
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Metrics follow-up
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade-t
+    </p>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div class="scroll-fade-b scrollbar-none h-36 overflow-y-auto">
+        <div class="flex flex-col gap-1.5 p-1.5">
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Inbox triage
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Design review
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            API contract
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">QA pass</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Launch notes
+          </div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Metrics follow-up
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade-b
+    </p>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div class="scroll-fade-s scrollbar-none overflow-x-auto">
+        <div class="flex w-max gap-1.5 p-1.5">
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Design
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Engineering
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Marketing
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Product
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Research
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Sales
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade-s
+    </p>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div class="scroll-fade-e scrollbar-none overflow-x-auto">
+        <div class="flex w-max gap-1.5 p-1.5">
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Design
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Engineering
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Marketing
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Product
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Research
+          </div>
+          <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">
+            Sales
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade-e
+    </p>
+  </div>
+</div>
+```
+
+### Fade size
+
+Size utilities change how far the fade reaches: `scroll-fade-{n}` takes a spacing-scale value or an arbitrary length, and the per-edge forms like `scroll-fade-b-8` size one edge on its own.
+
+```html preview preset=form
+<div class="mx-auto flex w-full max-w-xs flex-col gap-6">
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div
+        class="scroll-fade scrollbar-none h-48 overflow-y-auto scroll-fade-4"
+      >
+        <div class="flex flex-col gap-1.5 p-1.5">
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 2</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 3</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 4</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 5</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 6</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 7</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 8</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade-4
+    </p>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div
+        class="scroll-fade scrollbar-none h-48 overflow-y-auto scroll-fade-24"
+      >
+        <div class="flex flex-col gap-1.5 p-1.5">
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 2</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 3</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 4</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 5</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 6</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 7</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 8</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade-24
+    </p>
+  </div>
+</div>
+```
+
+### Disabling the fade
+
+Add `scroll-fade-none` to remove the fade, for example at a breakpoint where the layout no longer scrolls.
+
+```html preview preset=form
+<div class="mx-auto flex w-full max-w-xs min-w-0 flex-col gap-6">
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div class="scroll-fade scrollbar-none h-48 overflow-y-auto">
+        <div class="flex flex-col gap-1.5 p-1.5">
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 2</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 3</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 4</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 5</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 6</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade
+    </p>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="overflow-hidden rounded-2xl border">
+      <div
+        class="scroll-fade scroll-fade-none scrollbar-none h-48 overflow-y-auto"
+      >
+        <div class="flex flex-col gap-1.5 p-1.5">
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 2</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 3</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 4</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 5</div>
+          <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 6</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center font-mono text-xs text-muted-foreground">
+      scroll-fade scroll-fade-none
+    </p>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. The inline fades of `scroll-fade-x`, `scroll-fade-s`, and `scroll-fade-e` mirror automatically. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=form dir=rtl
+<div
+  id="scroll-fade-rtl-demo"
+  dir="rtl"
+  class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border"
+>
+  <div class="scroll-fade-x scrollbar-none overflow-x-auto">
+    <div class="flex w-max gap-1.5 p-1.5">
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="design"
+      >
+        التصميم
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="engineering"
+      >
+        الهندسة
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="marketing"
+      >
+        التسويق
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="product"
+      >
+        المنتج
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="research"
+      >
+        الأبحاث
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="sales"
+      >
+        المبيعات
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="support"
+      >
+        الدعم
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="operations"
+      >
+        العمليات
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="finance"
+      >
+        المالية
+      </div>
+      <div
+        class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm"
+        data-i18n="legal"
+      >
+        الشؤون القانونية
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+  ar: {
+    dir: "rtl",
+    design: "التصميم",
+    engineering: "الهندسة",
+    marketing: "التسويق",
+    product: "المنتج",
+    research: "الأبحاث",
+    sales: "المبيعات",
+    support: "الدعم",
+    operations: "العمليات",
+    finance: "المالية",
+    legal: "الشؤون القانونية",
+  },
+  he: {
+    dir: "rtl",
+    design: "עיצוב",
+    engineering: "הנדסה",
+    marketing: "שיווק",
+    product: "מוצר",
+    research: "מחקר",
+    sales: "מכירות",
+    support: "תמיכה",
+    operations: "תפעול",
+    finance: "כספים",
+    legal: "משפטי",
+  },
+  en: {
+    dir: "ltr",
+    design: "Design",
+    engineering: "Engineering",
+    marketing: "Marketing",
+    product: "Product",
+    research: "Research",
+    sales: "Sales",
+    support: "Support",
+    operations: "Operations",
+    finance: "Finance",
+    legal: "Legal",
+  },
+};
+window.addEventListener("message", (e) => {
+  const t = translations[e.data?.lang];
+  if (e.data?.type !== "sp-language" || !t) return;
+  document.getElementById("scroll-fade-rtl-demo").dir = t.dir;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t[el.dataset.i18n];
+  });
+});
+</script>
+```
+
+## CSS variables
+
+The fade reads its metrics from component-local variables. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+
+| Variable               | Default                               | Description                                             |
+| ---------------------- | ------------------------------------- | ------------------------------------------------------- |
+| `--scroll-fade-size`   | `min(12%, calc(var(--spacing) * 10))` | Depth of the fade at each edge                          |
+| `--scroll-fade-t-size` | `--scroll-fade-size`                  | Depth for one edge, also `b`, `s`, and `e`              |
+| `--scroll-fade-reveal` | `calc(var(--spacing) * 24)`           | Scroll distance over which a fade eases in near an edge |
+| `--scroll-fade-mask`   | The built-in gradient                 | The mask itself; set `none` to disable                  |
+
+```html
+<div class="scroll-fade [--scroll-fade-reveal:8rem] h-72 overflow-y-auto">
+  Long content
+</div>
+```
