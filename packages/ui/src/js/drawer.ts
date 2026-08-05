@@ -274,6 +274,7 @@ export const Drawer = define({
       }
       this._pending = false;
       this._dragging = true;
+      document.getSelection()?.removeAllRanges();
       this._dragOrigin = axis === "y" ? e.clientY : e.clientX;
       this._dragBase = (this._snaps as number[]).length
         ? this._snapTranslate((this._snaps as number[])[this._activeSnap as number])
@@ -306,6 +307,14 @@ export const Drawer = define({
         if (Math.abs(cross) > Math.abs(main)) {
           this._pending = false;
           return;
+        }
+        // A mouse that started on text is selecting by now; let it.
+        if (e.pointerType !== "touch") {
+          const selection = document.getSelection();
+          if (selection && !selection.isCollapsed) {
+            this._pending = false;
+            return;
+          }
         }
         this._commitDrag(e);
       }

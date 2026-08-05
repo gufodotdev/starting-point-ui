@@ -23,6 +23,11 @@
     @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:duration-(--drawer-duration) [&.show]:ease-(--drawer-ease) [&.show]:[animation-fill-mode:forwards];
     @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:duration-(--drawer-duration) [&.hide]:ease-(--drawer-ease) [&.hide]:[animation-fill-mode:forwards];
 
+    /* Dragging must not highlight text as the pointer moves over it. */
+    &.dragging {
+      @apply select-none;
+    }
+
     /* A drag release animates the exit itself; the lifecycle classes must not
        replay it. */
     &.dragged,
