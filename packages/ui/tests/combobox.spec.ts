@@ -158,6 +158,13 @@ test.describe("input-anchored", () => {
     ).toBe("astro");
   });
 
+  test("the highlight follows the pointer", async ({ page }) => {
+    await mount(page, INPUT_ANCHORED);
+    await page.click("#field");
+    await page.hover("#i2");
+    expect(await highlighted(page)).toBe("i2");
+  });
+
   test("dismissing reverts the field text to the selection", async ({ page }) => {
     await mount(page, INPUT_ANCHORED);
     await page.click("#field");

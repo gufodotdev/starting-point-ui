@@ -73,6 +73,15 @@ test("highlights the first item on init", async ({ page }) => {
   expect(active).toBe(await page.locator("#calendar").getAttribute("id"));
 });
 
+test("an authored data-sp-highlighted item keeps the highlight on init", async ({ page }) => {
+  await mount(page, BASIC.replace('id="profile"', 'id="profile" data-sp-highlighted'));
+  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#profile")).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#calendar")).not.toHaveAttribute("data-sp-highlighted");
+  const active = await input(page).getAttribute("aria-activedescendant");
+  expect(active).toBe(await page.locator("#profile").getAttribute("id"));
+});
+
 test("typing filters items, hides emptied groups, highlights first match", async ({ page }) => {
   await mount(page, BASIC);
   await input(page).fill("prof");
@@ -110,6 +119,49 @@ test("arrows move the highlight from the input and skip disabled items", async (
   await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
   await page.keyboard.press("ArrowUp");
   await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+});
+
+test("the highlight follows the pointer and skips disabled items", async ({ page }) => {
+  await mount(page, BASIC);
+  await page.hover("#profile");
+  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#calendar")).not.toHaveAttribute("data-sp-highlighted");
+  await page.hover("#billing", { force: true });
+  await expect(page.locator("#billing")).not.toHaveAttribute("data-sp-highlighted");
+  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+});
+
+test("a scroll-induced pointermove with unchanged coordinates keeps the keyboard highlight", async ({ page }) => {
+  await mount(page, BASIC);
+  const move = (id: string, x: number, y: number) =>
+    page.evaluate(
+      ([sel, cx, cy]) => {
+        document.querySelector(sel as string)?.dispatchEvent(
+          new PointerEvent("pointermove", { bubbles: true, clientX: cx as number, clientY: cy as number }),
+        );
+      },
+      [`#${id}`, x, y],
+    );
+  await move("profile", 10, 10);
+  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await input(page).focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
+  await move("profile", 10, 10);
+  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
+  await move("profile", 11, 10);
+  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+});
+
+test("touch pointer movement does not move the highlight", async ({ page }) => {
+  await mount(page, BASIC);
+  await page.evaluate(() => {
+    document.querySelector("#profile")?.dispatchEvent(
+      new PointerEvent("pointermove", { bubbles: true, clientX: 30, clientY: 30, pointerType: "touch" }),
+    );
+  });
+  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#profile")).not.toHaveAttribute("data-sp-highlighted");
 });
 
 test("enter runs the highlighted item", async ({ page }) => {
@@ -167,6 +219,15 @@ test("dynamically swapped items get wired, highlighted, and toggle the empty sta
   await expect(page.locator("#fresh")).toHaveAttribute("role", "option");
   await expect(page.locator("#fresh")).toHaveAttribute("data-sp-highlighted", "");
   await expect(page.locator(".command-empty")).not.toHaveClass(/visible/);
+});
+
+test("clicking an item keeps focus in the input", async ({ page }) => {
+  await mount(page, BASIC);
+  await input(page).focus();
+  await page.locator("#profile").click();
+  expect(
+    await page.evaluate(() => document.activeElement?.matches(".command input") ?? false),
+  ).toBe(true);
 });
 
 test("click runs an item; disabled items do not run", async ({ page }) => {

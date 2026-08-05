@@ -35,7 +35,7 @@ export const Combobox = define({
     // Arrow navigation only visits items the current filter left visible.
     item: { type: String, default: `${ITEM}:not([hidden])` },
     matchWidth: { type: Boolean, default: true },
-    // Highlight the first match while the user types (Base UI parity: opt-in).
+    // Highlight the first match while the user types; opt-in.
     autoHighlight: { type: Boolean, default: false },
   },
 
@@ -80,6 +80,15 @@ export const Combobox = define({
       }
     });
 
+    // Pressing an item must not blur the input: on mobile the blur dismisses
+    // the keyboard and the resulting layout shift moves the item away before
+    // the click lands. iOS can emit the mousedown without a pointerdown.
+    for (const type of ["pointerdown", "mousedown"]) {
+      this.on(this.el, type, (e) => {
+        if ((e.target as HTMLElement).closest(ITEM)) e.preventDefault();
+      });
+    }
+
     this.on(this.el, "click", (e) => {
       // select() re-clicks the hidden input; skip that synthetic pass.
       if (e.target instanceof HTMLInputElement) return;
@@ -90,6 +99,19 @@ export const Combobox = define({
         return;
       }
       this.select(item);
+    });
+
+    // Scrolling emits a synthetic pointermove with unchanged coordinates; only
+    // real movement may move the highlight.
+    this.on(this.el, "pointermove", (e) => {
+      const { clientX, clientY, pointerType } = e as PointerEvent;
+      if (pointerType === "touch") return;
+      if (clientX === this._pointerX && clientY === this._pointerY) return;
+      this._pointerX = clientX;
+      this._pointerY = clientY;
+      const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
+      if (!item || isDisabled(item) || item.hasAttribute("data-sp-highlighted")) return;
+      this._setActive(item, false);
     });
 
     if (anchorInput && trigger) {
@@ -139,8 +161,8 @@ export const Combobox = define({
     this.on(this.el, "sp-hidden", (e) => {
       if (e.target !== this.el) return;
       this.filter("");
-      // The field text resettles to the actual selection (Base UI focusOut
-      // behavior); a chips input just empties.
+      // The field text resettles to the actual selection; a chips input
+      // just empties.
       if (anchorInput) anchorInput.value = chips ? "" : this._selectedLabel();
     });
 
@@ -323,24 +345,29 @@ export const Combobox = define({
       if (clear) clear.hidden = this._checkedItems().length === 0;
     },
 
-    // Virtual highlight (cmdk-style): focus stays in the field while
+    // Virtual highlight: focus stays in the field while
     // aria-activedescendant and [data-sp-highlighted] track the active option.
     _activeIndex(this: SpInstance, items: HTMLElement[]): number {
       return items.findIndex((item) => item.hasAttribute("data-sp-highlighted"));
     },
 
-    _setActive(this: SpInstance, item: HTMLElement): void {
-      this.el.querySelector(`${ITEM}[data-sp-highlighted]`)?.removeAttribute("data-sp-highlighted");
+    // A pointer-set highlight must not scroll the list under the cursor.
+    _setActive(this: SpInstance, item: HTMLElement, scroll = true): void {
+      this.el
+        .querySelectorAll(`${ITEM}[data-sp-highlighted]`)
+        .forEach((prev) => prev.removeAttribute("data-sp-highlighted"));
       item.setAttribute("data-sp-highlighted", "");
       (this._anchorInput as HTMLElement | null)?.setAttribute(
         "aria-activedescendant",
         ensureId(item),
       );
-      item.scrollIntoView({ block: "nearest" });
+      if (scroll) item.scrollIntoView({ block: "nearest" });
     },
 
     _clearActive(this: SpInstance): void {
-      this.el.querySelector(`${ITEM}[data-sp-highlighted]`)?.removeAttribute("data-sp-highlighted");
+      this.el
+        .querySelectorAll(`${ITEM}[data-sp-highlighted]`)
+        .forEach((prev) => prev.removeAttribute("data-sp-highlighted"));
       (this._anchorInput as HTMLElement | null)?.removeAttribute("aria-activedescendant");
     },
   },

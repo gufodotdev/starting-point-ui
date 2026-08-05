@@ -42,10 +42,34 @@ export const Command = define({
       if (list) input.setAttribute("aria-controls", ensureId(list));
     }
 
+    // Pressing an item must not blur the input: on mobile the blur dismisses
+    // the keyboard and the resulting layout shift moves the item away before
+    // the click lands. iOS can emit the mousedown without a pointerdown.
+    for (const type of ["pointerdown", "mousedown"]) {
+      this.on(this.el, type, (e) => {
+        if ((e.target as HTMLElement).closest(ITEM)) e.preventDefault();
+      });
+    }
+
     this.on(this.el, "click", (e) => {
       const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
       if (!item || isDisabled(item)) return;
+      // Touch has no hover; the tap itself moves the highlight.
+      this._setActive(item, false);
       this.run(item);
+    });
+
+    // Scrolling emits a synthetic pointermove with unchanged coordinates; only
+    // real movement may move the highlight.
+    this.on(this.el, "pointermove", (e) => {
+      const { clientX, clientY, pointerType } = e as PointerEvent;
+      if (pointerType === "touch") return;
+      if (clientX === this._pointerX && clientY === this._pointerY) return;
+      this._pointerX = clientX;
+      this._pointerY = clientY;
+      const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
+      if (!item || isDisabled(item) || item.hasAttribute("data-sp-highlighted")) return;
+      this._setActive(item, false);
     });
 
     if (input) {
@@ -119,6 +143,13 @@ export const Command = define({
         .querySelector<HTMLElement>(".command-empty")
         ?.classList.toggle("visible", visible.length === 0);
 
+      // Keep a still-valid highlight so an authored data-sp-highlighted
+      // survives init; _setActive adds the aria wiring markup can't.
+      const current = this.el.querySelector<HTMLElement>(`${ITEM}[data-sp-highlighted]`);
+      if (current && visible.includes(current) && !isDisabled(current)) {
+        this._setActive(current);
+        return;
+      }
       const target = visible.find((item) => !isDisabled(item)) ?? null;
       if (target) this._setActive(target);
       else this._clearActive();
@@ -145,23 +176,26 @@ export const Command = define({
       return items.findIndex((item) => item.hasAttribute("data-sp-highlighted"));
     },
 
-    _setActive(this: SpInstance, item: HTMLElement): void {
-      const prev = this.el.querySelector(`${ITEM}[data-sp-highlighted]`);
-      prev?.removeAttribute("data-sp-highlighted");
-      prev?.removeAttribute("aria-selected");
+    // A pointer-set highlight must not scroll the list under the cursor.
+    _setActive(this: SpInstance, item: HTMLElement, scroll = true): void {
+      this.el.querySelectorAll(`${ITEM}[data-sp-highlighted]`).forEach((prev) => {
+        prev.removeAttribute("data-sp-highlighted");
+        prev.removeAttribute("aria-selected");
+      });
       item.setAttribute("data-sp-highlighted", "");
       item.setAttribute("aria-selected", "true");
       (this._input as HTMLElement | null)?.setAttribute("aria-activedescendant", ensureId(item));
       // The initial highlight on page load must not scroll the document.
-      if (this.el.contains(document.activeElement)) {
+      if (scroll && this.el.contains(document.activeElement)) {
         item.scrollIntoView({ block: "nearest" });
       }
     },
 
     _clearActive(this: SpInstance): void {
-      const prev = this.el.querySelector(`${ITEM}[data-sp-highlighted]`);
-      prev?.removeAttribute("data-sp-highlighted");
-      prev?.removeAttribute("aria-selected");
+      this.el.querySelectorAll(`${ITEM}[data-sp-highlighted]`).forEach((prev) => {
+        prev.removeAttribute("data-sp-highlighted");
+        prev.removeAttribute("aria-selected");
+      });
       (this._input as HTMLElement | null)?.removeAttribute("aria-activedescendant");
     },
 

@@ -56,7 +56,6 @@
   @layer l1.l2 {
     @apply relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-start text-sm outline-hidden select-none;
     @apply in-[.dialog]:rounded-lg;
-    @apply hover:bg-muted hover:text-foreground;
     @apply data-sp-highlighted:bg-muted data-sp-highlighted:text-foreground;
     @apply disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
     @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
