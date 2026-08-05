@@ -52,6 +52,7 @@ export const docsNav: NavGroup[] = [
       { title: "Dialog", href: "/components/dialog" },
       { title: "Drawer", href: "/components/drawer" },
       { title: "Dropdown", href: "/components/dropdown" },
+      { title: "Empty", href: "/components/empty" },
       { title: "Field", href: "/components/field" },
       { title: "Forms", href: "/components/forms" },
       { title: "Input", href: "/components/input" },

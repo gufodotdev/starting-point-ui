@@ -1,0 +1,255 @@
+---
+title: Empty
+description: An empty state component for Tailwind CSS with beautiful shadcn/ui styling. Use it to fill a blank area with an icon, a message, and an action.
+---
+
+The empty state tells users there is nothing to show yet, with an icon, a short message, and usually an action to get started. Use it for empty lists, zero search results, or a first-run screen; for a placeholder while content is loading, reach for the [skeleton](/components/skeleton).
+
+```html preview preset=empty
+<div class="empty">
+  <div class="empty-header">
+    <div class="empty-media empty-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10.5 8 13l2 2.5"/><path d="m14 10.5 2 2.5-2 2.5"/><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
+    </div>
+    <div class="empty-title">No Projects Yet</div>
+    <div class="empty-description">
+      You haven't created any projects yet. Get started by creating your first
+      project.
+    </div>
+  </div>
+  <div class="empty-content flex-row justify-center gap-2">
+    <button class="btn">Create Project</button>
+    <button class="btn btn-outline">Import Project</button>
+  </div>
+  <a href="#" class="btn btn-link btn-sm text-muted-foreground">
+    Learn More
+    <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+  </a>
+</div>
+```
+
+## Usage
+
+Add the `empty` class to a container, then build it up from the parts you need: an `empty-header` grouping the `empty-media`, `empty-title`, and `empty-description`, and an `empty-content` block below for actions like buttons or a search field. Add `empty-media-icon` to the media slot for the muted rounded icon tile, or leave it off to drop in an avatar or illustration at its own size.
+
+| Class               | Description                                              |
+| ------------------- | ------------------------------------------------------- |
+| `empty`             | Add to the empty-state container                        |
+| `empty-header`      | Add to the block grouping the media, title, and text    |
+| `empty-media`       | Add to the leading slot for an icon, avatar, or image   |
+| `empty-media-icon`  | Add to `empty-media` for the muted rounded icon tile    |
+| `empty-title`       | Add to the heading line                                 |
+| `empty-description` | Add to the supporting text                              |
+| `empty-content`     | Add to the block holding actions below the header       |
+
+```html
+<div class="empty">
+  <div class="empty-header">
+    <div class="empty-media empty-media-icon">
+      <svg><!-- icon --></svg>
+    </div>
+    <div class="empty-title">Title</div>
+    <div class="empty-description">Description</div>
+  </div>
+  <div class="empty-content">
+    <button class="btn">Action</button>
+  </div>
+</div>
+```
+
+## Examples
+
+### Outline
+
+Add `border border-dashed` for a dashed outline around the empty state.
+
+```html preview preset=empty
+<div class="empty border border-dashed">
+  <div class="empty-header">
+    <div class="empty-media empty-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+    </div>
+    <div class="empty-title">Cloud Storage Empty</div>
+    <div class="empty-description">
+      Upload files to your cloud storage to access them anywhere.
+    </div>
+  </div>
+  <div class="empty-content">
+    <button class="btn btn-outline btn-sm">Upload Files</button>
+  </div>
+</div>
+```
+
+### Background
+
+Give the empty state a muted background to set it apart from the page.
+
+```html preview preset=empty
+<div class="empty h-full bg-muted/30">
+  <div class="empty-header">
+    <div class="empty-media empty-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+    </div>
+    <div class="empty-title">No Notifications</div>
+    <div class="empty-description max-w-xs text-pretty">
+      You're all caught up. New notifications will appear here.
+    </div>
+  </div>
+  <div class="empty-content">
+    <button class="btn btn-outline">
+      <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+      Refresh
+    </button>
+  </div>
+</div>
+```
+
+### Avatar
+
+Leave `empty-media-icon` off to place an avatar at its own size.
+
+```html preview preset=empty
+<div class="empty">
+  <div class="empty-header">
+    <div class="empty-media">
+      <span class="avatar size-12">
+        <img
+          class="avatar-image"
+          src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+          alt="Leila Navarro"
+        />
+        <span class="avatar-fallback">LN</span>
+      </span>
+    </div>
+    <div class="empty-title">User Offline</div>
+    <div class="empty-description">
+      This user is currently offline. You can leave a message to notify them or
+      try again later.
+    </div>
+  </div>
+  <div class="empty-content">
+    <button class="btn btn-sm">Leave Message</button>
+  </div>
+</div>
+```
+
+### Avatar group
+
+A stacked [avatar group](/components/avatar-group) in the media slot.
+
+```html preview preset=empty
+<div class="empty">
+  <div class="empty-header">
+    <div class="empty-media">
+      <span class="avatar-group *:size-12">
+        <span class="avatar">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Leila Navarro"
+          />
+          <span class="avatar-fallback">LN</span>
+        </span>
+        <span class="avatar">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Theo Marchetti"
+          />
+          <span class="avatar-fallback">TM</span>
+        </span>
+        <span class="avatar">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Maya Santoso"
+          />
+          <span class="avatar-fallback">MS</span>
+        </span>
+      </span>
+    </div>
+    <div class="empty-title">No Team Members</div>
+    <div class="empty-description">
+      Invite your team to collaborate on this project.
+    </div>
+  </div>
+  <div class="empty-content">
+    <button class="btn btn-sm">
+      <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+      Invite Members
+    </button>
+  </div>
+</div>
+```
+
+### Input group
+
+Put a search field or other control in `empty-content` for a zero-results state.
+
+```html preview preset=empty
+<div class="empty">
+  <div class="empty-header">
+    <div class="empty-title">404 - Not Found</div>
+    <div class="empty-description">
+      The page you're looking for doesn't exist. Try searching for what you need
+      below.
+    </div>
+  </div>
+  <div class="empty-content">
+    <div class="input-group sm:w-3/4">
+      <input class="input" placeholder="Try searching for pages..." aria-label="Search pages" />
+      <span class="input-group-addon">
+        <svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+      </span>
+      <span class="input-group-addon input-group-addon-end">
+        <kbd class="kbd">/</kbd>
+      </span>
+    </div>
+    <div class="empty-description">
+      Need help? <a href="#">Contact support</a>
+    </div>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional icons with a `rtl:rotate-*` utility. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=empty dir=rtl
+<div id="empty-rtl-demo" dir="rtl" class="empty">
+  <div class="empty-header">
+    <div class="empty-media empty-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10.5 8 13l2 2.5"/><path d="m14 10.5 2 2.5-2 2.5"/><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
+    </div>
+    <div class="empty-title" data-i18n="title">لا توجد مشاريع بعد</div>
+    <div class="empty-description" data-i18n="description">
+      لم تقم بإنشاء أي مشاريع بعد. ابدأ بإنشاء مشروعك الأول.
+    </div>
+  </div>
+  <div class="empty-content flex-row justify-center gap-2">
+    <button class="btn" data-i18n="createProject">إنشاء مشروع</button>
+    <button class="btn btn-outline" data-i18n="importProject">استيراد مشروع</button>
+  </div>
+  <a href="#" class="btn btn-link btn-sm text-muted-foreground">
+    <span data-i18n="learnMore">تعرف على المزيد</span>
+    <svg class="icon-end rtl:rotate-270" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+  </a>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", title: "لا توجد مشاريع بعد", description: "لم تقم بإنشاء أي مشاريع بعد. ابدأ بإنشاء مشروعك الأول.", createProject: "إنشاء مشروع", importProject: "استيراد مشروع", learnMore: "تعرف على المزيد" },
+    he: { dir: "rtl", title: "אין פרויקטים עדיין", description: "עדיין לא יצרת פרויקטים. התחל ביצירת הפרויקט הראשון שלך.", createProject: "צור פרויקט", importProject: "ייבא פרויקט", learnMore: "למידע נוסף" },
+    en: { dir: "ltr", title: "No Projects Yet", description: "You haven't created any projects yet. Get started by creating your first project.", createProject: "Create Project", importProject: "Import Project", learnMore: "Learn More" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("empty-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
