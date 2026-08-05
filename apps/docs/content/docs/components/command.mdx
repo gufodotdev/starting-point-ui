@@ -1,0 +1,579 @@
+---
+title: Command
+description: A command palette component for Tailwind CSS with beautiful shadcn/ui styling. Use it for a searchable menu of actions, opened inline or as a command dialog.
+---
+
+The command palette shows a searchable menu of actions. Use it to let users find a page or run a command, inline or hosted in a dialog; for picking a form value from a list, reach for the [combobox](/components/combobox).
+
+```html preview preset=command
+<div class="command max-w-sm rounded-lg border">
+  <div class="input-group">
+    <input class="input" placeholder="Type a command or search..." />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <div class="command-group">
+      <div class="command-label">Suggestions</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <span>Calendar</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+        <span>Search Emoji</span>
+      </button>
+      <button class="command-item" aria-disabled="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+        <span>Calculator</span>
+      </button>
+    </div>
+    <div class="command-separator"></div>
+    <div class="command-group">
+      <div class="command-label">Settings</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profile</span>
+        <span class="command-shortcut">⌘P</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        <span>Billing</span>
+        <span class="command-shortcut">⌘B</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Settings</span>
+        <span class="command-shortcut">⌘S</span>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `command` class to a container with an [input group](/components/input-group) and a `command-list` inside, then fill the list with `command-item` buttons, grouped under `command-group` when it helps. Typing filters items by their text, groups hide when the filter empties them, and the `command-empty` message appears when nothing matches. Enter or a click runs the highlighted item, firing `sp-select` with it; disable an item with `aria-disabled`.
+
+| Class                  | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| `command`              | Add to the palette container                            |
+| `command-list`         | Add to the scrollable list below the input              |
+| `command-group`        | Add to a wrapper grouping related items                 |
+| `command-label`        | Add to a group's heading line                           |
+| `command-item`         | Add to each action, typically a `<button>`              |
+| `command-item-checked` | Add to `command-item` to show a trailing check          |
+| `command-shortcut`     | Add to a `<span>` with the item's keyboard shortcut     |
+| `command-separator`    | Add to a divider between groups                         |
+| `command-empty`        | Add to the message shown when nothing matches           |
+| `command-dialog`       | Add to a [dialog](/components/dialog) hosting a command |
+
+```html
+<div class="command">
+  <div class="input-group">
+    <input class="input" placeholder="Type a command or search..." />
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <button class="command-item">Calendar</button>
+  </div>
+</div>
+```
+
+## Examples
+
+### Dialog
+
+Host the command in a [dialog](/components/dialog) with `command-dialog` for the classic ⌘K palette; the sr-only title and description name it for screen readers.
+
+```html preview preset=dialog open=.dialog
+<button id="command-basic-trigger" class="btn btn-outline">Open Menu</button>
+
+<dialog class="dialog command-dialog" data-sp-toggle="#command-basic-trigger">
+  <div class="dialog-panel">
+    <h2 class="dialog-title sr-only">Command Palette</h2>
+    <p class="dialog-description sr-only">Search for a command to run...</p>
+    <div class="command">
+      <div class="input-group">
+        <input class="input" placeholder="Type a command or search..." />
+        <span class="input-group-addon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </span>
+      </div>
+      <div class="command-list">
+        <div class="command-empty">No results found.</div>
+        <div class="command-group">
+          <div class="command-label">Suggestions</div>
+          <button class="command-item">
+            <span>Calendar</span>
+          </button>
+          <button class="command-item">
+            <span>Search Emoji</span>
+          </button>
+          <button class="command-item">
+            <span>Calculator</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+```
+
+Open it from anywhere with a keyboard shortcut:
+
+```js
+const palette = sp.dialog(document.querySelector("#my-command-dialog"));
+document.addEventListener("keydown", (e) => {
+  if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+    e.preventDefault();
+    palette.toggle();
+  }
+});
+```
+
+### Shortcuts
+
+Show an item's key combination in a trailing `command-shortcut`.
+
+```html preview preset=command
+<div class="command max-w-sm rounded-lg border">
+  <div class="input-group">
+    <input class="input" placeholder="Type a command or search..." />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <div class="command-group">
+      <div class="command-label">Settings</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profile</span>
+        <span class="command-shortcut">⌘P</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        <span>Billing</span>
+        <span class="command-shortcut">⌘B</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Settings</span>
+        <span class="command-shortcut">⌘S</span>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+### Groups
+
+Related items sit in `command-group` blocks with a `command-label`; a group disappears whenever the filter empties it.
+
+```html preview preset=command
+<div class="command max-w-sm rounded-lg border">
+  <div class="input-group">
+    <input class="input" placeholder="Type a command or search..." />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <div class="command-group">
+      <div class="command-label">Suggestions</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <span>Calendar</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+        <span>Search Emoji</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+        <span>Calculator</span>
+      </button>
+    </div>
+    <div class="command-separator"></div>
+    <div class="command-group">
+      <div class="command-label">Settings</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profile</span>
+        <span class="command-shortcut">⌘P</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        <span>Billing</span>
+        <span class="command-shortcut">⌘B</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Settings</span>
+        <span class="command-shortcut">⌘S</span>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+### Disabled
+
+Mark an item with `aria-disabled` to make it unselectable.
+
+```html preview preset=command
+<div class="command max-w-sm rounded-lg border">
+  <div class="input-group">
+    <input class="input" placeholder="Type a command or search..." />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <div class="command-group">
+      <div class="command-label">Actions</div>
+      <button class="command-item">New File</button>
+      <button class="command-item">Duplicate</button>
+      <button class="command-item" aria-disabled="true">Publish</button>
+      <button class="command-item">Delete</button>
+    </div>
+  </div>
+</div>
+```
+
+### Scrollable
+
+The list scrolls past its max height, so long palettes stay compact.
+
+```html preview preset=command
+<div class="command max-w-sm rounded-lg border">
+  <div class="input-group">
+    <input class="input" placeholder="Type a command or search..." />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <div class="command-group">
+      <div class="command-label">Pages</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+        <span>Inbox</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+        <span>Documents</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+        <span>Projects</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        <span>Media Library</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+        <span>Notifications</span>
+      </button>
+    </div>
+    <div class="command-separator"></div>
+    <div class="command-group">
+      <div class="command-label">Actions</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        <span>New File</span>
+        <span class="command-shortcut">⌘N</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span>Copy</span>
+        <span class="command-shortcut">⌘C</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+        <span>Cut</span>
+        <span class="command-shortcut">⌘X</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 14h10"/><path d="M16 4h2a2 2 0 0 1 2 2v1.344"/><path d="m17 18 4-4-4-4"/><path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 1.793-1.113"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+        <span>Paste</span>
+        <span class="command-shortcut">⌘V</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <span>Delete</span>
+      </button>
+    </div>
+    <div class="command-separator"></div>
+    <div class="command-group">
+      <div class="command-label">View</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+        <span>Grid View</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/></svg>
+        <span>List View</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+        <span>Zoom In</span>
+        <span class="command-shortcut">⌘+</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+        <span>Zoom Out</span>
+        <span class="command-shortcut">⌘-</span>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+### Async search
+
+Set `data-sp-filter="false"` when your own code decides what the list contains, like results fetched from a server. The command leaves the items alone while you add and remove them, and keeps wiring roles, highlighting the first result, and toggling the empty message. Groups are yours to manage in this mode; the demo toggles `hidden` on its Results group along with the fake request.
+
+```html preview preset=command
+<div
+  id="command-async-demo"
+  class="command max-w-sm rounded-lg border"
+  data-sp-filter="false"
+>
+  <div class="input-group">
+    <input class="input" placeholder="Search components..." />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty visible">No recent searches</div>
+    <div class="command-group" hidden>
+      <div class="command-label">Results</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const command = document.querySelector("#command-async-demo");
+const input = command.querySelector("input");
+const group = command.querySelector(".command-group");
+const empty = command.querySelector(".command-empty");
+
+const components = [
+  "Accordion",
+  "Alert",
+  "Avatar",
+  "Badge",
+  "Breadcrumb",
+  "Button",
+  "Card",
+  "Checkbox",
+  "Combobox",
+  "Command",
+  "Dialog",
+  "Drawer",
+  "Dropdown",
+  "Empty",
+  "Field",
+  "Input",
+  "Item",
+  "Kbd",
+  "Label",
+  "Pagination",
+  "Popover",
+  "Progress",
+  "Select",
+  "Separator",
+  "Sheet",
+  "Sidebar",
+  "Skeleton",
+  "Slider",
+  "Switch",
+  "Table",
+  "Tabs",
+  "Textarea",
+  "Toast",
+  "Tooltip",
+];
+
+function render(names) {
+  group.querySelectorAll(".command-item").forEach((item) => item.remove());
+  group.hidden = names.length === 0;
+  for (const name of names) {
+    const item = document.createElement("button");
+    item.className = "command-item";
+    item.textContent = name;
+    group.append(item);
+  }
+}
+
+let timer;
+input.addEventListener("input", () => {
+  clearTimeout(timer);
+  const query = input.value.trim().toLowerCase();
+  if (!query) {
+    empty.textContent = "No recent searches";
+    render([]);
+    return;
+  }
+  empty.textContent = "Searching...";
+  timer = setTimeout(() => {
+    empty.textContent = "No results found.";
+    render(components.filter((name) => name.toLowerCase().includes(query)));
+  }, 400);
+});
+</script>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=command dir=rtl
+<div id="command-rtl-demo" dir="rtl" class="command max-w-sm rounded-lg border">
+  <div class="input-group">
+    <input
+      class="input"
+      placeholder="اكتب أمرًا أو ابحث..."
+      data-i18n-placeholder="placeholder"
+    />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty" data-i18n="empty">لم يتم العثور على نتائج.</div>
+    <div class="command-group">
+      <div class="command-label" data-i18n="suggestions">اقتراحات</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <span data-i18n="calendar">التقويم</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+        <span data-i18n="searchEmoji">البحث عن الرموز التعبيرية</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+        <span data-i18n="calculator">الآلة الحاسبة</span>
+      </button>
+    </div>
+    <div class="command-separator"></div>
+    <div class="command-group">
+      <div class="command-label" data-i18n="settingsLabel">الإعدادات</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span data-i18n="profile">الملف الشخصي</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        <span data-i18n="billing">الفوترة</span>
+      </button>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+        <span data-i18n="settings">الإعدادات</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+  ar: {
+    dir: "rtl",
+    placeholder: "اكتب أمرًا أو ابحث...",
+    empty: "لم يتم العثور على نتائج.",
+    suggestions: "اقتراحات",
+    calendar: "التقويم",
+    searchEmoji: "البحث عن الرموز التعبيرية",
+    calculator: "الآلة الحاسبة",
+    settingsLabel: "الإعدادات",
+    settings: "الإعدادات",
+    profile: "الملف الشخصي",
+    billing: "الفوترة",
+  },
+  he: {
+    dir: "rtl",
+    placeholder: "הקלד פקודה או חפש...",
+    empty: "לא נמצאו תוצאות.",
+    suggestions: "הצעות",
+    calendar: "לוח שנה",
+    searchEmoji: "חפש אמוג'י",
+    calculator: "מחשבון",
+    settingsLabel: "הגדרות",
+    settings: "הגדרות",
+    profile: "פרופיל",
+    billing: "חיוב",
+  },
+  en: {
+    dir: "ltr",
+    placeholder: "Type a command or search...",
+    empty: "No results found.",
+    suggestions: "Suggestions",
+    calendar: "Calendar",
+    searchEmoji: "Search Emoji",
+    calculator: "Calculator",
+    settingsLabel: "Settings",
+    settings: "Settings",
+    profile: "Profile",
+    billing: "Billing",
+  },
+};
+window.addEventListener("message", (e) => {
+  const t = translations[e.data?.lang];
+  if (e.data?.type !== "sp-language" || !t) return;
+  document.getElementById("command-rtl-demo").dir = t.dir;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t[el.dataset.i18n];
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    el.placeholder = t[el.dataset.i18nPlaceholder];
+  });
+});
+</script>
+```
+
+## Options
+
+### Command
+
+Set each option with its own `data-sp-*` attribute on the `command` element.
+
+| Attribute        | Values          | Default |
+| ---------------- | --------------- | ------- |
+| `data-sp-filter` | `true`, `false` | `true`  |
+
+Set `data-sp-filter="false"` when your own code decides what the list contains, like results from a server search. The command stops matching item text itself and instead tracks the list as it changes: new items get their roles wired, the first one is highlighted, and the empty message toggles automatically. See the [async search example](#async-search).
+
+## JavaScript
+
+### Events
+
+| Event       | When                 |
+| ----------- | -------------------- |
+| `sp-select` | An item was selected |
+
+```js
+document.querySelector(".command").addEventListener("sp-select", (e) => {
+  console.log(e.detail.value);
+});
+```
+
+### Methods
+
+Get the instance with `sp.command(el)`, then call its methods:
+
+| Method          | Description                                             |
+| --------------- | ------------------------------------------------------- |
+| `filter(query)` | Filter the list as if the user typed `query`            |
+| `run(item)`     | Run an item element, firing `sp-select`                 |
+| `refresh()`     | Re-wire items and the highlight after changing the list |

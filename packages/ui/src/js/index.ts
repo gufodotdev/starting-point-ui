@@ -2,6 +2,7 @@
 
 import { getInstance, start } from "./observer";
 import type { ComponentFactory, SpInstance } from "./define";
+import { Command } from "./command";
 import { Dialog } from "./dialog";
 import { Drawer } from "./drawer";
 import { Sheet } from "./sheet";
@@ -21,6 +22,7 @@ import { Pagination } from "./pagination";
 import { Sidebar } from "./sidebar";
 
 const components: ComponentFactory[] = [
+  Command,
   Dialog,
   Drawer,
   Sheet,
@@ -40,6 +42,7 @@ const components: ComponentFactory[] = [
   Sidebar,
 ];
 
+const command = (el: HTMLElement): SpInstance | null => getInstance(el, Command);
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
 const drawer = (el: HTMLElement): SpInstance | null => getInstance(el, Drawer);
 const sheet = (el: HTMLElement): SpInstance | null => getInstance(el, Sheet);
@@ -60,6 +63,7 @@ const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar)
 export {
   Avatar,
   Breadcrumb,
+  Command,
   Dialog,
   Drawer,
   Sheet,
@@ -73,6 +77,7 @@ export {
   Slider,
   SliderRange,
   Sidebar,
+  command,
   dialog,
   drawer,
   sheet,
@@ -97,6 +102,7 @@ export type { SpInstance };
 declare global {
   interface Window {
     sp: {
+      command: typeof command;
       dialog: typeof dialog;
       drawer: typeof drawer;
       sheet: typeof sheet;
@@ -120,6 +126,7 @@ declare global {
 
 if (typeof document !== "undefined") {
   window.sp = {
+    command,
     dialog,
     drawer,
     sheet,

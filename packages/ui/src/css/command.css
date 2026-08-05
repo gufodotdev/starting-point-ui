@@ -1,0 +1,95 @@
+@utility command {
+  @layer l1.l2 {
+    @apply flex size-full flex-col overflow-hidden rounded-xl bg-popover p-1 text-popover-foreground;
+
+    & > .input-group {
+      @apply m-1 mb-0 h-8 w-auto rounded-lg border-input/30 bg-input/30 shadow-none;
+
+      &:has(input:focus-visible) {
+        @apply border-input/30 ring-0;
+      }
+      & .input-group-addon {
+        @apply ps-2;
+      }
+      & input {
+        @apply text-sm;
+      }
+    }
+  }
+}
+
+@utility command-list {
+  @layer l1.l2 {
+    @apply scrollbar-none max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none;
+  }
+}
+
+@utility command-empty {
+  @layer l1.l2 {
+    @apply hidden py-6 text-center text-sm;
+
+    &.visible {
+      @apply block;
+    }
+  }
+}
+
+@utility command-group {
+  @layer l1.l2 {
+    @apply overflow-hidden p-1 text-foreground;
+  }
+}
+
+@utility command-label {
+  @layer l1.l2 {
+    @apply px-2 py-1.5 text-xs font-medium text-muted-foreground;
+  }
+}
+
+@utility command-separator {
+  @layer l1.l2 {
+    @apply -mx-1 h-px w-auto bg-border;
+  }
+}
+
+@utility command-item {
+  @layer l1.l2 {
+    @apply relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-start text-sm outline-hidden select-none;
+    @apply in-[.dialog]:rounded-lg;
+    @apply hover:bg-muted hover:text-foreground;
+    @apply data-sp-highlighted:bg-muted data-sp-highlighted:text-foreground;
+    @apply disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
+
+    &[data-sp-highlighted] svg {
+      @apply text-foreground;
+    }
+    &[data-sp-highlighted] .command-shortcut {
+      @apply text-foreground;
+    }
+  }
+}
+
+@utility command-item-checked {
+  @layer l1 {
+    &::after {
+      @apply pointer-events-none ms-auto size-4 bg-current content-[''];
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      mask-size: 100% 100%;
+    }
+  }
+}
+
+@utility command-shortcut {
+  @layer l1.l2 {
+    @apply ms-auto text-xs tracking-widest text-muted-foreground;
+  }
+}
+
+@utility command-dialog {
+  @layer l1 {
+    & > .dialog-panel {
+      @apply max-w-md overflow-hidden rounded-xl [--dialog-spacing:--spacing(0)];
+    }
+  }
+}
