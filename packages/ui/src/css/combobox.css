@@ -86,7 +86,7 @@
     /* The chips input needs no class: a bare input inside works as the
        query field. Once something is selected, the chips speak for it. */
     & > input {
-      @apply min-w-16 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground;
+      @apply min-w-16 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground md:text-sm;
       @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
     }
 

@@ -12,7 +12,7 @@
         @apply ps-2;
       }
       & input {
-        @apply text-sm;
+        @apply text-base md:text-sm;
       }
     }
   }

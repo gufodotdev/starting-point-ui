@@ -2,7 +2,7 @@
 
 @utility select {
   @layer l1.l2 {
-    @apply h-9 w-full min-w-0 appearance-none rounded-md border border-input bg-transparent py-1 pe-8 ps-2.5 text-sm shadow-xs transition-[color,box-shadow] outline-none select-none;
+    @apply h-9 w-full min-w-0 appearance-none rounded-md border border-input bg-transparent py-1 pe-8 ps-2.5 text-base shadow-xs transition-[color,box-shadow] outline-none select-none md:text-sm;
     @apply placeholder:text-muted-foreground;
     @apply selection:bg-primary selection:text-primary-foreground;
     @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
