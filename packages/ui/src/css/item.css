@@ -1,0 +1,116 @@
+@utility item-group {
+  @layer l1.l2 {
+    @apply flex w-full flex-col gap-4;
+
+    &:has(.item-sm) {
+      @apply gap-2.5;
+    }
+    &:has(.item-xs) {
+      @apply gap-2;
+    }
+  }
+}
+
+@utility item {
+  @layer l1.l2 {
+    @apply flex w-full flex-wrap items-center gap-3.5 rounded-md border border-transparent px-4 py-3.5 text-sm transition-colors duration-100 outline-none;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+
+    &:is(a) {
+      @apply transition-colors hover:bg-muted;
+    }
+
+    /* With two text lines the media aligns to the first one. */
+    &:has(.item-description) > .item-media {
+      @apply translate-y-0.5 self-start;
+    }
+  }
+}
+
+@utility item-outline {
+  @layer l1 {
+    @apply border-border;
+  }
+}
+
+@utility item-muted {
+  @layer l1 {
+    @apply bg-muted/50;
+  }
+}
+
+@utility item-sm {
+  @layer l1 {
+    @apply gap-2.5 px-3 py-2.5;
+  }
+}
+
+@utility item-xs {
+  @layer l1 {
+    @apply gap-2 px-2.5 py-2 in-[.dropdown]:p-0;
+  }
+}
+
+@utility item-media {
+  @layer l1.l2 {
+    @apply flex shrink-0 items-center justify-center gap-2;
+    @apply [&_svg]:pointer-events-none;
+  }
+}
+
+@utility item-media-icon {
+  @layer l1 {
+    @apply [&_svg:not([class*='size-'])]:size-4;
+  }
+}
+
+@utility item-media-image {
+  @layer l1 {
+    @apply size-10 overflow-hidden rounded-sm in-[.item-sm]:size-8 in-[.item-xs]:size-6;
+    @apply [&_img]:size-full [&_img]:object-cover;
+  }
+}
+
+@utility item-content {
+  @layer l1.l2 {
+    @apply flex flex-1 flex-col gap-1 in-[.item-xs]:gap-0;
+    @apply [&+.item-content]:flex-none;
+  }
+}
+
+@utility item-title {
+  @layer l1.l2 {
+    @apply line-clamp-1 flex w-fit items-center gap-2 text-sm leading-snug font-medium underline-offset-4;
+  }
+}
+
+@utility item-description {
+  @layer l1.l2 {
+    @apply line-clamp-2 text-start text-sm leading-normal font-normal text-muted-foreground in-[.item-xs]:text-xs;
+    @apply [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary;
+  }
+}
+
+@utility item-actions {
+  @layer l1.l2 {
+    @apply flex items-center gap-2;
+  }
+}
+
+@utility item-header {
+  @layer l1.l2 {
+    @apply flex basis-full items-center justify-between gap-2;
+  }
+}
+
+@utility item-footer {
+  @layer l1.l2 {
+    @apply flex basis-full items-center justify-between gap-2;
+  }
+}
+
+@utility item-separator {
+  @layer l1.l2 {
+    @apply separator my-2;
+  }
+}

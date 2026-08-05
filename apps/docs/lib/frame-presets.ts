@@ -124,6 +124,17 @@ export const framePresets: Record<string, CSSProperties> = {
     padding: "clamp(1rem, 5vw, 2.5rem)",
     minHeight: "12rem",
   },
+  item: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: "1.5rem",
+    width: "100%",
+    maxWidth: "33rem",
+    marginInline: "auto",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "16rem",
+  },
   drawer: {
     display: "flex",
     flexWrap: "wrap",

@@ -56,6 +56,7 @@ export const docsNav: NavGroup[] = [
       { title: "Forms", href: "/components/forms" },
       { title: "Input", href: "/components/input" },
       { title: "Input Group", href: "/components/input-group" },
+      { title: "Item", href: "/components/item" },
       { title: "Kbd", href: "/components/kbd" },
       { title: "Label", href: "/components/label" },
       { title: "Pagination", href: "/components/pagination" },
