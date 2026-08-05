@@ -1,6 +1,7 @@
 // Starting Point UI — JavaScript entry.
 
 import { getInstance, start } from "./observer";
+import { inlineEvents } from "./inline-events";
 import type { ComponentFactory, SpInstance } from "./define";
 import { Command } from "./command";
 import { Dialog } from "./dialog";
@@ -146,7 +147,10 @@ if (typeof document !== "undefined") {
     toast,
   };
 
-  const run = () => start(components);
+  const run = () => {
+    inlineEvents();
+    start(components);
+  };
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", run, { once: true });
   } else {

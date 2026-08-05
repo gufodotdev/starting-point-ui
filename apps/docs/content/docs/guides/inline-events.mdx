@@ -1,0 +1,59 @@
+---
+title: Inline Events
+seoTitle: Inline event handlers for Starting Point UI components
+description: React to Starting Point UI component events straight from your markup with data-sp-on attributes. No script files or wiring, ideal for server-rendered stacks like Laravel Blade and Rails.
+---
+
+Inline events let you react to the components' own events right in your HTML: show a toast when a dialog opens, or run a bit of logic when a command is selected, without creating a script file for every small interaction. They are made for server-rendered stacks like Laravel Blade or Rails, where the markup is right there and a separate script feels like overkill. This feature is currently experimental.
+
+This ⌘K-style palette closes itself and confirms the action when you pick an item. One attribute on the dialog glues the command's select event to the dialog's hide method; wiring that up normally needs a script.
+
+```html preview preset=dialog open=.dialog
+<button id="inline-palette-trigger" class="btn btn-outline">Open Menu</button>
+
+<dialog
+  class="dialog command-dialog"
+  data-sp-toggle="#inline-palette-trigger"
+  data-sp-on-select="sp.dialog(el).hide(); sp.toast('Running ' + event.detail.value)"
+>
+  <div class="dialog-panel">
+    <h2 class="dialog-title sr-only">Command Palette</h2>
+    <p class="dialog-description sr-only">Search for a command to run...</p>
+    <div class="command">
+      <div class="input-group">
+        <input class="input" placeholder="Type a command or search..." />
+        <span class="input-group-addon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </span>
+      </div>
+      <div class="command-list">
+        <div class="command-empty">No results found.</div>
+        <div class="command-group">
+          <div class="command-label">Suggestions</div>
+          <button class="command-item">
+            <span>Calendar</span>
+          </button>
+          <button class="command-item">
+            <span>Search Emoji</span>
+          </button>
+          <button class="command-item">
+            <span>Calculator</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+```
+
+## Usage
+
+Add `data-sp-on-<event>` to any element, where `<event>` is a component event name without its `sp-` prefix: `sp-shown` becomes `data-sp-on-shown`, `sp-select` becomes `data-sp-on-select`. The attribute value is plain JavaScript with two variables in scope: `event`, the original event, and `el`, the element carrying the attribute. It runs as a full function body, so multiple statements across multiple lines, local variables, and an early `return` all work. Each component's events are listed in the JavaScript section of its docs page.
+
+Whatever an event carries is on `event.detail`, and the `sp` global works inside expressions too; the hero above uses both, reading the selected item from `event.detail.value` and closing its own dialog with `sp.dialog(el).hide()`.
+
+Events bubble, so the attribute works on the component itself or on any ancestor: the hero's `data-sp-on-select` sits on the dialog while the event comes from the command inside it. Markup added to the page later works without any extra wiring.
+
+## Security
+
+Expressions are compiled with the [Function constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function), so a page with a strict Content Security Policy needs [unsafe-eval](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy#unsafe-eval) in its `script-src`; without it the rest of the library works and only these attributes are inert. Never interpolate user-provided content into a `data-sp-on-*` attribute, it executes as code just like any inline handler.

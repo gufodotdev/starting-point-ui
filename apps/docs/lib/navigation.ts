@@ -23,6 +23,7 @@ export const docsNav: NavGroup[] = [
       { title: "Installation", href: "/guides/installation" },
       { title: "Customization", href: "/guides/customization" },
       { title: "RTL", href: "/guides/rtl" },
+      { title: "Inline Events", href: "/guides/inline-events" },
       { title: "Help", href: "/guides/help" },
       { title: "Changelog", href: "/changelog" },
       { title: "Discord", href: discordUrl },
