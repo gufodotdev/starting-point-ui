@@ -1,0 +1,56 @@
+@utility alert {
+  @layer l1.l2 {
+    @apply relative grid w-full gap-0.5 rounded-lg border bg-card px-4 py-3 text-start text-sm text-card-foreground;
+
+    /* An icon takes the first column and spans both text rows. */
+    &:has(> svg) {
+      @apply grid-cols-[auto_1fr] gap-x-2.5;
+
+      & > .alert-title {
+        @apply col-start-2;
+      }
+    }
+    & > svg {
+      @apply row-span-2 translate-y-0.5 text-current;
+
+      &:not([class*="size-"]) {
+        @apply size-4;
+      }
+    }
+
+    &:has(> .alert-action) {
+      @apply pe-18;
+    }
+  }
+}
+
+@utility alert-destructive {
+  @layer l1 {
+    @apply text-destructive;
+
+    & > .alert-description {
+      @apply text-destructive/90;
+    }
+  }
+}
+
+@utility alert-title {
+  @layer l1.l2 {
+    @apply font-medium;
+    @apply [&_a]:underline [&_a]:underline-offset-3 [&_a:hover]:text-foreground;
+  }
+}
+
+@utility alert-description {
+  @layer l1.l2 {
+    @apply text-sm text-balance text-muted-foreground md:text-pretty;
+    @apply [&_a]:underline [&_a]:underline-offset-3 [&_a:hover]:text-foreground;
+    @apply [&_p:not(:last-child)]:mb-4;
+  }
+}
+
+@utility alert-action {
+  @layer l1.l2 {
+    @apply absolute top-2.5 end-3;
+  }
+}
