@@ -1,0 +1,5 @@
+@utility skeleton {
+  @layer l1.l2 {
+    @apply animate-pulse rounded-md bg-muted;
+  }
+}

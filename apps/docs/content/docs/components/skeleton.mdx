@@ -1,0 +1,146 @@
+---
+title: Skeleton
+description: A skeleton component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a placeholder while content is loading.
+---
+
+The skeleton shows a pulsing placeholder in the shape of the content while it loads. Use it to keep the layout steady while a page or panel fetches its data; for progress with a known duration, reach for the [progress](/components/progress) bar.
+
+```html preview preset=skeleton
+<div class="flex items-center gap-4">
+  <div class="skeleton size-12 rounded-full"></div>
+  <div class="flex flex-col gap-2">
+    <div class="skeleton h-4 w-[250px]"></div>
+    <div class="skeleton h-4 w-[200px]"></div>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `skeleton` class to an element and size it with width and height utilities to match the content it stands in for. It comes with the muted fill, rounded corners, and pulse animation; shape it into bars, circles, or blocks as needed.
+
+| Class      | Description                          |
+| ---------- | ------------------------------------ |
+| `skeleton` | Add to a placeholder element         |
+
+```html
+<div class="skeleton h-4 w-48"></div>
+```
+
+## Examples
+
+### Avatar
+
+A common pattern: a circle for the avatar and two bars for the text beside it.
+
+```html preview preset=skeleton
+<div class="flex w-fit items-center gap-4">
+  <div class="skeleton size-10 shrink-0 rounded-full"></div>
+  <div class="grid gap-2">
+    <div class="skeleton h-4 w-[150px]"></div>
+    <div class="skeleton h-4 w-[100px]"></div>
+  </div>
+</div>
+```
+
+### Card
+
+Skeletons standing in for a card's text and media.
+
+```html preview preset=skeleton
+<div class="card w-full max-w-xs">
+  <div class="card-header">
+    <div class="skeleton h-4 w-2/3"></div>
+    <div class="skeleton h-4 w-1/2"></div>
+  </div>
+  <div class="card-content">
+    <div class="skeleton aspect-video w-full"></div>
+  </div>
+</div>
+```
+
+### Text
+
+A paragraph placeholder from stacked bars.
+
+```html preview preset=skeleton
+<div class="flex w-full max-w-xs flex-col gap-2">
+  <div class="skeleton h-4 w-full"></div>
+  <div class="skeleton h-4 w-full"></div>
+  <div class="skeleton h-4 w-3/4"></div>
+</div>
+```
+
+### Form
+
+Label and field pairs while a form loads.
+
+```html preview preset=skeleton
+<div class="flex w-full max-w-xs flex-col gap-7">
+  <div class="flex flex-col gap-3">
+    <div class="skeleton h-4 w-20"></div>
+    <div class="skeleton h-8 w-full"></div>
+  </div>
+  <div class="flex flex-col gap-3">
+    <div class="skeleton h-4 w-24"></div>
+    <div class="skeleton h-8 w-full"></div>
+  </div>
+  <div class="skeleton h-8 w-24"></div>
+</div>
+```
+
+### Table
+
+Repeated rows of columns for tabular data.
+
+```html preview preset=skeleton
+<div class="flex w-full max-w-sm flex-col gap-2">
+  <div class="flex gap-4">
+    <div class="skeleton h-4 flex-1"></div>
+    <div class="skeleton h-4 w-24"></div>
+    <div class="skeleton h-4 w-20"></div>
+  </div>
+  <div class="flex gap-4">
+    <div class="skeleton h-4 flex-1"></div>
+    <div class="skeleton h-4 w-24"></div>
+    <div class="skeleton h-4 w-20"></div>
+  </div>
+  <div class="flex gap-4">
+    <div class="skeleton h-4 flex-1"></div>
+    <div class="skeleton h-4 w-24"></div>
+    <div class="skeleton h-4 w-20"></div>
+  </div>
+  <div class="flex gap-4">
+    <div class="skeleton h-4 flex-1"></div>
+    <div class="skeleton h-4 w-24"></div>
+    <div class="skeleton h-4 w-20"></div>
+  </div>
+  <div class="flex gap-4">
+    <div class="skeleton h-4 flex-1"></div>
+    <div class="skeleton h-4 w-24"></div>
+    <div class="skeleton h-4 w-20"></div>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=skeleton dir=rtl
+<div id="skeleton-rtl-demo" dir="rtl" class="flex items-center gap-4">
+  <div class="skeleton size-12 rounded-full"></div>
+  <div class="flex flex-col gap-2">
+    <div class="skeleton h-4 w-[250px]"></div>
+    <div class="skeleton h-4 w-[200px]"></div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener("message", (e) => {
+    if (e.data?.type !== "sp-language") return;
+    document.getElementById("skeleton-rtl-demo").dir =
+      e.data.lang === "en" ? "ltr" : "rtl";
+  });
+</script>
+```
