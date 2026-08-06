@@ -6,6 +6,122 @@ description: A command palette component for Tailwind CSS with beautiful shadcn/
 The command palette shows a searchable menu of actions. Use it to let users find a page or run a command, inline or hosted in a dialog; for picking a form value from a list, reach for the [combobox](/components/combobox).
 
 ```html preview preset=command
+<div class="command w-full max-w-130 rounded-lg border">
+  <div class="input-group">
+    <input class="input" placeholder="Search customers..." />
+    <span class="input-group-addon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </span>
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <div class="command-group">
+      <div class="command-label">Search results (3)</div>
+      <button class="command-item active">
+        <span class="avatar avatar-sm">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Leila Navarro"
+          />
+          <span class="avatar-fallback">LN</span>
+        </span>
+        <span class="font-medium">Leila Navarro</span>
+        <span class="text-muted-foreground">leila@navarrostudio.com</span>
+      </button>
+      <button class="command-item">
+        <span class="avatar avatar-sm">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Theo Marchetti"
+          />
+          <span class="avatar-fallback">TM</span>
+        </span>
+        <span class="font-medium">Theo Marchetti</span>
+        <span class="text-muted-foreground">theo@marchetti.dev</span>
+      </button>
+      <button class="command-item">
+        <span class="avatar avatar-sm">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Maya Santoso"
+          />
+          <span class="avatar-fallback">MS</span>
+        </span>
+        <span class="font-medium">Maya Santoso</span>
+        <span class="text-muted-foreground">maya@santoso.co</span>
+      </button>
+    </div>
+    <div class="command-separator"></div>
+    <div class="command-group">
+      <div class="command-label">Actions</div>
+      <button class="command-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21a8 8 0 0 1 13.292-6"/><circle cx="10" cy="8" r="5"/><path d="M19 16v6"/><path d="M22 19h-6"/></svg>
+        <span>Add new customer</span>
+        <span class="command-shortcut">⌘N</span>
+      </button>
+    </div>
+  </div>
+  <div
+    class="flex h-10 items-center gap-4 border-t px-3 text-xs text-muted-foreground"
+  >
+    <span class="flex items-center gap-1.5">
+      <kbd class="kbd">↑</kbd>
+      <kbd class="kbd">↓</kbd>
+      navigate
+    </span>
+    <span class="flex items-center gap-1.5">
+      <kbd class="kbd">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></svg>
+      </kbd>
+      open
+    </span>
+    <span class="ms-auto flex items-center gap-1.5">
+      <kbd class="kbd">esc</kbd>
+      close
+    </span>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `command` class to a container with an [input group](/components/input-group) and a `command-list` inside, then fill the list with `command-item` buttons, grouped under `command-group` when it helps. Typing filters items by their text, groups hide when the filter empties them, and the `command-empty` message appears when nothing matches. Enter or a click runs the highlighted item, firing `sp-select` with it; disable an item with `aria-disabled`. The first item is highlighted once the script runs; add `active` to an item to render it highlighted from the first paint.
+
+| Class                  | Description                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| `command`              | Add to the palette container                                                   |
+| `command-list`         | Add to the scrollable list below the input                                     |
+| `command-group`        | Add to a wrapper grouping related items                                        |
+| `command-label`        | Add to a group's heading line                                                  |
+| `command-item`         | Add to each action, typically a `<button>`; `active` marks the highlighted one |
+| `command-item-checked` | Add to `command-item` to show a trailing check                                 |
+| `command-shortcut`     | Add to a `<span>` with the item's keyboard shortcut                            |
+| `command-separator`    | Add to a divider between groups                                                |
+| `command-empty`        | Add to the message shown when nothing matches                                  |
+| `command-dialog`       | Add to a [dialog](/components/dialog) hosting a command                        |
+
+```html
+<div class="command">
+  <div class="input-group">
+    <input class="input" placeholder="Type a command or search..." />
+  </div>
+  <div class="command-list">
+    <div class="command-empty">No results found.</div>
+    <button class="command-item active">Calendar</button>
+  </div>
+</div>
+```
+
+## Examples
+
+### Basic
+
+Grouped actions with shortcuts in a plain palette; typing filters the list and the disabled item is skipped.
+
+```html preview preset=command
 <div class="command max-w-sm rounded-lg border">
   <div class="input-group">
     <input class="input" placeholder="Type a command or search..." />
@@ -52,37 +168,6 @@ The command palette shows a searchable menu of actions. Use it to let users find
   </div>
 </div>
 ```
-
-## Usage
-
-Add the `command` class to a container with an [input group](/components/input-group) and a `command-list` inside, then fill the list with `command-item` buttons, grouped under `command-group` when it helps. Typing filters items by their text, groups hide when the filter empties them, and the `command-empty` message appears when nothing matches. Enter or a click runs the highlighted item, firing `sp-select` with it; disable an item with `aria-disabled`. The first item is highlighted once the script runs; add `active` to an item to render it highlighted from the first paint.
-
-| Class                  | Description                                                                    |
-| ---------------------- | ------------------------------------------------------------------------------ |
-| `command`              | Add to the palette container                                                   |
-| `command-list`         | Add to the scrollable list below the input                                     |
-| `command-group`        | Add to a wrapper grouping related items                                        |
-| `command-label`        | Add to a group's heading line                                                  |
-| `command-item`         | Add to each action, typically a `<button>`; `active` marks the highlighted one |
-| `command-item-checked` | Add to `command-item` to show a trailing check                                 |
-| `command-shortcut`     | Add to a `<span>` with the item's keyboard shortcut                            |
-| `command-separator`    | Add to a divider between groups                                                |
-| `command-empty`        | Add to the message shown when nothing matches                                  |
-| `command-dialog`       | Add to a [dialog](/components/dialog) hosting a command                        |
-
-```html
-<div class="command">
-  <div class="input-group">
-    <input class="input" placeholder="Type a command or search..." />
-  </div>
-  <div class="command-list">
-    <div class="command-empty">No results found.</div>
-    <button class="command-item active">Calendar</button>
-  </div>
-</div>
-```
-
-## Examples
 
 ### Dialog
 
