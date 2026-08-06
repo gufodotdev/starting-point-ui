@@ -30,7 +30,9 @@
 @utility combobox-item {
   @layer l1.l2 {
     @apply relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pe-8 ps-2 text-sm outline-hidden select-none;
-    @apply data-sp-highlighted:bg-accent data-sp-highlighted:text-accent-foreground;
+    &.active {
+      @apply bg-accent text-accent-foreground;
+    }
     @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4;
 
     /* The state-holding radio/checkbox is hidden; selection shows via ::after. */

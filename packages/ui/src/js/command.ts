@@ -68,7 +68,7 @@ export const Command = define({
       this._pointerX = clientX;
       this._pointerY = clientY;
       const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
-      if (!item || isDisabled(item) || item.hasAttribute("data-sp-highlighted")) return;
+      if (!item || isDisabled(item) || item.classList.contains("active")) return;
       this._setActive(item, false);
     });
 
@@ -76,7 +76,7 @@ export const Command = define({
       this.on(input, "input", () => this._sync());
       this.on(input, "keydown", (e) => {
         if ((e as KeyboardEvent).key !== "Enter") return;
-        const active = this.el.querySelector<HTMLElement>(`${ITEM}[data-sp-highlighted]`);
+        const active = this.el.querySelector<HTMLElement>(`${ITEM}.active`);
         if (active) {
           e.preventDefault();
           this.run(active);
@@ -143,9 +143,9 @@ export const Command = define({
         .querySelector<HTMLElement>(".command-empty")
         ?.classList.toggle("visible", visible.length === 0);
 
-      // Keep a still-valid highlight so an authored data-sp-highlighted
+      // Keep a still-valid highlight so an authored .active
       // survives init; _setActive adds the aria wiring markup can't.
-      const current = this.el.querySelector<HTMLElement>(`${ITEM}[data-sp-highlighted]`);
+      const current = this.el.querySelector<HTMLElement>(`${ITEM}.active`);
       if (current && visible.includes(current) && !isDisabled(current)) {
         this._setActive(current);
         return;
@@ -173,16 +173,16 @@ export const Command = define({
     },
 
     _activeIndex(this: SpInstance, items: HTMLElement[]): number {
-      return items.findIndex((item) => item.hasAttribute("data-sp-highlighted"));
+      return items.findIndex((item) => item.classList.contains("active"));
     },
 
     // A pointer-set highlight must not scroll the list under the cursor.
     _setActive(this: SpInstance, item: HTMLElement, scroll = true): void {
-      this.el.querySelectorAll(`${ITEM}[data-sp-highlighted]`).forEach((prev) => {
-        prev.removeAttribute("data-sp-highlighted");
+      this.el.querySelectorAll(`${ITEM}.active`).forEach((prev) => {
+        prev.classList.remove("active");
         prev.removeAttribute("aria-selected");
       });
-      item.setAttribute("data-sp-highlighted", "");
+      item.classList.add("active");
       item.setAttribute("aria-selected", "true");
       (this._input as HTMLElement | null)?.setAttribute("aria-activedescendant", ensureId(item));
       // The initial highlight on page load must not scroll the document.
@@ -192,8 +192,8 @@ export const Command = define({
     },
 
     _clearActive(this: SpInstance): void {
-      this.el.querySelectorAll(`${ITEM}[data-sp-highlighted]`).forEach((prev) => {
-        prev.removeAttribute("data-sp-highlighted");
+      this.el.querySelectorAll(`${ITEM}.active`).forEach((prev) => {
+        prev.classList.remove("active");
         prev.removeAttribute("aria-selected");
       });
       (this._input as HTMLElement | null)?.removeAttribute("aria-activedescendant");

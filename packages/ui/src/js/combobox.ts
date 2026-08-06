@@ -110,7 +110,7 @@ export const Combobox = define({
       this._pointerX = clientX;
       this._pointerY = clientY;
       const item = (e.target as HTMLElement).closest<HTMLElement>(ITEM);
-      if (!item || isDisabled(item) || item.hasAttribute("data-sp-highlighted")) return;
+      if (!item || isDisabled(item) || item.classList.contains("active")) return;
       this._setActive(item, false);
     });
 
@@ -267,7 +267,7 @@ export const Combobox = define({
       }
 
       if (key === "Enter") {
-        const item = this.el.querySelector<HTMLElement>(`${ITEM}[data-sp-highlighted]`);
+        const item = this.el.querySelector<HTMLElement>(`${ITEM}.active`);
         if (!this._isMounted() || !item) return;
         e.preventDefault();
         if (!isDisabled(item)) this.select(item);
@@ -346,17 +346,17 @@ export const Combobox = define({
     },
 
     // Virtual highlight: focus stays in the field while
-    // aria-activedescendant and [data-sp-highlighted] track the active option.
+    // aria-activedescendant and .active track the active option.
     _activeIndex(this: SpInstance, items: HTMLElement[]): number {
-      return items.findIndex((item) => item.hasAttribute("data-sp-highlighted"));
+      return items.findIndex((item) => item.classList.contains("active"));
     },
 
     // A pointer-set highlight must not scroll the list under the cursor.
     _setActive(this: SpInstance, item: HTMLElement, scroll = true): void {
       this.el
-        .querySelectorAll(`${ITEM}[data-sp-highlighted]`)
-        .forEach((prev) => prev.removeAttribute("data-sp-highlighted"));
-      item.setAttribute("data-sp-highlighted", "");
+        .querySelectorAll(`${ITEM}.active`)
+        .forEach((prev) => prev.classList.remove("active"));
+      item.classList.add("active");
       (this._anchorInput as HTMLElement | null)?.setAttribute(
         "aria-activedescendant",
         ensureId(item),
@@ -366,8 +366,8 @@ export const Combobox = define({
 
     _clearActive(this: SpInstance): void {
       this.el
-        .querySelectorAll(`${ITEM}[data-sp-highlighted]`)
-        .forEach((prev) => prev.removeAttribute("data-sp-highlighted"));
+        .querySelectorAll(`${ITEM}.active`)
+        .forEach((prev) => prev.classList.remove("active"));
       (this._anchorInput as HTMLElement | null)?.removeAttribute("aria-activedescendant");
     },
   },

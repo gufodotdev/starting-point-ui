@@ -96,7 +96,7 @@ const CHIPS = `
 const panel = (page: Page) => page.locator("#cb");
 const activeId = (page: Page) => page.evaluate(() => document.activeElement?.id ?? null);
 const highlighted = (page: Page) =>
-  page.evaluate(() => document.querySelector(".combobox-item[data-sp-highlighted]")?.id ?? null);
+  page.evaluate(() => document.querySelector(".combobox-item.active")?.id ?? null);
 
 test.describe("input-anchored", () => {
   test("clicking the field opens the list, focuses the input, and never toggle-closes", async ({ page }) => {

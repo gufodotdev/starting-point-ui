@@ -67,17 +67,17 @@ test("keeps authored aria attributes instead of overwriting them", async ({ page
 
 test("highlights the first item on init", async ({ page }) => {
   await mount(page, BASIC);
-  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#calendar")).toHaveClass(/active/);
   await expect(page.locator("#calendar")).toHaveAttribute("aria-selected", "true");
   const active = await input(page).getAttribute("aria-activedescendant");
   expect(active).toBe(await page.locator("#calendar").getAttribute("id"));
 });
 
-test("an authored data-sp-highlighted item keeps the highlight on init", async ({ page }) => {
-  await mount(page, BASIC.replace('id="profile"', 'id="profile" data-sp-highlighted'));
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+test("an authored active class keeps the highlight on init", async ({ page }) => {
+  await mount(page, BASIC.replace('class="command-item" id="profile"', 'class="command-item active" id="profile"'));
+  await expect(page.locator("#profile")).toHaveClass(/active/);
   await expect(page.locator("#profile")).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator("#calendar")).not.toHaveAttribute("data-sp-highlighted");
+  await expect(page.locator("#calendar")).not.toHaveClass(/active/);
   const active = await input(page).getAttribute("aria-activedescendant");
   expect(active).toBe(await page.locator("#profile").getAttribute("id"));
 });
@@ -89,7 +89,7 @@ test("typing filters items, hides emptied groups, highlights first match", async
   await expect(page.locator("#group-a")).toBeHidden();
   await expect(page.locator("#separator")).toHaveAttribute("hidden", "");
   await expect(page.locator("#profile")).toBeVisible();
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#profile")).toHaveClass(/active/);
   await input(page).fill("");
   await expect(page.locator("#calendar")).toBeVisible();
   await expect(page.locator("#group-a")).toBeVisible();
@@ -110,25 +110,25 @@ test("arrows move the highlight from the input and skip disabled items", async (
   await mount(page, BASIC);
   await input(page).focus();
   await page.keyboard.press("ArrowDown");
-  await expect(page.locator("#emoji")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#emoji")).toHaveClass(/active/);
   await expect(page.locator("#emoji")).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#calendar")).not.toHaveAttribute("aria-selected");
   await page.keyboard.press("ArrowDown");
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#profile")).toHaveClass(/active/);
   await page.keyboard.press("ArrowDown");
-  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#calendar")).toHaveClass(/active/);
   await page.keyboard.press("ArrowUp");
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#profile")).toHaveClass(/active/);
 });
 
 test("the highlight follows the pointer and skips disabled items", async ({ page }) => {
   await mount(page, BASIC);
   await page.hover("#profile");
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
-  await expect(page.locator("#calendar")).not.toHaveAttribute("data-sp-highlighted");
+  await expect(page.locator("#profile")).toHaveClass(/active/);
+  await expect(page.locator("#calendar")).not.toHaveClass(/active/);
   await page.hover("#billing", { force: true });
-  await expect(page.locator("#billing")).not.toHaveAttribute("data-sp-highlighted");
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#billing")).not.toHaveClass(/active/);
+  await expect(page.locator("#profile")).toHaveClass(/active/);
 });
 
 test("a scroll-induced pointermove with unchanged coordinates keeps the keyboard highlight", async ({ page }) => {
@@ -143,14 +143,14 @@ test("a scroll-induced pointermove with unchanged coordinates keeps the keyboard
       [`#${id}`, x, y],
     );
   await move("profile", 10, 10);
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#profile")).toHaveClass(/active/);
   await input(page).focus();
   await page.keyboard.press("ArrowDown");
-  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#calendar")).toHaveClass(/active/);
   await move("profile", 10, 10);
-  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#calendar")).toHaveClass(/active/);
   await move("profile", 11, 10);
-  await expect(page.locator("#profile")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#profile")).toHaveClass(/active/);
 });
 
 test("touch pointer movement does not move the highlight", async ({ page }) => {
@@ -160,8 +160,8 @@ test("touch pointer movement does not move the highlight", async ({ page }) => {
       new PointerEvent("pointermove", { bubbles: true, clientX: 30, clientY: 30, pointerType: "touch" }),
     );
   });
-  await expect(page.locator("#calendar")).toHaveAttribute("data-sp-highlighted", "");
-  await expect(page.locator("#profile")).not.toHaveAttribute("data-sp-highlighted");
+  await expect(page.locator("#calendar")).toHaveClass(/active/);
+  await expect(page.locator("#profile")).not.toHaveClass(/active/);
 });
 
 test("enter runs the highlighted item", async ({ page }) => {
@@ -217,7 +217,7 @@ test("dynamically swapped items get wired, highlighted, and toggle the empty sta
     document.querySelector(".command-list")?.appendChild(item);
   });
   await expect(page.locator("#fresh")).toHaveAttribute("role", "option");
-  await expect(page.locator("#fresh")).toHaveAttribute("data-sp-highlighted", "");
+  await expect(page.locator("#fresh")).toHaveClass(/active/);
   await expect(page.locator(".command-empty")).not.toHaveClass(/visible/);
 });
 
