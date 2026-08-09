@@ -1,0 +1,372 @@
+---
+title: Bubble
+description: A chat bubble component for Tailwind CSS with beautiful shadcn/ui styling. Use it to draw the speech balloons in messaging and AI chat interfaces.
+---
+
+The bubble draws one speech balloon of a chat conversation, with variants for both sides and reactions pinned to its corner. Use it inside [message](/components/message) rows for messaging UIs and AI assistants.
+
+```html preview preset=message
+<div class="bubble bubble-end">
+  <div class="bubble-content">Hey there! what's up?</div>
+</div>
+<div class="bubble-group">
+  <div class="bubble bubble-muted">
+    <div class="bubble-content">Hey! Want to see chat bubbles?</div>
+  </div>
+  <div class="bubble bubble-muted">
+    <div class="bubble-content">
+      I can group messages, switch sides, and keep the whole thread easy to
+      scan.
+    </div>
+    <div class="bubble-reactions" role="img" aria-label="Reaction: thumbs up">
+      <span>👍</span>
+    </div>
+  </div>
+</div>
+<div class="bubble bubble-end">
+  <div class="bubble-content">Sure. Hit me with your best demo.</div>
+</div>
+<div class="bubble bubble-muted">
+  <div class="bubble-content">
+    Yes. You are reading a demo that is demoing itself. Very meta. Very
+    on-brand.
+  </div>
+  <div class="bubble-reactions" role="img" aria-label="Reactions: thumbs up, fire, eyes, and 2 more">
+    <span>👍</span>
+    <span>🔥</span>
+    <span>👀</span>
+    <span>+2</span>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `bubble` class to a container with a `bubble-content` element holding the text. Add `bubble-end` to align a balloon to your own side, and a variant class like `bubble-muted` for the other voice. `bubble-content` can also be a `button` or a link.
+
+| Class                    | Description                                          |
+| ------------------------ | ---------------------------------------------------- |
+| `bubble`                 | Add to the container for one balloon                 |
+| `bubble-end`             | Add to `bubble` to align it to your side             |
+| `bubble-secondary`       | Add to `bubble` for the secondary color              |
+| `bubble-muted`           | Add to `bubble` for a low-emphasis color             |
+| `bubble-tinted`          | Add to `bubble` for a soft tint of the primary color |
+| `bubble-outline`         | Add to `bubble` for a bordered balloon               |
+| `bubble-ghost`           | Add to `bubble` for frameless full-width content     |
+| `bubble-destructive`     | Add to `bubble` for errors                           |
+| `bubble-group`           | Add to a wrapper stacking consecutive balloons       |
+| `bubble-content`         | Add to the element holding the text                  |
+| `bubble-reactions`       | Add to the reaction pill pinned to the corner        |
+| `bubble-reactions-top`   | Add to `bubble-reactions` to pin it to the top       |
+| `bubble-reactions-start` | Add to `bubble-reactions` to pin it to the start     |
+
+```html
+<div class="bubble">
+  <div class="bubble-content">Message</div>
+</div>
+```
+
+## Examples
+
+### Variants
+
+Variant classes color the balloon; `bubble-ghost` drops the frame entirely for full-width assistant text.
+
+```html preview preset=message
+<div class="bubble">
+  <div class="bubble-content">This is the default primary bubble.</div>
+</div>
+<div class="bubble bubble-secondary bubble-end">
+  <div class="bubble-content">This is the secondary variant.</div>
+</div>
+<div class="bubble bubble-muted">
+  <div class="bubble-content">
+    This one is muted. It uses a lower emphasis color for the chat bubble.
+  </div>
+  <div class="bubble-reactions" role="img" aria-label="Reaction: thumbs up">
+    <span>👍</span>
+  </div>
+</div>
+<div class="bubble bubble-tinted bubble-end">
+  <div class="bubble-content">
+    This one is tinted. The tint is a softer color derived from the primary
+    color.
+  </div>
+</div>
+<div class="bubble bubble-outline">
+  <div class="bubble-content">We can also use an outlined variant.</div>
+</div>
+<div class="bubble bubble-destructive bubble-end">
+  <div class="bubble-content">Or a destructive variant with a reaction.</div>
+  <div class="bubble-reactions" role="img" aria-label="Reaction: fire">
+    <span>🔥</span>
+  </div>
+</div>
+<div class="bubble bubble-ghost">
+  <div class="bubble-content space-y-3">
+    <p>
+      Ghost bubbles work for assistant text,
+      <strong class="font-semibold">markdown</strong>, and other content that
+      should not be framed.
+    </p>
+    <p>
+      This is perfect for assistant messages that should not have a frame and
+      can take the full width of the container. You can also render
+      <code class="font-mono text-[13px]">code</code> in it.
+    </p>
+    <p>
+      Ghost bubbles are full width and can take the full width of the
+      container.
+    </p>
+  </div>
+</div>
+```
+
+### Alignment
+
+Balloons align to the start; `bubble-end` moves one to your side.
+
+```html preview preset=message
+<div class="bubble bubble-muted">
+  <div class="bubble-content">
+    This bubble is aligned to the start. This is the default alignment.
+  </div>
+</div>
+<div class="bubble bubble-end">
+  <div class="bubble-content">
+    This bubble is aligned to the end. Use this for user messages.
+  </div>
+</div>
+```
+
+### Group
+
+Wrap consecutive balloons from the same voice in `bubble-group`.
+
+```html preview preset=message
+<div class="bubble bubble-muted">
+  <div class="bubble-content">Can you tell me what's the issue?</div>
+</div>
+<div class="bubble-group">
+  <div class="bubble bubble-end">
+    <div class="bubble-content">You tell me!</div>
+  </div>
+  <div class="bubble bubble-end">
+    <div class="bubble-content">It worked yesterday. You broke it!</div>
+  </div>
+  <div class="bubble bubble-end">
+    <div class="bubble-content">Find the bug and fix it.</div>
+    <div class="bubble-reactions bubble-reactions-start" role="img" aria-label="Reaction: eyes">
+      <span>👀</span>
+    </div>
+  </div>
+</div>
+<div class="bubble bubble-muted">
+  <div class="bubble-content">
+    Want me to diff yesterday's you against today's you? It's a bit
+    embarrassing.
+  </div>
+</div>
+```
+
+### Links and buttons
+
+Put `bubble-content` on a `button` or link to make the whole balloon interactive.
+
+```html preview preset=message
+<div class="bubble bubble-muted">
+  <div class="bubble-content">How can I help you today?</div>
+</div>
+<div class="bubble-group">
+  <div class="bubble bubble-tinted bubble-end">
+    <button class="bubble-content">I forgot my password</button>
+  </div>
+  <div class="bubble bubble-tinted bubble-end">
+    <button class="bubble-content">I need help with my subscription</button>
+  </div>
+  <div class="bubble bubble-tinted bubble-end">
+    <button class="bubble-content">Something else. Talk to a human.</button>
+  </div>
+</div>
+```
+
+### Reactions
+
+`bubble-reactions` pins a pill to the balloon's corner; `bubble-reactions-top` and `bubble-reactions-start` move it.
+
+```html preview preset=message
+<div class="bubble bubble-muted bubble-end">
+  <div class="bubble-content">I don't need tests, I know my code works.</div>
+  <div class="bubble-reactions bubble-reactions-start" role="img" aria-label="Reactions: thumbs up, surprised">
+    <span>👍</span>
+    <span>😮</span>
+  </div>
+</div>
+<div class="bubble bubble-muted">
+  <div class="bubble-content">
+    Bold. Fine I'll add some tests. I'll let you know when they're done.
+  </div>
+  <div class="bubble-reactions" role="img" aria-label="Reactions: eyes, rocket, and 2 more">
+    <span>👀</span>
+    <span>🚀</span>
+    <span>+2</span>
+  </div>
+</div>
+<div class="bubble bubble-end">
+  <div class="bubble-content">
+    Tests passed on the first try. All 142 of them. Looking good!
+  </div>
+  <div class="bubble-reactions bubble-reactions-top bubble-reactions-start" role="img" aria-label="Reactions: party popper, clapping hands">
+    <span>🎉</span>
+    <span>👏</span>
+  </div>
+</div>
+<div class="bubble bubble-destructive">
+  <div class="bubble-content">Are you sure I can run this command?</div>
+  <div class="bubble-reactions">
+    <button class="btn btn-ghost btn-xs">Yes, run it</button>
+  </div>
+</div>
+```
+
+### Show more
+
+Compose a [collapsible](/components/collapsible) inside `bubble-content` to fold long messages.
+
+```html preview preset=message
+<div class="bubble bubble-muted">
+  <div class="bubble-content">How can I help you today?</div>
+</div>
+<div class="bubble bubble-muted bubble-end">
+  <div class="bubble-content">
+    <p>
+      The accessibility review found two focus states that were visually too
+      subtle in dark mode.
+    </p>
+    <div class="collapsible" data-sp-toggle="#bubble-show-more">
+      <div class="collapsible-content space-y-3 pt-3">
+        <p>
+          I checked the dialog, menu, and drawer paths because each one renders
+          focusable controls inside a layered surface.
+        </p>
+        <p>
+          The dialog and drawer are fine. The menu needs the hover and focus
+          tokens split so keyboard focus stays visible when the pointer is not
+          involved.
+        </p>
+        <p>
+          I also recommend keeping the change in the style file instead of the
+          primitive so the other themes can choose their own focus treatment
+          later.
+        </p>
+      </div>
+    </div>
+    <button id="bubble-show-more" class="group btn btn-link gap-1 p-0 text-muted-foreground">
+      <span class="group-aria-expanded:hidden">Show more</span>
+      <span class="hidden group-aria-expanded:inline">Show less</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-aria-expanded:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</div>
+```
+
+### Tooltip
+
+A [tooltip](/components/tooltip) on a reaction button explains it on hover.
+
+```html preview preset=message
+<div class="bubble bubble-secondary">
+  <div class="bubble-content">Did you remove the stale route?</div>
+</div>
+<div class="bubble bubble-end">
+  <div class="bubble-content">Yes, removed it from the registry.</div>
+  <div class="bubble-reactions">
+    <button id="bubble-read-receipt" class="btn btn-ghost btn-xs btn-icon" aria-label="Read receipt">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="tooltip" data-sp-toggle="#bubble-read-receipt">
+  Read on Jan 5, 2026 at 4:32 PM
+</div>
+```
+
+### Popover
+
+A [popover](/components/popover) on a reaction button carries details that don't fit in the balloon.
+
+```html preview preset=message
+<div class="bubble bubble-end">
+  <div class="bubble-content">Run the build script.</div>
+</div>
+<div class="bubble bubble-destructive">
+  <div class="bubble-content">Failed to run the command.</div>
+  <div class="bubble-reactions">
+    <button id="bubble-error-details" class="btn btn-ghost btn-xs btn-icon aria-expanded:text-destructive" aria-label="Show error details">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="popover" data-sp-toggle="#bubble-error-details">
+  <div class="popover-header">
+    <div class="popover-title text-sm">Command failed with exit code 1</div>
+    <div class="popover-description text-sm">
+      ENOENT: no such file or directory, open pnpm-lock.yaml
+    </div>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=message dir=rtl
+<div id="bubble-rtl-demo" dir="rtl" class="flex w-full flex-col gap-6">
+  <div class="bubble bubble-muted">
+    <div class="bubble-content" data-i18n="m1">كيف يمكنني مساعدتك اليوم؟</div>
+  </div>
+  <div class="bubble bubble-end">
+    <div class="bubble-content" data-i18n="m2">أين وصل طلبي؟</div>
+  </div>
+  <div class="bubble bubble-muted">
+    <div class="bubble-content" data-i18n="m3">تم شحن طلبك وسيصل غدًا.</div>
+    <div class="bubble-reactions" role="img" aria-label="Reaction: thumbs up">
+      <span>👍</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+  ar: {
+    dir: "rtl",
+    m1: "كيف يمكنني مساعدتك اليوم؟",
+    m2: "أين وصل طلبي؟",
+    m3: "تم شحن طلبك وسيصل غدًا.",
+  },
+  he: {
+    dir: "rtl",
+    m1: "איך אפשר לעזור לך היום?",
+    m2: "איפה ההזמנה שלי?",
+    m3: "ההזמנה שלך נשלחה ותגיע מחר.",
+  },
+  en: {
+    dir: "ltr",
+    m1: "How can I help you today?",
+    m2: "Where is my order?",
+    m3: "Your order has shipped and arrives tomorrow.",
+  },
+};
+window.addEventListener("message", (e) => {
+  const t = translations[e.data?.lang];
+  if (e.data?.type !== "sp-language" || !t) return;
+  document.getElementById("bubble-rtl-demo").dir = t.dir;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t[el.dataset.i18n];
+  });
+});
+</script>
+```

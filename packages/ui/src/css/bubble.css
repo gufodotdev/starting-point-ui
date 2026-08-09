@@ -1,0 +1,145 @@
+@utility bubble-group {
+  @layer l1.l2 {
+    @apply flex min-w-0 flex-col gap-2;
+  }
+}
+
+@utility bubble {
+  @layer l1.l2 {
+    @apply relative flex w-fit max-w-[80%] min-w-0 flex-col gap-1 in-[.message-end]:self-end;
+    &:where(
+      :not(
+        .bubble-secondary,
+        .bubble-muted,
+        .bubble-tinted,
+        .bubble-outline,
+        .bubble-ghost,
+        .bubble-destructive
+      )
+    ) {
+      & > .bubble-content {
+        @apply bg-primary text-primary-foreground;
+      }
+      & > .bubble-content:is(button, a):hover {
+        @apply bg-primary/80;
+      }
+    }
+  }
+}
+
+@utility bubble-end {
+  @layer l1 {
+    @apply self-end;
+  }
+}
+
+@utility bubble-secondary {
+  @layer l1 {
+    & > .bubble-content {
+      @apply bg-secondary text-secondary-foreground;
+    }
+    & > .bubble-content:is(button, a):hover {
+      background-color: color-mix(
+        in oklch,
+        var(--secondary),
+        var(--foreground) 5%
+      );
+    }
+  }
+}
+
+@utility bubble-muted {
+  @layer l1 {
+    & > .bubble-content {
+      @apply bg-muted;
+    }
+    & > .bubble-content:is(button, a):hover {
+      background-color: color-mix(in oklch, var(--muted), var(--foreground) 5%);
+    }
+  }
+}
+
+@utility bubble-tinted {
+  @layer l1 {
+    & > .bubble-content {
+      @apply text-foreground;
+      background-color: oklch(from var(--primary) 0.93 calc(c * 0.4) h);
+    }
+    & > .bubble-content:is(button, a):hover {
+      background-color: oklch(from var(--primary) 0.88 calc(c * 0.5) h);
+    }
+    &:where(.dark, .dark *) > .bubble-content {
+      background-color: oklch(from var(--primary) 0.3 calc(c * 0.4) h);
+    }
+    &:where(.dark, .dark *) > .bubble-content:is(button, a):hover {
+      background-color: oklch(from var(--primary) 0.35 calc(c * 0.5) h);
+    }
+  }
+}
+
+@utility bubble-outline {
+  @layer l1 {
+    & > .bubble-content {
+      @apply border-border bg-background;
+    }
+    & > .bubble-content:is(button, a):hover {
+      @apply bg-muted text-foreground dark:bg-input/30;
+    }
+  }
+}
+
+@utility bubble-ghost {
+  @layer l1 {
+    @apply max-w-full;
+    & > .bubble-content {
+      @apply rounded-none bg-transparent p-0;
+    }
+    & > .bubble-content:is(button, a):hover {
+      @apply bg-muted text-foreground dark:bg-muted/50;
+    }
+  }
+}
+
+@utility bubble-destructive {
+  @layer l1 {
+    & > .bubble-content {
+      @apply bg-destructive/10 text-destructive dark:bg-destructive/20;
+    }
+    & > .bubble-content:is(button, a):hover {
+      @apply bg-destructive/20 dark:bg-destructive/30;
+    }
+  }
+}
+
+@utility bubble-content {
+  @layer l1.l2 {
+    @apply w-fit max-w-full min-w-0 overflow-hidden rounded-3xl border border-transparent px-3 py-2.5 text-sm leading-relaxed wrap-break-word in-[.bubble-end]:self-end;
+    &:is(button) {
+      @apply text-start;
+    }
+    &:is(button, a) {
+      @apply transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30;
+    }
+  }
+}
+
+@utility bubble-reactions {
+  @layer l1.l2 {
+    @apply absolute bottom-0 end-3 z-10 flex w-fit shrink-0 translate-y-3/4 items-center justify-center gap-1 rounded-full bg-muted px-1.5 py-0.5 text-sm ring-3 ring-card;
+    &:has(button) {
+      @apply p-0;
+    }
+  }
+}
+
+@utility bubble-reactions-top {
+  @layer l1 {
+    @apply top-0 bottom-auto -translate-y-3/4;
+  }
+}
+
+@utility bubble-reactions-start {
+  @layer l1 {
+    @apply start-3 end-auto;
+  }
+}
