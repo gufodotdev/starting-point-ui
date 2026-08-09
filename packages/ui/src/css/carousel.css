@@ -1,0 +1,74 @@
+@utility carousel {
+  @layer l1.l2 {
+    @apply relative min-w-0;
+  }
+}
+
+@utility carousel-content {
+  @layer l1.l2 {
+    @apply scrollbar-none flex snap-x snap-mandatory gap-(--carousel-gap) overflow-x-auto overscroll-x-contain [--carousel-gap:--spacing(4)];
+  }
+}
+
+@utility carousel-item {
+  @layer l1.l2 {
+    @apply min-w-0 shrink-0 grow-0 basis-full snap-start;
+  }
+}
+
+@utility carousel-item-* {
+  @layer l1 {
+    --carousel-slides: --value(integer);
+    --carousel-slide-size: calc(
+      (100% - (var(--carousel-slides) - 1) * var(--carousel-gap)) /
+        var(--carousel-slides)
+    );
+    flex-basis: var(--carousel-slide-size);
+  }
+}
+
+@utility carousel-pagination {
+  @layer l1.l2 {
+    @apply flex items-center justify-center gap-2;
+  }
+}
+
+@utility carousel-previous {
+  @layer l1.l2 {
+    @apply touch-manipulation;
+  }
+}
+
+@utility carousel-next {
+  @layer l1.l2 {
+    @apply touch-manipulation;
+  }
+}
+
+@utility carousel-fade {
+  @layer l1 {
+    & .carousel-content {
+      @apply grid snap-none overflow-visible;
+    }
+    & .carousel-item {
+      @apply col-start-1 row-start-1 opacity-0 transition-opacity duration-500;
+    }
+    & .carousel-item.active {
+      @apply opacity-100;
+    }
+  }
+}
+
+@utility carousel-vertical {
+  @layer l1 {
+    & .carousel-content {
+      @apply snap-y flex-col overflow-x-hidden overflow-y-auto overscroll-y-contain;
+    }
+    /* Chromium resolves calc() percentages in a column flex-basis against
+       the inline size, so vertical fitted slides size via height instead. */
+    & [class*="carousel-item-"] {
+      @apply basis-auto;
+      height: var(--carousel-slide-size);
+    }
+  }
+}

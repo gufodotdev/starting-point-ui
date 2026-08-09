@@ -1,0 +1,894 @@
+---
+title: Carousel
+description: A carousel slider component for Tailwind CSS with beautiful shadcn/ui styling. Use it for image galleries, product showcases, testimonials, or hero sections.
+---
+
+The carousel cycles through a series of slides in place. Use it for image galleries, product showcases, testimonials, or hero sections; for sections readers pick by name instead of browsing, reach for [tabs](/components/tabs).
+
+```html preview preset=carousel
+<div class="carousel w-full max-w-48 sm:max-w-xs">
+  <div class="carousel-content">
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+## Usage
+
+Add the `carousel` class to a container. Inside it, add a `carousel-content` element with one `carousel-item` per slide. For controls, put `carousel-previous` and `carousel-next` on [buttons](/components/button) anywhere inside the container and style them however you like.
+
+| Class                  | Description                                         |
+| ---------------------- | --------------------------------------------------- |
+| `carousel`             | Add to the container                                |
+| `carousel-vertical`    | Add to `carousel` to scroll vertically              |
+| `carousel-fade`        | Add to `carousel` to crossfade slides in place      |
+| `carousel-content`     | Add to the element holding the slides               |
+| `carousel-item`        | Add to each slide; full width by default            |
+| `carousel-item-*`      | Add to `carousel-item` to fit that many slides per view, like `carousel-item-3` |
+| `carousel-previous`    | Add to a `button` that pages backward               |
+| `carousel-next`        | Add to a `button` that pages forward                |
+| `carousel-pagination`  | Add to an element whose children page to their slide by position |
+
+```html
+<div class="carousel">
+  <div class="carousel-content">
+    <div class="carousel-item">Slide</div>
+  </div>
+  <button class="carousel-previous" disabled>...</button>
+  <button class="carousel-next">...</button>
+</div>
+```
+
+## Examples
+
+### Sizes
+
+`carousel-item-<number>` sets how many slides share the view. Use plain `basis-*` utilities instead when the next slide should peek in at the edge.
+
+```html preview preset=carousel
+<div class="carousel w-full max-w-48 sm:max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-4xl">
+  <div class="carousel-content">
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+### Spacing
+
+Set the gap between slides with the `--carousel-gap` variable on `carousel-content`.
+
+```html preview preset=carousel
+<div class="carousel w-full max-w-48 sm:max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-4xl">
+  <div class="carousel-content [--carousel-gap:--spacing(1)]">
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-2xl font-semibold">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+### Orientation
+
+Add `carousel-vertical` to scroll vertically and give `carousel-content` a height.
+
+```html preview preset=carousel
+<div class="carousel carousel-vertical w-full max-w-xs">
+  <div class="carousel-content h-[270px] [--carousel-gap:--spacing(1)]">
+    <div class="carousel-item carousel-item-2">
+      <div class="p-1">
+        <div class="card">
+          <div class="card-content flex items-center justify-center p-6">
+            <span class="text-2xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item carousel-item-2">
+      <div class="p-1">
+        <div class="card">
+          <div class="card-content flex items-center justify-center p-6">
+            <span class="text-2xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item carousel-item-2">
+      <div class="p-1">
+        <div class="card">
+          <div class="card-content flex items-center justify-center p-6">
+            <span class="text-2xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item carousel-item-2">
+      <div class="p-1">
+        <div class="card">
+          <div class="card-content flex items-center justify-center p-6">
+            <span class="text-2xl font-semibold">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item carousel-item-2">
+      <div class="p-1">
+        <div class="card">
+          <div class="card-content flex items-center justify-center p-6">
+            <span class="text-2xl font-semibold">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute -top-12 start-1/2 -translate-x-1/2 rotate-90 rounded-full" disabled>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button class="carousel-next btn btn-outline btn-sm btn-icon absolute -bottom-12 start-1/2 -translate-x-1/2 rotate-90 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+### Fade
+
+Add `carousel-fade` to crossfade slides in place, and mark the starting slide with `active`.
+
+```html preview preset=carousel
+<div class="carousel carousel-fade w-full max-w-48 sm:max-w-xs">
+  <div class="carousel-content">
+    <div class="carousel-item active">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+### Slide counter
+
+Listen for `sp-change` to track the current slide.
+
+```html preview preset=carousel
+<div>
+  <div class="carousel w-full max-w-48 sm:max-w-xs" id="carousel-counter-demo">
+    <div class="carousel-content">
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <span class="sr-only">Previous slide</span>
+    </button>
+    <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <span class="sr-only">Next slide</span>
+    </button>
+  </div>
+  <div
+    class="py-2 text-center text-sm text-muted-foreground"
+    id="carousel-counter-status"
+  >
+    Slide 1 of 5
+  </div>
+</div>
+
+<script>
+  const counterCarousel = document.querySelector("#carousel-counter-demo");
+const counterStatus = document.querySelector("#carousel-counter-status");
+counterCarousel.addEventListener("sp-change", (e) => {
+  counterStatus.textContent = `Slide ${e.detail.index + 1} of ${e.detail.count}`;
+});
+</script>
+```
+
+### Pagination
+
+Children of a `carousel-pagination` container page to their slide by position, and the current one carries `active`.
+
+```html preview preset=carousel
+<div class="carousel w-full max-w-48 sm:max-w-xs">
+  <div class="relative">
+    <div class="carousel-content">
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <span class="sr-only">Previous slide</span>
+    </button>
+    <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <span class="sr-only">Next slide</span>
+    </button>
+  </div>
+  <div class="carousel-pagination mt-4">
+    <button
+      class="size-2 rounded-full bg-muted-foreground/30 transition-colors hover:bg-muted-foreground/50 [&.active]:bg-primary active"
+      aria-label="Go to slide 1"
+    ></button>
+    <button
+      class="size-2 rounded-full bg-muted-foreground/30 transition-colors hover:bg-muted-foreground/50 [&.active]:bg-primary"
+      aria-label="Go to slide 2"
+    ></button>
+    <button
+      class="size-2 rounded-full bg-muted-foreground/30 transition-colors hover:bg-muted-foreground/50 [&.active]:bg-primary"
+      aria-label="Go to slide 3"
+    ></button>
+    <button
+      class="size-2 rounded-full bg-muted-foreground/30 transition-colors hover:bg-muted-foreground/50 [&.active]:bg-primary"
+      aria-label="Go to slide 4"
+    ></button>
+    <button
+      class="size-2 rounded-full bg-muted-foreground/30 transition-colors hover:bg-muted-foreground/50 [&.active]:bg-primary"
+      aria-label="Go to slide 5"
+    ></button>
+  </div>
+</div>
+```
+
+### Progress
+
+The `--sp-carousel-index` and `--sp-carousel-count` variables render a display-only position bar with pure CSS.
+
+```html preview preset=carousel
+<div class="carousel w-full max-w-48 sm:max-w-xs">
+  <div class="relative">
+    <div class="carousel-content">
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="p-1">
+          <div class="card">
+            <div
+              class="card-content flex aspect-square items-center justify-center p-6"
+            >
+              <span class="text-4xl font-semibold">5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <span class="sr-only">Previous slide</span>
+    </button>
+    <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <span class="sr-only">Next slide</span>
+    </button>
+  </div>
+  <div class="mx-auto mt-4 h-1 w-32 overflow-hidden rounded-full bg-muted-foreground/30">
+    <div
+      class="h-full w-[calc(100%/var(--sp-carousel-count,5))] translate-x-[calc(var(--sp-carousel-index,0)*100%)] rounded-full bg-primary transition-transform duration-300"
+    ></div>
+  </div>
+</div>
+```
+
+### Loop
+
+Add `data-sp-loop` to wrap around at the ends.
+
+```html preview preset=carousel
+<div class="carousel w-full max-w-48 sm:max-w-xs" data-sp-loop>
+  <div class="carousel-content">
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button
+    class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+### Autoplay
+
+Add `data-sp-autoplay` with a delay in milliseconds to rotate the slides automatically.
+
+```html preview preset=carousel
+<div
+  class="carousel w-full max-w-48 sm:max-w-xs"
+  data-sp-loop
+  data-sp-autoplay="3000"
+>
+  <div class="carousel-content">
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details. Flip directional icons with `rtl:rotate-180`.
+
+```html preview preset=carousel dir=rtl
+<div dir="rtl" class="carousel w-full max-w-48 sm:max-w-xs">
+  <div class="carousel-content">
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="p-1">
+        <div class="card">
+          <div
+            class="card-content flex aspect-square items-center justify-center p-6"
+          >
+            <span class="text-4xl font-semibold">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-previous btn btn-outline btn-sm btn-icon absolute top-1/2 -start-12 -translate-y-1/2 rounded-full" disabled>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rtl:rotate-180"><path d="m15 18-6-6 6-6"/></svg>
+    <span class="sr-only">Previous slide</span>
+  </button>
+  <button class="carousel-next btn btn-outline btn-sm btn-icon absolute top-1/2 -end-12 -translate-y-1/2 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rtl:rotate-180"><path d="m9 18 6-6-6-6"/></svg>
+    <span class="sr-only">Next slide</span>
+  </button>
+</div>
+```
+
+## CSS variables
+
+| Variable         | Default | Description                                    |
+| ---------------- | ------- | ---------------------------------------------- |
+| `--carousel-gap` | `1rem`  | Gap between slides; the fitted sizes follow it |
+
+## Options
+
+Set each option with its own `data-sp-*` attribute on the `carousel` element.
+
+| Attribute          | Values  | Default |
+| ------------------ | ------- | ------- |
+| `data-sp-loop`     | Boolean | `false` |
+| `data-sp-autoplay` | Number  | —       |
+
+```html
+<div class="carousel" data-sp-loop data-sp-autoplay="4000">...</div>
+```
+
+With `data-sp-loop` the buttons stop disabling at the ends and paging wraps from the last slide back to the first. `data-sp-autoplay` advances to the next slide every given number of milliseconds; it pauses while the carousel is hovered or holds focus, and stays off for users who prefer reduced motion.
+
+## JavaScript
+
+The carousel mirrors its state onto `--sp-carousel-index` and `--sp-carousel-count` CSS variables on the container, so indicators like progress bars or dots can be styled with plain CSS and no script.
+
+### Events
+
+| Event       | When                      |
+| ----------- | ------------------------- |
+| `sp-change` | The current slide changed |
+
+```js
+document.querySelector(".carousel").addEventListener("sp-change", (e) => {
+  console.log(e.detail.index, e.detail.count);
+});
+```
+
+### Methods
+
+Get the instance with `sp.carousel(el)`, then call its methods:
+
+| Method      | Description                    |
+| ----------- | ------------------------------ |
+| `prev()`    | Scroll to the previous slide   |
+| `next()`    | Scroll to the next slide       |
+| `to(index)` | Scroll to the slide at `index` |
+| `index()`   | The current slide index        |
+| `count()`   | The number of slides           |

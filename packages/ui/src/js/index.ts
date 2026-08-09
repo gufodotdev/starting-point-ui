@@ -3,6 +3,7 @@
 import { getInstance, start } from "./observer";
 import { inlineEvents } from "./inline-events";
 import type { ComponentFactory, SpInstance } from "./define";
+import { Carousel } from "./carousel";
 import { Command } from "./command";
 import { Dialog } from "./dialog";
 import { Drawer } from "./drawer";
@@ -23,6 +24,7 @@ import { Pagination } from "./pagination";
 import { Sidebar } from "./sidebar";
 
 const components: ComponentFactory[] = [
+  Carousel,
   Command,
   Dialog,
   Drawer,
@@ -43,6 +45,7 @@ const components: ComponentFactory[] = [
   Sidebar,
 ];
 
+const carousel = (el: HTMLElement): SpInstance | null => getInstance(el, Carousel);
 const command = (el: HTMLElement): SpInstance | null => getInstance(el, Command);
 const dialog = (el: HTMLElement): SpInstance | null => getInstance(el, Dialog);
 const drawer = (el: HTMLElement): SpInstance | null => getInstance(el, Drawer);
@@ -64,6 +67,7 @@ const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar)
 export {
   Avatar,
   Breadcrumb,
+  Carousel,
   Command,
   Dialog,
   Drawer,
@@ -78,6 +82,7 @@ export {
   Slider,
   SliderRange,
   Sidebar,
+  carousel,
   command,
   dialog,
   drawer,
@@ -103,6 +108,7 @@ export type { SpInstance };
 declare global {
   interface Window {
     sp: {
+      carousel: typeof carousel;
       command: typeof command;
       dialog: typeof dialog;
       drawer: typeof drawer;
@@ -127,6 +133,7 @@ declare global {
 
 if (typeof document !== "undefined") {
   window.sp = {
+    carousel,
     command,
     dialog,
     drawer,

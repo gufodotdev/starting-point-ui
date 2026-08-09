@@ -47,6 +47,7 @@ export const docsNav: NavGroup[] = [
       { title: "Button", href: "/components/button" },
       { title: "Button Group", href: "/components/button-group" },
       { title: "Card", href: "/components/card" },
+      { title: "Carousel", href: "/components/carousel" },
       { title: "Checkbox", href: "/components/checkbox" },
       { title: "Collapsible", href: "/components/collapsible" },
       { title: "Combobox", href: "/components/combobox" },
