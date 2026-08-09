@@ -75,6 +75,7 @@ export const docsNav: NavGroup[] = [
       { title: "Sidebar", href: "/components/sidebar" },
       { title: "Skeleton", href: "/components/skeleton" },
       { title: "Slider", href: "/components/slider" },
+      { title: "Shimmer", href: "/components/shimmer" },
       { title: "Switch", href: "/components/switch" },
       { title: "Table", href: "/components/table" },
       { title: "Tabs", href: "/components/tabs" },

@@ -156,6 +156,17 @@ export const framePresets: Record<string, CSSProperties> = {
     padding: "clamp(1rem, 5vw, 2.5rem)",
     minHeight: "12rem",
   },
+  message: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: "2rem",
+    width: "100%",
+    maxWidth: "29rem",
+    marginInline: "auto",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "16rem",
+  },
   carousel: {
     display: "flex",
     flexDirection: "column",
