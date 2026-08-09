@@ -1,0 +1,40 @@
+@utility marker {
+  @layer l1.l2 {
+    @apply relative flex min-h-4 w-full items-center gap-2 text-start text-sm text-muted-foreground;
+    @apply [&_svg:not([class*="size-"])]:size-4;
+    &:is(a) {
+      @apply underline underline-offset-3 hover:text-foreground;
+    }
+  }
+}
+
+@utility marker-separator {
+  @layer l1 {
+    @apply before:me-1 before:h-px before:min-w-0 before:flex-1 before:bg-border after:ms-1 after:h-px after:min-w-0 after:flex-1 after:bg-border;
+    & .marker-content {
+      @apply flex-none text-center;
+    }
+  }
+}
+
+@utility marker-border {
+  @layer l1 {
+    @apply border-b border-border pb-2;
+  }
+}
+
+@utility marker-icon {
+  @layer l1.l2 {
+    @apply size-4 shrink-0;
+    @apply [&_svg:not([class*="size-"])]:size-4;
+  }
+}
+
+@utility marker-content {
+  @layer l1.l2 {
+    @apply min-w-0 wrap-break-word;
+    & > a {
+      @apply underline underline-offset-3 hover:text-foreground;
+    }
+  }
+}
