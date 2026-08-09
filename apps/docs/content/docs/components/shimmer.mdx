@@ -15,9 +15,16 @@ The shimmer sweeps a soft highlight across text, signaling that something is in 
 
 Add the `shimmer` class to any text element.
 
-| Class     | Description             |
-| --------- | ----------------------- |
-| `shimmer` | Add to the text element |
+| Class                       | Description                                                      |
+| --------------------------- | ---------------------------------------------------------------- |
+| `shimmer`                   | Add to the text element                                          |
+| `shimmer-color-<color>`     | Add to set the highlight color, like `shimmer-color-blue-500/60` |
+| `shimmer-duration-<number>` | Add to set one sweep's length in milliseconds                    |
+| `shimmer-spread-<number>`   | Add to set the highlight band's width on the spacing scale       |
+| `shimmer-angle-<number>`    | Add to set the band's tilt in degrees                            |
+| `shimmer-reverse`           | Add to sweep in the opposite direction                           |
+| `shimmer-once`              | Add to play a single sweep instead of looping                    |
+| `shimmer-none`              | Add to turn the effect off                                       |
 
 ```html
 <span class="shimmer">Thinking...</span>
@@ -43,20 +50,61 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 
 ### Color
 
-Set `--shimmer-color` to move the highlight away from the text color.
+`shimmer-color-<color>` sets the highlight color: theme colors with an opacity modifier, or any arbitrary value.
 
 ```html preview preset=message
-<span class="shimmer text-sm [--shimmer-color:var(--color-blue-500)]">Deploying to production</span>
-<span class="shimmer text-sm [--shimmer-color:var(--color-emerald-500)]">Running checks</span>
+<span class="shimmer shimmer-color-blue-500/60 text-sm">Generating response...</span>
+<span class="shimmer shimmer-color-[#378ADD] text-sm">Generating response...</span>
 ```
 
-### Speed
+### Duration
 
-Set `--shimmer-duration` to slow the sweep down or hurry it up.
+`shimmer-duration-<number>` sets one sweep's length in milliseconds; the default is `2000`.
 
 ```html preview preset=message
-<span class="shimmer text-sm [--shimmer-duration:1s]">A fast shimmer</span>
-<span class="shimmer text-sm [--shimmer-duration:4s]">A slow, calm shimmer</span>
+<span class="shimmer text-sm">Generating response...</span>
+<span class="shimmer shimmer-duration-1000 text-sm">Generating response...</span>
+```
+
+### Spread
+
+`shimmer-spread-<number>` sets the highlight band's width on the spacing scale. Use an arbitrary length or percentage for one-off values.
+
+```html preview preset=message
+<span class="shimmer shimmer-spread-24 text-sm">Generating response...</span>
+<span class="shimmer shimmer-spread-[5rem] text-sm">Generating response...</span>
+```
+
+### Angle
+
+`shimmer-angle-<number>` tilts the highlight band in degrees; the default is `20`.
+
+```html preview preset=message
+<span class="shimmer shimmer-angle-45 text-sm">Generating response...</span>
+```
+
+### Reverse
+
+`shimmer-reverse` sweeps the highlight in the opposite direction.
+
+```html preview preset=message
+<span class="shimmer shimmer-reverse text-sm">Generating response...</span>
+```
+
+### Play once
+
+`shimmer-once` plays a single sweep instead of looping. Pair it with `shimmer-duration-<number>` to control how long the sweep takes.
+
+```html preview preset=message
+<span class="shimmer shimmer-duration-1100 shimmer-once text-sm">Response generated.</span>
+```
+
+### Disable
+
+`shimmer-none` turns the effect off, so the text renders normally at a breakpoint or state.
+
+```html preview preset=message
+<span class="shimmer md:shimmer-none text-sm">Shimmering only below md</span>
 ```
 
 ### RTL

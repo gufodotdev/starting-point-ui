@@ -36,10 +36,10 @@
 @import "./select.css";
 @import "./separator.css";
 @import "./sheet.css";
+@import "./shimmer.css";
 @import "./sidebar.css";
 @import "./skeleton.css";
 @import "./slider.css";
-@import "./shimmer.css";
 @import "./switch.css";
 @import "./table.css";
 @import "./tabs.css";
@@ -82,8 +82,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
-
 }
 
 .dark {
@@ -118,7 +116,6 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-
 }
 
 @theme static {
@@ -168,9 +165,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-
 }
-
 
 @layer base {
   * {

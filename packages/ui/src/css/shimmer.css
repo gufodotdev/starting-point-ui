@@ -1,3 +1,19 @@
+@property --shimmer-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 20deg;
+}
+
+@property --shimmer-image {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --shimmer-text-fill {
+  syntax: "*";
+  inherits: false;
+}
+
 @utility shimmer {
   @layer l1.l2 {
     --_spread: var(--shimmer-spread, calc(3ch + 40px));
@@ -9,7 +25,7 @@
     background-image: var(
       --shimmer-image,
       linear-gradient(
-        calc(90deg + var(--shimmer-angle, 20deg)),
+        calc(90deg + var(--shimmer-angle)),
         var(--_base) calc(50% - var(--_spread)),
         color-mix(in oklch, var(--_highlight), var(--_base) 50%)
           calc(50% - var(--_spread) * 0.5),
@@ -35,6 +51,60 @@
     &:dir(rtl) {
       animation-direction: reverse;
     }
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      background-image: none;
+      -webkit-text-fill-color: currentColor;
+    }
+  }
+}
+
+@utility shimmer-once {
+  @layer l1 {
+    animation-iteration-count: 1;
+  }
+}
+
+@utility shimmer-reverse {
+  @layer l1 {
+    animation-direction: reverse;
+  }
+}
+
+@utility shimmer-none {
+  @layer l1 {
+    --shimmer-image: none;
+    --shimmer-text-fill: currentColor;
+  }
+}
+
+@utility shimmer-color-* {
+  @layer l1 {
+    --shimmer-color: --value(--color, [color]);
+    --shimmer-color: color-mix(
+      in oklch,
+      --value(--color, [color]) calc(--modifier(integer) * 1%),
+      transparent
+    );
+  }
+}
+
+@utility shimmer-duration-* {
+  @layer l1 {
+    --shimmer-duration: calc(--value(integer) * 1ms);
+  }
+}
+
+@utility shimmer-spread-* {
+  @layer l1 {
+    --shimmer-spread: calc(var(--spacing) * --value(integer));
+    --shimmer-spread: --value([length], [percentage]);
+  }
+}
+
+@utility shimmer-angle-* {
+  @layer l1 {
+    --shimmer-angle: calc(--value(integer) * 1deg);
   }
 }
 
