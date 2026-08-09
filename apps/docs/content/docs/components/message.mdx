@@ -1,0 +1,338 @@
+---
+title: Message
+description: A chat message component for Tailwind CSS with beautiful shadcn/ui styling. Use it to build messaging conversations and AI chat interfaces.
+---
+
+The message lays out one row of a chat conversation: the speech bubbles plus the avatar, sender name, and delivery status around them. Use it with the [bubble](/components/bubble) component for messaging UIs and AI assistants.
+
+```html preview preset=message
+<div class="message message-end">
+  <span class="message-avatar">
+    <span class="avatar">
+      <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Theo Marchetti" />
+      <span class="avatar-fallback">TM</span>
+    </span>
+  </span>
+  <div class="message-content">
+    <div class="bubble">
+      <div class="bubble-content">Deploying to prod real quick.</div>
+    </div>
+  </div>
+</div>
+<div class="message">
+  <span class="message-avatar">
+    <span class="avatar">
+      <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+      <span class="avatar-fallback">LN</span>
+    </span>
+  </span>
+  <div class="message-content">
+    <div class="bubble bubble-muted">
+      <div class="bubble-content">It's 4:55 PM. On a Friday.</div>
+    </div>
+  </div>
+</div>
+<div class="message message-end">
+  <span class="message-avatar">
+    <span class="avatar">
+      <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Theo Marchetti" />
+      <span class="avatar-fallback">TM</span>
+    </span>
+  </span>
+  <div class="message-content">
+    <div class="bubble">
+      <div class="bubble-content">It's a one-line change.</div>
+    </div>
+    <div class="message-footer">Delivered</div>
+  </div>
+</div>
+<div class="message">
+  <span class="message-avatar">
+    <span class="avatar">
+      <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+      <span class="avatar-fallback">LN</span>
+    </span>
+  </span>
+  <div class="message-content">
+    <div class="bubble-group">
+      <div class="bubble bubble-muted">
+        <div class="bubble-content">It's always a one-line change 😭.</div>
+      </div>
+      <div class="bubble bubble-muted">
+        <div class="bubble-content">Alright, let me take a look.</div>
+        <div class="bubble-reactions" aria-label="Reactions: thumbs up">
+          <span>👍</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="marker" role="status">
+  <span class="marker-content shimmer">
+    <span class="font-medium">Leila</span> is typing...
+  </span>
+</div>
+```
+
+## Usage
+
+Add the `message` class to a container. Inside it, add a `message-content` element holding the row's [bubbles](/components/bubble). Add `message-end` to align the row to your own side of the conversation, and pick whichever parts the row needs around the content: an avatar, a header, a footer.
+
+| Class             | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| `message`         | Add to the container for one chat row                    |
+| `message-end`     | Add to `message` to align the row to your side           |
+| `message-group`   | Add to a wrapper stacking consecutive rows tighter       |
+| `message-avatar`  | Add to the element holding the sender's [avatar](/components/avatar) |
+| `message-content` | Add to the element holding the bubbles                   |
+| `message-header`  | Add to the sender name above the bubbles                 |
+| `message-footer`  | Add to the status line below the bubbles                 |
+
+```html
+<div class="message">
+  <span class="message-avatar">...</span>
+  <div class="message-content">
+    <div class="bubble">
+      <div class="bubble-content">Message</div>
+    </div>
+  </div>
+</div>
+```
+
+## Examples
+
+### Avatar
+
+Wrap an [avatar](/components/avatar) in `message-avatar` to identify the sender.
+
+```html preview preset=message
+<div class="message">
+  <span class="message-avatar">
+    <span class="avatar">
+      <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+      <span class="avatar-fallback">LN</span>
+    </span>
+  </span>
+  <div class="message-content">
+    <div class="bubble bubble-muted">
+      <div class="bubble-content">The build failed during dependency installation.</div>
+    </div>
+  </div>
+</div>
+<div class="message message-end">
+  <span class="message-avatar">
+    <span class="avatar">
+      <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Theo Marchetti" />
+      <span class="avatar-fallback">TM</span>
+    </span>
+  </span>
+  <div class="message-content">
+    <div class="bubble">
+      <div class="bubble-content">Can you share the exact error?</div>
+    </div>
+  </div>
+</div>
+<div class="message">
+  <span class="message-avatar">
+    <span class="avatar">
+      <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+      <span class="avatar-fallback">LN</span>
+    </span>
+  </span>
+  <div class="message-content">
+    <div class="bubble-group">
+      <div class="bubble bubble-muted">
+        <div class="bubble-content">Here's the error from the logs</div>
+      </div>
+      <div class="bubble bubble-muted">
+        <div class="bubble-content">
+          Something went wrong with the build. The libraries are not installed
+          correctly. Try running the build again.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Group
+
+Wrap consecutive rows from the same sender in `message-group`; an empty `message-avatar` keeps the rows aligned.
+
+```html preview preset=message
+<div class="message-group">
+  <div class="message">
+    <span class="message-avatar"></span>
+    <div class="message-content">
+      <div class="bubble bubble-muted">
+        <div class="bubble-content">I checked the registry addresses.</div>
+      </div>
+    </div>
+  </div>
+  <div class="message">
+    <span class="message-avatar">
+      <span class="avatar">
+        <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+        <span class="avatar-fallback">LN</span>
+      </span>
+    </span>
+    <div class="message-content">
+      <div class="bubble bubble-muted">
+        <div class="bubble-content">
+          The component and example JSON now live under the UI registry.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Header and footer
+
+`message-header` names the sender above the bubbles, and `message-footer` carries status below them.
+
+```html preview preset=message
+<div class="message">
+  <div class="message-content">
+    <div class="message-header">Leila</div>
+    <div class="bubble bubble-muted">
+      <div class="bubble-content">I already checked the logs.</div>
+    </div>
+  </div>
+</div>
+<div class="message message-end">
+  <div class="message-content">
+    <div class="bubble">
+      <div class="bubble-content">
+        Send the report to the team. Ping @leila if you need help.
+      </div>
+    </div>
+    <div class="message-footer">
+      <div>Read <span class="font-normal">Yesterday</span></div>
+    </div>
+  </div>
+</div>
+```
+
+### Actions
+
+Put [buttons](/components/button) in `message-footer` for per-message actions; give icon-only ones an `aria-label`.
+
+```html preview preset=message
+<div class="message">
+  <div class="message-content">
+    <div class="bubble bubble-muted">
+      <div class="bubble-content">
+        The install failure is coming from the workspace package.
+      </div>
+    </div>
+    <div class="message-footer">
+      <button class="btn btn-ghost btn-icon" aria-label="Copy" title="Copy">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      </button>
+      <button class="btn btn-ghost btn-icon" aria-label="Like" title="Like">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/><path d="M7 10v12"/></svg>
+      </button>
+      <button class="btn btn-ghost btn-icon" aria-label="Dislike" title="Dislike">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/><path d="M17 14V2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="message message-end">
+  <div class="message-content">
+    <div class="bubble">
+      <div class="bubble-content">Okay drop me a link. Taking a look...</div>
+    </div>
+    <div class="message-footer gap-2">
+      <span class="font-normal text-destructive">Failed to send</span>
+      <button class="btn btn-ghost btn-xs btn-icon" aria-label="Retry" title="Retry">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=message dir=rtl
+<div id="message-rtl-demo" dir="rtl" class="flex w-full flex-col gap-6">
+  <div class="message">
+    <span class="message-avatar">
+      <span class="avatar">
+        <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+        <span class="avatar-fallback">LN</span>
+      </span>
+    </span>
+    <div class="message-content">
+      <div class="bubble bubble-muted">
+        <div class="bubble-content" data-i18n="m1">وصل الطرد للتو.</div>
+      </div>
+    </div>
+  </div>
+  <div class="message message-end">
+    <span class="message-avatar">
+      <span class="avatar">
+        <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Theo Marchetti" />
+        <span class="avatar-fallback">TM</span>
+      </span>
+    </span>
+    <div class="message-content">
+      <div class="bubble">
+        <div class="bubble-content" data-i18n="m2">رائع! هل كل شيء سليم؟</div>
+      </div>
+      <div class="message-footer" data-i18n="delivered">تم التسليم</div>
+    </div>
+  </div>
+  <div class="message">
+    <span class="message-avatar">
+      <span class="avatar">
+        <img class="avatar-image" src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5" alt="Leila Navarro" />
+        <span class="avatar-fallback">LN</span>
+      </span>
+    </span>
+    <div class="message-content">
+      <div class="bubble bubble-muted">
+        <div class="bubble-content" data-i18n="m3">نعم، كل شيء بحالة ممتازة.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+  ar: {
+    dir: "rtl",
+    m1: "وصل الطرد للتو.",
+    m2: "رائع! هل كل شيء سليم؟",
+    m3: "نعم، كل شيء بحالة ممتازة.",
+    delivered: "تم التسليم",
+  },
+  he: {
+    dir: "rtl",
+    m1: "החבילה הגיעה עכשיו.",
+    m2: "מעולה! הכול תקין?",
+    m3: "כן, הכול במצב מצוין.",
+    delivered: "נמסר",
+  },
+  en: {
+    dir: "ltr",
+    m1: "The package just arrived.",
+    m2: "Great! Is everything intact?",
+    m3: "Yes, everything is in great shape.",
+    delivered: "Delivered",
+  },
+};
+window.addEventListener("message", (e) => {
+  const t = translations[e.data?.lang];
+  if (e.data?.type !== "sp-language" || !t) return;
+  document.getElementById("message-rtl-demo").dir = t.dir;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t[el.dataset.i18n];
+  });
+});
+</script>
+```

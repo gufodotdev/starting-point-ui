@@ -1,0 +1,47 @@
+@utility message-group {
+  @layer l1.l2 {
+    @apply flex min-w-0 flex-col gap-2;
+  }
+}
+
+@utility message {
+  @layer l1.l2 {
+    @apply relative flex w-full min-w-0 gap-2 text-sm;
+    &:has(.message-footer) .message-avatar {
+      @apply -translate-y-8;
+    }
+    &:has(.bubble-ghost) :is(.message-header, .message-footer) {
+      @apply px-0;
+    }
+  }
+}
+
+@utility message-end {
+  @layer l1 {
+    @apply flex-row-reverse;
+  }
+}
+
+@utility message-avatar {
+  @layer l1.l2 {
+    @apply flex w-fit min-w-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-muted;
+  }
+}
+
+@utility message-content {
+  @layer l1.l2 {
+    @apply flex w-full min-w-0 flex-col gap-2.5 wrap-break-word in-[.message-end]:*:self-end;
+  }
+}
+
+@utility message-header {
+  @layer l1.l2 {
+    @apply flex max-w-full min-w-0 items-center px-3 text-xs font-medium text-muted-foreground;
+  }
+}
+
+@utility message-footer {
+  @layer l1.l2 {
+    @apply flex max-w-full min-w-0 items-center px-3 text-xs font-medium text-muted-foreground in-[.message-end]:justify-end;
+  }
+}
