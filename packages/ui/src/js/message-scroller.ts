@@ -360,6 +360,10 @@ export const MessageScroller = define({
       return true;
     },
 
+    _followEnd(this: SpInstance): void {
+      this.scrollToEnd(this._autoscrolling ? { behavior: "smooth" } : {});
+    },
+
     _alignTarget(
       this: SpInstance,
       element: HTMLElement,
@@ -566,14 +570,14 @@ export const MessageScroller = define({
             this._mode === "following" &&
             fresh.length > 1
           ) {
-            this.scrollToEnd();
+            this._followEnd();
             return;
           }
           this._scrollToElement(fresh[0], { align: "start" }, true);
           return;
         }
         if (this._mode === "following" && this.config.autoScroll) {
-          this.scrollToEnd();
+          this._followEnd();
           return;
         }
         this._commit();
@@ -587,7 +591,7 @@ export const MessageScroller = define({
 
     _handleResize(this: SpInstance): void {
       if (this._mode === "following" && this.config.autoScroll) {
-        this.scrollToEnd();
+        this._followEnd();
         return;
       }
       const turn = this._turn as HTMLElement | null;
