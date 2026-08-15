@@ -1,0 +1,56 @@
+@utility message-scroller {
+  @layer l1.l2 {
+    @apply relative flex size-full min-h-0 flex-col overflow-hidden;
+  }
+}
+
+@utility message-scroller-viewport {
+  @layer l1.l2 {
+    @apply scroll-fade-b scrollbar scrollbar-sm size-full min-h-0 min-w-0 overflow-y-auto overscroll-contain;
+    scrollbar-gutter: stable;
+    contain: content;
+    &[data-sp-autoscrolling] {
+      --scrollbar-thumb: transparent;
+      --scrollbar-track: transparent;
+    }
+  }
+}
+
+@utility message-scroller-content {
+  @layer l1.l2 {
+    @apply flex h-max min-h-full flex-col gap-8;
+  }
+}
+
+@utility message-scroller-item {
+  @layer l1.l2 {
+    @apply min-w-0 shrink-0;
+  }
+}
+
+@utility message-scroller-button {
+  @layer l1.l2 {
+    @apply absolute start-1/2 bottom-4 z-10 -translate-x-1/2 translate-y-full scale-95 opacity-0 transition-[translate,scale,opacity] duration-400 ease-[cubic-bezier(0.7,0,0.84,0)];
+    @apply pointer-events-none;
+    &:dir(rtl) {
+      @apply translate-x-1/2;
+    }
+    &.active {
+      @apply pointer-events-auto translate-y-0 scale-100 opacity-100 duration-200 ease-[cubic-bezier(0.23,1,0.32,1)];
+    }
+  }
+
+  @layer l1 {
+    @apply border-border bg-background text-foreground hover:bg-muted hover:text-foreground;
+  }
+}
+
+@utility message-scroller-button-start {
+  @layer l1 {
+    @apply top-4 bottom-auto -translate-y-full;
+    @apply [&_svg]:rotate-180;
+    &.active {
+      @apply translate-y-0;
+    }
+  }
+}

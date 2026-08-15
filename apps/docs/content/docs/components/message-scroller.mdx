@@ -1,0 +1,992 @@
+---
+title: Message Scroller
+description: A message scroller component for Tailwind CSS with beautiful shadcn/ui styling. Use it to build chat feeds that follow new messages and keep the reader's place.
+---
+
+The message scroller is the scrolling viewport of a chat: it follows new messages as they arrive, pins fresh turns to the top like an AI assistant, and keeps the reader's place when older history loads in. Use it around [message](/components/message) rows for messaging UIs and AI chats.
+
+```html preview preset=card
+%include examples/cards/chat.tsx%
+```
+
+## Usage
+
+Add the `message-scroller` class to a container with a height. Inside it, add a `message-scroller-viewport` element with a `message-scroller-content` element inside, and one `message-scroller-item` per message. For a jump-to-latest button, add `message-scroller-button` to a [button](/components/button) inside the container.
+
+| Class                           | Description                                          |
+| ------------------------------- | ---------------------------------------------------- |
+| `message-scroller`              | Add to the container                                 |
+| `message-scroller-viewport`     | Add to the scrolling element                         |
+| `message-scroller-content`      | Add to the element holding the messages              |
+| `message-scroller-item`         | Add to each message                                  |
+| `message-scroller-button`       | Add to a `button` that scrolls back to the latest message |
+| `message-scroller-button-start` | Add to `message-scroller-button` to target the top instead |
+
+```html
+<div class="message-scroller h-96">
+  <div class="message-scroller-viewport">
+    <div class="message-scroller-content">
+      <div class="message-scroller-item">Message</div>
+    </div>
+  </div>
+  <button class="message-scroller-button">...</button>
+</div>
+```
+
+## Examples
+
+### Anchoring
+
+Add `data-sp-anchor` to a turn to pin it to the top of the viewport when it arrives.
+
+```html preview preset=message
+<div class="flex w-full flex-col gap-4">
+  <div class="card mx-auto h-140 w-full max-w-sm gap-0">
+    <div class="card-header border-b">
+      <div class="card-title">Anchoring Turns</div>
+      <div class="card-description">Choose which role settles near the top edge.</div>
+      <div class="card-action">
+        <button id="anchor-reset" class="btn btn-outline btn-icon" aria-label="Reset anchored turns">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-content min-h-0 flex-1 overflow-hidden p-0">
+      <div class="empty h-full" id="anchor-empty">
+        <div class="empty-header">
+          <div class="empty-media empty-media-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.1 2.182a10 10 0 0 1 3.8 0"/><path d="M13.9 21.818a10 10 0 0 1-3.8 0"/><path d="M17.609 3.72a10 10 0 0 1 2.69 2.7"/><path d="M2.182 13.9a10 10 0 0 1 0-3.8"/><path d="M20.28 17.61a10 10 0 0 1-2.7 2.69"/><path d="M21.818 10.1a10 10 0 0 1 0 3.8"/><path d="M3.721 6.391a10 10 0 0 1 2.7-2.69"/><path d="m6.163 21.117-2.906.85a1 1 0 0 1-1.236-1.169l.965-2.98"/></svg>
+          </div>
+          <div class="empty-title">No anchored messages yet</div>
+          <div class="empty-description">Send the first message to see the selected role anchor.</div>
+        </div>
+      </div>
+      <div class="message-scroller hidden size-full" id="anchor-scroller">
+        <div class="message-scroller-viewport">
+          <div class="message-scroller-content p-6" id="anchor-content"></div>
+        </div>
+        <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="tab-list" id="anchor-roles" role="group" aria-label="Select scroll anchor role">
+        <button class="tab active" data-role="user" type="button">User</button>
+        <button class="tab" data-role="assistant" type="button">Assistant</button>
+      </div>
+      <button id="anchor-send" class="btn btn-icon ms-auto" type="button" aria-label="Send message">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mx-auto max-w-xs px-0.5 text-center text-xs text-muted-foreground">
+    Toggle the anchor role, then send messages to compare where turns settle.
+  </div>
+</div>
+
+<script>
+  const anchorMessages = [
+  { role: "user", text: "Can you show me how anchoring behaves when a new prompt starts the turn?" },
+  { role: "assistant", text: "Append the user prompt first, then append the assistant response. With User selected, the prompt settles near the top and the assistant response fills in below it." },
+  { role: "user", text: "What changes when assistant messages are the anchor?" },
+  { role: "assistant", text: "Now each assistant response is the item the scroller keeps in view. This is useful when the reply is the moment you want readers to land on after each turn." },
+  { role: "user", text: "Can I switch roles and keep adding turns?" },
+  { role: "assistant", text: "Yes. The next appended message with the selected role becomes the anchor, so you can compare user and assistant anchoring without resetting the demo." },
+];
+const anchorEmpty = document.querySelector("#anchor-empty");
+const anchorScroller = document.querySelector("#anchor-scroller");
+const anchorContent = document.querySelector("#anchor-content");
+const anchorSend = document.querySelector("#anchor-send");
+const anchorReset = document.querySelector("#anchor-reset");
+let anchorRole = "user";
+let anchorIndex = 0;
+const anchorSpacer = () => anchorContent.querySelector(":scope > [aria-hidden]");
+const anchorSync = () => {
+  anchorReset.disabled = anchorIndex === 0;
+  anchorSend.disabled = anchorIndex >= anchorMessages.length;
+  anchorEmpty.classList.toggle("hidden", anchorIndex > 0);
+  anchorScroller.classList.toggle("hidden", anchorIndex === 0);
+};
+const anchorClear = () => {
+  [...anchorContent.children].filter((el) => el !== anchorSpacer()).forEach((el) => el.remove());
+  anchorIndex = 0;
+  anchorSync();
+};
+anchorSend.addEventListener("click", () => {
+  const message = anchorMessages[anchorIndex];
+  if (!message) return;
+  anchorIndex += 1;
+  anchorSync();
+  const item = document.createElement("div");
+  item.className = "message-scroller-item";
+  if (message.role === anchorRole) item.setAttribute("data-sp-anchor", "");
+  item.innerHTML = message.role === "user"
+    ? '<div class="message message-end"><div class="message-content"><div class="bubble bubble-muted"><div class="bubble-content"></div></div></div></div>'
+    : '<div class="message"><div class="message-content"><div class="bubble bubble-ghost"><div class="bubble-content"></div></div></div></div>';
+  item.querySelector(".bubble-content").textContent = message.text;
+  anchorContent.insertBefore(item, anchorSpacer());
+});
+anchorReset.addEventListener("click", anchorClear);
+document.querySelectorAll("#anchor-roles .tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#anchor-roles .tab").forEach((t) => t.classList.remove("active"));
+    tab.classList.add("active");
+    anchorRole = tab.dataset.role;
+    anchorClear();
+  });
+});
+anchorSync();
+</script>
+```
+
+### Group chat
+
+Markers work as turns too: give the join event `data-sp-anchor` and the thread settles on it like any other turn.
+
+```html preview preset=message
+<div class="flex w-full flex-col gap-4">
+  <div class="card mx-auto h-140 w-full max-w-sm gap-0">
+    <div class="card-header border-b">
+      <div class="card-title">Group Chat</div>
+      <div class="card-description">A group chat with several participants and an assistant. The join marker is marked as a turn.</div>
+      <div class="card-action">
+        <button id="group-reset" class="btn btn-outline btn-icon" aria-label="Reset conversation" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        </button>
+        <div class="tooltip" data-sp-toggle="#group-reset">Reset</div>
+      </div>
+    </div>
+    <div class="card-content min-h-0 flex-1 overflow-hidden p-0">
+      <div class="message-scroller size-full" id="group-scroller">
+        <div class="message-scroller-viewport">
+          <div class="message-scroller-content p-6" id="group-content">
+            <div class="message-scroller-item">
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">@mary, the astrophage line keeps matching Venus energy output. Can you check my math?</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="message-header">Mary (Agent)</div>
+                  <div class="bubble bubble-ghost"><div class="bubble-content">Yes. Confirmed. The curve points to a microorganism harvesting stellar energy and breeding near carbon dioxide. If @rocky agrees, this is the clue we need.</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item" data-sp-anchor>
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">ping @rocky</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-footer flex-col items-center gap-2 border-t">
+      <button id="group-action" class="btn btn-secondary w-full" type="button">Add Rocky</button>
+      <p class="text-xs text-muted-foreground" id="group-hint">This will create a marker and make it the anchor</p>
+    </div>
+  </div>
+  <div class="mx-auto max-w-sm px-0.5 text-center text-xs text-muted-foreground">
+    When a user joins, a marker is created. data-sp-anchor on the marker marks it as the next turn.
+  </div>
+</div>
+
+<script>
+  const groupContent = document.querySelector("#group-content");
+const groupAction = document.querySelector("#group-action");
+const groupHint = document.querySelector("#group-hint");
+const groupReset = document.querySelector("#group-reset");
+const groupSpacer = () => groupContent.querySelector(":scope > [aria-hidden]");
+let groupTurn = "idle";
+const groupSync = () => {
+  groupAction.disabled = groupTurn === "message";
+  groupAction.textContent = groupTurn === "idle" ? "Add Rocky" : "Send Message as Rocky";
+  groupHint.textContent = groupTurn === "idle"
+    ? "This will create a marker and make it the anchor"
+    : "Now send Rocky's reply into the conversation";
+  groupReset.disabled = groupTurn === "idle";
+};
+groupAction.addEventListener("click", () => {
+  const item = document.createElement("div");
+  item.className = "message-scroller-item";
+  item.setAttribute("data-group-extra", "");
+  if (groupTurn === "idle") {
+    groupTurn = "marker";
+    item.setAttribute("data-sp-anchor", "");
+    item.innerHTML = '<div class="marker marker-separator"><span class="marker-content">Rocky has joined the chat</span></div>';
+  } else {
+    groupTurn = "message";
+    item.innerHTML = '<div class="message"><div class="message-content"><div class="message-header">Rocky</div><div class="bubble bubble-tinted"><div class="bubble-content">Amaze. Astrophage eats light, makes heat, goes to carbon dioxide. Rocky has fuel model. Grace is smart.</div></div></div></div>';
+  }
+  groupContent.insertBefore(item, groupSpacer());
+  groupSync();
+});
+groupReset.addEventListener("click", () => {
+  groupContent.querySelectorAll("[data-group-extra]").forEach((el) => el.remove());
+  groupTurn = "idle";
+  groupSync();
+  window.sp.messageScroller(document.querySelector("#group-scroller"))?.scrollToEnd();
+});
+groupSync();
+</script>
+```
+
+### Following
+
+Add `data-sp-auto-scroll` to follow new messages as they arrive; scrolling up releases it, and the button brings it back.
+
+```html preview preset=message
+<div class="flex w-full flex-col gap-4">
+  <div class="card mx-auto h-140 w-full max-w-sm gap-0">
+    <div class="card-header border-b">
+      <div class="card-title">Streaming Messages</div>
+      <div class="card-description">Auto-scroll follows the live edge of the conversation.</div>
+      <div class="card-action">
+        <button id="stream-reset" class="btn btn-outline btn-icon" aria-label="Reset stream">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        </button>
+        <div class="tooltip" data-sp-toggle="#stream-reset">Reset</div>
+      </div>
+    </div>
+    <div class="card-content flex-1 overflow-hidden p-0">
+      <div class="empty h-full" id="stream-empty">
+        <div class="empty-header">
+          <div class="empty-media empty-media-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.1 2.182a10 10 0 0 1 3.8 0"/><path d="M13.9 21.818a10 10 0 0 1-3.8 0"/><path d="M17.609 3.72a10 10 0 0 1 2.69 2.7"/><path d="M2.182 13.9a10 10 0 0 1 0-3.8"/><path d="M20.28 17.61a10 10 0 0 1-2.7 2.69"/><path d="M21.818 10.1a10 10 0 0 1 0 3.8"/><path d="M3.721 6.391a10 10 0 0 1 2.7-2.69"/><path d="m6.163 21.117-2.906.85a1 1 0 0 1-1.236-1.169l.965-2.98"/></svg>
+          </div>
+          <div class="empty-title">Ready to Stream</div>
+          <div class="empty-description">Press send to stream the scripted conversation.</div>
+        </div>
+      </div>
+      <div class="message-scroller hidden size-full" id="stream-scroller" data-sp-auto-scroll>
+        <div class="message-scroller-viewport">
+          <div class="message-scroller-content p-6" id="stream-content"></div>
+        </div>
+        <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-footer">
+      <form class="w-full" id="stream-form">
+        <div class="input-group">
+          <div class="h-14 w-full px-3 py-2.5">
+            <span class="line-clamp-2 text-sm opacity-60" id="stream-queue"></span>
+          </div>
+          <div class="input-group-addon input-group-addon-block-end pt-1">
+            <button id="stream-send" class="btn btn-sm btn-icon ms-auto" type="submit" aria-label="Send">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="mx-auto max-w-sm px-0.5 text-center text-xs text-muted-foreground">
+    Streaming is simulated. Auto-scroll is enabled.
+  </div>
+</div>
+
+<script>
+  const streamTurns = [
+  {
+    user: "I'm building a chat for our app and the scroll behavior is driving me nuts. Every time the AI streams a reply, the whole thread jumps around.",
+    reply: [
+      "That's the classic streaming scroll problem. Wrap your message list in a message scroller and turn on auto-scroll: the viewport pins to the bottom as tokens arrive, so users always see the latest text land in place.",
+      "The important part: it only auto-scrolls while the reader is already at the bottom. The moment they scroll up to read something earlier, auto-scroll backs off and their position is preserved. You get smooth streaming without fighting the user's intent.",
+    ],
+  },
+  {
+    user: "Okay, but when someone sends a new message the view still feels jarring, like the whole conversation reloads from the top.",
+    reply: [
+      "Turn anchoring fixes that. Add data-sp-anchor to the turn that should settle near the top instead of blindly snapping to the document bottom.",
+      "It also leaves a small peek of the previous exchange visible above the anchor, so context isn't lost. The reply starts in view without that disorienting jump you get from a plain overflow container.",
+    ],
+  },
+  {
+    user: "And if they've scrolled up to re-read an older answer? I don't want to yank them back down.",
+    reply: [
+      "You won't. Auto-scroll only runs when the viewport is already pinned to the bottom, so scrolling up is a deliberate opt-out. Their place in the thread stays put even as new tokens keep arriving below.",
+      "When there is content they haven't seen yet, the scroll button appears at the bottom of the viewport. One tap jumps them back to the newest message and re-engages auto-scroll. Same pattern as Slack or iMessage: quiet when you're caught up, helpful when you're not.",
+    ],
+  },
+  {
+    user: "Last one, does this work with assistive tech?",
+    reply: [
+      "The content element has role=\"log\" and aria-relevant=\"additions\" by default, so screen readers announce new messages as they stream in.",
+      "The scroll button is a real button with a label, and it's removed from the tab order when you're already at the bottom, so there are no ghost focus stops.",
+    ],
+  },
+];
+const streamEmpty = document.querySelector("#stream-empty");
+const streamScroller = document.querySelector("#stream-scroller");
+const streamContent = document.querySelector("#stream-content");
+const streamForm = document.querySelector("#stream-form");
+const streamSend = document.querySelector("#stream-send");
+const streamReset = document.querySelector("#stream-reset");
+const streamQueue = document.querySelector("#stream-queue");
+let streamIndex = 0;
+let streamBusy = false;
+const streamSpacer = () => streamContent.querySelector(":scope > [aria-hidden]");
+const streamSync = () => {
+  const next = streamTurns[streamIndex];
+  streamQueue.classList.toggle("text-muted-foreground", !next);
+  streamQueue.textContent = next ? next.user : "No messages queued. Reset the stream.";
+  streamQueue.classList.toggle("opacity-60", streamBusy);
+  streamSend.disabled = !next || streamBusy;
+  streamReset.disabled = streamIndex === 0 || streamBusy;
+  streamEmpty.classList.toggle("hidden", streamIndex > 0);
+  streamScroller.classList.toggle("hidden", streamIndex === 0);
+};
+streamReset.addEventListener("click", () => {
+  if (streamBusy) return;
+  [...streamContent.children].filter((el) => el !== streamSpacer()).forEach((el) => el.remove());
+  streamIndex = 0;
+  streamSync();
+});
+streamForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const turn = streamTurns[streamIndex];
+  if (!turn || streamBusy) return;
+  streamIndex += 1;
+  streamBusy = true;
+  streamSync();
+  const question = document.createElement("div");
+  question.className = "message-scroller-item";
+  question.setAttribute("data-sp-anchor", "");
+  question.innerHTML = '<div class="message message-end"><div class="message-content"><div class="bubble bubble-muted"><div class="bubble-content"></div></div></div></div>';
+  question.querySelector(".bubble-content").textContent = turn.user;
+  streamContent.insertBefore(question, streamSpacer());
+  setTimeout(() => {
+    const reply = document.createElement("div");
+    reply.className = "message-scroller-item";
+    reply.innerHTML = '<div class="message"><div class="message-content"><div class="bubble bubble-ghost"><div class="bubble-content space-y-2"></div></div></div></div>';
+    const target = reply.querySelector(".bubble-content");
+    streamContent.insertBefore(reply, streamSpacer());
+    let paragraph = 0;
+    const nextParagraph = () => {
+      if (paragraph >= turn.reply.length) {
+        streamBusy = false;
+        streamSync();
+        return;
+      }
+      const words = turn.reply[paragraph].split(" ");
+      const p = document.createElement("p");
+      target.append(p);
+      let at = 0;
+      const stream = setInterval(() => {
+        at += 1;
+        p.textContent = words.slice(0, at).join(" ");
+        if (at >= words.length) {
+          clearInterval(stream);
+          paragraph += 1;
+          nextParagraph();
+        }
+      }, 40);
+    };
+    nextParagraph();
+  }, 900);
+});
+streamSync();
+</script>
+```
+
+### Opening position
+
+Set `data-sp-position` to `start`, `end`, or `last-anchor` for where the scroller opens; `last-anchor` starts at the newest turn.
+
+```html preview preset=message
+<div class="flex w-full flex-col gap-4">
+  <div class="card mx-auto h-140 w-full max-w-sm gap-0">
+    <div class="card-header border-b">
+      <div class="card-title">Opening Position</div>
+      <div class="card-description">Choose where a saved transcript opens.</div>
+    </div>
+    <div class="card-content flex-1 overflow-hidden p-0">
+      <div class="message-scroller size-full" id="open-scroller" data-sp-position="last-anchor">
+        <div class="message-scroller-viewport">
+          <div class="message-scroller-content p-6">
+            <div class="message-scroller-item" id="open-1" data-sp-anchor>
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">This is the first message the user sent in the conversation.</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item" id="open-2">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost"><div class="bubble-content">Workspace creation rose 8%, but first invite completion only rose 2%.</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item" id="open-3" data-sp-anchor>
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">This is the last message the user sent in the conversation.</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item" id="open-4">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>Start with the invite step. Teams are creating workspaces but waiting to add collaborators.</p>
+                      <p>Recommended follow-up:</p>
+                      <p>1. Compare invite drop-off by account size.<br>2. Check whether users who skip invites still return within 24 hours.<br>3. Review the empty-state copy on the first project screen.<br>4. Segment activation by template, since template users may not need invites right away.</p>
+                      <p>If that pattern holds, the next experiment should make collaboration useful earlier instead of prompting for invites harder.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-footer border-t">
+      <div class="tab-list w-full" id="open-tabs" role="group" aria-label="Opening position">
+        <button class="tab flex-1" data-position="start" type="button">start</button>
+        <button class="tab flex-1" data-position="end" type="button">end</button>
+        <button class="tab active flex-1" data-position="last-anchor" type="button">last-anchor</button>
+      </div>
+    </div>
+  </div>
+  <div class="mx-auto max-w-sm px-0.5 text-center text-xs text-muted-foreground">
+    Toggle the position to see where the transcript starts when you open the thread.
+  </div>
+</div>
+
+<script>
+  const openScroller = document.querySelector("#open-scroller");
+document.querySelectorAll("#open-tabs .tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#open-tabs .tab").forEach((t) => t.classList.remove("active"));
+    tab.classList.add("active");
+    const api = window.sp.messageScroller(openScroller);
+    if (tab.dataset.position === "start") api?.scrollToStart();
+    else if (tab.dataset.position === "end") api?.scrollToEnd();
+    else api?.scrollToMessage("open-3", { align: "start", scrollMargin: 64 });
+  });
+});
+</script>
+```
+
+### Load history
+
+Messages inserted at the top keep the reader's place automatically; turn it off with `data-sp-preserve-prepend="false"`.
+
+```html preview preset=message
+<div class="flex w-full flex-col gap-4">
+  <div class="card mx-auto h-140 w-full max-w-sm gap-0">
+    <div class="card-header border-b">
+      <div class="card-title">Load History</div>
+      <div class="card-description">Prepended messages keep your place.</div>
+      <div class="card-action">
+        <button id="history-reset" class="btn btn-outline btn-icon" aria-label="Reset loaded messages" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        </button>
+        <div class="tooltip" data-sp-toggle="#history-reset">Reset</div>
+      </div>
+    </div>
+    <div class="card-content flex-1 overflow-hidden p-0">
+      <div class="message-scroller size-full" id="history-scroller">
+        <div class="message-scroller-viewport">
+          <div class="message-scroller-content p-6" id="history-content">
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>Only the export queue worker changed. The deploy moved large CSV jobs onto the shared retry policy, which made each failed attempt hold a worker slot longer than before.</p>
+                      <p>The app deploy did not include checkout, pricing, or billing API changes.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">Do we need to roll back?</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>Not yet. Queue depth is recovering after we reduced retry concurrency, and the oldest pending job is now under five minutes old.</p>
+                      <p>Keep rollback ready if the queue starts climbing again, but the current trend points toward recovery.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">Keep watching for customer-visible issues.</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>I will watch the queue and support tags for another 15 minutes. I am tracking export failures, delayed download requests, and any support thread that mentions missing reports.</p>
+                      <p>If those stay quiet through the next batch window, we can close this as an internal degradation.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="marker marker-separator"><span class="marker-content">End of Conversation</span></div>
+            </div>
+          </div>
+        </div>
+        <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-footer flex-col items-center gap-2 border-t">
+      <button id="history-load" class="btn btn-secondary w-full" type="button">Load History</button>
+      <p class="text-xs text-muted-foreground">Restore earlier messages while keeping your place.</p>
+    </div>
+  </div>
+  <div class="mx-auto max-w-sm px-0.5 text-center text-xs text-muted-foreground">
+    Click Load History to load the entire conversation.
+  </div>
+</div>
+
+<script>
+  const historyEarlier = [
+  { role: "user", paragraphs: ["Can you summarize the incident channel?"] },
+  { role: "assistant", paragraphs: ["The first alert was a delayed export job. It started backing up around 09:42 UTC and triggered the warning once the retry queue crossed the threshold.", "No customer-facing checkout paths were affected, but exports for larger workspaces were running about 12 minutes behind."] },
+  { role: "user", paragraphs: ["Was checkout affected?"] },
+  { role: "assistant", paragraphs: ["No checkout errors were reported. Payment authorization, order creation, and confirmation emails stayed inside their normal latency bands.", "The only elevated metric was export queue depth, which maps to analytics downloads instead of checkout."] },
+  { role: "user", paragraphs: ["What changed in the last deploy?"] },
+];
+const historyContent = document.querySelector("#history-content");
+const historyLoad = document.querySelector("#history-load");
+const historyReset = document.querySelector("#history-reset");
+const historyItem = (message) => {
+  const item = document.createElement("div");
+  item.className = "message-scroller-item";
+  item.setAttribute("data-history-extra", "");
+  item.innerHTML = message.role === "user"
+    ? '<div class="message message-end"><div class="message-content"><div class="bubble bubble-muted"><div class="bubble-content space-y-2"></div></div></div></div>'
+    : '<div class="message"><div class="message-content"><div class="bubble bubble-ghost"><div class="bubble-content space-y-2"></div></div></div></div>';
+  const target = item.querySelector(".bubble-content");
+  message.paragraphs.forEach((text) => {
+    const p = document.createElement("p");
+    p.textContent = text;
+    target.append(p);
+  });
+  return item;
+};
+historyLoad.addEventListener("click", () => {
+  historyEarlier.toReversed().forEach((message) => {
+    historyContent.insertBefore(historyItem(message), historyContent.firstElementChild);
+  });
+  historyLoad.disabled = true;
+  historyLoad.textContent = "History Loaded";
+  historyReset.disabled = false;
+  sp.toast("History loaded", { description: "Scroll up to see earlier messages." });
+});
+historyReset.addEventListener("click", () => {
+  historyContent.querySelectorAll("[data-history-extra]").forEach((el) => el.remove());
+  historyLoad.disabled = false;
+  historyLoad.textContent = "Load History";
+  historyReset.disabled = true;
+  window.sp.messageScroller(document.querySelector("#history-scroller"))?.scrollToEnd();
+});
+</script>
+```
+
+### Jump to message
+
+Call `scrollToMessage` with an item's `id` to jump the viewport to it.
+
+```html preview preset=message
+<div class="flex w-full flex-col gap-4">
+  <div class="card mx-auto h-140 w-full max-w-sm gap-0">
+    <div class="card-header border-b">
+      <div class="card-title">Commands</div>
+      <div class="card-description">Drive the transcript from outside.</div>
+      <div class="card-action">
+        <button id="command-trigger" class="btn btn-secondary" type="button">Jump to...</button>
+        <div class="dropdown w-64" data-sp-toggle="#command-trigger" data-sp-placement="bottom-end" id="command-menu">
+          <div class="dropdown-label">Conversations</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-content flex-1 overflow-hidden p-0">
+      <div class="message-scroller size-full" id="command-scroller">
+        <div class="message-scroller-viewport">
+          <div class="message-scroller-content p-6" id="command-content">
+            <div class="message-scroller-item" id="command-activation" data-sp-anchor>
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">We're seeing activation dip after workspace creation. Can you help me find the likely step?</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>The sharpest drop is between creating the workspace and inviting the first teammate.</p>
+                      <p>Workspace creation is still healthy, but the invite step is where users pause. That suggests the product is asking for collaboration before the user has enough confidence in the workspace.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item" id="command-compare" data-sp-anchor>
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">What should I compare before we change the onboarding flow?</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>Compare three cohorts:</p>
+                      <p>1. Users who choose a template before inviting teammates.<br>2. Users who start from a blank workspace.<br>3. Users who skip invites and return within 24 hours.</p>
+                      <p>If template users invite faster, the fix is probably better first-run guidance rather than a louder invite prompt.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item" id="command-experiment" data-sp-anchor>
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">Can you turn that into an experiment?</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>Yes. Create a variant that shows a short checklist after workspace creation:</p>
+                      <p>- Pick a template.<br>- Add one project detail.<br>- Invite a teammate when the workspace has context.</p>
+                      <p>Measure first invite completion, 24-hour return rate, and whether teams create a second project.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item" id="command-risk" data-sp-anchor>
+              <div class="message message-end">
+                <div class="message-content">
+                  <div class="bubble bubble-muted"><div class="bubble-content">What's the risk if we delay the invite prompt?</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="message-scroller-item">
+              <div class="message">
+                <div class="message-content">
+                  <div class="bubble bubble-ghost">
+                    <div class="bubble-content space-y-2">
+                      <p>The main risk is reducing team creation for accounts that already know who they want to invite.</p>
+                      <p>To protect that path, keep the invite action visible in the header and only change the primary empty-state guidance. That gives confident teams a direct route without forcing uncertain users through the invite step too early.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mx-auto max-w-sm px-0.5 text-center text-xs text-muted-foreground">
+    Use the controls to jump to any message in the conversation.
+  </div>
+</div>
+
+<script>
+  const commandScroller = document.querySelector("#command-scroller");
+const commandMenu = document.querySelector("#command-menu");
+document.querySelectorAll("#command-content [data-sp-anchor]").forEach((item) => {
+  const text = item.textContent.trim().replace(/\s+/g, " ");
+  const label = text.length > 42 ? `${text.slice(0, 39)}...` : text;
+  const button = document.createElement("button");
+  button.className = "dropdown-item";
+  button.innerHTML = '<span class="line-clamp-1 min-w-0"></span>';
+  button.querySelector("span").textContent = label;
+  button.addEventListener("click", () => {
+    window.sp.messageScroller(commandScroller)?.scrollToMessage(item.id, { align: "start", behavior: "smooth" });
+  });
+  commandMenu.append(button);
+});
+</script>
+```
+
+### Scroll state
+
+The scroller mirrors its reachable edges onto `data-sp-scrollable` and reports changes through `sp-change`.
+
+```html preview preset=message
+<div class="mx-auto flex w-full max-w-sm flex-col gap-4">
+  <div class="card h-140 w-full gap-0">
+    <div class="card-header border-b">
+      <div class="card-title">Scroll Status</div>
+      <div class="card-description">Where the reader can scroll based on the current position.</div>
+    </div>
+    <div class="card-content flex-1 overflow-hidden p-0">
+      <div class="message-scroller size-full" id="state-scroller" data-sp-position="start">
+        <div class="message-scroller-viewport">
+          <div class="message-scroller-content gap-4 p-6" id="state-content"></div>
+        </div>
+        <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="card-footer justify-center border-t text-center text-sm text-muted-foreground">
+      <span id="state-status">You are at the top. You can only scroll down.</span>
+    </div>
+  </div>
+  <div class="px-0.5 text-center text-xs text-muted-foreground">
+    Scroll the transcript to see the footer update.
+  </div>
+</div>
+
+<script>
+  const stateContent = document.querySelector("#state-content");
+const stateStatus = document.querySelector("#state-status");
+const stateSpacer = () => stateContent.querySelector(":scope > [aria-hidden]");
+for (let i = 1; i <= 12; i += 1) {
+  const user = i % 2 === 1;
+  const item = document.createElement("div");
+  item.className = "message-scroller-item";
+  item.id = `state-${i}`;
+  if (user) item.setAttribute("data-sp-anchor", "");
+  item.innerHTML = user
+    ? '<div class="message message-end"><div class="message-content"><div class="bubble bubble-muted"><div class="bubble-content"></div></div></div></div>'
+    : '<div class="message"><div class="message-content"><div class="bubble bubble-ghost"><div class="bubble-content space-y-2"></div></div></div></div>';
+  const target = item.querySelector(".bubble-content");
+  if (user) {
+    target.textContent = `Review scroll checkpoint ${i}.`;
+  } else {
+    [
+      `Checkpoint ${i} is synced. The scroll state updates as the viewport moves.`,
+      "When the reader is at the first message, the footer should only point them down. Once they move into the middle of the transcript, it should explain that both directions are available.",
+      "At the latest message, the footer should switch again and only point them back up.",
+    ].forEach((text) => {
+      const p = document.createElement("p");
+      p.textContent = text;
+      target.append(p);
+    });
+  }
+  stateContent.insertBefore(item, stateSpacer());
+}
+document.querySelector("#state-scroller").addEventListener("sp-change", (e) => {
+  const { start, end } = e.detail.scrollable;
+  if (start && end) stateStatus.textContent = "You can scroll both ways.";
+  else if (end) stateStatus.textContent = "You are at the top. You can only scroll down.";
+  else if (start) stateStatus.textContent = "You are at the bottom. You can only scroll up.";
+  else stateStatus.textContent = "All messages fit in the viewport.";
+});
+</script>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=message dir=rtl
+<div id="message-scroller-rtl-demo" dir="rtl" class="w-full">
+  <div class="card mx-auto h-96 w-full max-w-sm gap-0 py-0">
+    <div class="message-scroller size-full" data-sp-auto-scroll>
+      <div class="message-scroller-viewport">
+        <div class="message-scroller-content p-6">
+          <div class="message-scroller-item">
+            <div class="message">
+              <div class="message-content">
+                <div class="bubble bubble-ghost"><div class="bubble-content" data-i18n="m1">وصلت الرسائل الجديدة في الأسفل.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="message-scroller-item">
+            <div class="message message-end">
+              <div class="message-content">
+                <div class="bubble bubble-muted"><div class="bubble-content" data-i18n="m2">والمتصفح يتابعها تلقائيًا.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="message-scroller-item">
+            <div class="message">
+              <div class="message-content">
+                <div class="bubble bubble-ghost"><div class="bubble-content" data-i18n="m3">مرر للأعلى لقراءة السجل، ثم عد إلى الأسفل للمتابعة.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="message-scroller-item">
+            <div class="message message-end">
+              <div class="message-content">
+                <div class="bubble bubble-muted"><div class="bubble-content" data-i18n="m4">تمامًا كما في أي تطبيق محادثة.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="message-scroller-item">
+            <div class="message">
+              <div class="message-content">
+                <div class="bubble bubble-ghost"><div class="bubble-content" data-i18n="m5">وتُحمَّل الرسائل الأقدم في الأعلى دون أن يتغيّر مكانك.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="message-scroller-item">
+            <div class="message message-end">
+              <div class="message-content">
+                <div class="bubble bubble-muted"><div class="bubble-content" data-i18n="m6">وكيف أعود إلى أحدث رسالة؟</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="message-scroller-item">
+            <div class="message">
+              <div class="message-content">
+                <div class="bubble bubble-ghost"><div class="bubble-content" data-i18n="m7">اضغط على زر السهم للعودة إلى الأسفل مباشرة.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="message-scroller-item">
+            <div class="message">
+              <div class="message-content">
+                <div class="bubble bubble-ghost"><div class="bubble-content" data-i18n="m8">هذه هي الرسالة الأخيرة.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="message-scroller-button btn btn-sm btn-icon" aria-label="Scroll to latest">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+  ar: {
+    dir: "rtl",
+    m1: "وصلت الرسائل الجديدة في الأسفل.",
+    m2: "والمتصفح يتابعها تلقائيًا.",
+    m3: "مرر للأعلى لقراءة السجل، ثم عد إلى الأسفل للمتابعة.",
+    m4: "تمامًا كما في أي تطبيق محادثة.",
+    m5: "وتُحمَّل الرسائل الأقدم في الأعلى دون أن يتغيّر مكانك.",
+    m6: "وكيف أعود إلى أحدث رسالة؟",
+    m7: "اضغط على زر السهم للعودة إلى الأسفل مباشرة.",
+    m8: "هذه هي الرسالة الأخيرة.",
+  },
+  he: {
+    dir: "rtl",
+    m1: "הודעות חדשות מגיעות למטה.",
+    m2: "והתצוגה עוקבת אחריהן אוטומטית.",
+    m3: "גללו למעלה לקריאת ההיסטוריה, וחזרו למטה כדי להמשיך.",
+    m4: "בדיוק כמו בכל אפליקציית צ'אט.",
+    m5: "הודעות ישנות יותר נטענות למעלה מבלי שהמיקום שלך זז.",
+    m6: "ואיך חוזרים להודעה החדשה ביותר?",
+    m7: "לוחצים על כפתור החץ וחוזרים ישר למטה.",
+    m8: "זו ההודעה האחרונה.",
+  },
+  en: {
+    dir: "ltr",
+    m1: "New messages arrive at the bottom.",
+    m2: "And the view follows them automatically.",
+    m3: "Scroll up to read the history, then return to the bottom to resume.",
+    m4: "Just like any chat app.",
+    m5: "Older messages load at the top without moving your place.",
+    m6: "And how do I get back to the newest message?",
+    m7: "Press the arrow button to jump straight back down.",
+    m8: "This is the last message.",
+  },
+};
+window.addEventListener("message", (e) => {
+  const t = translations[e.data?.lang];
+  if (e.data?.type !== "sp-language" || !t) return;
+  document.getElementById("message-scroller-rtl-demo").dir = t.dir;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t[el.dataset.i18n];
+  });
+});
+</script>
+```
+
+## Options
+
+Set each option with its own `data-sp-*` attribute on the `message-scroller` element.
+
+| Attribute                  | Values                            | Default |
+| -------------------------- | --------------------------------- | ------- |
+| `data-sp-auto-scroll`      | Boolean                           | `false` |
+| `data-sp-position`         | `start`, `end`, `last-anchor`     | `end`   |
+| `data-sp-edge-threshold`   | Number                            | `8`     |
+| `data-sp-margin`           | Number                            | `0`     |
+| `data-sp-peek`             | Number                            | `64`    |
+| `data-sp-preserve-prepend` | Boolean                           | `true`  |
+
+```html
+<div class="message-scroller" data-sp-auto-scroll data-sp-position="last-anchor">...</div>
+```
+
+With `data-sp-auto-scroll` the viewport follows new messages while the reader is at the bottom; scrolling up releases it, and returning to the bottom resumes it. `data-sp-position` picks where a thread opens. `data-sp-edge-threshold` is how close to an edge still counts as being there, `data-sp-margin` adds an offset to scroll targets, and `data-sp-peek` is how much of the previous turn stays visible above a pinned anchor. Set `data-sp-preserve-prepend="false"` to stop holding the reader's place when older messages are inserted at the top.
+
+Mark a turn with `data-sp-anchor` on its `message-scroller-item` to pin it to the top of the viewport when it arrives.
+
+## JavaScript
+
+The scroller mirrors its reachable edges onto a `data-sp-scrollable` attribute on the container and the viewport, so CSS can react with selectors like `[data-sp-scrollable~="end"]`.
+
+### Events
+
+| Event       | When                                             |
+| ----------- | ------------------------------------------------ |
+| `sp-change` | The scrollable edges or visible messages changed |
+
+```js
+document.querySelector(".message-scroller").addEventListener("sp-change", (e) => {
+  console.log(e.detail.scrollable, e.detail.currentAnchorId, e.detail.visibleMessageIds);
+});
+```
+
+### Methods
+
+Get the instance with `sp.messageScroller(el)`, then call its methods:
+
+| Method                       | Description                                    |
+| ---------------------------- | ---------------------------------------------- |
+| `scrollToEnd(options)`       | Scroll to the latest message                   |
+| `scrollToStart(options)`     | Scroll to the top                              |
+| `scrollToMessage(id, options)` | Scroll to the item with that `id`            |
+
+Options take `behavior` (`auto` or `smooth`), `align` (`start`, `center`, `end`, `nearest`), and `scrollMargin`.
