@@ -29,16 +29,18 @@
     @apply [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4;
   }
 
-  /* Buttons inside an addon shrink to fit the field; use the regular button
-     classes and the addon handles the in-group metrics. */
   @layer l1 {
     & > .btn {
-      @apply h-6 gap-1 rounded-[calc(var(--radius)-5px)] px-1.5 shadow-none;
-      @apply [&>svg:not([class*='size-'])]:size-3.5;
+      @apply shadow-none;
     }
 
-    & > .btn.btn-icon {
-      @apply p-0;
+    & > .btn:where(:not(.btn-sm, .btn-base, .btn-lg)) {
+      @apply h-6 gap-1 rounded-[calc(var(--radius)-5px)] px-1.5;
+      @apply [&>svg:not([class*='size-'])]:size-3.5;
+
+      &.btn-icon {
+        @apply p-0;
+      }
     }
   }
 }
@@ -52,12 +54,14 @@
 @utility input-group-addon-block-start {
   @layer l1 {
     @apply order-first w-full justify-start px-2.5 pt-2 pb-1.5 [&.border-b]:pb-2;
+    @apply has-[>button]:ms-0 has-[>kbd]:ms-0;
   }
 }
 
 @utility input-group-addon-block-end {
   @layer l1 {
     @apply order-last w-full justify-start px-2.5 pt-1.5 pb-2 [&.border-t]:pt-2;
+    @apply has-[>button]:ms-0 has-[>kbd]:ms-0;
   }
 }
 
