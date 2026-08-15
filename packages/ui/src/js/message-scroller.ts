@@ -98,6 +98,10 @@ export const MessageScroller = define({
 
     const resizeObserver = new ResizeObserver(() => {
       cancelAnimationFrame(this._resizeFrame as number);
+      if (this._mode === "following" && this.config.autoScroll) {
+        this._handleResize();
+        return;
+      }
       this._resizeFrame = requestAnimationFrame(() => this._handleResize());
     });
     resizeObserver.observe(viewport);
@@ -328,7 +332,7 @@ export const MessageScroller = define({
         this._commit();
         return;
       }
-      if (autoscrolling) this._setAutoscrolling(true);
+      if (autoscrolling && behavior === "smooth") this._setAutoscrolling(true);
       viewport.scrollTo({ top: target, behavior });
       this._scheduleCommit();
     },
