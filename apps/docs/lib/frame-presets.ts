@@ -93,6 +93,16 @@ export const framePresets: Record<string, CSSProperties> = {
     padding: "clamp(1rem, 5vw, 2.5rem)",
     minHeight: "24rem",
   },
+  dropdown: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    gap: "1rem",
+    width: "100%",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "32rem",
+  },
   popover: {
     display: "flex",
     flexWrap: "wrap",

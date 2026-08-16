@@ -92,6 +92,7 @@ export const docsNav: NavGroup[] = [
     title: "Examples",
     items: [
       { title: "Cards", href: "/examples/cards" },
+      { title: "Dropdowns", href: "/examples/dropdowns" },
     ],
   },
 ];
