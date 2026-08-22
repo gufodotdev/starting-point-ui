@@ -57,8 +57,12 @@ export const Anchorable: Mixin = {
     // Static panels are positioned by author CSS; skip anchoring entirely
     // while keeping the rest of the component (toggle, dismiss, top layer).
     if (this.config.static) return;
-    this.on(this.el, "sp-show", () => this._startAnchor());
-    this.on(this.el, "sp-hidden", () => this._stopAnchor());
+    this.on(this.el, "sp-show", (e) => {
+      if (e.target === this.el) this._startAnchor();
+    });
+    this.on(this.el, "sp-hidden", (e) => {
+      if (e.target === this.el) this._stopAnchor();
+    });
   },
 
   destroy(this: SpInstance) {
