@@ -11,18 +11,20 @@ export default function ProfileDropdown() {
       </button>
 
       <div className="dropdown w-60" data-sp-toggle="#profile-dropdown-trigger" data-sp-placement="bottom-end">
-        <div className="dropdown-label flex items-center gap-2.5">
-          <span className="avatar">
-            <img
-              className="avatar-image"
-              src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
-              alt=""
-            />
-            <span className="avatar-fallback">LN</span>
-          </span>
-          <div>
-            <div className="text-sm text-foreground">Leila Navarro</div>
-            <div className="font-normal">hello@leilanavarro.co</div>
+        <div className="item item-xs px-2 py-1.5">
+          <div className="item-media">
+            <span className="avatar">
+              <img
+                className="avatar-image"
+                src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+                alt=""
+              />
+              <span className="avatar-fallback">LN</span>
+            </span>
+          </div>
+          <div className="item-content">
+            <div className="item-title">Leila Navarro</div>
+            <div className="item-description">hello@leilanavarro.co</div>
           </div>
         </div>
         <div className="dropdown-separator"></div>
