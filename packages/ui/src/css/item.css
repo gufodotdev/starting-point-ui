@@ -73,7 +73,7 @@
 
 @utility item-content {
   @layer l1.l2 {
-    @apply flex flex-1 flex-col gap-1 in-[.item-xs]:gap-0;
+    @apply flex flex-1 flex-col gap-1 in-[.item-xs]:gap-px;
     @apply [&+.item-content]:flex-none;
   }
 }
