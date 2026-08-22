@@ -75,20 +75,125 @@ async function expandIncludes(content: string): Promise<string> {
   return out;
 }
 
+export type ExampleSection = {
+  slug: string;
+  title: string;
+  body: string;
+};
+
+// Must match the ids rehype-slug generates, so hub anchors and routes agree.
+function slugifyHeading(heading: string): string {
+  return heading
+    .toLowerCase()
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function parseExampleSections(content: string): ExampleSection[] {
+  const headings = [...content.matchAll(/^## (.+)$/gm)];
+  return headings.map((match, i) => {
+    const start = (match.index ?? 0) + match[0].length;
+    const end = i + 1 < headings.length ? headings[i + 1].index : content.length;
+    const title = match[1].trim();
+    return {
+      slug: slugifyHeading(title),
+      title,
+      body: content.slice(start, end).trim(),
+    };
+  });
+}
+
+function titleCaseWords(text: string): string {
+  return text.replace(/\S+/g, (word) => word[0].toUpperCase() + word.slice(1));
+}
+
+// Prose above the fence is the hub description; prose below it renders only
+// on the example's own page.
+function splitSectionBody(body: string): { description: string; rest: string; intro: string } {
+  const fenceStart = body.search(/^```/m);
+  if (fenceStart === -1) return { description: body.trim(), rest: "", intro: "" };
+  const fenceEnd = body.indexOf("\n```", fenceStart) + "\n```".length;
+  return {
+    description: body.slice(0, fenceStart).trim(),
+    rest: body.slice(fenceStart, fenceEnd).trim(),
+    intro: body.slice(fenceEnd).trim(),
+  };
+}
+
+function plainText(markdown: string): string {
+  return markdown.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/`/g, "");
+}
+
+function stripSectionIntros(content: string): string {
+  const headings = [...content.matchAll(/^## .+$/gm)];
+  if (!headings.length) return content;
+
+  let out = content.slice(0, headings[0].index);
+  headings.forEach((match, i) => {
+    const start = (match.index ?? 0) + match[0].length;
+    const end = i + 1 < headings.length ? headings[i + 1].index : content.length;
+    const { description, rest } = splitSectionBody(content.slice(start, end));
+    out += `${match[0]}\n\n${description}\n\n${rest}\n\n`;
+  });
+  return out;
+}
+
+async function getExampleSectionDoc(slug: string[]): Promise<DocFile | null> {
+  const hubPath = path.join(getDocsDirectory(), slug[0], slug[1]) + ".mdx";
+  if (!fs.existsSync(hubPath)) return null;
+
+  const { content } = matter(fs.readFileSync(hubPath, "utf-8"));
+  const section = parseExampleSections(content).find((s) => s.slug === slug[2]);
+  if (!section) return null;
+
+  const { description, rest, intro } = splitSectionBody(section.body);
+  const kind = titleCaseWords(slug[1].replace(/s$/, ""));
+  const name = titleCaseWords(section.title);
+  const fullName = name.toLowerCase().includes(kind.toLowerCase()) ? name : `${name} ${kind}`;
+
+  const summaryLine = /^[A-Z](?![A-Z])/.test(description)
+    ? description[0].toLowerCase() + description.slice(1)
+    : description;
+  const parts = intro
+    ? [intro, rest, `The example shows ${summaryLine}`]
+    : [description, rest];
+  parts.push(`Browse more [${kind.toLowerCase()} examples](/${slug[0]}/${slug[1]}).`);
+  const summary = plainText(description).replace(/\.?\s*$/, ".");
+
+  return {
+    metadata: {
+      title: section.title,
+      seoTitle: `Tailwind CSS ${fullName}`,
+      description: `A Tailwind CSS ${fullName.toLowerCase()} with shadcn/ui styling. ${summary} Copy-paste ready.`,
+    },
+    content: (await expandIncludes(parts.filter(Boolean).join("\n\n"))).replaceAll(
+      "%VERSION%",
+      version,
+    ),
+    slug,
+  };
+}
+
 export async function getDocBySlug(slug: string[]): Promise<DocFile | null> {
   const docsDir = getDocsDirectory();
   const filePath = path.join(docsDir, ...slug) + ".mdx";
 
   if (!fs.existsSync(filePath)) {
+    if (slug.length === 3 && slug[0] === "examples") {
+      return getExampleSectionDoc(slug);
+    }
     return null;
   }
 
   const rawContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(rawContent);
+  const source =
+    slug.length === 2 && slug[0] === "examples" ? stripSectionIntros(content) : content;
 
   return {
     metadata: data as DocMetadata,
-    content: (await expandIncludes(content)).replaceAll("%VERSION%", version),
+    content: (await expandIncludes(source)).replaceAll("%VERSION%", version),
     slug,
   };
 }
@@ -117,10 +222,20 @@ export function getAllDocSlugs(): string[][] {
   const docsDir = getDocsDirectory();
   if (!fs.existsSync(docsDir)) return [];
 
-  return getMDXFiles(docsDir).map((filePath) =>
+  const slugs = getMDXFiles(docsDir).map((filePath) =>
     path
       .relative(docsDir, filePath)
       .replace(/\.mdx$/, "")
       .split(path.sep),
   );
+
+  for (const slug of slugs.filter((s) => s.length === 2 && s[0] === "examples")) {
+    const raw = fs.readFileSync(path.join(docsDir, ...slug) + ".mdx", "utf-8");
+    const { content } = matter(raw);
+    for (const section of parseExampleSections(content)) {
+      slugs.push([...slug, section.slug]);
+    }
+  }
+
+  return slugs;
 }

@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
       { source: "/docs", destination: "/guides/introduction", permanent: true },
       { source: "/docs/:path*", destination: "/:path*", permanent: true },
       { source: "/guides/theming", destination: "/guides/customization", permanent: true },
-      { source: "/examples/:type/:category", destination: "/examples", permanent: true },
       { source: "/examples/:type/:category/:variant", destination: "/examples", permanent: true },
     ];
   },

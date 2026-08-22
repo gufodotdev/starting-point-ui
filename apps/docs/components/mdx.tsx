@@ -238,8 +238,28 @@ const components = {
 };
 
 type CustomMDXProps = Omit<MDXRemoteProps, "components"> & {
-  components?: typeof components;
+  components?: Partial<typeof components>;
 };
+
+export function exampleHubHeadings(base: string): Partial<typeof components> {
+  return {
+    h2: ({ children, id, ...props }: React.ComponentProps<"h2">) => (
+      <h2
+        id={id}
+        className="mt-10 lg:mt-12 first:mt-0 scroll-m-28 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
+        {...props}
+      >
+        {id ? (
+          <Link href={`${base}/${id}`} className="hover:underline underline-offset-4">
+            {children}
+          </Link>
+        ) : (
+          children
+        )}
+      </h2>
+    ),
+  };
+}
 
 export function CustomMDX(props: CustomMDXProps) {
   return (

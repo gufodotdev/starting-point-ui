@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getDocBySlug, getAllDocSlugs } from "@/lib/mdx";
-import { CustomMDX } from "@/components/mdx";
+import { CustomMDX, exampleHubHeadings } from "@/components/mdx";
 import { CopyContextButton } from "@/components/copy-context-button";
 import type { Metadata } from "next";
 
@@ -49,7 +49,14 @@ export default async function DocPage({ params }: Props) {
         </h1>
         <CopyContextButton content={doc.content} />
       </div>
-      <CustomMDX source={doc.content} />
+      <CustomMDX
+        source={doc.content}
+        components={
+          slug[0] === "examples" && slug.length === 2
+            ? exampleHubHeadings(`/${slug.join("/")}`)
+            : undefined
+        }
+      />
     </>
   );
 }
