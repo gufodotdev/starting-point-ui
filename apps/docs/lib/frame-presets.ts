@@ -101,7 +101,7 @@ export const framePresets: Record<string, CSSProperties> = {
     gap: "1rem",
     width: "100%",
     padding: "clamp(1rem, 5vw, 2.5rem)",
-    minHeight: "32rem",
+    minHeight: "40rem",
   },
   popover: {
     display: "flex",
