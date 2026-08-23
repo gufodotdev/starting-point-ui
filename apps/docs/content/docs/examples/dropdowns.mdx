@@ -7,16 +7,20 @@ A collection of Tailwind CSS dropdown menu examples with beautiful shadcn/ui sty
 
 ## Profile dropdown
 
-An avatar opens the account menu. Give the trigger an `aria-label` since it has no visible text.
+An avatar button opens the account menu with an identity header, grouped shortcuts, and a nested submenu.
 
 ```html preview preset=dropdown open=.dropdown
 %include examples/dropdowns/profile-dropdown.tsx%
 ```
 
-## Notifications
+A profile dropdown, or user menu, puts account actions behind the signed-in user's avatar. It typically opens with the user's name and email, followed by shortcuts like profile, billing, and settings, a team section for inviting people, and a log out action at the end. The pattern lives in the top corner of nearly every app with accounts, from SaaS dashboards to storefronts.
 
-A [popover](/components/popover) holds the notification list, since the rows are content rather than menu actions. Give the icon trigger an `aria-label`.
+## Notifications dropdown
+
+A bell button with an unread count badge opens a scrollable activity feed with timestamps and actions.
 
 ```html preview preset=dropdown open=.popover
 %include examples/dropdowns/notifications.tsx%
 ```
+
+A notification dropdown lets users check recent activity without leaving the page. A bell button with an unread count badge is the usual trigger, opening a compact feed of updates that users can scan and act on directly, whether that's accepting a follow request, jumping to a reply, or marking everything as read. The pattern fits anywhere users expect quick access to updates and alerts, from social apps to SaaS dashboards and messaging tools.

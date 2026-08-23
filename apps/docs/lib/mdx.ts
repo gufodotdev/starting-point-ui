@@ -152,12 +152,7 @@ async function getExampleSectionDoc(slug: string[]): Promise<DocFile | null> {
   const name = titleCaseWords(section.title);
   const fullName = name.toLowerCase().includes(kind.toLowerCase()) ? name : `${name} ${kind}`;
 
-  const summaryLine = /^[A-Z](?![A-Z])/.test(description)
-    ? description[0].toLowerCase() + description.slice(1)
-    : description;
-  const parts = intro
-    ? [intro, rest, `The example shows ${summaryLine}`]
-    : [description, rest];
+  const parts = intro ? [intro, rest] : [description, rest];
   parts.push(`Browse more [${kind.toLowerCase()} examples](/${slug[0]}/${slug[1]}).`);
   const summary = plainText(description).replace(/\.?\s*$/, ".");
 
