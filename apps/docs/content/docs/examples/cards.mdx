@@ -13,6 +13,8 @@ A login form with a forgot password link and social sign in.
 %include examples/cards/login.tsx%
 ```
 
+A login card collects the credentials users need to get back into their account. Email and password fields plus a sign in button form the core, often joined by a forgot password link and social sign in buttons for one-click authentication. It's usually the first screen of any app with accounts, standing alone on a centered page or inside a modal.
+
 ## Sign Up
 
 A sign up form with email and password fields and social providers.
@@ -20,6 +22,8 @@ A sign up form with email and password fields and social providers.
 ```html preview preset=card
 %include examples/cards/sign-up.tsx%
 ```
+
+A sign up card turns visitors into account holders with as little friction as possible. The classic shape asks for an email and password, offers social providers so users can skip the form entirely, and links to the login page for people who already registered. You'll see it on landing pages, in onboarding flows, and anywhere a product invites new users in.
 
 ## Product
 
@@ -29,6 +33,8 @@ A product card with a cover photo, rating, price, and add to cart action.
 %include examples/cards/product.tsx%
 ```
 
+A product card summarizes an item for sale so shoppers can evaluate it at a glance. A cover photo does most of the selling, backed by the product name, a star rating, the price, and an add to cart button, with a category tag or discount badge often riding along. Product grids in shops, search results, and recommendation strips are all built from cards like this.
+
 ## Blog Post
 
 An article preview with a cover image, title, and author.
@@ -36,6 +42,8 @@ An article preview with a cover image, title, and author.
 ```html preview preset=card
 %include examples/cards/blog-post.tsx%
 ```
+
+A blog post card teases an article and invites the click. It pairs a cover image with the title, a category or short excerpt, and the author's avatar and name, often rounded out with a date or reading time. Blog indexes, related article strips, and content marketing pages lay out posts in exactly these grids.
 
 ## Share Document
 
@@ -45,6 +53,8 @@ A share dialog with a copyable link and per-person access levels.
 %include examples/cards/share-document.tsx%
 ```
 
+A share card lets users grant others access to a document without leaving their work. The usual shape is a copyable link up top and a people list below, where each person carries an access level select like view, comment, or edit. Document editors, design tools, and file managers reach for this pattern whenever collaboration happens per file.
+
 ## Payment Method
 
 A payment method picker built from radio choice cards.
@@ -52,6 +62,8 @@ A payment method picker built from radio choice cards.
 ```html preview preset=card
 %include examples/cards/payment-method.tsx%
 ```
+
+A payment method card lets users choose how to pay. Each method is a selectable choice card that behaves like a radio button, pairing an icon with a label, and the selection can reveal extra fields like card details when needed. Checkout steps and billing settings both lean on this pattern to make the choice obvious and hard to get wrong.
 
 ## Notifications
 
@@ -61,6 +73,8 @@ Notification preferences with descriptive switch rows.
 %include examples/cards/notifications.tsx%
 ```
 
+A notification settings card puts users in control of what interrupts them. Each row pairs a switch with a label and a short description, so options explain themselves, from email digests to push alerts and mentions. Settings and preference pages in almost every app group their toggles exactly like this.
+
 ## Feedback
 
 A feedback form with a type select, title input, and message textarea.
@@ -68,6 +82,8 @@ A feedback form with a type select, title input, and message textarea.
 ```html preview preset=card
 %include examples/cards/feedback.tsx%
 ```
+
+A feedback card gives users a quick way to tell you what's working and what's broken. A type select for bugs, ideas, or general comments, a short title, and a free-form message keep reports structured enough to triage. Product dashboards, support pages, and in-app dialogs all collect feedback with this shape.
 
 ## Premium Plan
 
@@ -77,6 +93,8 @@ A pricing card with a feature list and upgrade action.
 %include examples/cards/premium-plan.tsx%
 ```
 
+A pricing card sells a plan on a single surface. The plan name and monthly price lead, a checklist of features carries the argument, and an upgrade button closes the deal, with a popular badge or annual discount often sweetening it. Pricing pages line up several of these side by side, and upsell prompts drop one into settings or paywalls.
+
 ## Profile
 
 A profile card with a photo, bio, follower stats, and a follow action.
@@ -84,6 +102,8 @@ A profile card with a photo, bio, follower stats, and a follow action.
 ```html preview preset=card
 %include examples/cards/profile.tsx%
 ```
+
+A profile card introduces a person at a glance. Avatar, name, and handle come first, a short bio adds character, follower stats add social proof, and a follow button turns the card into an action. Member directories, hover cards, and community sidebars all present people this way.
 
 ## Testimonial
 
@@ -93,6 +113,8 @@ A testimonial with a star rating and reviewer details.
 %include examples/cards/testimonial.tsx%
 ```
 
+A testimonial card lends your product someone else's voice. A star rating and a short quote carry the message, with the reviewer's photo, name, and role underneath to make it credible. Landing pages and checkout flows scatter these wherever trust needs a boost.
+
 ## Music Player
 
 A now playing card with track progress and transport controls.
@@ -100,6 +122,8 @@ A now playing card with track progress and transport controls.
 ```html preview preset=card
 %include examples/cards/music-player.tsx%
 ```
+
+A now playing card puts playback control anywhere in a layout. Cover art, the track title and artist, a progress bar, and transport buttons for previous, play, and next make up the standard anatomy. Music apps, podcast players, and media dashboards use the pattern as both a compact widget and the heart of a full screen.
 
 ## Chat
 
@@ -109,6 +133,8 @@ An assistant chat with streaming replies, built on the [message scroller](/compo
 %include examples/cards/chat.tsx%
 ```
 
+A chat card embeds a conversation in a compact surface. Messages alternate between the user and the other side, a scroller keeps the latest reply in view, and an input with a send button sits at the bottom, with streaming replies suiting AI assistants especially well. Support widgets, AI assistants, and messaging panels all build on this shape.
+
 ## Shopping Cart
 
 A cart summary with product thumbnails, quantities, a subtotal, and a checkout action.
@@ -116,6 +142,8 @@ A cart summary with product thumbnails, quantities, a subtotal, and a checkout a
 ```html preview preset=card
 %include examples/cards/shopping-cart.tsx%
 ```
+
+A shopping cart card shows shoppers what they're about to buy. Product thumbnails with names, prices, and quantities stack into a list, a subtotal keeps the math honest, and a checkout button moves the order forward. It works as a dropdown panel, a slide-in drawer, or a step of the checkout page itself.
 
 ## Invoice Paid
 
@@ -125,6 +153,8 @@ A payment confirmation with a success icon and stacked actions.
 %include examples/cards/invoice-paid.tsx%
 ```
 
+A payment confirmation card closes a transaction with certainty. A success icon leads, the amount and reference details confirm what happened, and stacked actions like viewing the receipt or returning home give users somewhere to go next. Payment flows, order pages, and billing screens all end on a note like this.
+
 ## Attendance
 
 Nested radio and checkbox options where selecting Private disables the sub-options with CSS alone.
@@ -132,3 +162,5 @@ Nested radio and checkbox options where selecting Private disables the sub-optio
 ```html preview preset=card
 %include examples/cards/attendance.tsx%
 ```
+
+An option group card collects a decision along with its follow-up choices. Radio options set the main answer while nested checkboxes refine it, and picking an option that makes the sub-options irrelevant disables them. RSVP forms, privacy settings, and survey questions all branch like this.
