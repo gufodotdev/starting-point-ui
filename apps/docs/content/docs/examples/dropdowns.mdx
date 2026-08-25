@@ -24,3 +24,13 @@ A bell button with an unread count badge opens a scrollable activity feed with t
 ```
 
 A notification dropdown lets users check recent activity without leaving the page. A bell button with an unread count badge is the usual trigger, opening a compact feed of updates that users can scan and act on directly, whether that's accepting a follow request, jumping to a reply, or marking everything as read. The pattern fits anywhere users expect quick access to updates and alerts, from social apps to SaaS dashboards and messaging tools.
+
+## Country picker
+
+A country field opens a searchable list with flags and recent picks, filtering as the user types.
+
+```html preview preset=dropdown open=.combobox
+%include examples/dropdowns/country-picker.tsx%
+```
+
+A country picker gives users a comfortable way to select their country from a long list. Flags make options easy to recognize, recent picks put the likely choices at the top, and typing filters the list for anyone who would rather search than scroll, with the selection submitting like any native form value. Country fields appear in checkout address forms, sign up flows, and shipping or billing settings, anywhere an app needs to know where its users are.
