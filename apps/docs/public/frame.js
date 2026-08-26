@@ -19,7 +19,12 @@ if (window.frameElement) {
 // data-open panels open via show() so the enter animation plays.
 const openHost = document.querySelector("[data-open]");
 if (openHost) {
-  const selector = openHost.dataset.open;
+  // A :first suffix opens only the first match, for previews that repeat a
+  // panel per row.
+  const firstOnly = openHost.dataset.open.endsWith(":first");
+  const selector = firstOnly
+    ? openHost.dataset.open.slice(0, -":first".length)
+    : openHost.dataset.open;
   const name = selector.slice(1);
   const show = () => {
     if (!window.sp || !window.sp[name]) {
@@ -38,6 +43,7 @@ if (openHost) {
         if (!window.__spBridgeTarget && instance.trigger) {
           window.__spBridgeTarget = instance.trigger;
         }
+        if (firstOnly) break;
       }
     }
   };

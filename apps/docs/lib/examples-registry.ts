@@ -32,7 +32,7 @@ export function dirFromMeta(meta: string): "rtl" | undefined {
 // open=<.class> makes the frame open the matching overlays on load.
 export function openFromMeta(meta: string): string | undefined {
   const open = meta.match(/open="([^"]+)"|open=(\S+)/)?.slice(1).find(Boolean);
-  if (open && !/^\.[\w-]+$/.test(open)) {
+  if (open && !/^\.[\w-]+(:first)?$/.test(open)) {
     throw new Error(`Invalid open selector "${open}". Use a single class, e.g. open=.dialog`);
   }
   return open;
