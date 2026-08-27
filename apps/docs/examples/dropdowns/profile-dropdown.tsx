@@ -1,7 +1,7 @@
 export default function ProfileDropdown() {
   return (
     <>
-      <button type="button" id="profile-dropdown-trigger" className="avatar" aria-label="Open user menu">
+      <button type="button" id="profile-dropdown-trigger" className="avatar size-9 shadow-xs" aria-label="Open user menu">
         <img
           className="avatar-image"
           src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
