@@ -6,6 +6,7 @@ const notifications = [
     time: "2 minutes ago",
     src: "https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "MO",
+    accent: "text-rose-600",
     unread: true,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -18,6 +19,7 @@ const notifications = [
     time: "18 minutes ago",
     src: "https://images.unsplash.com/photo-1513673054901-2b5f51551112?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "DR",
+    accent: "text-blue-600",
     unread: true,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
@@ -29,6 +31,7 @@ const notifications = [
     time: "1 hour ago",
     src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "PR",
+    accent: "text-green-600",
     unread: true,
     request: true,
     icon: (
@@ -42,6 +45,7 @@ const notifications = [
     time: "Yesterday at 4:12 PM",
     src: "https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "TL",
+    accent: "text-violet-600",
     unread: false,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
@@ -54,6 +58,7 @@ const notifications = [
     time: "Tuesday",
     src: "https://images.unsplash.com/photo-1573496527892-904f897eb744?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "GA",
+    accent: "text-amber-600",
     unread: false,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
@@ -66,6 +71,7 @@ const notifications = [
     time: "Monday",
     src: "https://images.unsplash.com/photo-1705645930353-0e335311ef20?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "LM",
+    accent: "text-rose-600",
     unread: false,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -77,6 +83,7 @@ const notifications = [
     time: "Last week",
     src: "https://images.unsplash.com/photo-1752486268240-0507bb1ebc7e?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "CL",
+    accent: "text-green-600",
     unread: false,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
@@ -89,6 +96,7 @@ const notifications = [
     time: "Last week",
     src: "https://images.unsplash.com/photo-1634149134664-ca3598f29da5?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5",
     initials: "ED",
+    accent: "text-blue-600",
     unread: false,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
@@ -143,7 +151,7 @@ export default function Notifications() {
                   <span className="avatar avatar-lg">
                     <img className="avatar-image" src={notification.src} alt="" />
                     <span className="avatar-fallback">{notification.initials}</span>
-                    <span className="avatar-badge">{notification.icon}</span>
+                    <span className={`avatar-badge bg-background shadow-sm ${notification.accent}`}>{notification.icon}</span>
                   </span>
                 </div>
                 <div className="item-content">
