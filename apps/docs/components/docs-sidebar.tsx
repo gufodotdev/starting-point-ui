@@ -8,8 +8,9 @@ export function DocsSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-[calc(var(--navbar-height)+0.6rem)] z-30 hidden h-[calc(100svh-var(--navbar-height)-0.6rem)] w-(--sidebar-width) shrink-0 flex-col overflow-hidden overscroll-none lg:flex">
-      <div className="scroll-fade scrollbar-none flex min-h-0 flex-1 flex-col gap-2 overflow-x-hidden overflow-y-auto pb-12 pl-2">
+    <aside className="sticky top-[calc(var(--navbar-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] w-(--sidebar-width) shrink-0 flex-col overflow-hidden overscroll-none lg:flex">
+      <div className="absolute top-12 right-2 bottom-0 w-px bg-[linear-gradient(to_bottom,transparent_0%,var(--border)_10%,var(--border)_90%,transparent_100%)]" />
+      <div className="scroll-fade scroll-fade-16 scrollbar-none flex min-h-0 flex-1 flex-col gap-2 overflow-x-hidden overflow-y-auto pb-12 pl-2">
         {docsNav.map((group, index) => (
           <div
             key={group.title}
