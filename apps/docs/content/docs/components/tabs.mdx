@@ -5,13 +5,12 @@ description: A tabs component for Tailwind CSS with beautiful shadcn/ui styling.
 
 The tabs show one section at a time behind a row of tabs, like the pages of a settings screen. For content that should stay visible and stack, use an [accordion](/components/accordion) instead.
 
-```html preview preset=form
-<div class="tabs">
+```html preview preset=base
+<div class="tabs w-full max-w-sm">
   <div class="tab-list">
     <button class="tab active" data-sp-toggle="#tab-overview">Overview</button>
     <button class="tab" data-sp-toggle="#tab-analytics">Analytics</button>
     <button class="tab" data-sp-toggle="#tab-reports">Reports</button>
-    <button class="tab" data-sp-toggle="#tab-settings">Settings</button>
   </div>
   <div class="tab-content active" id="tab-overview">
     <div class="card">
@@ -55,20 +54,6 @@ The tabs show one section at a time behind a row of tabs, like the pages of a se
       </div>
     </div>
   </div>
-  <div class="tab-content" id="tab-settings">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Settings</h3>
-        <p class="card-description">
-          Manage your account preferences and options. Customize your experience
-          to fit your needs.
-        </p>
-      </div>
-      <div class="card-content text-sm text-muted-foreground">
-        Configure notifications, security, and themes.
-      </div>
-    </div>
-  </div>
 </div>
 ```
 
@@ -102,7 +87,7 @@ Add `tab-list` to the row of `tab` buttons and point each tab at its panel with 
 
 Add `tab-list-line` for transparent tabs with an underline marking the selection.
 
-```html preview
+```html preview preset=sm
 <div class="tab-list tab-list-line">
   <button class="tab active">Overview</button>
   <button class="tab">Analytics</button>
@@ -114,7 +99,7 @@ Add `tab-list-line` for transparent tabs with an underline marking the selection
 
 Add `tabs-vertical` to the wrapper and `data-sp-orientation="vertical"` to the list so the arrow keys follow.
 
-```html preview
+```html preview preset=sm
 <div class="tabs tabs-vertical">
   <div class="tab-list" data-sp-orientation="vertical">
     <button class="tab active">Account</button>
@@ -128,7 +113,7 @@ Add `tabs-vertical` to the wrapper and `data-sp-orientation="vertical"` to the l
 
 Add `disabled` to a tab and both clicks and arrow navigation skip it.
 
-```html preview
+```html preview preset=sm
 <div class="tab-list">
   <button class="tab active">Home</button>
   <button class="tab" disabled>Disabled</button>
@@ -139,7 +124,7 @@ Add `disabled` to a tab and both clicks and arrow navigation skip it.
 
 Tabs fit a leading icon; add `icon-start` to it for the correct spacing.
 
-```html preview
+```html preview preset=sm
 <div class="tab-list">
   <button class="tab active">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></svg>
@@ -156,7 +141,7 @@ Tabs fit a leading icon; add `icon-start` to it for the correct spacing.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
+```html preview preset=base dir=rtl
 <div id="tabs-rtl-demo" class="tabs w-full max-w-md" dir="rtl">
   <div class="tab-list">
     <button class="tab active" data-sp-toggle="#tabs-rtl-overview" data-i18n="overview">نظرة عامة</button>
