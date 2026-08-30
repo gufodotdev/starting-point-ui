@@ -5,7 +5,7 @@ description: A label component for Tailwind CSS with beautiful shadcn/ui styling
 
 The label names a form control. Clicking it focuses or toggles the control it points at, and screen readers announce it when the control receives focus.
 
-```html preview
+```html preview preset=sm
 <div class="flex gap-2">
   <input type="checkbox" class="checkbox" id="label-demo-terms" />
   <label class="label" for="label-demo-terms">
@@ -33,7 +33,7 @@ Add the `label` class to a `<label>` element and connect it to a control with a 
 
 For form fields, use the [field](/components/field) component, which pairs the label with the control and gives you `field-description` and `field-error` slots.
 
-```html preview
+```html preview preset=base h=50rem
 <form class="field-group w-full max-w-md">
   <fieldset class="field-set">
     <legend class="field-legend">Payment Method</legend>
@@ -139,7 +139,7 @@ For form fields, use the [field](/components/field) component, which pairs the l
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=sm dir=rtl
 <div id="label-rtl-demo" class="flex gap-2" dir="rtl">
   <input type="checkbox" class="checkbox" id="label-rtl-terms" />
   <label class="label" for="label-rtl-terms" data-i18n="terms">قبول الشروط والأحكام</label>
