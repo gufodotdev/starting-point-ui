@@ -5,7 +5,7 @@ description: A kbd component for Tailwind CSS with beautiful shadcn/ui styling. 
 
 The kbd shows a keyboard key or shortcut, like the hints next to menu items, tooltips, and search fields.
 
-```html preview
+```html preview preset=sm
 <div class="flex flex-col items-center gap-4">
   <span class="kbd-group">
     <kbd class="kbd">⌘</kbd>
@@ -40,7 +40,7 @@ Add the `kbd` class to a `<kbd>` element, one per key or combination.
 
 Keep a sequence of keys together in running text with `kbd-group`.
 
-```html preview
+```html preview preset=sm
 <p class="text-sm text-muted-foreground">
   Use
   <span class="kbd-group">
@@ -56,7 +56,7 @@ Keep a sequence of keys together in running text with `kbd-group`.
 
 A kbd rides along inside a [button](/components/button) to hint its shortcut.
 
-```html preview
+```html preview preset=sm
 <button class="btn btn-outline">
   Accept <kbd class="kbd">⏎</kbd>
 </button>
@@ -66,7 +66,7 @@ A kbd rides along inside a [button](/components/button) to hint its shortcut.
 
 Inside a [tooltip](/components/tooltip)'s inverted panel, the kbd switches to a translucent treatment automatically.
 
-```html preview
+```html preview preset=sm
 <div class="btn-group">
   <button id="kbd-tt-save" class="btn btn-outline">Save</button>
   <button id="kbd-tt-print" class="btn btn-outline">Print</button>
@@ -88,8 +88,8 @@ Inside a [tooltip](/components/tooltip)'s inverted panel, the kbd switches to a 
 
 Hint a search shortcut in an [input group](/components/input-group) addon.
 
-```html preview preset=form
-<div class="input-group">
+```html preview preset=sm
+<div class="input-group w-full max-w-sm">
   <input class="input" placeholder="Search..." />
   <span class="input-group-addon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></span>
   <span class="input-group-addon input-group-addon-end">
@@ -103,7 +103,7 @@ Hint a search shortcut in an [input group](/components/input-group) addon.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=sm dir=rtl
 <div id="kbd-rtl-demo" class="flex flex-col items-center gap-4" dir="rtl">
   <span class="kbd-group">
     <kbd class="kbd">⌘</kbd>
