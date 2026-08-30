@@ -5,8 +5,8 @@ description: A textarea component for Tailwind CSS with beautiful shadcn/ui styl
 
 The textarea captures multi-line text like messages, comments, and feedback, and grows with its content as the user types. Pair it with a [field](/components/field) for a label and description; for a single line, reach for the [input](/components/input).
 
-```html preview preset=form
-<textarea class="textarea" placeholder="Type your message here."></textarea>
+```html preview preset=sm
+<textarea class="textarea w-full max-w-sm" placeholder="Type your message here."></textarea>
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ Add the `textarea` class to a `<textarea>` element. It sizes itself to its conte
 | `textarea` | Add to a `<textarea>` element |
 
 ```html
-<textarea class="textarea" placeholder="Type your message here."></textarea>
+<textarea class="textarea w-full max-w-sm" placeholder="Type your message here."></textarea>
 ```
 
 ## Examples
@@ -27,8 +27,8 @@ Add the `textarea` class to a `<textarea>` element. It sizes itself to its conte
 
 Wrap the textarea in a [field](/components/field) with a label and description.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="textarea-message">Message</label>
   <p class="field-description">Enter your message below.</p>
   <textarea
@@ -43,8 +43,8 @@ Wrap the textarea in a [field](/components/field) with a label and description.
 
 Add `disabled` and the textarea mutes itself and blocks interaction.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="textarea-disabled">Message</label>
   <textarea
     class="textarea"
@@ -59,8 +59,8 @@ Add `disabled` and the textarea mutes itself and blocks interaction.
 
 Set `aria-invalid` on the textarea for the error state.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="textarea-invalid">Message</label>
   <textarea
     class="textarea"
@@ -76,8 +76,8 @@ Set `aria-invalid` on the textarea for the error state.
 
 Pair the textarea with a [button](/components/button) to submit; without a visible label, give the textarea an `aria-label`.
 
-```html preview preset=form
-<div class="grid gap-2">
+```html preview preset=sm
+<div class="grid w-full max-w-sm gap-2">
   <textarea
     class="textarea"
     placeholder="Type your message here."
@@ -91,7 +91,7 @@ Pair the textarea with a [button](/components/button) to submit; without a visib
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
+```html preview preset=sm dir=rtl
 <div id="textarea-rtl-demo" class="field w-full max-w-xs" dir="rtl">
   <label class="label" for="textarea-rtl-feedback" data-i18n="label">التعليقات</label>
   <textarea
