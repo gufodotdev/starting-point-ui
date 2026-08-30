@@ -5,7 +5,7 @@ description: A popover component for Tailwind CSS with beautiful shadcn/ui styli
 
 The popover floats a panel next to its trigger for rich content like forms and settings, and closes when the user clicks away. For a simple text hint, reach for the [tooltip](/components/tooltip); for a menu of actions, use the [dropdown](/components/dropdown).
 
-```html preview preset=popover open=.popover
+```html preview preset=base align=top open=.popover
 <button id="popover-demo-trigger" class="btn btn-outline">Open popover</button>
 
 <div class="popover w-80" data-sp-toggle="#popover-demo-trigger">
@@ -67,7 +67,7 @@ Add the `popover` class to the panel and point it at its trigger with `data-sp-t
 
 A simple popover with a header, title, and description.
 
-```html preview preset=popover open=.popover
+```html preview preset=base align=top open=.popover
 <button id="popover-basic-trigger" class="btn btn-outline">Open Popover</button>
 
 <div class="popover" data-sp-toggle="#popover-basic-trigger">
@@ -82,7 +82,7 @@ A simple popover with a header, title, and description.
 
 Set where the panel opens relative to its trigger with `data-sp-placement`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement), like `top`, `right`, or `bottom-end`, and the panel flips to the opposite side on its own when there isn't room.
 
-```html preview preset=popover
+```html preview preset=base align=top
 <div class="flex gap-6">
   <button id="popover-start-trigger" class="btn btn-outline btn-sm">
     Start
@@ -120,7 +120,7 @@ Set where the panel opens relative to its trigger with `data-sp-placement`. It a
 
 A popover holding a compact form, laid out with horizontal [fields](/components/field).
 
-```html preview preset=popover open=.popover
+```html preview preset=base align=top open=.popover
 <button id="popover-form-trigger" class="btn btn-outline">Open Popover</button>
 
 <div class="popover w-64" data-sp-toggle="#popover-form-trigger">
@@ -145,7 +145,7 @@ A popover holding a compact form, laid out with horizontal [fields](/components/
 
 Add `data-sp-mode="hover"` to open on hover instead of click.
 
-```html preview preset=popover
+```html preview preset=base align=top
 <button id="popover-hover-trigger" class="btn btn-outline">Hover me</button>
 
 <div
@@ -164,7 +164,7 @@ Add `data-sp-mode="hover"` to open on hover instead of click.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=popover dir=rtl
+```html preview preset=base align=top dir=rtl
 <div id="popover-rtl-demo" dir="rtl" class="flex flex-wrap justify-center gap-2">
   <button id="popover-rtl-left-trigger" class="btn btn-outline" data-i18n="left">يسار</button>
   <button id="popover-rtl-top-trigger" class="btn btn-outline" data-i18n="top">أعلى</button>
