@@ -5,8 +5,8 @@ description: A separator component for Tailwind CSS with beautiful shadcn/ui sty
 
 The separator draws a thin line that visually divides content, horizontally between sections or vertically between inline items.
 
-```html preview preset=form
-<div class="flex flex-col gap-4 text-sm">
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-4 text-sm">
   <div class="flex flex-col gap-1.5">
     <div class="leading-none font-medium">Starting Point UI</div>
     <div class="text-muted-foreground">
@@ -41,7 +41,7 @@ Add the `separator` class to an empty element; it renders horizontally unless yo
 
 Divide inline items with `separator-vertical`.
 
-```html preview
+```html preview preset=sm
 <div class="flex h-5 items-center gap-4 text-sm">
   <div>Blog</div>
   <div class="separator separator-vertical"></div>
@@ -55,7 +55,7 @@ Divide inline items with `separator-vertical`.
 
 Vertical separators divide richer inline groups too; hide trailing ones responsively along with their content.
 
-```html preview
+```html preview preset=sm
 <div class="flex items-center gap-2 text-sm md:gap-4">
   <div class="flex flex-col gap-1">
     <span class="font-medium">Settings</span>
@@ -78,8 +78,8 @@ Vertical separators divide richer inline groups too; hide trailing ones responsi
 
 Separate rows of a definition list.
 
-```html preview preset=form
-<div class="flex flex-col gap-2 text-sm">
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-2 text-sm">
   <dl class="flex items-center justify-between">
     <dt>Item 1</dt>
     <dd class="text-muted-foreground">Value 1</dd>
@@ -101,7 +101,7 @@ Separate rows of a definition list.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
+```html preview preset=sm dir=rtl
 <div id="separator-rtl-demo" dir="rtl" class="flex max-w-sm flex-col gap-4 text-sm">
   <div class="flex flex-col gap-1.5">
     <div class="leading-none font-medium">Starting Point UI</div>
