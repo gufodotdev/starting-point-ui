@@ -5,7 +5,7 @@ description: A table component for Tailwind CSS with beautiful shadcn/ui styling
 
 The table presents tabular data on native table elements, with styled headers, footers, captions, and hoverable rows.
 
-```html preview
+```html preview preset=base
 <div class="table-container">
   <table class="table">
     <caption>A list of your recent invoices.</caption>
@@ -109,7 +109,7 @@ Add the classes to their native table elements, and wrap the table in a `table-c
 
 Summarize columns in a `table-footer`.
 
-```html preview
+```html preview preset=base
 <div class="table-container">
   <table class="table">
     <caption>A list of your recent invoices.</caption>
@@ -155,7 +155,7 @@ Summarize columns in a `table-footer`.
 
 End rows with a [dropdown](/components/dropdown) of row actions.
 
-```html preview preset=popover
+```html preview preset=base align=top
 <div class="table-container">
   <table class="table">
     <thead class="table-header">
@@ -247,7 +247,7 @@ End rows with a [dropdown](/components/dropdown) of row actions.
 
 Stripe alternating rows with an `odd:` utility.
 
-```html preview
+```html preview preset=base
 <div class="table-container">
   <table class="table">
     <thead class="table-header">
@@ -298,7 +298,7 @@ Stripe alternating rows with an `odd:` utility.
 
 A row containing a checked checkbox tints itself; see the [checkbox](/components/checkbox) page for the full row-selection pattern.
 
-```html preview
+```html preview preset=sm
 <div class="table-container">
   <table class="table">
     <thead class="table-header">
@@ -339,7 +339,7 @@ A row containing a checked checkbox tints itself; see the [checkbox](/components
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Use `text-end` instead of `text-right` on numeric columns. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=base dir=rtl
 <div id="table-rtl-demo" class="table-container" dir="rtl">
   <table class="table">
     <caption data-i18n="caption">قائمة بفواتيرك الأخيرة.</caption>
