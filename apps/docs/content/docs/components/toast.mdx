@@ -5,7 +5,7 @@ description: A toast component for Tailwind CSS with beautiful shadcn/ui styling
 
 The toast shows a brief notification that stacks in a corner and dismisses itself, like "Changes saved" after a form submit. It is created from JavaScript rather than authored markup; for a message that must interrupt and be acknowledged, use a [dialog](/components/dialog) instead.
 
-```html preview preset=default-tall
+```html preview preset=base
 <button
   class="btn btn-outline"
   onclick="sp.toast('Event has been created', { description: 'Sunday, December 03, 2023 at 9:00 AM', action: { label: 'Undo', onClick: () => console.log('Undo') } })"
@@ -37,7 +37,7 @@ sp.toast("Event has been created");
 
 Use the shorthand methods for a leading status icon, or pass the `type` option.
 
-```html preview preset=default-tall
+```html preview preset=base
 <div class="flex flex-wrap justify-center gap-2">
   <button class="btn btn-outline" onclick="sp.toast('Event has been created')">
     Default
@@ -73,7 +73,7 @@ Use the shorthand methods for a leading status icon, or pass the `type` option.
 
 Add a secondary line of text with the `description` option.
 
-```html preview preset=default-tall
+```html preview preset=base
 <button
   class="btn btn-outline"
   onclick="sp.toast('Profile updated', { description: 'Your changes have been saved and are now live.' })"
@@ -86,7 +86,7 @@ Add a secondary line of text with the `description` option.
 
 A status icon next to a title and description.
 
-```html preview preset=default-tall
+```html preview preset=base
 <button
   class="btn btn-outline"
   onclick="sp.toast.success('Event has been created', { description: 'Sunday, December 03, 2023 at 9:00 AM' })"
@@ -99,7 +99,7 @@ A status icon next to a title and description.
 
 Add a clickable action button; choosing it also dismisses the toast.
 
-```html preview preset=default-tall
+```html preview preset=base
 <button
   class="btn btn-outline"
   onclick="sp.toast('File deleted', { description: 'report-2024.pdf was moved to trash.', action: { label: 'Undo', onClick: () => sp.toast.success('File restored') } })"
@@ -112,7 +112,7 @@ Add a clickable action button; choosing it also dismisses the toast.
 
 `sp.toast.loading()` shows a spinner and stays put; call `update()` on the returned instance to swap it to a result state.
 
-```html preview preset=default-tall
+```html preview preset=base
 <button
   class="btn btn-outline"
   onclick="(function(){ var t = sp.toast.loading('Loading data...'); setTimeout(function(){ t.update({ title: 'Data loaded successfully', type: 'success' }) }, 2000) })()"
@@ -137,7 +137,7 @@ if (res.ok) {
 
 Wrap a promise with `sp.toast.promise()`: it shows a loading toast, then swaps to the success or error state when the promise settles. The messages can be strings or functions of the resolved value.
 
-```html preview preset=default-tall
+```html preview preset=base
 <button
   class="btn btn-outline"
   onclick="sp.toast.promise(new Promise(function (resolve) { setTimeout(resolve, 2000) }), { loading: 'Uploading file...', success: 'File uploaded', error: 'Upload failed' })"
@@ -158,7 +158,7 @@ sp.toast.promise(fetch("/api/posts", { method: "POST", body }), {
 
 Control how long the toast stays (milliseconds, default 4000); `0` keeps it until dismissed.
 
-```html preview preset=default-tall
+```html preview preset=base
 <div class="flex flex-wrap justify-center gap-2">
   <button
     class="btn btn-outline"
@@ -185,7 +185,7 @@ Control how long the toast stays (milliseconds, default 4000); `0` keeps it unti
 
 Place the stack in any corner or centered at the top or bottom; default is `bottom-right`.
 
-```html preview preset=default-tall
+```html preview preset=base
 <div class="flex flex-wrap justify-center gap-2">
   <button
     class="btn btn-outline"
@@ -230,7 +230,7 @@ Place the stack in any corner or centered at the top or bottom; default is `bott
 
 Set `dismissible: false` to hide the close button; the toast leaves only when its duration expires.
 
-```html preview preset=default-tall
+```html preview preset=base
 <button
   class="btn btn-outline"
   onclick="sp.toast.info('Processing your request...', { dismissible: false, duration: 3000 })"
@@ -272,7 +272,7 @@ Toasts queued this way survive being rendered by React, Livewire, HTMX, or anyth
 
 Toasts mount on `<body>`, outside any wrapper, so add `dir="rtl"` to the `<html>` element for the stack to follow. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=default-tall dir=rtl
+```html preview preset=base dir=rtl
 <div id="toast-rtl-demo" dir="rtl">
   <button class="btn btn-outline" onclick="showRtlToast()" data-i18n="show">
     عرض تنبيه
