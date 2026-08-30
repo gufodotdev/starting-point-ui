@@ -5,8 +5,8 @@ description: An input component for Tailwind CSS with beautiful shadcn/ui stylin
 
 The input captures a single line of text, from names and emails to search queries. Pair it with a [field](/components/field) for a label and description; for multi-line text, reach for the [textarea](/components/textarea).
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-demo-api-key">API Key</label>
   <input
     class="input"
@@ -39,16 +39,16 @@ Add the `input` class to an `<input>` element. It styles all the textual types p
 
 A bare input with only a placeholder.
 
-```html preview preset=form
-<input class="input" placeholder="Enter text" />
+```html preview preset=sm
+<input class="input w-full max-w-sm" placeholder="Enter text" />
 ```
 
 ### Field
 
 Wrap the input in a [field](/components/field) with a [label](/components/label) and description.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-field-username">Username</label>
   <input
     class="input"
@@ -64,8 +64,8 @@ Wrap the input in a [field](/components/field) with a [label](/components/label)
 
 Stack several fields with a [field group](/components/field).
 
-```html preview preset=form
-<div class="field-group">
+```html preview preset=base
+<div class="field-group w-full max-w-sm">
   <div class="field">
     <label class="label" for="fieldgroup-name">Name</label>
     <input class="input" id="fieldgroup-name" placeholder="Jordan Lee" />
@@ -91,8 +91,8 @@ Stack several fields with a [field group](/components/field).
 
 Add `disabled` and the input mutes itself and blocks interaction.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-demo-disabled">Email</label>
   <input
     class="input"
@@ -109,8 +109,8 @@ Add `disabled` and the input mutes itself and blocks interaction.
 
 Set `aria-invalid` on the input for the error ring.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-invalid">Invalid Input</label>
   <input
     class="input"
@@ -126,8 +126,8 @@ Set `aria-invalid` on the input for the error ring.
 
 File inputs get matching button-like styling for the browse control.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-picture">Picture</label>
   <input class="input" id="input-picture" type="file" />
   <p class="field-description">Select a picture to upload.</p>
@@ -138,8 +138,8 @@ File inputs get matching button-like styling for the browse control.
 
 Lay the input out beside a [button](/components/button) with a horizontal field.
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <input class="input" type="search" placeholder="Search..." />
   <button class="btn">Search</button>
 </div>
@@ -149,8 +149,8 @@ Lay the input out beside a [button](/components/button) with a horizontal field.
 
 Arrange fields in columns with grid utilities on a [field group](/components/field).
 
-```html preview preset=form
-<div class="field-group grid grid-cols-2">
+```html preview preset=sm
+<div class="field-group grid w-full max-w-sm grid-cols-2">
   <div class="field">
     <label class="label" for="input-first-name">First Name</label>
     <input class="input" id="input-first-name" placeholder="Jordan" />
@@ -166,8 +166,8 @@ Arrange fields in columns with grid utilities on a [field group](/components/fie
 
 Mark the label and add `required` so the browser enforces the field.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-required">
     Required Field
     <span class="text-destructive">*</span>
@@ -186,8 +186,8 @@ Mark the label and add `required` so the browser enforces the field.
 
 Labels are flex rows, so a [badge](/components/badge) slots in next to the text.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-badge">
     Webhook URL
     <span class="badge badge-secondary ml-auto">Beta</span>
@@ -205,8 +205,8 @@ Labels are flex rows, so a [badge](/components/badge) slots in next to the text.
 
 Prefix or suffix the input with an [input group](/components/input-group).
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-group-url">Website URL</label>
   <div class="input-group">
     <span class="input-group-addon">
@@ -224,8 +224,8 @@ Prefix or suffix the input with an [input group](/components/input-group).
 
 Attach a button to the input with a [button group](/components/button-group).
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="input-button-group">Search</label>
   <div class="btn-group">
     <input
@@ -242,8 +242,8 @@ Attach a button to the input with a [button group](/components/button-group).
 
 Compose inputs, a [select](/components/select), and actions into a full form.
 
-```html preview preset=form
-<form class="field-group">
+```html preview preset=base
+<form class="field-group w-full max-w-sm">
   <div class="field">
     <label class="label" for="form-name">Name</label>
     <input
@@ -303,8 +303,8 @@ Compose inputs, a [select](/components/select), and actions into a full form.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<div id="input-rtl-demo" class="field" dir="rtl">
+```html preview preset=sm dir=rtl
+<div id="input-rtl-demo" class="field w-full max-w-sm" dir="rtl">
   <label class="label" for="input-rtl-api-key" data-i18n="apiKey">مفتاح API</label>
   <input
     class="input"
