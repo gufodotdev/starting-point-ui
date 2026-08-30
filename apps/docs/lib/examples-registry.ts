@@ -8,6 +8,7 @@ export type PreviewExample = {
   preset: string;
   open?: string;
   dir?: "rtl";
+  align?: "top";
 };
 
 export function isPreviewMeta(meta: string): boolean {
@@ -29,6 +30,12 @@ export function dirFromMeta(meta: string): "rtl" | undefined {
   return /(?:^|\s)dir=rtl(?:\s|$)/.test(meta) ? "rtl" : undefined;
 }
 
+// align=top pins content to the frame's top edge instead of centering, for
+// triggers whose panels need room to open below.
+export function alignFromMeta(meta: string): "top" | undefined {
+  return /(?:^|\s)align=top(?:\s|$)/.test(meta) ? "top" : undefined;
+}
+
 // open=<.class> makes the frame open the matching overlays on load.
 export function openFromMeta(meta: string): string | undefined {
   const open = meta.match(/open="([^"]+)"|open=(\S+)/)?.slice(1).find(Boolean);
@@ -43,9 +50,10 @@ export function exampleId(
   preset: string,
   open?: string,
   dir?: string,
+  align?: string,
 ): string {
   return createHash("sha1")
-    .update(`${preset}\n${open ?? ""}\n${dir ?? ""}\n${source.trim()}`)
+    .update(`${preset}\n${open ?? ""}\n${dir ?? ""}\n${align ?? ""}\n${source.trim()}`)
     .digest("hex")
     .slice(0, 12);
 }
@@ -74,8 +82,9 @@ async function build(): Promise<Map<string, PreviewExample>> {
       const preset = presetFromMeta(meta);
       const open = openFromMeta(meta);
       const dir = dirFromMeta(meta);
-      const id = exampleId(html, preset, open, dir);
-      if (!examples.has(id)) examples.set(id, { id, html, preset, open, dir });
+      const align = alignFromMeta(meta);
+      const id = exampleId(html, preset, open, dir, align);
+      if (!examples.has(id)) examples.set(id, { id, html, preset, open, dir, align });
     }
   }
 

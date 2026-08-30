@@ -34,7 +34,13 @@ export default async function FramePage({
       <div
         data-no-scrollbar-gutter
         data-open={example.open}
-        style={framePresets[example.preset]}
+        style={{
+          ...framePresets[example.preset],
+          ...(example.align === "top" && {
+            alignItems: "flex-start",
+            alignContent: "flex-start",
+          }),
+        }}
         // frame.js sets min-height inline before hydration on direct visits.
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: html }}

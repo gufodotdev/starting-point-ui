@@ -8,6 +8,7 @@ import { AvatarsList } from "@/components/avatars-list";
 import { UnsplashEditor } from "@/components/unsplash-editor";
 import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
 import {
+  alignFromMeta,
   dirFromMeta,
   exampleId,
   isPreviewMeta,
@@ -42,6 +43,7 @@ const prettyCodeOptions = {
             presetFromMeta(meta),
             openFromMeta(meta),
             dirFromMeta(meta),
+            alignFromMeta(meta),
           );
           node.properties["data-frame-preset"] = presetFromMeta(meta);
           const dir = dirFromMeta(meta);

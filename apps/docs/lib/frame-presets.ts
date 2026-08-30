@@ -1,6 +1,39 @@
 import type { CSSProperties } from "react";
 
 export const framePresets: Record<string, CSSProperties> = {
+  sm: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    width: "100%",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "16rem",
+  },
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    width: "100%",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "32rem",
+  },
+  lg: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    width: "100%",
+    padding: "clamp(1rem, 5vw, 2.5rem)",
+    minHeight: "40rem",
+  },
   default: {
     display: "flex",
     flexWrap: "wrap",
