@@ -40,6 +40,7 @@ export default async function FramePage({
             alignItems: "flex-start",
             alignContent: "flex-start",
           }),
+          ...(example.h && { minHeight: example.h }),
         }}
         // frame.js sets min-height inline before hydration on direct visits.
         suppressHydrationWarning

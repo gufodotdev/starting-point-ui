@@ -9,6 +9,7 @@ export type PreviewExample = {
   open?: string;
   dir?: "rtl";
   align?: "top";
+  h?: string;
 };
 
 export function isPreviewMeta(meta: string): boolean {
@@ -36,6 +37,15 @@ export function alignFromMeta(meta: string): "top" | undefined {
   return /(?:^|\s)align=top(?:\s|$)/.test(meta) ? "top" : undefined;
 }
 
+// h=<length> overrides the preset's min-height for unusually tall examples.
+export function hFromMeta(meta: string): string | undefined {
+  const h = meta.match(/(?:^|\s)h=(\S+)/)?.[1];
+  if (h && !/^\d+(\.\d+)?(rem|px)$/.test(h)) {
+    throw new Error(`Invalid frame height "${h}". Use a rem or px length, e.g. h=48rem`);
+  }
+  return h;
+}
+
 // open=<.class> makes the frame open the matching overlays on load.
 export function openFromMeta(meta: string): string | undefined {
   const open = meta.match(/open="([^"]+)"|open=(\S+)/)?.slice(1).find(Boolean);
@@ -51,9 +61,10 @@ export function exampleId(
   open?: string,
   dir?: string,
   align?: string,
+  h?: string,
 ): string {
   return createHash("sha1")
-    .update(`${preset}\n${open ?? ""}\n${dir ?? ""}\n${align ?? ""}\n${source.trim()}`)
+    .update(`${preset}\n${open ?? ""}\n${dir ?? ""}\n${align ?? ""}\n${h ?? ""}\n${source.trim()}`)
     .digest("hex")
     .slice(0, 12);
 }
@@ -83,8 +94,9 @@ async function build(): Promise<Map<string, PreviewExample>> {
       const open = openFromMeta(meta);
       const dir = dirFromMeta(meta);
       const align = alignFromMeta(meta);
-      const id = exampleId(html, preset, open, dir, align);
-      if (!examples.has(id)) examples.set(id, { id, html, preset, open, dir, align });
+      const h = hFromMeta(meta);
+      const id = exampleId(html, preset, open, dir, align, h);
+      if (!examples.has(id)) examples.set(id, { id, html, preset, open, dir, align, h });
     }
   }
 

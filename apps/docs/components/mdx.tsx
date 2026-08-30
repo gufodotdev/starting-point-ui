@@ -11,6 +11,7 @@ import {
   alignFromMeta,
   dirFromMeta,
   exampleId,
+  hFromMeta,
   isPreviewMeta,
   openFromMeta,
   presetFromMeta,
@@ -44,8 +45,11 @@ const prettyCodeOptions = {
             openFromMeta(meta),
             dirFromMeta(meta),
             alignFromMeta(meta),
+            hFromMeta(meta),
           );
           node.properties["data-frame-preset"] = presetFromMeta(meta);
+          const h = hFromMeta(meta);
+          if (h) node.properties["data-frame-h"] = h;
           const dir = dirFromMeta(meta);
           if (dir) node.properties["data-frame-dir"] = dir;
         }
@@ -191,6 +195,7 @@ const components = {
     "data-frame-id": frameId,
     "data-frame-dir": frameDir,
     "data-frame-preset": framePreset,
+    "data-frame-h": frameH,
   }: React.ComponentProps<"pre"> & {
     "data-code"?: string;
     "data-preview"?: string;
@@ -198,6 +203,7 @@ const components = {
     "data-frame-id"?: string;
     "data-frame-dir"?: string;
     "data-frame-preset"?: string;
+    "data-frame-h"?: string;
   }) => {
     if (preview === "true" && frameId) {
       return (
@@ -207,6 +213,7 @@ const components = {
           frameId={frameId}
           frameDir={frameDir}
           framePreset={framePreset}
+          frameH={frameH}
         >
           {children}
         </CodeBlock>

@@ -69,10 +69,12 @@ function CodePanel({ children }: { children: React.ReactNode }) {
 function FrameExample({
   id,
   preset,
+  h,
   frameRef,
 }: {
   id: string;
   preset?: string;
+  h?: string;
   frameRef: React.RefObject<HTMLIFrameElement | null>;
 }) {
   const { resolvedTheme } = useTheme();
@@ -146,7 +148,7 @@ function FrameExample({
       title="Example preview"
       loading="lazy"
       className="h-96 w-full border-0 bg-background opacity-0 transition-opacity duration-200"
-      style={{ height: framePresets[preset ?? "default"]?.minHeight }}
+      style={{ height: h ?? framePresets[preset ?? "default"]?.minHeight }}
       onPointerEnter={handleEnter}
       onPointerLeave={handleLeave}
       suppressHydrationWarning
@@ -197,12 +199,14 @@ export function PreviewBlock({
   frameId,
   frameDir,
   framePreset,
+  frameH,
 }: {
   children: React.ReactNode;
   code: string;
   frameId: string;
   frameDir?: string;
   framePreset?: string;
+  frameH?: string;
 }) {
   const panelRef = useRef<PanelImperativeHandle>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
@@ -293,7 +297,7 @@ export function PreviewBlock({
               minSize={`${MOBILE_WIDTH}px`}
               className="overflow-hidden rounded-xl border bg-background"
             >
-              <FrameExample id={frameId} preset={framePreset} frameRef={frameRef} />
+              <FrameExample id={frameId} preset={framePreset} h={frameH} frameRef={frameRef} />
             </Panel>
             <Separator className="relative hidden w-3 bg-transparent p-0 after:absolute after:top-1/2 after:right-0 after:h-8 after:w-1.5 after:-translate-x-px after:-translate-y-1/2 after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
             <Panel defaultSize="0%" minSize="0%" />
