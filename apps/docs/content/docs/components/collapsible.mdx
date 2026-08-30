@@ -5,8 +5,8 @@ description: A collapsible component for Tailwind CSS with beautiful shadcn/ui s
 
 The collapsible expands and collapses a single panel of content from a trigger, like extra details behind a "show more". For a set of stacked panels where opening one closes the others, use an [accordion](/components/accordion).
 
-```html preview preset=collapsible
-<div class="flex w-full gap-3">
+```html preview preset=base
+<div class="flex w-full max-w-md gap-3">
   <span class="avatar">
     <img
       class="avatar-image"
@@ -100,8 +100,8 @@ Add the `collapsible` class to the panel and point it at its trigger with `data-
 
 Reveal the rest of a long text in place; the trigger swaps its label against the expanded state.
 
-```html preview preset=collapsible
-<div class="flex w-full flex-col items-start gap-2">
+```html preview preset=base
+<div class="flex w-full max-w-md flex-col items-start gap-2">
   <h4 class="text-sm font-medium">About this project</h4>
   <p class="text-sm text-muted-foreground">
     Starting Point UI is an open-source component library for Tailwind CSS,
@@ -136,8 +136,8 @@ Reveal the rest of a long text in place; the trigger swaps its label against the
 
 Author the `expanded` class on the panel to start it open, and mirror `aria-expanded="true"` onto the trigger so state-driven styling, like a rotated chevron, paints correctly before JavaScript loads.
 
-```html preview preset=collapsible
-<nav class="sidebar-menu mx-auto w-full max-w-64">
+```html preview preset=base
+<nav class="sidebar-menu w-full max-w-64">
   <div class="sidebar-menu-item">
     <button
       id="collapsible-open-trigger"
@@ -182,8 +182,8 @@ Author the `expanded` class on the panel to start it open, and mirror `aria-expa
 
 Collapsibles nest, so a file tree is triggers and panels all the way down. The [sidebar menu](/components/sidebar) classes give it a ready-made look, indent line included.
 
-```html preview preset=collapsible
-<nav class="sidebar-menu mx-auto w-full max-w-64">
+```html preview preset=base
+<nav class="sidebar-menu w-full max-w-64">
   <div class="sidebar-menu-item">
     <button
       id="ct-src"
@@ -241,7 +241,7 @@ Collapsibles nest, so a file tree is triggers and panels all the way down. The [
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional chevrons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=collapsible dir=rtl
+```html preview preset=base dir=rtl
 <div id="collapsible-rtl-demo" class="flex w-full max-w-sm flex-col gap-2" dir="rtl">
   <div class="flex items-center justify-between gap-4 px-4">
     <h4 class="text-sm font-semibold" data-i18n="orderNumber">الطلب #4189</h4>
