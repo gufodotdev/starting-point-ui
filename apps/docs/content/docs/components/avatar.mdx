@@ -5,7 +5,7 @@ description: An avatar component for Tailwind CSS with beautiful shadcn/ui styli
 
 The avatar shows a user's image in a circle, falling back to initials when the image is missing or fails to load. Avatars stack into groups with an optional overflow count, and a badge can mark status.
 
-```html preview
+```html preview preset=sm
 <span class="avatar">
   <img
     class="avatar-image"
@@ -81,7 +81,7 @@ Add the `avatar` class to a wrapper holding the image and the fallback initials.
 
 An image with fallback initials behind it.
 
-```html preview
+```html preview preset=sm
 <span class="avatar">
   <img
     class="avatar-image"
@@ -96,7 +96,7 @@ An image with fallback initials behind it.
 
 Add `avatar-sm` or `avatar-lg` to change the size.
 
-```html preview
+```html preview preset=sm
 <div class="flex flex-wrap items-center gap-2">
   <span class="avatar avatar-sm">
     <img
@@ -129,7 +129,7 @@ Add `avatar-sm` or `avatar-lg` to change the size.
 
 When the image is missing or fails to load, the initials take over.
 
-```html preview
+```html preview preset=sm
 <span class="avatar">
   <img class="avatar-image" src="/broken-link.webp" alt="Leila Navarro" />
   <span class="avatar-fallback">LN</span>
@@ -144,7 +144,7 @@ When the image is missing or fails to load, the initials take over.
 
 Mark status with an `avatar-badge`; color it with utilities.
 
-```html preview
+```html preview preset=sm
 <span class="avatar">
   <img
     class="avatar-image"
@@ -160,7 +160,7 @@ Mark status with an `avatar-badge`; color it with utilities.
 
 The badge fits a small icon at the default and large sizes.
 
-```html preview
+```html preview preset=sm
 <span class="avatar">
   <img
     class="avatar-image"
@@ -178,7 +178,7 @@ The badge fits a small icon at the default and large sizes.
 
 Avatars stack into a group with a ring separating them.
 
-```html preview
+```html preview preset=sm
 <span class="avatar-group">
   <span class="avatar">
     <img
@@ -211,7 +211,7 @@ Avatars stack into a group with a ring separating them.
 
 End the stack with an overflow count.
 
-```html preview
+```html preview preset=sm
 <span class="avatar-group">
   <span class="avatar">
     <img
@@ -245,7 +245,7 @@ End the stack with an overflow count.
 
 The count slot fits an icon too.
 
-```html preview
+```html preview preset=sm
 <span class="avatar-group">
   <span class="avatar">
     <img
@@ -281,7 +281,7 @@ The count slot fits an icon too.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=sm dir=rtl
 <div id="avatar-rtl-demo" dir="rtl" class="flex flex-wrap items-center gap-8">
   <span class="avatar">
     <img
