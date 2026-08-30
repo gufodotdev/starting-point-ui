@@ -5,7 +5,7 @@ description: A dropdown menu component for Tailwind CSS with beautiful shadcn/ui
 
 The dropdown displays a menu of actions anchored to its trigger, like the commands behind a "more" button or a user menu. For rich free-form content, reach for the [popover](/components/popover); for picking a value in a form, use the [select](/components/select) or [combobox](/components/combobox).
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-demo-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown w-44" data-sp-toggle="#dd-demo-trigger">
@@ -74,7 +74,7 @@ Add the `dropdown` class to the menu panel and point it at its trigger with `dat
 
 A plain menu of actions.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-basic-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown" data-sp-toggle="#dd-basic-trigger">
@@ -88,7 +88,7 @@ A plain menu of actions.
 
 Group related items under a `dropdown-label` and divide groups with a `dropdown-separator`.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-groups-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown" data-sp-toggle="#dd-groups-trigger">
@@ -106,7 +106,7 @@ Group related items under a `dropdown-label` and divide groups with a `dropdown-
 
 Nest menus by pointing a second dropdown at an item; `dropdown-sub` sizes it, and hover mode opens it when the pointer reaches the item. With the keyboard, ArrowRight, Enter, or Space opens it and ArrowLeft or Escape closes it back to its item.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-sub-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown" data-sp-toggle="#dd-sub-trigger">
@@ -154,7 +154,7 @@ Nest menus by pointing a second dropdown at an item; `dropdown-sub` sizes it, an
 
 Hint an item's keyboard shortcut with `dropdown-shortcut`; it right-aligns inside the item.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-shortcuts-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown" data-sp-toggle="#dd-shortcuts-trigger">
@@ -183,7 +183,7 @@ Hint an item's keyboard shortcut with `dropdown-shortcut`; it right-aligns insid
 
 Lead items with an icon; svgs inside items are sized automatically.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-icons-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown" data-sp-toggle="#dd-icons-trigger">
@@ -211,7 +211,7 @@ Lead items with an icon; svgs inside items are sized automatically.
 
 Make items checkable with `dropdown-item-checkbox`: a hidden checkbox input holds the state, so `checked`, `change` events, and form submission work like any input. Toggling doesn't close the menu, so several can be flipped in one visit.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-check-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown w-40" data-sp-toggle="#dd-check-trigger">
@@ -235,7 +235,7 @@ Make items checkable with `dropdown-item-checkbox`: a hidden checkbox input hold
 
 Give `dropdown-item-radio` inputs a shared `name` and the browser keeps the set exclusive; read the choice with `input[name=position]:checked`.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-radio-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown w-32" data-sp-toggle="#dd-radio-trigger">
@@ -259,7 +259,7 @@ Give `dropdown-item-radio` inputs a shared `name` and the browser keeps the set 
 
 Mark a dangerous action with `dropdown-item-destructive`.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-destructive-trigger" class="btn btn-outline">Actions</button>
 
 <div class="dropdown" data-sp-toggle="#dd-destructive-trigger">
@@ -283,7 +283,7 @@ Mark a dangerous action with `dropdown-item-destructive`.
 
 Add `aria-disabled` to disable an item.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-disabled-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown" data-sp-toggle="#dd-disabled-trigger">
@@ -297,7 +297,7 @@ Add `aria-disabled` to disable an item.
 
 Any element can be the trigger, like an avatar button for a user menu.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-avatar-trigger" class="btn btn-ghost btn-icon rounded-full">
   <span class="avatar">
     <img
@@ -334,7 +334,7 @@ Any element can be the trigger, like an avatar button for a user menu.
 
 Groups, submenus, checkboxes, and radio items compose into a full application menu.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="dd-complex-trigger" class="btn btn-outline">Open</button>
 
 <div class="dropdown w-44" data-sp-toggle="#dd-complex-trigger">
@@ -390,7 +390,7 @@ Groups, submenus, checkboxes, and radio items compose into a full application me
 
 Set where the menu opens relative to its trigger with `data-sp-placement`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement), like `top`, `right-start`, or `bottom-end`, plus the logical sides `inline-start` and `inline-end` that follow the text direction. The menu flips to the opposite side on its own when there isn't room.
 
-```html preview preset=popover
+```html preview preset=base align=top
 <div class="flex gap-6">
   <button id="dd-placement-start" class="btn btn-outline btn-sm">Start</button>
   <button id="dd-placement-center" class="btn btn-outline btn-sm">
@@ -429,7 +429,7 @@ Set where the menu opens relative to its trigger with `data-sp-placement`. It ac
 
 Add `data-sp-mode="hover"` to open the menu on hover instead of click; it closes when the pointer leaves both the trigger and the menu.
 
-```html preview preset=popover
+```html preview preset=base align=top
 <button id="dd-hover-trigger" class="btn btn-outline">Hover me</button>
 
 <div class="dropdown" data-sp-toggle="#dd-hover-trigger" data-sp-mode="hover">
@@ -443,7 +443,7 @@ Add `data-sp-mode="hover"` to open the menu on hover instead of click; it closes
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional icons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=popover open=.dropdown dir=rtl
+```html preview preset=base align=top open=.dropdown dir=rtl
 <div id="dd-rtl-demo" dir="rtl">
   <button id="dd-rtl-trigger" class="btn btn-outline" data-i18n="open">افتح القائمة</button>
 
