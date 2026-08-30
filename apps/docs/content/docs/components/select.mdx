@@ -5,8 +5,8 @@ description: A select component for Tailwind CSS with beautiful shadcn/ui stylin
 
 The select picks one option from a list using the browser's native dropdown. Pair it with a [field](/components/field) for a label and description; for a searchable list with custom option rendering, reach for the [combobox](/components/combobox).
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="select-demo-fruit">Fruit</label>
   <select class="select" id="select-demo-fruit">
     <option value="">Select a fruit</option>
@@ -45,8 +45,8 @@ Add the `select` class to a `<select>` element. Options and groups are the nativ
 
 A bare select with only a placeholder option.
 
-```html preview preset=form
-<select class="select">
+```html preview preset=sm
+<select class="select w-full max-w-sm">
   <option value="">Select an option</option>
   <option value="one">Option one</option>
   <option value="two">Option two</option>
@@ -58,8 +58,8 @@ A bare select with only a placeholder option.
 
 Organize options into categories with `<optgroup>`.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="select-department">Department</label>
   <select class="select" id="select-department">
     <option value="">Select department</option>
@@ -87,8 +87,8 @@ Organize options into categories with `<optgroup>`.
 
 Add `disabled` and the select mutes itself and blocks interaction.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="select-disabled">Fruit</label>
   <select class="select" id="select-disabled" disabled>
     <option value="">Select a fruit</option>
@@ -104,8 +104,8 @@ Add `disabled` and the select mutes itself and blocks interaction.
 
 Set `aria-invalid` on the select for the error state.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="select-invalid">Fruit</label>
   <select class="select" id="select-invalid" aria-invalid="true">
     <option value="">Select a fruit</option>
@@ -121,7 +121,7 @@ Set `aria-invalid` on the select for the error state.
 
 Put the label beside the select with a horizontal field, like a rows per page control.
 
-```html preview preset=form
+```html preview preset=sm
 <div class="field field-horizontal w-fit">
   <label class="label" for="select-rows-per-page">Rows per page</label>
   <select class="select w-20" id="select-rows-per-page">
@@ -137,8 +137,8 @@ Put the label beside the select with a horizontal field, like a rows per page co
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<div id="select-rtl-demo" dir="rtl" class="field">
+```html preview preset=sm dir=rtl
+<div id="select-rtl-demo" dir="rtl" class="field w-full max-w-sm">
   <label class="label" for="select-rtl-fruit" data-i18n="label">فاكهة</label>
   <select class="select" id="select-rtl-fruit">
     <option value="" data-i18n="selectFruit">اختر فاكهة</option>
