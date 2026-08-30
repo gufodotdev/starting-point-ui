@@ -5,8 +5,8 @@ description: A checkbox component for Tailwind CSS with beautiful shadcn/ui styl
 
 The checkbox toggles a single option on or off, like accepting terms or picking items from a list. For a setting that takes effect immediately, reach for the [switch](/components/switch); for choosing one option among several, use a [radio group](/components/radio-group).
 
-```html preview preset=form
-<div class="field-group">
+```html preview preset=base
+<div class="field-group w-full max-w-sm">
   <div class="field field-horizontal">
     <input
       type="checkbox"
@@ -82,8 +82,8 @@ Add the `checkbox` class to an `<input type="checkbox">`.
 
 Lay the checkbox out with its [label](/components/label) in a horizontal [field](/components/field).
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <input
     type="checkbox"
     class="checkbox"
@@ -100,8 +100,8 @@ Lay the checkbox out with its [label](/components/label) in a horizontal [field]
 
 Add supporting text under the label with a `field-content` block.
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <input
     type="checkbox"
     class="checkbox"
@@ -124,8 +124,8 @@ Add supporting text under the label with a `field-content` block.
 
 Add `disabled` and the label dims with the checkbox.
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <input
     type="checkbox"
     class="checkbox"
@@ -143,8 +143,8 @@ Add `disabled` and the label dims with the checkbox.
 
 Set `aria-invalid` on the checkbox for the error state.
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <input
     type="checkbox"
     class="checkbox"
@@ -162,8 +162,8 @@ Set `aria-invalid` on the checkbox for the error state.
 
 Use multiple fields to create a checkbox list.
 
-```html preview preset=form
-<fieldset class="field-set">
+```html preview preset=base
+<fieldset class="field-set w-full max-w-sm">
   <legend class="field-legend field-legend-label">
     Show these items on the desktop:
   </legend>
@@ -208,7 +208,7 @@ Use multiple fields to create a checkbox list.
 
 Use checkboxes in the first column of a [table](/components/table) to make rows selectable; without visible labels, give them an `aria-label`.
 
-```html preview
+```html preview preset=base
 <table class="table w-full max-w-lg">
   <thead class="table-header">
     <tr class="table-row">
@@ -258,8 +258,8 @@ Use checkboxes in the first column of a [table](/components/table) to make rows 
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<div id="checkbox-rtl-demo" dir="rtl">
+```html preview preset=base dir=rtl
+<div id="checkbox-rtl-demo" dir="rtl" class="w-full max-w-sm">
   <div class="field-group max-w-sm">
     <div class="field field-horizontal">
       <input type="checkbox" class="checkbox" id="checkbox-rtl-terms" />
