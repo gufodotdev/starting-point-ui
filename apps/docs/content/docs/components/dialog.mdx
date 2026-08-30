@@ -5,7 +5,7 @@ description: A dialog component for Tailwind CSS with beautiful shadcn/ui stylin
 
 The dialog opens a modal window above the page and blocks interaction with everything behind it. Use it for confirmations, short forms, and alerts that need a decision; for a panel that slides in from the edge, reach for the [sheet](/components/sheet).
 
-```html preview preset=dialog open=.dialog
+```html preview preset=lg open=.dialog
 <button id="dialog-1-trigger" class="btn btn-outline">Open Dialog</button>
 
 <dialog class="dialog" data-sp-toggle="#dialog-1-trigger">
@@ -94,7 +94,7 @@ Add the `dialog` class to a `<dialog>` element. Give your trigger an `id`, then 
 
 Any element with `data-sp-dismiss` closes the dialog, so put close buttons wherever the layout needs them.
 
-```html preview preset=dialog open=.dialog
+```html preview preset=lg open=.dialog
 <button id="dialog-share-trigger" class="btn btn-outline">Share</button>
 
 <dialog class="dialog" data-sp-toggle="#dialog-share-trigger">
@@ -134,7 +134,7 @@ Any element with `data-sp-dismiss` closes the dialog, so put close buttons where
 
 Cap the body's height and let it scroll on its own: the header and footer stay pinned while the content scrolls between them.
 
-```html preview preset=dialog open=.dialog
+```html preview preset=lg open=.dialog
 <button id="dialog-sticky-trigger" class="btn btn-outline">
   Sticky Footer
 </button>
@@ -224,7 +224,7 @@ Cap the body's height and let it scroll on its own: the header and footer stay p
 
 The same scrolling body without a footer.
 
-```html preview preset=dialog open=.dialog
+```html preview preset=lg open=.dialog
 <button id="dialog-scroll-trigger" class="btn btn-outline">
   Scrollable Content
 </button>
@@ -310,7 +310,7 @@ The same scrolling body without a footer.
 
 Add the `shown` class to the dialog and it renders open, with no enter animation. Useful when the server re-renders the page mid-flow, like a submitted form coming back with validation errors, so the dialog is still open exactly where the user left it.
 
-```html preview preset=dialog
+```html preview preset=lg
 <button id="dialog-open-trigger" class="btn btn-outline">Create account</button>
 
 <dialog class="dialog shown" data-sp-toggle="#dialog-open-trigger">
@@ -360,7 +360,7 @@ Add the `shown` class to the dialog and it renders open, with no enter animation
 
 An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interrupts the user and requires a choice. Add `data-sp-static` so a backdrop click won't dismiss it (Escape still closes, so keyboard users are never stuck) and author `role="alertdialog"` on the element. Put `autofocus` on the least destructive action and skip the close button.
 
-```html preview preset=dialog open=.dialog
+```html preview preset=lg open=.dialog
 <button id="alert-trigger" class="btn btn-outline">Show Dialog</button>
 
 <dialog
@@ -389,7 +389,7 @@ An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interru
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Position the close button with `inset-e-3` instead of `right-3` so it follows the text direction. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=dialog open=.dialog dir=rtl
+```html preview preset=lg open=.dialog dir=rtl
 <div id="dialog-rtl-demo" dir="rtl">
   <button id="dialog-rtl-trigger" class="btn btn-outline" data-i18n="open">فتح الحوار</button>
 
