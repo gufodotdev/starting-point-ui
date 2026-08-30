@@ -5,8 +5,8 @@ description: A command palette component for Tailwind CSS with beautiful shadcn/
 
 The command palette shows a searchable menu of actions. Use it to let users find a page or run a command, inline or hosted in a dialog; for picking a form value from a list, reach for the [combobox](/components/combobox).
 
-```html preview preset=command
-<div class="command w-full max-w-130 rounded-lg border">
+```html preview preset=base
+<div class="command w-full max-w-md rounded-lg border">
   <div class="input-group">
     <input class="input" placeholder="Search customers..." />
     <span class="input-group-addon">
@@ -121,7 +121,7 @@ Add the `command` class to a container with an [input group](/components/input-g
 
 Grouped actions with shortcuts in a plain palette; typing filters the list and the disabled item is skipped.
 
-```html preview preset=command
+```html preview preset=base
 <div class="command max-w-sm rounded-lg border">
   <div class="input-group">
     <input class="input" placeholder="Type a command or search..." />
@@ -173,7 +173,7 @@ Grouped actions with shortcuts in a plain palette; typing filters the list and t
 
 Host the command in a [dialog](/components/dialog) with `command-dialog` for the classic ⌘K palette; the sr-only title and description name it for screen readers.
 
-```html preview preset=dialog open=.dialog
+```html preview preset=lg open=.dialog
 <button id="command-basic-trigger" class="btn btn-outline">Open Menu</button>
 
 <dialog class="dialog command-dialog" data-sp-toggle="#command-basic-trigger">
@@ -223,7 +223,7 @@ document.addEventListener("keydown", (e) => {
 
 Show an item's key combination in a trailing `command-shortcut`.
 
-```html preview preset=command
+```html preview preset=base
 <div class="command max-w-sm rounded-lg border">
   <div class="input-group">
     <input class="input" placeholder="Type a command or search..." />
@@ -259,7 +259,7 @@ Show an item's key combination in a trailing `command-shortcut`.
 
 Related items sit in `command-group` blocks with a `command-label`; a group disappears whenever the filter empties it.
 
-```html preview preset=command
+```html preview preset=base
 <div class="command max-w-sm rounded-lg border">
   <div class="input-group">
     <input class="input" placeholder="Type a command or search..." />
@@ -311,7 +311,7 @@ Related items sit in `command-group` blocks with a `command-label`; a group disa
 
 Mark an item with `aria-disabled` to make it unselectable.
 
-```html preview preset=command
+```html preview preset=base
 <div class="command max-w-sm rounded-lg border">
   <div class="input-group">
     <input class="input" placeholder="Type a command or search..." />
@@ -336,7 +336,7 @@ Mark an item with `aria-disabled` to make it unselectable.
 
 The list scrolls past its max height, so long palettes stay compact.
 
-```html preview preset=command
+```html preview preset=base
 <div class="command max-w-sm rounded-lg border">
   <div class="input-group">
     <input class="input" placeholder="Type a command or search..." />
@@ -427,7 +427,7 @@ The list scrolls past its max height, so long palettes stay compact.
 
 Set `data-sp-filter="false"` when your own code decides what the list contains, like results fetched from a server. The command leaves the items alone while you add and remove them, and keeps wiring roles, highlighting the first result, and toggling the empty message. Groups are yours to manage in this mode; the demo toggles `hidden` on its Results group along with the fake request.
 
-```html preview preset=command
+```html preview preset=base
 <div
   id="command-async-demo"
   class="command max-w-sm rounded-lg border"
@@ -523,7 +523,7 @@ input.addEventListener("input", () => {
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=command dir=rtl
+```html preview preset=base dir=rtl
 <div id="command-rtl-demo" dir="rtl" class="command max-w-sm rounded-lg border">
   <div class="input-group">
     <input
