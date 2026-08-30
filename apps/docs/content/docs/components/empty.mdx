@@ -5,8 +5,8 @@ description: An empty state component for Tailwind CSS with beautiful shadcn/ui 
 
 The empty state tells users there is nothing to show yet, with an icon, a short message, and usually an action to get started. Use it for empty lists, zero search results, or a first-run screen; for a placeholder while content is loading, reach for the [skeleton](/components/skeleton).
 
-```html preview preset=empty
-<div class="empty">
+```html preview preset=base
+<div class="empty w-full max-w-2xl">
   <div class="empty-header">
     <div class="empty-media empty-media-icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10.5 8 13l2 2.5"/><path d="m14 10.5 2 2.5-2 2.5"/><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
@@ -63,8 +63,8 @@ Add the `empty` class to a container, then build it up from the parts you need: 
 
 Add `border border-dashed` for a dashed outline around the empty state.
 
-```html preview preset=empty
-<div class="empty border border-dashed">
+```html preview preset=base
+<div class="empty w-full max-w-2xl border border-dashed">
   <div class="empty-header">
     <div class="empty-media empty-media-icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
@@ -84,8 +84,8 @@ Add `border border-dashed` for a dashed outline around the empty state.
 
 Give the empty state a muted background to set it apart from the page.
 
-```html preview preset=empty
-<div class="empty h-full bg-muted/30">
+```html preview preset=base
+<div class="empty h-full w-full max-w-2xl bg-muted/30">
   <div class="empty-header">
     <div class="empty-media empty-media-icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
@@ -108,8 +108,8 @@ Give the empty state a muted background to set it apart from the page.
 
 Leave `empty-media-icon` off to place an avatar at its own size.
 
-```html preview preset=empty
-<div class="empty">
+```html preview preset=base
+<div class="empty w-full max-w-2xl">
   <div class="empty-header">
     <div class="empty-media">
       <span class="avatar size-12">
@@ -137,8 +137,8 @@ Leave `empty-media-icon` off to place an avatar at its own size.
 
 A stacked [avatar group](/components/avatar-group) in the media slot.
 
-```html preview preset=empty
-<div class="empty">
+```html preview preset=base
+<div class="empty w-full max-w-2xl">
   <div class="empty-header">
     <div class="empty-media">
       <span class="avatar-group *:size-12">
@@ -186,8 +186,8 @@ A stacked [avatar group](/components/avatar-group) in the media slot.
 
 Put a search field or other control in `empty-content` for a zero-results state.
 
-```html preview preset=empty
-<div class="empty">
+```html preview preset=base
+<div class="empty w-full max-w-2xl">
   <div class="empty-header">
     <div class="empty-title">404 - Not Found</div>
     <div class="empty-description">
@@ -216,8 +216,8 @@ Put a search field or other control in `empty-content` for a zero-results state.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional icons with a `rtl:rotate-*` utility. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=empty dir=rtl
-<div id="empty-rtl-demo" dir="rtl" class="empty">
+```html preview preset=base dir=rtl
+<div id="empty-rtl-demo" dir="rtl" class="empty w-full max-w-2xl">
   <div class="empty-header">
     <div class="empty-media empty-media-icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10.5 8 13l2 2.5"/><path d="m14 10.5 2 2.5-2 2.5"/><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg>
