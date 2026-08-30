@@ -5,8 +5,8 @@ description: A radio group component for Tailwind CSS with beautiful shadcn/ui s
 
 The radio group picks exactly one option from a set, like a plan or a shipping method. For on/off settings, reach for the [checkbox](/components/checkbox) or [switch](/components/switch).
 
-```html preview preset=form
-<div class="field-group gap-3" role="radiogroup" aria-label="Density">
+```html preview preset=sm
+<div class="field-group w-full max-w-sm gap-3" role="radiogroup" aria-label="Density">
   <div class="field field-horizontal">
     <input type="radio" class="radio" id="r1" name="density" value="default" />
     <label class="label" for="r1">Default</label>
@@ -43,8 +43,8 @@ Add the `radio` class to each `<input type="radio">` and give the set a shared `
 
 Give options supporting text with `field-content`.
 
-```html preview preset=form
-<div class="field-group gap-3" role="radiogroup" aria-label="Density">
+```html preview preset=sm
+<div class="field-group w-full max-w-sm gap-3" role="radiogroup" aria-label="Density">
   <div class="field field-horizontal">
     <input type="radio" class="radio" id="desc-r1" name="desc-density" value="default" />
     <div class="field-content">
@@ -73,8 +73,8 @@ Give options supporting text with `field-content`.
 
 Wrap each option in a [label](/components/label) and the whole card becomes clickable, tinting itself while checked.
 
-```html preview preset=form
-<div class="field-group gap-3" role="radiogroup" aria-label="Plan">
+```html preview preset=base
+<div class="field-group w-full max-w-sm gap-3" role="radiogroup" aria-label="Plan">
   <label class="label" for="plus-plan">
     <div class="field field-horizontal">
       <div class="field-content">
@@ -109,8 +109,8 @@ Wrap each option in a [label](/components/label) and the whole card becomes clic
 
 Wrap the group in a [field set](/components/field) with a legend so it is announced together.
 
-```html preview preset=form
-<fieldset class="field-set">
+```html preview preset=sm
+<fieldset class="field-set w-full max-w-sm">
   <legend class="field-legend field-legend-label">Subscription Plan</legend>
   <p class="field-description">Yearly and lifetime plans offer significant savings.</p>
   <div class="field-group gap-3">
@@ -134,8 +134,8 @@ Wrap the group in a [field set](/components/field) with a legend so it is announ
 
 Add `disabled` to an option and its label dims with it.
 
-```html preview preset=form
-<div class="field-group gap-3" role="radiogroup" aria-label="Options">
+```html preview preset=sm
+<div class="field-group w-full max-w-sm gap-3" role="radiogroup" aria-label="Options">
   <div class="field field-horizontal">
     <input type="radio" class="radio" id="disabled-1" name="disabled-group" disabled />
     <label class="label font-normal" for="disabled-1">Disabled</label>
@@ -155,8 +155,8 @@ Add `disabled` to an option and its label dims with it.
 
 Set `aria-invalid` on the radios for the error state.
 
-```html preview preset=form
-<fieldset class="field-set">
+```html preview preset=sm
+<fieldset class="field-set w-full max-w-sm">
   <legend class="field-legend field-legend-label">Notification Preferences</legend>
   <p class="field-description">Choose how you want to receive notifications.</p>
   <div class="field-group gap-3">
@@ -180,8 +180,8 @@ Set `aria-invalid` on the radios for the error state.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<div id="radio-group-rtl-demo" dir="rtl">
+```html preview preset=sm dir=rtl
+<div id="radio-group-rtl-demo" dir="rtl" class="w-full max-w-sm">
   <div class="field-group gap-3" role="radiogroup" aria-label="Density">
     <div class="field field-horizontal">
       <input type="radio" class="radio" id="radio-group-rtl-1" name="radio-group-rtl-density" value="default" />
