@@ -5,30 +5,32 @@ description: An item component for Tailwind CSS with beautiful shadcn/ui styling
 
 The item lays out a row with a media slot, text, and trailing actions. Use it as the building block for lists, menus, and settings pages; for a standalone content block, reach for the [card](/components/card), and for a similar-looking row that delivers a message, the [alert](/components/alert).
 
-```html preview preset=item
-<div class="item item-outline">
-  <div class="item-content">
-    <div class="item-title">Basic Item</div>
-    <div class="item-description">
-      A simple item with title and description.
+```html preview preset=sm
+<div class="flex w-full max-w-md flex-col gap-6">
+  <div class="item item-outline">
+    <div class="item-content">
+      <div class="item-title">Basic Item</div>
+      <div class="item-description">
+        A simple item with title and description.
+      </div>
+    </div>
+    <div class="item-actions">
+      <button class="btn btn-outline btn-sm">Action</button>
     </div>
   </div>
-  <div class="item-actions">
-    <button class="btn btn-outline btn-sm">Action</button>
-  </div>
-</div>
 
-<a href="#" class="item item-outline item-sm">
-  <div class="item-media">
-    <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
-  </div>
-  <div class="item-content">
-    <div class="item-title">Your profile has been verified.</div>
-  </div>
-  <div class="item-actions">
-    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-  </div>
-</a>
+  <a href="#" class="item item-outline item-sm">
+    <div class="item-media">
+      <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+    </div>
+    <div class="item-content">
+      <div class="item-title">Your profile has been verified.</div>
+    </div>
+    <div class="item-actions">
+      <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </div>
+  </a>
+</div>
 ```
 
 ## Usage
@@ -74,34 +76,36 @@ Add the `item` class to a container, then pick whichever parts the row needs: an
 
 The default item is borderless; add `item-outline` for a border or `item-muted` for a filled background.
 
-```html preview preset=item
-<div class="item">
-  <div class="item-media item-media-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+```html preview preset=base
+<div class="flex w-full max-w-md flex-col gap-6">
+  <div class="item">
+    <div class="item-media item-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+    </div>
+    <div class="item-content">
+      <div class="item-title">Default Variant</div>
+      <div class="item-description">Transparent background with no border.</div>
+    </div>
   </div>
-  <div class="item-content">
-    <div class="item-title">Default Variant</div>
-    <div class="item-description">Transparent background with no border.</div>
-  </div>
-</div>
 
-<div class="item item-outline">
-  <div class="item-media item-media-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+  <div class="item item-outline">
+    <div class="item-media item-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+    </div>
+    <div class="item-content">
+      <div class="item-title">Outline Variant</div>
+      <div class="item-description">Outlined style with a visible border.</div>
+    </div>
   </div>
-  <div class="item-content">
-    <div class="item-title">Outline Variant</div>
-    <div class="item-description">Outlined style with a visible border.</div>
-  </div>
-</div>
 
-<div class="item item-muted">
-  <div class="item-media item-media-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
-  </div>
-  <div class="item-content">
-    <div class="item-title">Muted Variant</div>
-    <div class="item-description">Muted background for secondary content.</div>
+  <div class="item item-muted">
+    <div class="item-media item-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+    </div>
+    <div class="item-content">
+      <div class="item-title">Muted Variant</div>
+      <div class="item-description">Muted background for secondary content.</div>
+    </div>
   </div>
 </div>
 ```
@@ -110,34 +114,36 @@ The default item is borderless; add `item-outline` for a border or `item-muted` 
 
 Add `item-sm` or `item-xs` for tighter rows.
 
-```html preview preset=item
-<div class="item item-outline">
-  <div class="item-media item-media-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+```html preview preset=base
+<div class="flex w-full max-w-md flex-col gap-6">
+  <div class="item item-outline">
+    <div class="item-media item-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+    </div>
+    <div class="item-content">
+      <div class="item-title">Default Size</div>
+      <div class="item-description">The standard size for most use cases.</div>
+    </div>
   </div>
-  <div class="item-content">
-    <div class="item-title">Default Size</div>
-    <div class="item-description">The standard size for most use cases.</div>
-  </div>
-</div>
 
-<div class="item item-outline item-sm">
-  <div class="item-media item-media-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+  <div class="item item-outline item-sm">
+    <div class="item-media item-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+    </div>
+    <div class="item-content">
+      <div class="item-title">Small Size</div>
+      <div class="item-description">A compact size for dense layouts.</div>
+    </div>
   </div>
-  <div class="item-content">
-    <div class="item-title">Small Size</div>
-    <div class="item-description">A compact size for dense layouts.</div>
-  </div>
-</div>
 
-<div class="item item-outline item-xs">
-  <div class="item-media item-media-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
-  </div>
-  <div class="item-content">
-    <div class="item-title">Extra Small Size</div>
-    <div class="item-description">The most compact size available.</div>
+  <div class="item item-outline item-xs">
+    <div class="item-media item-media-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+    </div>
+    <div class="item-content">
+      <div class="item-title">Extra Small Size</div>
+      <div class="item-description">The most compact size available.</div>
+    </div>
   </div>
 </div>
 ```
@@ -146,8 +152,8 @@ Add `item-sm` or `item-xs` for tighter rows.
 
 An icon in the media slot with a trailing action.
 
-```html preview preset=item
-<div class="item item-outline">
+```html preview preset=sm
+<div class="item item-outline w-full max-w-md">
   <div class="item-media item-media-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
   </div>
@@ -165,69 +171,71 @@ An icon in the media slot with a trailing action.
 
 Avatars and avatar groups in the media slot.
 
-```html preview preset=item
-<div class="item item-outline">
-  <div class="item-media">
-    <span class="avatar size-10">
-      <img
-        class="avatar-image"
-        src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
-        alt="Leila Navarro"
-      />
-      <span class="avatar-fallback">LN</span>
-    </span>
-  </div>
-  <div class="item-content">
-    <div class="item-title">Leila Navarro</div>
-    <div class="item-description">Last seen 5 months ago</div>
-  </div>
-  <div class="item-actions">
-    <button
-      class="btn btn-outline btn-sm btn-icon rounded-full"
-      aria-label="Invite"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-    </button>
-  </div>
-</div>
-
-<div class="item item-outline">
-  <div class="item-media">
-    <span class="avatar-group">
-      <span class="avatar max-sm:hidden">
+```html preview preset=base
+<div class="flex w-full max-w-md flex-col gap-6">
+  <div class="item item-outline">
+    <div class="item-media">
+      <span class="avatar size-10">
         <img
           class="avatar-image"
-          src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
-          alt="Theo Marchetti"
+          src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+          alt="Leila Navarro"
         />
-        <span class="avatar-fallback">TM</span>
+        <span class="avatar-fallback">LN</span>
       </span>
-      <span class="avatar max-sm:hidden">
-        <img
-          class="avatar-image"
-          src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
-          alt="Maya Santoso"
-        />
-        <span class="avatar-fallback">MS</span>
-      </span>
-      <span class="avatar">
-        <img
-          class="avatar-image"
-          src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
-          alt="Sofia Lindqvist"
-        />
-        <span class="avatar-fallback">SL</span>
-      </span>
-    </span>
-  </div>
-  <div class="item-content">
-    <div class="item-title">No Team Members</div>
-    <div class="item-description">
-      Invite your team to collaborate on this project.
+    </div>
+    <div class="item-content">
+      <div class="item-title">Leila Navarro</div>
+      <div class="item-description">Last seen 5 months ago</div>
+    </div>
+    <div class="item-actions">
+      <button
+        class="btn btn-outline btn-sm btn-icon rounded-full"
+        aria-label="Invite"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+      </button>
     </div>
   </div>
-  <div class="item-actions">
-    <button class="btn btn-outline btn-sm">Invite</button>
+
+  <div class="item item-outline">
+    <div class="item-media">
+      <span class="avatar-group">
+        <span class="avatar max-sm:hidden">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Theo Marchetti"
+          />
+          <span class="avatar-fallback">TM</span>
+        </span>
+        <span class="avatar max-sm:hidden">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Maya Santoso"
+          />
+          <span class="avatar-fallback">MS</span>
+        </span>
+        <span class="avatar">
+          <img
+            class="avatar-image"
+            src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+            alt="Sofia Lindqvist"
+          />
+          <span class="avatar-fallback">SL</span>
+        </span>
+      </span>
+    </div>
+    <div class="item-content">
+      <div class="item-title">No Team Members</div>
+      <div class="item-description">
+        Invite your team to collaborate on this project.
+      </div>
+    </div>
+    <div class="item-actions">
+      <button class="btn btn-outline btn-sm">Invite</button>
+    </div>
   </div>
 </div>
 ```
@@ -236,8 +244,8 @@ Avatars and avatar groups in the media slot.
 
 Square artwork with `item-media-image`, and a second `item-content` for the duration.
 
-```html preview preset=item
-<div class="item-group" role="list">
+```html preview preset=base
+<div class="item-group w-full max-w-md" role="list">
   <a href="#" class="item item-outline">
     <div class="item-media item-media-image">
       <img
@@ -299,8 +307,8 @@ Square artwork with `item-media-image`, and a second `item-content` for the dura
 
 A stack of related items in an `item-group`.
 
-```html preview preset=item
-<div class="item-group" role="list">
+```html preview preset=base
+<div class="item-group w-full max-w-md" role="list">
   <div class="item item-outline">
     <div class="item-media">
       <span class="avatar avatar-lg">
@@ -377,8 +385,8 @@ A stack of related items in an `item-group`.
 
 Use `item-header` for a full-width row above the content, like a preview image.
 
-```html preview preset=item
-<div class="item-group grid w-full grid-cols-2 gap-3 sm:gap-4" role="list">
+```html preview preset=base
+<div class="item-group grid w-full max-w-md grid-cols-2 gap-3 sm:gap-4" role="list">
   <div class="item item-outline">
     <div class="item-header">
       <img
@@ -412,37 +420,39 @@ Use `item-header` for a full-width row above the content, like a preview image.
 
 An item on an `<a>` picks up a hover style; external links can mark themselves with an icon.
 
-```html preview preset=item
-<a href="#" class="item">
-  <div class="item-content">
-    <div class="item-title">Visit our documentation</div>
-    <div class="item-description">
-      Learn how to get started with our components.
+```html preview preset=sm
+<div class="flex w-full max-w-md flex-col gap-6">
+  <a href="#" class="item">
+    <div class="item-content">
+      <div class="item-title">Visit our documentation</div>
+      <div class="item-description">
+        Learn how to get started with our components.
+      </div>
     </div>
-  </div>
-  <div class="item-actions">
-    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-  </div>
-</a>
+    <div class="item-actions">
+      <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </div>
+  </a>
 
-<a href="#" target="_blank" rel="noopener noreferrer" class="item item-outline">
-  <div class="item-content">
-    <div class="item-title">External resource</div>
-    <div class="item-description">
-      Opens in a new tab with security attributes.
+  <a href="#" target="_blank" rel="noopener noreferrer" class="item item-outline">
+    <div class="item-content">
+      <div class="item-title">External resource</div>
+      <div class="item-description">
+        Opens in a new tab with security attributes.
+      </div>
     </div>
-  </div>
-  <div class="item-actions">
-    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-  </div>
-</a>
+    <div class="item-actions">
+      <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+    </div>
+  </a>
+</div>
 ```
 
 ### Dropdown
 
 An `item-xs` drops its own padding inside a dropdown, so the row's padding takes over.
 
-```html preview preset=popover open=.dropdown
+```html preview preset=base align=top open=.dropdown
 <button id="item-dd-trigger" class="btn btn-outline">
   Select
   <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
@@ -510,8 +520,8 @@ An `item-xs` drops its own padding inside a dropdown, so the row's padding takes
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional icons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=item dir=rtl
-<div id="item-rtl-demo" dir="rtl" class="flex w-full flex-col gap-4">
+```html preview preset=sm dir=rtl
+<div id="item-rtl-demo" dir="rtl" class="flex w-full max-w-md flex-col gap-4">
   <div class="item item-outline">
     <div class="item-content">
       <div class="item-title" data-i18n="basicItem">عنصر أساسي</div>
