@@ -5,8 +5,8 @@ description: A scroll fade utility for Tailwind CSS with beautiful shadcn/ui sty
 
 The scroll fade masks the edges of a scroller so content melts away instead of clipping, hinting that there is more to scroll. Use it for long lists, chat feeds, and horizontal tag rows, anywhere clipped content should read as scrollable.
 
-```html preview preset=form
-<div class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border">
+```html preview preset=base
+<div class="w-full max-w-xs overflow-hidden rounded-2xl border">
   <div class="scroll-fade scrollbar-none h-72 overflow-y-auto">
     <div class="flex flex-col gap-1.5 p-1.5">
       <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
@@ -56,8 +56,8 @@ Add `scroll-fade` to any vertical scroller; use the directional variants for hor
 
 The fades are driven by the scroll position, so a scroller whose content fits shows no fade at all.
 
-```html preview preset=form
-<div class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border">
+```html preview preset=sm
+<div class="w-full max-w-xs overflow-hidden rounded-2xl border">
   <div class="scroll-fade scrollbar-none overflow-y-auto">
     <div class="flex flex-col gap-1.5 p-1.5">
       <div class="rounded-lg bg-muted px-3 py-2.5 text-sm">Item 1</div>
@@ -72,8 +72,8 @@ The fades are driven by the scroll position, so a scroller whose content fits sh
 
 Add `scroll-fade-x` to a horizontal scroller. The fades follow the reading direction.
 
-```html preview preset=form
-<div class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border">
+```html preview preset=sm
+<div class="w-full max-w-xs overflow-hidden rounded-2xl border">
   <div class="scroll-fade-x scrollbar-none overflow-x-auto">
     <div class="flex w-max gap-1.5 p-1.5">
       <div class="shrink-0 rounded-lg bg-muted px-3 py-2.5 text-sm">Design</div>
@@ -113,8 +113,8 @@ Add `scroll-fade-x` to a horizontal scroller. The fades follow the reading direc
 
 Fade a single edge with the directional variants: `scroll-fade-t` and `scroll-fade-b` for vertical scrollers, `scroll-fade-s` and `scroll-fade-e` for horizontal ones.
 
-```html preview preset=form
-<div class="mx-auto flex w-full max-w-xs min-w-0 flex-col gap-6">
+```html preview preset=lg h=44rem
+<div class="flex w-full max-w-xs min-w-0 flex-col gap-6">
   <div class="flex flex-col gap-3">
     <div class="overflow-hidden rounded-2xl border">
       <div class="scroll-fade-t scrollbar-none h-36 overflow-y-auto">
@@ -234,8 +234,8 @@ Fade a single edge with the directional variants: `scroll-fade-t` and `scroll-fa
 
 Size utilities change how far the fade reaches: `scroll-fade-{n}` takes a spacing-scale value or an arbitrary length, and the per-edge forms like `scroll-fade-b-8` size one edge on its own.
 
-```html preview preset=form
-<div class="mx-auto flex w-full max-w-xs flex-col gap-6">
+```html preview preset=lg
+<div class="flex w-full max-w-xs flex-col gap-6">
   <div class="flex flex-col gap-3">
     <div class="overflow-hidden rounded-2xl border">
       <div
@@ -285,8 +285,8 @@ Size utilities change how far the fade reaches: `scroll-fade-{n}` takes a spacin
 
 Add `scroll-fade-none` to remove the fade, for example at a breakpoint where the layout no longer scrolls.
 
-```html preview preset=form
-<div class="mx-auto flex w-full max-w-xs min-w-0 flex-col gap-6">
+```html preview preset=lg
+<div class="flex w-full max-w-xs min-w-0 flex-col gap-6">
   <div class="flex flex-col gap-3">
     <div class="overflow-hidden rounded-2xl border">
       <div class="scroll-fade scrollbar-none h-48 overflow-y-auto">
@@ -330,11 +330,11 @@ Add `scroll-fade-none` to remove the fade, for example at a breakpoint where the
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. The inline fades of `scroll-fade-x`, `scroll-fade-s`, and `scroll-fade-e` mirror automatically. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
+```html preview preset=sm dir=rtl
 <div
   id="scroll-fade-rtl-demo"
   dir="rtl"
-  class="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border"
+  class="w-full max-w-xs overflow-hidden rounded-2xl border"
 >
   <div class="scroll-fade-x scrollbar-none overflow-x-auto">
     <div class="flex w-max gap-1.5 p-1.5">
