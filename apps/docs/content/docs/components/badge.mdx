@@ -5,7 +5,7 @@ description: A badge component for Tailwind CSS with beautiful shadcn/ui styling
 
 The badge marks content with a small status or label, like "New", a count, or a category.
 
-```html preview
+```html preview preset=sm
 <span class="badge">Badge</span>
 <span class="badge badge-secondary">Secondary</span>
 <span class="badge badge-destructive">Destructive</span>
@@ -35,7 +35,7 @@ Add the `badge` class to a `<span>` or `<a>` element.
 
 All badge variants side by side.
 
-```html preview
+```html preview preset=sm
 <span class="badge">Default</span>
 <span class="badge badge-secondary">Secondary</span>
 <span class="badge badge-destructive">Destructive</span>
@@ -48,7 +48,7 @@ All badge variants side by side.
 
 Lead or trail the text with an icon, and add `icon-start` or `icon-end` to it for the correct spacing.
 
-```html preview
+```html preview preset=sm
 <span class="badge badge-secondary">
   <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
   Verified
@@ -63,7 +63,7 @@ Lead or trail the text with an icon, and add `icon-start` or `icon-end` to it fo
 
 A spinning icon marks an in-progress state.
 
-```html preview
+```html preview preset=sm
 <span class="badge badge-destructive">
   <svg class="icon-start animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
   Deleting
@@ -78,7 +78,7 @@ A spinning icon marks an in-progress state.
 
 Render the badge on an `<a>` and it picks up hover styling.
 
-```html preview
+```html preview preset=sm
 <a href="#link" class="badge">
   Open Link
   <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
@@ -89,7 +89,7 @@ Render the badge on an `<a>` and it picks up hover styling.
 
 The badge is one element, so utility classes restyle it directly. Make sure the text still carries the meaning, not the color alone.
 
-```html preview
+```html preview preset=sm
 <span
   class="badge bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"
 >
@@ -117,7 +117,7 @@ The badge is one element, so utility classes restyle it directly. Make sure the 
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=sm dir=rtl
 <div id="badge-rtl-demo" class="flex flex-wrap items-center gap-2" dir="rtl">
   <span class="badge" data-i18n="badge">شارة</span>
   <span class="badge badge-secondary" data-i18n="secondary">ثانوي</span>
