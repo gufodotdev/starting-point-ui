@@ -5,8 +5,8 @@ description: A switch component for Tailwind CSS with beautiful shadcn/ui stylin
 
 The switch turns a setting on or off with immediate effect, like enabling notifications. For options that are submitted with a form, reach for the [checkbox](/components/checkbox) instead.
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <input type="checkbox" role="switch" class="switch" id="airplane-mode" />
   <label class="label" for="airplane-mode">Airplane Mode</label>
 </div>
@@ -32,8 +32,8 @@ Add the `switch` class to an `<input type="checkbox">` with `role="switch"`, so 
 
 Pair the switch with a label and description in a horizontal [field](/components/field).
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <div class="field-content">
     <label class="label" for="switch-focus-mode">Share across devices</label>
     <p class="field-description">
@@ -48,8 +48,8 @@ Pair the switch with a label and description in a horizontal [field](/components
 
 Wrap the field in a [label](/components/label) and the whole card toggles the switch.
 
-```html preview preset=form
-<div class="field-group gap-3">
+```html preview preset=base
+<div class="field-group w-full max-w-sm gap-3">
   <label class="label" for="switch-share">
     <div class="field field-horizontal">
       <div class="field-content">
@@ -85,8 +85,8 @@ Wrap the field in a [label](/components/label) and the whole card toggles the sw
 
 Stack switches in a [field set](/components/field) to build a settings group.
 
-```html preview preset=form
-<fieldset class="field-set">
+```html preview preset=base
+<fieldset class="field-set w-full max-w-sm">
   <legend class="field-legend">Notifications</legend>
   <p class="field-description">Manage when you'll receive notifications.</p>
   <div class="field-group">
@@ -143,8 +143,8 @@ Stack switches in a [field set](/components/field) to build a settings group.
 
 Add `disabled` and the label dims with the switch.
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <input
     type="checkbox"
     role="switch"
@@ -160,8 +160,8 @@ Add `disabled` and the label dims with the switch.
 
 Set `aria-invalid` on the switch for the error state.
 
-```html preview preset=form
-<div class="field field-horizontal">
+```html preview preset=sm
+<div class="field field-horizontal w-full max-w-sm">
   <div class="field-content">
     <label class="label" for="switch-terms">Accept terms and conditions</label>
     <p class="field-description">
@@ -183,8 +183,8 @@ Set `aria-invalid` on the switch for the error state.
 
 Add `switch-sm` for a smaller size.
 
-```html preview preset=form
-<div class="field-group gap-3">
+```html preview preset=sm
+<div class="field-group w-full max-w-sm gap-3">
   <div class="field field-horizontal">
     <input
       type="checkbox"
@@ -210,7 +210,7 @@ Add `switch-sm` for a smaller size.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
+```html preview preset=sm dir=rtl
 <div id="switch-rtl-demo" class="field field-horizontal max-w-sm" dir="rtl">
   <div class="field-content">
     <label class="label" for="switch-rtl-share" data-i18n="label">المشاركة عبر الأجهزة</label>
