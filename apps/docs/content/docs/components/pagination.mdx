@@ -5,7 +5,7 @@ description: A pagination component for Tailwind CSS with beautiful shadcn/ui st
 
 The pagination lets users move through pages of content, with previous and next links and direct links to nearby pages.
 
-```html preview
+```html preview preset=sm
 <nav class="pagination">
   <a href="#" class="pagination-item pagination-previous">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
@@ -51,7 +51,7 @@ Add the `pagination` class to a `<nav>` and put one `pagination-item` link per p
 
 A simple pagination with only page numbers.
 
-```html preview
+```html preview preset=sm
 <nav class="pagination">
   <a href="#" class="pagination-item">1</a>
   <a href="#" class="pagination-item active">2</a>
@@ -65,7 +65,7 @@ A simple pagination with only page numbers.
 
 Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page [select](/components/select).
 
-```html preview
+```html preview preset=sm
 <div class="flex w-full max-w-lg items-center justify-between gap-4">
   <div class="field field-horizontal w-fit">
     <label class="label" for="pagination-rows-per-page">Rows per page</label>
@@ -93,7 +93,7 @@ Use just the previous and next buttons without page numbers. This is useful for 
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip the previous and next chevrons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=sm dir=rtl
 <div id="pagination-rtl-demo" dir="rtl">
   <nav class="pagination">
     <a href="#" class="pagination-item pagination-previous">
