@@ -5,7 +5,7 @@ description: A sheet component for Tailwind CSS with beautiful shadcn/ui styling
 
 The sheet slides a modal panel in from a screen edge. Use it for edit forms, filters, carts, and mobile navigation; for a centered window, reach for the [dialog](/components/dialog).
 
-```html preview preset=sheet open=.sheet
+```html preview preset=lg open=.sheet
 <button id="sheet-1-trigger" class="btn btn-outline">Open</button>
 
 <dialog class="sheet" data-sp-toggle="#sheet-1-trigger">
@@ -82,7 +82,7 @@ Add the `sheet` class to a `<dialog>` element. Give your trigger an `id`, then p
 
 Pick the edge the sheet slides from with `sheet-start`, `sheet-end`, `sheet-top`, or `sheet-bottom`; start and end follow the text direction, and `sheet-left` or `sheet-right` pin a physical edge. Without one, it defaults to the end.
 
-```html preview preset=sheet
+```html preview preset=lg
 <!-- Start -->
 <button id="side-left" class="btn btn-outline">Start</button>
 
@@ -148,7 +148,7 @@ Pick the edge the sheet slides from with `sheet-start`, `sheet-end`, `sheet-top`
 
 Pair a start-side sheet with the [sidebar menu](/components/sidebar) classes for a simple mobile navigation drawer. For a full navigation layout with a desktop column, reach for the [sidebar](/components/sidebar) component instead.
 
-```html preview preset=sheet open=.sheet
+```html preview preset=lg open=.sheet
 <button id="sheet-nav-trigger" class="btn btn-ghost btn-icon" aria-label="Open menu">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
 </button>
@@ -210,7 +210,7 @@ Pair a start-side sheet with the [sidebar menu](/components/sidebar) classes for
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=sheet open=.sheet dir=rtl
+```html preview preset=lg open=.sheet dir=rtl
 <div id="sheet-rtl-demo" dir="rtl">
   <button id="sheet-rtl-trigger" class="btn btn-outline" data-i18n="open">فتح</button>
 
