@@ -5,7 +5,7 @@ description: A drawer component for Tailwind CSS with beautiful shadcn/ui stylin
 
 The drawer slides a panel in from the screen edge and follows your finger: drag it toward the edge to dismiss it, like a native mobile sheet. For a desktop-first side panel without dragging, use a [sheet](/components/sheet); for a centered window, use a [dialog](/components/dialog).
 
-```html preview preset=drawer open=.drawer
+```html preview preset=lg open=.drawer
 <button id="drawer-demo-trigger" class="btn btn-outline">Open Drawer</button>
 
 <dialog class="drawer drawer-end" data-sp-toggle="#drawer-demo-trigger">
@@ -163,7 +163,7 @@ Add the `drawer` class to a native `<dialog>`, put the visible surface in a `dra
 
 Add a side class to slide from another edge. `drawer-start` and `drawer-end` follow the reading direction; `drawer-left` and `drawer-right` pin a physical edge. Side drawers drag horizontally, and below the `--breakpoint-drawer` theme token (your `sm` breakpoint) they render as the bottom sheet, like a native mobile drawer.
 
-```html preview preset=drawer
+```html preview preset=lg
 <button id="drawer-pos-bottom" class="btn btn-outline">Bottom</button>
 <button id="drawer-pos-top" class="btn btn-outline">Top</button>
 <button id="drawer-pos-start" class="btn btn-outline">Start</button>
@@ -234,7 +234,7 @@ Add a side class to slide from another edge. `drawer-start` and `drawer-end` fol
 
 A drawer opened from inside another drawer stacks on top and shrinks the one behind it to a peek strip. Drawers can nest as deep as needed.
 
-```html preview preset=drawer open=.drawer
+```html preview preset=lg open=.drawer
 <button id="drawer-nested-trigger" class="btn btn-outline">Open Drawer</button>
 
 <dialog class="drawer drawer-end" data-sp-toggle="#drawer-nested-trigger">
@@ -317,7 +317,7 @@ A drawer opened from inside another drawer stacks on top and shrinks the one beh
 
 Add `data-sp-snap-points` with comma-separated fractions of the panel size. The drawer opens at the first point, dragging settles on the nearest one, and the backdrop only dims fully at the last. Dragging past the first point toward the edge dismisses.
 
-```html preview preset=drawer open=.drawer
+```html preview preset=lg open=.drawer
 <button id="drawer-snap-trigger" class="btn btn-outline">
   Open Snap Drawer
 </button>
@@ -349,7 +349,7 @@ Add `data-sp-snap-points` with comma-separated fractions of the panel size. The 
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. The `drawer-start` and `drawer-end` sides follow the text direction, and dragging mirrors with them. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=drawer open=.drawer dir=rtl
+```html preview preset=lg open=.drawer dir=rtl
 <div id="drawer-rtl-demo" dir="rtl">
   <button id="drawer-rtl-trigger" class="btn btn-outline" data-i18n="open">
     فتح
