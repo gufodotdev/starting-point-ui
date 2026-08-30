@@ -5,8 +5,8 @@ description: A combobox component for Tailwind CSS with beautiful shadcn/ui styl
 
 The combobox pairs a text field with a filterable list of options: the user types to narrow the list and picks an option, which fills the field. Use it for choosing from many options, like countries, timezones, or tags, alone or as chips for multiple selection. For a short, static set of options, reach for the [select](/components/select); for a menu of actions, use the [dropdown](/components/dropdown).
 
-```html preview preset=form-start open=.combobox
-<div class="field">
+```html preview preset=base align=top open=.combobox
+<div class="field w-full max-w-sm">
   <label class="label" for="cb-demo-input">Framework</label>
   <div class="input-group" id="cb-demo-field">
     <input class="input" id="cb-demo-input" placeholder="Select a framework" />
@@ -69,8 +69,8 @@ Add the `combobox` class to the panel and point `data-sp-toggle` at the field: a
 
 Type in the field to filter the list; choosing an option fills the field and checks its hidden input.
 
-```html preview preset=form-start open=.combobox
-<div class="input-group" id="cb-basic-field">
+```html preview preset=base align=top open=.combobox
+<div class="input-group w-full max-w-sm" id="cb-basic-field">
   <input class="input" placeholder="Select a framework" />
   <span class="input-group-addon input-group-addon-end">
     <button class="btn btn-ghost btn-xs btn-icon" type="button" tabindex="-1" aria-label="Open list"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -93,39 +93,41 @@ Type in the field to filter the list; choosing an option fills the field and che
 
 Author `checked` on the options and the selection renders before JavaScript initializes; the combobox adopts it on load. For single select, mirror the label into the field's `value`; for multi select, author one chip per checked option.
 
-```html preview preset=form-start
-<div class="input-group" id="cb-preselected-field">
-  <input class="input" placeholder="Select a framework" value="Nuxt.js" />
-  <span class="input-group-addon input-group-addon-end">
-    <button class="btn btn-ghost btn-xs btn-icon" type="button" tabindex="-1" aria-label="Open list"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-  </span>
-</div>
-
-<div class="combobox-chips" id="cb-preselected-chips">
-  <span class="combobox-chip">SvelteKit <button class="combobox-chip-remove" type="button" aria-label="Remove SvelteKit"></button></span>
-  <span class="combobox-chip">Astro <button class="combobox-chip-remove" type="button" aria-label="Remove Astro"></button></span>
-  <input placeholder="Add framework" />
-</div>
-
-<div class="combobox" data-sp-toggle="#cb-preselected-field">
-  <div class="combobox-empty">No items found.</div>
-  <div class="combobox-list">
-    <div class="combobox-item"><input type="radio" name="cb-preselected" value="next" /> Next.js</div>
-    <div class="combobox-item"><input type="radio" name="cb-preselected" value="sveltekit" /> SvelteKit</div>
-    <div class="combobox-item"><input type="radio" name="cb-preselected" value="nuxt" checked /> Nuxt.js</div>
-    <div class="combobox-item"><input type="radio" name="cb-preselected" value="remix" /> Remix</div>
-    <div class="combobox-item"><input type="radio" name="cb-preselected" value="astro" /> Astro</div>
+```html preview preset=base align=top
+<div class="flex w-full max-w-sm flex-col gap-4">
+  <div class="input-group" id="cb-preselected-field">
+    <input class="input" placeholder="Select a framework" value="Nuxt.js" />
+    <span class="input-group-addon input-group-addon-end">
+      <button class="btn btn-ghost btn-xs btn-icon" type="button" tabindex="-1" aria-label="Open list"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+    </span>
   </div>
-</div>
 
-<div class="combobox" data-sp-toggle="#cb-preselected-chips">
-  <div class="combobox-empty">No items found.</div>
-  <div class="combobox-list">
-    <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="next" /> Next.js</div>
-    <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="sveltekit" checked /> SvelteKit</div>
-    <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="nuxt" /> Nuxt.js</div>
-    <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="remix" /> Remix</div>
-    <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="astro" checked /> Astro</div>
+  <div class="combobox-chips" id="cb-preselected-chips">
+    <span class="combobox-chip">SvelteKit <button class="combobox-chip-remove" type="button" aria-label="Remove SvelteKit"></button></span>
+    <span class="combobox-chip">Astro <button class="combobox-chip-remove" type="button" aria-label="Remove Astro"></button></span>
+    <input placeholder="Add framework" />
+  </div>
+
+  <div class="combobox" data-sp-toggle="#cb-preselected-field">
+    <div class="combobox-empty">No items found.</div>
+    <div class="combobox-list">
+      <div class="combobox-item"><input type="radio" name="cb-preselected" value="next" /> Next.js</div>
+      <div class="combobox-item"><input type="radio" name="cb-preselected" value="sveltekit" /> SvelteKit</div>
+      <div class="combobox-item"><input type="radio" name="cb-preselected" value="nuxt" checked /> Nuxt.js</div>
+      <div class="combobox-item"><input type="radio" name="cb-preselected" value="remix" /> Remix</div>
+      <div class="combobox-item"><input type="radio" name="cb-preselected" value="astro" /> Astro</div>
+    </div>
+  </div>
+
+  <div class="combobox" data-sp-toggle="#cb-preselected-chips">
+    <div class="combobox-empty">No items found.</div>
+    <div class="combobox-list">
+      <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="next" /> Next.js</div>
+      <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="sveltekit" checked /> SvelteKit</div>
+      <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="nuxt" /> Nuxt.js</div>
+      <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="remix" /> Remix</div>
+      <div class="combobox-item"><input type="checkbox" name="cb-preselected-multi" value="astro" checked /> Astro</div>
+    </div>
   </div>
 </div>
 ```
@@ -134,8 +136,8 @@ Author `checked` on the options and the selection renders before JavaScript init
 
 Point the combobox at a `combobox-chips` field and use checkbox inputs: every choice renders as a removable chip, and Backspace in the empty input removes the newest one. Author a chip for each pre-checked option and the selection paints before JavaScript loads.
 
-```html preview preset=form-start open=.combobox
-<div class="combobox-chips" id="cb-multi-chips">
+```html preview preset=base align=top open=.combobox
+<div class="combobox-chips w-full max-w-sm" id="cb-multi-chips">
   <span class="combobox-chip">Next.js <button class="combobox-chip-remove" type="button" aria-label="Remove Next.js"></button></span>
   <span class="combobox-chip">Nuxt.js <button class="combobox-chip-remove" type="button" aria-label="Remove Nuxt.js"></button></span>
   <input placeholder="Add framework" />
@@ -157,8 +159,8 @@ Point the combobox at a `combobox-chips` field and use checkbox inputs: every ch
 
 Add a `combobox-clear` button to the field; it shows while something is selected and clears the selection.
 
-```html preview preset=form-start
-<div class="input-group" id="cb-clear-field">
+```html preview preset=base align=top
+<div class="input-group w-full max-w-sm" id="cb-clear-field">
   <input class="input" placeholder="Select a framework" value="Next.js" />
   <span class="input-group-addon input-group-addon-end">
     <button class="btn btn-ghost btn-xs btn-icon combobox-clear" type="button" aria-label="Clear selection"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
@@ -181,8 +183,8 @@ Add a `combobox-clear` button to the field; it shows while something is selected
 
 Wrap a `combobox-label` and its options in a `combobox-group`; a group disappears when the filter empties it.
 
-```html preview preset=form-start open=.combobox
-<div class="input-group" id="cb-groups-field">
+```html preview preset=base align=top open=.combobox
+<div class="input-group w-full max-w-sm" id="cb-groups-field">
   <input class="input" placeholder="Select a timezone" />
   <span class="input-group-addon input-group-addon-end">
     <button class="btn btn-ghost btn-xs btn-icon" type="button" tabindex="-1" aria-label="Open list"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -229,8 +231,8 @@ Wrap a `combobox-label` and its options in a `combobox-group`; a group disappear
 
 Options can hold any markup; set `data-sp-label` so filtering and the field text use the label instead of the full contents.
 
-```html preview preset=form-start open=.combobox
-<div class="input-group" id="cb-custom-field">
+```html preview preset=base align=top open=.combobox
+<div class="input-group w-full max-w-sm" id="cb-custom-field">
   <input class="input" placeholder="Search countries..." />
   <span class="input-group-addon input-group-addon-end">
     <button class="btn btn-ghost btn-xs btn-icon" type="button" tabindex="-1" aria-label="Open list"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -381,8 +383,8 @@ Options can hold any markup; set `data-sp-label` so filtering and the field text
 
 Set `aria-invalid` on the input and the field shows the error ring.
 
-```html preview preset=form-start
-<div class="field">
+```html preview preset=base align=top
+<div class="field w-full max-w-sm">
   <label class="label" for="cb-invalid-input">Framework</label>
   <div class="input-group" id="cb-invalid-field">
     <input class="input" id="cb-invalid-input" placeholder="Select a framework" aria-invalid="true" />
@@ -409,8 +411,8 @@ Set `aria-invalid` on the input and the field shows the error ring.
 
 Add `disabled` to the input and the whole field mutes itself and stops opening.
 
-```html preview preset=form-start
-<div class="field">
+```html preview preset=base align=top
+<div class="field w-full max-w-sm">
   <label class="label" for="cb-disabled-input">Framework</label>
   <div class="input-group" id="cb-disabled-field">
     <input class="input" id="cb-disabled-input" placeholder="Select a framework" disabled />
@@ -437,8 +439,8 @@ Add `disabled` to the input and the whole field mutes itself and stops opening.
 
 Add `data-sp-auto-highlight` and the first match highlights while the user types, so Enter selects it right away.
 
-```html preview preset=form-start open=.combobox
-<div class="input-group" id="cb-auto-field">
+```html preview preset=base align=top open=.combobox
+<div class="input-group w-full max-w-sm" id="cb-auto-field">
   <input class="input" placeholder="Select a framework" />
   <span class="input-group-addon input-group-addon-end">
     <button class="btn btn-ghost btn-xs btn-icon" type="button" tabindex="-1" aria-label="Open list"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -461,8 +463,8 @@ Add `data-sp-auto-highlight` and the first match highlights while the user types
 
 The field is a regular [input group](/components/input-group), so addons like a leading icon compose in.
 
-```html preview preset=form-start open=.combobox
-<div class="input-group" id="cb-addon-field">
+```html preview preset=base align=top open=.combobox
+<div class="input-group w-full max-w-sm" id="cb-addon-field">
   <span class="input-group-addon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
   <input class="input" placeholder="Select a timezone" />
   <span class="input-group-addon input-group-addon-end">
@@ -508,8 +510,8 @@ The field is a regular [input group](/components/input-group), so addons like a 
 
 The hidden inputs are real form fields, so the selections submit with the form: read a single select with `FormData.get` and a multi select with `FormData.getAll`, or query `input[name]:checked` directly.
 
-```html preview preset=form-start
-<form id="cb-form" class="field-group">
+```html preview preset=base align=top
+<form id="cb-form" class="field-group w-full max-w-sm">
   <div class="field">
     <label class="label" for="cb-form-framework">Framework</label>
     <div class="input-group" id="cb-form-single">
@@ -565,8 +567,8 @@ The hidden inputs are real form fields, so the selections submit with the form: 
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form-start open=.combobox dir=rtl
-<div id="combobox-rtl-demo" dir="rtl">
+```html preview preset=base align=top open=.combobox dir=rtl
+<div id="combobox-rtl-demo" dir="rtl" class="w-full max-w-sm">
   <div class="field">
     <label class="label" for="combobox-rtl-input" data-i18n="label">الفئات</label>
     <div class="combobox-chips" id="combobox-rtl-chips">
