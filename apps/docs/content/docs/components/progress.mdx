@@ -5,8 +5,8 @@ description: A progress component for Tailwind CSS with beautiful shadcn/ui styl
 
 The progress bar shows how far along a task is, like an upload, an onboarding flow, or a playback position. For picking a value, reach for the [slider](/components/slider).
 
-```html preview preset=form
-<progress class="progress" value="33" max="100" aria-label="Upload progress"></progress>
+```html preview preset=sm
+<progress class="progress w-full max-w-sm" value="33" max="100" aria-label="Upload progress"></progress>
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ Add the `progress` class to a `<progress>` element with `value` and `max` attrib
 | `progress` | Add to a `<progress>` element      |
 
 ```html
-<progress class="progress" value="33" max="100"></progress>
+<progress class="progress w-full max-w-sm" value="33" max="100"></progress>
 ```
 
 ## Examples
@@ -27,8 +27,8 @@ Add the `progress` class to a `<progress>` element with `value` and `max` attrib
 
 Pair the bar with a [label](/components/label) and value in a [field](/components/field).
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <label class="label" for="progress-upload">
     <span>Upload progress</span>
     <span class="ml-auto tabular-nums">66%</span>
@@ -41,17 +41,19 @@ Pair the bar with a [label](/components/label) and value in a [field](/component
 
 Drive the bar from JavaScript by setting `value`; start the upload to watch it fill.
 
-```html preview preset=form
-<div class="field">
-  <label class="label" for="progress-sim">Uploading backup.zip</label>
-  <progress class="progress" id="progress-sim" value="0" max="100"></progress>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-4">
+  <div class="field">
+    <label class="label" for="progress-sim">Uploading backup.zip</label>
+    <progress class="progress" id="progress-sim" value="0" max="100"></progress>
+  </div>
+  <button
+    class="btn btn-outline"
+    onclick="var bar = document.getElementById('progress-sim'); if (bar.dataset.running) return; bar.dataset.running = '1'; bar.value = 0; var t = setInterval(function () { bar.value = Math.min(100, bar.value + 1 + Math.random() * 4); if (bar.value >= 100) { clearInterval(t); delete bar.dataset.running } }, 80)"
+  >
+    Start upload
+  </button>
 </div>
-<button
-  class="btn btn-outline"
-  onclick="var bar = document.getElementById('progress-sim'); if (bar.dataset.running) return; bar.dataset.running = '1'; bar.value = 0; var t = setInterval(function () { bar.value = Math.min(100, bar.value + 1 + Math.random() * 4); if (bar.value >= 100) { clearInterval(t); delete bar.dataset.running } }, 80)"
->
-  Start upload
-</button>
 ```
 
 ```js
@@ -67,8 +69,8 @@ const timer = setInterval(() => {
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<div id="progress-rtl-demo" dir="rtl">
+```html preview preset=sm dir=rtl
+<div id="progress-rtl-demo" dir="rtl" class="w-full max-w-sm">
   <div class="field">
     <label class="label" for="progress-rtl-upload">
       <span data-i18n="label">تقدم الرفع</span>
