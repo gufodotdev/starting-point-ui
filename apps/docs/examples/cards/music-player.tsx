@@ -2,7 +2,7 @@ import { Pause, Repeat, Shuffle, SkipBack, SkipForward } from "lucide-react";
 
 export default function MusicPlayer() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <img
         src="https://images.unsplash.com/photo-1605084198811-7a358b91dc15?rect=0,0,4000,4000&w=640&h=640&fit=crop&auto=format&q=100"
         alt="Album cover"

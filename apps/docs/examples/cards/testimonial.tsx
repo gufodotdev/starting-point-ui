@@ -2,7 +2,7 @@ import { Star } from "lucide-react";
 
 export default function Testimonial() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-content flex flex-col gap-6">
         <div className="flex gap-1">
           <Star className="size-4.5 text-primary" fill="currentColor" />

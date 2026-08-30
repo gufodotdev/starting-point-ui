@@ -1,6 +1,6 @@
 export default function Attendance() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-header">
         <div className="card-title">Attendance</div>
         <div className="card-description">

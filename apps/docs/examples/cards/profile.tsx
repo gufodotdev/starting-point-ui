@@ -2,7 +2,7 @@ import { Plus } from "lucide-react";
 
 export default function Profile() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-content">
         <img
           src="https://images.unsplash.com/photo-1604573824303-d0177f69461f?rect=0,0,4000,4000&w=640&h=640&fit=crop&auto=format&q=100"

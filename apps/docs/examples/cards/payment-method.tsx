@@ -1,6 +1,6 @@
 export default function PaymentMethod() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-header">
         <h3 className="card-title">Payment Method</h3>
         <p className="card-description">

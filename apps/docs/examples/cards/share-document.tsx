@@ -2,7 +2,7 @@ import { Copy } from "lucide-react";
 
 export default function ShareDocument() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-header">
         <h3 className="card-title">Share Document</h3>
         <p className="card-description">

@@ -1,6 +1,6 @@
 export default function BlogPost() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <img
         src="https://images.unsplash.com/photo-1592765213254-f101ad9b8f76?rect=0,0,3000,2000&w=640&h=427&fit=crop&auto=format&q=100"
         alt="White blossoms in muted warm tones"

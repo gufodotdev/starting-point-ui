@@ -39,7 +39,7 @@ const items: CartItem[] = [
 
 export default function ShoppingCart() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-header">
         <div className="card-title">Shopping Cart</div>
         <div className="card-description">

@@ -2,7 +2,7 @@ import { Plus, Star } from "lucide-react";
 
 export default function Product() {
   return (
-    <div className="card relative">
+    <div className="card relative w-full max-w-sm">
       <img
         src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?rect=0,0,4896,3264&w=640&h=427&fit=crop&auto=format&q=100"
         alt="Vintage leather sofa"

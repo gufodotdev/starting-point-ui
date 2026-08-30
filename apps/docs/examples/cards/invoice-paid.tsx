@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 
 export default function InvoicePaid() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-content flex flex-col items-center gap-4 text-center text-balance">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
           <Check className="size-6" />

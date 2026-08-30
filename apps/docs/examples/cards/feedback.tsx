@@ -1,6 +1,6 @@
 export default function Feedback() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-header">
         <h3 className="card-title">Submit Feedback</h3>
         <p className="card-description">

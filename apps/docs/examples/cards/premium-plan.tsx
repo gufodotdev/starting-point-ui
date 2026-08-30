@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 
 export default function PremiumPlan() {
   return (
-    <div className="card">
+    <div className="card w-full max-w-sm">
       <div className="card-header">
         <h3 className="card-title">Premium Plan</h3>
       </div>
