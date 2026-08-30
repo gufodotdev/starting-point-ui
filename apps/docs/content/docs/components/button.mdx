@@ -5,7 +5,7 @@ description: A button component for Tailwind CSS with beautiful shadcn/ui stylin
 
 The button triggers an action with a click or key press. Use it for submitting forms, confirming decisions, and opening overlays like dialogs; for a set of related actions, attach several into a [button group](/components/button-group).
 
-```html preview
+```html preview preset=sm
 <button class="btn btn-outline">Button</button>
 <button class="btn btn-outline btn-icon" aria-label="Submit">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
@@ -36,7 +36,7 @@ Add the `btn` class to a `<button>` or `<a>` element.
 
 Use the variant classes to communicate intent and hierarchy.
 
-```html preview
+```html preview preset=sm
 <button class="btn">Default</button>
 <button class="btn btn-outline">Outline</button>
 <button class="btn btn-secondary">Secondary</button>
@@ -49,7 +49,7 @@ Use the variant classes to communicate intent and hierarchy.
 
 Use the size classes to change the size of the button.
 
-```html preview
+```html preview preset=sm
 <div class="flex items-center gap-2">
   <button class="btn btn-outline btn-xs">Extra Small</button>
   <button class="btn btn-outline btn-xs btn-icon" aria-label="Submit">
@@ -83,7 +83,7 @@ Use the size classes to change the size of the button.
 
 Place an icon before or after the label, and add `icon-start` or `icon-end` to it for the correct spacing. For a square icon-only button, add `btn-icon` and give it an `aria-label`; for a loading state, pair `disabled` with a spinning icon.
 
-```html preview
+```html preview preset=sm
 <button class="btn btn-outline">
   <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
   Export
@@ -105,7 +105,7 @@ Place an icon before or after the label, and add `icon-start` or `icon-end` to i
 
 Add a `<span>` with `btn-badge` inside the button for a corner count; recolor it with background utilities like `bg-destructive`.
 
-```html preview
+```html preview preset=sm
 <button class="btn btn-outline btn-icon" aria-label="Open notifications">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
   <span class="btn-badge bg-destructive">3</span>
@@ -120,7 +120,7 @@ Add a `<span>` with `btn-badge` inside the button for a corner count; recolor it
 
 Attach related buttons into one segmented control with a [button group](/components/button-group).
 
-```html preview
+```html preview preset=sm
 <div class="btn-group">
   <button class="btn btn-outline">Archive</button>
   <button class="btn btn-outline">Report</button>
@@ -132,7 +132,7 @@ Attach related buttons into one segmented control with a [button group](/compone
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Flip directional icons with `rtl:rotate-180`. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=sm dir=rtl
 <div id="button-rtl-demo" class="flex flex-wrap items-center gap-2" dir="rtl">
   <button class="btn btn-outline" data-i18n="button">زر</button>
   <button class="btn btn-destructive" data-i18n="delete">حذف</button>
