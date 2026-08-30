@@ -5,7 +5,7 @@ description: A breadcrumb component for Tailwind CSS with beautiful shadcn/ui st
 
 The breadcrumb shows where the current page sits in the hierarchy, with links back up to each ancestor. Long paths can collapse their middle into an ellipsis or a [dropdown](/components/dropdown).
 
-```html preview
+```html preview preset=sm
 <nav class="breadcrumb">
   <a href="#" class="breadcrumb-item">Home</a>
   <span class="breadcrumb-separator">
@@ -68,7 +68,7 @@ Add the `breadcrumb` class to a `<nav>` and put one `breadcrumb-item` link per l
 
 A trail of links ending in the current page.
 
-```html preview
+```html preview preset=sm
 <nav class="breadcrumb">
   <a href="#" class="breadcrumb-item">Home</a>
   <span class="breadcrumb-separator">
@@ -86,7 +86,7 @@ A trail of links ending in the current page.
 
 Put any icon inside the separators.
 
-```html preview
+```html preview preset=sm
 <nav class="breadcrumb">
   <a href="#" class="breadcrumb-item">Home</a>
   <span class="breadcrumb-separator">
@@ -104,7 +104,7 @@ Put any icon inside the separators.
 
 An item can open a [dropdown](/components/dropdown) with sibling pages.
 
-```html preview
+```html preview preset=sm
 <nav class="breadcrumb">
   <a href="#" class="breadcrumb-item">Home</a>
   <span class="breadcrumb-separator">
@@ -138,7 +138,7 @@ An item can open a [dropdown](/components/dropdown) with sibling pages.
 
 Stand in for collapsed middle items with a `breadcrumb-ellipsis`.
 
-```html preview
+```html preview preset=sm
 <nav class="breadcrumb">
   <a href="#" class="breadcrumb-item">Home</a>
   <span class="breadcrumb-separator">
@@ -163,7 +163,7 @@ Stand in for collapsed middle items with a `breadcrumb-ellipsis`.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview dir=rtl
+```html preview preset=sm dir=rtl
 <div id="breadcrumb-rtl-demo" dir="rtl">
   <nav class="breadcrumb">
     <a href="#" class="breadcrumb-item" data-i18n="home">الرئيسية</a>
