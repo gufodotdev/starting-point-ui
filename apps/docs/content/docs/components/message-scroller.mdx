@@ -5,7 +5,7 @@ description: A message scroller component for Tailwind CSS with beautiful shadcn
 
 The message scroller is the scrolling viewport of a chat: it follows new messages as they arrive, pins fresh turns to the top like an AI assistant, and keeps the reader's place when older history loads in. Use it around [message](/components/message) rows for messaging UIs and AI chats.
 
-```html preview preset=card
+```html preview preset=base h=46rem
 %include examples/cards/chat.tsx%
 ```
 
@@ -39,8 +39,8 @@ Add the `message-scroller` class to a container with a height. Inside it, add a 
 
 Add `data-sp-anchor` to a turn to pin it to the top of the viewport when it arrives.
 
-```html preview preset=message
-<div class="flex w-full flex-col gap-4">
+```html preview preset=base h=46rem
+<div class="flex w-full max-w-sm flex-col gap-4">
   <div class="card mx-auto h-140 w-full max-w-sm gap-0">
     <div class="card-header border-b">
       <div class="card-title">Anchoring Turns</div>
@@ -144,8 +144,8 @@ anchorSync();
 
 Markers work as turns too: give the join event `data-sp-anchor` and the thread settles on it like any other turn.
 
-```html preview preset=message
-<div class="flex w-full flex-col gap-4">
+```html preview preset=base h=46rem
+<div class="flex w-full max-w-sm flex-col gap-4">
   <div class="card mx-auto h-140 w-full max-w-sm gap-0">
     <div class="card-header border-b">
       <div class="card-title">Group Chat</div>
@@ -244,8 +244,8 @@ groupSync();
 
 Add `data-sp-auto-scroll` to follow new messages as they arrive; scrolling up releases it, and the button brings it back.
 
-```html preview preset=message
-<div class="flex w-full flex-col gap-4">
+```html preview preset=base h=46rem
+<div class="flex w-full max-w-sm flex-col gap-4">
   <div class="card mx-auto h-140 w-full max-w-sm gap-0">
     <div class="card-header border-b">
       <div class="card-title">Streaming Messages</div>
@@ -404,8 +404,8 @@ streamSync();
 
 Set `data-sp-position` to `start`, `end`, or `last-anchor` for where the scroller opens; `last-anchor` starts at the newest turn.
 
-```html preview preset=message
-<div class="flex w-full flex-col gap-4">
+```html preview preset=base h=46rem
+<div class="flex w-full max-w-sm flex-col gap-4">
   <div class="card mx-auto h-140 w-full max-w-sm gap-0">
     <div class="card-header border-b">
       <div class="card-title">Opening Position</div>
@@ -489,8 +489,8 @@ document.querySelectorAll("#open-tabs .tab").forEach((tab) => {
 
 Messages inserted at the top keep the reader's place automatically; turn it off with `data-sp-preserve-prepend="false"`.
 
-```html preview preset=message
-<div class="flex w-full flex-col gap-4">
+```html preview preset=base h=46rem
+<div class="flex w-full max-w-sm flex-col gap-4">
   <div class="card mx-auto h-140 w-full max-w-sm gap-0">
     <div class="card-header border-b">
       <div class="card-title">Load History</div>
@@ -625,8 +625,8 @@ historyReset.addEventListener("click", () => {
 
 Call `scrollToMessage` with an item's `id` to jump the viewport to it.
 
-```html preview preset=message
-<div class="flex w-full flex-col gap-4">
+```html preview preset=base h=46rem
+<div class="flex w-full max-w-sm flex-col gap-4">
   <div class="card mx-auto h-140 w-full max-w-sm gap-0">
     <div class="card-header border-b">
       <div class="card-title">Commands</div>
@@ -755,8 +755,8 @@ document.querySelectorAll("#command-content [data-sp-anchor]").forEach((item) =>
 
 The scroller mirrors its reachable edges onto `data-sp-scrollable` and reports changes through `sp-change`.
 
-```html preview preset=message
-<div class="mx-auto flex w-full max-w-sm flex-col gap-4">
+```html preview preset=base h=46rem
+<div class="flex w-full max-w-sm flex-col gap-4">
   <div class="card h-140 w-full gap-0">
     <div class="card-header border-b">
       <div class="card-title">Scroll Status</div>
@@ -824,8 +824,8 @@ document.querySelector("#state-scroller").addEventListener("sp-change", (e) => {
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=message dir=rtl
-<div id="message-scroller-rtl-demo" dir="rtl" class="w-full">
+```html preview preset=base dir=rtl
+<div id="message-scroller-rtl-demo" dir="rtl" class="w-full max-w-sm">
   <div class="card mx-auto h-96 w-full max-w-sm gap-0 py-0">
     <div class="message-scroller size-full" data-sp-auto-scroll>
       <div class="message-scroller-viewport">
