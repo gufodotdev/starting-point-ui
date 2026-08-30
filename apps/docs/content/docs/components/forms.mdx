@@ -5,8 +5,8 @@ description: Form components for Tailwind CSS with beautiful shadcn/ui styling. 
 
 Forms compose from small pieces: a [field](/components/field) lays out each label, control, and description, and the controls build on native form elements, so values submit with the form. This page shows the pieces working together and links out to each one.
 
-```html preview preset=form
-<form class="field-group">
+```html preview preset=base h=106rem
+<form class="field-group w-full max-w-sm">
   <fieldset class="field-set">
     <legend class="field-legend">Contact</legend>
     <p class="field-description">How we can reach you about your booking.</p>
@@ -141,8 +141,8 @@ Forms compose from small pieces: a [field](/components/field) lays out each labe
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<form id="forms-rtl-demo" class="field-group" dir="rtl">
+```html preview preset=base h=50rem dir=rtl
+<form id="forms-rtl-demo" class="field-group w-full max-w-sm" dir="rtl">
   <fieldset class="field-set">
     <legend class="field-legend" data-i18n="paymentMethod">طريقة الدفع</legend>
     <p class="field-description" data-i18n="secureTransactions">جميع المعاملات آمنة ومشفرة</p>
