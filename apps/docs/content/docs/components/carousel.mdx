@@ -5,7 +5,7 @@ description: A carousel slider component for Tailwind CSS with beautiful shadcn/
 
 The carousel cycles through a series of slides in place. Use it for image galleries, product showcases, testimonials, or hero sections; for sections readers pick by name instead of browsing, reach for [tabs](/components/tabs).
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel w-full max-w-48 sm:max-w-xs">
   <div class="carousel-content">
     <div class="carousel-item">
@@ -107,7 +107,7 @@ Add the `carousel` class to a container. Inside it, add a `carousel-content` ele
 
 `carousel-item-<number>` sets how many slides share the view. Use plain `basis-*` utilities instead when the next slide should peek in at the edge.
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel w-full max-w-48 sm:max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-4xl">
   <div class="carousel-content">
     <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
@@ -181,7 +181,7 @@ Add the `carousel` class to a container. Inside it, add a `carousel-content` ele
 
 Set the gap between slides with the `--carousel-gap` variable on `carousel-content`.
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel w-full max-w-48 sm:max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-4xl">
   <div class="carousel-content [--carousel-gap:--spacing(1)]">
     <div class="carousel-item sm:carousel-item-2 md:carousel-item-3">
@@ -255,7 +255,7 @@ Set the gap between slides with the `--carousel-gap` variable on `carousel-conte
 
 Add `carousel-vertical` to scroll vertically and give `carousel-content` a height.
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel carousel-vertical w-full max-w-xs">
   <div class="carousel-content h-[270px] [--carousel-gap:--spacing(1)]">
     <div class="carousel-item carousel-item-2">
@@ -319,7 +319,7 @@ Add `carousel-vertical` to scroll vertically and give `carousel-content` a heigh
 
 Add `carousel-fade` to crossfade slides in place, and mark the starting slide with `active`.
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel carousel-fade w-full max-w-48 sm:max-w-xs">
   <div class="carousel-content">
     <div class="carousel-item active">
@@ -371,7 +371,7 @@ Add `carousel-fade` to crossfade slides in place, and mark the starting slide wi
 
 Listen for `sp-change` to track the current slide.
 
-```html preview preset=carousel
+```html preview preset=base
 <div>
   <div class="carousel w-full max-w-48 sm:max-w-xs" id="carousel-counter-demo">
     <div class="carousel-content">
@@ -461,7 +461,7 @@ counterCarousel.addEventListener("sp-change", (e) => {
 
 Children of a `carousel-pagination` container page to their slide by position, and the current one carries `active`.
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel w-full max-w-48 sm:max-w-xs">
   <div class="relative">
     <div class="carousel-content">
@@ -559,7 +559,7 @@ Children of a `carousel-pagination` container page to their slide by position, a
 
 The `--sp-carousel-index` and `--sp-carousel-count` variables render a display-only position bar with pure CSS.
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel w-full max-w-48 sm:max-w-xs">
   <div class="relative">
     <div class="carousel-content">
@@ -640,7 +640,7 @@ The `--sp-carousel-index` and `--sp-carousel-count` variables render a display-o
 
 Add `data-sp-loop` to wrap around at the ends.
 
-```html preview preset=carousel
+```html preview preset=base
 <div class="carousel w-full max-w-48 sm:max-w-xs" data-sp-loop>
   <div class="carousel-content">
     <div class="carousel-item">
@@ -718,7 +718,7 @@ Add `data-sp-loop` to wrap around at the ends.
 
 Add `data-sp-autoplay` with a delay in milliseconds to rotate the slides automatically.
 
-```html preview preset=carousel
+```html preview preset=base
 <div
   class="carousel w-full max-w-48 sm:max-w-xs"
   data-sp-loop
@@ -796,7 +796,7 @@ Add `data-sp-autoplay` with a delay in milliseconds to rotate the slides automat
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details. Flip directional icons with `rtl:rotate-180`.
 
-```html preview preset=carousel dir=rtl
+```html preview preset=base dir=rtl
 <div dir="rtl" class="carousel w-full max-w-48 sm:max-w-xs">
   <div class="carousel-content">
     <div class="carousel-item">
