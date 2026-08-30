@@ -5,10 +5,12 @@ description: A text shimmer utility for Tailwind CSS with beautiful shadcn/ui st
 
 The shimmer sweeps a soft highlight across text, signaling that something is in progress. Use it for thinking indicators, streaming status lines, and anywhere a spinner would be too loud; in chat it pairs with the [marker](/components/marker) component.
 
-```html preview preset=message
-<span class="shimmer text-sm text-muted-foreground">Thinking...</span>
-<span class="shimmer text-sm text-muted-foreground">Generating a response</span>
-<span class="shimmer font-medium">Reading 4 files</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer text-sm text-muted-foreground">Thinking...</span>
+  <span class="shimmer text-sm text-muted-foreground">Generating a response</span>
+  <span class="shimmer font-medium">Reading 4 files</span>
+</div>
 ```
 
 ## Usage
@@ -36,15 +38,17 @@ Add the `shimmer` class to any text element.
 
 Compose shimmer with a [marker](/components/marker) for chat status lines.
 
-```html preview preset=message
-<div class="marker" role="status">
-  <span class="marker-icon" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-  </span>
-  <span class="marker-content shimmer">Thinking...</span>
-</div>
-<div class="marker marker-separator" role="status">
-  <span class="marker-content shimmer">Reading 4 files</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <div class="marker" role="status">
+    <span class="marker-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    </span>
+    <span class="marker-content shimmer">Thinking...</span>
+  </div>
+  <div class="marker marker-separator" role="status">
+    <span class="marker-content shimmer">Reading 4 files</span>
+  </div>
 </div>
 ```
 
@@ -52,67 +56,81 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 
 `shimmer-color-<color>` sets the highlight color: theme colors with an opacity modifier, or any arbitrary value.
 
-```html preview preset=message
-<span class="shimmer shimmer-color-blue-500/60 text-sm">Generating response...</span>
-<span class="shimmer shimmer-color-[#378ADD] text-sm">Generating response...</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer shimmer-color-blue-500/60 text-sm">Generating response...</span>
+  <span class="shimmer shimmer-color-[#378ADD] text-sm">Generating response...</span>
+</div>
 ```
 
 ### Duration
 
 `shimmer-duration-<number>` sets one sweep's length in milliseconds; the default is `2000`.
 
-```html preview preset=message
-<span class="shimmer text-sm">Generating response...</span>
-<span class="shimmer shimmer-duration-1000 text-sm">Generating response...</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer text-sm">Generating response...</span>
+  <span class="shimmer shimmer-duration-1000 text-sm">Generating response...</span>
+</div>
 ```
 
 ### Spread
 
 `shimmer-spread-<number>` sets the highlight band's width on the spacing scale. Use an arbitrary length or percentage for one-off values.
 
-```html preview preset=message
-<span class="shimmer shimmer-spread-24 text-sm">Generating response...</span>
-<span class="shimmer shimmer-spread-[5rem] text-sm">Generating response...</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer shimmer-spread-24 text-sm">Generating response...</span>
+  <span class="shimmer shimmer-spread-[5rem] text-sm">Generating response...</span>
+</div>
 ```
 
 ### Angle
 
 `shimmer-angle-<number>` tilts the highlight band in degrees; the default is `20`.
 
-```html preview preset=message
-<span class="shimmer shimmer-angle-45 text-sm">Generating response...</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer shimmer-angle-45 text-sm">Generating response...</span>
+</div>
 ```
 
 ### Reverse
 
 `shimmer-reverse` sweeps the highlight in the opposite direction.
 
-```html preview preset=message
-<span class="shimmer shimmer-reverse text-sm">Generating response...</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer shimmer-reverse text-sm">Generating response...</span>
+</div>
 ```
 
 ### Play once
 
 `shimmer-once` plays a single sweep instead of looping. Pair it with `shimmer-duration-<number>` to control how long the sweep takes.
 
-```html preview preset=message
-<span class="shimmer shimmer-duration-1100 shimmer-once text-sm">Response generated.</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer shimmer-duration-1100 shimmer-once text-sm">Response generated.</span>
+</div>
 ```
 
 ### Disable
 
 `shimmer-none` turns the effect off, so the text renders normally at a breakpoint or state.
 
-```html preview preset=message
-<span class="shimmer md:shimmer-none text-sm">Shimmering only below md</span>
+```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-8">
+  <span class="shimmer md:shimmer-none text-sm">Shimmering only below md</span>
+</div>
 ```
 
 ### RTL
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=message dir=rtl
-<div id="shimmer-rtl-demo" dir="rtl" class="flex w-full flex-col gap-6">
+```html preview preset=sm dir=rtl
+<div id="shimmer-rtl-demo" dir="rtl" class="flex w-full max-w-sm flex-col gap-6">
   <span class="shimmer text-sm text-muted-foreground" data-i18n="thinking">جارٍ التفكير...</span>
   <span class="shimmer font-medium" data-i18n="reading">قراءة 4 ملفات</span>
 </div>
