@@ -5,8 +5,8 @@ description: An accordion component for Tailwind CSS with beautiful shadcn/ui st
 
 The accordion stacks sections that expand and collapse in place, opening one at a time unless told otherwise, like an FAQ. For a single independent section, use a [collapsible](/components/collapsible).
 
-```html preview preset=accordion
-<div class="accordion">
+```html preview preset=base
+<div class="accordion w-full max-w-lg">
   <div class="accordion-item">
     <h3>
       <button id="acc-shipping" class="accordion-trigger" aria-expanded="true">
@@ -92,8 +92,8 @@ You can include an icon in the trigger, most commonly a chevron as its last chil
 
 Add `data-sp-multiple` and sections open independently.
 
-```html preview preset=accordion
-<div class="accordion" data-sp-multiple>
+```html preview preset=base
+<div class="accordion w-full max-w-lg" data-sp-multiple>
   <div class="accordion-item">
     <h3>
       <button
@@ -147,8 +147,8 @@ Add `data-sp-multiple` and sections open independently.
 
 Author the `expanded` class on a panel to start it open, and mirror `aria-expanded="true"` onto its trigger so state-driven styling, like the rotated chevron, paints correctly before JavaScript loads.
 
-```html preview preset=accordion
-<div class="accordion">
+```html preview preset=base
+<div class="accordion w-full max-w-lg">
   <div class="accordion-item">
     <h3>
       <button id="acc-open-trial" class="accordion-trigger">
@@ -184,8 +184,8 @@ Author the `expanded` class on a panel to start it open, and mirror `aria-expand
 
 The chevron is plain markup, so swap it for another icon, move it in front of the title, or leave it out. Nothing moves on its own: `in-aria-expanded:rotate-180` on the svg is what turns it while the section is open.
 
-```html preview preset=accordion
-<div class="accordion">
+```html preview preset=base
+<div class="accordion w-full max-w-lg">
   <div class="accordion-item">
     <h3>
       <button id="acc-icon-chevron" class="accordion-trigger" aria-expanded="true">
@@ -262,8 +262,8 @@ The chevron is plain markup, so swap it for another icon, move it in front of th
 
 Add `disabled` to a trigger to lock its section.
 
-```html preview preset=accordion
-<div class="accordion">
+```html preview preset=base
+<div class="accordion w-full max-w-lg">
   <div class="accordion-item">
     <h3>
       <button id="acc-history" class="accordion-trigger">
@@ -314,8 +314,8 @@ Add `disabled` to a trigger to lock its section.
 
 Wrap the accordion in a border and inset the items.
 
-```html preview preset=accordion
-<div class="accordion rounded-lg border">
+```html preview preset=base
+<div class="accordion w-full max-w-lg rounded-lg border">
   <div class="accordion-item px-4">
     <h3>
       <button id="acc-billing-b" class="accordion-trigger" aria-expanded="true">
@@ -365,8 +365,8 @@ Wrap the accordion in a border and inset the items.
 
 An accordion slots into a [card](/components/card) for a framed FAQ.
 
-```html preview preset=accordion
-<div class="card">
+```html preview preset=base
+<div class="card w-full max-w-lg">
   <div class="card-header">
     <h3 class="card-title">Subscription &amp; Billing</h3>
     <p class="card-description">
@@ -426,8 +426,8 @@ An accordion slots into a [card](/components/card) for a framed FAQ.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=accordion dir=rtl
-<div id="accordion-rtl-demo" class="accordion" dir="rtl">
+```html preview preset=base dir=rtl
+<div id="accordion-rtl-demo" class="accordion w-full max-w-lg" dir="rtl">
   <div class="accordion-item">
     <h3>
       <button
