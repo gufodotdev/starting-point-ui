@@ -5,7 +5,7 @@ description: A skeleton component for Tailwind CSS with beautiful shadcn/ui styl
 
 The skeleton shows a pulsing placeholder in the shape of the content while it loads. Use it to keep the layout steady while a page or panel fetches its data; for progress with a known duration, reach for the [progress](/components/progress) bar.
 
-```html preview preset=skeleton
+```html preview preset=sm
 <div class="flex items-center gap-4">
   <div class="skeleton size-12 rounded-full"></div>
   <div class="flex flex-col gap-2">
@@ -33,7 +33,7 @@ Add the `skeleton` class to an element and size it with width and height utiliti
 
 A common pattern: a circle for the avatar and two bars for the text beside it.
 
-```html preview preset=skeleton
+```html preview preset=sm
 <div class="flex w-fit items-center gap-4">
   <div class="skeleton size-10 shrink-0 rounded-full"></div>
   <div class="grid gap-2">
@@ -47,7 +47,7 @@ A common pattern: a circle for the avatar and two bars for the text beside it.
 
 Skeletons standing in for a card's text and media.
 
-```html preview preset=skeleton
+```html preview preset=base
 <div class="card w-full max-w-xs">
   <div class="card-header">
     <div class="skeleton h-4 w-2/3"></div>
@@ -63,7 +63,7 @@ Skeletons standing in for a card's text and media.
 
 A paragraph placeholder from stacked bars.
 
-```html preview preset=skeleton
+```html preview preset=sm
 <div class="flex w-full max-w-xs flex-col gap-2">
   <div class="skeleton h-4 w-full"></div>
   <div class="skeleton h-4 w-full"></div>
@@ -75,7 +75,7 @@ A paragraph placeholder from stacked bars.
 
 Label and field pairs while a form loads.
 
-```html preview preset=skeleton
+```html preview preset=base
 <div class="flex w-full max-w-xs flex-col gap-7">
   <div class="flex flex-col gap-3">
     <div class="skeleton h-4 w-20"></div>
@@ -93,7 +93,7 @@ Label and field pairs while a form loads.
 
 Repeated rows of columns for tabular data.
 
-```html preview preset=skeleton
+```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-2">
   <div class="flex gap-4">
     <div class="skeleton h-4 flex-1"></div>
@@ -127,7 +127,7 @@ Repeated rows of columns for tabular data.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=skeleton dir=rtl
+```html preview preset=sm dir=rtl
 <div id="skeleton-rtl-demo" dir="rtl" class="flex items-center gap-4">
   <div class="skeleton size-12 rounded-full"></div>
   <div class="flex flex-col gap-2">
