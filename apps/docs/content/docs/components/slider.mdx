@@ -5,8 +5,8 @@ description: A slider component for Tailwind CSS with beautiful shadcn/ui stylin
 
 The slider picks a numeric value from a range by dragging a thumb along a track, like volume or a price cap.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <span class="field-title">Volume</span>
   <p class="field-description">
     Set the playback volume (
@@ -58,8 +58,8 @@ Add the `slider` class to an `<input type="range">`. The filled part of the trac
 
 Overlay two sliders in a `slider-range` to pick a range with two thumbs; the wrapper paints the shared fill and keeps the thumbs from crossing.
 
-```html preview preset=form
-<div class="slider-range" style="--val-min: 25%; --val-max: 50%">
+```html preview preset=sm
+<div class="slider-range w-full max-w-sm" style="--val-min: 25%; --val-max: 50%">
   <input
     type="range"
     class="slider"
@@ -83,8 +83,8 @@ Overlay two sliders in a `slider-range` to pick a range with two thumbs; the wra
 
 The wrapper takes any number of sliders; each thumb is clamped between its neighbors.
 
-```html preview preset=form
-<div class="slider-range" style="--val-min: 10%; --val-max: 70%">
+```html preview preset=sm
+<div class="slider-range w-full max-w-sm" style="--val-min: 10%; --val-max: 70%">
   <input
     type="range"
     class="slider"
@@ -116,8 +116,8 @@ The wrapper takes any number of sliders; each thumb is clamped between its neigh
 
 Add `slider-vertical` for a bottom-to-top slider.
 
-```html preview preset=form
-<div class="flex items-center justify-center gap-6">
+```html preview preset=sm
+<div class="flex w-full max-w-sm items-center justify-center gap-6">
   <input
     type="range"
     class="slider slider-vertical"
@@ -143,8 +143,8 @@ Add `slider-vertical` for a bottom-to-top slider.
 
 Point an element at the slider with `data-sp-slider-value` and it mirrors the value automatically.
 
-```html preview preset=form
-<div class="grid gap-3">
+```html preview preset=sm
+<div class="grid w-full max-w-sm gap-3">
   <div class="flex items-center justify-between gap-2">
     <label class="label" for="slider-temperature">Temperature</label>
     <span
@@ -171,8 +171,8 @@ Point an element at the slider with `data-sp-slider-value` and it mirrors the va
 
 Wrap the slider in a [field](/components/field) with a title and description.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <span class="field-title">Price Range</span>
   <p class="field-description">
     Set your budget range ($
@@ -218,8 +218,8 @@ Wrap the slider in a [field](/components/field) with a title and description.
 
 Use `step` to snap the value to increments.
 
-```html preview preset=form
-<div class="field">
+```html preview preset=sm
+<div class="field w-full max-w-sm">
   <span class="field-title">Zoom</span>
   <p class="field-description">
     Snaps in steps of 25 (
@@ -249,10 +249,10 @@ Use `step` to snap the value to increments.
 
 Add `disabled` and the slider mutes itself and blocks interaction.
 
-```html preview preset=form
+```html preview preset=sm
 <input
   type="range"
-  class="slider"
+  class="slider w-full max-w-sm"
   max="100"
   step="1"
   value="50"
@@ -266,8 +266,8 @@ Add `disabled` and the slider mutes itself and blocks interaction.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<div id="slider-rtl-demo" dir="rtl">
+```html preview preset=sm dir=rtl
+<div id="slider-rtl-demo" dir="rtl" class="w-full max-w-sm">
   <input
     type="range"
     class="slider mx-auto w-full max-w-xs"
