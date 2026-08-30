@@ -5,8 +5,8 @@ description: A card component for Tailwind CSS with beautiful shadcn/ui styling.
 
 The card groups related content on one surface, like a login form, a stat, or a settings section.
 
-```html preview preset=form
-<div class="card">
+```html preview preset=lg
+<div class="card w-full max-w-sm">
   <div class="card-header">
     <h3 class="card-title">Login to your account</h3>
     <p class="card-description">
@@ -82,8 +82,8 @@ Add the `card` class to the surface and compose the sections inside.
 
 Add `card-sm` for a more compact card: the spacing tightens and the title drops a step.
 
-```html preview preset=form
-<div class="card card-sm mx-auto w-full max-w-xs">
+```html preview preset=lg
+<div class="card card-sm w-full max-w-xs">
   <div class="card-header">
     <h3 class="card-title">Scheduled reports</h3>
     <p class="card-description">Weekly snapshots. No manual exports.</p>
@@ -115,82 +115,84 @@ Add `card-sm` for a more compact card: the spacing tightens and the title drops 
 
 Set `--card-spacing` to control the section gaps and edge insets in one place.
 
-```html preview preset=form
-<div class="btn-group mx-auto" role="group" aria-label="Card spacing">
-  <button
-    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
-    data-spacing="4"
-    aria-pressed="false"
-  >
-    16px
-  </button>
-  <button
-    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
-    data-spacing="5"
-    aria-pressed="false"
-  >
-    20px
-  </button>
-  <button
-    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
-    data-spacing="6"
-    aria-pressed="true"
-  >
-    24px
-  </button>
-  <button
-    class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
-    data-spacing="8"
-    aria-pressed="false"
-  >
-    32px
-  </button>
-</div>
+```html preview preset=lg
+<div class="flex w-full max-w-sm flex-col items-center gap-4">
+  <div class="btn-group" role="group" aria-label="Card spacing">
+    <button
+      class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+      data-spacing="4"
+      aria-pressed="false"
+    >
+      16px
+    </button>
+    <button
+      class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+      data-spacing="5"
+      aria-pressed="false"
+    >
+      20px
+    </button>
+    <button
+      class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+      data-spacing="6"
+      aria-pressed="true"
+    >
+      24px
+    </button>
+    <button
+      class="btn btn-outline btn-sm aria-pressed:bg-accent aria-pressed:text-accent-foreground"
+      data-spacing="8"
+      aria-pressed="false"
+    >
+      32px
+    </button>
+  </div>
 
-<div class="card" id="card-spacing-demo">
-  <div class="card-header">
-    <h3 class="card-title">Login to your account</h3>
-    <p class="card-description">
-      Enter your email below to login to your account
-    </p>
-    <div class="card-action">
-      <button class="btn btn-link">Sign Up</button>
+  <div class="card w-full" id="card-spacing-demo">
+    <div class="card-header">
+      <h3 class="card-title">Login to your account</h3>
+      <p class="card-description">
+        Enter your email below to login to your account
+      </p>
+      <div class="card-action">
+        <button class="btn btn-link">Sign Up</button>
+      </div>
     </div>
-  </div>
-  <div class="card-content">
-    <form class="flex flex-col gap-6">
-      <div class="field">
-        <label class="label" for="card-spacing-email">Email</label>
-        <input
-          class="input"
-          id="card-spacing-email"
-          type="email"
-          placeholder="m@example.com"
-          required
-        />
-      </div>
-      <div class="field">
-        <div class="flex w-full items-center">
-          <label class="label" for="card-spacing-password">Password</label>
-          <a
-            href="#"
-            class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-          >
-            Forgot your password?
-          </a>
+    <div class="card-content">
+      <form class="flex flex-col gap-6">
+        <div class="field">
+          <label class="label" for="card-spacing-email">Email</label>
+          <input
+            class="input"
+            id="card-spacing-email"
+            type="email"
+            placeholder="m@example.com"
+            required
+          />
         </div>
-        <input
-          class="input"
-          id="card-spacing-password"
-          type="password"
-          required
-        />
-      </div>
-    </form>
-  </div>
-  <div class="card-footer flex-col gap-2">
-    <button type="submit" class="btn w-full">Login</button>
-    <button class="btn btn-outline w-full">Login with Google</button>
+        <div class="field">
+          <div class="flex w-full items-center">
+            <label class="label" for="card-spacing-password">Password</label>
+            <a
+              href="#"
+              class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+            >
+              Forgot your password?
+            </a>
+          </div>
+          <input
+            class="input"
+            id="card-spacing-password"
+            type="password"
+            required
+          />
+        </div>
+      </form>
+    </div>
+    <div class="card-footer flex-col gap-2">
+      <button type="submit" class="btn w-full">Login</button>
+      <button class="btn btn-outline w-full">Login with Google</button>
+    </div>
   </div>
 </div>
 
@@ -214,8 +216,8 @@ buttons.forEach((button) => {
 
 Use negative margins with `-mx-(--card-spacing)` to run content to the card edges while keeping it aligned with the inset.
 
-```html preview preset=form
-<div class="card">
+```html preview preset=lg
+<div class="card w-full max-w-sm">
   <div class="card-header">
     <h3 class="card-title">Terms of Service</h3>
     <p class="card-description">
@@ -256,8 +258,8 @@ Use negative margins with `-mx-(--card-spacing)` to run content to the card edge
 
 Add an image before the card header to create a card with an image.
 
-```html preview preset=form
-<div class="card relative pt-0">
+```html preview preset=lg
+<div class="card relative w-full max-w-sm pt-0">
   <div class="absolute inset-0 z-30 aspect-video bg-black/35"></div>
   <img
     src="https://avatar.vercel.sh/shadcn1"
@@ -283,8 +285,8 @@ Add an image before the card header to create a card with an image.
 
 Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Use logical utilities like `ms-auto` so alignment follows the text direction. See the [RTL guide](/guides/rtl) for details.
 
-```html preview preset=form dir=rtl
-<div id="card-rtl-demo" dir="rtl">
+```html preview preset=lg dir=rtl
+<div id="card-rtl-demo" dir="rtl" class="w-full max-w-sm">
   <div class="card">
     <div class="card-header">
       <h3 class="card-title" data-i18n="title">تسجيل الدخول إلى حسابك</h3>
