@@ -1,9 +1,9 @@
 ---
-title: Sheet
-description: A sheet component for Tailwind CSS with beautiful shadcn/ui styling. Use it to slide out a panel for edit forms, filters, and mobile navigation.
+title: Tailwind CSS Offcanvas Sheet
+description: Beautiful, modern offcanvas sheet component for Tailwind CSS. Use it to slide a side panel in from the edge, like an edit form or a menu. Easily customizable.
 ---
 
-The sheet slides a modal panel in from a screen edge. Use it for edit forms, filters, carts, and mobile navigation; for a centered window, reach for the [dialog](/components/dialog).
+Use the sheet component to slide a modal panel in from a screen edge, like an edit form, a filter panel, a cart, or a mobile menu. For a centered window, reach for the [dialog](/components/dialog), and for a touch panel with drag to dismiss, the [drawer](/components/drawer).
 
 ```html preview preset=lg open=.sheet
 <button id="sheet-1-trigger" class="btn btn-outline">Open</button>
@@ -47,16 +47,16 @@ The sheet slides a modal panel in from a screen edge. Use it for edit forms, fil
 
 Add the `sheet` class to a `<dialog>` element. Give your trigger an `id`, then point the sheet at it with `data-sp-toggle`. The trigger can be any element. Close the sheet with `data-sp-dismiss` on a button, a backdrop click, or the Escape key.
 
-| Class               | Description                                                    |
-| ------------------- | -------------------------------------------------------------- |
-| `sheet`             | Add to the `<dialog>` element; fills the viewport and dims the page |
-| `sheet-start` `sheet-end` `sheet-top` `sheet-bottom` | Add to `sheet` to pick the edge; end is the default. `sheet-left` and `sheet-right` pin a physical edge |
-| `sheet-panel`       | Add to the child element that is the visible panel             |
-| `sheet-header`      | Add to the block holding the title and description             |
-| `sheet-title`       | Add to a heading element to create the sheet title             |
-| `sheet-description` | Add to a paragraph to create the supporting description        |
-| `sheet-content`     | Add to the body section between header and footer              |
-| `sheet-footer`      | Add to the action block; it sticks to the bottom of the panel  |
+| Class                                                | Description                                                                                         |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `sheet`                                              | Add to the `<dialog>` element, which fills the viewport and dims the page                           |
+| `sheet-start` `sheet-end` `sheet-top` `sheet-bottom` | Add to `sheet` to pick the edge, end by default. `sheet-left` and `sheet-right` pin a physical edge |
+| `sheet-panel`                                        | Add to the child element that is the visible panel                                                  |
+| `sheet-header`                                       | Add to the block holding the title and description                                                  |
+| `sheet-title`                                        | Add to a heading element to create the sheet title                                                  |
+| `sheet-description`                                  | Add to a paragraph to create the supporting description                                             |
+| `sheet-content`                                      | Add to the body section between header and footer                                                   |
+| `sheet-footer`                                       | Add to the action block stuck to the bottom of the panel                                            |
 
 ```html
 <!-- This is a button toggling the sheet -->
@@ -78,9 +78,9 @@ Add the `sheet` class to a `<dialog>` element. Give your trigger an `id`, then p
 
 ## Examples
 
-### Side
+### Sheet side
 
-Pick the edge the sheet slides from with `sheet-start`, `sheet-end`, `sheet-top`, or `sheet-bottom`; start and end follow the text direction, and `sheet-left` or `sheet-right` pin a physical edge. Without one, it defaults to the end.
+Pick the edge the sheet slides from with `sheet-start`, `sheet-end`, `sheet-top`, or `sheet-bottom`. Start and end follow the text direction, and `sheet-left` or `sheet-right` pin a physical edge.
 
 ```html preview preset=lg
 <!-- Start -->
@@ -265,7 +265,7 @@ Set each option with its own `data-sp-*` attribute on the `sheet` element.
 
 | Attribute        | Values       | Default |
 | ---------------- | ------------ | ------- |
-| `data-sp-toggle` | CSS selector | —       |
+| `data-sp-toggle` | CSS selector | None    |
 | `data-sp-static` | Boolean      | `false` |
 
 ```html
@@ -276,17 +276,17 @@ Set each option with its own `data-sp-*` attribute on the `sheet` element.
 
 ### Events
 
-Lifecycle events fire on the sheet element; `before*` events are cancelable.
+Lifecycle events fire on the sheet element. The `before*` events are cancelable.
 
-| Event              | When                                       |
-| ------------------ | ------------------------------------------ |
-| `sp-beforeshow`    | Before showing (cancelable)                |
-| `sp-show`          | Opening                                    |
-| `sp-shown`         | Open and settled                           |
-| `sp-beforehide`    | Before hiding (cancelable)                 |
-| `sp-hide`          | Closing                                    |
-| `sp-hidden`        | Closed                                     |
-| `sp-hideprevented` | A static sheet refused a backdrop dismiss  |
+| Event              | When                                      |
+| ------------------ | ----------------------------------------- |
+| `sp-beforeshow`    | Before showing (cancelable)               |
+| `sp-show`          | Opening                                   |
+| `sp-shown`         | Open and settled                          |
+| `sp-beforehide`    | Before hiding (cancelable)                |
+| `sp-hide`          | Closing                                   |
+| `sp-hidden`        | Closed                                    |
+| `sp-hideprevented` | A static sheet refused a backdrop dismiss |
 
 ```js
 el.addEventListener("sp-beforeshow", (e) => {
