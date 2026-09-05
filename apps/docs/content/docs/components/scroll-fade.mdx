@@ -1,9 +1,9 @@
 ---
-title: Scroll Fade
-description: A scroll fade utility for Tailwind CSS with beautiful shadcn/ui styling. Use it to fade scrollable content at its edges, so users can see there is more to scroll.
+title: Tailwind CSS Scroll Fade
+description: Beautiful, modern scroll fade utility for Tailwind CSS. Use it to fade scrollable content at its edges, like a long list or a chat feed. Easily customizable.
 ---
 
-The scroll fade masks the edges of a scroller so content melts away instead of clipping, hinting that there is more to scroll. Use it for long lists, chat feeds, and horizontal tag rows, anywhere clipped content should read as scrollable.
+Use the scroll fade utility to mask the edges of a scroller so content fades out instead of clipping, like in a long list, a chat feed, or a horizontal row of tags. For styling the scrollbar itself, use the [scrollbar](/components/scrollbar) utility.
 
 ```html preview preset=base
 <div class="w-full max-w-xs overflow-hidden rounded-2xl border">
@@ -28,7 +28,7 @@ The scroll fade masks the edges of a scroller so content melts away instead of c
 
 ## Usage
 
-Add `scroll-fade` to any vertical scroller; use the directional variants for horizontal scrollers or a single edge. The fades follow the scroll position, so an edge only fades while more content lies in that direction. The fade size defaults to 12% of the scroller, capped at `2.5rem`; override it with the size utilities, like `scroll-fade-16` for a spacing-scale value or `scroll-fade-[15%]` for an arbitrary one. In browsers without scroll-driven animations, the edges fade statically instead, no JavaScript involved.
+Add `scroll-fade` to any vertical scroller, or a directional variant for horizontal scrollers and single edges. The fades follow the scroll position, so an edge only fades while more content lies in that direction. Size the fade with utilities like `scroll-fade-16` or `scroll-fade-[15%]`. Browsers without scroll-driven animations fade the edges statically instead.
 
 | Class                           | Description                                     |
 | ------------------------------- | ----------------------------------------------- |
@@ -68,7 +68,7 @@ The fades are driven by the scroll position, so a scroller whose content fits sh
 </div>
 ```
 
-### Horizontal scrolling
+### Horizontal scroll fade
 
 Add `scroll-fade-x` to a horizontal scroller. The fades follow the reading direction.
 
@@ -109,7 +109,7 @@ Add `scroll-fade-x` to a horizontal scroller. The fades follow the reading direc
 </div>
 ```
 
-### Edge fades
+### Single edge fade
 
 Fade a single edge with the directional variants: `scroll-fade-t` and `scroll-fade-b` for vertical scrollers, `scroll-fade-s` and `scroll-fade-e` for horizontal ones.
 
@@ -457,14 +457,14 @@ window.addEventListener("message", (e) => {
 
 ## CSS variables
 
-The fade reads its metrics from component-local variables. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+Override the variables per element with an arbitrary property, or for the whole app with a CSS rule.
 
 | Variable               | Default                               | Description                                             |
 | ---------------------- | ------------------------------------- | ------------------------------------------------------- |
 | `--scroll-fade-size`   | `min(12%, calc(var(--spacing) * 10))` | Depth of the fade at each edge                          |
 | `--scroll-fade-t-size` | `--scroll-fade-size`                  | Depth for one edge, also `b`, `s`, and `e`              |
 | `--scroll-fade-reveal` | `calc(var(--spacing) * 24)`           | Scroll distance over which a fade eases in near an edge |
-| `--scroll-fade-mask`   | The built-in gradient                 | The mask itself; set `none` to disable                  |
+| `--scroll-fade-mask`   | The built-in gradient                 | The mask itself, set to `none` to disable               |
 
 ```html
 <div class="scroll-fade [--scroll-fade-reveal:8rem] h-72 overflow-y-auto">
