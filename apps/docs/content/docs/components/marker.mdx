@@ -1,9 +1,9 @@
 ---
-title: Marker
-description: A conversation marker component for Tailwind CSS with beautiful shadcn/ui styling. Use it for status lines, date dividers, and activity notes in chat interfaces.
+title: Tailwind CSS Chat Marker
+description: Beautiful, modern chat marker component for Tailwind CSS. Use it for the lines between chat messages, like a date divider or a status. Easily customizable.
 ---
 
-The marker is the small line between chat messages: a status update, a date divider, or an activity note. Use it between [message](/components/message) rows for messaging UIs and AI assistants.
+Use the marker component for the small line between chat messages, like a status update, a date divider, or an activity note. Place markers between [message](/components/message) rows to build the conversation.
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -35,13 +35,13 @@ The marker is the small line between chat messages: a status update, a date divi
 
 Add the `marker` class to a container with a `marker-content` element holding the text, and a `marker-icon` before it when the line needs one. The container can also be a `button` or a link.
 
-| Class              | Description                                            |
-| ------------------ | ------------------------------------------------------ |
-| `marker`           | Add to the container                                   |
-| `marker-separator` | Add to `marker` for hairlines on both sides            |
-| `marker-border`    | Add to `marker` for a bottom border                    |
-| `marker-icon`      | Add to the decorative icon element; give it `aria-hidden` |
-| `marker-content`   | Add to the element holding the text                    |
+| Class                            | Description                                              |
+| -------------------------------- | -------------------------------------------------------- |
+| `marker`                         | Add to the container                                     |
+| `marker-separator`               | Add to `marker` for hairlines on both sides              |
+| `marker-border`                  | Add to `marker` for a bottom border                      |
+| `marker-icon`                    | Add to the decorative icon element, with `aria-hidden`   |
+| `marker-content`                 | Add to the element holding the text                      |
 | [`shimmer`](/components/shimmer) | Add to any text element to animate a highlight across it |
 
 ```html
@@ -52,7 +52,7 @@ Add the `marker` class to a container with a `marker-content` element holding th
 
 ## Examples
 
-### Variants
+### Marker variants
 
 `marker-separator` centers the text between hairlines, and `marker-border` closes the line with a bottom border.
 
@@ -70,7 +70,7 @@ Add the `marker` class to a container with a `marker-content` element holding th
 </div>
 ```
 
-### Status
+### Status marker
 
 Add `role="status"` so screen readers announce the update, with a spinning icon for running work.
 
@@ -91,7 +91,7 @@ Add `role="status"` so screen readers announce the update, with a spinning icon 
 </div>
 ```
 
-### Shimmer
+### Marker with a shimmer
 
 Add `shimmer` to the content to sweep a highlight across the text while something is in progress.
 
@@ -106,7 +106,7 @@ Add `shimmer` to the content to sweep a highlight across the text while somethin
 </div>
 ```
 
-### Separator
+### Separator marker
 
 Separator markers divide a conversation into sections.
 
@@ -124,7 +124,7 @@ Separator markers divide a conversation into sections.
 </div>
 ```
 
-### Border
+### Border marker
 
 Border markers read as a compact activity log.
 
@@ -151,9 +151,9 @@ Border markers read as a compact activity log.
 </div>
 ```
 
-### Icon
+### Marker with an icon
 
-`marker-icon` leads the line; stack the marker with `flex-col` to center the icon above the text.
+`marker-icon` leads the line. Stack the marker with `flex-col` to center the icon above the text.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-8">
