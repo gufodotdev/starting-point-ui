@@ -1,9 +1,9 @@
 ---
-title: Pagination
-description: A pagination component for Tailwind CSS with beautiful shadcn/ui styling. Use it to move between pages of content, with previous and next links.
+title: Tailwind CSS Pagination
+description: Beautiful, modern pagination component for Tailwind CSS. Use it to move between pages of content, like a data table or search results. Easily customizable.
 ---
 
-The pagination lets users move through pages of content, with previous and next links and direct links to nearby pages.
+Use the pagination component to move between pages of content, like a data table, search results, or a blog archive. For paging the slides of a carousel, use its own [carousel pagination](/components/carousel#carousel-pagination).
 
 ```html preview preset=sm
 <nav class="pagination">
@@ -32,7 +32,7 @@ Add the `pagination` class to a `<nav>` and put one `pagination-item` link per p
 | Class                                   | Description                                              |
 | --------------------------------------- | -------------------------------------------------------- |
 | `pagination`                            | Add to the `<nav>` holding the links                     |
-| `pagination-item`                       | Add to each `<a>`; add `active` to the current page      |
+| `pagination-item`                       | Add to each `<a>`, with `active` on the current page     |
 | `pagination-sm`                         | Add to `pagination` for compact items                    |
 | `pagination-previous` `pagination-next` | Add to `pagination-item` for the previous and next links |
 | `pagination-ellipsis`                   | Add to a `<span>` standing in for skipped pages          |
@@ -47,7 +47,7 @@ Add the `pagination` class to a `<nav>` and put one `pagination-item` link per p
 
 ## Examples
 
-### Simple
+### Simple pagination
 
 A simple pagination with only page numbers.
 
@@ -61,9 +61,9 @@ A simple pagination with only page numbers.
 </nav>
 ```
 
-### Icons only
+### Pagination with icons only
 
-Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page [select](/components/select).
+Use only the previous and next buttons, like next to a rows per page [select](/components/select) in a data table.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-lg items-center justify-between gap-4">
