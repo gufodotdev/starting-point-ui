@@ -1,9 +1,9 @@
 ---
-title: Toast
-description: A toast component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show brief notifications, like "Changes saved" or "Copied to clipboard".
+title: Tailwind CSS Toast
+description: Beautiful, modern toast notification component for Tailwind CSS. Use it to show a brief message, like a saved confirmation. Easily customizable.
 ---
 
-The toast shows a brief notification that stacks in a corner and dismisses itself, like "Changes saved" after a form submit. It is created from JavaScript rather than authored markup; for a message that must interrupt and be acknowledged, use a [dialog](/components/dialog) instead.
+Use the toast component to show a brief notification that stacks in a corner and dismisses itself, like "Changes saved" after a form submit. For a message that must be acknowledged, use a [dialog](/components/dialog).
 
 ```html preview preset=base
 <button
@@ -33,7 +33,7 @@ sp.toast("Event has been created");
 
 ## Examples
 
-### Types
+### Toast types
 
 Use the shorthand methods for a leading status icon, or pass the `type` option.
 
@@ -69,7 +69,7 @@ Use the shorthand methods for a leading status icon, or pass the `type` option.
 </div>
 ```
 
-### Description
+### Toast with a description
 
 Add a secondary line of text with the `description` option.
 
@@ -82,7 +82,7 @@ Add a secondary line of text with the `description` option.
 </button>
 ```
 
-### Type with description
+### Type with a description
 
 A status icon next to a title and description.
 
@@ -95,9 +95,9 @@ A status icon next to a title and description.
 </button>
 ```
 
-### Action
+### Toast with an action
 
-Add a clickable action button; choosing it also dismisses the toast.
+Add a clickable action button, and choosing it also dismisses the toast.
 
 ```html preview preset=base
 <button
@@ -110,7 +110,7 @@ Add a clickable action button; choosing it also dismisses the toast.
 
 ### Loading and update
 
-`sp.toast.loading()` shows a spinner and stays put; call `update()` on the returned instance to swap it to a result state.
+`sp.toast.loading()` shows a spinner and stays put. Call `update()` on the returned instance to swap it to a result state.
 
 ```html preview preset=base
 <button
@@ -154,9 +154,9 @@ sp.toast.promise(fetch("/api/posts", { method: "POST", body }), {
 });
 ```
 
-### Duration
+### Toast duration
 
-Control how long the toast stays (milliseconds, default 4000); `0` keeps it until dismissed.
+Control how long the toast stays in milliseconds, default 4000. Pass `0` to keep it until dismissed.
 
 ```html preview preset=base
 <div class="flex flex-wrap justify-center gap-2">
@@ -181,9 +181,9 @@ Control how long the toast stays (milliseconds, default 4000); `0` keeps it unti
 </div>
 ```
 
-### Position
+### Toast position
 
-Place the stack in any corner or centered at the top or bottom; default is `bottom-right`.
+Place the stack in any corner or centered at the top or bottom. The default is `bottom-right`.
 
 ```html preview preset=base
 <div class="flex flex-wrap justify-center gap-2">
@@ -228,7 +228,7 @@ Place the stack in any corner or centered at the top or bottom; default is `bott
 
 ### Non-dismissible
 
-Set `dismissible: false` to hide the close button; the toast leaves only when its duration expires.
+Set `dismissible: false` to hide the close button, and the toast leaves only when its duration expires.
 
 ```html preview preset=base
 <button
@@ -314,9 +314,9 @@ Pass options as the second argument to `sp.toast()`.
 | Option        | Type    | Default        | Description                                                                           |
 | ------------- | ------- | -------------- | ------------------------------------------------------------------------------------- |
 | `type`        | String  | `default`      | `success`, `error`, `warning`, `info`, or `loading`                                   |
-| `description` | String  | —              | Secondary text under the title                                                        |
-| `duration`    | Number  | `4000`         | Milliseconds before auto-dismiss; `0` keeps the toast until dismissed                 |
-| `action`      | Object  | —              | `{ label, onClick }` rendered as a button; clicking also dismisses                    |
+| `description` | String  | None           | Secondary text under the title                                                        |
+| `duration`    | Number  | `4000`         | Milliseconds before auto-dismiss, `0` keeps the toast until dismissed                 |
+| `action`      | Object  | None           | `{ label, onClick }` rendered as a button that also dismisses                         |
 | `position`    | String  | `bottom-right` | `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right` |
 | `dismissible` | Boolean | `true`         | Show the close button                                                                 |
 
@@ -335,13 +335,13 @@ Lifecycle events fire on each toast element and bubble to `document`.
 
 ### Methods
 
-`sp.toast()` returns a toast instance; the module also exposes global helpers.
+`sp.toast()` returns a toast instance. The module also exposes global helpers.
 
-| Method                             | Description                                                                |
-| ---------------------------------- | -------------------------------------------------------------------------- |
-| `sp.toast(title, options)`         | Show a toast, returns `{ id, update, dismiss }`                            |
-| `sp.toast.success(title, options)` | Shorthand for each type (`success`, `error`, `warning`, `info`, `loading`) |
-| `instance.update(options)`         | Swap title, type, description, and duration in place                       |
-| `instance.dismiss()`               | Dismiss this toast                                                         |
-| `sp.toast.dismiss(id)`             | Dismiss a toast by id, or every toast when called without one              |
-| `sp.toast.promise(promise, messages)` | Show a loading toast that settles with the promise                     |
+| Method                                | Description                                                                |
+| ------------------------------------- | -------------------------------------------------------------------------- |
+| `sp.toast(title, options)`            | Show a toast, returns `{ id, update, dismiss }`                            |
+| `sp.toast.success(title, options)`    | Shorthand for each type (`success`, `error`, `warning`, `info`, `loading`) |
+| `instance.update(options)`            | Swap title, type, description, and duration in place                       |
+| `instance.dismiss()`                  | Dismiss this toast                                                         |
+| `sp.toast.dismiss(id)`                | Dismiss a toast by id, or every toast when called without one              |
+| `sp.toast.promise(promise, messages)` | Show a loading toast that settles with the promise                         |
