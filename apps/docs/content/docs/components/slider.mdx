@@ -1,9 +1,9 @@
 ---
-title: Slider
-description: A slider component for Tailwind CSS with beautiful shadcn/ui styling. Use it to pick a value from a range, like volume or a price cap.
+title: Tailwind CSS Range Slider
+description: Beautiful, modern range slider component for Tailwind CSS. Use it to pick a value from a range, like a volume level or a price cap. Easily customizable.
 ---
 
-The slider picks a numeric value from a range by dragging a thumb along a track, like volume or a price cap.
+Use the slider component to pick a numeric value from a range by dragging a thumb along a track, like a volume level or a price cap. For showing progress rather than picking a value, use the [progress](/components/progress) bar.
 
 ```html preview preset=sm
 <div class="field w-full max-w-sm">
@@ -33,7 +33,7 @@ The slider picks a numeric value from a range by dragging a thumb along a track,
 
 ## Usage
 
-Add the `slider` class to an `<input type="range">`. The filled part of the track follows the value; set the inline `--val` to match the initial `value` so the fill paints correctly before JavaScript loads.
+Add the `slider` class to an `<input type="range">`. The filled part of the track follows the value. Set the inline `--val` to match the initial `value` so the fill paints before JavaScript loads.
 
 | Class             | Description                                                     |
 | ----------------- | --------------------------------------------------------------- |
@@ -54,9 +54,9 @@ Add the `slider` class to an `<input type="range">`. The filled part of the trac
 
 ## Examples
 
-### Range
+### Range slider
 
-Overlay two sliders in a `slider-range` to pick a range with two thumbs; the wrapper paints the shared fill and keeps the thumbs from crossing.
+Overlay two sliders in a `slider-range` to pick a range with two thumbs. The wrapper paints the shared fill and keeps the thumbs from crossing.
 
 ```html preview preset=sm
 <div class="slider-range w-full max-w-sm" style="--val-min: 25%; --val-max: 50%">
@@ -81,7 +81,7 @@ Overlay two sliders in a `slider-range` to pick a range with two thumbs; the wra
 
 ### Multiple thumbs
 
-The wrapper takes any number of sliders; each thumb is clamped between its neighbors.
+The wrapper takes any number of sliders, and each thumb is clamped between its neighbors.
 
 ```html preview preset=sm
 <div class="slider-range w-full max-w-sm" style="--val-min: 10%; --val-max: 70%">
@@ -112,7 +112,7 @@ The wrapper takes any number of sliders; each thumb is clamped between its neigh
 </div>
 ```
 
-### Vertical
+### Vertical slider
 
 Add `slider-vertical` for a bottom-to-top slider.
 
@@ -139,7 +139,7 @@ Add `slider-vertical` for a bottom-to-top slider.
 </div>
 ```
 
-### Controlled
+### Showing the value
 
 Point an element at the slider with `data-sp-slider-value` and it mirrors the value automatically.
 
@@ -167,7 +167,7 @@ Point an element at the slider with `data-sp-slider-value` and it mirrors the va
 </div>
 ```
 
-### Field
+### Slider in a field
 
 Wrap the slider in a [field](/components/field) with a title and description.
 
@@ -214,7 +214,7 @@ Wrap the slider in a [field](/components/field) with a title and description.
 </div>
 ```
 
-### Steps
+### Slider steps
 
 Use `step` to snap the value to increments.
 
