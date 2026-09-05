@@ -1,9 +1,9 @@
 ---
-title: Avatar
-description: An avatar component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a user's picture in profiles, comments, and menus, alone or stacked in groups.
+title: Tailwind CSS Avatar
+description: Beautiful, modern avatar component for Tailwind CSS. Use it to show a user's picture, like in profiles, comments, and menus. Easily customizable.
 ---
 
-The avatar shows a user's image in a circle, falling back to initials when the image is missing or fails to load. Avatars stack into groups with an optional overflow count, and a badge can mark status.
+Use the avatar component to show a user's picture, like in a profile header, a comment, or a user menu. For placeholder photos to build with, browse the [avatar images](/resources/avatars).
 
 ```html preview preset=sm
 <span class="avatar">
@@ -56,7 +56,7 @@ The avatar shows a user's image in a circle, falling back to initials when the i
 
 ## Usage
 
-Add the `avatar` class to a wrapper holding the image and the fallback initials. The image wins while it works; when it is missing or fails to load, the fallback shows instead. Give the `<img>` a meaningful `alt`, like the person's name.
+Add the `avatar` class to a wrapper holding the image and the fallback initials. The fallback shows when the image is missing or fails to load. Give the `<img>` a meaningful `alt`, like the person's name.
 
 | Class                   | Description                                                        |
 | ----------------------- | ------------------------------------------------------------------ |
@@ -77,7 +77,7 @@ Add the `avatar` class to a wrapper holding the image and the fallback initials.
 
 ## Examples
 
-### Basic
+### Basic avatar
 
 An image with fallback initials behind it.
 
@@ -92,7 +92,7 @@ An image with fallback initials behind it.
 </span>
 ```
 
-### Size
+### Avatar sizes
 
 Add `avatar-sm` or `avatar-lg` to change the size.
 
@@ -125,7 +125,7 @@ Add `avatar-sm` or `avatar-lg` to change the size.
 </div>
 ```
 
-### Fallback
+### Avatar fallback
 
 When the image is missing or fails to load, the initials take over.
 
@@ -140,9 +140,9 @@ When the image is missing or fails to load, the initials take over.
 </span>
 ```
 
-### Badge
+### Avatar badge
 
-Mark status with an `avatar-badge`; color it with utilities.
+Mark status with an `avatar-badge` and color it with utilities.
 
 ```html preview preset=sm
 <span class="avatar">
@@ -174,7 +174,7 @@ The badge fits a small icon at the default and large sizes.
 </span>
 ```
 
-### Group
+### Avatar group
 
 Avatars stack into a group with a ring separating them.
 
@@ -207,7 +207,7 @@ Avatars stack into a group with a ring separating them.
 </span>
 ```
 
-### Group count
+### Avatar group count
 
 End the stack with an overflow count.
 
