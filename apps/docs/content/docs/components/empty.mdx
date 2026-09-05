@@ -1,9 +1,9 @@
 ---
-title: Empty
-description: An empty state component for Tailwind CSS with beautiful shadcn/ui styling. Use it to fill a blank area with an icon, a message, and an action.
+title: Tailwind CSS Empty States
+description: Beautiful, modern empty state component for Tailwind CSS. Use it to say there is nothing to show yet, like an empty list or no results. Easily customizable.
 ---
 
-The empty state tells users there is nothing to show yet, with an icon, a short message, and usually an action to get started. Use it for empty lists, zero search results, or a first-run screen; for a placeholder while content is loading, reach for the [skeleton](/components/skeleton).
+Use the empty component to tell users there is nothing to show yet, like an empty list, zero search results, or a first-run screen. For a placeholder while content loads, reach for the [skeleton](/components/skeleton).
 
 ```html preview preset=base
 <div class="empty w-full max-w-2xl">
@@ -32,15 +32,15 @@ The empty state tells users there is nothing to show yet, with an icon, a short 
 
 Add the `empty` class to a container, then build it up from the parts you need: an `empty-header` grouping the `empty-media`, `empty-title`, and `empty-description`, and an `empty-content` block below for actions like buttons or a search field. Add `empty-media-icon` to the media slot for the muted rounded icon tile, or leave it off to drop in an avatar or illustration at its own size.
 
-| Class               | Description                                              |
-| ------------------- | ------------------------------------------------------- |
-| `empty`             | Add to the empty-state container                        |
-| `empty-header`      | Add to the block grouping the media, title, and text    |
-| `empty-media`       | Add to the leading slot for an icon, avatar, or image   |
-| `empty-media-icon`  | Add to `empty-media` for the muted rounded icon tile    |
-| `empty-title`       | Add to the heading line                                 |
-| `empty-description` | Add to the supporting text                              |
-| `empty-content`     | Add to the block holding actions below the header       |
+| Class               | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `empty`             | Add to the empty-state container                      |
+| `empty-header`      | Add to the block grouping the media, title, and text  |
+| `empty-media`       | Add to the leading slot for an icon, avatar, or image |
+| `empty-media-icon`  | Add to `empty-media` for the muted rounded icon tile  |
+| `empty-title`       | Add to the heading line                               |
+| `empty-description` | Add to the supporting text                            |
+| `empty-content`     | Add to the block holding actions below the header     |
 
 ```html
 <div class="empty">
@@ -59,7 +59,7 @@ Add the `empty` class to a container, then build it up from the parts you need: 
 
 ## Examples
 
-### Outline
+### Outlined empty state
 
 Add `border border-dashed` for a dashed outline around the empty state.
 
@@ -80,7 +80,7 @@ Add `border border-dashed` for a dashed outline around the empty state.
 </div>
 ```
 
-### Background
+### Empty state with a background
 
 Give the empty state a muted background to set it apart from the page.
 
@@ -104,7 +104,7 @@ Give the empty state a muted background to set it apart from the page.
 </div>
 ```
 
-### Avatar
+### Empty state with an avatar
 
 Leave `empty-media-icon` off to place an avatar at its own size.
 
@@ -133,9 +133,9 @@ Leave `empty-media-icon` off to place an avatar at its own size.
 </div>
 ```
 
-### Avatar group
+### Empty state with an avatar group
 
-A stacked [avatar group](/components/avatar-group) in the media slot.
+A stacked [avatar group](/components/avatar#avatar-group) in the media slot.
 
 ```html preview preset=base
 <div class="empty w-full max-w-2xl">
@@ -182,7 +182,7 @@ A stacked [avatar group](/components/avatar-group) in the media slot.
 </div>
 ```
 
-### Input group
+### No results state
 
 Put a search field or other control in `empty-content` for a zero-results state.
 
