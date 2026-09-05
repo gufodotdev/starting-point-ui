@@ -1,9 +1,9 @@
 ---
-title: Scrollbar
-description: A scrollbar component for Tailwind CSS with beautiful shadcn/ui styling. Use it to restyle native scrollbars with a slim, themeable thumb.
+title: Tailwind CSS Custom Scrollbar
+description: Beautiful, modern custom scrollbar utility for Tailwind CSS. Use it to style or hide the scrollbar of any element, like a sidebar. Easily customizable.
 ---
 
-The scrollbar restyles the native scrollbar on any scrollable element, adapting to dark mode and themes automatically.
+Use the scrollbar utility to restyle or hide the native scrollbar of any scrollable element, like a sidebar, a code block, or a chat feed. For fading the edges of a scroller, use the [scroll fade](/components/scroll-fade) utility.
 
 ```html preview preset=base
 <div
@@ -32,11 +32,11 @@ The scrollbar restyles the native scrollbar on any scrollable element, adapting 
 
 Add the `scrollbar` class to an element that scrolls and its scrollbars are styled, vertical and horizontal alike. Add `scrollbar-sm` for a thinner thumb in tighter spaces.
 
-| Class            | Description                                                   |
-| ---------------- | ------------------------------------------------------------- |
-| `scrollbar`      | Add to a scrollable element to style its scrollbar            |
-| `scrollbar-sm`   | Add to `scrollbar` for a thinner variant                      |
-| `scrollbar-none` | Add to hide the scrollbar entirely; the element still scrolls |
+| Class            | Description                                               |
+| ---------------- | --------------------------------------------------------- |
+| `scrollbar`      | Add to a scrollable element to style its scrollbar        |
+| `scrollbar-sm`   | Add to `scrollbar` for a thinner variant                  |
+| `scrollbar-none` | Add to hide the scrollbar while the element still scrolls |
 
 ```html
 <div class="scrollbar h-48 overflow-y-auto">Long content</div>
@@ -44,7 +44,7 @@ Add the `scrollbar` class to an element that scrolls and its scrollbars are styl
 
 ## Examples
 
-### Small
+### Small scrollbar
 
 The small variant suits panels and popups where the default width feels heavy.
 
@@ -68,6 +68,27 @@ The small variant suits panels and popups where the default width feels heavy.
     doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
     veritatis et quasi architecto beatae vitae dicta sunt explicabo.
   </p>
+</div>
+```
+
+### Hide the scrollbar
+
+Add `scrollbar-none` to hide the scrollbar while the element keeps scrolling, like a row of chips that scrolls sideways.
+
+```html preview preset=base
+<div class="scrollbar-none flex w-full max-w-sm gap-2 overflow-x-auto">
+  <span class="badge badge-secondary whitespace-nowrap">Design</span>
+  <span class="badge badge-secondary whitespace-nowrap">Engineering</span>
+  <span class="badge badge-secondary whitespace-nowrap">Marketing</span>
+  <span class="badge badge-secondary whitespace-nowrap">Sales</span>
+  <span class="badge badge-secondary whitespace-nowrap">Support</span>
+  <span class="badge badge-secondary whitespace-nowrap">Finance</span>
+  <span class="badge badge-secondary whitespace-nowrap">Legal</span>
+  <span class="badge badge-secondary whitespace-nowrap">Operations</span>
+  <span class="badge badge-secondary whitespace-nowrap">Product</span>
+  <span class="badge badge-secondary whitespace-nowrap">Research</span>
+  <span class="badge badge-secondary whitespace-nowrap">Security</span>
+  <span class="badge badge-secondary whitespace-nowrap">People</span>
 </div>
 ```
 
@@ -201,7 +222,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
 
 ## CSS variables
 
-The scrollbar reads its colors and metrics from component-local variables. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+Override the variables per element with an arbitrary property, or for the whole app with a CSS rule.
 
 | Variable             | Default                                     | Description         |
 | -------------------- | ------------------------------------------- | ------------------- |
