@@ -1,9 +1,9 @@
 ---
-title: Dropdown
-description: A dropdown menu component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a menu of actions behind a button, like a user menu or row actions.
+title: Tailwind CSS Dropdown Menu
+description: Beautiful, modern dropdown menu component for Tailwind CSS. Use it to show a menu of actions, like a user menu or row actions. Easily customizable.
 ---
 
-The dropdown displays a menu of actions anchored to its trigger, like the commands behind a "more" button or a user menu. For rich free-form content, reach for the [popover](/components/popover); for picking a value in a form, use the [select](/components/select) or [combobox](/components/combobox).
+Use the dropdown component to show a menu of actions behind a trigger, like a user menu or the commands behind a "more" button. For rich free-form content, reach for the [popover](/components/popover), and for picking a value in a form, the [select](/components/select) or [combobox](/components/combobox).
 
 ```html preview preset=base align=top open=.dropdown
 <button id="dd-demo-trigger" class="btn btn-outline">Open</button>
@@ -43,16 +43,16 @@ The dropdown displays a menu of actions anchored to its trigger, like the comman
 
 ## Usage
 
-Add the `dropdown` class to the menu panel and point it at its trigger with `data-sp-toggle`. It opens on click, positions itself against the trigger, supports arrow-key navigation, and closes when an action is chosen, on an outside click, or with Escape. Checkable items are the exception: toggling one keeps the menu open.
+Add the `dropdown` class to the menu panel and point it at its trigger with `data-sp-toggle`. It opens on click and closes when an action is chosen, on an outside click, or with Escape.
 
 | Class                       | Description                                                                             |
 | --------------------------- | --------------------------------------------------------------------------------------- |
-| `dropdown`                  | Add to the menu panel; carries the `data-sp-*` options                                  |
+| `dropdown`                  | Add to the menu panel, which carries the `data-sp-*` options                            |
 | `dropdown-label`            | Add to a heading above a group of items                                                 |
 | `dropdown-item`             | Add to each action, on a native `<button>` or `<a>`                                     |
 | `dropdown-item-destructive` | Add to `dropdown-item` for a destructive action                                         |
 | `dropdown-item-checkbox`    | Add to `dropdown-item` wrapping a hidden `<input type="checkbox">` that holds the state |
-| `dropdown-item-radio`       | Add to `dropdown-item` wrapping a hidden `<input type="radio">`; share a `name` per set |
+| `dropdown-item-radio`       | Add to `dropdown-item` wrapping a hidden `<input type="radio">` with a shared `name`    |
 | `dropdown-shortcut`         | Add to a `<span>` inside an item for a keyboard hint                                    |
 | `dropdown-separator`        | Add to an element between items to divide them                                          |
 | `dropdown-sub`              | Add to a nested `dropdown` that opens from an item                                      |
@@ -70,7 +70,7 @@ Add the `dropdown` class to the menu panel and point it at its trigger with `dat
 
 ## Examples
 
-### Basic
+### Basic dropdown
 
 A plain menu of actions.
 
@@ -84,7 +84,7 @@ A plain menu of actions.
 </div>
 ```
 
-### Groups
+### Dropdown groups
 
 Group related items under a `dropdown-label` and divide groups with a `dropdown-separator`.
 
@@ -102,9 +102,9 @@ Group related items under a `dropdown-label` and divide groups with a `dropdown-
 </div>
 ```
 
-### Submenu
+### Dropdown submenu
 
-Nest menus by pointing a second dropdown at an item; `dropdown-sub` sizes it, and hover mode opens it when the pointer reaches the item. With the keyboard, ArrowRight, Enter, or Space opens it and ArrowLeft or Escape closes it back to its item.
+Nest menus by pointing a second dropdown at an item and adding `dropdown-sub`. Hover mode opens it when the pointer reaches the item.
 
 ```html preview preset=base align=top open=.dropdown
 <button id="dd-sub-trigger" class="btn btn-outline">Open</button>
@@ -150,9 +150,9 @@ Nest menus by pointing a second dropdown at an item; `dropdown-sub` sizes it, an
 </div>
 ```
 
-### Shortcuts
+### Keyboard shortcuts
 
-Hint an item's keyboard shortcut with `dropdown-shortcut`; it right-aligns inside the item.
+Hint an item's keyboard shortcut with a `dropdown-shortcut` at its end.
 
 ```html preview preset=base align=top open=.dropdown
 <button id="dd-shortcuts-trigger" class="btn btn-outline">Open</button>
@@ -179,9 +179,9 @@ Hint an item's keyboard shortcut with `dropdown-shortcut`; it right-aligns insid
 </div>
 ```
 
-### Icons
+### Dropdown items with icons
 
-Lead items with an icon; svgs inside items are sized automatically.
+Lead items with an icon, sized automatically.
 
 ```html preview preset=base align=top open=.dropdown
 <button id="dd-icons-trigger" class="btn btn-outline">Open</button>
@@ -207,9 +207,9 @@ Lead items with an icon; svgs inside items are sized automatically.
 </div>
 ```
 
-### Checkboxes
+### Checkbox items
 
-Make items checkable with `dropdown-item-checkbox`: a hidden checkbox input holds the state, so `checked`, `change` events, and form submission work like any input. Toggling doesn't close the menu, so several can be flipped in one visit.
+Make items checkable with `dropdown-item-checkbox`. A hidden checkbox input holds the state, so `checked`, `change` events, and form submission work like any input, and toggling keeps the menu open.
 
 ```html preview preset=base align=top open=.dropdown
 <button id="dd-check-trigger" class="btn btn-outline">Open</button>
@@ -231,9 +231,9 @@ Make items checkable with `dropdown-item-checkbox`: a hidden checkbox input hold
 </div>
 ```
 
-### Radio group
+### Radio items
 
-Give `dropdown-item-radio` inputs a shared `name` and the browser keeps the set exclusive; read the choice with `input[name=position]:checked`.
+Give `dropdown-item-radio` inputs a shared `name` and the browser keeps the set exclusive. Read the choice with `input[name=position]:checked`.
 
 ```html preview preset=base align=top open=.dropdown
 <button id="dd-radio-trigger" class="btn btn-outline">Open</button>
@@ -255,7 +255,7 @@ Give `dropdown-item-radio` inputs a shared `name` and the browser keeps the set 
 </div>
 ```
 
-### Destructive
+### Destructive items
 
 Mark a dangerous action with `dropdown-item-destructive`.
 
@@ -293,7 +293,7 @@ Add `aria-disabled` to disable an item.
 </div>
 ```
 
-### Avatar
+### Avatar dropdown
 
 Any element can be the trigger, like an avatar button for a user menu.
 
@@ -330,7 +330,7 @@ Any element can be the trigger, like an avatar button for a user menu.
 </div>
 ```
 
-### Complex
+### Complex dropdown
 
 Groups, submenus, checkboxes, and radio items compose into a full application menu.
 
@@ -386,7 +386,7 @@ Groups, submenus, checkboxes, and radio items compose into a full application me
 </div>
 ```
 
-### Placement
+### Dropdown placement
 
 Set where the menu opens relative to its trigger with `data-sp-placement`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement), like `top`, `right-start`, or `bottom-end`, plus the logical sides `inline-start` and `inline-end` that follow the text direction. The menu flips to the opposite side on its own when there isn't room.
 
@@ -425,9 +425,9 @@ Set where the menu opens relative to its trigger with `data-sp-placement`. It ac
 </div>
 ```
 
-### Hover
+### Open on hover
 
-Add `data-sp-mode="hover"` to open the menu on hover instead of click; it closes when the pointer leaves both the trigger and the menu.
+Add `data-sp-mode="hover"` to open the menu on hover instead of click. It closes when the pointer leaves both the trigger and the menu.
 
 ```html preview preset=base align=top
 <button id="dd-hover-trigger" class="btn btn-outline">Hover me</button>
@@ -511,7 +511,7 @@ Set each option with its own `data-sp-*` attribute on the `dropdown` element.
 
 | Attribute             | Values                | Default          |
 | --------------------- | --------------------- | ---------------- |
-| `data-sp-toggle`      | CSS selector          | —                |
+| `data-sp-toggle`      | CSS selector          | None             |
 | `data-sp-placement`   | Floating UI placement | `bottom-end`     |
 | `data-sp-offset`      | Number                | `4`              |
 | `data-sp-mode`        | `click` \| `hover`    | `click`          |
@@ -530,7 +530,7 @@ Set each option with its own `data-sp-*` attribute on the `dropdown` element.
 
 ### Events
 
-Lifecycle events fire on the dropdown element; `before*` events are cancelable.
+Lifecycle events fire on the dropdown element. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
