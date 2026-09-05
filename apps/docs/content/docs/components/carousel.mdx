@@ -1,9 +1,9 @@
 ---
-title: Carousel
-description: A carousel slider component for Tailwind CSS with beautiful shadcn/ui styling. Use it for image galleries, product showcases, testimonials, or hero sections.
+title: Tailwind CSS Carousel
+description: Beautiful, modern carousel component for Tailwind CSS. Use it to slide through content, like an image gallery or a product showcase. Easily customizable.
 ---
 
-The carousel cycles through a series of slides in place. Use it for image galleries, product showcases, testimonials, or hero sections; for sections readers pick by name instead of browsing, reach for [tabs](/components/tabs).
+Use the carousel component to slide through a series of slides in place, like an image gallery, a product showcase, or a hero section. For sections readers pick by name instead of browsing, reach for [tabs](/components/tabs).
 
 ```html preview preset=base
 <div class="carousel w-full max-w-48 sm:max-w-xs">
@@ -77,7 +77,7 @@ The carousel cycles through a series of slides in place. Use it for image galler
 
 ## Usage
 
-Add the `carousel` class to a container. Inside it, add a `carousel-content` element with one `carousel-item` per slide. For controls, put `carousel-previous` and `carousel-next` on [buttons](/components/button) anywhere inside the container and style them however you like.
+Add the `carousel` class to a container. Inside it, add a `carousel-content` element with one `carousel-item` per slide. For controls, put `carousel-previous` and `carousel-next` on [buttons](/components/button) anywhere inside the container.
 
 | Class                  | Description                                         |
 | ---------------------- | --------------------------------------------------- |
@@ -85,7 +85,7 @@ Add the `carousel` class to a container. Inside it, add a `carousel-content` ele
 | `carousel-vertical`    | Add to `carousel` to scroll vertically              |
 | `carousel-fade`        | Add to `carousel` to crossfade slides in place      |
 | `carousel-content`     | Add to the element holding the slides               |
-| `carousel-item`        | Add to each slide; full width by default            |
+| `carousel-item`        | Add to each slide, full width by default            |
 | `carousel-item-*`      | Add to `carousel-item` to fit that many slides per view, like `carousel-item-3` |
 | `carousel-previous`    | Add to a `button` that pages backward               |
 | `carousel-next`        | Add to a `button` that pages forward                |
@@ -103,7 +103,7 @@ Add the `carousel` class to a container. Inside it, add a `carousel-content` ele
 
 ## Examples
 
-### Sizes
+### Slide sizes
 
 `carousel-item-<number>` sets how many slides share the view. Use plain `basis-*` utilities instead when the next slide should peek in at the edge.
 
@@ -177,7 +177,7 @@ Add the `carousel` class to a container. Inside it, add a `carousel-content` ele
 </div>
 ```
 
-### Spacing
+### Slide spacing
 
 Set the gap between slides with the `--carousel-gap` variable on `carousel-content`.
 
@@ -251,7 +251,7 @@ Set the gap between slides with the `--carousel-gap` variable on `carousel-conte
 </div>
 ```
 
-### Orientation
+### Vertical carousel
 
 Add `carousel-vertical` to scroll vertically and give `carousel-content` a height.
 
@@ -315,7 +315,7 @@ Add `carousel-vertical` to scroll vertically and give `carousel-content` a heigh
 </div>
 ```
 
-### Fade
+### Fade carousel
 
 Add `carousel-fade` to crossfade slides in place, and mark the starting slide with `active`.
 
@@ -457,7 +457,7 @@ counterCarousel.addEventListener("sp-change", (e) => {
 </script>
 ```
 
-### Pagination
+### Carousel pagination
 
 Children of a `carousel-pagination` container page to their slide by position, and the current one carries `active`.
 
@@ -555,7 +555,7 @@ Children of a `carousel-pagination` container page to their slide by position, a
 </div>
 ```
 
-### Progress
+### Carousel progress bar
 
 The `--sp-carousel-index` and `--sp-carousel-count` variables render a display-only position bar with pure CSS.
 
@@ -636,7 +636,7 @@ The `--sp-carousel-index` and `--sp-carousel-count` variables render a display-o
 </div>
 ```
 
-### Loop
+### Looping carousel
 
 Add `data-sp-loop` to wrap around at the ends.
 
@@ -714,7 +714,7 @@ Add `data-sp-loop` to wrap around at the ends.
 </div>
 ```
 
-### Autoplay
+### Autoplay carousel
 
 Add `data-sp-autoplay` with a delay in milliseconds to rotate the slides automatically.
 
@@ -848,7 +848,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
 
 | Variable         | Default | Description                                    |
 | ---------------- | ------- | ---------------------------------------------- |
-| `--carousel-gap` | `1rem`  | Gap between slides; the fitted sizes follow it |
+| `--carousel-gap` | `1rem`  | Gap between slides, which the fitted sizes follow |
 
 ## Options
 
@@ -857,13 +857,13 @@ Set each option with its own `data-sp-*` attribute on the `carousel` element.
 | Attribute          | Values  | Default |
 | ------------------ | ------- | ------- |
 | `data-sp-loop`     | Boolean | `false` |
-| `data-sp-autoplay` | Number  | —       |
+| `data-sp-autoplay` | Number  | None    |
 
 ```html
 <div class="carousel" data-sp-loop data-sp-autoplay="4000">...</div>
 ```
 
-With `data-sp-loop` the buttons stop disabling at the ends and paging wraps from the last slide back to the first. `data-sp-autoplay` advances to the next slide every given number of milliseconds; it pauses while the carousel is hovered or holds focus, and stays off for users who prefer reduced motion.
+With `data-sp-loop` the buttons stop disabling at the ends and paging wraps from the last slide back to the first. `data-sp-autoplay` advances to the next slide every given number of milliseconds. It pauses while the carousel is hovered or focused, and stays off for users who prefer reduced motion.
 
 ## JavaScript
 
