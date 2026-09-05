@@ -1,9 +1,9 @@
 ---
-title: Shimmer
-description: A text shimmer utility for Tailwind CSS with beautiful shadcn/ui styling. Use it to sweep a highlight across loading and thinking indicators.
+title: Tailwind CSS Text Shimmer
+description: Beautiful, modern text shimmer utility for Tailwind CSS. Use it to sweep a highlight across text, like a thinking indicator. Easily customizable.
 ---
 
-The shimmer sweeps a soft highlight across text, signaling that something is in progress. Use it for thinking indicators, streaming status lines, and anywhere a spinner would be too loud; in chat it pairs with the [marker](/components/marker) component.
+Use the shimmer utility to sweep a soft highlight across text, like a thinking indicator, a streaming status line, or anywhere a spinner would be too loud. In a chat, pair it with the [marker](/components/marker) component.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -34,7 +34,7 @@ Add the `shimmer` class to any text element.
 
 ## Examples
 
-### Marker
+### Shimmer on a marker
 
 Compose shimmer with a [marker](/components/marker) for chat status lines.
 
@@ -52,7 +52,7 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 </div>
 ```
 
-### Color
+### Shimmer color
 
 `shimmer-color-<color>` sets the highlight color: theme colors with an opacity modifier, or any arbitrary value.
 
@@ -63,9 +63,9 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 </div>
 ```
 
-### Duration
+### Shimmer duration
 
-`shimmer-duration-<number>` sets one sweep's length in milliseconds; the default is `2000`.
+`shimmer-duration-<number>` sets one sweep's length in milliseconds. The default is `2000`.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -74,7 +74,7 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 </div>
 ```
 
-### Spread
+### Shimmer spread
 
 `shimmer-spread-<number>` sets the highlight band's width on the spacing scale. Use an arbitrary length or percentage for one-off values.
 
@@ -85,9 +85,9 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 </div>
 ```
 
-### Angle
+### Shimmer angle
 
-`shimmer-angle-<number>` tilts the highlight band in degrees; the default is `20`.
+`shimmer-angle-<number>` tilts the highlight band in degrees. The default is `20`.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -95,7 +95,7 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 </div>
 ```
 
-### Reverse
+### Reverse shimmer
 
 `shimmer-reverse` sweeps the highlight in the opposite direction.
 
@@ -115,7 +115,7 @@ Compose shimmer with a [marker](/components/marker) for chat status lines.
 </div>
 ```
 
-### Disable
+### Disabling the shimmer
 
 `shimmer-none` turns the effect off, so the text renders normally at a breakpoint or state.
 
