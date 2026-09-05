@@ -1,9 +1,9 @@
 ---
-title: Accordion
-description: An accordion component for Tailwind CSS with beautiful shadcn/ui styling. Use it to stack sections that expand one at a time, like the questions of an FAQ.
+title: Tailwind CSS Accordion
+description: Beautiful, modern accordion component for Tailwind CSS. Use it to show and hide content sections, like an FAQ or a settings panel. Easily customizable.
 ---
 
-The accordion stacks sections that expand and collapse in place, opening one at a time unless told otherwise, like an FAQ. For a single independent section, use a [collapsible](/components/collapsible).
+Use the accordion component to stack sections that expand and collapse in place, like the questions of an FAQ or the steps of a setup guide. For a single independent section, use a [collapsible](/components/collapsible).
 
 ```html preview preset=base
 <div class="accordion w-full max-w-lg">
@@ -54,15 +54,15 @@ The accordion stacks sections that expand and collapse in place, opening one at 
 
 ## Usage
 
-Add the `accordion` class to the wrapper and compose each section from an item, a trigger, and a panel; the panel points at its trigger with `data-sp-toggle`. Opening a section closes the others.
+Add the `accordion` class to the wrapper and compose each section from an item, a trigger, and a panel. The panel points at its trigger with `data-sp-toggle`. Opening a section closes the others.
 
-| Class               | Description                                              |
-| ------------------- | -------------------------------------------------------- |
-| `accordion`         | Add to the wrapper; carries the `data-sp-*` options      |
-| `accordion-item`    | Add to each section; draws the divider to the next one   |
-| `accordion-trigger` | Add to the `<button>`, wrapped in a heading              |
-| `accordion-panel`   | Add to the collapsing element; `expanded` starts it open |
-| `accordion-content` | Add to the inner wrapper holding the section's content   |
+| Class               | Description                                                    |
+| ------------------- | -------------------------------------------------------------- |
+| `accordion`         | Add to the wrapper, which carries the `data-sp-*` options      |
+| `accordion-item`    | Add to each section, drawing the divider to the next one       |
+| `accordion-trigger` | Add to the `<button>`, wrapped in a heading                    |
+| `accordion-panel`   | Add to the collapsing element, where `expanded` starts it open |
+| `accordion-content` | Add to the inner wrapper holding the section's content         |
 
 ```html
 <div class="accordion">
@@ -88,7 +88,7 @@ You can include an icon in the trigger, most commonly a chevron as its last chil
 
 ## Examples
 
-### Multiple
+### Multiple open sections
 
 Add `data-sp-multiple` and sections open independently.
 
@@ -180,7 +180,7 @@ Author the `expanded` class on a panel to start it open, and mirror `aria-expand
 </div>
 ```
 
-### Icons
+### Accordion icons
 
 The chevron is plain markup, so swap it for another icon, move it in front of the title, or leave it out. Nothing moves on its own: `in-aria-expanded:rotate-180` on the svg is what turns it while the section is open.
 
@@ -251,7 +251,7 @@ The chevron is plain markup, so swap it for another icon, move it in front of th
     </h3>
     <div class="accordion-panel" data-sp-toggle="#acc-icon-none">
       <div class="accordion-content">
-        No indicator at all; the trigger is just text.
+        No indicator at all. The trigger is just text.
       </div>
     </div>
   </div>
@@ -310,7 +310,7 @@ Add `disabled` to a trigger to lock its section.
 </div>
 ```
 
-### Borders
+### Bordered accordion
 
 Wrap the accordion in a border and inset the items.
 
@@ -361,7 +361,7 @@ Wrap the accordion in a border and inset the items.
 </div>
 ```
 
-### Card
+### Accordion in a card
 
 An accordion slots into a [card](/components/card) for a framed FAQ.
 
@@ -531,7 +531,7 @@ Each `accordion-panel` points at its trigger with its own `data-sp-toggle` attri
 
 ### Events
 
-The panels are collapsibles, so their lifecycle events fire on each panel and bubble; `before*` events are cancelable.
+The panels are collapsibles, so their lifecycle events fire on each panel and bubble. The `before*` events are cancelable.
 
 | Event               | When                           |
 | ------------------- | ------------------------------ |
@@ -550,7 +550,7 @@ accordion.addEventListener("sp-expand", (e) => {
 
 ### Methods
 
-Each panel is a collapsible; drive one with `sp.collapsible(panel)`:
+Each panel is a collapsible, so drive one with `sp.collapsible(panel)`:
 
 | Method       | Description                                         |
 | ------------ | --------------------------------------------------- |
