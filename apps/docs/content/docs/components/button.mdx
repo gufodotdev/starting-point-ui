@@ -1,9 +1,9 @@
 ---
-title: Button
-description: A button component for Tailwind CSS with beautiful shadcn/ui styling. Use it to trigger actions in forms, dialogs, and toolbars.
+title: Tailwind CSS Buttons
+description: Beautiful, modern button component for Tailwind CSS. Use it to trigger actions, like in forms, dialogs, and toolbars. Easily customizable.
 ---
 
-The button triggers an action with a click or key press. Use it for submitting forms, confirming decisions, and opening overlays like dialogs; for a set of related actions, attach several into a [button group](/components/button-group).
+Use the button component to trigger actions like submitting a form, confirming a decision, or opening a dialog. For a set of related actions, attach several into a [button group](/components/button-group).
 
 ```html preview preset=sm
 <button class="btn btn-outline">Button</button>
@@ -21,7 +21,7 @@ Add the `btn` class to a `<button>` or `<a>` element.
 | `btn`                                                                  | Add to a `<button>` or `<a>` element                               |
 | `btn-secondary` `btn-destructive` `btn-outline` `btn-ghost` `btn-link` | Add to `btn` to pick a variant                                     |
 | `btn-xs` `btn-sm` `btn-lg`                                             | Add to `btn` to change the size                                    |
-| `btn-icon`                                                             | Add to `btn` for a square icon-only button; combines with any size |
+| `btn-icon`                                                             | Add to `btn` for a square icon-only button, in any size            |
 | `btn-badge`                                                            | Add to a `<span>` inside the button for a corner count             |
 | `icon-start` `icon-end`                                                | Add to a leading or trailing icon for the correct spacing          |
 
@@ -32,7 +32,7 @@ Add the `btn` class to a `<button>` or `<a>` element.
 
 ## Examples
 
-### Variants
+### Button variants
 
 Use the variant classes to communicate intent and hierarchy.
 
@@ -45,7 +45,7 @@ Use the variant classes to communicate intent and hierarchy.
 <button class="btn btn-link">Link</button>
 ```
 
-### Size
+### Button sizes
 
 Use the size classes to change the size of the button.
 
@@ -79,9 +79,9 @@ Use the size classes to change the size of the button.
 </div>
 ```
 
-### With icons
+### Buttons with icons
 
-Place an icon before or after the label, and add `icon-start` or `icon-end` to it for the correct spacing. For a square icon-only button, add `btn-icon` and give it an `aria-label`; for a loading state, pair `disabled` with a spinning icon.
+Place an icon before or after the label, and add `icon-start` or `icon-end` to it for the correct spacing. For a square icon-only button, add `btn-icon` and give it an `aria-label`. For a loading state, pair `disabled` with a spinning icon.
 
 ```html preview preset=sm
 <button class="btn btn-outline">
@@ -101,9 +101,9 @@ Place an icon before or after the label, and add `icon-start` or `icon-end` to i
 </button>
 ```
 
-### With a badge
+### Button with a badge
 
-Add a `<span>` with `btn-badge` inside the button for a corner count; recolor it with background utilities like `bg-destructive`.
+Add a `<span>` with `btn-badge` inside the button for a corner count, and recolor it with background utilities like `bg-destructive`.
 
 ```html preview preset=sm
 <button class="btn btn-outline btn-icon" aria-label="Open notifications">
