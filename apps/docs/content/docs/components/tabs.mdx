@@ -1,9 +1,9 @@
 ---
-title: Tabs
-description: A tabs component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show one section at a time behind a row of tabs, like the pages of a settings screen.
+title: Tailwind CSS Tabs
+description: Beautiful, modern tabs component for Tailwind CSS. Use it to show one section at a time behind a row of tabs, like a settings screen. Easily customizable.
 ---
 
-The tabs show one section at a time behind a row of tabs, like the pages of a settings screen. For content that should stay visible and stack, use an [accordion](/components/accordion) instead.
+Use the tabs component to show one section at a time behind a row of tabs, like the pages of a settings screen or a product's details. For content that should stay visible and stack, use an [accordion](/components/accordion).
 
 ```html preview preset=base
 <div class="tabs w-full max-w-sm">
@@ -59,7 +59,7 @@ The tabs show one section at a time behind a row of tabs, like the pages of a se
 
 ## Usage
 
-Add `tab-list` to the row of `tab` buttons and point each tab at its panel with `data-sp-toggle`; mark the initially selected pair with `active`. The optional `tabs` wrapper lays out the list and panels with consistent spacing.
+Add `tab-list` to the row of `tab` buttons and point each tab at its panel with `data-sp-toggle`. Mark the initially selected pair with `active`. The optional `tabs` wrapper lays out the list and panels with consistent spacing.
 
 | Class           | Description                                               |
 | --------------- | --------------------------------------------------------- |
@@ -67,8 +67,8 @@ Add `tab-list` to the row of `tab` buttons and point each tab at its panel with 
 | `tabs-vertical` | Add to `tabs` to put the list beside the panels           |
 | `tab-list`      | Add to the element holding the tabs                       |
 | `tab-list-line` | Add to `tab-list` for the underline variant               |
-| `tab`           | Add to each `<button>`; `active` marks the selected one   |
-| `tab-content`   | Add to each panel; `active` marks the visible one         |
+| `tab`           | Add to each `<button>`, with `active` on the selected one |
+| `tab-content`   | Add to each panel, with `active` on the visible one       |
 
 ```html
 <div class="tabs">
@@ -83,7 +83,7 @@ Add `tab-list` to the row of `tab` buttons and point each tab at its panel with 
 
 ## Examples
 
-### Line
+### Underline tabs
 
 Add `tab-list-line` for transparent tabs with an underline marking the selection.
 
@@ -95,7 +95,7 @@ Add `tab-list-line` for transparent tabs with an underline marking the selection
 </div>
 ```
 
-### Vertical
+### Vertical tabs
 
 Add `tabs-vertical` to the wrapper and `data-sp-orientation="vertical"` to the list so the arrow keys follow.
 
@@ -120,9 +120,9 @@ Add `disabled` to a tab and both clicks and arrow navigation skip it.
 </div>
 ```
 
-### Icons
+### Tabs with icons
 
-Tabs fit a leading icon; add `icon-start` to it for the correct spacing.
+Tabs fit a leading icon. Add `icon-start` to it for the correct spacing.
 
 ```html preview preset=sm
 <div class="tab-list">
@@ -253,7 +253,7 @@ Each `tab` points at its panel with its own `data-sp-toggle` attribute.
 
 ### Events
 
-Events fire on the `tab-list` element; `sp-beforechange` is cancelable and both carry the tab in `detail.tab`.
+Events fire on the `tab-list` element. `sp-beforechange` is cancelable, and both carry the tab in `detail.tab`.
 
 | Event             | When                              |
 | ----------------- | --------------------------------- |
