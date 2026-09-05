@@ -1,13 +1,12 @@
 ---
-title: RTL
-seoTitle: Right-to-left (RTL) support for Tailwind CSS components
-description: Learn how to build right-to-left layouts with Starting Point UI. Every Tailwind CSS component mirrors automatically for languages like Arabic and Hebrew, with nothing to install or configure.
+title: Right-to-left (RTL) support for Tailwind CSS components
+description: Every Tailwind CSS component mirrors automatically for right-to-left languages like Arabic and Hebrew, with nothing to install or configure.
 ---
 
 Every component supports right-to-left layouts out of the box, so interfaces for languages like Arabic, Hebrew, and Persian look and behave the way their readers expect. Layout, alignment, overlay positioning, and keyboard navigation all mirror automatically, with nothing to install or configure.
 
-```html preview preset=form dir=rtl
-<div id="card-rtl-demo" dir="rtl">
+```html preview preset=lg dir=rtl
+<div id="card-rtl-demo" class="w-full max-w-sm" dir="rtl">
   <div class="card">
     <div class="card-header">
       <h3 class="card-title" data-i18n="title">تسجيل الدخول إلى حسابك</h3>
@@ -78,7 +77,7 @@ A few things are choices only you can make:
 - **Side classes.** [Sheet](/components/sheet) and [sidebar](/components/sidebar) default to the logical start and end sides (`sheet-end`, `sidebar-start`), which follow the text direction. Use `sheet-left`, `sheet-right`, `sidebar-left`, or `sidebar-right` when you want a fixed physical edge instead.
 - **Placements.** `data-sp-placement` accepts the logical sides `inline-start` and `inline-end` alongside the physical Floating UI values, so a submenu authored once opens toward the reading direction in both modes.
 - **Icons.** Directional icons in your markup, like chevrons pointing into a submenu, need the `rtl:rotate-180` utility. Symmetric icons need nothing.
-- **Toasts.** Toaster positions like `toaster-bottom-right` are physical viewport anchors by design; pick the corner you want per direction.
+- **Toasts.** Toaster positions like `toaster-bottom-right` are physical viewport anchors by design. Pick the corner you want per direction.
 
 ## Examples
 
