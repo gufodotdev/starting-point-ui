@@ -1,56 +1,46 @@
 ---
-title: Dropdown Examples
-description: Dropdown menu examples for Tailwind CSS with beautiful shadcn/ui styling. Ready-made user menus and action menus to copy into your project.
+title: Tailwind CSS Dropdown Examples
+description: Beautiful, modern dropdown menu examples for Tailwind CSS. Copy a profile menu, a notifications panel, a country dropdown, or a mega menu. Easily customizable.
 ---
 
-A collection of Tailwind CSS dropdown menu examples with beautiful shadcn/ui styling. The examples are built with the library's menu components, like the [dropdown](/components/dropdown), [popover](/components/popover), and [combobox](/components/combobox), and are ready to copy into your project.
+Ready-made dropdown menus for Tailwind CSS, built with the [dropdown](/components/dropdown), [popover](/components/popover), and [combobox](/components/combobox) components. Click an example to open its page and copy the code.
 
-## Profile
+## Profile Dropdown
 
-An avatar button opens the account menu with an identity header, grouped shortcuts, and a nested submenu.
+A profile dropdown for Tailwind CSS, the user menu behind an avatar with an account header and shortcuts. Built with the [dropdown](/components/dropdown) and [avatar](/components/avatar) components.
 
 ```html preview preset=lg align=top open=.dropdown
 %include examples/dropdowns/profile-dropdown.tsx%
 ```
 
-A profile dropdown, or user menu, puts account actions behind the signed-in user's avatar. It typically opens with the user's name and email, followed by shortcuts like profile, billing, and settings, a team section for inviting people, and a log out action at the end. The pattern lives in the top corner of nearly every app with accounts, from SaaS dashboards to storefronts.
+## Notifications Dropdown
 
-## Notifications
-
-A bell button with an unread count badge opens a scrollable activity feed with timestamps and actions.
+A notifications dropdown for Tailwind CSS with an unread badge on the bell, a scrollable feed, and quick actions. Built with the [popover](/components/popover) and [item](/components/item) components.
 
 ```html preview preset=lg align=top open=.popover
 %include examples/dropdowns/notifications.tsx%
 ```
 
-A notification dropdown lets users check recent activity without leaving the page. A bell button with an unread count badge is the usual trigger, opening a compact feed of updates that users can scan and act on directly, whether that's accepting a follow request, jumping to a reply, or marking everything as read. The pattern fits anywhere users expect quick access to updates and alerts, from social apps to SaaS dashboards and messaging tools.
+## Country Dropdown
 
-## Country picker
-
-A country field opens a searchable list with flags and recent picks, filtering as the user types.
+A searchable country dropdown for Tailwind CSS with flags, recent picks, and type-to-filter, submitting like a native select. Built with the [combobox](/components/combobox) component.
 
 ```html preview preset=lg align=top open=.combobox
 %include examples/dropdowns/country-picker.tsx%
 ```
 
-A country picker gives users a comfortable way to select their country from a long list. Flags make options easy to recognize, recent picks put the likely choices at the top, and typing filters the list for anyone who would rather search than scroll, with the selection submitting like any native form value. Country fields appear in checkout address forms, sign up flows, and shipping or billing settings, anywhere an app needs to know where its users are.
+## Mega Menu
 
-## Mega menu
-
-A nav button opens a wide panel on hover, with icon links and short descriptions beside an announcement.
+A mega menu for Tailwind CSS that opens on hover with grouped icon links, short descriptions, and an announcement column. Built with the [popover](/components/popover) component.
 
 ```html preview preset=lg align=top open=.popover
 %include examples/dropdowns/mega-menu.tsx%
 ```
 
-A mega menu turns a plain navigation link into an overview of what a site offers. Related pages sit together in groups users can scan at a glance, short descriptions give each link context before anyone clicks, and the extra space can spotlight whatever deserves attention, from a product launch to fresh content. Mega menus show up in the headers of marketing sites, docs hubs, and online stores, anywhere a product has more to show than a row of links can carry.
+## Table Row Actions Dropdown
 
-## Table row actions
-
-An ellipsis button at the end of each table row opens a menu of row actions.
+A table row actions dropdown for Tailwind CSS, opened from an ellipsis button on each row, with delete kept apart. Built with the [table](/components/table) and [dropdown](/components/dropdown) components.
 
 ```html preview preset=lg align=top open=.dropdown:first
 %include examples/dropdowns/table-row-actions.tsx%
 ```
-
-A table row actions dropdown, sometimes called a kebab menu after its three-dot trigger, keeps a data table clean by collecting every per-row operation in one place. Each row keeps its actions a click away without cluttering the table with buttons, and destructive choices like delete can sit apart from the rest instead of exposed next to the data. The pattern runs through file managers, admin panels, and dashboards, anywhere users manage lists of records without leaving the page.
