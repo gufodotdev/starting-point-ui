@@ -4,11 +4,25 @@ import { ArrowRight } from "lucide-react";
 import { version } from "@/lib/version";
 import { LandingCards } from "@/components/landing-cards";
 
+const title = "Beautiful Components for Tailwind CSS";
+const description =
+  "An open-source component library for Tailwind CSS. Inspired by shadcn/ui, Starting Point UI gives you the same beautiful design system without locking you into a framework.";
+const image = `/og?title=${encodeURIComponent("Starting Point UI")}&description=${encodeURIComponent("A Tailwind CSS component library that brings the shadcn/ui design system to any web project, no React required.")}`;
+
 export const metadata: Metadata = {
-  title: "Beautiful Components for Tailwind CSS",
-  description:
-    "An open-source component library for Tailwind CSS. Inspired by shadcn/ui, Starting Point UI gives you the same beautiful design system without locking you into a framework.",
+  title,
+  description,
   alternates: { canonical: "/" },
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    siteName: "Starting Point UI",
+    locale: "en_US",
+    url: "/",
+    images: [{ url: image, width: 1200, height: 630, alt: title }],
+  },
+  twitter: { card: "summary_large_image", title, description, images: [image] },
 };
 
 export default function Home() {

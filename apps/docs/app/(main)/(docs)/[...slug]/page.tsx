@@ -17,12 +17,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const doc = await getDocBySlug(slug);
   if (!doc) return {};
 
+  const title = doc.metadata.seoTitle ?? doc.metadata.title;
+  const description = doc.metadata.description;
+  const url = `/${slug.join("/")}`;
+  const cardTitle = ["components", "examples"].includes(slug[0])
+    ? title.replace(/^Tailwind CSS /, "")
+    : title;
+  const cardDescription = description.replace(/\s*Easily customizable\.$/, "");
+  const image = `/og?title=${encodeURIComponent(cardTitle)}&description=${encodeURIComponent(cardDescription)}`;
+
   return {
-    title: doc.metadata.seoTitle ?? doc.metadata.title,
-    description: doc.metadata.description,
-    alternates: {
-      canonical: `/${slug.join("/")}`,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      siteName: "Starting Point UI",
+      locale: "en_US",
+      url,
+      images: [{ url: image, width: 1200, height: 630, alt: title }],
     },
+    twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }
 
