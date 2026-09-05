@@ -1,9 +1,9 @@
 ---
-title: Badge
-description: A badge component for Tailwind CSS with beautiful shadcn/ui styling. Use it to mark content with a small status or label, like "New", a count, or a category.
+title: Tailwind CSS Badges
+description: Beautiful, modern badge component for Tailwind CSS. Use it to mark content with a small status or label, like a count or a category. Easily customizable.
 ---
 
-The badge marks content with a small status or label, like "New", a count, or a category.
+Use the badge component to mark content with a small status or label, like "New", a count, or a category. For a count or status dot pinned to a corner, use the [button badge](/components/button#button-with-a-badge) or the [avatar badge](/components/avatar#avatar-badge).
 
 ```html preview preset=sm
 <span class="badge">Badge</span>
@@ -18,7 +18,7 @@ Add the `badge` class to a `<span>` or `<a>` element.
 
 | Class               | Description                                               |
 | ------------------- | --------------------------------------------------------- |
-| `badge`             | Add to the element; primary style by default              |
+| `badge`             | Add to the element for the primary style                  |
 | `badge-secondary`   | Add to `badge` for the muted secondary style              |
 | `badge-destructive` | Add to `badge` for the soft destructive style             |
 | `badge-outline`     | Add to `badge` for a bordered, transparent style          |
@@ -31,7 +31,7 @@ Add the `badge` class to a `<span>` or `<a>` element.
 
 ## Examples
 
-### Variants
+### Badge variants
 
 All badge variants side by side.
 
@@ -44,7 +44,7 @@ All badge variants side by side.
 <span class="badge badge-link">Link</span>
 ```
 
-### With icon
+### Badge with an icon
 
 Lead or trail the text with an icon, and add `icon-start` or `icon-end` to it for the correct spacing.
 
@@ -59,7 +59,7 @@ Lead or trail the text with an icon, and add `icon-start` or `icon-end` to it fo
 </span>
 ```
 
-### With spinner
+### Badge with a spinner
 
 A spinning icon marks an in-progress state.
 
@@ -74,7 +74,7 @@ A spinning icon marks an in-progress state.
 </span>
 ```
 
-### Link
+### Link badge
 
 Render the badge on an `<a>` and it picks up hover styling.
 
@@ -85,9 +85,9 @@ Render the badge on an `<a>` and it picks up hover styling.
 </a>
 ```
 
-### Custom colors
+### Badge colors
 
-The badge is one element, so utility classes restyle it directly. Make sure the text still carries the meaning, not the color alone.
+Recolor a badge with utilities. Keep the meaning in the text, not in the color alone.
 
 ```html preview preset=sm
 <span
