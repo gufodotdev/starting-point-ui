@@ -1,9 +1,9 @@
 ---
-title: Alert
-description: An alert component for Tailwind CSS with beautiful shadcn/ui styling. Use it to display a callout for user attention, like a confirmation, a warning, or an error.
+title: Tailwind CSS Alerts
+description: Beautiful, modern alert component for Tailwind CSS. Use it to show a message in place, like a success confirmation, a warning, or an error. Easily customizable.
 ---
 
-The alert displays a callout that draws attention without interrupting: a confirmation, a warning, or an error summary. It renders in place as part of the page; for a notification that pops up, reach for the [toast](/components/toast), and for a similar-looking row that presents content rather than a message, the [item](/components/item).
+Use the alert component to show a message that stays in place on the page, like a success confirmation, a warning, or an error summary. For a notification that pops up, use the [toast](/components/toast), and for a row that presents content rather than a message, the [item](/components/item).
 
 ```html preview preset=base
 <div class="flex w-full max-w-md flex-col gap-4">
@@ -28,7 +28,7 @@ The alert displays a callout that draws attention without interrupting: a confir
 
 ## Usage
 
-Add the `alert` class to a container with a title and description inside. Drop an svg icon in as the first child and the text moves aside to make room for it. For a message that appears dynamically, like a form error after a submit, add [`role="alert"`](https://www.w3.org/TR/wai-aria-1.2/#alert) so screen readers announce it; a callout that is part of the page from the start doesn't need it.
+Add the `alert` class to a container with a title and description inside. An svg icon as the first child sits beside the text. Add [`role="alert"`](https://www.w3.org/TR/wai-aria-1.2/#alert) when the message appears dynamically, like a form error after a submit, so screen readers announce it.
 
 | Class               | Description                                       |
 | ------------------- | ------------------------------------------------- |
@@ -48,7 +48,7 @@ Add the `alert` class to a container with a title and description inside. Drop a
 
 ## Examples
 
-### Basic
+### Basic alert
 
 A confirmation with an icon, a title, and a description.
 
@@ -63,7 +63,7 @@ A confirmation with an icon, a title, and a description.
 </div>
 ```
 
-### Destructive
+### Destructive alert
 
 Add `alert-destructive` for errors and other messages that need stronger attention.
 
@@ -78,7 +78,7 @@ Add `alert-destructive` for errors and other messages that need stronger attenti
 </div>
 ```
 
-### With an action
+### Alert with an action
 
 Wrap a trailing control in `alert-action` and it sits in the top end corner.
 
@@ -94,7 +94,7 @@ Wrap a trailing control in `alert-action` and it sits in the top end corner.
 </div>
 ```
 
-### Custom colors
+### Alert colors
 
 Recolor an alert for any tone with utilities.
 
