@@ -1,11 +1,11 @@
 ---
 title: Customization
-description: Learn how to customize Starting Point UI. Theme your Tailwind CSS components with shadcn/ui-compatible CSS variables, tweak them with utilities, and restyle them with your own CSS.
+description: Learn how to theme and customize Starting Point UI components with CSS variables for colors, radius, and fonts, utility classes, and your own CSS.
 ---
 
 Every component is a semantic class built on theme variables: override the variables for colors, radius, and fonts, add utilities for one-off tweaks, or restyle the classes to build your own design system.
 
-```html preview
+```html preview preset=lg
 <style>
   [data-style="nova"] .card {
     @apply rounded-xl shadow-none [--card-spacing:--spacing(4)] has-[>.card-footer]:pb-0;
@@ -432,7 +432,7 @@ To add new tokens, define the variables on `:root` and `.dark`, then register th
 
 Components are utility classes, so one-off changes are just more Tailwind classes on the element. Later classes win:
 
-```html preview
+```html preview preset=sm
 <button class="btn">Default</button>
 <button class="btn rounded-full">Rounded</button>
 <button class="btn bg-blue-500 hover:bg-blue-600">Blue</button>
@@ -440,7 +440,7 @@ Components are utility classes, so one-off changes are just more Tailwind classe
 
 Combine them freely for one-off designs:
 
-```html preview
+```html preview preset=sm
 <button
   class="btn bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 text-white border-0 px-6 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
 >
