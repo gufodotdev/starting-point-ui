@@ -104,20 +104,13 @@ export function parseExampleSections(content: string): ExampleSection[] {
   });
 }
 
-function titleCaseWords(text: string): string {
-  return text.replace(/\S+/g, (word) => word[0].toUpperCase() + word.slice(1));
-}
-
-// Prose above the fence is the hub description; prose below it renders only
-// on the example's own page.
-function splitSectionBody(body: string): { description: string; rest: string; intro: string } {
+function splitSectionBody(body: string): { description: string; rest: string } {
   const fenceStart = body.search(/^```/m);
-  if (fenceStart === -1) return { description: body.trim(), rest: "", intro: "" };
+  if (fenceStart === -1) return { description: body.trim(), rest: "" };
   const fenceEnd = body.indexOf("\n```", fenceStart) + "\n```".length;
   return {
     description: body.slice(0, fenceStart).trim(),
     rest: body.slice(fenceStart, fenceEnd).trim(),
-    intro: body.slice(fenceEnd).trim(),
   };
 }
 
@@ -144,23 +137,26 @@ async function getExampleSectionDoc(slug: string[]): Promise<DocFile | null> {
   if (!fs.existsSync(hubPath)) return null;
 
   const { content } = matter(fs.readFileSync(hubPath, "utf-8"));
-  const section = parseExampleSections(content).find((s) => s.slug === slug[2]);
+  const sections = parseExampleSections(content);
+  const section = sections.find((s) => s.slug === slug[2]);
   if (!section) return null;
 
-  const { description, rest, intro } = splitSectionBody(section.body);
-  const kind = titleCaseWords(slug[1].replace(/s$/, ""));
-  const name = titleCaseWords(section.title);
-  const fullName = name.toLowerCase().includes(kind.toLowerCase()) ? name : `${name} ${kind}`;
-
-  const parts = intro ? [intro, rest] : [description, rest];
-  parts.push(`Browse more [${kind.toLowerCase()} examples](/${slug[0]}/${slug[1]}).`);
-  const summary = plainText(description).replace(/\.?\s*$/, ".");
+  const { description, rest } = splitSectionBody(section.body);
+  const kind = slug[1].replace(/s$/, "");
+  const siblings = sections
+    .filter((s) => s.slug !== section.slug)
+    .map((s) => `- [${s.title}](/${slug[0]}/${slug[1]}/${s.slug})`);
+  const parts = [
+    description,
+    rest,
+    `## More ${kind} examples`,
+    [...siblings, `- [All ${kind} examples](/${slug[0]}/${slug[1]})`].join("\n"),
+  ];
 
   return {
     metadata: {
-      title: section.title,
-      seoTitle: `Tailwind CSS ${fullName}`,
-      description: `A Tailwind CSS ${fullName.toLowerCase()} with shadcn/ui styling. ${summary} Copy-paste ready.`,
+      title: `Tailwind CSS ${section.title}`,
+      description: plainText(description),
     },
     content: (await expandIncludes(parts.filter(Boolean).join("\n\n"))).replaceAll(
       "%VERSION%",
