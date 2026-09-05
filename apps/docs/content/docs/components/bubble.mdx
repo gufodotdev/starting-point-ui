@@ -1,9 +1,9 @@
 ---
-title: Bubble
-description: A chat bubble component for Tailwind CSS with beautiful shadcn/ui styling. Use it to draw the speech balloons in messaging and AI chat interfaces.
+title: Tailwind CSS Chat Bubble
+description: Beautiful, modern chat bubble component for Tailwind CSS. Use it to show chat messages, like in a messaging app or an AI assistant. Easily customizable.
 ---
 
-The bubble draws one speech balloon of a chat conversation, with variants for both sides and reactions pinned to its corner. Use it inside [message](/components/message) rows for messaging UIs and AI assistants.
+Use the bubble component to draw one speech balloon of a chat, like in a messaging app or an AI assistant. Place bubbles inside [message](/components/message) rows to build the conversation.
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -44,7 +44,7 @@ The bubble draws one speech balloon of a chat conversation, with variants for bo
 
 ## Usage
 
-Add the `bubble` class to a container with a `bubble-content` element holding the text. Add `bubble-end` to align a balloon to your own side, and a variant class like `bubble-muted` for the other voice. `bubble-content` can also be a `button` or a link.
+Add the `bubble` class to a container with a `bubble-content` element holding the text. Add `bubble-end` to align a balloon to your own side, and a variant class like `bubble-muted` for the other voice.
 
 | Class                    | Description                                          |
 | ------------------------ | ---------------------------------------------------- |
@@ -70,9 +70,9 @@ Add the `bubble` class to a container with a `bubble-content` element holding th
 
 ## Examples
 
-### Variants
+### Bubble variants
 
-Variant classes color the balloon; `bubble-ghost` drops the frame entirely for full-width assistant text.
+Variant classes color the balloon. `bubble-ghost` drops the frame for full-width assistant text.
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -126,9 +126,9 @@ Variant classes color the balloon; `bubble-ghost` drops the frame entirely for f
 </div>
 ```
 
-### Alignment
+### Bubble alignment
 
-Balloons align to the start; `bubble-end` moves one to your side.
+Balloons align to the start, and `bubble-end` moves one to your side.
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -145,7 +145,7 @@ Balloons align to the start; `bubble-end` moves one to your side.
 </div>
 ```
 
-### Group
+### Bubble group
 
 Wrap consecutive balloons from the same voice in `bubble-group`.
 
@@ -200,9 +200,9 @@ Put `bubble-content` on a `button` or link to make the whole balloon interactive
 </div>
 ```
 
-### Reactions
+### Bubble reactions
 
-`bubble-reactions` pins a pill to the balloon's corner; `bubble-reactions-top` and `bubble-reactions-start` move it.
+`bubble-reactions` pins a pill to the balloon's corner. Move it with `bubble-reactions-top` or `bubble-reactions-start`.
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -284,7 +284,7 @@ Compose a [collapsible](/components/collapsible) inside `bubble-content` to fold
 </div>
 ```
 
-### Tooltip
+### Bubble with a tooltip
 
 A [tooltip](/components/tooltip) on a reaction button explains it on hover.
 
@@ -308,7 +308,7 @@ A [tooltip](/components/tooltip) on a reaction button explains it on hover.
 </div>
 ```
 
-### Popover
+### Bubble with a popover
 
 A [popover](/components/popover) on a reaction button carries details that don't fit in the balloon.
 
