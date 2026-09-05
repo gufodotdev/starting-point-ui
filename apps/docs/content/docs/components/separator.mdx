@@ -1,9 +1,9 @@
 ---
-title: Separator
-description: A separator component for Tailwind CSS with beautiful shadcn/ui styling. Use it to divide content, horizontally between sections or vertically between inline items.
+title: Tailwind CSS Separator
+description: Beautiful, modern separator component for Tailwind CSS. Use it as a divider line between content, like sections of a page or inline items. Easily customizable.
 ---
 
-The separator draws a thin line that visually divides content, horizontally between sections or vertically between inline items.
+Use the separator component to draw a thin divider line between content, like sections of a page or items in a toolbar. For dividing rows inside a list or a menu, use the [item separator](/components/item#item-group) or the [dropdown separator](/components/dropdown#dropdown-groups).
 
 ```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-4 text-sm">
@@ -23,11 +23,11 @@ The separator draws a thin line that visually divides content, horizontally betw
 
 ## Usage
 
-Add the `separator` class to an empty element; it renders horizontally unless you add `separator-vertical`. A vertical separator stretches to its container's height, so give the row a height or let the tallest sibling define it.
+Add the `separator` class to an empty element. It renders horizontally unless you add `separator-vertical`. A vertical separator stretches to its container's height, so give the row a height or let the tallest sibling define it.
 
 | Class                  | Description                                     |
 | ---------------------- | ----------------------------------------------- |
-| `separator`            | Add to an empty element; horizontal by default  |
+| `separator`            | Add to an empty element, horizontal by default  |
 | `separator-horizontal` | Add to `separator` to force the horizontal axis |
 | `separator-vertical`   | Add to `separator` for a vertical divider       |
 
@@ -37,7 +37,7 @@ Add the `separator` class to an empty element; it renders horizontally unless yo
 
 ## Examples
 
-### Vertical
+### Vertical separator
 
 Divide inline items with `separator-vertical`.
 
@@ -51,9 +51,9 @@ Divide inline items with `separator-vertical`.
 </div>
 ```
 
-### Menu
+### Separator in a menu
 
-Vertical separators divide richer inline groups too; hide trailing ones responsively along with their content.
+Vertical separators divide richer inline groups too. Hide trailing ones responsively along with their content.
 
 ```html preview preset=sm
 <div class="flex items-center gap-2 text-sm md:gap-4">
@@ -74,7 +74,7 @@ Vertical separators divide richer inline groups too; hide trailing ones responsi
 </div>
 ```
 
-### List
+### Separator in a list
 
 Separate rows of a definition list.
 
