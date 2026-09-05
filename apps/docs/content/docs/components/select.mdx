@@ -1,9 +1,9 @@
 ---
-title: Select
-description: A select component for Tailwind CSS with beautiful shadcn/ui styling. Use it to pick one option from a native dropdown, like a category, status, or timezone.
+title: Tailwind CSS Select
+description: Beautiful, modern select component for Tailwind CSS. Use it to pick one option from a native dropdown, like a category or a timezone. Easily customizable.
 ---
 
-The select picks one option from a list using the browser's native dropdown. Pair it with a [field](/components/field) for a label and description; for a searchable list with custom option rendering, reach for the [combobox](/components/combobox).
+Use the select component to pick one option from the browser's native dropdown, like a category, a status, or a timezone. Pair it with a [field](/components/field) for a label and description, and for a searchable list, reach for the [combobox](/components/combobox).
 
 ```html preview preset=sm
 <div class="field w-full max-w-sm">
@@ -26,9 +26,9 @@ The select picks one option from a list using the browser's native dropdown. Pai
 
 Add the `select` class to a `<select>` element. Options and groups are the native `<option>` and `<optgroup>` elements.
 
-| Class    | Description                    |
-| -------- | ------------------------------- |
-| `select` | Add to a `<select>` element     |
+| Class       | Description                         |
+| ----------- | ----------------------------------- |
+| `select`    | Add to a `<select>` element         |
 | `select-sm` | Add to `select` for a compact field |
 
 ```html
@@ -41,7 +41,7 @@ Add the `select` class to a `<select>` element. Options and groups are the nativ
 
 ## Examples
 
-### Basic
+### Basic select
 
 A bare select with only a placeholder option.
 
@@ -54,7 +54,7 @@ A bare select with only a placeholder option.
 </select>
 ```
 
-### Groups
+### Select with option groups
 
 Organize options into categories with `<optgroup>`.
 
@@ -117,7 +117,7 @@ Set `aria-invalid` on the select for the error state.
 </div>
 ```
 
-### Inline
+### Inline select
 
 Put the label beside the select with a horizontal field, like a rows per page control.
 
