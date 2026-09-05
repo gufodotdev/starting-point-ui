@@ -1,9 +1,9 @@
 ---
-title: Popover
-description: A popover component for Tailwind CSS with beautiful shadcn/ui styling. Use it to open a small panel next to a button for settings, filters, and quick forms.
+title: Tailwind CSS Popover
+description: Beautiful, modern popover component for Tailwind CSS. Use it to open a small panel next to a button, like for settings or a quick form. Easily customizable.
 ---
 
-The popover floats a panel next to its trigger for rich content like forms and settings, and closes when the user clicks away. For a simple text hint, reach for the [tooltip](/components/tooltip); for a menu of actions, use the [dropdown](/components/dropdown).
+Use the popover component to float a panel next to its trigger for rich content, like a settings form, a filter, or a profile card. For a simple text hint, reach for the [tooltip](/components/tooltip), and for a menu of actions, the [dropdown](/components/dropdown).
 
 ```html preview preset=base align=top open=.popover
 <button id="popover-demo-trigger" class="btn btn-outline">Open popover</button>
@@ -46,12 +46,12 @@ The popover floats a panel next to its trigger for rich content like forms and s
 
 Add the `popover` class to the panel and point it at its trigger with `data-sp-toggle`. It opens on click, positions itself relative to the trigger, and closes on an outside click or Escape.
 
-| Class                 | Description                                                |
-| --------------------- | ---------------------------------------------------------- |
-| `popover`             | Add to the floating panel; carries the `data-sp-*` options |
-| `popover-header`      | Add to the block holding the title and description         |
-| `popover-title`       | Add to a heading element                                   |
-| `popover-description` | Add to a paragraph with supporting text                    |
+| Class                 | Description                                                      |
+| --------------------- | ---------------------------------------------------------------- |
+| `popover`             | Add to the floating panel, which carries the `data-sp-*` options |
+| `popover-header`      | Add to the block holding the title and description               |
+| `popover-title`       | Add to a heading element                                         |
+| `popover-description` | Add to a paragraph with supporting text                          |
 
 ```html
 <!-- This is the trigger -->
@@ -63,7 +63,7 @@ Add the `popover` class to the panel and point it at its trigger with `data-sp-t
 
 ## Examples
 
-### Basic
+### Basic popover
 
 A simple popover with a header, title, and description.
 
@@ -78,7 +78,7 @@ A simple popover with a header, title, and description.
 </div>
 ```
 
-### Placement
+### Popover placement
 
 Set where the panel opens relative to its trigger with `data-sp-placement`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement), like `top`, `right`, or `bottom-end`, and the panel flips to the opposite side on its own when there isn't room.
 
@@ -116,7 +116,7 @@ Set where the panel opens relative to its trigger with `data-sp-placement`. It a
 </div>
 ```
 
-### With form
+### Popover with a form
 
 A popover holding a compact form, laid out with horizontal [fields](/components/field).
 
@@ -141,7 +141,7 @@ A popover holding a compact form, laid out with horizontal [fields](/components/
 </div>
 ```
 
-### Hover
+### Open on hover
 
 Add `data-sp-mode="hover"` to open on hover instead of click.
 
@@ -222,7 +222,7 @@ Set each option with its own `data-sp-*` attribute on the `popover` element.
 
 | Attribute             | Values                | Default  |
 | --------------------- | --------------------- | -------- |
-| `data-sp-toggle`      | CSS selector          | —        |
+| `data-sp-toggle`      | CSS selector          | None     |
 | `data-sp-placement`   | Floating UI placement | `bottom` |
 | `data-sp-offset`      | Number                | `6`      |
 | `data-sp-mode`        | `click` \| `hover`    | `click`  |
@@ -253,7 +253,7 @@ With `data-sp-static` the popover skips anchored positioning entirely and you po
 
 ### Events
 
-Lifecycle events fire on the popover element; `before*` events are cancelable.
+Lifecycle events fire on the popover element. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
