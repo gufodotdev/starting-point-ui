@@ -1,9 +1,9 @@
 ---
-title: Item
-description: An item component for Tailwind CSS with beautiful shadcn/ui styling. Use it to lay out rows of media, title, description, and actions in lists, menus, and settings.
+title: Tailwind CSS List Item
+description: Beautiful, modern list item component for Tailwind CSS. Use it to lay out a row with media, text, and actions, like in a list or a menu. Easily customizable.
 ---
 
-The item lays out a row with a media slot, text, and trailing actions. Use it as the building block for lists, menus, and settings pages; for a standalone content block, reach for the [card](/components/card), and for a similar-looking row that delivers a message, the [alert](/components/alert).
+Use the item component to lay out a row with a media slot, text, and trailing actions, like in a list, a menu, or a settings page. For a standalone content block, reach for the [card](/components/card), and for a similar-looking row that delivers a message, the [alert](/components/alert).
 
 ```html preview preset=sm
 <div class="flex w-full max-w-md flex-col gap-6">
@@ -37,23 +37,23 @@ The item lays out a row with a media slot, text, and trailing actions. Use it as
 
 Add the `item` class to a container, then pick whichever parts the row needs: an `item-media` for a leading icon or image, an `item-content` holding a title and description, and an `item-actions` slot for trailing controls. Any element can be an item, so use an `<a>` for a row that navigates and it picks up a hover style on its own. Related items can be wrapped in an `item-group` with [`role="list"`](https://www.w3.org/TR/wai-aria-1.2/#list).
 
-| Class                 | Description                                            |
-| --------------------- | ------------------------------------------------------ |
-| `item`                | Add to the row container                               |
-| `item-media`          | Add to the leading slot for an icon, avatar, or image  |
-| `item-media-icon`     | Add to `item-media` to size a bare svg icon            |
-| `item-media-image`    | Add to `item-media` for a square, rounded image        |
-| `item-content`        | Add to the block holding the text lines                |
-| `item-title`          | Add to the heading line                                |
-| `item-description`    | Add to the supporting text                             |
-| `item-actions`        | Add to the trailing slot for buttons and icons         |
-| `item-header`         | Add to a full-width row above the content              |
-| `item-footer`         | Add to a full-width row below the content              |
-| `item-group`          | Add to a wrapper stacking items; give it `role="list"` |
-| `item-separator`      | Add to a divider between items in a group              |
-| `item-outline`        | Add to `item` for a visible border                     |
-| `item-muted`          | Add to `item` for a muted background                   |
-| `item-sm` / `item-xs` | Add to `item` for compact spacing                      |
+| Class                 | Description                                           |
+| --------------------- | ----------------------------------------------------- |
+| `item`                | Add to the row container                              |
+| `item-media`          | Add to the leading slot for an icon, avatar, or image |
+| `item-media-icon`     | Add to `item-media` to size a bare svg icon           |
+| `item-media-image`    | Add to `item-media` for a square, rounded image       |
+| `item-content`        | Add to the block holding the text lines               |
+| `item-title`          | Add to the heading line                               |
+| `item-description`    | Add to the supporting text                            |
+| `item-actions`        | Add to the trailing slot for buttons and icons        |
+| `item-header`         | Add to a full-width row above the content             |
+| `item-footer`         | Add to a full-width row below the content             |
+| `item-group`          | Add to a wrapper stacking items, with `role="list"`   |
+| `item-separator`      | Add to a divider between items in a group             |
+| `item-outline`        | Add to `item` for a visible border                    |
+| `item-muted`          | Add to `item` for a muted background                  |
+| `item-sm` / `item-xs` | Add to `item` for compact spacing                     |
 
 ```html
 <div class="item item-outline">
@@ -72,9 +72,9 @@ Add the `item` class to a container, then pick whichever parts the row needs: an
 
 ## Examples
 
-### Variants
+### Item variants
 
-The default item is borderless; add `item-outline` for a border or `item-muted` for a filled background.
+The default item is borderless. Add `item-outline` for a border or `item-muted` for a filled background.
 
 ```html preview preset=base
 <div class="flex w-full max-w-md flex-col gap-6">
@@ -110,7 +110,7 @@ The default item is borderless; add `item-outline` for a border or `item-muted` 
 </div>
 ```
 
-### Sizes
+### Item sizes
 
 Add `item-sm` or `item-xs` for tighter rows.
 
@@ -148,7 +148,7 @@ Add `item-sm` or `item-xs` for tighter rows.
 </div>
 ```
 
-### Icon
+### Item with an icon
 
 An icon in the media slot with a trailing action.
 
@@ -167,7 +167,7 @@ An icon in the media slot with a trailing action.
 </div>
 ```
 
-### Avatar
+### Item with an avatar
 
 Avatars and avatar groups in the media slot.
 
@@ -240,7 +240,7 @@ Avatars and avatar groups in the media slot.
 </div>
 ```
 
-### Image
+### Item with an image
 
 Square artwork with `item-media-image`, and a second `item-content` for the duration.
 
@@ -303,7 +303,7 @@ Square artwork with `item-media-image`, and a second `item-content` for the dura
 </div>
 ```
 
-### Group
+### Item group
 
 A stack of related items in an `item-group`.
 
@@ -381,7 +381,7 @@ A stack of related items in an `item-group`.
 </div>
 ```
 
-### Header
+### Item header
 
 Use `item-header` for a full-width row above the content, like a preview image.
 
@@ -416,9 +416,9 @@ Use `item-header` for a full-width row above the content, like a preview image.
 </div>
 ```
 
-### Link
+### Link item
 
-An item on an `<a>` picks up a hover style; external links can mark themselves with an icon.
+An item on an `<a>` picks up a hover style. Mark external links with an icon.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-md flex-col gap-6">
@@ -448,7 +448,7 @@ An item on an `<a>` picks up a hover style; external links can mark themselves w
 </div>
 ```
 
-### Dropdown
+### Items in a dropdown
 
 An `item-xs` drops its own padding inside a dropdown, so the row's padding takes over.
 
