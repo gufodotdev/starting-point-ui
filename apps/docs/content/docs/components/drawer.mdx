@@ -1,9 +1,9 @@
 ---
-title: Drawer
-description: A drawer component for Tailwind CSS with beautiful shadcn/ui styling. Use it for actions and details that slide in from the screen edge, with drag to dismiss like a native mobile sheet.
+title: Tailwind CSS Drawer
+description: Beautiful, modern drawer component for Tailwind CSS. Use it to slide a panel in from the screen edge, like a mobile menu or a cart. Easily customizable.
 ---
 
-The drawer slides a panel in from the screen edge and follows your finger: drag it toward the edge to dismiss it, like a native mobile sheet. For a desktop-first side panel without dragging, use a [sheet](/components/sheet); for a centered window, use a [dialog](/components/dialog).
+Use the drawer component to slide in a panel from the screen edge that users can drag to dismiss, like a mobile menu, a filter panel, or a cart. For a desktop-first side panel without dragging, use a [sheet](/components/sheet), and for a centered window, a [dialog](/components/dialog).
 
 ```html preview preset=lg open=.drawer
 <button id="drawer-demo-trigger" class="btn btn-outline">Open Drawer</button>
@@ -121,23 +121,23 @@ The drawer slides a panel in from the screen edge and follows your finger: drag 
 
 ## Usage
 
-Add the `drawer` class to a native `<dialog>`, put the visible surface in a `drawer-panel`, and point the dialog at its trigger with `data-sp-toggle`. It opens as a modal and slides in from the bottom by default. Dragging the panel toward its edge dismisses it: past a quarter of its size, or with a quick flick from anywhere. Interactive elements like buttons, inputs, and labels never start a drag; add `data-sp-no-drag` to any custom widget that should behave the same.
+Add the `drawer` class to a native `<dialog>`, put the visible surface in a `drawer-panel`, and point the dialog at its trigger with `data-sp-toggle`. It opens as a modal from the bottom by default, and dragging the panel toward its edge dismisses it. Buttons, inputs, and labels never start a drag. Add `data-sp-no-drag` to any custom widget that should behave the same.
 
-| Class                | Description                                                   |
-| -------------------- | ------------------------------------------------------------- |
-| `drawer`             | Add to the `<dialog>`; carries the `data-sp-*` options        |
-| `drawer-panel`       | Add to the visible surface inside the dialog                  |
-| `drawer-header`      | Add to the block holding the title and description            |
-| `drawer-title`       | Add to a heading element to create the drawer title           |
-| `drawer-description` | Add to a paragraph to create the supporting description       |
-| `drawer-content`     | Add to the body section between header and footer; it scrolls |
-| `drawer-footer`      | Add to the action block; it sticks to the end of the panel    |
-| `drawer-bottom`      | Add to `drawer` to slide from the bottom (the default)        |
-| `drawer-top`         | Add to `drawer` to slide from the top                         |
-| `drawer-start`       | Add to `drawer` to slide from the reading-direction start     |
-| `drawer-end`         | Add to `drawer` to slide from the reading-direction end       |
-| `drawer-left`        | Add to `drawer` to slide from the left, in any direction      |
-| `drawer-right`       | Add to `drawer` to slide from the right, in any direction     |
+| Class                | Description                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| `drawer`             | Add to the `<dialog>`, which carries the `data-sp-*` options |
+| `drawer-panel`       | Add to the visible surface inside the dialog                 |
+| `drawer-header`      | Add to the block holding the title and description           |
+| `drawer-title`       | Add to a heading element to create the drawer title          |
+| `drawer-description` | Add to a paragraph to create the supporting description      |
+| `drawer-content`     | Add to the scrolling body section between header and footer  |
+| `drawer-footer`      | Add to the action block stuck to the end of the panel        |
+| `drawer-bottom`      | Add to `drawer` to slide from the bottom (the default)       |
+| `drawer-top`         | Add to `drawer` to slide from the top                        |
+| `drawer-start`       | Add to `drawer` to slide from the reading-direction start    |
+| `drawer-end`         | Add to `drawer` to slide from the reading-direction end      |
+| `drawer-left`        | Add to `drawer` to slide from the left, in any direction     |
+| `drawer-right`       | Add to `drawer` to slide from the right, in any direction    |
 
 ```html
 <!-- This is a button toggling the drawer -->
@@ -159,9 +159,9 @@ Add the `drawer` class to a native `<dialog>`, put the visible surface in a `dra
 
 ## Examples
 
-### Position
+### Drawer position
 
-Add a side class to slide from another edge. `drawer-start` and `drawer-end` follow the reading direction; `drawer-left` and `drawer-right` pin a physical edge. Side drawers drag horizontally, and below the `--breakpoint-drawer` theme token (your `sm` breakpoint) they render as the bottom sheet, like a native mobile drawer.
+Add a side class to slide from another edge. `drawer-start` and `drawer-end` follow the reading direction, and `drawer-left` and `drawer-right` pin a physical edge. Below the `--breakpoint-drawer` theme token, your `sm` breakpoint, side drawers render as the bottom sheet.
 
 ```html preview preset=lg
 <button id="drawer-pos-bottom" class="btn btn-outline">Bottom</button>
@@ -230,7 +230,7 @@ Add a side class to slide from another edge. `drawer-start` and `drawer-end` fol
 </dialog>
 ```
 
-### Nested
+### Nested drawers
 
 A drawer opened from inside another drawer stacks on top and shrinks the one behind it to a peek strip. Drawers can nest as deep as needed.
 
@@ -418,12 +418,12 @@ window.addEventListener("message", (e) => {
 
 ## CSS variables
 
-The drawer reads its motion from component-local variables, shared by the enter and exit animations and the settle after a drag. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+Two variables set the motion of the open, close, and settle animations. Override them per drawer with an arbitrary property, or for the whole app with a CSS rule.
 
-| Variable            | Default                          | Description                                       |
-| ------------------- | -------------------------------- | ------------------------------------------------- |
-| `--drawer-duration` | `500ms`                          | Length of the open, close, and settle animations  |
-| `--drawer-ease`     | `cubic-bezier(0.32, 0.72, 0, 1)` | Easing curve for the same                         |
+| Variable            | Default                          | Description                                      |
+| ------------------- | -------------------------------- | ------------------------------------------------ |
+| `--drawer-duration` | `500ms`                          | Length of the open, close, and settle animations |
+| `--drawer-ease`     | `cubic-bezier(0.32, 0.72, 0, 1)` | Easing curve for the same                        |
 
 ```html
 <dialog class="drawer [--drawer-duration:300ms]" data-sp-toggle="#my-trigger">
@@ -437,8 +437,8 @@ Set each option with its own `data-sp-*` attribute on the `drawer` element.
 
 | Attribute             | Values                         | Default |
 | --------------------- | ------------------------------ | ------- |
-| `data-sp-toggle`      | CSS selector                   | —       |
-| `data-sp-snap-points` | Comma-separated fractions, 0-1 | —       |
+| `data-sp-toggle`      | CSS selector                   | None    |
+| `data-sp-snap-points` | Comma-separated fractions, 0-1 | None    |
 | `data-sp-static`      | Boolean                        | `false` |
 
 ```html
@@ -453,7 +453,7 @@ Set each option with its own `data-sp-*` attribute on the `drawer` element.
 
 ### Events
 
-Lifecycle events fire on the drawer element; `before*` events are cancelable.
+Lifecycle events fire on the drawer element. The `before*` events are cancelable.
 
 | Event              | When                                       |
 | ------------------ | ------------------------------------------ |
