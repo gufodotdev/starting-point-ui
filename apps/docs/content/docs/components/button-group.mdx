@@ -1,9 +1,9 @@
 ---
-title: Button Group
-description: A button group component for Tailwind CSS with beautiful shadcn/ui styling. Use it to attach related buttons into one row, like a split button or a search input with its action.
+title: Tailwind CSS Button Group
+description: Beautiful, modern button group component for Tailwind CSS. Use it to attach related buttons into one row, like a split button or a toolbar. Easily customizable.
 ---
 
-The button group attaches related controls into one segmented row, like a split button, a set of toolbar actions, or an input with its button. For choices that toggle on and off, reach for [tabs](/components/tabs) or a [radio group](/components/radio-group) instead.
+Use the button group component to attach related controls into one segmented row, like a split button, a set of toolbar actions, or an input with its button. For switching between views, reach for [tabs](/components/tabs) instead.
 
 ```html preview preset=sm
 <div class="btn-group">
@@ -59,7 +59,7 @@ Add the `btn-group` class to a container and put [buttons](/components/button) d
 
 ## Examples
 
-### Orientation
+### Vertical button group
 
 Add `btn-group-vertical` to stack the buttons vertically.
 
@@ -74,7 +74,7 @@ Add `btn-group-vertical` to stack the buttons vertically.
 </div>
 ```
 
-### Size
+### Button group sizes
 
 Size the group through the buttons themselves.
 
@@ -118,7 +118,7 @@ Size the group through the buttons themselves.
 </div>
 ```
 
-### Nested
+### Nested button groups
 
 Nest groups inside a group and they separate with a small gap. Anything groupable nests the same way, like the [input group](/components/input-group) holding the message field here.
 
@@ -142,9 +142,9 @@ Nest groups inside a group and they separate with a small gap. Anything groupabl
 <div class="tooltip" data-sp-toggle="#bg-voice-addon">Voice Mode</div>
 ```
 
-### Split
+### Split button
 
-Pair a main action with a compact secondary one. Outline buttons separate themselves with their borders; for other variants, divide the buttons with a `btn-group-separator`.
+Pair a main action with a compact secondary one. Outline buttons separate themselves with their borders. For other variants, divide the buttons with a `btn-group-separator`.
 
 ```html preview preset=sm
 <div class="btn-group">
@@ -156,7 +156,7 @@ Pair a main action with a compact secondary one. Outline buttons separate themse
 </div>
 ```
 
-### Input
+### Button group with an input
 
 Group an [input](/components/input) with its action.
 
@@ -169,7 +169,7 @@ Group an [input](/components/input) with its action.
 </div>
 ```
 
-### Dropdown
+### Button group with a dropdown
 
 Attach a [dropdown](/components/dropdown) trigger for secondary actions.
 
@@ -195,7 +195,7 @@ Attach a [dropdown](/components/dropdown) trigger for secondary actions.
 </div>
 ```
 
-### Select
+### Button group with a select
 
 Group a [select](/components/select) with an input.
 
@@ -217,7 +217,7 @@ Group a [select](/components/select) with an input.
 </div>
 ```
 
-### Text
+### Button group with text
 
 Attach static text to a control with `btn-group-text`, like a prefix or a unit.
 
