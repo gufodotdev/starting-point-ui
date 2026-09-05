@@ -1,9 +1,9 @@
 ---
-title: Message
-description: A chat message component for Tailwind CSS with beautiful shadcn/ui styling. Use it to build messaging conversations and AI chat interfaces.
+title: Tailwind CSS Chat Message
+description: Beautiful, modern chat message component for Tailwind CSS. Use it to lay out one row of a chat, like in a messaging app or an AI assistant. Easily customizable.
 ---
 
-The message lays out one row of a chat conversation: the speech bubbles plus the avatar, sender name, and delivery status around them. Use it with the [bubble](/components/bubble) component for messaging UIs and AI assistants.
+Use the message component to lay out one row of a chat, like in a messaging app or an AI assistant. Fill it with [bubbles](/components/bubble) and scroll the rows in a [message scroller](/components/message-scroller).
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-8">
@@ -80,15 +80,15 @@ The message lays out one row of a chat conversation: the speech bubbles plus the
 
 Add the `message` class to a container. Inside it, add a `message-content` element holding the row's [bubbles](/components/bubble). Add `message-end` to align the row to your own side of the conversation, and pick whichever parts the row needs around the content: an avatar, a header, a footer.
 
-| Class             | Description                                              |
-| ----------------- | -------------------------------------------------------- |
-| `message`         | Add to the container for one chat row                    |
-| `message-end`     | Add to `message` to align the row to your side           |
-| `message-group`   | Add to a wrapper stacking consecutive rows tighter       |
+| Class             | Description                                                          |
+| ----------------- | -------------------------------------------------------------------- |
+| `message`         | Add to the container for one chat row                                |
+| `message-end`     | Add to `message` to align the row to your side                       |
+| `message-group`   | Add to a wrapper stacking consecutive rows tighter                   |
 | `message-avatar`  | Add to the element holding the sender's [avatar](/components/avatar) |
-| `message-content` | Add to the element holding the bubbles                   |
-| `message-header`  | Add to the sender name above the bubbles                 |
-| `message-footer`  | Add to the status line below the bubbles                 |
+| `message-content` | Add to the element holding the bubbles                               |
+| `message-header`  | Add to the sender name above the bubbles                             |
+| `message-footer`  | Add to the status line below the bubbles                             |
 
 ```html
 <div class="message">
@@ -103,7 +103,7 @@ Add the `message` class to a container. Inside it, add a `message-content` eleme
 
 ## Examples
 
-### Avatar
+### Message with an avatar
 
 Wrap an [avatar](/components/avatar) in `message-avatar` to identify the sender.
 
@@ -159,9 +159,9 @@ Wrap an [avatar](/components/avatar) in `message-avatar` to identify the sender.
 </div>
 ```
 
-### Group
+### Message group
 
-Wrap consecutive rows from the same sender in `message-group`; an empty `message-avatar` keeps the rows aligned.
+Wrap consecutive rows from the same sender in `message-group`, and an empty `message-avatar` keeps the rows aligned.
 
 ```html preview preset=sm
 <div class="message-group w-full max-w-sm">
@@ -191,7 +191,7 @@ Wrap consecutive rows from the same sender in `message-group`; an empty `message
 </div>
 ```
 
-### Header and footer
+### Message header and footer
 
 `message-header` names the sender above the bubbles, and `message-footer` carries status below them.
 
@@ -220,9 +220,9 @@ Wrap consecutive rows from the same sender in `message-group`; an empty `message
 </div>
 ```
 
-### Actions
+### Message actions
 
-Put [buttons](/components/button) in `message-footer` for per-message actions; give icon-only ones an `aria-label`.
+Put [buttons](/components/button) in `message-footer` for per-message actions, and give icon-only ones an `aria-label`.
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-8">
