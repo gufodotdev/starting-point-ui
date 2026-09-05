@@ -1,9 +1,9 @@
 ---
-title: Collapsible
-description: A collapsible component for Tailwind CSS with beautiful shadcn/ui styling. Use it to expand and collapse content with a trigger, like details behind a "show more".
+title: Tailwind CSS Collapsible
+description: Beautiful, modern collapsible component for Tailwind CSS. Use it to expand and collapse content with a trigger, like a show more button. Easily customizable.
 ---
 
-The collapsible expands and collapses a single panel of content from a trigger, like extra details behind a "show more". For a set of stacked panels where opening one closes the others, use an [accordion](/components/accordion).
+Use the collapsible component to expand and collapse a single panel of content from a trigger, like extra details behind a show more button. For a set of stacked panels where opening one closes the others, use an [accordion](/components/accordion).
 
 ```html preview preset=base
 <div class="flex w-full max-w-md gap-3">
@@ -77,12 +77,12 @@ The collapsible expands and collapses a single panel of content from a trigger, 
 
 ## Usage
 
-Add the `collapsible` class to the panel and point it at its trigger with `data-sp-toggle`. The trigger's `aria-expanded` follows the state, which is the styling hook for rotating chevrons or swapping labels.
+Add the `collapsible` class to the panel and point it at its trigger with `data-sp-toggle`. The trigger's `aria-expanded` follows the state, so use it to rotate a chevron or swap a label.
 
-| Class                 | Description                                                                  |
-| --------------------- | ---------------------------------------------------------------------------- |
-| `collapsible`         | Add to the panel; carries the `data-sp-*` options. `expanded` starts it open |
-| `collapsible-content` | Add to an inner wrapper for consistent spacing between children              |
+| Class                 | Description                                                     |
+| --------------------- | --------------------------------------------------------------- |
+| `collapsible`         | Add to the panel, where `expanded` starts it open               |
+| `collapsible-content` | Add to an inner wrapper for consistent spacing between children |
 
 ```html
 <!-- This is the trigger -->
@@ -98,7 +98,7 @@ Add the `collapsible` class to the panel and point it at its trigger with `data-
 
 ### Show more
 
-Reveal the rest of a long text in place; the trigger swaps its label against the expanded state.
+Reveal the rest of a long text in place. The trigger swaps its label against the expanded state.
 
 ```html preview preset=base
 <div class="flex w-full max-w-md flex-col items-start gap-2">
@@ -178,7 +178,7 @@ Author the `expanded` class on the panel to start it open, and mirror `aria-expa
 </nav>
 ```
 
-### Nested
+### Nested collapsibles
 
 Collapsibles nest, so a file tree is triggers and panels all the way down. The [sidebar menu](/components/sidebar) classes give it a ready-made look, indent line included.
 
@@ -293,7 +293,7 @@ Set each option with its own `data-sp-*` attribute on the `collapsible` element.
 
 | Attribute        | Values       | Default |
 | ---------------- | ------------ | ------- |
-| `data-sp-toggle` | CSS selector | —       |
+| `data-sp-toggle` | CSS selector | None    |
 
 ```html
 <div class="collapsible" data-sp-toggle="#my-trigger"></div>
@@ -303,7 +303,7 @@ Set each option with its own `data-sp-*` attribute on the `collapsible` element.
 
 ### Events
 
-Lifecycle events fire on the panel; `before*` events are cancelable.
+Lifecycle events fire on the panel. The `before*` events are cancelable.
 
 | Event               | When                           |
 | ------------------- | ------------------------------ |
