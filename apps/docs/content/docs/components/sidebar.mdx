@@ -1,9 +1,9 @@
 ---
-title: Sidebar
-description: A sidebar component for Tailwind CSS with beautiful shadcn/ui styling. Use it to put app navigation beside the page, collapsing to an icon rail or a mobile drawer.
+title: Tailwind CSS Sidebar
+description: Beautiful, modern sidebar component for Tailwind CSS. Use it to put app navigation beside the page, like in a dashboard or an admin panel. Easily customizable.
 ---
 
-The sidebar places your navigation in a column beside the page, the standard layout for dashboards, admin panels, and apps with many destinations. It collapses out of the way when the content needs room, and becomes a drawer on mobile.
+Use the sidebar component to put your navigation in a column beside the page, like in a dashboard, an admin panel, or a docs site. For a navigation panel that only opens on demand, use a [sheet](/components/sheet).
 
 ```html preview preset=sidebar
 <div class="sidebar-container">
@@ -181,23 +181,23 @@ The sidebar places your navigation in a column beside the page, the standard lay
 
 Add the `sidebar` class to an `<aside>` element and pair it with a `sidebar-page` content area inside a `sidebar-container` root. Point the sidebar at its trigger with `data-sp-toggle`: on desktop the trigger collapses the column in place, on mobile it opens the sidebar as a drawer.
 
-Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle while an optional `sidebar-header` and `sidebar-footer` stay pinned. Their contents are up to you, typically a brand row up top, grouped menus of links, and a user row at the bottom.
+Inside, `sidebar-content` scrolls in the middle while an optional `sidebar-header` and `sidebar-footer` stay pinned, typically a brand row up top and a user row at the bottom.
 
-| Class                   | Description                                                                 |
-| ----------------------- | --------------------------------------------------------------------------- |
-| `sidebar-container`     | Add to the root element wrapping the sidebar and page                       |
-| `sidebar`               | Add to an `<aside>` element to create the sidebar; carries `data-sp-toggle` |
-| `sidebar-header`        | Add for a pinned region at the top of the sidebar                           |
-| `sidebar-input`         | Add to an `input` for a search field that fits the sidebar                  |
-| `sidebar-content`       | Add for the scrollable middle of the sidebar                                |
-| `sidebar-group`         | Add to create a labelled section of the content                             |
-| `sidebar-group-label`   | Add to the group's heading                                                  |
-| `sidebar-group-content` | Add to the wrapper around the group's menu                                  |
-| `sidebar-menu`          | Add to a `<nav>` element to create a menu                                   |
-| `sidebar-menu-item`     | Add to each row in the menu                                                 |
-| `sidebar-menu-button`   | Add to the link or button in a row; `active` marks the current page         |
-| `sidebar-footer`        | Add for a pinned region at the bottom of the sidebar                        |
-| `sidebar-page`          | Add to the `<main>` content area beside the sidebar                         |
+| Class                   | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| `sidebar-container`     | Add to the root element wrapping the sidebar and page                 |
+| `sidebar`               | Add to an `<aside>` element, which carries `data-sp-toggle`           |
+| `sidebar-header`        | Add for a pinned region at the top of the sidebar                     |
+| `sidebar-input`         | Add to an `input` for a search field that fits the sidebar            |
+| `sidebar-content`       | Add for the scrollable middle of the sidebar                          |
+| `sidebar-group`         | Add to create a labelled section of the content                       |
+| `sidebar-group-label`   | Add to the group's heading                                            |
+| `sidebar-group-content` | Add to the wrapper around the group's menu                            |
+| `sidebar-menu`          | Add to a `<nav>` element to create a menu                             |
+| `sidebar-menu-item`     | Add to each row in the menu                                           |
+| `sidebar-menu-button`   | Add to the link or button in a row, with `active` on the current page |
+| `sidebar-footer`        | Add for a pinned region at the bottom of the sidebar                  |
+| `sidebar-page`          | Add to the `<main>` content area beside the sidebar                   |
 
 ```html
 <div class="sidebar-container">
@@ -253,7 +253,7 @@ Inside, the sidebar is a flex column: `sidebar-content` scrolls in the middle wh
 
 ### Icon collapse
 
-Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each button needs a leading icon and a `<span>` label; the rail keeps the icon and shows the label in a tooltip on hover.
+Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each button needs a leading icon and a `<span>` label. The rail keeps the icon and shows the label in a tooltip on hover.
 
 ```html preview preset=sidebar
 <div class="sidebar-container">
@@ -345,7 +345,7 @@ Set `data-sp-collapse="icon"` on the panel to shrink it to a rail of icons. Each
 
 ### Offcanvas collapse
 
-`data-sp-collapse="offcanvas"` (the default) slides the panel fully off-screen and the page reclaims the space.
+`data-sp-collapse="offcanvas"`, the default, slides the panel fully off-screen and the page reclaims the space.
 
 ```html preview preset=sidebar
 <div class="sidebar-container">
@@ -535,7 +535,7 @@ Add the `collapsed` class to the panel to render it collapsed on first paint.
 
 ### End sidebar
 
-A sidebar defaults to the start side, the left in LTR. Add `sidebar-end` to move it to the other side; `sidebar-left` and `sidebar-right` pin a physical edge.
+A sidebar defaults to the start side, the left in LTR. Add `sidebar-end` to move it to the other side, and `sidebar-left` and `sidebar-right` pin a physical edge.
 
 ```html preview preset=sidebar
 <div class="sidebar-container">
@@ -894,7 +894,7 @@ Nest two `sidebar-static` columns inside a single collapsible sidebar to build i
 </div>
 ```
 
-### Inset
+### Inset sidebar
 
 Add `sidebar-inset` to the root for an inset main content area with rounded corners and a shadow. It pairs well with `data-sp-collapse="icon"`, leaving the rail floating beside the inset page.
 
@@ -1104,9 +1104,9 @@ Use `sidebar-static` for a non-collapsing column that embeds anywhere, like a se
 </dialog>
 ```
 
-### Menu
+### Sidebar menu
 
-A `sidebar-menu` is a list of `sidebar-menu-item`s, each holding a `sidebar-menu-button`. Buttons can be links or buttons; add `active` to mark the current one. These classes work anywhere, not just inside a sidebar.
+A `sidebar-menu` is a list of `sidebar-menu-item`s, each holding a `sidebar-menu-button`. Buttons can be links or buttons, with `active` marking the current one. These classes work anywhere, not just inside a sidebar.
 
 ```html preview
 <aside class="sidebar-static">
@@ -1135,7 +1135,7 @@ A `sidebar-menu` is a list of `sidebar-menu-item`s, each holding a `sidebar-menu
 </aside>
 ```
 
-### Submenu
+### Sidebar submenu
 
 A `sidebar-menu-sub` is a nested list of `sidebar-menu-sub-item`s.
 
@@ -1238,7 +1238,7 @@ Wrap it in a [collapsible](/components/collapsible) to make it expandable, and n
 </aside>
 ```
 
-### Menu button
+### Menu button sizes
 
 Use `sidebar-menu-button-sm` or `sidebar-menu-button-lg` for smaller or larger rows. The large size suits brand rows with a logo or avatar.
 
@@ -1278,7 +1278,7 @@ Use `sidebar-menu-button-sm` or `sidebar-menu-button-lg` for smaller or larger r
 </aside>
 ```
 
-### Group
+### Sidebar group
 
 Wrap a labelled section of the menu in a `sidebar-group` with a `sidebar-group-label`. Stack multiple groups to organize the menu, and add a `sidebar-group-action` in the label row, for example to open a [dropdown](/components/dropdown).
 
@@ -1382,7 +1382,7 @@ Add a `sidebar-menu-action` for a secondary button on a menu item, or a `sidebar
 </aside>
 ```
 
-### Header
+### Sidebar header
 
 The `sidebar-header` is a pinned region at the top of the panel, typically a brand row built with a large menu button and a logo. Pair it with a [dropdown](/components/dropdown) to switch between versions, teams, or workspaces.
 
@@ -1421,7 +1421,7 @@ The `sidebar-header` is a pinned region at the top of the panel, typically a bra
 </aside>
 ```
 
-### Search
+### Sidebar search
 
 Add `sidebar-input` to an [input](/components/input) for a search field that fits the sidebar, typically in the header.
 
@@ -1457,7 +1457,7 @@ Add `sidebar-input` to an [input](/components/input) for a search field that fit
 </aside>
 ```
 
-### Footer
+### Sidebar footer
 
 The `sidebar-footer` is a pinned region at the bottom of the panel, often a user row with an [avatar](/components/avatar). Pair it with a [dropdown](/components/dropdown) for an account menu.
 
@@ -1784,7 +1784,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
 
 ## CSS variables
 
-The sidebar reads its dimensions from component-local variables declared on `sidebar-container` and `sidebar-static`. Override them per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+The variables live on `sidebar-container` and `sidebar-static`. Override them per instance with an arbitrary property, or for the whole app with a CSS rule.
 
 | Variable                 | Default | Description                      |
 | ------------------------ | ------- | -------------------------------- |
@@ -1796,7 +1796,7 @@ The sidebar reads its dimensions from component-local variables declared on `sid
 <div class="sidebar-container [--sidebar-width:18rem]"></div>
 ```
 
-The breakpoint where the sidebar switches between the mobile drawer and the desktop column is the `--breakpoint-sidebar` theme token. It follows your `md` breakpoint by default; override it in your theme to give the sidebar its own value, and the styles and the JavaScript both follow.
+The breakpoint where the sidebar switches between the mobile drawer and the desktop column is the `--breakpoint-sidebar` theme token. It follows your `md` breakpoint by default. Override it in your theme to give the sidebar its own value, and the styles and the JavaScript both follow.
 
 ```css
 @theme {
@@ -1812,7 +1812,7 @@ Set each option with its own `data-sp-*` attribute on the `sidebar` element.
 
 | Attribute          | Values                | Default     |
 | ------------------ | --------------------- | ----------- |
-| `data-sp-toggle`   | CSS selector          | —           |
+| `data-sp-toggle`   | CSS selector          | None        |
 | `data-sp-collapse` | `offcanvas` \| `icon` | `offcanvas` |
 
 ```html
@@ -1827,7 +1827,7 @@ Set each option with its own `data-sp-*` attribute on the `sidebar` element.
 
 ### Events
 
-All events fire on the panel; `before*` events are cancelable. The mobile drawer fires the show/hide lifecycle, the desktop column fires the collapse/expand lifecycle.
+All events fire on the panel. The `before*` events are cancelable. The mobile drawer fires the show/hide lifecycle, the desktop column fires the collapse/expand lifecycle.
 
 | Event               | When                                     |
 | ------------------- | ---------------------------------------- |
