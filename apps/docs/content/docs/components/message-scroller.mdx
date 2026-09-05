@@ -1,9 +1,9 @@
 ---
-title: Message Scroller
-description: A message scroller component for Tailwind CSS with beautiful shadcn/ui styling. Use it to build chat feeds that follow new messages and keep the reader's place.
+title: Tailwind CSS Message Scroller
+description: Beautiful, modern message scroller component for Tailwind CSS. Use it to auto scroll a chat feed, like a thread or an AI assistant. Easily customizable.
 ---
 
-The message scroller is the scrolling viewport of a chat: it follows new messages as they arrive, pins fresh turns to the top like an AI assistant, and keeps the reader's place when older history loads in. Use it around [message](/components/message) rows for messaging UIs and AI chats.
+Use the message scroller component as the scrolling viewport of a chat, like a messaging thread or an AI assistant, so it follows new messages and keeps the reader's place. Fill it with [message](/components/message) rows.
 
 ```html preview preset=base h=46rem
 %include examples/cards/chat.tsx%
@@ -13,13 +13,13 @@ The message scroller is the scrolling viewport of a chat: it follows new message
 
 Add the `message-scroller` class to a container with a height. Inside it, add a `message-scroller-viewport` element with a `message-scroller-content` element inside, and one `message-scroller-item` per message. For a jump-to-latest button, add `message-scroller-button` to a [button](/components/button) inside the container.
 
-| Class                           | Description                                          |
-| ------------------------------- | ---------------------------------------------------- |
-| `message-scroller`              | Add to the container                                 |
-| `message-scroller-viewport`     | Add to the scrolling element                         |
-| `message-scroller-content`      | Add to the element holding the messages              |
-| `message-scroller-item`         | Add to each message                                  |
-| `message-scroller-button`       | Add to a `button` that scrolls back to the latest message |
+| Class                           | Description                                                |
+| ------------------------------- | ---------------------------------------------------------- |
+| `message-scroller`              | Add to the container                                       |
+| `message-scroller-viewport`     | Add to the scrolling element                               |
+| `message-scroller-content`      | Add to the element holding the messages                    |
+| `message-scroller-item`         | Add to each message                                        |
+| `message-scroller-button`       | Add to a `button` that scrolls back to the latest message  |
 | `message-scroller-button-start` | Add to `message-scroller-button` to target the top instead |
 
 ```html
@@ -240,9 +240,9 @@ groupSync();
 </script>
 ```
 
-### Following
+### Following new messages
 
-Add `data-sp-auto-scroll` to follow new messages as they arrive; scrolling up releases it, and the button brings it back.
+Add `data-sp-auto-scroll` to follow new messages as they arrive. Scrolling up releases it, and the button brings it back.
 
 ```html preview preset=base h=46rem
 <div class="flex w-full max-w-sm flex-col gap-4">
@@ -402,7 +402,7 @@ streamSync();
 
 ### Opening position
 
-Set `data-sp-position` to `start`, `end`, or `last-anchor` for where the scroller opens; `last-anchor` starts at the newest turn.
+Set `data-sp-position` to `start`, `end`, or `last-anchor` for where the scroller opens. `last-anchor` starts at the newest turn.
 
 ```html preview preset=base h=46rem
 <div class="flex w-full max-w-sm flex-col gap-4">
@@ -487,7 +487,7 @@ document.querySelectorAll("#open-tabs .tab").forEach((tab) => {
 
 ### Load history
 
-Messages inserted at the top keep the reader's place automatically; turn it off with `data-sp-preserve-prepend="false"`.
+Messages inserted at the top keep the reader's place automatically. Turn it off with `data-sp-preserve-prepend="false"`.
 
 ```html preview preset=base h=46rem
 <div class="flex w-full max-w-sm flex-col gap-4">
@@ -946,20 +946,20 @@ window.addEventListener("message", (e) => {
 
 Set each option with its own `data-sp-*` attribute on the `message-scroller` element.
 
-| Attribute                  | Values                            | Default |
-| -------------------------- | --------------------------------- | ------- |
-| `data-sp-auto-scroll`      | Boolean                           | `false` |
-| `data-sp-position`         | `start`, `end`, `last-anchor`     | `end`   |
-| `data-sp-edge-threshold`   | Number                            | `8`     |
-| `data-sp-margin`           | Number                            | `0`     |
-| `data-sp-peek`             | Number                            | `64`    |
-| `data-sp-preserve-prepend` | Boolean                           | `true`  |
+| Attribute                  | Values                        | Default |
+| -------------------------- | ----------------------------- | ------- |
+| `data-sp-auto-scroll`      | Boolean                       | `false` |
+| `data-sp-position`         | `start`, `end`, `last-anchor` | `end`   |
+| `data-sp-edge-threshold`   | Number                        | `8`     |
+| `data-sp-margin`           | Number                        | `0`     |
+| `data-sp-peek`             | Number                        | `64`    |
+| `data-sp-preserve-prepend` | Boolean                       | `true`  |
 
 ```html
 <div class="message-scroller" data-sp-auto-scroll data-sp-position="last-anchor">...</div>
 ```
 
-With `data-sp-auto-scroll` the viewport follows new messages while the reader is at the bottom; scrolling up releases it, and returning to the bottom resumes it. `data-sp-position` picks where a thread opens. `data-sp-edge-threshold` is how close to an edge still counts as being there, `data-sp-margin` adds an offset to scroll targets, and `data-sp-peek` is how much of the previous turn stays visible above a pinned anchor. Set `data-sp-preserve-prepend="false"` to stop holding the reader's place when older messages are inserted at the top.
+With `data-sp-auto-scroll` the viewport follows new messages while the reader is at the bottom. Scrolling up releases it, and returning to the bottom resumes it. `data-sp-position` picks where a thread opens. `data-sp-edge-threshold` is how close to an edge still counts as being there, `data-sp-margin` adds an offset to scroll targets, and `data-sp-peek` is how much of the previous turn stays visible above a pinned anchor. Set `data-sp-preserve-prepend="false"` to stop holding the reader's place when older messages are inserted at the top.
 
 Mark a turn with `data-sp-anchor` on its `message-scroller-item` to pin it to the top of the viewport when it arrives.
 
@@ -983,10 +983,10 @@ document.querySelector(".message-scroller").addEventListener("sp-change", (e) =>
 
 Get the instance with `sp.messageScroller(el)`, then call its methods:
 
-| Method                       | Description                                    |
-| ---------------------------- | ---------------------------------------------- |
-| `scrollToEnd(options)`       | Scroll to the latest message                   |
-| `scrollToStart(options)`     | Scroll to the top                              |
-| `scrollToMessage(id, options)` | Scroll to the item with that `id`            |
+| Method                         | Description                       |
+| ------------------------------ | --------------------------------- |
+| `scrollToEnd(options)`         | Scroll to the latest message      |
+| `scrollToStart(options)`       | Scroll to the top                 |
+| `scrollToMessage(id, options)` | Scroll to the item with that `id` |
 
 Options take `behavior` (`auto` or `smooth`), `align` (`start`, `center`, `end`, `nearest`), and `scrollMargin`.
