@@ -1,9 +1,9 @@
 ---
-title: Radio Group
-description: A radio group component for Tailwind CSS with beautiful shadcn/ui styling. Use it to pick exactly one option from a set, like a plan or a shipping method.
+title: Tailwind CSS Radio Group
+description: Beautiful, modern radio button component for Tailwind CSS. Use it to pick exactly one option from a set, like a plan or a shipping method. Easily customizable.
 ---
 
-The radio group picks exactly one option from a set, like a plan or a shipping method. For on/off settings, reach for the [checkbox](/components/checkbox) or [switch](/components/switch).
+Use the radio group component to pick exactly one option from a set of radio buttons, like a plan or a shipping method. For on and off settings, reach for the [checkbox](/components/checkbox) or [switch](/components/switch).
 
 ```html preview preset=sm
 <div class="field-group w-full max-w-sm gap-3" role="radiogroup" aria-label="Density">
@@ -24,11 +24,11 @@ The radio group picks exactly one option from a set, like a plan or a shipping m
 
 ## Usage
 
-Add the `radio` class to each `<input type="radio">` and give the set a shared `name`. Lay each option out with its label in a horizontal [field](/components/field), and give the group an accessible name: a `field-set` with a legend, or `role="radiogroup"` with an `aria-label`.
+Add the `radio` class to each `<input type="radio">` and give the set a shared `name`. Lay each option out with its label in a horizontal [field](/components/field), and name the group with a `field-set` and legend or with `role="radiogroup"` and an `aria-label`.
 
-| Class   | Description                          |
-| ------- | ------------------------------------- |
-| `radio` | Add to each `<input type="radio">`    |
+| Class   | Description                        |
+| ------- | ---------------------------------- |
+| `radio` | Add to each `<input type="radio">` |
 
 ```html
 <div class="field field-horizontal">
@@ -39,7 +39,7 @@ Add the `radio` class to each `<input type="radio">` and give the set a shared `
 
 ## Examples
 
-### Description
+### Radio with a description
 
 Give options supporting text with `field-content`.
 
@@ -69,7 +69,7 @@ Give options supporting text with `field-content`.
 </div>
 ```
 
-### Choice card
+### Radio choice cards
 
 Wrap each option in a [label](/components/label) and the whole card becomes clickable, tinting itself while checked.
 
@@ -105,7 +105,7 @@ Wrap each option in a [label](/components/label) and the whole card becomes clic
 </div>
 ```
 
-### Fieldset
+### Radio group in a fieldset
 
 Wrap the group in a [field set](/components/field) with a legend so it is announced together.
 
