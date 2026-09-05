@@ -1,9 +1,9 @@
 ---
-title: Skeleton
-description: A skeleton component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a placeholder while content is loading.
+title: Tailwind CSS Skeleton
+description: Beautiful, modern skeleton loader component for Tailwind CSS. Use it to show a placeholder while content loads, like a card or a table. Easily customizable.
 ---
 
-The skeleton shows a pulsing placeholder in the shape of the content while it loads. Use it to keep the layout steady while a page or panel fetches its data; for progress with a known duration, reach for the [progress](/components/progress) bar.
+Use the skeleton component to show a pulsing placeholder in the shape of content while it loads, like a card, a table, or a form. For progress with a known duration, reach for the [progress](/components/progress) bar.
 
 ```html preview preset=sm
 <div class="flex items-center gap-4">
@@ -17,11 +17,11 @@ The skeleton shows a pulsing placeholder in the shape of the content while it lo
 
 ## Usage
 
-Add the `skeleton` class to an element and size it with width and height utilities to match the content it stands in for. It comes with the muted fill, rounded corners, and pulse animation; shape it into bars, circles, or blocks as needed.
+Add the `skeleton` class to an element and size it with width and height utilities to match the content it stands in for. It comes with the muted fill, rounded corners, and pulse animation, so shape it into bars, circles, or blocks.
 
-| Class      | Description                          |
-| ---------- | ------------------------------------ |
-| `skeleton` | Add to a placeholder element         |
+| Class      | Description                  |
+| ---------- | ---------------------------- |
+| `skeleton` | Add to a placeholder element |
 
 ```html
 <div class="skeleton h-4 w-48"></div>
@@ -29,9 +29,9 @@ Add the `skeleton` class to an element and size it with width and height utiliti
 
 ## Examples
 
-### Avatar
+### Avatar skeleton
 
-A common pattern: a circle for the avatar and two bars for the text beside it.
+A circle for the avatar and two bars for the text beside it.
 
 ```html preview preset=sm
 <div class="flex w-fit items-center gap-4">
@@ -43,7 +43,7 @@ A common pattern: a circle for the avatar and two bars for the text beside it.
 </div>
 ```
 
-### Card
+### Card skeleton
 
 Skeletons standing in for a card's text and media.
 
@@ -59,7 +59,7 @@ Skeletons standing in for a card's text and media.
 </div>
 ```
 
-### Text
+### Text skeleton
 
 A paragraph placeholder from stacked bars.
 
@@ -71,7 +71,7 @@ A paragraph placeholder from stacked bars.
 </div>
 ```
 
-### Form
+### Form skeleton
 
 Label and field pairs while a form loads.
 
@@ -89,7 +89,7 @@ Label and field pairs while a form loads.
 </div>
 ```
 
-### Table
+### Table skeleton
 
 Repeated rows of columns for tabular data.
 
