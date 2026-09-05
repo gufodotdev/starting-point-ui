@@ -1,9 +1,9 @@
 ---
-title: Tooltip
-description: A tooltip component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show a short text hint on hover, like explaining an icon-only button.
+title: Tailwind CSS Tooltip
+description: Beautiful, modern tooltip component for Tailwind CSS. Use it to show a short text hint on hover, like explaining an icon-only button. Easily customizable.
 ---
 
-The tooltip shows a short text hint next to its trigger on hover or focus, like explaining an icon-only button. It is for plain text only; for rich content or anything interactive, use a [popover](/components/popover).
+Use the tooltip component to show a short text hint next to its trigger on hover or focus, like explaining an icon-only button. For rich content or anything interactive, use a [popover](/components/popover).
 
 ```html preview preset=sm
 <button id="tooltip-demo-trigger" class="btn btn-outline">Hover</button>
@@ -15,9 +15,9 @@ The tooltip shows a short text hint next to its trigger on hover or focus, like 
 
 Add the `tooltip` class to an element and point it at its trigger with `data-sp-toggle`.
 
-| Class     | Description                                              |
-| --------- | -------------------------------------------------------- |
-| `tooltip` | Add to the hint element; carries the `data-sp-*` options |
+| Class     | Description                                                    |
+| --------- | -------------------------------------------------------------- |
+| `tooltip` | Add to the hint element, which carries the `data-sp-*` options |
 
 ```html
 <!-- This is the trigger -->
@@ -29,9 +29,9 @@ Add the `tooltip` class to an element and point it at its trigger with `data-sp-
 
 ## Examples
 
-### Side
+### Tooltip placement
 
-Set which side the tooltip opens on with `data-sp-placement`; it defaults to `top`. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement) and flips to the opposite side on its own when there isn't room.
+Set which side the tooltip opens on with `data-sp-placement`, `top` by default. It accepts any [Floating UI placement](https://floating-ui.com/docs/computeposition#placement) and flips to the opposite side on its own when there isn't room.
 
 ```html preview preset=sm
 <div class="flex flex-wrap justify-center gap-2">
@@ -71,9 +71,9 @@ Set which side the tooltip opens on with `data-sp-placement`; it defaults to `to
 </div>
 ```
 
-### With keyboard shortcut
+### Tooltip with a keyboard shortcut
 
-A [kbd](/components/kbd) rides along after the text; the tooltip tightens its padding for it and the kbd switches to a translucent treatment automatically.
+A [kbd](/components/kbd) rides along after the text, and the tooltip tightens its padding for it.
 
 ```html preview preset=sm
 <button
@@ -90,7 +90,7 @@ A [kbd](/components/kbd) rides along after the text; the tooltip tightens its pa
 </div>
 ```
 
-### Disabled button
+### Tooltip on a disabled button
 
 Disabled elements don't fire pointer events, so wrap the trigger in a focusable span and point the tooltip at that.
 
@@ -172,7 +172,7 @@ Set each option with its own `data-sp-*` attribute on the `tooltip` element.
 
 | Attribute           | Values                | Default |
 | ------------------- | --------------------- | ------- |
-| `data-sp-toggle`    | CSS selector          | —       |
+| `data-sp-toggle`    | CSS selector          | None    |
 | `data-sp-placement` | Floating UI placement | `top`   |
 | `data-sp-offset`    | Number                | `5`     |
 
@@ -188,7 +188,7 @@ Set each option with its own `data-sp-*` attribute on the `tooltip` element.
 
 ### Events
 
-Lifecycle events fire on the tooltip element; `before*` events are cancelable.
+Lifecycle events fire on the tooltip element. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
