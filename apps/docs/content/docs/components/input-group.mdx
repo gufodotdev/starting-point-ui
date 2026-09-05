@@ -1,9 +1,9 @@
 ---
-title: Input Group
-description: An input group component for Tailwind CSS with beautiful shadcn/ui styling. Use it to put icons, text, and buttons inside one bordered field.
+title: Tailwind CSS Input Group
+description: Beautiful, modern input group component for Tailwind CSS. Use it to put icons, text, and buttons in one field, like a search box. Easily customizable.
 ---
 
-The input group wraps an [input](/components/input) or [textarea](/components/textarea) in a single bordered field and lets icons, text, buttons, and whole toolbars sit inside it. For attaching full-size buttons next to a field, reach for the [button group](/components/button-group) instead.
+Use the input group component to put icons, text, and buttons inside one bordered field, like a search box with its icon or a price with its currency. For attaching full-size buttons next to a field, reach for the [button group](/components/button-group).
 
 ```html preview preset=sm
 <div class="input-group w-full max-w-sm">
@@ -15,17 +15,17 @@ The input group wraps an [input](/components/input) or [textarea](/components/te
 
 ## Usage
 
-Add the `input-group` class to the wrapper and put a regular [input](/components/input) or [textarea](/components/textarea) inside; the wrapper strips its border and takes over as the field chrome. Extras go in `input-group-addon` elements, and regular [buttons](/components/button) inside an addon shrink to fit the field automatically. The wrapper draws the border, focus ring, and invalid state for the whole field.
+Add the `input-group` class to the wrapper and put a regular [input](/components/input) or [textarea](/components/textarea) inside. The wrapper takes over the border, focus ring, and invalid state for the whole field. Put extras in `input-group-addon` elements, where regular [buttons](/components/button) shrink to fit the field.
 
-| Class                          | Description                                                       |
-| ------------------------------ | ----------------------------------------------------------------- |
-| `input-group`                  | Add to the wrapper; carries the border, focus ring, and invalid state |
-| `input-group-sm`               | Add to `input-group` for a compact field                          |
-| `input-group-addon`            | Add to an element holding icons, text, or buttons (leading by default) |
-| `input-group-addon-end`        | Add to `input-group-addon` to trail the input                     |
-| `input-group-addon-block-start`| Add to `input-group-addon` for a full-width header row            |
-| `input-group-addon-block-end`  | Add to `input-group-addon` for a full-width footer row            |
-| `input-group-text`             | Add to a `<span>` for muted static text inside an addon           |
+| Class                           | Description                                                               |
+| ------------------------------- | ------------------------------------------------------------------------- |
+| `input-group`                   | Add to the wrapper, which draws the border, focus ring, and invalid state |
+| `input-group-sm`                | Add to `input-group` for a compact field                                  |
+| `input-group-addon`             | Add to an element holding icons, text, or buttons, leading by default     |
+| `input-group-addon-end`         | Add to `input-group-addon` to trail the input                             |
+| `input-group-addon-block-start` | Add to `input-group-addon` for a full-width header row                    |
+| `input-group-addon-block-end`   | Add to `input-group-addon` for a full-width footer row                    |
+| `input-group-text`              | Add to a `<span>` for muted static text inside an addon                   |
 
 ```html
 <div class="input-group">
@@ -127,9 +127,9 @@ Add `input-group-addon-block-end` for a full-width footer row below the control.
 </div>
 ```
 
-### Icon
+### Input group with an icon
 
-Drop svgs straight into addons; they size themselves.
+Drop svgs straight into addons and they size themselves.
 
 ```html preview preset=base
 <div class="flex w-full max-w-sm flex-col gap-4">
@@ -156,7 +156,7 @@ Drop svgs straight into addons; they size themselves.
 </div>
 ```
 
-### Text
+### Input group with text
 
 Wrap static text in `input-group-text` for prefixes, suffixes, and counters.
 
@@ -188,9 +188,9 @@ Wrap static text in `input-group-text` for prefixes, suffixes, and counters.
 </div>
 ```
 
-### Button
+### Input group with a button
 
-Put regular [buttons](/components/button) in an addon and they shrink to fit the field; a [popover](/components/popover) or any other overlay can hang off them.
+Put regular [buttons](/components/button) in an addon and they shrink to fit the field, and a [popover](/components/popover) or any other overlay can hang off them.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-4">
@@ -240,7 +240,7 @@ Trail the input with a [kbd](/components/kbd) to hint a shortcut.
 </div>
 ```
 
-### Dropdown
+### Input group with a dropdown
 
 Hang a [dropdown](/components/dropdown) off an addon button.
 
@@ -272,7 +272,7 @@ Hang a [dropdown](/components/dropdown) off an addon button.
 </div>
 ```
 
-### Loading
+### Loading state
 
 Spin an icon in an addon while the field works.
 
@@ -306,7 +306,7 @@ Spin an icon in an addon while the field works.
 </div>
 ```
 
-### Textarea
+### Textarea input group
 
 Full toolbars compose above and below a textarea with the block addons.
 
@@ -327,7 +327,7 @@ Full toolbars compose above and below a textarea with the block addons.
 
 ### Custom control
 
-Any element works as the control; our textarea autosizes natively via `field-sizing-content`.
+Any element works as the control, like a textarea that autosizes with `field-sizing-content`.
 
 ```html preview preset=sm
 <div class="input-group w-full max-w-sm">
