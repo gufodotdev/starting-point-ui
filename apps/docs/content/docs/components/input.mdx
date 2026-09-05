@@ -1,9 +1,9 @@
 ---
-title: Input
-description: An input component for Tailwind CSS with beautiful shadcn/ui styling. Use it to capture single-line text like names, emails, and search queries.
+title: Tailwind CSS Input
+description: Beautiful, modern input component for Tailwind CSS. Use it to capture a single line of text, like a name, an email, or a search query. Easily customizable.
 ---
 
-The input captures a single line of text, from names and emails to search queries. Pair it with a [field](/components/field) for a label and description; for multi-line text, reach for the [textarea](/components/textarea).
+Use the input component to capture a single line of text, like a name, an email, or a search query. Pair it with a [field](/components/field) for a label and description, and for multi-line text, reach for the [textarea](/components/textarea).
 
 ```html preview preset=sm
 <div class="field w-full max-w-sm">
@@ -24,9 +24,9 @@ The input captures a single line of text, from names and emails to search querie
 
 Add the `input` class to an `<input>` element. It styles all the textual types plus file inputs, and reads validation state from `aria-invalid`.
 
-| Class   | Description                 |
-| ------- | --------------------------- |
-| `input` | Add to an `<input>` element |
+| Class      | Description                        |
+| ---------- | ---------------------------------- |
+| `input`    | Add to an `<input>` element        |
 | `input-sm` | Add to `input` for a compact field |
 
 ```html
@@ -35,7 +35,7 @@ Add the `input` class to an `<input>` element. It styles all the textual types p
 
 ## Examples
 
-### Basic
+### Basic input
 
 A bare input with only a placeholder.
 
@@ -43,7 +43,7 @@ A bare input with only a placeholder.
 <input class="input w-full max-w-sm" placeholder="Enter text" />
 ```
 
-### Field
+### Input with a label
 
 Wrap the input in a [field](/components/field) with a [label](/components/label) and description.
 
@@ -60,7 +60,7 @@ Wrap the input in a [field](/components/field) with a [label](/components/label)
 </div>
 ```
 
-### Field group
+### Stacked inputs
 
 Stack several fields with a [field group](/components/field).
 
@@ -122,7 +122,7 @@ Set `aria-invalid` on the input for the error ring.
 </div>
 ```
 
-### File
+### File input
 
 File inputs get matching button-like styling for the browse control.
 
@@ -134,7 +134,7 @@ File inputs get matching button-like styling for the browse control.
 </div>
 ```
 
-### Inline
+### Input with a button
 
 Lay the input out beside a [button](/components/button) with a horizontal field.
 
@@ -145,7 +145,7 @@ Lay the input out beside a [button](/components/button) with a horizontal field.
 </div>
 ```
 
-### Grid
+### Inputs in a grid
 
 Arrange fields in columns with grid utilities on a [field group](/components/field).
 
@@ -162,7 +162,7 @@ Arrange fields in columns with grid utilities on a [field group](/components/fie
 </div>
 ```
 
-### Required
+### Required input
 
 Mark the label and add `required` so the browser enforces the field.
 
@@ -182,7 +182,7 @@ Mark the label and add `required` so the browser enforces the field.
 </div>
 ```
 
-### Badge
+### Input with a badge
 
 Labels are flex rows, so a [badge](/components/badge) slots in next to the text.
 
@@ -238,7 +238,7 @@ Attach a button to the input with a [button group](/components/button-group).
 </div>
 ```
 
-### Form
+### Inputs in a form
 
 Compose inputs, a [select](/components/select), and actions into a full form.
 
