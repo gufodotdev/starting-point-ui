@@ -1,166 +1,134 @@
 ---
-title: Card Examples
-description: Card examples for Tailwind CSS with beautiful shadcn/ui styling. Ready-made designs for forms, commerce, content, and more.
+title: Tailwind CSS Card Examples
+description: Beautiful, modern card examples for Tailwind CSS. Copy a login form, a product card, a pricing card, a profile card, and more. Easily customizable.
 ---
 
-A collection of Tailwind CSS card examples with beautiful shadcn/ui styling. Use them for things like login forms, user profiles, pricing, and dashboard widgets, or as inspiration for your own designs. Every example is built on the [card](/components/card) component and ready to copy into your project.
+Ready-made cards for Tailwind CSS, every one built on the [card](/components/card) component with the library's form and content pieces inside. Click an example to open its page and copy the code.
 
-## Login
+## Login Form
 
-A login form with a forgot password link and social sign in.
+A login form for Tailwind CSS with email and password fields, a forgot password link, and social sign in. Built with the [card](/components/card) and [field](/components/field) components.
 
 ```html preview preset=lg
 %include examples/cards/login.tsx%
 ```
 
-A login card collects the credentials users need to get back into their account. Email and password fields plus a sign in button form the core, often joined by a forgot password link and social sign in buttons for one-click authentication. It's usually the first screen of any app with accounts, standing alone on a centered page or inside a modal.
+## Sign Up Form
 
-## Sign Up
-
-A sign up form with email and password fields and social providers.
+A sign up form for Tailwind CSS with email and password fields, social providers, and a link to log in. Built with the [card](/components/card) and [field](/components/field) components.
 
 ```html preview preset=lg
 %include examples/cards/sign-up.tsx%
 ```
 
-A sign up card turns visitors into account holders with as little friction as possible. The classic shape asks for an email and password, offers social providers so users can skip the form entirely, and links to the login page for people who already registered. You'll see it on landing pages, in onboarding flows, and anywhere a product invites new users in.
+## Product Card
 
-## Product
-
-A product card with a cover photo, rating, price, and add to cart action.
+A product card for Tailwind CSS with a cover photo, star rating, price, and add to cart button. Built with the [card](/components/card) and [badge](/components/badge) components.
 
 ```html preview preset=lg
 %include examples/cards/product.tsx%
 ```
 
-A product card summarizes an item for sale so shoppers can evaluate it at a glance. A cover photo does most of the selling, backed by the product name, a star rating, the price, and an add to cart button, with a category tag or discount badge often riding along. Product grids in shops, search results, and recommendation strips are all built from cards like this.
+## Blog Card
 
-## Blog Post
-
-An article preview with a cover image, title, and author.
+A blog card for Tailwind CSS with a cover image, title, category, and author. Built with the [card](/components/card) and [avatar](/components/avatar) components.
 
 ```html preview preset=lg
 %include examples/cards/blog-post.tsx%
 ```
 
-A blog post card teases an article and invites the click. It pairs a cover image with the title, a category or short excerpt, and the author's avatar and name, often rounded out with a date or reading time. Blog indexes, related article strips, and content marketing pages lay out posts in exactly these grids.
+## Share Dialog
 
-## Share Document
-
-A share dialog with a copyable link and per-person access levels.
+A share dialog for Tailwind CSS with a copyable link and per-person access levels. Built with the [card](/components/card), [avatar](/components/avatar), and [select](/components/select) components.
 
 ```html preview preset=lg
 %include examples/cards/share-document.tsx%
 ```
 
-A share card lets users grant others access to a document without leaving their work. The usual shape is a copyable link up top and a people list below, where each person carries an access level select like view, comment, or edit. Document editors, design tools, and file managers reach for this pattern whenever collaboration happens per file.
+## Payment Method Form
 
-## Payment Method
-
-A payment method picker built from radio choice cards.
+A payment method form for Tailwind CSS where each method is a selectable radio choice card. Built with the [card](/components/card) and [field](/components/field) components.
 
 ```html preview preset=lg
 %include examples/cards/payment-method.tsx%
 ```
 
-A payment method card lets users choose how to pay. Each method is a selectable choice card that behaves like a radio button, pairing an icon with a label, and the selection can reveal extra fields like card details when needed. Checkout steps and billing settings both lean on this pattern to make the choice obvious and hard to get wrong.
+## Notification Settings
 
-## Notifications
-
-Notification preferences with descriptive switch rows.
+A notification settings card for Tailwind CSS with a switch, label, and description per option. Built with the [card](/components/card) and [switch](/components/switch) components.
 
 ```html preview preset=base
 %include examples/cards/notifications.tsx%
 ```
 
-A notification settings card puts users in control of what interrupts them. Each row pairs a switch with a label and a short description, so options explain themselves, from email digests to push alerts and mentions. Settings and preference pages in almost every app group their toggles exactly like this.
+## Feedback Form
 
-## Feedback
-
-A feedback form with a type select, title input, and message textarea.
+A feedback form for Tailwind CSS with a type select, a title input, and a message textarea. Built with the [card](/components/card), [select](/components/select), and [textarea](/components/textarea) components.
 
 ```html preview preset=lg
 %include examples/cards/feedback.tsx%
 ```
 
-A feedback card gives users a quick way to tell you what's working and what's broken. A type select for bugs, ideas, or general comments, a short title, and a free-form message keep reports structured enough to triage. Product dashboards, support pages, and in-app dialogs all collect feedback with this shape.
+## Pricing Card
 
-## Premium Plan
-
-A pricing card with a feature list and upgrade action.
+A pricing card for Tailwind CSS with the plan name, monthly price, a feature checklist, and an upgrade button. Built with the [card](/components/card) component.
 
 ```html preview preset=lg
 %include examples/cards/premium-plan.tsx%
 ```
 
-A pricing card sells a plan on a single surface. The plan name and monthly price lead, a checklist of features carries the argument, and an upgrade button closes the deal, with a popular badge or annual discount often sweetening it. Pricing pages line up several of these side by side, and upsell prompts drop one into settings or paywalls.
+## Profile Card
 
-## Profile
-
-A profile card with a photo, bio, follower stats, and a follow action.
+A profile card for Tailwind CSS with a photo, bio, follower stats, and a follow button. Built with the [card](/components/card) and [button](/components/button) components.
 
 ```html preview preset=lg
 %include examples/cards/profile.tsx%
 ```
 
-A profile card introduces a person at a glance. Avatar, name, and handle come first, a short bio adds character, follower stats add social proof, and a follow button turns the card into an action. Member directories, hover cards, and community sidebars all present people this way.
+## Testimonial Card
 
-## Testimonial
-
-A testimonial with a star rating and reviewer details.
+A testimonial card for Tailwind CSS with a star rating, a quote, and the reviewer's photo, name, and role. Built with the [card](/components/card) and [avatar](/components/avatar) components.
 
 ```html preview preset=base
 %include examples/cards/testimonial.tsx%
 ```
 
-A testimonial card lends your product someone else's voice. A star rating and a short quote carry the message, with the reviewer's photo, name, and role underneath to make it credible. Landing pages and checkout flows scatter these wherever trust needs a boost.
+## Music Player Card
 
-## Music Player
-
-A now playing card with track progress and transport controls.
+A music player card for Tailwind CSS with cover art, track progress, and play, previous, and next controls. Built with the [card](/components/card) and [progress](/components/progress) components.
 
 ```html preview preset=base h=44rem
 %include examples/cards/music-player.tsx%
 ```
 
-A now playing card puts playback control anywhere in a layout. Cover art, the track title and artist, a progress bar, and transport buttons for previous, play, and next make up the standard anatomy. Music apps, podcast players, and media dashboards use the pattern as both a compact widget and the heart of a full screen.
+## Chat UI
 
-## Chat
-
-An assistant chat with streaming replies, built on the [message scroller](/components/message-scroller).
+A chat UI for Tailwind CSS with streaming assistant replies, a scrolling thread, and a message composer. Built with the [card](/components/card) and [message scroller](/components/message-scroller) components.
 
 ```html preview preset=base h=42rem
 %include examples/cards/chat.tsx%
 ```
 
-A chat card embeds a conversation in a compact surface. Messages alternate between the user and the other side, a scroller keeps the latest reply in view, and an input with a send button sits at the bottom, with streaming replies suiting AI assistants especially well. Support widgets, AI assistants, and messaging panels all build on this shape.
-
 ## Shopping Cart
 
-A cart summary with product thumbnails, quantities, a subtotal, and a checkout action.
+A shopping cart for Tailwind CSS with product thumbnails, quantities, a subtotal, and a checkout button. Built with the [card](/components/card) and [button](/components/button) components.
 
 ```html preview preset=lg
 %include examples/cards/shopping-cart.tsx%
 ```
 
-A shopping cart card shows shoppers what they're about to buy. Product thumbnails with names, prices, and quantities stack into a list, a subtotal keeps the math honest, and a checkout button moves the order forward. It works as a dropdown panel, a slide-in drawer, or a step of the checkout page itself.
+## Payment Success
 
-## Invoice Paid
-
-A payment confirmation with a success icon and stacked actions.
+A payment success card for Tailwind CSS with a success icon, the amount and reference, and stacked actions. Built with the [card](/components/card) and [button](/components/button) components.
 
 ```html preview preset=base
 %include examples/cards/invoice-paid.tsx%
 ```
 
-A payment confirmation card closes a transaction with certainty. A success icon leads, the amount and reference details confirm what happened, and stacked actions like viewing the receipt or returning home give users somewhere to go next. Payment flows, order pages, and billing screens all end on a note like this.
+## Radio Group with Nested Checkboxes
 
-## Attendance
-
-Nested radio and checkbox options where selecting Private disables the sub-options with CSS alone.
+A radio group for Tailwind CSS with nested checkboxes that CSS alone disables under an unpicked option. Built with the [radio group](/components/radio-group) and [checkbox](/components/checkbox) components.
 
 ```html preview preset=lg
 %include examples/cards/attendance.tsx%
 ```
-
-An option group card collects a decision along with its follow-up choices. Radio options set the main answer while nested checkboxes refine it, and picking an option that makes the sub-options irrelevant disables them. RSVP forms, privacy settings, and survey questions all branch like this.
