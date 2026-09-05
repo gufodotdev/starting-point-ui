@@ -8,7 +8,7 @@ export type NavGroup = {
   items: NavItem[];
 };
 
-export const discordUrl = "https://discord.gg/ZMc7k8RWe";
+export const discordUrl = "https://discord.gg/EFqGKyQ3tQ";
 
 export const mainNav: NavItem[] = [
   { title: "Documentation", href: "/guides/introduction" },

@@ -64,7 +64,7 @@ Starting Point UI is designed to be the first thing you install in any new proje
 
 ## Community
 
-- [Discord](https://discord.gg/ZMc7k8RWe) - Hang out, get help, and share what you've built
+- [Discord](https://discord.gg/EFqGKyQ3tQ) - Hang out, get help, and share what you've built
 - [GitHub Discussions](https://github.com/gufodotdev/starting-point-ui/discussions) - Ask questions or suggest features
 - [GitHub Issues](https://github.com/gufodotdev/starting-point-ui/issues) - Report bugs
 
