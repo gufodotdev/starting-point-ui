@@ -1,9 +1,9 @@
 ---
-title: Breadcrumb
-description: A breadcrumb component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show users where they are on your site, with links back to each page above.
+title: Tailwind CSS Breadcrumbs
+description: Beautiful, modern breadcrumb component for Tailwind CSS. Use it to show where a page sits on your site, like in docs or a store. Easily customizable.
 ---
 
-The breadcrumb shows where the current page sits in the hierarchy, with links back up to each ancestor. Long paths can collapse their middle into an ellipsis or a [dropdown](/components/dropdown).
+Use the breadcrumb component to show where the current page sits on your site, like a docs section or a product category, with links back up to each level. For a long path, collapse the middle into an ellipsis or a [dropdown](/components/dropdown).
 
 ```html preview preset=sm
 <nav class="breadcrumb">
@@ -48,7 +48,7 @@ Add the `breadcrumb` class to a `<nav>` and put one `breadcrumb-item` link per l
 | Class                  | Description                                               |
 | ---------------------- | --------------------------------------------------------- |
 | `breadcrumb`           | Add to the `<nav>` holding the trail                      |
-| `breadcrumb-item`      | Add to each `<a>`; add `active` to the current page       |
+| `breadcrumb-item`      | Add to each `<a>`, with `active` on the current page      |
 | `breadcrumb-separator` | Add to a `<span>` between items, holding the divider icon |
 | `breadcrumb-ellipsis`  | Add to a `<span>` standing in for collapsed items         |
 
@@ -64,7 +64,7 @@ Add the `breadcrumb` class to a `<nav>` and put one `breadcrumb-item` link per l
 
 ## Examples
 
-### Basic
+### Basic breadcrumb
 
 A trail of links ending in the current page.
 
@@ -82,7 +82,7 @@ A trail of links ending in the current page.
 </nav>
 ```
 
-### Custom separator
+### Breadcrumb separator
 
 Put any icon inside the separators.
 
@@ -100,7 +100,7 @@ Put any icon inside the separators.
 </nav>
 ```
 
-### Dropdown
+### Breadcrumb with a dropdown
 
 An item can open a [dropdown](/components/dropdown) with sibling pages.
 
@@ -134,7 +134,7 @@ An item can open a [dropdown](/components/dropdown) with sibling pages.
 </div>
 ```
 
-### Collapsed
+### Collapsed breadcrumb
 
 Stand in for collapsed middle items with a `breadcrumb-ellipsis`.
 
