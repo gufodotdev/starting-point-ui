@@ -1,9 +1,9 @@
 ---
-title: Progress
-description: A progress component for Tailwind CSS with beautiful shadcn/ui styling. Use it to show how far along a task is, like an upload or a playback position.
+title: Tailwind CSS Progress Bar
+description: Beautiful, modern progress bar component for Tailwind CSS. Use it to show how far along a task is, like an upload or an onboarding flow. Easily customizable.
 ---
 
-The progress bar shows how far along a task is, like an upload, an onboarding flow, or a playback position. For picking a value, reach for the [slider](/components/slider).
+Use the progress component to show how far along a task is, like an upload, an onboarding flow, or a playback position. For picking a value, reach for the [slider](/components/slider).
 
 ```html preview preset=sm
 <progress class="progress w-full max-w-sm" value="33" max="100" aria-label="Upload progress"></progress>
@@ -13,9 +13,9 @@ The progress bar shows how far along a task is, like an upload, an onboarding fl
 
 Add the `progress` class to a `<progress>` element with `value` and `max` attributes.
 
-| Class      | Description                        |
-| ---------- | ----------------------------------- |
-| `progress` | Add to a `<progress>` element      |
+| Class      | Description                   |
+| ---------- | ----------------------------- |
+| `progress` | Add to a `<progress>` element |
 
 ```html
 <progress class="progress w-full max-w-sm" value="33" max="100"></progress>
@@ -23,7 +23,7 @@ Add the `progress` class to a `<progress>` element with `value` and `max` attrib
 
 ## Examples
 
-### With label
+### Progress bar with a label
 
 Pair the bar with a [label](/components/label) and value in a [field](/components/field).
 
@@ -39,7 +39,7 @@ Pair the bar with a [label](/components/label) and value in a [field](/component
 
 ### Simulated upload
 
-Drive the bar from JavaScript by setting `value`; start the upload to watch it fill.
+Drive the bar from JavaScript by setting `value`. Start the upload to watch it fill.
 
 ```html preview preset=sm
 <div class="flex w-full max-w-sm flex-col gap-4">
