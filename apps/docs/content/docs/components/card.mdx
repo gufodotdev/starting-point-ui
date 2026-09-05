@@ -1,9 +1,9 @@
 ---
-title: Card
-description: A card component for Tailwind CSS with beautiful shadcn/ui styling. Use it to group related content on one surface, like a login form or a stat.
+title: Tailwind CSS Cards
+description: Beautiful, modern card component for Tailwind CSS. Use it to group related content on one surface, like a login form or a stat. Easily customizable.
 ---
 
-The card groups related content on one surface, like a login form, a stat, or a settings section.
+Use the card component to group related content on one surface, like a login form, a stat, or a settings section. For a single row with media, text, and actions, use an [item](/components/item).
 
 ```html preview preset=lg
 <div class="card w-full max-w-sm">
@@ -55,7 +55,7 @@ Add the `card` class to the surface and compose the sections inside.
 
 | Class              | Description                                                       |
 | ------------------ | ----------------------------------------------------------------- |
-| `card`             | Add to the surface; spacing derives from `--card-spacing`         |
+| `card`             | Add to the surface, spaced by `--card-spacing`                    |
 | `card-sm`          | Add to `card` for compact spacing and a smaller title             |
 | `card-header`      | Add to the top section holding title, description, and action     |
 | `card-title`       | Add to a heading element                                          |
@@ -78,9 +78,9 @@ Add the `card` class to the surface and compose the sections inside.
 
 ## Examples
 
-### Size
+### Card sizes
 
-Add `card-sm` for a more compact card: the spacing tightens and the title drops a step.
+Add `card-sm` for a compact card with tighter spacing and a smaller title.
 
 ```html preview preset=lg
 <div class="card card-sm w-full max-w-xs">
@@ -111,7 +111,7 @@ Add `card-sm` for a more compact card: the spacing tightens and the title drops 
 </div>
 ```
 
-### Spacing
+### Card spacing
 
 Set `--card-spacing` to control the section gaps and edge insets in one place.
 
@@ -212,7 +212,7 @@ buttons.forEach((button) => {
 </script>
 ```
 
-### Edge to edge
+### Edge to edge content
 
 Use negative margins with `-mx-(--card-spacing)` to run content to the card edges while keeping it aligned with the inset.
 
@@ -254,9 +254,9 @@ Use negative margins with `-mx-(--card-spacing)` to run content to the card edge
 </div>
 ```
 
-### Image
+### Card with an image
 
-Add an image before the card header to create a card with an image.
+Place an image before the card header.
 
 ```html preview preset=lg
 <div class="card relative w-full max-w-sm pt-0">
@@ -336,7 +336,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
 
 ## CSS variables
 
-The card's spacing rhythm is one component-local variable: the card derives its vertical padding and section gap from it, and each section its horizontal inset. Override it per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+One variable sets the card's padding, section gap, and section insets. Override it per card with an arbitrary property, or for the whole app with a CSS rule.
 
 | Variable         | Default                          | Description                                         |
 | ---------------- | -------------------------------- | --------------------------------------------------- |
