@@ -1,9 +1,9 @@
 ---
-title: Dialog
-description: A dialog component for Tailwind CSS with beautiful shadcn/ui styling. Use it to open a modal window for confirmations, short forms, and alerts.
+title: Tailwind CSS Modal Dialog
+description: Beautiful, modern modal dialog component for Tailwind CSS. Use it to open a modal window, like for confirmations, forms, and alerts. Easily customizable.
 ---
 
-The dialog opens a modal window above the page and blocks interaction with everything behind it. Use it for confirmations, short forms, and alerts that need a decision; for a panel that slides in from the edge, reach for the [sheet](/components/sheet).
+Use the dialog component to open a modal window above the page, like a confirmation, a short form, or an alert that needs a decision, while blocking interaction with everything behind it. For a panel that slides in from the edge, reach for the [sheet](/components/sheet).
 
 ```html preview preset=lg open=.dialog
 <button id="dialog-1-trigger" class="btn btn-outline">Open Dialog</button>
@@ -60,15 +60,15 @@ The dialog opens a modal window above the page and blocks interaction with every
 
 Add the `dialog` class to a `<dialog>` element. Give your trigger an `id`, then point the dialog at it with `data-sp-toggle`. The trigger can be any element. Close the dialog with `data-sp-dismiss` on a button, a backdrop click, or the Escape key.
 
-| Class                | Description                                                         |
-| -------------------- | ------------------------------------------------------------------- |
-| `dialog`             | Add to the `<dialog>` element; fills the viewport and dims the page |
-| `dialog-panel`       | Add to the child element that is the visible panel                  |
-| `dialog-header`      | Add to the block holding the title and description                  |
-| `dialog-title`       | Add to a heading element to create the dialog title                 |
-| `dialog-description` | Add to a paragraph to create the supporting description             |
-| `dialog-content`     | Add to the body section between header and footer                   |
-| `dialog-footer`      | Add to the action row at the bottom of the panel                    |
+| Class                | Description                                                               |
+| -------------------- | ------------------------------------------------------------------------- |
+| `dialog`             | Add to the `<dialog>` element, which fills the viewport and dims the page |
+| `dialog-panel`       | Add to the child element that is the visible panel                        |
+| `dialog-header`      | Add to the block holding the title and description                        |
+| `dialog-title`       | Add to a heading element to create the dialog title                       |
+| `dialog-description` | Add to a paragraph to create the supporting description                   |
+| `dialog-content`     | Add to the body section between header and footer                         |
+| `dialog-footer`      | Add to the action row at the bottom of the panel                          |
 
 ```html
 <!-- This is a button toggling the dialog -->
@@ -130,7 +130,7 @@ Any element with `data-sp-dismiss` closes the dialog, so put close buttons where
 </dialog>
 ```
 
-### Sticky footer
+### Dialog with a sticky footer
 
 Cap the body's height and let it scroll on its own: the header and footer stay pinned while the content scrolls between them.
 
@@ -220,7 +220,7 @@ Cap the body's height and let it scroll on its own: the header and footer stay p
 </dialog>
 ```
 
-### Scrollable content
+### Scrollable dialog
 
 The same scrolling body without a footer.
 
@@ -306,9 +306,9 @@ The same scrolling body without a footer.
 </dialog>
 ```
 
-### Initially open
+### Initially open dialog
 
-Add the `shown` class to the dialog and it renders open, with no enter animation. Useful when the server re-renders the page mid-flow, like a submitted form coming back with validation errors, so the dialog is still open exactly where the user left it.
+Add the `shown` class and the dialog renders open with no enter animation, like when a submitted form comes back with validation errors.
 
 ```html preview preset=lg
 <button id="dialog-open-trigger" class="btn btn-outline">Create account</button>
@@ -358,7 +358,7 @@ Add the `shown` class to the dialog and it renders open, with no enter animation
 
 ### Alert dialog
 
-An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interrupts the user and requires a choice. Add `data-sp-static` so a backdrop click won't dismiss it (Escape still closes, so keyboard users are never stuck) and author `role="alertdialog"` on the element. Put `autofocus` on the least destructive action and skip the close button.
+An [alert dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/) interrupts the user and requires a choice. Add `data-sp-static` so a backdrop click won't dismiss it, and author `role="alertdialog"` on the element. Put `autofocus` on the least destructive action and skip the close button. Escape still closes it, so keyboard users are never stuck.
 
 ```html preview preset=lg open=.dialog
 <button id="alert-trigger" class="btn btn-outline">Show Dialog</button>
@@ -441,7 +441,7 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
 
 ## CSS variables
 
-The panel's spacing rhythm is one component-local variable: the panel derives its vertical padding and section gap from it, and each section its horizontal padding. Override it per instance with an arbitrary property, or for the whole app with a plain CSS rule.
+One variable sets the panel's padding, section gap, and section insets. Override it per dialog with an arbitrary property, or for the whole app with a CSS rule.
 
 | Variable           | Default  | Description                                          |
 | ------------------ | -------- | ---------------------------------------------------- |
@@ -459,7 +459,7 @@ Set each option with its own `data-sp-*` attribute on the `dialog` element.
 
 | Attribute        | Values       | Default |
 | ---------------- | ------------ | ------- |
-| `data-sp-toggle` | CSS selector | —       |
+| `data-sp-toggle` | CSS selector | None    |
 | `data-sp-static` | Boolean      | `false` |
 
 ```html
@@ -470,7 +470,7 @@ Set each option with its own `data-sp-*` attribute on the `dialog` element.
 
 ### Events
 
-Lifecycle events fire on the dialog element; `before*` events are cancelable.
+Lifecycle events fire on the dialog element. The `before*` events are cancelable.
 
 | Event              | When                                       |
 | ------------------ | ------------------------------------------ |
