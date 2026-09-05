@@ -1,9 +1,9 @@
 ---
-title: Field
-description: A field component for Tailwind CSS with beautiful shadcn/ui styling. Use it to wrap a form control with its label, description, and error message.
+title: Tailwind CSS Form Field
+description: Beautiful, modern form field component for Tailwind CSS. Use it to lay out a control with its label, like an input or a checkbox. Easily customizable.
 ---
 
-The field wraps a form control with its label, description, and error message, and lines everything up for you. It works around any control: [inputs](/components/input), [selects](/components/select), [textareas](/components/textarea), checkboxes, switches, and more.
+Use the field component to wrap a form control with its label, description, and error message, like an [input](/components/input), a [select](/components/select), or a checkbox. For complete forms built from fields, see the [forms](/components/forms) page.
 
 ```html preview preset=base h=50rem
 <form class="field-group w-full max-w-md">
@@ -90,21 +90,21 @@ The field wraps a form control with its label, description, and error message, a
 
 ## Usage
 
-Add the `field` class to a wrapper and put the label, control, and supporting text inside. Fields stack vertically by default; group several with `field-group`.
+Add the `field` class to a wrapper and put the label, control, and supporting text inside. Fields stack vertically by default. Group several with `field-group`.
 
-| Class               | Description                                                     |
-| ------------------- | ---------------------------------------------------------------- |
-| `field`             | Add to the wrapper around a label, control, and supporting text  |
+| Class                                 | Description                                                                   |
+| ------------------------------------- | ----------------------------------------------------------------------------- |
+| `field`                               | Add to the wrapper around a label, control, and supporting text               |
 | `field-horizontal` `field-responsive` | Add to `field` to lay it out in a row, always or from the `md` container size |
-| `field-content`     | Add to a block holding a title and description inside a field    |
-| `field-title`       | Add to a heading inside `field-content`                          |
-| `field-description` | Add to a paragraph with supporting text                          |
-| `field-error`       | Add to a paragraph with a validation message                     |
-| `field-group`       | Add to a container stacking several fields                       |
-| `field-set`         | Add to a `<fieldset>` wrapping related fields                    |
-| `field-legend`      | Add to the `<legend>` of a field set                             |
-| `field-legend-label` | Add to `field-legend` for a label-sized legend                  |
-| `field-separator`   | Add to a divider between fields; put text in a `<span>` inside   |
+| `field-content`                       | Add to a block holding a title and description inside a field                 |
+| `field-title`                         | Add to a heading inside `field-content`                                       |
+| `field-description`                   | Add to a paragraph with supporting text                                       |
+| `field-error`                         | Add to a paragraph with a validation message                                  |
+| `field-group`                         | Add to a container stacking several fields                                    |
+| `field-set`                           | Add to a `<fieldset>` wrapping related fields                                 |
+| `field-legend`                        | Add to the `<legend>` of a field set                                          |
+| `field-legend-label`                  | Add to `field-legend` for a label-sized legend                                |
+| `field-separator`                     | Add to a divider between fields, with optional text in a `<span>`             |
 
 ```html
 <div class="field">
@@ -116,9 +116,9 @@ Add the `field` class to a wrapper and put the label, control, and supporting te
 
 ## Examples
 
-### Input
+### Input field
 
-Stack the label, control, and description in any order; the field spaces them consistently.
+Stack the label, control, and description in any order and the field spaces them.
 
 ```html preview preset=base
 <fieldset class="field-set w-full max-w-sm">
@@ -137,9 +137,9 @@ Stack the label, control, and description in any order; the field spaces them co
 </fieldset>
 ```
 
-### Textarea
+### Textarea field
 
-A [textarea](/components/textarea) fields like any other control.
+A [textarea](/components/textarea) works like any other control.
 
 ```html preview preset=base
 <fieldset class="field-set w-full max-w-sm">
@@ -153,7 +153,7 @@ A [textarea](/components/textarea) fields like any other control.
 </fieldset>
 ```
 
-### Select
+### Select field
 
 A [select](/components/select) with a label and supporting text.
 
@@ -175,7 +175,7 @@ A [select](/components/select) with a label and supporting text.
 </div>
 ```
 
-### Slider
+### Slider field
 
 Fields also wrap controls without a `<label>` element, like a [slider](/components/slider) titled with a `field-title`.
 
@@ -216,7 +216,7 @@ Group related fields in a `field-set` with a `field-legend` so they are announce
 </fieldset>
 ```
 
-### Checkbox
+### Checkbox field
 
 Horizontal fields lay out [checkboxes](/components/checkbox), with a `field-separator` dividing sections.
 
@@ -258,7 +258,7 @@ Horizontal fields lay out [checkboxes](/components/checkbox), with a `field-sepa
 </div>
 ```
 
-### Radio
+### Radio field
 
 A [radio group](/components/radio-group) in a field set, one horizontal field per option.
 
@@ -283,7 +283,7 @@ A [radio group](/components/radio-group) in a field set, one horizontal field pe
 </fieldset>
 ```
 
-### Switch
+### Switch field
 
 A horizontal field puts a [switch](/components/switch) beside its label.
 
@@ -367,7 +367,7 @@ Stack sections of fields with a `field-group` and divide them with separators.
 </div>
 ```
 
-### Responsive
+### Responsive field
 
 Add `field-responsive` and the field stacks on narrow containers and becomes a row from the `md` container size. Resize the preview to see it switch.
 
@@ -393,7 +393,7 @@ Add `field-responsive` and the field stacks on narrow containers and becomes a r
 </form>
 ```
 
-### Invalid
+### Invalid field
 
 Set `aria-invalid` on the control for the error ring and put the message in a `field-error`.
 
