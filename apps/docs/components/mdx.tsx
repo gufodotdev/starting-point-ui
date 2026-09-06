@@ -124,7 +124,7 @@ const components = {
   UnsplashEditor,
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
-      className="mt-10 lg:mt-12 first:mt-0 scroll-m-28 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
+      className="mt-10 lg:mt-12 first:mt-0 scroll-mt-18 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
       {...props}
     >
       {children}
@@ -132,7 +132,7 @@ const components = {
   ),
   h3: ({ children, ...props }: React.ComponentProps<"h3">) => (
     <h3
-      className="mt-12 scroll-m-28 text-lg font-medium tracking-tight [&+p]:mt-4!"
+      className="mt-12 scroll-mt-18 text-lg font-medium tracking-tight [&+p]:mt-4!"
       {...props}
     >
       {children}
@@ -140,7 +140,7 @@ const components = {
   ),
   h4: ({ children, ...props }: React.ComponentProps<"h4">) => (
     <h4
-      className="mt-8 scroll-m-28 text-base font-medium tracking-tight"
+      className="mt-8 scroll-mt-18 text-base font-medium tracking-tight"
       {...props}
     >
       {children}
@@ -255,7 +255,7 @@ export function exampleHubHeadings(base: string): Partial<typeof components> {
     h2: ({ children, id, ...props }: React.ComponentProps<"h2">) => (
       <h2
         id={id}
-        className="mt-10 lg:mt-12 first:mt-0 scroll-m-28 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
+        className="mt-10 lg:mt-12 first:mt-0 scroll-mt-18 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
         {...props}
       >
         {id ? (

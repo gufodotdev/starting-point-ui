@@ -56,7 +56,7 @@ export default async function DocPage({ params }: Props) {
       <div className="flex items-end justify-between gap-4 mb-4 sm:mb-6">
         <h1
           id="introduction"
-          className="text-3xl font-bold tracking-tight scroll-mt-20"
+          className="text-3xl font-bold tracking-tight scroll-mt-18"
         >
           {doc.metadata.title}
         </h1>

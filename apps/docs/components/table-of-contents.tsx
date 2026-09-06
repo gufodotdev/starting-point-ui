@@ -12,8 +12,8 @@ export function TableOfContents() {
       tocSelector: ".toc",
       contentSelector: "#content",
       headingSelector: "#introduction, #content > h2, #content > h3",
-      headingsOffset: 80,
-      scrollSmoothOffset: -80,
+      headingsOffset: 72,
+      scrollSmoothOffset: -72,
       collapseDepth: 6,
       headingObjectCallback: (obj, node) => {
         if (node.tagName === "H1") {
