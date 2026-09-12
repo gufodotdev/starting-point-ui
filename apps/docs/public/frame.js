@@ -25,7 +25,7 @@ if (openHost) {
   const selector = firstOnly
     ? openHost.dataset.open.slice(0, -":first".length)
     : openHost.dataset.open;
-  const name = selector.slice(1);
+  const name = selector.slice(1).replace(/-(\w)/g, (_, c) => c.toUpperCase());
   const show = () => {
     if (!window.sp || !window.sp[name]) {
       requestAnimationFrame(show);
