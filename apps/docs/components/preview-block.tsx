@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useId } from "react";
 import { useTheme } from "next-themes";
 import { Monitor, Tablet, Smartphone, Fullscreen, Languages } from "lucide-react";
 import {
@@ -210,8 +210,10 @@ export function PreviewBlock({
 }) {
   const panelRef = useRef<PanelImperativeHandle>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const previewId = `preview-${frameId}`;
-  const codeId = `code-${frameId}`;
+  // Identical examples share a frame id, so the tab ids need a per-instance part.
+  const uid = useId().replace(/:/g, "");
+  const previewId = `preview-${frameId}-${uid}`;
+  const codeId = `code-${frameId}-${uid}`;
 
   return (
     <div className="@container my-6">
