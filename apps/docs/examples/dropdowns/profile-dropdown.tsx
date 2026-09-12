@@ -12,8 +12,8 @@ export default function ProfileDropdown() {
 
       <div className="dropdown w-60" data-sp-toggle="#profile-dropdown-trigger" data-sp-placement="bottom-end">
         <div className="item item-xs px-2 py-1.5">
-          <div className="item-media">
-            <span className="avatar">
+          <div className="item-media translate-y-0 self-center">
+            <span className="avatar avatar-lg">
               <img
                 className="avatar-image"
                 src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
