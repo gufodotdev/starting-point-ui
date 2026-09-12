@@ -13,6 +13,8 @@ import { Popover } from "./popover";
 import { Tooltip } from "./tooltip";
 import { Dropdown } from "./dropdown";
 import { ContextMenu } from "./context-menu";
+import { Calendar } from "./calendar";
+import { DatePicker } from "./date-picker";
 import { Combobox } from "./combobox";
 import { Tabs } from "./tabs";
 import { Collapsible } from "./collapsible";
@@ -36,6 +38,8 @@ const components: ComponentFactory[] = [
   Tooltip,
   Dropdown,
   ContextMenu,
+  Calendar,
+  DatePicker,
   Combobox,
   Tabs,
   Collapsible,
@@ -60,6 +64,8 @@ const popover = (el: HTMLElement): SpInstance | null => getInstance(el, Popover)
 const tooltip = (el: HTMLElement): SpInstance | null => getInstance(el, Tooltip);
 const dropdown = (el: HTMLElement): SpInstance | null => getInstance(el, Dropdown);
 const contextMenu = (el: HTMLElement): SpInstance | null => getInstance(el, ContextMenu);
+const calendar = (el: HTMLElement): SpInstance | null => getInstance(el, Calendar);
+const datePicker = (el: HTMLElement): SpInstance | null => getInstance(el, DatePicker);
 const combobox = (el: HTMLElement): SpInstance | null => getInstance(el, Combobox);
 const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
 const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
@@ -84,6 +90,8 @@ export {
   Tooltip,
   Dropdown,
   ContextMenu,
+  Calendar,
+  DatePicker,
   Combobox,
   Tabs,
   Collapsible,
@@ -101,6 +109,8 @@ export {
   tooltip,
   dropdown,
   contextMenu,
+  calendar,
+  datePicker,
   combobox,
   tabs,
   collapsible,
@@ -129,6 +139,8 @@ declare global {
       tooltip: typeof tooltip;
       dropdown: typeof dropdown;
       contextMenu: typeof contextMenu;
+      calendar: typeof calendar;
+      datePicker: typeof datePicker;
       combobox: typeof combobox;
       tabs: typeof tabs;
       collapsible: typeof collapsible;
@@ -156,6 +168,8 @@ if (typeof document !== "undefined") {
     tooltip,
     dropdown,
     contextMenu,
+    calendar,
+    datePicker,
     combobox,
     tabs,
     collapsible,

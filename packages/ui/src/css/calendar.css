@@ -1,0 +1,175 @@
+@source inline("{calendar,calendar-months,calendar-month,calendar-nav,calendar-previous,calendar-next,calendar-caption,calendar-caption-label,calendar-dropdowns,calendar-dropdown,calendar-dropdown-label,calendar-month-select,calendar-year-select,calendar-grid,calendar-weekdays,calendar-weekday,calendar-week,calendar-week-number-header,calendar-week-number,calendar-cell,calendar-day}");
+
+@utility calendar {
+  @layer l1.l2 {
+    @apply w-fit bg-background p-3 [--calendar-cell-radius:var(--radius-md)] [--calendar-cell-size:--spacing(8)];
+    @apply in-[.popover]:bg-transparent in-[.card-content]:bg-transparent;
+
+    & > input {
+      @apply sr-only;
+    }
+  }
+}
+
+@utility calendar-months {
+  @layer l1.l2 {
+    @apply relative flex flex-col gap-4 md:flex-row;
+  }
+}
+
+@utility calendar-month {
+  @layer l1.l2 {
+    @apply flex w-full flex-col gap-4;
+  }
+}
+
+@utility calendar-nav {
+  @layer l1.l2 {
+    @apply absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1;
+  }
+}
+
+@utility calendar-previous {
+  @layer l1.l2 {
+    @apply inline-flex size-(--calendar-cell-size) shrink-0 cursor-default items-center justify-center rounded-md p-0 select-none;
+    @apply hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-50;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 outline-hidden;
+    @apply [&_svg]:size-4 [&_svg]:shrink-0 rtl:[&_svg]:rotate-180;
+  }
+}
+
+@utility calendar-next {
+  @layer l1.l2 {
+    @apply inline-flex size-(--calendar-cell-size) shrink-0 cursor-default items-center justify-center rounded-md p-0 select-none;
+    @apply hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-50;
+    @apply focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 outline-hidden;
+    @apply [&_svg]:size-4 [&_svg]:shrink-0 rtl:[&_svg]:rotate-180;
+  }
+}
+
+@utility calendar-caption {
+  @layer l1.l2 {
+    @apply flex h-(--calendar-cell-size) w-full items-center justify-center px-(--calendar-cell-size) text-sm font-medium select-none;
+  }
+}
+
+@utility calendar-dropdowns {
+  @layer l1.l2 {
+    @apply flex h-(--calendar-cell-size) w-full items-center justify-center gap-1.5 text-sm font-medium;
+  }
+}
+
+@utility calendar-dropdown {
+  @layer l1.l2 {
+    @apply relative rounded-(--calendar-cell-radius);
+    @apply has-[select:focus-visible]:ring-3 has-[select:focus-visible]:ring-ring/50;
+
+    & > select {
+      @apply absolute inset-0 cursor-pointer opacity-0;
+    }
+  }
+}
+
+@utility calendar-dropdown-label {
+  @layer l1.l2 {
+    @apply flex items-center gap-1 rounded-(--calendar-cell-radius) text-sm select-none [&>svg]:size-3.5 [&>svg]:text-muted-foreground;
+  }
+}
+
+@utility calendar-grid {
+  @layer l1.l2 {
+    @apply w-full border-collapse;
+  }
+}
+
+@utility calendar-weekdays {
+  @layer l1.l2 {
+    @apply flex;
+  }
+}
+
+@utility calendar-weekday {
+  @layer l1.l2 {
+    @apply flex-1 rounded-(--calendar-cell-radius) py-0.5 text-[0.8rem] font-normal text-muted-foreground select-none;
+  }
+}
+
+@utility calendar-week {
+  @layer l1.l2 {
+    @apply mt-2 flex w-full;
+  }
+}
+
+@utility calendar-week-number-header {
+  @layer l1.l2 {
+    @apply w-(--calendar-cell-size) shrink-0 select-none;
+  }
+}
+
+@utility calendar-week-number {
+  @layer l1.l2 {
+    @apply flex size-(--calendar-cell-size) shrink-0 items-center justify-center text-center text-[0.8rem] text-muted-foreground select-none;
+  }
+}
+
+@utility calendar-cell {
+  @layer l1.l2 {
+    @apply relative aspect-square h-full w-full rounded-(--calendar-cell-radius) p-0 text-center select-none;
+
+    &.range-start {
+      @apply relative isolate z-0 rounded-s-(--calendar-cell-radius) bg-muted after:absolute after:inset-y-0 after:end-0 after:w-4 after:bg-muted;
+    }
+    &.range-middle {
+      @apply rounded-none;
+    }
+    &.range-end {
+      @apply relative isolate z-0 rounded-e-(--calendar-cell-radius) bg-muted after:absolute after:inset-y-0 after:start-0 after:w-4 after:bg-muted;
+    }
+    &.range-start.range-end {
+      @apply rounded-(--calendar-cell-radius) after:hidden;
+    }
+    &.today {
+      @apply rounded-(--calendar-cell-radius) bg-muted text-foreground;
+    }
+    &.today.selected {
+      @apply rounded-none;
+    }
+    &.outside {
+      @apply text-muted-foreground;
+    }
+    &.disabled {
+      @apply text-muted-foreground opacity-50;
+    }
+    &:first-child.range-middle > .calendar-day {
+      @apply rounded-s-(--calendar-cell-radius);
+    }
+    &:last-child.range-middle > .calendar-day {
+      @apply rounded-e-(--calendar-cell-radius);
+    }
+  }
+}
+
+@utility calendar-day {
+  @layer l1.l2 {
+    @apply relative isolate z-10 flex aspect-square size-auto w-full min-w-(--calendar-cell-size) cursor-default flex-col items-center justify-center gap-1 rounded-(--calendar-cell-radius) border-0 text-sm leading-none font-normal select-none outline-hidden;
+    @apply hover:bg-muted hover:text-foreground dark:hover:text-foreground disabled:pointer-events-none;
+    @apply focus-visible:relative focus-visible:z-10 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50;
+
+    &.selected:not(.range-start):not(.range-end):not(.range-middle) {
+      @apply bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground;
+    }
+    &.range-start,
+    &.range-end {
+      @apply rounded-(--calendar-cell-radius) bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground;
+    }
+    &.range-start:not(.range-end) {
+      @apply rounded-s-(--calendar-cell-radius);
+    }
+    &.range-end:not(.range-start) {
+      @apply rounded-e-(--calendar-cell-radius);
+    }
+    &.range-middle {
+      @apply rounded-none bg-muted text-foreground;
+    }
+  }
+}
