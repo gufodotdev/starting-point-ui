@@ -1,0 +1,281 @@
+---
+title: Tailwind CSS Date Picker
+description: Beautiful, modern date picker component for Tailwind CSS. Use it to pick a date from a popup calendar, like a booking date or a birthday. Easily customizable.
+---
+
+Use the date picker component to pick a date or a date range from a popup calendar, like a due date, a booking, or a date of birth. For a calendar that stays visible on the page, use the [calendar](/components/calendar).
+
+```html preview preset=base align=top open=.date-picker
+<div class="date-picker">
+  <input type="date" name="date" />
+  <button id="date-picker-demo" class="btn btn-outline w-53 justify-between font-normal">
+    <span class="date-picker-value" data-sp-placeholder="Pick a date"></span>
+    <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+</div>
+```
+
+## Usage
+
+Add the `date-picker` class to a wrapper holding a native `<input type="date">` and a button. Give the button `date-picker-trigger` to make it look like a form field, or style it as any [button](/components/button). Put an empty `date-picker-value` span in the button with the placeholder in `data-sp-placeholder`. The popover and calendar are built for you, and the input keeps submitting with the form. When the server has a saved value, set it on the input and write the formatted date into the span, so the page paints right before any JavaScript runs.
+
+| Class                    | Description                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------ |
+| `date-picker`            | Add to the wrapper around the input and the trigger, which carries the `data-sp-*` options |
+| `date-picker-trigger`    | Add to the button for a field look, like a select, with a chevron and the invalid ring     |
+| `date-picker-trigger-sm` | Add to `date-picker-trigger` for a compact field                                           |
+| `date-picker-value`      | Add to the span in the trigger that shows the picked date, or its `data-sp-placeholder`    |
+| `date-picker-popover`    | Rendered on the popover holding the calendar                                               |
+
+```html
+<div class="date-picker">
+  <input type="date" name="date" />
+  <button class="date-picker-trigger">
+    <span class="date-picker-value" data-sp-placeholder="Pick a date"></span>
+  </button>
+</div>
+```
+
+## Examples
+
+### Basic date picker
+
+Wrap the picker in a [field](/components/field) and point the label at the trigger. `date-picker-trigger` gives the button the same look as an input or select.
+
+```html preview preset=base align=top open=.date-picker
+<div class="field w-44">
+  <label class="label" for="date-picker-basic">Date</label>
+  <div class="date-picker">
+    <input type="date" name="date" />
+    <button id="date-picker-basic" class="date-picker-trigger">
+      <span class="date-picker-value" data-sp-placeholder="Pick a date"></span>
+    </button>
+  </div>
+</div>
+```
+
+### Date picker sizes
+
+Add `date-picker-trigger-sm` to match `input-sm` and `select-sm`.
+
+```html preview preset=base align=top open=.date-picker
+<div class="field w-44">
+  <label class="label" for="date-picker-small">Date</label>
+  <div class="date-picker">
+    <input type="date" name="date" />
+    <button id="date-picker-small" class="date-picker-trigger date-picker-trigger-sm">
+      <span class="date-picker-value" data-sp-placeholder="Pick a date"></span>
+    </button>
+  </div>
+</div>
+```
+
+### Date range picker
+
+Two date inputs make a range picker, shown here with `data-sp-months="2"`.
+
+```html preview preset=base align=top open=.date-picker
+<div class="field w-60">
+  <label class="label" for="date-picker-range">Date Picker Range</label>
+  <div class="date-picker" data-sp-months="2">
+    <input type="date" name="from" value="2026-01-20" />
+    <input type="date" name="to" value="2026-02-09" />
+    <button id="date-picker-range" class="date-picker-trigger">
+      <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+      <span class="date-picker-value" data-sp-placeholder="Pick a date"></span>
+    </button>
+  </div>
+</div>
+```
+
+### Multiple date picker
+
+Add `multiple` to the input to pick several dates, and the trigger counts them.
+
+```html preview preset=base align=top open=.date-picker
+<div class="field w-44">
+  <label class="label" for="date-picker-multiple">Dates</label>
+  <div class="date-picker">
+    <input type="date" name="dates" multiple />
+    <button id="date-picker-multiple" class="date-picker-trigger">
+      <span class="date-picker-value" data-sp-placeholder="Pick dates"></span>
+    </button>
+  </div>
+</div>
+```
+
+### Date of birth picker
+
+Add `data-sp-caption="dropdown"` to jump between years, and cap the range with `data-sp-max="today"`.
+
+```html preview preset=base align=top open=.date-picker
+<div class="field w-44">
+  <label class="label" for="date-picker-dob">Date of birth</label>
+  <div class="date-picker" data-sp-caption="dropdown" data-sp-max="today">
+    <input type="date" name="dob" />
+    <button id="date-picker-dob" class="date-picker-trigger">
+      <span class="date-picker-value" data-sp-placeholder="Select date"></span>
+    </button>
+  </div>
+</div>
+```
+
+### Date and time picker
+
+Put a native time input next to the picker, and the two submit as separate fields.
+
+```html preview preset=base align=top open=.date-picker
+<div class="field-group max-w-xs flex-row">
+  <div class="field">
+    <label class="label" for="date-picker-time">Date</label>
+    <div class="date-picker" data-sp-caption="dropdown">
+      <input type="date" name="date" />
+      <button id="date-picker-time" class="date-picker-trigger w-32">
+        <span class="date-picker-value" data-sp-placeholder="Select date"></span>
+      </button>
+    </div>
+  </div>
+  <div class="field w-32">
+    <label class="label" for="time-picker-time">Time</label>
+    <input
+      class="input appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+      id="time-picker-time"
+      type="time"
+      name="time"
+      step="1"
+      value="10:30:00"
+    />
+  </div>
+</div>
+```
+
+### Date picker with disabled dates
+
+Every [calendar option](/components/calendar#options) works on the wrapper, like `data-sp-disabled` for weekends and booked days.
+
+```html preview preset=base align=top open=.date-picker
+<div class="field w-44">
+  <label class="label" for="date-picker-disabled">Appointment</label>
+  <div
+    class="date-picker"
+    data-sp-month="2026-03"
+    data-sp-min="2026-03-02"
+    data-sp-disabled="sat,sun,2026-03-16..2026-03-20"
+  >
+    <input type="date" name="appointment" />
+    <button id="date-picker-disabled" class="date-picker-trigger">
+      <span class="date-picker-value" data-sp-placeholder="Pick a weekday"></span>
+    </button>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Pair it with a matching `data-sp-locale`. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=base align=top open=.date-picker dir=rtl
+<div id="date-picker-rtl-demo" dir="rtl">
+  <div class="date-picker" data-sp-locale="ar-EG">
+    <input type="date" name="date" />
+    <button id="date-picker-rtl" class="btn btn-outline w-53 justify-between font-normal">
+      <span class="date-picker-value" data-sp-placeholder="اختر تاريخًا"></span>
+      <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const demo = document.getElementById("date-picker-rtl-demo");
+  const template = demo.innerHTML;
+  const translations = {
+    ar: { dir: "rtl", locale: "ar-EG", placeholder: "اختر تاريخًا" },
+    he: { dir: "rtl", locale: "he-IL", placeholder: "בחר תאריך" },
+    en: { dir: "ltr", locale: "en-US", placeholder: "Pick a date" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    demo.dir = t.dir;
+    demo.innerHTML = template;
+    const picker = demo.querySelector(".date-picker");
+    picker.setAttribute("data-sp-locale", t.locale);
+    picker.querySelector(".date-picker-value").setAttribute("data-sp-placeholder", t.placeholder);
+    sp.datePicker(picker).show();
+  });
+</script>
+```
+
+## Options
+
+Set each option with its own `data-sp-*` attribute on the `date-picker` element. The calendar options are passed through to the calendar inside, see the [calendar](/components/calendar#options) page for their details.
+
+| Attribute                | Values                                                  | Default                       |
+| ------------------------ | ------------------------------------------------------- | ----------------------------- |
+| `data-sp-placement`      | Floating UI placement                                   | `bottom-start`                |
+| `data-sp-offset`         | Number                                                  | `6`                           |
+| `data-sp-align-offset`   | Number                                                  | `0`                           |
+| `data-sp-locale`         | BCP 47 language tag                                     | The page `lang`               |
+| `data-sp-month`          | `YYYY-MM`                                               | The selected or current month |
+| `data-sp-months`         | Number                                                  | `1`                           |
+| `data-sp-caption`        | `label` \| `dropdown`                                   | `label`                       |
+| `data-sp-week-numbers`   | Boolean                                                 | `false`                       |
+| `data-sp-week-start`     | `0` (Sunday) to `6` (Saturday)                          | `0`                           |
+| `data-sp-min`            | `YYYY-MM-DD` \| `today`                                 | None                          |
+| `data-sp-max`            | `YYYY-MM-DD` \| `today`                                 | None                          |
+| `data-sp-disabled`       | Comma-separated dates, `from..to` ranges, weekday names | None                          |
+
+The placeholder is the one option that lives on the `date-picker-value` span instead.
+
+| Attribute             | Values | Default |
+| --------------------- | ------ | ------- |
+| `data-sp-placeholder` | Text   | None    |
+
+```html
+<div
+  class="date-picker"
+  data-sp-placement="bottom-end"
+  data-sp-caption="dropdown"
+  data-sp-max="today"
+>
+  <input type="date" name="date" />
+  <button class="date-picker-trigger">
+    <span class="date-picker-value" data-sp-placeholder="Pick a date"></span>
+  </button>
+</div>
+```
+
+## JavaScript
+
+### Events
+
+`sp-change` bubbles up from the calendar, so listen for it on the `date-picker` element. Its `detail` is `{ value }` for a single date, `{ from, to }` for a range, and `{ values }` for multiple dates. The [popover lifecycle events](/components/popover#events) fire on the rendered popover.
+
+| Event       | When                  |
+| ----------- | --------------------- |
+| `sp-change` | The selection changed |
+
+```js
+el.addEventListener("sp-change", (e) => {
+  console.log(e.detail.value);
+});
+```
+
+### Methods
+
+Get the instance with `sp.datePicker(el)`, then call its methods:
+
+| Method          | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| `value()`       | The ISO value, `{ from, to }` for a range, array for multiple |
+| `select(value)` | Select an ISO date, `{ from, to }`, or an array of dates       |
+| `clear()`       | Clear the selection                                           |
+| `show()`        | Open the calendar                                             |
+| `hide()`        | Close the calendar                                            |
+| `toggle()`      | Open if closed, else close                                    |
+
+```js
+const picker = sp.datePicker(document.querySelector("#my-picker"));
+
+picker.select("2026-12-24");
+```

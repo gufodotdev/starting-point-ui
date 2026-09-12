@@ -1,0 +1,344 @@
+---
+title: Tailwind CSS Calendar
+description: Beautiful, modern calendar component for Tailwind CSS. Use it to pick a date, a range, or several dates, like in a booking or a schedule. Easily customizable.
+---
+
+Use the calendar component to pick dates from a month grid on the page, like a booking flow, an availability view, or a schedule. For a calendar behind a form field, use the [date picker](/components/date-picker).
+
+```html preview preset=base
+<div class="calendar rounded-lg border" data-sp-caption="dropdown">
+  <input type="date" name="date" />
+</div>
+```
+
+## Usage
+
+Add the `calendar` class to a container and put a native `<input type="date">` inside it. The calendar hides the input and writes the picked date to it, so the value submits with the form like any other field. Add a second input for a date range, or give the input the `multiple` attribute for several dates.
+
+| Class                  | Description                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------- |
+| `calendar`             | Add to the container holding the date inputs, which carries the `data-sp-*` options |
+| `calendar-previous`    | Rendered previous month button                                                      |
+| `calendar-next`        | Rendered next month button                                                          |
+| `calendar-caption`     | Rendered month label, or the month and year dropdowns                               |
+| `calendar-weekday`     | Rendered weekday header                                                            |
+| `calendar-week-number` | Rendered week number cell                                                          |
+| `calendar-cell`        | Rendered day cell, with `selected`, `today`, `outside`, and `disabled` modifiers   |
+| `calendar-day`         | Rendered day button inside a cell                                                  |
+
+```html
+<div class="calendar">
+  <input type="date" name="date" />
+</div>
+```
+
+## Examples
+
+### Basic calendar
+
+One date input makes a single date calendar, styled here with `rounded-lg border`.
+
+```html preview preset=base
+<div class="calendar rounded-lg border">
+  <input type="date" name="date" />
+</div>
+```
+
+### Range calendar
+
+Two date inputs make a range, and `data-sp-months="2"` shows two months side by side.
+
+```html preview preset=base
+<div class="calendar rounded-lg border" data-sp-months="2">
+  <input type="date" name="from" value="2026-01-12" />
+  <input type="date" name="to" value="2026-02-11" />
+</div>
+```
+
+### Calendar with multiple dates
+
+Add `multiple` to the input to pick several dates. Each picked date submits as a hidden input under the same name, and hidden inputs you render with that name start out picked.
+
+```html preview preset=base
+<div class="card w-fit p-0">
+  <div class="card-content p-0">
+    <div class="calendar">
+      <input type="date" name="dates" multiple />
+    </div>
+  </div>
+</div>
+```
+
+### Month and year selector
+
+Set `data-sp-caption="dropdown"` to swap the month label for month and year dropdowns.
+
+```html preview preset=base
+<div class="calendar rounded-lg border" data-sp-caption="dropdown">
+  <input type="date" name="date" />
+</div>
+```
+
+### Calendar presets
+
+Call `select()` with an ISO date to pick it from outside the calendar, like preset buttons.
+
+```html preview preset=lg
+<div class="card card-sm w-fit max-w-[300px]">
+  <div class="card-content">
+    <div id="calendar-presets" class="calendar p-0 [--calendar-cell-size:--spacing(9.5)]">
+      <input type="date" name="date" />
+    </div>
+  </div>
+  <div class="card-footer flex-wrap gap-2 border-t">
+    <button class="btn btn-outline btn-sm flex-1" data-days="0">Today</button>
+    <button class="btn btn-outline btn-sm flex-1" data-days="1">Tomorrow</button>
+    <button class="btn btn-outline btn-sm flex-1" data-days="3">In 3 days</button>
+    <button class="btn btn-outline btn-sm flex-1" data-days="7">In a week</button>
+    <button class="btn btn-outline btn-sm flex-1" data-days="14">In 2 weeks</button>
+  </div>
+</div>
+
+<script>
+  const calendar = document.getElementById("calendar-presets");
+  document.querySelectorAll("[data-days]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const date = new Date();
+      date.setDate(date.getDate() + Number(button.dataset.days));
+      sp.calendar(calendar).select(date.toLocaleDateString("en-CA"));
+    });
+  });
+</script>
+```
+
+### Date and time picker
+
+Pair the calendar with native time inputs. The date and the times submit as separate fields.
+
+```html preview preset=lg
+<div class="card card-sm w-fit">
+  <div class="card-content">
+    <div class="calendar p-0">
+      <input type="date" name="date" value="2026-09-12" />
+    </div>
+  </div>
+  <div class="card-footer border-t bg-card">
+    <div class="field-group">
+      <div class="field">
+        <label class="label" for="calendar-time-from">Start Time</label>
+        <div class="input-group">
+          <input
+            class="input appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+            id="calendar-time-from"
+            type="time"
+            name="from"
+            step="1"
+            value="10:30:00"
+          />
+          <span class="input-group-addon"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4-2"/></svg></span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="calendar-time-to">End Time</label>
+        <div class="input-group">
+          <input
+            class="input appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+            id="calendar-time-to"
+            type="time"
+            name="to"
+            step="1"
+            value="12:30:00"
+          />
+          <span class="input-group-addon"><svg class="text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4-2"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Calendar with booked dates
+
+List dates or ranges in `data-sp-disabled` to block them, here struck through with `line-through` on the blocked days.
+
+```html preview preset=base
+<div class="card w-fit p-0">
+  <div class="card-content p-0">
+    <div
+      class="calendar [&_.disabled]:opacity-100 [&_.disabled_.calendar-day]:line-through"
+      data-sp-disabled="2026-01-12..2026-01-26"
+    >
+      <input type="date" name="date" value="2026-01-06" />
+    </div>
+  </div>
+</div>
+```
+
+### Calendar min and max dates
+
+Bound the pickable range with `data-sp-min` and `data-sp-max`, both an ISO date or `today`. Weekday names in `data-sp-disabled` block every Saturday and Sunday.
+
+```html preview preset=base
+<div
+  class="calendar rounded-lg border"
+  data-sp-month="2026-03"
+  data-sp-min="2026-03-02"
+  data-sp-max="2026-03-27"
+  data-sp-disabled="sat,sun"
+>
+  <input type="date" name="date" />
+</div>
+```
+
+### Calendar cell size
+
+Size the cells with the `--calendar-cell-size` variable, responsive breakpoints included.
+
+```html preview preset=base
+<div class="card w-fit p-0">
+  <div class="card-content p-0">
+    <div
+      class="calendar [--calendar-cell-size:--spacing(10)] md:[--calendar-cell-size:--spacing(12)]"
+      data-sp-caption="dropdown"
+    >
+      <input type="date" name="from" value="2026-12-08" />
+      <input type="date" name="to" value="2026-12-18" />
+    </div>
+  </div>
+</div>
+```
+
+### Calendar week numbers
+
+Add `data-sp-week-numbers` for an ISO week column, and `data-sp-week-start="1"` to start weeks on Monday.
+
+```html preview preset=base
+<div class="card w-fit p-0">
+  <div class="card-content p-0">
+    <div class="calendar" data-sp-week-numbers data-sp-week-start="1">
+      <input type="date" name="date" value="2026-01-12" />
+    </div>
+  </div>
+</div>
+```
+
+### Calendar locale
+
+Set `data-sp-locale` to format month and weekday names in another language. It defaults to the page's `lang`.
+
+```html preview preset=base
+<div class="calendar rounded-lg border" data-sp-locale="sv-SE" data-sp-week-start="1">
+  <input type="date" name="datum" value="2026-06-06" />
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. Pair it with a matching `data-sp-locale`. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=base dir=rtl
+<div id="calendar-rtl-demo" dir="rtl">
+  <div
+    class="calendar rounded-lg border [--calendar-cell-size:--spacing(9)]"
+    data-sp-caption="dropdown"
+    data-sp-locale="ar-EG"
+  >
+    <input type="date" name="date" />
+  </div>
+</div>
+
+<script>
+  const demo = document.getElementById("calendar-rtl-demo");
+  const template = demo.innerHTML;
+  const locales = {
+    ar: { dir: "rtl", locale: "ar-EG" },
+    he: { dir: "rtl", locale: "he-IL" },
+    en: { dir: "ltr", locale: "en-US" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = locales[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    demo.dir = t.dir;
+    demo.innerHTML = template;
+    demo.querySelector(".calendar").setAttribute("data-sp-locale", t.locale);
+  });
+</script>
+```
+
+## CSS variables
+
+Set these on the `calendar` element.
+
+| Variable                 | Default            |
+| ------------------------ | ------------------ |
+| `--calendar-cell-size`   | `--spacing(8)`     |
+| `--calendar-cell-radius` | `var(--radius-md)` |
+
+```html
+<div class="calendar [--calendar-cell-size:--spacing(10)]">
+  <input type="date" name="date" />
+</div>
+```
+
+## Options
+
+Set each option with its own `data-sp-*` attribute on the `calendar` element.
+
+| Attribute              | Values                                                  | Default                       |
+| ---------------------- | ------------------------------------------------------- | ----------------------------- |
+| `data-sp-month`        | `YYYY-MM`                                               | The selected or current month |
+| `data-sp-months`       | Number                                                  | `1`                           |
+| `data-sp-caption`      | `label` \| `dropdown`                                   | `label`                       |
+| `data-sp-week-numbers` | Boolean                                                 | `false`                       |
+| `data-sp-week-start`   | `0` (Sunday) to `6` (Saturday)                          | `0`                           |
+| `data-sp-locale`       | BCP 47 language tag                                     | The page `lang`               |
+| `data-sp-min`          | `YYYY-MM-DD` \| `today`                                 | None                          |
+| `data-sp-max`          | `YYYY-MM-DD` \| `today`                                 | None                          |
+| `data-sp-disabled`     | Comma-separated dates, `from..to` ranges, weekday names | None                          |
+
+```html
+<div
+  class="calendar"
+  data-sp-caption="dropdown"
+  data-sp-min="today"
+  data-sp-disabled="sat,sun,2026-12-24..2026-12-26"
+>
+  <input type="date" name="date" />
+</div>
+```
+
+`data-sp-min` and `data-sp-max` are also copied onto the inputs, so the browser validates them on submit. Dates in `data-sp-disabled` are not, so check those on the server. `required` works like on any input, and it also keeps a second click on the picked day from clearing a single date.
+
+## JavaScript
+
+### Events
+
+`sp-change` fires on the calendar element after every pick. Its `detail` is `{ value }` for a single date, `{ from, to }` for a range, and `{ values }` for multiple dates. The inputs also fire native `input` and `change` events.
+
+| Event       | When                  |
+| ----------- | --------------------- |
+| `sp-change` | The selection changed |
+
+```js
+el.addEventListener("sp-change", (e) => {
+  console.log(e.detail.value);
+});
+```
+
+### Methods
+
+Get the instance with `sp.calendar(el)`, then call its methods:
+
+| Method          | Description                                                 |
+| --------------- | ----------------------------------------------------------- |
+| `value()`       | The ISO value, `{ from, to }` for a range, array for multiple |
+| `select(value)` | Select an ISO date, `{ from, to }`, or an array of dates     |
+| `clear()`       | Clear the selection                                         |
+| `goTo(month)`   | Show the month holding a `YYYY-MM` or ISO date              |
+| `focus()`       | Move focus into the grid                                    |
+
+```js
+const calendar = sp.calendar(document.querySelector("#my-calendar"));
+
+calendar.select("2026-12-24");
+```
