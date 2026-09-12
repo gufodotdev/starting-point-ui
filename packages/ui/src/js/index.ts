@@ -12,6 +12,7 @@ import { Sheet } from "./sheet";
 import { Popover } from "./popover";
 import { Tooltip } from "./tooltip";
 import { Dropdown } from "./dropdown";
+import { ContextMenu } from "./context-menu";
 import { Combobox } from "./combobox";
 import { Tabs } from "./tabs";
 import { Collapsible } from "./collapsible";
@@ -34,6 +35,7 @@ const components: ComponentFactory[] = [
   Popover,
   Tooltip,
   Dropdown,
+  ContextMenu,
   Combobox,
   Tabs,
   Collapsible,
@@ -57,6 +59,7 @@ const sheet = (el: HTMLElement): SpInstance | null => getInstance(el, Sheet);
 const popover = (el: HTMLElement): SpInstance | null => getInstance(el, Popover);
 const tooltip = (el: HTMLElement): SpInstance | null => getInstance(el, Tooltip);
 const dropdown = (el: HTMLElement): SpInstance | null => getInstance(el, Dropdown);
+const contextMenu = (el: HTMLElement): SpInstance | null => getInstance(el, ContextMenu);
 const combobox = (el: HTMLElement): SpInstance | null => getInstance(el, Combobox);
 const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
 const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
@@ -80,6 +83,7 @@ export {
   Popover,
   Tooltip,
   Dropdown,
+  ContextMenu,
   Combobox,
   Tabs,
   Collapsible,
@@ -96,6 +100,7 @@ export {
   popover,
   tooltip,
   dropdown,
+  contextMenu,
   combobox,
   tabs,
   collapsible,
@@ -123,6 +128,7 @@ declare global {
       popover: typeof popover;
       tooltip: typeof tooltip;
       dropdown: typeof dropdown;
+      contextMenu: typeof contextMenu;
       combobox: typeof combobox;
       tabs: typeof tabs;
       collapsible: typeof collapsible;
@@ -149,6 +155,7 @@ if (typeof document !== "undefined") {
     popover,
     tooltip,
     dropdown,
+    contextMenu,
     combobox,
     tabs,
     collapsible,
