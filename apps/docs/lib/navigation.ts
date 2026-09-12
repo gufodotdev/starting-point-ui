@@ -53,6 +53,7 @@ export const docsNav: NavGroup[] = [
       { title: "Collapsible", href: "/components/collapsible" },
       { title: "Combobox", href: "/components/combobox" },
       { title: "Command", href: "/components/command" },
+      { title: "Context Menu", href: "/components/context-menu" },
       { title: "Dialog", href: "/components/dialog" },
       { title: "Drawer", href: "/components/drawer" },
       { title: "Dropdown", href: "/components/dropdown" },
