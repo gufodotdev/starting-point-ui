@@ -82,10 +82,10 @@ export const Navigable: Mixin = {
   },
 
   methods: {
-    // Arrow keys only act when they come from an item, so widgets inside the
-    // panel content keep their own key handling.
+    // Arrow keys only act when they come from an item or the panel itself, so
+    // widgets inside the panel content keep their own key handling.
     _navigates(this: SpInstance, target: HTMLElement): boolean {
-      return !!target.closest(this.config.item as string);
+      return target === this.el || !!target.closest(this.config.item as string);
     },
     _activeIndex(this: SpInstance, items: HTMLElement[]): number {
       return items.indexOf(document.activeElement as HTMLElement);

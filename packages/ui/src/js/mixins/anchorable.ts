@@ -3,7 +3,7 @@
 // leak while closed.
 
 import { computePosition, autoUpdate, offset, flip, shift, arrow, size } from "@floating-ui/dom";
-import type { Placement, Middleware } from "@floating-ui/dom";
+import type { Placement, Middleware, VirtualElement } from "@floating-ui/dom";
 import type { Mixin, SpInstance } from "../define";
 
 const ARROW_SIDE: Record<string, string> = {
@@ -49,6 +49,7 @@ export const Anchorable: Mixin = {
   props: {
     placement: { type: String, default: "bottom-start" },
     offset: { type: Number, default: 6 },
+    alignOffset: { type: Number, default: 0 },
     matchWidth: { type: Boolean, default: false },
     static: { type: Boolean, default: false },
   },
@@ -70,15 +71,22 @@ export const Anchorable: Mixin = {
   },
 
   methods: {
+    // A component may set _anchor to a virtual element (a pointer position) to
+    // position against instead of the trigger.
+    _reference(this: SpInstance): HTMLElement | VirtualElement | null {
+      return (this._anchor as VirtualElement | null) ?? this.trigger ?? null;
+    },
+
     _position(this: SpInstance): void {
-      if (this.config.static || !this.trigger) return;
-      if (this.config.matchWidth) this.el.style.width = `${this.trigger.offsetWidth}px`;
+      const reference = this._reference();
+      if (this.config.static || !reference) return;
+      if (this.config.matchWidth && this.trigger) this.el.style.width = `${this.trigger.offsetWidth}px`;
       const arrowEl = this.el.querySelector<HTMLElement>("[data-sp-arrow]");
       // Leave room for the arrow's protrusion on top of the configured gap so
       // the panel isn't flush against the trigger.
       const gap = (this.config.offset as number) + (arrowEl ? arrowEl.offsetWidth / 2 : 0);
       const middleware: Middleware[] = [
-        offset(gap),
+        offset({ mainAxis: gap, crossAxis: this.config.alignOffset as number }),
         flip({ crossAxis: true, fallbackAxisSideDirection: "start" }),
         shift({ padding: 8 }),
         // Exposes the space left in the viewport so panels can cap their
@@ -101,7 +109,7 @@ export const Anchorable: Mixin = {
       // animation starts with the right origin; corrected below if flipped.
       applyOrigin(this.el, resolved);
 
-      computePosition(this.trigger, this.el, {
+      computePosition(reference, this.el, {
         strategy: "fixed",
         placement: resolved as Placement,
         middleware,
@@ -123,9 +131,10 @@ export const Anchorable: Mixin = {
     },
 
     _startAnchor(this: SpInstance): void {
-      if (!this.trigger) return;
+      const reference = this._reference();
+      if (!reference) return;
       this._stopAnchor();
-      this._stopAnchorFn = autoUpdate(this.trigger, this.el, () => this._position());
+      this._stopAnchorFn = autoUpdate(reference, this.el, () => this._position());
     },
 
     _stopAnchor(this: SpInstance): void {

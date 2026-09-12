@@ -8,6 +8,7 @@ export const ClickToShow: Mixin = {
   props: { toggle: String },
 
   init(this: SpInstance) {
+    if (this.config.mode === "context") return;
     const trigger = resolveTrigger(this);
     if (!trigger) return;
 
