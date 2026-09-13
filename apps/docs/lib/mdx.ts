@@ -15,7 +15,7 @@ type DocFile = {
   slug: string[];
 };
 
-function getDocsDirectory() {
+export function getDocsDirectory() {
   return path.join(process.cwd(), "content", "docs");
 }
 
