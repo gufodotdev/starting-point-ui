@@ -3,21 +3,27 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { getAllDocSlugs, getDocsDirectory } from "@/lib/mdx";
 
-// Last commit date of a file, so lastmod means something. Without git (or an
-// uncommitted file) the field is left out rather than faked.
-function lastCommitDate(file?: string): Date | undefined {
+function git(...args: string[]): string {
   try {
-    const args = ["log", "-1", "--format=%cI", ...(file ? ["--", file] : [])];
-    const out = execFileSync("git", args, {
+    return execFileSync("git", args, {
       cwd: process.cwd(),
       stdio: ["ignore", "pipe", "ignore"],
     })
       .toString()
       .trim();
-    return out ? new Date(out) : undefined;
   } catch {
-    return undefined;
+    return "";
   }
+}
+
+// A shallow clone only knows the deploy commit, which would date every page
+// alike. Then, as without git, lastmod is left out rather than faked.
+const hasHistory = git("rev-parse", "--is-shallow-repository") === "false";
+
+function lastCommitDate(file?: string): Date | undefined {
+  if (!hasHistory) return undefined;
+  const out = git("log", "-1", "--format=%cI", ...(file ? ["--", file] : []));
+  return out ? new Date(out) : undefined;
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
