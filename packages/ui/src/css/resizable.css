@@ -1,0 +1,36 @@
+@utility resizable {
+  @layer l1.l2 {
+    @apply flex h-full w-full;
+  }
+}
+
+@utility resizable-vertical {
+  @layer l1 {
+    @apply flex-col;
+  }
+}
+
+@utility resizable-panel {
+  @layer l1.l2 {
+    @apply min-h-0 min-w-0 flex-1 overflow-hidden;
+  }
+}
+
+@utility resizable-handle {
+  @layer l1.l2 {
+    @apply relative flex w-px shrink-0 cursor-col-resize items-center justify-center bg-border ring-offset-background outline-hidden select-none touch-none;
+    @apply focus-visible:ring-1 focus-visible:ring-ring;
+    @apply aria-disabled:cursor-default;
+    /* The hit area is wider than the hairline, and wider still for touch. */
+    @apply after:absolute after:inset-y-0 after:left-1/2 after:w-2.5 after:-translate-x-1/2 after:[@media(pointer:coarse)]:w-5;
+    @apply [.resizable-vertical>&]:h-px [.resizable-vertical>&]:w-full [.resizable-vertical>&]:cursor-row-resize;
+    @apply [.resizable-vertical>&]:after:left-0 [.resizable-vertical>&]:after:h-2.5 [.resizable-vertical>&]:after:w-full [.resizable-vertical>&]:after:translate-x-0 [.resizable-vertical>&]:after:-translate-y-1/2 [.resizable-vertical>&]:after:[@media(pointer:coarse)]:h-5;
+    @apply [.resizable-vertical>&>.resizable-grip]:rotate-90;
+  }
+}
+
+@utility resizable-grip {
+  @layer l1.l2 {
+    @apply z-10 flex h-6 w-1 shrink-0 rounded-lg bg-border;
+  }
+}

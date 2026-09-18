@@ -15,6 +15,7 @@ import { Dropdown } from "./dropdown";
 import { ContextMenu } from "./context-menu";
 import { Calendar } from "./calendar";
 import { DatePicker } from "./date-picker";
+import { Resizable } from "./resizable";
 import { Combobox } from "./combobox";
 import { Tabs } from "./tabs";
 import { Collapsible } from "./collapsible";
@@ -40,6 +41,7 @@ const components: ComponentFactory[] = [
   ContextMenu,
   Calendar,
   DatePicker,
+  Resizable,
   Combobox,
   Tabs,
   Collapsible,
@@ -66,6 +68,7 @@ const dropdown = (el: HTMLElement): SpInstance | null => getInstance(el, Dropdow
 const contextMenu = (el: HTMLElement): SpInstance | null => getInstance(el, ContextMenu);
 const calendar = (el: HTMLElement): SpInstance | null => getInstance(el, Calendar);
 const datePicker = (el: HTMLElement): SpInstance | null => getInstance(el, DatePicker);
+const resizable = (el: HTMLElement): SpInstance | null => getInstance(el, Resizable);
 const combobox = (el: HTMLElement): SpInstance | null => getInstance(el, Combobox);
 const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
 const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
@@ -92,6 +95,7 @@ export {
   ContextMenu,
   Calendar,
   DatePicker,
+  Resizable,
   Combobox,
   Tabs,
   Collapsible,
@@ -111,6 +115,7 @@ export {
   contextMenu,
   calendar,
   datePicker,
+  resizable,
   combobox,
   tabs,
   collapsible,
@@ -141,6 +146,7 @@ declare global {
       contextMenu: typeof contextMenu;
       calendar: typeof calendar;
       datePicker: typeof datePicker;
+      resizable: typeof resizable;
       combobox: typeof combobox;
       tabs: typeof tabs;
       collapsible: typeof collapsible;
@@ -170,6 +176,7 @@ if (typeof document !== "undefined") {
     contextMenu,
     calendar,
     datePicker,
+    resizable,
     combobox,
     tabs,
     collapsible,
