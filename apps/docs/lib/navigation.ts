@@ -74,6 +74,7 @@ export const docsNav: NavGroup[] = [
       { title: "Popover", href: "/components/popover" },
       { title: "Progress", href: "/components/progress" },
       { title: "Radio Group", href: "/components/radio-group" },
+      { title: "Resizable", href: "/components/resizable" },
       { title: "Scroll Fade", href: "/components/scroll-fade" },
       { title: "Scrollbar", href: "/components/scrollbar" },
       { title: "Select", href: "/components/select" },
