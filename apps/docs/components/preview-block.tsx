@@ -3,12 +3,6 @@
 import { useRef, useEffect, useState, useId } from "react";
 import { useTheme } from "next-themes";
 import { Monitor, Tablet, Smartphone, Fullscreen, Languages } from "lucide-react";
-import {
-  Group,
-  Panel,
-  Separator,
-  type PanelImperativeHandle,
-} from "react-resizable-panels";
 import { CopyButton } from "@/components/copy-button";
 import { framePresets } from "@/lib/frame-presets";
 
@@ -157,11 +151,13 @@ function FrameExample({
 }
 
 function DeviceButtons({
-  panelRef,
+  groupRef,
 }: {
-  panelRef: React.RefObject<PanelImperativeHandle | null>;
+  groupRef: React.RefObject<HTMLDivElement | null>;
 }) {
-  const resize = (size: string) => panelRef.current?.resize(size);
+  const resize = (size: string) => {
+    if (groupRef.current) window.sp?.resizable(groupRef.current)?.resize(0, size);
+  };
 
   return (
     <>
@@ -208,7 +204,7 @@ export function PreviewBlock({
   framePreset?: string;
   frameH?: string;
 }) {
-  const panelRef = useRef<PanelImperativeHandle>(null);
+  const groupRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   // Identical examples share a frame id, so the tab ids need a per-instance part.
   const uid = useId().replace(/:/g, "");
@@ -258,7 +254,7 @@ export function PreviewBlock({
             >
               <Fullscreen />
             </a>
-            <DeviceButtons panelRef={panelRef} />
+            <DeviceButtons groupRef={groupRef} />
             <CopyButton code={code} classes="btn btn-outline btn-sm btn-icon" />
           </div>
           {frameDir === "rtl" && (
@@ -292,18 +288,22 @@ export function PreviewBlock({
       <div id={previewId} className="tab-content active">
         <div className="relative md:-mr-3">
           <div className="absolute inset-0 bg-[radial-gradient(var(--border)_1px,transparent_1px)] bg-size-[16px_16px] md:right-3" />
-          <Group orientation="horizontal" className="relative">
-            <Panel
-              panelRef={panelRef}
-              defaultSize="100%"
-              minSize={`${MOBILE_WIDTH}px`}
-              className="overflow-hidden rounded-xl border bg-background"
+          <div ref={groupRef} className="resizable relative">
+            {/* Sizes are inline as well so the server render paints the split. */}
+            <div
+              className="resizable-panel rounded-xl border bg-background"
+              style={{ flex: "100 1 0px" }}
+              data-sp-size="100"
+              data-sp-min={`${MOBILE_WIDTH}px`}
             >
               <FrameExample id={frameId} preset={framePreset} h={frameH} frameRef={frameRef} />
-            </Panel>
-            <Separator className="relative hidden w-3 bg-transparent p-0 after:absolute after:top-1/2 after:right-0 after:h-8 after:w-1.5 after:-translate-x-px after:-translate-y-1/2 after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
-            <Panel defaultSize="0%" minSize="0%" />
-          </Group>
+            </div>
+            <div
+              className="resizable-handle hidden w-3 bg-transparent after:top-1/2 after:right-0 after:left-auto after:h-8 after:w-1.5 after:-translate-x-px after:-translate-y-1/2 after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block"
+              aria-label="Resize preview"
+            />
+            <div className="resizable-panel" style={{ flex: "0 1 0px" }} data-sp-size="0" />
+          </div>
         </div>
       </div>
 
