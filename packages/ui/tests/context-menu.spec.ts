@@ -80,7 +80,9 @@ test("a second right click moves the open menu instead of closing it", async ({ 
 });
 
 test("a right click while the menu is closing reopens it", async ({ page }) => {
-  await mount(page, BASIC);
+  // Without a stylesheet a hide settles in one frame, so the closing state
+  // needs a real transition to be caught mid-way.
+  await mount(page, `<style>#menu.hide { opacity: 0; transition: opacity 300ms; }</style>${BASIC}`);
   await rightClick(page, 100, 60);
   await page.evaluate(() => window.sp.contextMenu(document.querySelector<HTMLElement>("#menu")!)!.hide());
   await expect(menu(page)).toHaveClass(/hide/);
