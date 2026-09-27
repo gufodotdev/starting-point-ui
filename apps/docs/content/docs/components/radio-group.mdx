@@ -130,6 +130,56 @@ Wrap the group in a [field set](/components/field) with a legend so it is announ
 </fieldset>
 ```
 
+### Radio group with nested checkboxes
+
+Nest checkboxes inside a radio's `field-content`, and fade them with a `group-has-*` variant while the other option is checked.
+
+```html preview preset=lg
+<fieldset class="field-set w-full max-w-sm">
+  <legend class="field-legend">Attendance</legend>
+  <p class="field-description">Choose who can attend your event.</p>
+  <div class="group/attendance field-group gap-4" role="radiogroup" aria-label="Attendance">
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="attendance-public" name="attendance" checked />
+      <div class="field-content">
+        <label class="label" for="attendance-public">Public</label>
+        <p class="field-description">Tickets will be available to the general public.</p>
+        <div class="field-group mt-4 gap-4 transition-opacity group-has-[#attendance-private:checked]/attendance:pointer-events-none group-has-[#attendance-private:checked]/attendance:opacity-50">
+          <div class="field field-horizontal">
+            <input type="checkbox" class="checkbox" id="attendance-inperson" checked />
+            <div class="field-content">
+              <label class="label" for="attendance-inperson">In-person</label>
+              <p class="field-description">Attendees will be at the event in person.</p>
+            </div>
+          </div>
+          <div class="field field-horizontal">
+            <input type="checkbox" class="checkbox" id="attendance-online" />
+            <div class="field-content">
+              <label class="label" for="attendance-online">Online</label>
+              <p class="field-description">Attendees will only be able to view the event online.</p>
+            </div>
+          </div>
+          <div class="field field-horizontal">
+            <input type="checkbox" class="checkbox" id="attendance-recorded" />
+            <div class="field-content">
+              <label class="label" for="attendance-recorded">Recorded</label>
+              <p class="field-description">A recording will be available after the event.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="field field-horizontal">
+      <input type="radio" class="radio" id="attendance-private" name="attendance" />
+      <div class="field-content">
+        <label class="label" for="attendance-private">Private</label>
+        <p class="field-description">Tickets are not available to the general public.</p>
+      </div>
+    </div>
+  </div>
+</fieldset>
+```
+
 ### Disabled
 
 Add `disabled` to an option and its label dims with it.
