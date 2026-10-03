@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Generated search index
 /public/search-index.json
+
+# examples fetched from the plus api at build time
+/.plus/

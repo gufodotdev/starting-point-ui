@@ -9,7 +9,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return getAllDocSlugs().map((slug) => ({ slug }));
+  return (await getAllDocSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -54,10 +54,7 @@ export default async function DocPage({ params }: Props) {
   return (
     <>
       <div className="flex items-end justify-between gap-4 mb-4 sm:mb-6">
-        <h1
-          id="introduction"
-          className="text-3xl font-bold tracking-tight scroll-mt-18"
-        >
+        <h1 id="introduction" className="text-3xl font-bold tracking-tight scroll-mt-18">
           {doc.metadata.title}
         </h1>
         <CopyContextButton content={doc.content} />

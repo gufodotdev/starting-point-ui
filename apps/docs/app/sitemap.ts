@@ -26,11 +26,11 @@ function lastCommitDate(file?: string): Date | undefined {
   return out ? new Date(out) : undefined;
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://startingpointui.com";
   const docsDir = getDocsDirectory();
 
-  const docUrls = getAllDocSlugs().map((slug) => {
+  const docUrls = (await getAllDocSlugs()).map((slug) => {
     // Example subpages are sections of their hub file.
     const file = path.join(docsDir, ...slug.slice(0, 2)) + ".mdx";
     return {

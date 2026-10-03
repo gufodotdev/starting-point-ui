@@ -2,14 +2,11 @@ import { getAllDocSlugs, getDocBySlug } from "@/lib/mdx";
 
 export const dynamic = "force-static";
 
-export function generateStaticParams() {
-  return getAllDocSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  return (await getAllDocSlugs()).map((slug) => ({ slug }));
 }
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ slug: string[] }> },
-) {
+export async function GET(_request: Request, { params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
   const doc = await getDocBySlug(slug);
   if (!doc) {

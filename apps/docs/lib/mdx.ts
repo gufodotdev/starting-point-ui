@@ -63,13 +63,106 @@ async function formatInclude(html: string): Promise<string> {
   return (await format(clean, { parser: "html" })).trim();
 }
 
-async function expandIncludes(content: string): Promise<string> {
-  const matches = [...content.matchAll(/^%include ([\w./-]+)%$/gm)];
-  if (matches.length === 0) return content;
+// A line like %plus tables/user-table preset=lg align=top% expands to a whole
+// example section from the Plus app: the heading, the description with its
+// built-with links, and the preview fence with the rendered markup. The build
+// reads .plus, filled by the prebuild fetch so Tailwind scans the markup; in
+// dev a missing or changed example is fetched from the api and mirrored there.
+const PLUS_URL = process.env.PLUS_URL ?? "http://localhost:8000";
 
-  const rendered = await renderIncludes([...new Set(matches.map((m) => m[1]))]);
+type PlusExample = {
+  title: string;
+  description: string;
+  builtWith: string[];
+  related?: string[];
+  html: string;
+};
+
+async function readPlusExample(id: string): Promise<PlusExample> {
+  const dir = path.join(process.cwd(), ".plus");
+  const htmlFile = path.join(dir, `${id}.html`);
+  const metaFile = path.join(dir, `${id}.json`);
+  const mirrored = fs.existsSync(htmlFile) && fs.existsSync(metaFile);
+  if (process.env.NODE_ENV === "production" && mirrored) {
+    return {
+      ...JSON.parse(await fs.promises.readFile(metaFile, "utf-8")),
+      html: await fs.promises.readFile(htmlFile, "utf-8"),
+    };
+  }
+
+  const res = await fetch(`${PLUS_URL}/api/examples/${id}`);
+  if (!res.ok) throw new Error(`Plus example ${id} responded ${res.status}`);
+  const { title, description, builtWith, related, html } = (await res.json()) as PlusExample;
+  const meta = JSON.stringify({ title, description, builtWith, related });
+  // The mirror is a Tailwind source, so an unchanged write would trigger a
+  // recompile, a re-render, and this function again.
+  const same =
+    mirrored &&
+    (await fs.promises.readFile(htmlFile, "utf-8")) === html &&
+    (await fs.promises.readFile(metaFile, "utf-8")) === meta;
+  if (!same) {
+    await fs.promises.mkdir(path.dirname(htmlFile), { recursive: true });
+    await fs.promises.writeFile(htmlFile, html);
+    await fs.promises.writeFile(metaFile, meta);
+  }
+  return { title, description, builtWith, related, html };
+}
+
+// The same content often exists as a card and as a dialog; each page points
+// at the other so a reader who wants the other container finds it.
+async function relatedSentence(ids: string[]): Promise<string> {
+  const sentences = await Promise.all(
+    ids.map(async (id) => {
+      const { title } = await readPlusExample(id);
+      const kind = id.split("/")[0].replace(/s$/, "");
+      return `Prefer a ${kind} instead? See the [${title.toLowerCase()}](/examples/${id}).`;
+    }),
+  );
+  return sentences.join(" ");
+}
+
+function builtWithSentence(slugs: string[]): string {
+  const links = slugs.map((slug) => `[${slug.replaceAll("-", " ")}](/components/${slug})`);
+  const list =
+    links.length > 1
+      ? `${links.slice(0, -1).join(", ")}${links.length > 2 ? "," : ""} and ${links.at(-1)}`
+      : links[0];
+  return `Built with the ${list} component${slugs.length > 1 ? "s" : ""}.`;
+}
+
+async function plusSection(id: string, options: string): Promise<string> {
+  const example = await readPlusExample(id);
+  const fence = ["```html preview", options.trim()].filter(Boolean).join(" ");
+  const related = example.related?.length ? ` ${await relatedSentence(example.related)}` : "";
+  return [
+    `## ${example.title}`,
+    "",
+    `${example.description} ${builtWithSentence(example.builtWith)}${related}`,
+    "",
+    fence,
+    await formatInclude(example.html),
+    "```",
+  ].join("\n");
+}
+
+// Plus directives expand to whole sections, so they run before anything that
+// reads the hub's headings: slugs, sibling lists, and the local includes.
+async function expandPlus(content: string): Promise<string> {
   let out = content;
-  for (const match of matches) {
+  for (const match of content.matchAll(/^%plus ([\w-]+\/[\w-]+)([^%\n]*)%$/gm)) {
+    out = out.replace(match[0], await plusSection(match[1], match[2]));
+  }
+  return out;
+}
+
+async function expandIncludes(content: string): Promise<string> {
+  const expanded = await expandPlus(content);
+  const includes = [...expanded.matchAll(/^%include ([\w./-]+)%$/gm)];
+  if (includes.length === 0) return expanded;
+
+  const rendered = await renderIncludes([...new Set(includes.map((m) => m[1]))]);
+  let out = expanded;
+  for (const match of includes) {
     out = out.replace(match[0], await formatInclude(rendered[match[1]]));
   }
   return out;
@@ -137,7 +230,7 @@ async function getExampleSectionDoc(slug: string[]): Promise<DocFile | null> {
   if (!fs.existsSync(hubPath)) return null;
 
   const { content } = matter(fs.readFileSync(hubPath, "utf-8"));
-  const sections = parseExampleSections(content);
+  const sections = parseExampleSections(await expandPlus(content));
   const section = sections.find((s) => s.slug === slug[2]);
   if (!section) return null;
 
@@ -180,7 +273,9 @@ export async function getDocBySlug(slug: string[]): Promise<DocFile | null> {
   const rawContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(rawContent);
   const source =
-    slug.length === 2 && slug[0] === "examples" ? stripSectionIntros(content) : content;
+    slug.length === 2 && slug[0] === "examples"
+      ? stripSectionIntros(await expandPlus(content))
+      : content;
 
   return {
     metadata: data as DocMetadata,
@@ -209,7 +304,7 @@ export async function getAllDocs(): Promise<DocFile[]> {
   );
 }
 
-export function getAllDocSlugs(): string[][] {
+export async function getAllDocSlugs(): Promise<string[][]> {
   const docsDir = getDocsDirectory();
   if (!fs.existsSync(docsDir)) return [];
 
@@ -217,13 +312,12 @@ export function getAllDocSlugs(): string[][] {
     path
       .relative(docsDir, filePath)
       .replace(/\.mdx$/, "")
-      .split(path.sep),
-  );
+      .split(path.sep));
 
   for (const slug of slugs.filter((s) => s.length === 2 && s[0] === "examples")) {
     const raw = fs.readFileSync(path.join(docsDir, ...slug) + ".mdx", "utf-8");
     const { content } = matter(raw);
-    for (const section of parseExampleSections(content)) {
+    for (const section of parseExampleSections(await expandPlus(content))) {
       slugs.push([...slug, section.slug]);
     }
   }

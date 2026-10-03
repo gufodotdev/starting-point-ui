@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "prebuild": "tsx scripts/generate-search-index.ts",
+    "prebuild": "tsx scripts/fetch-plus-examples.mts && tsx scripts/generate-search-index.ts",
     "build": "next build",
     "generate-search": "tsx scripts/generate-search-index.ts",
     "start": "next start",
