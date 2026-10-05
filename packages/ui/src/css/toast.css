@@ -4,13 +4,11 @@
 
 @utility toaster {
   @layer l1.l2 {
-    @apply fixed pointer-events-none list-none m-0 p-0 bg-transparent border-0 overflow-visible;
-    @apply max-sm:left-4 max-sm:right-4;
-    @apply sm:w-[356px];
-
-    /* Reset popover defaults */
     inset: auto;
+    width: auto;
     height: auto;
+    @apply fixed pointer-events-none list-none m-0 p-0 bg-transparent border-0 overflow-visible max-w-[356px];
+    @apply max-sm:inset-x-4 max-sm:mx-auto sm:w-[356px];
 
     &:popover-open {
       display: block;
