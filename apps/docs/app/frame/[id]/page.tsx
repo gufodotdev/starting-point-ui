@@ -16,8 +16,6 @@ export async function generateStaticParams() {
   return (await getAllPreviewExamples()).map((e) => ({ id: e.id }));
 }
 
-export const dynamicParams = false;
-
 export default async function FramePage({
   params,
 }: {
