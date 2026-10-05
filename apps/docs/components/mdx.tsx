@@ -19,6 +19,8 @@ import {
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
+import { createHighlighter } from "shiki";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
 const prettyCodeOptions = {
   theme: {
@@ -26,6 +28,10 @@ const prettyCodeOptions = {
     light: codeThemeLight,
   },
   keepBackground: false,
+  // The default WASM regex engine takes seconds on a large example, the
+  // JavaScript engine milliseconds, with the same output.
+  getHighlighter: (options: Parameters<typeof createHighlighter>[0]) =>
+    createHighlighter({ ...options, engine: createJavaScriptRegexEngine() }),
   transformers: [
     {
       // @ts-expect-error - rehype-pretty-code transformer type
