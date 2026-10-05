@@ -150,7 +150,8 @@ async function plusSection(id: string, options: string): Promise<string> {
 async function expandPlus(content: string): Promise<string> {
   let out = content;
   for (const match of content.matchAll(/^%plus ([\w-]+\/[\w-]+)([^%\n]*)%$/gm)) {
-    out = out.replace(match[0], await plusSection(match[1], match[2]));
+    const section = await plusSection(match[1], match[2]);
+    out = out.replace(match[0], () => section);
   }
   return out;
 }
@@ -163,7 +164,8 @@ async function expandIncludes(content: string): Promise<string> {
   const rendered = await renderIncludes([...new Set(includes.map((m) => m[1]))]);
   let out = expanded;
   for (const match of includes) {
-    out = out.replace(match[0], await formatInclude(rendered[match[1]]));
+    const include = await formatInclude(rendered[match[1]]);
+    out = out.replace(match[0], () => include);
   }
   return out;
 }
