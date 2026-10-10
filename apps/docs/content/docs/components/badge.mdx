@@ -24,6 +24,8 @@ Add the `badge` class to a `<span>` or `<a>` element.
 | `badge-outline`     | Add to `badge` for a bordered, transparent style          |
 | `badge-ghost`       | Add to `badge` for a borderless style that tints on hover |
 | `badge-link`        | Add to `badge` for a link-styled badge                    |
+| `badge-square`      | Add to `badge` for square corners instead of the pill     |
+| `badge-dot`         | Add to a `<span>` inside for a status dot                 |
 
 ```html
 <span class="badge">Badge</span>
@@ -111,6 +113,85 @@ Recolor a badge with utilities. Keep the meaning in the text, not in the color a
 <span class="badge bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300">
   Red
 </span>
+```
+
+### Square badges
+
+Add `badge-square` for square corners, like a label or a tag.
+
+```html preview preset=sm
+<span class="badge badge-square">Design</span>
+<span class="badge badge-secondary badge-square">Engineering</span>
+<span class="badge badge-outline badge-square">Marketing</span>
+```
+
+### Badge with a status dot
+
+Add a `<span>` with `badge-dot` before the text and color it with a background utility. It works the same on square badges.
+
+```html preview preset=sm
+<div class="flex flex-wrap items-center justify-center gap-2">
+  <span class="badge badge-outline">
+    <span class="badge-dot bg-emerald-500"></span>
+    Active
+  </span>
+  <span class="badge badge-outline">
+    <span class="badge-dot bg-blue-500"></span>
+    Invited
+  </span>
+  <span class="badge badge-outline">
+    <span class="badge-dot bg-amber-500"></span>
+    Pending
+  </span>
+  <span class="badge badge-outline">
+    <span class="badge-dot bg-neutral-400"></span>
+    Suspended
+  </span>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-2">
+  <span class="badge badge-outline badge-square">
+    <span class="badge-dot bg-blue-500"></span>
+    Admin
+  </span>
+  <span class="badge badge-outline badge-square">
+    <span class="badge-dot bg-emerald-500"></span>
+    Data export
+  </span>
+  <span class="badge badge-outline badge-square">
+    <span class="badge-dot bg-pink-500"></span>
+    Data import
+  </span>
+</div>
+```
+
+### Trend badges
+
+Combine `badge-square` with a color and a leading icon for a change indicator, or keep the outline and color only the arrow.
+
+```html preview preset=sm
+<div class="flex flex-wrap items-center justify-center gap-2">
+  <span class="badge badge-square bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+    0.8%
+  </span>
+  <span class="badge badge-square bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 7 10 10"/><path d="M17 7v10H7"/></svg>
+    2.4%
+  </span>
+  <span class="badge badge-square badge-secondary">
+    0.0%
+  </span>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-2">
+  <span class="badge badge-outline badge-square">
+    <svg class="icon-start text-emerald-600 dark:text-emerald-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+    2.5%
+  </span>
+  <span class="badge badge-outline badge-square">
+    <svg class="icon-start text-red-600 dark:text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 7 10 10"/><path d="M17 7v10H7"/></svg>
+    1.2%
+  </span>
+</div>
 ```
 
 ### RTL

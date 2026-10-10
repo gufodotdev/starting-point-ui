@@ -79,6 +79,7 @@ Add the classes to their native table elements, and wrap the table in a `table-c
 | ----------------- | ------------------------------------------------- |
 | `table-container` | Add to a wrapper `<div>` for horizontal scrolling |
 | `table`           | Add to the `<table>`                              |
+| `table-lg`        | Add to `table` for taller rows                    |
 | `table-header`    | Add to the `<thead>`                              |
 | `table-body`      | Add to the `<tbody>`                              |
 | `table-footer`    | Add to the `<tfoot>`                              |
@@ -104,6 +105,51 @@ Add the classes to their native table elements, and wrap the table in a `table-c
 ```
 
 ## Examples
+
+### Table sizes
+
+Add `table-lg` for taller rows with more padding in every cell.
+
+```html preview preset=base
+<div class="table-container">
+  <table class="table table-lg">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head w-[100px]">Invoice</th>
+        <th class="table-head">Status</th>
+        <th class="table-head">Method</th>
+        <th class="table-head text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$250.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell">Pending</td>
+        <td class="table-cell">PayPal</td>
+        <td class="table-cell text-right">$150.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV003</td>
+        <td class="table-cell">Unpaid</td>
+        <td class="table-cell">Bank Transfer</td>
+        <td class="table-cell text-right">$350.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV004</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$450.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
 
 ### Table footer
 
