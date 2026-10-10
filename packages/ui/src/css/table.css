@@ -44,14 +44,14 @@
 
 @utility table-head {
   @layer l1.l2 {
-    @apply h-10 px-2 text-start align-middle font-medium text-foreground whitespace-nowrap;
-    @apply [&:has(input[type="checkbox"])]:pe-0;
+    @apply h-10 px-2 text-start align-middle font-medium text-foreground whitespace-nowrap in-[.table-lg]:h-11;
+    @apply [&:has(input[type="checkbox"])]:pe-0 [&>input[type="checkbox"]]:block;
   }
 }
 
 @utility table-cell {
   @layer l1.l2 {
-    @apply p-2 align-middle whitespace-nowrap;
-    @apply [&:has(input[type="checkbox"])]:pe-0;
+    @apply p-2 align-middle whitespace-nowrap in-[.table-lg]:py-3;
+    @apply [&:has(input[type="checkbox"])]:pe-0 [&>input[type="checkbox"]]:block;
   }
 }
