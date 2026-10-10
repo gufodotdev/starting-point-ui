@@ -19,7 +19,7 @@
 @utility card-header {
   @layer l1.l2 {
     @apply @container grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing);
-    @apply has-[.card-action]:grid-cols-[1fr_auto] has-[.card-description]:grid-rows-[auto_auto];
+    @apply has-[.card-action]:grid-cols-[1fr_auto] has-[.card-description]:grid-rows-[auto_auto] [&>*:not(.card-action)]:col-start-1;
     @apply [&.border-b]:pb-(--card-spacing);
   }
 }
