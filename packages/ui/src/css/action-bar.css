@@ -1,0 +1,27 @@
+@utility action-bar {
+  @layer l1.l2 {
+    /* Hidden until JS upgrades it to a [popover]; authored .shown paints before JS. */
+    &:not([popover]) {
+      @apply hidden;
+
+      &.shown {
+        @apply flex;
+      }
+    }
+
+    /* Centered with translate so it composes with the slide's transform. */
+    @apply fixed top-auto right-auto bottom-6 left-1/2 m-0 h-auto w-auto max-w-[calc(100%-2rem)] -translate-x-1/2;
+    @apply items-center gap-1 overflow-x-auto rounded-xl border border-border bg-popover p-1.5 text-sm text-popover-foreground shadow-lg;
+    /* Display only while open, so the UA's closed-popover display:none wins. */
+    @apply [&:popover-open]:flex;
+
+    @apply [&.show]:animate-in [&.show]:fade-in-0 [&.show]:slide-in-from-bottom [&.show]:duration-300 [&.show]:ease-out [&.show]:[animation-fill-mode:forwards];
+    @apply [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:slide-out-to-bottom [&.hide]:duration-300 [&.hide]:ease-out [&.hide]:[animation-fill-mode:forwards];
+  }
+
+  @layer l1 {
+    & > .separator-vertical {
+      @apply mx-1 h-5 self-center;
+    }
+  }
+}
