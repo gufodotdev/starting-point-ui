@@ -1,0 +1,222 @@
+---
+title: Tailwind CSS Action Bar
+description: Beautiful, modern action bar component for Tailwind CSS. Use it to run bulk actions on selected rows, like exporting or deleting them. Easily customizable.
+---
+
+Use the action bar component to float the bulk actions for a selection at the bottom of the screen, like export and delete for the rows checked in a table. For a message that goes away on its own, use a [toast](/components/toast).
+
+```html preview preset=sm
+<div class="action-bar shown" aria-label="Selection actions">
+  <button class="btn btn-ghost btn-sm tabular-nums">
+    3 selected<span class="sr-only">, clear selection</span>
+    <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+  <div class="separator separator-vertical"></div>
+  <button class="btn btn-ghost btn-sm">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+    Export
+  </button>
+  <button class="btn btn-ghost btn-sm">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+    Email
+  </button>
+  <button class="btn btn-ghost btn-sm text-destructive hover:text-destructive">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    Delete
+  </button>
+</div>
+```
+
+## Usage
+
+Add the `action-bar` class to a `<div>` and fill it with buttons. Show it from your own code with `sp.actionBar(el).show()` when the selection changes, or give a trigger an id and point the bar at it with `data-sp-toggle`. Close it with `data-sp-dismiss` on a button inside or the Escape key. Give the bar an `aria-label`, put it right after the content it acts on so it comes next in the tab order, and add `shown` to have it open on load.
+
+| Class        | Description                                            |
+| ------------ | ------------------------------------------------------ |
+| `action-bar` | Add to a `<div>` of buttons to float it at the bottom |
+
+```html
+<div class="action-bar" id="my-bar" aria-label="Selection actions">
+  <button class="btn btn-ghost btn-sm" data-sp-dismiss>3 selected</button>
+  <div class="separator separator-vertical"></div>
+  <button class="btn btn-ghost btn-sm">Export</button>
+</div>
+```
+
+## Examples
+
+### Action bar for selected rows
+
+Call `show()` and `hide()` as the checkboxes change, and listen for `sp-hide` to clear the selection when the bar is dismissed.
+
+```html preview preset=base
+<div class="table-container w-full max-w-md" id="action-bar-table">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head w-10">
+          <input type="checkbox" class="checkbox" aria-label="Select all" />
+        </th>
+        <th class="table-head">Invoice</th>
+        <th class="table-head text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell">
+          <input type="checkbox" class="checkbox" aria-label="Select INV001" />
+        </td>
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell text-right">$250.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <input type="checkbox" class="checkbox" aria-label="Select INV002" />
+        </td>
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell text-right">$150.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell">
+          <input type="checkbox" class="checkbox" aria-label="Select INV003" />
+        </td>
+        <td class="table-cell font-medium">INV003</td>
+        <td class="table-cell text-right">$350.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="action-bar" id="action-bar-demo" aria-label="Selection actions">
+  <button class="btn btn-ghost btn-sm tabular-nums" data-sp-dismiss>
+    <span id="action-bar-count">0</span> selected<span class="sr-only">, clear selection</span>
+    <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+  <div class="separator separator-vertical"></div>
+  <button class="btn btn-ghost btn-sm">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+    Export
+  </button>
+  <button class="btn btn-ghost btn-sm text-destructive hover:text-destructive">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    Delete
+  </button>
+</div>
+
+<script>
+  const table = document.getElementById("action-bar-table");
+  const all = table.querySelector("thead input");
+  const rows = [...table.querySelectorAll("tbody input")];
+  const bar = document.getElementById("action-bar-demo");
+  const update = () => {
+    const selected = rows.filter((input) => input.checked).length;
+    document.getElementById("action-bar-count").textContent = selected;
+    all.checked = selected === rows.length;
+    all.indeterminate = selected > 0 && !all.checked;
+    if (selected) sp.actionBar(bar).show();
+    else sp.actionBar(bar).hide();
+  };
+  table.addEventListener("change", (event) => {
+    if (event.target === all) rows.forEach((input) => (input.checked = all.checked));
+    update();
+  });
+  bar.addEventListener("sp-hide", () => {
+    rows.forEach((input) => (input.checked = false));
+    all.checked = false;
+    all.indeterminate = false;
+    document.getElementById("action-bar-count").textContent = 0;
+  });
+</script>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=sm dir=rtl
+<div id="action-bar-rtl-demo" dir="rtl" class="action-bar shown" aria-label="إجراءات التحديد">
+  <button class="btn btn-ghost btn-sm tabular-nums">
+    <span data-i18n="selected">3 محددة</span>
+    <svg class="icon-end" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+  <div class="separator separator-vertical"></div>
+  <button class="btn btn-ghost btn-sm">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+    <span data-i18n="export">تصدير</span>
+  </button>
+  <button class="btn btn-ghost btn-sm text-destructive hover:text-destructive">
+    <svg class="icon-start" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    <span data-i18n="delete">حذف</span>
+  </button>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", selected: "3 محددة", export: "تصدير", delete: "حذف" },
+    he: { dir: "rtl", selected: "3 נבחרו", export: "ייצוא", delete: "מחיקה" },
+    en: { dir: "ltr", selected: "3 selected", export: "Export", delete: "Delete" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("action-bar-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```
+
+## Options
+
+### Action bar
+
+Set each option with its own `data-sp-*` attribute on the `action-bar` element.
+
+| Attribute        | Values       | Default |
+| ---------------- | ------------ | ------- |
+| `data-sp-toggle` | CSS selector | None    |
+| `data-sp-item`   | CSS selector | `.btn`  |
+
+`data-sp-item` selects the elements the arrow keys move between.
+
+```html
+<div class="action-bar" data-sp-toggle="#my-trigger"></div>
+```
+
+## JavaScript
+
+### Events
+
+Lifecycle events fire on the action bar element. The `before*` events are cancelable.
+
+| Event           | When                        |
+| --------------- | --------------------------- |
+| `sp-beforeshow` | Before showing (cancelable) |
+| `sp-show`       | Showing                     |
+| `sp-shown`      | Shown and settled           |
+| `sp-beforehide` | Before hiding (cancelable)  |
+| `sp-hide`       | Hiding                      |
+| `sp-hidden`     | Hidden                      |
+
+```js
+el.addEventListener("sp-hide", () => {
+  clearSelection();
+});
+```
+
+### Methods
+
+Get the instance with `sp.actionBar(el)`, then call its methods:
+
+| Method     | Description                  |
+| ---------- | ---------------------------- |
+| `show()`   | Show the bar                 |
+| `hide()`   | Hide the bar                 |
+| `toggle()` | Show if hidden, else hide    |
+
+```js
+const bar = sp.actionBar(document.querySelector("#my-bar"));
+
+bar.show();
+```
