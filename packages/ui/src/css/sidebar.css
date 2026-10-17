@@ -241,6 +241,10 @@
 @utility sidebar-input {
   @layer l1 {
     @apply h-8 w-full bg-background shadow-none;
+
+    & > .input {
+      @apply h-8;
+    }
   }
 }
 

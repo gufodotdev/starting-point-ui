@@ -190,7 +190,7 @@ Inside, `sidebar-content` scrolls in the middle while an optional `sidebar-heade
 | `sidebar-static`        | Add to an `<aside>` for a plain column that embeds anywhere          |
 | `sidebar-static-row`    | Add to `sidebar-static` to lay the menu out as one scrolling strip   |
 | `sidebar-header`        | Add for a pinned region at the top of the sidebar                     |
-| `sidebar-input`         | Add to an `input` for a search field that fits the sidebar            |
+| `sidebar-input`         | Add to an `input` or `input-group` for a sidebar search field         |
 | `sidebar-content`       | Add for the scrollable middle of the sidebar                          |
 | `sidebar-group`         | Add to create a labelled section of the content                       |
 | `sidebar-group-label`   | Add to the group's heading                                            |
@@ -1482,12 +1482,15 @@ The `sidebar-header` is a pinned region at the top of the panel, typically a bra
 
 ### Sidebar search
 
-Add `sidebar-input` to an [input](/components/input) for a search field that fits the sidebar, typically in the header.
+Add `sidebar-input` to an [input](/components/input), or to an [input group](/components/input-group) for a search field with an icon, typically in the header.
 
 ```html preview
 <aside class="sidebar-static">
   <header class="sidebar-header">
-    <input class="input sidebar-input" type="search" placeholder="Search..." />
+    <div class="input-group sidebar-input">
+      <input class="input" type="search" placeholder="Search..." />
+      <span class="input-group-addon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></span>
+    </div>
   </header>
   <div class="sidebar-content">
     <div class="sidebar-group">
