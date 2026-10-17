@@ -101,6 +101,39 @@
   }
 }
 
+@utility sidebar-static-row {
+  @layer l1 {
+    @apply h-auto w-full;
+
+    & > .sidebar-header,
+    & > .sidebar-footer {
+      @apply flex-row items-center justify-between;
+    }
+    & > .sidebar-content {
+      @apply scroll-fade-x flex-row items-center gap-1 scroll-px-2 overflow-x-auto overflow-y-hidden p-2;
+    }
+    & .sidebar-group {
+      @apply w-auto shrink-0 flex-row items-center gap-1 p-0;
+    }
+    & .sidebar-group-label {
+      @apply sr-only;
+    }
+    & .sidebar-menu-item {
+      @apply shrink-0;
+    }
+    & .sidebar-group-content,
+    & .sidebar-menu-button {
+      @apply w-auto;
+    }
+    & .sidebar-menu {
+      @apply w-auto flex-row;
+    }
+    & .sidebar-menu-button > svg {
+      @apply hidden;
+    }
+  }
+}
+
 @utility sidebar-left {
   @layer l1 {
     @apply left-0 border-r in-[.sidebar-inset]:border-r-0;
