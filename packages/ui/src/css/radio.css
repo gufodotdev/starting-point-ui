@@ -22,3 +22,31 @@
     }
   }
 }
+
+@utility radio-segmented {
+  @layer l1.l2 {
+    @apply inline-flex h-9 w-fit items-center justify-center rounded-lg bg-muted p-[3px] text-muted-foreground;
+    @apply aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40;
+  }
+}
+
+@utility radio-segmented-sm {
+  @layer l1 {
+    @apply h-8 p-px;
+  }
+}
+
+@utility radio-segment {
+  @layer l1.l2 {
+    @apply relative inline-flex h-full flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-2 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all select-none;
+    @apply hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground;
+    @apply has-focus-visible:border-ring has-focus-visible:ring-3 has-focus-visible:ring-ring/50;
+    @apply has-checked:bg-background has-checked:text-foreground has-checked:shadow-sm dark:has-checked:border-input dark:has-checked:bg-input/30 dark:has-checked:text-foreground;
+    @apply has-disabled:pointer-events-none has-disabled:opacity-50;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
+
+    & > input {
+      @apply sr-only;
+    }
+  }
+}

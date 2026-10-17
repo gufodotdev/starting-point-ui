@@ -26,9 +26,12 @@ Use the radio group component to pick exactly one option from a set of radio but
 
 Add the `radio` class to each `<input type="radio">` and give the set a shared `name`. Lay each option out with its label in a horizontal [field](/components/field), and name the group with a `field-set` and legend or with `role="radiogroup"` and an `aria-label`.
 
-| Class   | Description                        |
-| ------- | ---------------------------------- |
-| `radio` | Add to each `<input type="radio">` |
+| Class                | Description                                                             |
+| -------------------- | ----------------------------------------------------------------------- |
+| `radio`              | Add to each `<input type="radio">`                                      |
+| `radio-segmented`    | Add to a `role="radiogroup"` wrapper to show the options as a segmented control |
+| `radio-segmented-sm` | Add to `radio-segmented` for the smaller size                            |
+| `radio-segment`      | Add to each `<label>` wrapping a radio inside `radio-segmented`          |
 
 ```html
 <div class="field field-horizontal">
@@ -102,6 +105,46 @@ Wrap each option in a [label](/components/label) and the whole card becomes clic
       <input type="radio" class="radio" id="enterprise-plan" name="plan" value="enterprise" />
     </div>
   </label>
+</div>
+```
+
+### Segmented control
+
+Wrap the radios in a `radio-segmented` group and each option in a `radio-segment` label to show the choice as a segmented control. Add `radio-segmented-sm` for the smaller size, and give an icon-only option an `sr-only` label.
+
+```html preview preset=sm
+<div class="flex flex-col items-start gap-6">
+  <div class="radio-segmented" role="radiogroup" aria-label="Text size">
+    <label class="radio-segment">
+      <input type="radio" name="seg-size" value="small" />
+      Small
+    </label>
+    <label class="radio-segment">
+      <input type="radio" name="seg-size" value="medium" checked />
+      Medium
+    </label>
+    <label class="radio-segment">
+      <input type="radio" name="seg-size" value="large" />
+      Large
+    </label>
+  </div>
+  <div class="radio-segmented radio-segmented-sm" role="radiogroup" aria-label="Theme">
+    <label class="radio-segment">
+      <input type="radio" name="seg-theme" value="system" checked />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+      <span class="sr-only">System</span>
+    </label>
+    <label class="radio-segment">
+      <input type="radio" name="seg-theme" value="light" />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <span class="sr-only">Light</span>
+    </label>
+    <label class="radio-segment">
+      <input type="radio" name="seg-theme" value="dark" />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      <span class="sr-only">Dark</span>
+    </label>
+  </div>
 </div>
 ```
 
@@ -203,9 +246,10 @@ Add `disabled` to an option and its label dims with it.
 
 ### Invalid
 
-Set `aria-invalid` on the radios for the error state.
+Set `aria-invalid` on the radios for the error state, or on a `radio-segmented` group.
 
 ```html preview preset=sm
+<div class="flex w-full max-w-sm flex-col gap-6">
 <fieldset class="field-set w-full max-w-sm">
   <legend class="field-legend field-legend-label">Notification Preferences</legend>
   <p class="field-description">Choose how you want to receive notifications.</p>
@@ -224,6 +268,21 @@ Set `aria-invalid` on the radios for the error state.
     </div>
   </div>
 </fieldset>
+<div class="radio-segmented" role="radiogroup" aria-label="Plan" aria-invalid="true">
+  <label class="radio-segment">
+    <input type="radio" name="invalid-plan" value="free" />
+    Free
+  </label>
+  <label class="radio-segment">
+    <input type="radio" name="invalid-plan" value="pro" />
+    Pro
+  </label>
+  <label class="radio-segment">
+    <input type="radio" name="invalid-plan" value="team" />
+    Team
+  </label>
+</div>
+</div>
 ```
 
 ### RTL
