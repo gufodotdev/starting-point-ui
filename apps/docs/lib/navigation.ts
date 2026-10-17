@@ -44,6 +44,7 @@ export const docsNav: NavGroup[] = [
       { title: "Alert", href: "/components/alert" },
       { title: "Avatar", href: "/components/avatar" },
       { title: "Badge", href: "/components/badge" },
+      { title: "Brand", href: "/components/brand" },
       { title: "Breadcrumb", href: "/components/breadcrumb" },
       { title: "Bubble", href: "/components/bubble" },
       { title: "Button", href: "/components/button" },

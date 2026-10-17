@@ -1,0 +1,45 @@
+@utility brand {
+  @layer l1.l2 {
+    @apply flex h-10 min-w-0 items-center gap-2 text-foreground;
+  }
+}
+
+@utility brand-logo {
+  @layer l1.l2 {
+    @apply flex h-6 min-w-6 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-primary text-base leading-none text-primary-foreground;
+    @apply [&>img]:h-full [&>img]:w-auto [&>svg]:size-4 [&>svg]:shrink-0;
+
+    /* An image brings its own shape, so it shows bare. */
+    &:has(> img) {
+      @apply rounded-none bg-transparent;
+    }
+  }
+}
+
+@utility brand-logo-lg {
+  @layer l1 {
+    @apply h-8 min-w-8 rounded-md text-lg [&>svg]:size-5;
+
+    &:has(> img) {
+      @apply rounded-none;
+    }
+  }
+}
+
+@utility brand-text {
+  @layer l1.l2 {
+    @apply grid min-w-0 flex-1 text-start leading-tight;
+  }
+}
+
+@utility brand-name {
+  @layer l1.l2 {
+    @apply truncate text-sm font-medium;
+  }
+}
+
+@utility brand-subtitle {
+  @layer l1.l2 {
+    @apply truncate text-xs text-muted-foreground;
+  }
+}

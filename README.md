@@ -20,7 +20,7 @@ Visit [startingpointui.com](https://startingpointui.com) for full documentation 
 
 Beautiful components for building complete interfaces:
 
-Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Card, Checkbox, Collapsible, Combobox, Dialog, Dropdown, Field, Input, Input Group, Kbd, Label, Pagination, Popover, Progress, Radio Group, Scrollbar, Select, Separator, Sheet, Sidebar, Slider, Switch, Table, Tabs, Textarea, Toast, Tooltip
+Accordion, Avatar, Badge, Brand, Breadcrumb, Button, Button Group, Card, Checkbox, Collapsible, Combobox, Dialog, Dropdown, Field, Input, Input Group, Kbd, Label, Pagination, Popover, Progress, Radio Group, Scrollbar, Select, Separator, Sheet, Sidebar, Slider, Switch, Table, Tabs, Textarea, Toast, Tooltip
 
 ## Quick Start
 

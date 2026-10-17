@@ -1,0 +1,241 @@
+---
+title: Tailwind CSS Brand
+description: Beautiful, modern brand component for Tailwind CSS. Use it to show your logo and product name, like in a sidebar, a navbar, or a footer. Easily customizable.
+---
+
+Use the brand component to show your logo and product name, like in a sidebar header, a navbar, or a footer. For a person's picture instead, use an [avatar](/components/avatar).
+
+```html preview preset=sm
+<a href="#" class="brand">
+  <span class="brand-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="17" r="2.5"/></svg>
+  </span>
+  <span class="brand-name">Starting Point</span>
+</a>
+```
+
+## Usage
+
+Add the `brand` class to the link pointing home. Inside it, put the logo in a `brand-logo` box and the name in a `brand-name` span. The box takes a letter, an inline svg, or an `<img>`. Leave the image's `alt` empty when the name shows beside it, so screen readers do not [read it twice](https://www.w3.org/WAI/tutorials/images/functional/).
+
+| Class            | Description                                                        |
+| ---------------- | ------------------------------------------------------------------ |
+| `brand`          | Add to the row wrapping the logo and name, usually a link home     |
+| `brand-logo`     | Add to the logo box holding a letter, an inline svg, or an `<img>` |
+| `brand-logo-lg`  | Add to `brand-logo` for the taller box of large rows               |
+| `brand-text`     | Add to a wrapper stacking the name and a subtitle                  |
+| `brand-name`     | Add to the company or product name                                 |
+| `brand-subtitle` | Add to the muted second line under the name                        |
+
+```html
+<a href="/" class="brand">
+  <span class="brand-logo">
+    <img src="/logo.png" alt="" />
+  </span>
+  <span class="brand-name">Acme Inc.</span>
+</a>
+```
+
+## Examples
+
+### Logo marks
+
+The box takes a letter or an inline svg. Give it `bg-transparent` when the svg is the whole mark.
+
+```html preview preset=sm
+<div class="flex flex-wrap items-center justify-center gap-8">
+  <a href="#" class="brand">
+    <span class="brand-logo">
+      <i class="font-serif font-bold not-italic">A</i>
+    </span>
+    <span class="brand-name">Acme Inc.</span>
+  </a>
+
+  <a href="#" class="brand">
+    <span class="brand-logo size-7 bg-transparent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" class="size-7"><circle cx="14" cy="14" r="14" fill="#e11d48"/><path d="M6.5 14h3l2.5-5 4 10 2.5-5h3" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="brand-name">Pulse</span>
+  </a>
+
+  <a href="#" class="brand">
+    <span class="brand-logo size-7 bg-transparent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" class="size-7"><circle cx="14" cy="14" r="14" fill="#7c3aed"/><circle cx="16.5" cy="14" r="9" fill="#c4b5fd"/><circle cx="19" cy="14" r="4.5" fill="#fff"/></svg>
+    </span>
+    <span class="brand-name">Eclipse</span>
+  </a>
+
+  <a href="#" class="brand">
+    <span class="brand-logo size-7 bg-transparent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" class="size-7"><path d="M12 6q1.5 7.5 9 9-7.5 1.5-9 9-1.5-7.5-9-9 7.5-1.5 9-9Z" fill="#c026d3"/><path d="M21 2.5q.8 3.7 4.5 4.5-3.7.8-4.5 4.5-.8-3.7-4.5-4.5 3.7-.8 4.5-4.5Z" fill="#f0abfc"/></svg>
+    </span>
+    <span class="brand-name">Northstar</span>
+  </a>
+</div>
+```
+
+### Image logo
+
+An `<img>` shows as it is, without the box. For dark mode, flip a monochrome mark with `dark:invert`, or pair a `dark:hidden` image with a `hidden dark:block` one.
+
+```html preview preset=sm
+<a href="#" class="brand">
+  <span class="brand-logo">
+    <img src="/logo.svg" alt="" class="dark:invert" />
+  </span>
+  <span class="brand-name">Starting Point</span>
+</a>
+```
+
+### Brand with subtitle
+
+Pair `brand-logo-lg` with a `brand-text` stack to add a `brand-subtitle` under the name.
+
+```html preview preset=sm
+<a href="#" class="brand">
+  <span class="brand-logo brand-logo-lg">
+    <i class="font-serif font-bold not-italic">A</i>
+  </span>
+  <span class="brand-text">
+    <span class="brand-name">Acme Inc.</span>
+    <span class="brand-subtitle">Enterprise</span>
+  </span>
+</a>
+```
+
+### Logo only
+
+Leave the name out of view but keep it in an `sr-only` span, so the link keeps its [accessible name](https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context.html).
+
+```html preview preset=sm
+<a href="#" class="brand">
+  <span class="brand-logo">
+    <i class="font-serif font-bold not-italic">A</i>
+  </span>
+  <span class="sr-only">Acme Inc.</span>
+</a>
+```
+
+### Brand in a sidebar
+
+In a [sidebar](/components/sidebar), make the brand a `sidebar-menu-button` holding the logo and name. The button is the row, so leave the `brand` class off.
+
+```html preview
+<aside class="sidebar-static">
+  <header class="sidebar-header">
+    <a href="#" class="sidebar-menu-button">
+      <span class="brand-logo">
+        <i class="font-serif font-bold not-italic">A</i>
+      </span>
+      <span class="brand-name">Acme Inc.</span>
+    </a>
+  </header>
+  <div class="sidebar-content">
+    <div class="sidebar-group">
+      <nav class="sidebar-menu">
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button active">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            <span>Inbox</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+            <span>Documents</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</aside>
+```
+
+For a taller row with a subtitle, pair `sidebar-menu-button-lg` with `brand-logo-lg` and a `brand-text` stack.
+
+```html preview
+<aside class="sidebar-static">
+  <header class="sidebar-header">
+    <a href="#" class="sidebar-menu-button sidebar-menu-button-lg">
+      <span class="brand-logo brand-logo-lg">
+        <i class="font-serif font-bold not-italic">A</i>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Acme Inc.</span>
+        <span class="brand-subtitle">Enterprise</span>
+      </span>
+    </a>
+  </header>
+  <div class="sidebar-content">
+    <div class="sidebar-group">
+      <nav class="sidebar-menu">
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button active">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            <span>Inbox</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/></svg>
+            <span>Documents</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</aside>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=sm dir=rtl
+<div id="brand-rtl-demo" dir="rtl" class="flex flex-wrap items-center justify-center gap-8">
+  <a href="#" class="brand">
+    <span class="brand-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="17" r="2.5"/></svg>
+    </span>
+    <span class="brand-name" data-i18n="name">شركة أكمي</span>
+  </a>
+
+  <a href="#" class="brand">
+    <span class="brand-logo brand-logo-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="17" r="2.5"/></svg>
+    </span>
+    <span class="brand-text">
+      <span class="brand-name" data-i18n="name">شركة أكمي</span>
+      <span class="brand-subtitle" data-i18n="plan">المؤسسة</span>
+    </span>
+  </a>
+</div>
+
+<script>
+  const translations = {
+    ar: { dir: "rtl", name: "شركة أكمي", plan: "المؤسسة" },
+    he: { dir: "rtl", name: "אקמי בע״מ", plan: "ארגוני" },
+    en: { dir: "ltr", name: "Acme Inc.", plan: "Enterprise" },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    document.getElementById("brand-rtl-demo").dir = t.dir;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t[el.dataset.i18n];
+    });
+  });
+</script>
+```

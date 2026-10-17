@@ -383,11 +383,16 @@
         @apply hidden;
       }
 
-      /* Large buttons drop padding so their size-8 leading box fills the rail. */
+      /* Large buttons drop padding so their size-8 leading box fills the rail,
+         and a brand logo gets the padding that centers its box. */
       .sidebar-menu-button {
         @apply size-8! p-2!;
       }
-      .sidebar-menu-button-lg {
+      .sidebar-menu-button:has(> .brand-logo) {
+        @apply p-1!;
+      }
+      .sidebar-menu-button-lg,
+      .sidebar-menu-button:has(> .brand-logo-lg) {
         @apply p-0!;
       }
     }
