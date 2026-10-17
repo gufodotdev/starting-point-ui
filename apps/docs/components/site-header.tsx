@@ -10,11 +10,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full bg-background">
       <div className="container-wrapper px-6">
         <div className="flex h-(--navbar-height) items-center gap-2">
-          <Link href="/" className="flex h-10 min-w-0 items-center gap-2 text-foreground">
-            <span className="flex h-6 min-w-6 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-primary text-base leading-none text-primary-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 shrink-0"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /><circle cx="17" cy="17" r="2.5" /></svg>
+          <Link href="/" className="brand">
+            <span className="brand-logo">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /><circle cx="17" cy="17" r="2.5" /></svg>
             </span>
-            <span className="truncate text-sm font-medium">Starting Point</span>
+            <span className="brand-name">Starting Point</span>
           </Link>
           <div className="separator separator-vertical self-auto! h-4 max-md:hidden" />
           <span className="text-xs text-muted-foreground tabular-nums max-md:hidden">
