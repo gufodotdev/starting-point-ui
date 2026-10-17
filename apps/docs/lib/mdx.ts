@@ -121,13 +121,23 @@ async function relatedSentence(ids: string[]): Promise<string> {
   return sentences.join(" ");
 }
 
-function builtWithSentence(slugs: string[]): string {
-  const links = slugs.map((slug) => `[${slug.replaceAll("-", " ")}](/components/${slug})`);
-  const list =
-    links.length > 1
-      ? `${links.slice(0, -1).join(", ")}${links.length > 2 ? "," : ""} and ${links.at(-1)}`
-      : links[0];
-  return `Built with the ${list} component${slugs.length > 1 ? "s" : ""}.`;
+// The subpage lists the components an example is built from, one link each.
+function builtWithList(slugs: string[]): string {
+  return slugs
+    .map((slug) => {
+      const name = slug.replaceAll("-", " ");
+      return `- [${name[0].toUpperCase()}${name.slice(1)}](/components/${slug})`;
+    })
+    .join("\n");
+}
+
+// The plus example behind a hub section, matched on the heading slug.
+async function plusExampleFor(content: string, slug: string): Promise<PlusExample | null> {
+  for (const match of content.matchAll(/^%plus ([\w-]+\/[\w-]+)/gm)) {
+    const example = await readPlusExample(match[1]);
+    if (slugifyHeading(example.title) === slug) return example;
+  }
+  return null;
 }
 
 async function plusSection(id: string, options: string): Promise<string> {
@@ -137,7 +147,7 @@ async function plusSection(id: string, options: string): Promise<string> {
   return [
     `## ${example.title}`,
     "",
-    `${example.description} ${builtWithSentence(example.builtWith)}${related}`,
+    `${example.description}${related}`,
     "",
     fence,
     await formatInclude(example.html),
@@ -238,12 +248,14 @@ async function getExampleSectionDoc(slug: string[]): Promise<DocFile | null> {
 
   const { description, rest } = splitSectionBody(section.body);
   const kind = slug[1].replace(/s$/, "");
+  const plus = await plusExampleFor(content, section.slug);
   const siblings = sections
     .filter((s) => s.slug !== section.slug)
     .map((s) => `- [${s.title}](/${slug[0]}/${slug[1]}/${s.slug})`);
   const parts = [
     description,
     rest,
+    plus ? `## Built with\n\n${builtWithList(plus.builtWith)}` : "",
     `## More ${kind} examples`,
     [...siblings, `- [All ${kind} examples](/${slug[0]}/${slug[1]})`].join("\n"),
   ];
