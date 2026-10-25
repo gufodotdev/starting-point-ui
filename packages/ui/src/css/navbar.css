@@ -1,0 +1,332 @@
+/* Links laid out in the bar: outside a collapse, or above the breakpoint. */
+@custom-variant navbar-inline {
+  &:not(.navbar-collapse *) {
+    @slot;
+  }
+  @media (width >= theme(--breakpoint-navbar)) {
+    @slot;
+  }
+}
+
+@utility navbar {
+  @layer l1.l2 {
+    --navbar-height: 3.5rem;
+    @apply flex h-(--navbar-height) shrink-0 items-center gap-2 bg-background px-(--navbar-padding) text-foreground [--navbar-padding:--spacing(4)] md:[--navbar-padding:--spacing(6)];
+    @apply transition-[background-color,border-color] duration-200;
+
+    /* The brand keeps its size, so a menu that runs out of room scrolls instead. */
+    & .brand {
+      @apply shrink-0;
+    }
+  }
+}
+
+@utility navbar-sticky {
+  @layer l1 {
+    @apply sticky top-0 z-40;
+
+    &:not(.scrolled) {
+      @apply border-transparent;
+    }
+  }
+}
+
+@utility navbar-overlay {
+  @layer l1 {
+    @apply absolute inset-x-0 top-0 z-40 border-transparent bg-transparent;
+
+    /* Sticky rather than fixed, so it pins within its scroller and leaves the
+       scrollbar uncovered. */
+    &.navbar-sticky {
+      @apply sticky -mb-(--navbar-height);
+    }
+    &.scrolled {
+      @apply border-border bg-background;
+    }
+  }
+}
+
+/* Each alignment sets everything the others change, so a breakpoint-prefixed
+   one, like md:navbar-start after navbar-end, fully overrides the other. */
+@utility navbar-start {
+  @layer l1 {
+    @apply navbar:flex;
+
+    & .navbar-nav {
+      @apply navbar-inline:mx-0;
+    }
+    & .navbar-actions {
+      @apply navbar-inline:ms-auto;
+    }
+  }
+}
+
+@utility navbar-center {
+  @layer l1 {
+    /* Centered on the bar, not in the space the brand and actions leave. */
+    @apply navbar:grid navbar:grid-cols-[1fr_auto_1fr];
+
+    & .navbar-nav {
+      @apply navbar:col-start-2 navbar:mx-0;
+    }
+    & .navbar-actions {
+      @apply navbar:col-start-3 navbar:ms-0 navbar:justify-self-end;
+    }
+  }
+}
+
+@utility navbar-end {
+  @layer l1 {
+    @apply navbar:flex;
+
+    & .navbar-nav {
+      @apply navbar-inline:ms-auto navbar-inline:me-0;
+    }
+    & .navbar-actions {
+      @apply navbar-inline:ms-0;
+    }
+  }
+}
+
+@utility navbar-sm {
+  @layer l1 {
+    --navbar-height: 2.5rem;
+
+    & .navbar-nav > .navbar-link {
+      @apply text-[13px];
+    }
+  }
+}
+
+@utility navbar-nav {
+  @layer l1.l2 {
+    @apply flex min-w-0 items-center;
+
+    &:not(.navbar-collapse *) {
+      @apply max-navbar:scrollbar-none max-navbar:scroll-fade-x max-navbar:overflow-x-auto;
+    }
+  }
+}
+
+@utility navbar-link {
+  @layer l1.l2 {
+    @apply relative inline-flex h-9 w-max shrink-0 items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap text-foreground transition-all outline-none;
+    @apply hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1;
+    @apply aria-expanded:bg-muted/50 aria-expanded:hover:bg-muted aria-expanded:focus:bg-muted;
+    @apply dark:hover:bg-muted/50 dark:focus:bg-muted/50 dark:aria-expanded:bg-muted/30 dark:aria-expanded:hover:bg-muted/50 dark:aria-expanded:focus:bg-muted/50;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
+
+    & > svg.icon-end {
+      @apply relative top-px -ms-1 size-3 transition duration-300;
+    }
+    &[aria-expanded="true"] > .icon-end {
+      @apply rotate-180;
+    }
+
+    &.active {
+      @apply bg-muted/50 hover:bg-muted focus:bg-muted dark:bg-muted/30 dark:hover:bg-muted/50 dark:focus:bg-muted/50;
+    }
+
+    .navbar-content & {
+      @apply flex h-auto w-full flex-col items-start justify-start gap-1 rounded-sm p-2 text-start leading-5 whitespace-normal;
+    }
+  }
+}
+
+@utility navbar-link-description {
+  @layer l1.l2 {
+    @apply line-clamp-2 text-[13px] font-normal text-muted-foreground;
+  }
+}
+
+@utility navbar-label {
+  @layer l1.l2 {
+    @apply sidebar-group-label;
+  }
+}
+
+@utility navbar-nav-line {
+  @layer l1 {
+    /* The menu stretches to the bar's height so the line lands on its bottom
+       edge. */
+    @apply navbar-inline:gap-6 navbar-inline:self-stretch;
+
+    & > .navbar-link {
+      @apply navbar-inline:h-auto navbar-inline:self-stretch navbar-inline:bg-transparent navbar-inline:px-0 navbar-inline:text-muted-foreground;
+      @apply navbar-inline:hover:text-foreground navbar-inline:focus-visible:text-foreground navbar-inline:aria-expanded:text-foreground;
+    }
+    & > .navbar-link.active {
+      @apply navbar-inline:text-foreground;
+      @apply navbar-inline:after:absolute navbar-inline:after:inset-x-0 navbar-inline:after:bottom-0 navbar-inline:after:h-0.5 navbar-inline:after:bg-foreground navbar-inline:after:content-[""];
+    }
+  }
+}
+
+@utility navbar-content {
+  @layer l1.l2 {
+    /* The sizes undo the native popover defaults. */
+    @apply hidden fixed inset-auto m-0 max-h-(--sp-available-height) overflow-x-hidden overflow-y-auto rounded-lg border-0 bg-popover p-2 text-popover-foreground shadow ring-1 ring-foreground/10 outline-none;
+    @apply [&[popover].show]:block [&.show]:animate-in [&.show]:fade-in-0 [&.show]:zoom-in-90 [&.show]:duration-[350ms] [&.show]:ease-[cubic-bezier(0.22,1,0.36,1)] [&.show]:[animation-fill-mode:forwards];
+    @apply [&[popover].hide]:block [&.hide]:animate-out [&.hide]:fade-out-0 [&.hide]:zoom-out-90 [&.hide]:duration-150 [&.hide]:[animation-fill-mode:forwards];
+
+    &[popover].shown {
+      @apply block;
+    }
+
+    &:not(.navbar-collapse *) {
+      @apply max-navbar:right-0 max-navbar:w-auto max-navbar:rounded-none max-navbar:border-b max-navbar:p-3 max-navbar:shadow-lg max-navbar:ring-0;
+
+      & > :not(.navbar-link) {
+        @apply max-navbar:flex! max-navbar:w-auto! max-navbar:flex-col max-navbar:gap-y-3!;
+      }
+    }
+
+    /* The runtime measures --sp-collapse-height for the height animation. */
+    .navbar-collapse & {
+      @apply max-navbar:static max-navbar:invisible max-navbar:mx-0 max-navbar:-mt-1 max-navbar:flex max-navbar:h-0 max-navbar:shrink-0 max-navbar:max-h-none max-navbar:flex-col max-navbar:gap-1 max-navbar:overflow-hidden max-navbar:rounded-none max-navbar:bg-transparent max-navbar:p-0 max-navbar:text-foreground max-navbar:shadow-none max-navbar:ring-0 max-navbar:transition-none;
+      @apply max-navbar:[&.show]:visible max-navbar:[&.show]:animate-collapse-down;
+      @apply max-navbar:[&.hide]:visible max-navbar:[&.hide]:animate-collapse-up;
+
+      /* Clipped only while animating, so focus rings show once open. */
+      &.shown {
+        @apply max-navbar:visible max-navbar:h-auto max-navbar:overflow-visible;
+      }
+      & :not(.navbar-link, .navbar-link *, .navbar-label) {
+        @apply max-navbar:contents!;
+      }
+      & :is(.navbar-label, .navbar-link-description) {
+        @apply max-navbar:hidden;
+      }
+    }
+  }
+}
+
+@utility navbar-actions {
+  @layer l1.l2 {
+    @apply ms-auto flex items-center gap-2;
+
+    /* An avatar fills its button, unlike an icon, so it sits a little apart. */
+    & > .btn-icon:has(> .avatar):not(:first-child) {
+      @apply navbar-inline:ms-1;
+    }
+  }
+}
+
+@utility navbar-toggle {
+  @layer l1.l2 {
+    @apply relative navbar:hidden;
+    @apply before:absolute before:top-1/2 before:left-1/2 before:h-0.5 before:w-3 before:-translate-x-1/2 before:-translate-y-1 before:rounded-full before:bg-current before:transition-[translate,rotate] before:duration-200 before:content-[''];
+    @apply after:absolute after:top-1/2 after:left-1/2 after:h-0.5 after:w-3 after:-translate-x-1/2 after:translate-y-0.5 after:rounded-full after:bg-current after:transition-[translate,rotate] after:duration-200 after:content-[''];
+
+    &[aria-expanded="true"] {
+      @apply before:-translate-y-px before:-rotate-45 after:-translate-y-px after:rotate-45;
+    }
+  }
+}
+
+@utility navbar-collapse {
+  @layer l1.l2 {
+    @apply navbar:contents;
+    /* The sizes undo the native popover defaults. */
+    @apply max-navbar:hidden max-navbar:fixed max-navbar:inset-y-0 max-navbar:end-0 max-navbar:start-auto max-navbar:m-0 max-navbar:h-auto max-navbar:w-[min(18rem,100%-2.5rem)] max-navbar:flex-col max-navbar:overflow-hidden max-navbar:border-0 max-navbar:border-s max-navbar:bg-background max-navbar:p-0 max-navbar:text-foreground;
+    @apply max-navbar:[&.show]:flex max-navbar:[&.show]:animate-in max-navbar:[&.show]:fade-in-0 max-navbar:[&.show]:slide-in-from-end-10 max-navbar:[&.show]:duration-200 max-navbar:[&.show]:[animation-fill-mode:forwards];
+    @apply max-navbar:[&.hide]:flex max-navbar:[&.hide]:animate-out max-navbar:[&.hide]:fade-out-0 max-navbar:[&.hide]:slide-out-to-end-10 max-navbar:[&.hide]:duration-200 max-navbar:[&.hide]:[animation-fill-mode:forwards];
+
+    &.shown {
+      @apply max-navbar:flex;
+    }
+    &::backdrop {
+      @apply bg-black/10 supports-backdrop-filter:backdrop-blur-xs;
+    }
+    &.show::backdrop {
+      @apply animate-in fade-in-0 duration-200 [animation-fill-mode:forwards];
+    }
+    &.hide::backdrop {
+      @apply animate-out fade-out-0 duration-200 [animation-fill-mode:forwards];
+    }
+
+    & .navbar-nav {
+      @apply max-navbar:scrollbar-none max-navbar:mx-0! max-navbar:flex max-navbar:min-h-0 max-navbar:flex-1 max-navbar:flex-col max-navbar:items-stretch max-navbar:gap-1 max-navbar:overflow-y-auto max-navbar:overscroll-contain max-navbar:p-2;
+    }
+    & .navbar-nav > .separator {
+      @apply max-navbar:hidden;
+    }
+    & .navbar-link > .icon-end {
+      @apply max-navbar:ms-auto max-navbar:size-4 max-navbar:-rotate-90 rtl:max-navbar:rotate-90;
+    }
+    & .navbar-link[aria-expanded="true"] > .icon-end {
+      @apply max-navbar:rotate-0;
+    }
+  }
+}
+
+/* Sidebar utilities applied in a layered rule nest their layer. Under utilities
+   > l1 that nested layer outranks the bar's base styles, and plain utilities
+   still win. */
+@layer utilities {
+  @layer l1 {
+    @media (width < theme(--breakpoint-navbar)) {
+      .navbar-collapse-header {
+        @apply flex shrink-0 items-center gap-2 p-2;
+
+        & > .brand {
+          @apply sidebar-menu-button h-auto min-h-8;
+        }
+      }
+      .navbar-close {
+        @apply btn-sm ms-auto;
+      }
+      .navbar-collapse .navbar-nav {
+        @apply scroll-fade-y;
+      }
+      /* The drawer shows no current link. aria-current still announces it. */
+      .navbar-collapse .navbar-nav > .navbar-link {
+        @apply sidebar-menu-button h-10 justify-start text-sm font-medium whitespace-nowrap aria-expanded:bg-transparent;
+
+        &.active:not(:hover) {
+          @apply bg-transparent text-sidebar-foreground;
+        }
+      }
+      .navbar-collapse .navbar-content .navbar-link {
+        @apply sidebar-menu-sub-button h-9 translate-x-0 flex-row py-0 ps-5 text-sm font-medium leading-normal whitespace-normal text-muted-foreground hover:text-foreground rtl:translate-x-0;
+
+        &.active:not(:hover) {
+          @apply bg-transparent text-muted-foreground;
+        }
+      }
+      .navbar-collapse .navbar-actions {
+        @apply sidebar-footer ms-0 items-stretch gap-1;
+
+        & .btn {
+          @apply btn-sm;
+        }
+
+        /* Icon actions become rows in the sidebar's style, showing their hidden
+           label, and a row with an avatar is a user row. */
+        & .btn-icon {
+          @apply h-10 w-full aspect-auto justify-start gap-2 rounded-md! px-2 text-start text-sm font-medium;
+
+          & > .sr-only {
+            @apply not-sr-only!;
+          }
+          &:has(.avatar) {
+            @apply mt-2 h-12;
+          }
+          &:has(.avatar)[aria-haspopup] {
+            @apply after:ms-auto after:size-4 after:shrink-0 after:bg-muted-foreground after:content-[''];
+
+            &::after {
+              mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 15 5 5 5-5'/%3E%3Cpath d='m7 9 5-5 5 5'/%3E%3C/svg%3E");
+            }
+          }
+        }
+      }
+    }
+    @media (width >= theme(--breakpoint-navbar)) {
+      .navbar-collapse-header {
+        @apply hidden;
+      }
+    }
+  }
+}

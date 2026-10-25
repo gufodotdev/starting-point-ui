@@ -251,4 +251,17 @@ export const framePresets: Record<string, CSSProperties> = {
   sidebar: {
     minHeight: "667px",
   },
+  navbar: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "667px",
+  },
+  "navbar-scroll": {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    height: "667px",
+    minHeight: "667px",
+    overflowY: "auto",
+  },
 };

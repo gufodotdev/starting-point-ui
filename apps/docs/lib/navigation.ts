@@ -72,6 +72,7 @@ export const docsNav: NavGroup[] = [
       { title: "Marker", href: "/components/marker" },
       { title: "Message", href: "/components/message" },
       { title: "Message Scroller", href: "/components/message-scroller" },
+      { title: "Navbar", href: "/components/navbar" },
       { title: "Pagination", href: "/components/pagination" },
       { title: "Popover", href: "/components/popover" },
       { title: "Progress", href: "/components/progress" },

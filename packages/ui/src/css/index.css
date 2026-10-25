@@ -35,6 +35,7 @@
 @import "./marker.css";
 @import "./message.css";
 @import "./message-scroller.css";
+@import "./navbar.css";
 @import "./pagination.css";
 @import "./popover.css";
 @import "./progress.css";
@@ -56,7 +57,7 @@
 @import "./toast.css";
 @import "./tooltip.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark, .dark *));
 
 :root {
   --radius: 0.625rem;
@@ -133,6 +134,7 @@
      the variables always emit for the JS to read. */
   --breakpoint-sidebar: theme(--breakpoint-md);
   --breakpoint-drawer: theme(--breakpoint-sm);
+  --breakpoint-navbar: theme(--breakpoint-md);
 }
 
 @theme inline {
@@ -199,6 +201,13 @@
   /* The mobile sidebar drawer is modal; lock scroll while it's open. */
   @media (width < theme(--breakpoint-sidebar)) {
     html:has(.sidebar[data-sp-open]) {
+      @apply overflow-hidden;
+    }
+  }
+
+  /* The navbar's drawer is modal; lock scroll while it is open. */
+  @media (width < theme(--breakpoint-navbar)) {
+    html:has(.navbar-collapse[data-sp-open]) {
       @apply overflow-hidden;
     }
   }

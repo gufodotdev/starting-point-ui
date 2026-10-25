@@ -5,7 +5,7 @@
 import { define } from "./define";
 import type { SpInstance } from "./define";
 import { getInstance } from "./observer";
-import { linkAria } from "./utils";
+import { linkAria, belowBreakpoint } from "./utils";
 import { Togglable } from "./mixins/togglable";
 import { ClickToShow } from "./mixins/click-to-show";
 import { Modalable } from "./mixins/modalable";
@@ -87,13 +87,7 @@ export const Drawer = define({
       const cls = this.el.classList;
       if (cls.contains("drawer-top")) return { axis: "y", sign: -1 };
       // Side drawers render as the bottom sheet below the drawer breakpoint.
-      const bp = getComputedStyle(document.documentElement)
-        .getPropertyValue("--breakpoint-drawer")
-        .trim();
-      const mobile = bp
-        ? window.matchMedia(`(width < ${bp})`).matches
-        : window.innerWidth < 640;
-      if (mobile) return { axis: "y", sign: 1 };
+      if (belowBreakpoint("--breakpoint-drawer", 640)) return { axis: "y", sign: 1 };
       const rtl = getComputedStyle(this.el).direction === "rtl";
       if (cls.contains("drawer-left")) return { axis: "x", sign: -1 };
       if (cls.contains("drawer-right")) return { axis: "x", sign: 1 };

@@ -37,6 +37,14 @@ export function ensureId(el: HTMLElement, prefix = "sp"): string {
   return el.id;
 }
 
+// Whether the viewport is below a theme breakpoint variable, with a fallback
+// when it is unset.
+export function belowBreakpoint(variable: string, fallback = 768): boolean {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+  if (!value) return window.innerWidth < fallback;
+  return window.matchMedia(`(width < ${value})`).matches;
+}
+
 // The panel plus every open panel anchored to a trigger inside it, recursively
 // (ClickToShow wires triggers to their panels via aria-controls). Dismiss
 // mixins use this so a nested panel counts as inside its ancestors.

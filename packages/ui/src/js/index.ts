@@ -28,6 +28,9 @@ import { Avatar } from "./avatar";
 import { Breadcrumb } from "./breadcrumb";
 import { Pagination } from "./pagination";
 import { Sidebar } from "./sidebar";
+import { Navbar } from "./navbar";
+import { NavbarContent } from "./navbar-content";
+import { NavbarCollapse } from "./navbar-collapse";
 
 const components: ComponentFactory[] = [
   Carousel,
@@ -55,6 +58,9 @@ const components: ComponentFactory[] = [
   SliderRange,
   Pagination,
   Sidebar,
+  Navbar,
+  NavbarContent,
+  NavbarCollapse,
 ];
 
 const carousel = (el: HTMLElement): SpInstance | null => getInstance(el, Carousel);
@@ -82,6 +88,9 @@ const avatar = (el: HTMLElement): SpInstance | null => getInstance(el, Avatar);
 const breadcrumb = (el: HTMLElement): SpInstance | null => getInstance(el, Breadcrumb);
 const pagination = (el: HTMLElement): SpInstance | null => getInstance(el, Pagination);
 const sidebar = (el: HTMLElement): SpInstance | null => getInstance(el, Sidebar);
+const navbar = (el: HTMLElement): SpInstance | null => getInstance(el, Navbar);
+const navbarContent = (el: HTMLElement): SpInstance | null => getInstance(el, NavbarContent);
+const navbarCollapse = (el: HTMLElement): SpInstance | null => getInstance(el, NavbarCollapse);
 
 export {
   Avatar,
@@ -107,6 +116,9 @@ export {
   Slider,
   SliderRange,
   Sidebar,
+  Navbar,
+  NavbarContent,
+  NavbarCollapse,
   carousel,
   messageScroller,
   command,
@@ -131,6 +143,9 @@ export {
   breadcrumb,
   pagination,
   sidebar,
+  navbar,
+  navbarContent,
+  navbarCollapse,
   toast,
   start,
 };
@@ -163,6 +178,9 @@ declare global {
       breadcrumb: typeof breadcrumb;
       pagination: typeof pagination;
       sidebar: typeof sidebar;
+      navbar: typeof navbar;
+      navbarContent: typeof navbarContent;
+      navbarCollapse: typeof navbarCollapse;
       toast: typeof toast;
     };
   }
@@ -194,6 +212,9 @@ if (typeof document !== "undefined") {
     breadcrumb,
     pagination,
     sidebar,
+    navbar,
+    navbarContent,
+    navbarCollapse,
     toast,
   };
 

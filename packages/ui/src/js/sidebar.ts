@@ -4,7 +4,7 @@
 import { define } from "./define";
 import type { OpenOptions, SpInstance } from "./define";
 import { getInstance } from "./observer";
-import { announceCurrent, ensureId } from "./utils";
+import { announceCurrent, belowBreakpoint, ensureId } from "./utils";
 import { Tooltip } from "./tooltip";
 import { Togglable } from "./mixins/togglable";
 import { ClickToShow } from "./mixins/click-to-show";
@@ -63,11 +63,7 @@ export const Sidebar = define({
 
   methods: {
     _isMobile(this: SpInstance): boolean {
-      const value = getComputedStyle(document.documentElement)
-        .getPropertyValue("--breakpoint-sidebar")
-        .trim();
-      if (!value) return window.innerWidth < 768;
-      return window.matchMedia(`(width < ${value})`).matches;
+      return belowBreakpoint("--breakpoint-sidebar");
     },
 
     // "Expanded" is the drawer on mobile, the un-collapsed column on desktop.
