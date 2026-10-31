@@ -1,0 +1,149 @@
+/* Used by JS-created elements, never in user source. */
+@source inline("sr-only");
+
+@utility chart {
+  @layer l1.l2 {
+    @apply relative text-xs;
+  }
+}
+
+@utility chart-viewport {
+  @layer l1.l2 {
+    @apply relative;
+  }
+}
+
+@utility chart-svg {
+  @layer l1.l2 {
+    @apply absolute inset-0 size-full touch-pan-y touch-pinch-zoom overflow-visible rounded-md outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50;
+  }
+}
+
+@utility chart-line {
+  @layer l1.l2 {
+    @apply fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round];
+  }
+}
+
+@utility chart-area {
+  @layer l1.l2 {
+    @apply fill-current stroke-none [fill-opacity:0.4];
+  }
+}
+
+@utility chart-point {
+  @layer l1.l2 {
+    @apply fill-current stroke-current stroke-2;
+  }
+}
+
+@utility chart-bar {
+  @layer l1.l2 {
+    @apply fill-current;
+  }
+}
+
+@utility chart-pie {
+  @layer l1.l2 {
+    @apply fill-(--sp-chart-color) [stroke-linejoin:round];
+  }
+}
+
+@utility chart-label {
+  @layer l1.l2 {
+    @apply pointer-events-none fill-foreground tabular-nums;
+  }
+}
+
+@utility chart-axis-grid {
+  @layer l1.l2 {
+    @apply stroke-border/50;
+  }
+}
+
+@utility chart-axis-line {
+  @layer l1.l2 {
+    @apply stroke-border;
+  }
+}
+
+@utility chart-axis-mark {
+  @layer l1.l2 {
+    @apply stroke-border;
+  }
+}
+
+@utility chart-axis-tick {
+  @layer l1.l2 {
+    @apply fill-muted-foreground tabular-nums;
+  }
+}
+
+@utility chart-zero-line {
+  @layer l1.l2 {
+    @apply stroke-border;
+  }
+}
+
+@utility chart-cursor {
+  @layer l1.l2 {
+    @apply pointer-events-none fill-none stroke-border;
+    &:is(rect) {
+      @apply fill-muted stroke-none;
+    }
+  }
+}
+
+@utility chart-tooltip {
+  @layer l1.l2 {
+    @apply pointer-events-none absolute z-10 grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs whitespace-nowrap shadow-xl transition-[left,top] duration-300 ease-out;
+    &:not(.shown) {
+      @apply hidden;
+    }
+  }
+}
+
+@utility chart-tooltip-heading {
+  @layer l1.l2 {
+    @apply font-medium;
+  }
+}
+
+@utility chart-tooltip-item {
+  @layer l1.l2 {
+    @apply flex items-center gap-2 leading-none text-muted-foreground;
+    & > .chart-value:last-child {
+      @apply ms-auto ps-2 font-mono font-medium text-foreground tabular-nums;
+    }
+  }
+}
+
+@utility chart-tooltip-indicator {
+  @layer l1.l2 {
+    @apply size-2.5 shrink-0 rounded-[2px] border-(--sp-chart-color,currentColor) bg-(--sp-chart-color,currentColor);
+  }
+}
+
+@utility chart-tooltip-indicator-line {
+  @layer l1 {
+    @apply h-auto w-1 self-stretch;
+  }
+}
+
+@utility chart-tooltip-indicator-dashed {
+  @layer l1 {
+    @apply h-auto w-0 self-stretch border-[1.5px] border-dashed bg-transparent;
+  }
+}
+
+@utility chart-legend {
+  @layer l1.l2 {
+    @apply inline-flex items-center gap-1.5;
+  }
+}
+
+@utility chart-legend-indicator {
+  @layer l1.l2 {
+    @apply size-2 shrink-0 rounded-[2px] bg-current;
+  }
+}

@@ -821,7 +821,7 @@ export function LandingCards() {
   return (
     <div
       id="landing-cards"
-      className="relative flex w-full max-w-none flex-col gap-(--gap) overflow-hidden bg-muted p-12 pb-0! [--gap:--spacing(8)] min-[1900px]:p-12 min-[1900px]:[--gap:--spacing(10)]! lg:p-6 lg:[--gap:--spacing(6)] dark:bg-background"
+      className="relative flex w-full max-w-none flex-col gap-(--gap) overflow-hidden bg-muted p-12 pb-0! [--chart-1:oklch(0.87_0_0)] [--chart-2:oklch(0.556_0_0)] [--chart-3:oklch(0.439_0_0)] [--chart-4:oklch(0.371_0_0)] [--chart-5:oklch(0.269_0_0)] [--gap:--spacing(8)] min-[1900px]:p-12 min-[1900px]:[--gap:--spacing(10)]! lg:p-6 lg:[--gap:--spacing(6)] dark:bg-background"
     >
       <SkeletonRails />
       <div className="relative z-10 mx-auto grid gap-(--gap) **:[.card]:w-full **:[.card]:max-w-none min-[1400px]:grid-cols-4! min-[1900px]:grid-cols-5! md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-400 2xl:max-w-475">

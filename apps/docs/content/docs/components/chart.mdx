@@ -1,0 +1,1279 @@
+---
+title: Tailwind CSS Charts
+description: Beautiful, modern chart component for Tailwind CSS. Use it to turn data into graphs, like revenue trends, site traffic, or a sales breakdown. Easily customizable.
+---
+
+Use the chart component to turn data into graphs, like revenue over time, traffic on a dashboard, or a breakdown of sales. For data people read row by row, use a [table](/components/table).
+
+```html preview preset=base
+<div class="chart w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <div class="chart-viewport aspect-video">
+    <svg class="chart-svg" aria-label="Visitors by device">
+      <g class="chart-group">
+        <path class="chart-bar text-chart-2" data-sp-field="desktop" aria-label="Desktop"></path>
+        <path class="chart-bar text-chart-1" data-sp-field="mobile" aria-label="Mobile"></path>
+      </g>
+      <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+        <text class="chart-axis-tick"></text>
+      </g>
+      <g class="chart-axis" data-sp-axis="y">
+        <line class="chart-axis-grid"></line>
+      </g>
+      <rect class="chart-cursor" data-sp-type="area"></rect>
+    </svg>
+    <div class="chart-tooltip">
+      <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+      <div class="chart-tooltip-item">
+        <span class="chart-tooltip-indicator text-chart-2"></span>Desktop
+        <span class="chart-value" data-sp-field="desktop"></span>
+      </div>
+      <div class="chart-tooltip-item">
+        <span class="chart-tooltip-indicator text-chart-1"></span>Mobile
+        <span class="chart-value" data-sp-field="mobile"></span>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center gap-4 pt-3">
+    <div class="chart-legend"><span class="chart-legend-indicator text-chart-2"></span>Desktop</div>
+    <div class="chart-legend"><span class="chart-legend-indicator text-chart-1"></span>Mobile</div>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `chart` class to a wrapper with a height, and put the data in `data-sp-value` as a JSON array of rows. Inside it, add an `<svg>` with the `chart-svg` class and declare what to draw: a mark for each field in its `data-sp-field`, plus any axes and a cursor. Name the svg with `aria-label`, and give each mark and the axis that labels the rows their own `aria-label` to head the columns of the data table screen readers get. A chart without a name is decoration.
+
+| Class                               | Description                                                                         |
+| ----------------------------------- | ----------------------------------------------------------------------------------- |
+| `chart`                             | Add to the wrapper holding the data                                                 |
+| `chart-viewport`                    | Add to a box around the svg when other content sits beside it, like a legend        |
+| `chart-svg`                         | Add to the `<svg>` the chart draws into                                             |
+| `chart-line`                        | Add to a `<path>` to draw a line through a field                                    |
+| `chart-area`                        | Add to a `<path>` to fill the area under a field                                    |
+| `chart-point`                       | Add to a `<circle>` to draw a dot on each row                                       |
+| `chart-bar`                         | Add to a `<path>` to draw a bar for each row                                        |
+| `chart-pie`                         | Add to a `<path>` to draw a slice for each row                                      |
+| `chart-label`                       | Add to a `<text>` to write a value on each bar or point                             |
+| `chart-group`                       | Add to a `<g>` around bars to set them side by side                                 |
+| `chart-stack`                       | Add to a `<g>` around bars or areas to stack them                                   |
+| `chart-axis`                        | Add to a `<g>` with `data-sp-axis` set to `x` or `y`                                |
+| `chart-axis-tick`                   | Add to a `<text>` in an axis for its labels                                         |
+| `chart-axis-grid`                   | Add to a `<line>` in an axis for grid lines                                         |
+| `chart-axis-line`                   | Add to a `<line>` in an axis for the axis line                                      |
+| `chart-axis-mark`                   | Add to a `<line>` in an axis for tick marks                                         |
+| `chart-zero-line`                   | Add to a `<line>` to mark zero when values go below it                              |
+| `chart-cursor`                      | Add to a `<line>`, or a `<rect>` with `data-sp-type="area"`, to follow the pointer  |
+| `chart-tooltip`                     | Add to a block that shows the hovered row next to the pointer                       |
+| `chart-tooltip-heading`             | Add to the tooltip title                                                            |
+| `chart-tooltip-item`                | Add to a row of the tooltip                                                         |
+| `chart-tooltip-indicator`           | Add to the swatch in a tooltip row                                                  |
+| `chart-tooltip-indicator-line`      | Add to `chart-tooltip-indicator` for a bar instead of a square                      |
+| `chart-tooltip-indicator-dashed`    | Add to `chart-tooltip-indicator` for a dashed line                                  |
+| `chart-value`                       | Add to any element in the chart to show a field of the hovered row                  |
+| `chart-legend`                      | Add to a legend item                                                                |
+| `chart-legend-indicator`            | Add to the swatch in a legend item                                                  |
+
+```html
+<div class="chart aspect-video" data-sp-value='[{"month":"January","desktop":186},{"month":"February","desktop":305}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors">
+    <path class="chart-line" data-sp-field="desktop"></path>
+  </svg>
+</div>
+```
+
+## Examples
+
+### Line chart
+
+Add a `chart-line` for the field to plot, and color it with a `text-*` class.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"date":"2024-04-01","desktop":222,"mobile":150},{"date":"2024-04-02","desktop":97,"mobile":180},{"date":"2024-04-03","desktop":167,"mobile":120},{"date":"2024-04-04","desktop":242,"mobile":260},{"date":"2024-04-05","desktop":373,"mobile":290},{"date":"2024-04-06","desktop":301,"mobile":340},{"date":"2024-04-07","desktop":245,"mobile":180},{"date":"2024-04-08","desktop":409,"mobile":320},{"date":"2024-04-09","desktop":59,"mobile":110},{"date":"2024-04-10","desktop":261,"mobile":190},{"date":"2024-04-11","desktop":327,"mobile":350},{"date":"2024-04-12","desktop":292,"mobile":210},{"date":"2024-04-13","desktop":342,"mobile":380},{"date":"2024-04-14","desktop":137,"mobile":220},{"date":"2024-04-15","desktop":120,"mobile":170},{"date":"2024-04-16","desktop":138,"mobile":190},{"date":"2024-04-17","desktop":446,"mobile":360},{"date":"2024-04-18","desktop":364,"mobile":410},{"date":"2024-04-19","desktop":243,"mobile":180},{"date":"2024-04-20","desktop":89,"mobile":150},{"date":"2024-04-21","desktop":137,"mobile":200},{"date":"2024-04-22","desktop":224,"mobile":170},{"date":"2024-04-23","desktop":138,"mobile":230},{"date":"2024-04-24","desktop":387,"mobile":290},{"date":"2024-04-25","desktop":215,"mobile":250},{"date":"2024-04-26","desktop":75,"mobile":130},{"date":"2024-04-27","desktop":383,"mobile":420},{"date":"2024-04-28","desktop":122,"mobile":180},{"date":"2024-04-29","desktop":315,"mobile":240},{"date":"2024-04-30","desktop":454,"mobile":380}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors per day">
+    <path class="chart-line text-chart-1" data-sp-field="desktop" aria-label="Desktop"></path>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="date">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+    <line class="chart-cursor"></line>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Line chart with dots
+
+Add a `chart-point` to draw a dot on every row. Use `data-active:` to show it only on the hovered row, and `data-sp-curve="none"` for straight segments.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Visitors by device">
+    <path class="chart-line text-chart-2" data-sp-field="desktop" data-sp-curve="none" aria-label="Desktop"></path>
+    <circle class="chart-point text-chart-2" data-sp-field="desktop"></circle>
+    <path class="chart-line text-chart-1" data-sp-field="mobile" aria-label="Mobile"></path>
+    <circle class="chart-point text-chart-1 opacity-0 data-active:opacity-100" data-sp-field="mobile" r="4"></circle>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-2"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Mobile
+      <span class="chart-value" data-sp-field="mobile"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Area chart
+
+Add a `chart-area` to fill down to zero, with a `chart-line` for its edge. Fill it with a gradient from `<defs>` through a `fill-[url(#id)]` class.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"date":"2024-04-01","desktop":222,"mobile":150},{"date":"2024-04-02","desktop":97,"mobile":180},{"date":"2024-04-03","desktop":167,"mobile":120},{"date":"2024-04-04","desktop":242,"mobile":260},{"date":"2024-04-05","desktop":373,"mobile":290},{"date":"2024-04-06","desktop":301,"mobile":340},{"date":"2024-04-07","desktop":245,"mobile":180},{"date":"2024-04-08","desktop":409,"mobile":320},{"date":"2024-04-09","desktop":59,"mobile":110},{"date":"2024-04-10","desktop":261,"mobile":190},{"date":"2024-04-11","desktop":327,"mobile":350},{"date":"2024-04-12","desktop":292,"mobile":210},{"date":"2024-04-13","desktop":342,"mobile":380},{"date":"2024-04-14","desktop":137,"mobile":220},{"date":"2024-04-15","desktop":120,"mobile":170},{"date":"2024-04-16","desktop":138,"mobile":190},{"date":"2024-04-17","desktop":446,"mobile":360},{"date":"2024-04-18","desktop":364,"mobile":410},{"date":"2024-04-19","desktop":243,"mobile":180},{"date":"2024-04-20","desktop":89,"mobile":150},{"date":"2024-04-21","desktop":137,"mobile":200},{"date":"2024-04-22","desktop":224,"mobile":170},{"date":"2024-04-23","desktop":138,"mobile":230},{"date":"2024-04-24","desktop":387,"mobile":290},{"date":"2024-04-25","desktop":215,"mobile":250},{"date":"2024-04-26","desktop":75,"mobile":130},{"date":"2024-04-27","desktop":383,"mobile":420},{"date":"2024-04-28","desktop":122,"mobile":180},{"date":"2024-04-29","desktop":315,"mobile":240},{"date":"2024-04-30","desktop":454,"mobile":380}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors per day">
+    <defs>
+      <linearGradient id="chart-area-fill" class="text-chart-1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="5%" stop-color="currentColor" stop-opacity="0.8"></stop>
+        <stop offset="95%" stop-color="currentColor" stop-opacity="0.1"></stop>
+      </linearGradient>
+    </defs>
+    <path class="chart-area fill-[url(#chart-area-fill)] [fill-opacity:1]" data-sp-field="desktop" aria-label="Desktop"></path>
+    <path class="chart-line stroke-1 text-chart-1" data-sp-field="desktop"></path>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="date">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+    <line class="chart-cursor"></line>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-line text-chart-1"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Stacked area chart
+
+Wrap areas in a `chart-stack` to stack them, the first at the bottom. An area and its line share a layer when they plot the same field.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Visitors by device">
+    <g class="chart-stack">
+      <path class="chart-area text-chart-1" data-sp-field="mobile" aria-label="Mobile"></path>
+      <path class="chart-line stroke-1 text-chart-1" data-sp-field="mobile"></path>
+      <path class="chart-area text-chart-2" data-sp-field="desktop" aria-label="Desktop"></path>
+      <path class="chart-line stroke-1 text-chart-2" data-sp-field="desktop"></path>
+    </g>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+    <line class="chart-cursor"></line>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-2"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Mobile
+      <span class="chart-value" data-sp-field="mobile"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Stacked area chart at 100%
+
+Add `data-sp-offset="expand"` to the stack to fill every row to 100%.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80,"other":45},{"month":"February","desktop":305,"mobile":200,"other":100},{"month":"March","desktop":237,"mobile":120,"other":150},{"month":"April","desktop":73,"mobile":190,"other":50},{"month":"May","desktop":209,"mobile":130,"other":100},{"month":"June","desktop":214,"mobile":140,"other":160}]'>
+  <svg class="chart-svg" aria-label="Share of visitors by device">
+    <g class="chart-stack" data-sp-offset="expand">
+      <path class="chart-area text-chart-3 [fill-opacity:0.1]" data-sp-field="other" aria-label="Other"></path>
+      <path class="chart-area text-chart-1" data-sp-field="mobile" aria-label="Mobile"></path>
+      <path class="chart-area text-chart-2" data-sp-field="desktop" aria-label="Desktop"></path>
+    </g>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y" data-sp-format='{"style":"percent"}'>
+      <line class="chart-axis-grid"></line>
+      <text class="chart-axis-tick"></text>
+    </g>
+    <line class="chart-cursor"></line>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-line text-chart-2"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-line text-chart-1"></span>Mobile
+      <span class="chart-value" data-sp-field="mobile"></span>
+    </div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-line text-chart-3"></span>Other
+      <span class="chart-value" data-sp-field="other"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Bar chart
+
+Add a `chart-bar` for the field to plot, and it draws a bar for each row. Round its corners with `data-sp-radius`, and set its thickness with `data-sp-width`.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors">
+    <path class="chart-bar text-chart-1" data-sp-field="desktop" data-sp-radius="8" aria-label="Desktop"></path>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+    <rect class="chart-cursor" data-sp-type="area"></rect>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Grouped bar chart
+
+Wrap bars in a `chart-group` to set them side by side.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Visitors by device">
+    <g class="chart-group">
+      <path class="chart-bar text-chart-2" data-sp-field="desktop" aria-label="Desktop"></path>
+      <path class="chart-bar text-chart-1" data-sp-field="mobile" aria-label="Mobile"></path>
+    </g>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+    <rect class="chart-cursor" data-sp-type="area"></rect>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-dashed text-chart-2"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-dashed text-chart-1"></span>Mobile
+      <span class="chart-value" data-sp-field="mobile"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Stacked bar chart
+
+Wrap bars in a `chart-stack`. Round the outer ends with `data-sp-radius="0 4"` on the first bar and `data-sp-radius="4 0"` on the last.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Visitors by device">
+    <g class="chart-stack">
+      <path class="chart-bar text-chart-2" data-sp-field="desktop" data-sp-radius="0 4" aria-label="Desktop"></path>
+      <path class="chart-bar text-chart-1" data-sp-field="mobile" data-sp-radius="4 0" aria-label="Mobile"></path>
+    </g>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+    <rect class="chart-cursor" data-sp-type="area"></rect>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-2"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Mobile
+      <span class="chart-value" data-sp-field="mobile"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Horizontal bar chart
+
+Add `data-sp-horizontal` to the chart to run the rows down the y axis.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-horizontal data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors">
+    <path class="chart-bar text-chart-1" data-sp-field="desktop" data-sp-radius="5" aria-label="Desktop"></path>
+    <g class="chart-axis" data-sp-axis="y" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <rect class="chart-cursor" data-sp-type="area"></rect>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Bar chart with labels
+
+Add a `chart-label` to write each row's value on its bar. It sits past the end by default.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors">
+    <path class="chart-bar text-chart-1" data-sp-field="desktop" data-sp-radius="8" aria-label="Desktop"></path>
+    <text class="chart-label text-xs" data-sp-field="desktop"></text>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+  </svg>
+</div>
+```
+
+### Horizontal bar chart with labels
+
+Set `data-sp-position="inside-start"` to write inside the bar from its base, and `data-sp-label-field` to show another field, like the row's name.
+
+```html preview preset=base
+<div class="chart h-56 w-full max-w-md" data-sp-horizontal data-sp-value='[{"reason":"Too expensive","customers":14},{"reason":"Missing a feature","customers":11},{"reason":"Switched tools","customers":8},{"reason":"Stopped using it","customers":6},{"reason":"Other","customers":3}]'>
+  <svg class="chart-svg" aria-label="Cancellation reasons">
+    <path class="chart-bar text-chart-2" data-sp-field="customers" data-sp-width="68%" data-sp-radius="5" aria-label="Customers"></path>
+    <text class="chart-label fill-white text-xs font-medium" data-sp-field="customers" data-sp-label-field="reason" data-sp-position="inside-start"></text>
+    <text class="chart-label fill-muted-foreground text-xs" data-sp-field="customers"></text>
+  </svg>
+</div>
+```
+
+### Negative bar chart
+
+Add a `chart-zero-line` to mark zero when values go below it.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","visitors":186},{"month":"February","visitors":-125},{"month":"March","visitors":237},{"month":"April","visitors":-73},{"month":"May","visitors":209},{"month":"June","visitors":-94}]'>
+  <svg class="chart-svg" aria-label="Visitors compared to last year">
+    <path class="chart-bar text-chart-1" data-sp-field="visitors" aria-label="Visitors"></path>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid"></line>
+    </g>
+    <line class="chart-zero-line"></line>
+    <rect class="chart-cursor" data-sp-type="area"></rect>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Visitors
+      <span class="chart-value" data-sp-field="visitors"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Pie chart
+
+Add a `chart-pie`. Each row becomes a slice, colored from the chart tokens in order.
+
+```html preview preset=base
+<div class="chart mx-auto aspect-square w-full max-w-64" data-sp-value='[{"label":"Chrome","visitors":275},{"label":"Safari","visitors":200},{"label":"Firefox","visitors":187},{"label":"Edge","visitors":173},{"label":"Other","visitors":90}]'>
+  <svg class="chart-svg" aria-label="Visitors by browser">
+    <path class="chart-pie" data-sp-field="visitors" data-sp-label-field="label" aria-label="Visitors"></path>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator"></span>
+      <span class="chart-value" data-sp-field="label"></span>
+      <span class="chart-value" data-sp-field="visitors"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Donut chart
+
+Set `data-sp-inner-radius` to cut out the middle of the pie, in pixels or a percentage of its radius.
+
+```html preview preset=base
+<div class="chart mx-auto aspect-square w-full max-w-64" data-sp-value='[{"label":"Chrome","visitors":275},{"label":"Safari","visitors":200},{"label":"Firefox","visitors":187},{"label":"Edge","visitors":173},{"label":"Other","visitors":90}]'>
+  <svg class="chart-svg" aria-label="Visitors by browser">
+    <path class="chart-pie" data-sp-field="visitors" data-sp-label-field="label" data-sp-inner-radius="60%" aria-label="Visitors"></path>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator"></span>
+      <span class="chart-value" data-sp-field="label"></span>
+      <span class="chart-value" data-sp-field="visitors"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Donut chart with text
+
+Place content over the svg with `pointer-events-none`, so the slices stay hoverable.
+
+```html preview preset=base
+<div class="chart mx-auto aspect-square w-full max-w-64" data-sp-value='[{"label":"Chrome","visitors":275},{"label":"Safari","visitors":200},{"label":"Firefox","visitors":187},{"label":"Edge","visitors":173},{"label":"Other","visitors":90}]'>
+  <svg class="chart-svg" aria-label="Visitors by browser">
+    <path class="chart-pie" data-sp-field="visitors" data-sp-label-field="label" data-sp-inner-radius="60%" aria-label="Visitors"></path>
+  </svg>
+  <div class="pointer-events-none absolute inset-0 grid place-items-center text-center">
+    <div>
+      <div class="text-3xl font-bold">925</div>
+      <div class="text-muted-foreground">Visitors</div>
+    </div>
+  </div>
+</div>
+```
+
+### Pie chart hover styles
+
+The hovered slice gets `data-active` and the others `data-inactive`. Style them with Tailwind's data variants.
+
+```html preview preset=base
+<div class="chart mx-auto aspect-square w-full max-w-64" data-sp-value='[{"label":"Chrome","visitors":275},{"label":"Safari","visitors":200},{"label":"Firefox","visitors":187},{"label":"Edge","visitors":173},{"label":"Other","visitors":90}]'>
+  <svg class="chart-svg" aria-label="Visitors by browser">
+    <path class="chart-pie transition-opacity data-inactive:opacity-40" data-sp-field="visitors" data-sp-label-field="label" data-sp-inner-radius="50%" aria-label="Visitors"></path>
+  </svg>
+</div>
+```
+
+### Chart axes
+
+Pick the parts an axis draws: tick labels, grid lines, the axis line, and tick marks. Format the labels with `data-sp-format`.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"date":"2024-04-01","desktop":222,"mobile":150},{"date":"2024-04-02","desktop":97,"mobile":180},{"date":"2024-04-03","desktop":167,"mobile":120},{"date":"2024-04-04","desktop":242,"mobile":260},{"date":"2024-04-05","desktop":373,"mobile":290},{"date":"2024-04-06","desktop":301,"mobile":340},{"date":"2024-04-07","desktop":245,"mobile":180},{"date":"2024-04-08","desktop":409,"mobile":320},{"date":"2024-04-09","desktop":59,"mobile":110},{"date":"2024-04-10","desktop":261,"mobile":190},{"date":"2024-04-11","desktop":327,"mobile":350},{"date":"2024-04-12","desktop":292,"mobile":210},{"date":"2024-04-13","desktop":342,"mobile":380},{"date":"2024-04-14","desktop":137,"mobile":220},{"date":"2024-04-15","desktop":120,"mobile":170},{"date":"2024-04-16","desktop":138,"mobile":190},{"date":"2024-04-17","desktop":446,"mobile":360},{"date":"2024-04-18","desktop":364,"mobile":410},{"date":"2024-04-19","desktop":243,"mobile":180},{"date":"2024-04-20","desktop":89,"mobile":150},{"date":"2024-04-21","desktop":137,"mobile":200},{"date":"2024-04-22","desktop":224,"mobile":170},{"date":"2024-04-23","desktop":138,"mobile":230},{"date":"2024-04-24","desktop":387,"mobile":290},{"date":"2024-04-25","desktop":215,"mobile":250},{"date":"2024-04-26","desktop":75,"mobile":130},{"date":"2024-04-27","desktop":383,"mobile":420},{"date":"2024-04-28","desktop":122,"mobile":180},{"date":"2024-04-29","desktop":315,"mobile":240},{"date":"2024-04-30","desktop":454,"mobile":380}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors per day">
+    <path class="chart-line text-chart-1" data-sp-field="desktop" aria-label="Desktop"></path>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="date" data-sp-tick-count="4" data-sp-format='{"month":"short","day":"numeric"}'>
+      <line class="chart-axis-line"></line>
+      <line class="chart-axis-mark"></line>
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y" data-sp-tick-count="3" data-sp-format='{"notation":"compact"}'>
+      <line class="chart-axis-grid [stroke-dasharray:3_3]"></line>
+      <text class="chart-axis-tick"></text>
+    </g>
+  </svg>
+</div>
+```
+
+### Chart grid
+
+Add a `chart-axis-grid` line to the y axis for horizontal grid lines, and to the x axis for vertical ones. Style them with utilities like `[stroke-dasharray:3_3]`.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186},{"month":"February","desktop":305},{"month":"March","desktop":237},{"month":"April","desktop":73},{"month":"May","desktop":209},{"month":"June","desktop":214}]'>
+  <svg class="chart-svg" aria-label="Desktop visitors per month">
+    <path class="chart-line text-chart-1" data-sp-field="desktop" aria-label="Desktop"></path>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <line class="chart-axis-grid [stroke-dasharray:3_3]"></line>
+      <text class="chart-axis-tick"></text>
+    </g>
+    <g class="chart-axis" data-sp-axis="y">
+      <line class="chart-axis-grid [stroke-dasharray:3_3]"></line>
+      <text class="chart-axis-tick"></text>
+    </g>
+    <line class="chart-cursor"></line>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-1"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Chart with start and end labels
+
+Set `data-sp-tick-count="2"` on the x axis to label only the first and last row. The data then runs edge to edge, with the two labels aligned inward.
+
+```html preview preset=base
+<div class="chart h-40 w-full max-w-xl" data-sp-value='[{"date":"2024-04-01","users":1831},{"date":"2024-04-02","users":1880},{"date":"2024-04-03","users":1930},{"date":"2024-04-04","users":1972},{"date":"2024-04-05","users":2027},{"date":"2024-04-06","users":2025},{"date":"2024-04-07","users":2033},{"date":"2024-04-08","users":2048},{"date":"2024-04-09","users":2062},{"date":"2024-04-10","users":2028},{"date":"2024-04-11","users":2016},{"date":"2024-04-12","users":2015},{"date":"2024-04-13","users":1954},{"date":"2024-04-14","users":1934},{"date":"2024-04-15","users":1909},{"date":"2024-04-16","users":1863},{"date":"2024-04-17","users":1865},{"date":"2024-04-18","users":1825},{"date":"2024-04-19","users":1854},{"date":"2024-04-20","users":1862},{"date":"2024-04-21","users":1835},{"date":"2024-04-22","users":1889},{"date":"2024-04-23","users":1890},{"date":"2024-04-24","users":1952},{"date":"2024-04-25","users":1992},{"date":"2024-04-26","users":2029},{"date":"2024-04-27","users":2109},{"date":"2024-04-28","users":2153},{"date":"2024-04-29","users":2217},{"date":"2024-04-30","users":2219}]'>
+  <svg class="chart-svg" aria-label="Active users per day">
+    <path class="chart-area text-chart-2 [fill-opacity:0.15]" data-sp-field="users" aria-label="Active users"></path>
+    <path class="chart-line stroke-[1.5] text-chart-2" data-sp-field="users"></path>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="date" data-sp-tick-count="2">
+      <text class="chart-axis-tick"></text>
+    </g>
+    <line class="chart-cursor"></line>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator text-chart-2"></span>Active users
+      <span class="chart-value" data-sp-field="users"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Chart tooltip
+
+Add a `chart-tooltip` with a `chart-value` for each field to show. Add `chart-tooltip-indicator-line` or `chart-tooltip-indicator-dashed` to change the swatch.
+
+```html preview preset=base
+<div class="chart aspect-video w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <svg class="chart-svg" aria-label="Visitors by device">
+    <g class="chart-stack">
+      <path class="chart-bar text-chart-2" data-sp-field="desktop" data-sp-radius="0 4" aria-label="Desktop"></path>
+      <path class="chart-bar text-chart-1" data-sp-field="mobile" data-sp-radius="4 0" aria-label="Mobile"></path>
+    </g>
+    <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+      <text class="chart-axis-tick"></text>
+    </g>
+  </svg>
+  <div class="chart-tooltip">
+    <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-line text-chart-2"></span>Desktop
+      <span class="chart-value" data-sp-field="desktop"></span>
+    </div>
+    <div class="chart-tooltip-item">
+      <span class="chart-tooltip-indicator chart-tooltip-indicator-line text-chart-1"></span>Mobile
+      <span class="chart-value" data-sp-field="mobile"></span>
+    </div>
+  </div>
+</div>
+```
+
+### Chart legend
+
+Put the svg in a `chart-viewport` and lay out `chart-legend` items beside it.
+
+```html preview preset=base
+<div class="chart w-full max-w-xl" data-sp-value='[{"month":"January","desktop":186,"mobile":80},{"month":"February","desktop":305,"mobile":200},{"month":"March","desktop":237,"mobile":120},{"month":"April","desktop":73,"mobile":190},{"month":"May","desktop":209,"mobile":130},{"month":"June","desktop":214,"mobile":140}]'>
+  <div class="chart-viewport aspect-video">
+    <svg class="chart-svg" aria-label="Visitors by device">
+      <g class="chart-group">
+        <path class="chart-bar text-chart-2" data-sp-field="desktop" aria-label="Desktop"></path>
+        <path class="chart-bar text-chart-1" data-sp-field="mobile" aria-label="Mobile"></path>
+      </g>
+      <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+        <text class="chart-axis-tick"></text>
+      </g>
+    </svg>
+  </div>
+  <div class="flex justify-center gap-4 pt-3">
+    <div class="chart-legend"><span class="chart-legend-indicator text-chart-2"></span>Desktop</div>
+    <div class="chart-legend"><span class="chart-legend-indicator text-chart-1"></span>Mobile</div>
+  </div>
+</div>
+```
+
+### Chart summary
+
+A `chart-value` anywhere in the chart shows the hovered row, and the last row otherwise. Set `data-sp-fallback` to show something else.
+
+```html preview preset=base
+<div class="card w-full max-w-xl">
+  <div class="card-content">
+    <div class="chart grid gap-6" data-sp-value='[{"date":"2024-04-01","desktop":222,"mobile":150},{"date":"2024-04-02","desktop":97,"mobile":180},{"date":"2024-04-03","desktop":167,"mobile":120},{"date":"2024-04-04","desktop":242,"mobile":260},{"date":"2024-04-05","desktop":373,"mobile":290},{"date":"2024-04-06","desktop":301,"mobile":340},{"date":"2024-04-07","desktop":245,"mobile":180},{"date":"2024-04-08","desktop":409,"mobile":320},{"date":"2024-04-09","desktop":59,"mobile":110},{"date":"2024-04-10","desktop":261,"mobile":190},{"date":"2024-04-11","desktop":327,"mobile":350},{"date":"2024-04-12","desktop":292,"mobile":210},{"date":"2024-04-13","desktop":342,"mobile":380},{"date":"2024-04-14","desktop":137,"mobile":220},{"date":"2024-04-15","desktop":120,"mobile":170},{"date":"2024-04-16","desktop":138,"mobile":190},{"date":"2024-04-17","desktop":446,"mobile":360},{"date":"2024-04-18","desktop":364,"mobile":410},{"date":"2024-04-19","desktop":243,"mobile":180},{"date":"2024-04-20","desktop":89,"mobile":150},{"date":"2024-04-21","desktop":137,"mobile":200},{"date":"2024-04-22","desktop":224,"mobile":170},{"date":"2024-04-23","desktop":138,"mobile":230},{"date":"2024-04-24","desktop":387,"mobile":290},{"date":"2024-04-25","desktop":215,"mobile":250},{"date":"2024-04-26","desktop":75,"mobile":130},{"date":"2024-04-27","desktop":383,"mobile":420},{"date":"2024-04-28","desktop":122,"mobile":180},{"date":"2024-04-29","desktop":315,"mobile":240},{"date":"2024-04-30","desktop":454,"mobile":380}]'>
+      <div class="grid gap-1">
+        <div class="text-sm text-muted-foreground">Desktop visitors</div>
+        <div class="chart-value text-3xl font-bold tabular-nums" data-sp-field="desktop"></div>
+        <div class="chart-value text-sm text-muted-foreground" data-sp-field="date" data-sp-format='{"dateStyle":"medium"}'></div>
+      </div>
+      <div class="chart-viewport aspect-[3/1]">
+        <svg class="chart-svg" aria-label="Desktop visitors per day">
+          <path class="chart-line text-chart-1" data-sp-field="desktop" aria-label="Desktop"></path>
+          <line class="chart-cursor"></line>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Stat card with a chart
+
+Make the card's number a `chart-value` to show the hovered day, and add `data-sp-fallback` to show a total until then. A `data-sp-gutter` of `4 0 0` runs an area down to the card's edge.
+
+```html preview preset=base
+<div class="grid w-full max-w-3xl gap-4 sm:grid-cols-3">
+  <div class="card pb-0">
+    <div class="chart grid gap-4" data-sp-value='[{"date":"2024-04-01","revenue":3200},{"date":"2024-04-02","revenue":3837},{"date":"2024-04-03","revenue":3990},{"date":"2024-04-04","revenue":3599},{"date":"2024-04-05","revenue":3977},{"date":"2024-04-06","revenue":3510},{"date":"2024-04-07","revenue":3682},{"date":"2024-04-08","revenue":3870},{"date":"2024-04-09","revenue":3917},{"date":"2024-04-10","revenue":4211},{"date":"2024-04-11","revenue":4476},{"date":"2024-04-12","revenue":4232},{"date":"2024-04-13","revenue":3879},{"date":"2024-04-14","revenue":3941},{"date":"2024-04-15","revenue":4071},{"date":"2024-04-16","revenue":4459},{"date":"2024-04-17","revenue":4240},{"date":"2024-04-18","revenue":4000},{"date":"2024-04-19","revenue":4835},{"date":"2024-04-20","revenue":4356},{"date":"2024-04-21","revenue":4179},{"date":"2024-04-22","revenue":4535},{"date":"2024-04-23","revenue":5040},{"date":"2024-04-24","revenue":4822},{"date":"2024-04-25","revenue":4488},{"date":"2024-04-26","revenue":4896},{"date":"2024-04-27","revenue":4784},{"date":"2024-04-28","revenue":4658},{"date":"2024-04-29","revenue":4532},{"date":"2024-04-30","revenue":4960}]'>
+      <div class="card-header">
+        <p class="card-description">Revenue</p>
+        <h3 class="card-title chart-value text-2xl tabular-nums" data-sp-field="revenue" data-sp-format='{"style":"currency","currency":"USD","maximumFractionDigits":0}'></h3>
+        <p class="chart-value text-xs text-muted-foreground" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></p>
+      </div>
+      <div class="chart-viewport h-16">
+        <svg class="chart-svg" data-sp-gutter="4 0 0" aria-label="Revenue per day">
+          <path class="chart-area text-chart-2 [fill-opacity:0.15]" data-sp-field="revenue" aria-label="Revenue"></path>
+          <path class="chart-line stroke-[1.5] text-chart-2" data-sp-field="revenue"></path>
+          <line class="chart-cursor"></line>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="card pb-0">
+    <div class="chart grid gap-4" data-sp-value='[{"date":"2024-04-01","signups":57},{"date":"2024-04-02","signups":66},{"date":"2024-04-03","signups":52},{"date":"2024-04-04","signups":51},{"date":"2024-04-05","signups":65},{"date":"2024-04-06","signups":65},{"date":"2024-04-07","signups":52},{"date":"2024-04-08","signups":72},{"date":"2024-04-09","signups":78},{"date":"2024-04-10","signups":76},{"date":"2024-04-11","signups":59},{"date":"2024-04-12","signups":81},{"date":"2024-04-13","signups":73},{"date":"2024-04-14","signups":79},{"date":"2024-04-15","signups":65},{"date":"2024-04-16","signups":69},{"date":"2024-04-17","signups":64},{"date":"2024-04-18","signups":73},{"date":"2024-04-19","signups":73},{"date":"2024-04-20","signups":68},{"date":"2024-04-21","signups":89},{"date":"2024-04-22","signups":77},{"date":"2024-04-23","signups":72},{"date":"2024-04-24","signups":79},{"date":"2024-04-25","signups":93},{"date":"2024-04-26","signups":95},{"date":"2024-04-27","signups":84},{"date":"2024-04-28","signups":87},{"date":"2024-04-29","signups":90},{"date":"2024-04-30","signups":84}]'>
+      <div class="card-header">
+        <p class="card-description">Signups</p>
+        <h3 class="card-title chart-value text-2xl tabular-nums" data-sp-field="signups"></h3>
+        <p class="chart-value text-xs text-muted-foreground" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></p>
+      </div>
+      <div class="chart-viewport h-16">
+        <svg class="chart-svg" aria-label="Signups per day">
+          <path class="chart-bar text-chart-2 transition-opacity data-inactive:opacity-40" data-sp-field="signups" data-sp-radius="2" data-sp-width="60%" aria-label="Signups"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="card pb-0">
+    <div class="chart grid gap-4" data-sp-value='[{"date":"2024-04-01","users":1831},{"date":"2024-04-02","users":1880},{"date":"2024-04-03","users":1930},{"date":"2024-04-04","users":1972},{"date":"2024-04-05","users":2027},{"date":"2024-04-06","users":2025},{"date":"2024-04-07","users":2033},{"date":"2024-04-08","users":2048},{"date":"2024-04-09","users":2062},{"date":"2024-04-10","users":2028},{"date":"2024-04-11","users":2016},{"date":"2024-04-12","users":2015},{"date":"2024-04-13","users":1954},{"date":"2024-04-14","users":1934},{"date":"2024-04-15","users":1909},{"date":"2024-04-16","users":1863},{"date":"2024-04-17","users":1865},{"date":"2024-04-18","users":1825},{"date":"2024-04-19","users":1854},{"date":"2024-04-20","users":1862},{"date":"2024-04-21","users":1835},{"date":"2024-04-22","users":1889},{"date":"2024-04-23","users":1890},{"date":"2024-04-24","users":1952},{"date":"2024-04-25","users":1992},{"date":"2024-04-26","users":2029},{"date":"2024-04-27","users":2109},{"date":"2024-04-28","users":2153},{"date":"2024-04-29","users":2217},{"date":"2024-04-30","users":2219}]'>
+      <div class="card-header">
+        <p class="card-description">Active users</p>
+        <h3 class="card-title chart-value text-2xl tabular-nums" data-sp-field="users"></h3>
+        <p class="chart-value text-xs text-muted-foreground" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></p>
+      </div>
+      <div class="chart-viewport h-16">
+        <svg class="chart-svg" data-sp-gutter="4 0" aria-label="Active users per day">
+          <path class="chart-line stroke-[1.5] text-chart-3" data-sp-field="users" aria-label="Active users"></path>
+          <circle class="chart-point text-chart-3 fill-background stroke-2 opacity-0 data-active:opacity-100" data-sp-field="users" r="3"></circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="chart grid gap-6" data-sp-value='[{"date":"2024-04-17","orders":82},{"date":"2024-04-18","orders":86},{"date":"2024-04-19","orders":91},{"date":"2024-04-20","orders":89},{"date":"2024-04-21","orders":87},{"date":"2024-04-22","orders":90},{"date":"2024-04-23","orders":88},{"date":"2024-04-24","orders":92},{"date":"2024-04-25","orders":97},{"date":"2024-04-26","orders":101},{"date":"2024-04-27","orders":98},{"date":"2024-04-28","orders":95},{"date":"2024-04-29","orders":102},{"date":"2024-04-30","orders":106}]'>
+      <div class="card-header">
+        <h3 class="card-title">Orders</h3>
+        <p class="card-description chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}' data-sp-fallback="Last 14 days">Last 14 days</p>
+      </div>
+      <div class="card-content flex items-end justify-between gap-4">
+        <div class="grid gap-1">
+          <p class="chart-value text-2xl font-medium tabular-nums" data-sp-field="orders" data-sp-fallback="1,304">1,304</p>
+          <p class="flex items-center gap-1 text-xs text-muted-foreground">up 8.4% <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3 text-chart-2"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg></p>
+        </div>
+        <div class="chart-viewport h-14 max-w-32 flex-1">
+          <svg class="chart-svg" data-sp-gutter="4 0 0" aria-label="Orders per day">
+            <defs>
+              <linearGradient id="orders-fill" class="text-chart-2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="currentColor" stop-opacity="0.3"></stop>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <path class="chart-area fill-[url(#orders-fill)] [fill-opacity:1]" data-sp-field="orders" aria-label="Orders"></path>
+            <path class="chart-line stroke-[1.5] text-chart-2" data-sp-field="orders"></path>
+            <circle class="chart-point fill-background stroke-[1.5] opacity-0 data-active:opacity-100 text-chart-2" data-sp-field="orders" r="3"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="chart grid gap-6" data-sp-value='[{"date":"2024-03-18","rate":0.021},{"date":"2024-03-25","rate":0.028},{"date":"2024-04-01","rate":0.031},{"date":"2024-04-08","rate":0.024},{"date":"2024-04-15","rate":0.016},{"date":"2024-04-22","rate":0.029},{"date":"2024-04-29","rate":0.036}]'>
+      <div class="card-header">
+        <h3 class="card-title">Conversion rate</h3>
+        <p class="card-description chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}' data-sp-prefix="Week of " data-sp-fallback="Last 7 weeks">Last 7 weeks</p>
+      </div>
+      <div class="card-content flex items-end justify-between gap-4">
+        <div class="grid gap-1">
+          <p class="chart-value text-2xl font-medium tabular-nums" data-sp-field="rate" data-sp-format='{"style":"percent","maximumFractionDigits":1}' data-sp-fallback="3.6%">3.6%</p>
+          <p class="flex items-center gap-1 text-xs text-muted-foreground">up 2.1% <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3 text-emerald-500"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg></p>
+        </div>
+        <div class="chart-viewport h-14 max-w-32 flex-1">
+          <svg class="chart-svg" aria-label="Conversion rate per week">
+            <path class="chart-bar text-emerald-500 transition-opacity odd:opacity-40 data-active:opacity-100 data-inactive:opacity-20" data-sp-field="rate" data-sp-radius="4" data-sp-width="60%" aria-label="Conversion rate"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="chart grid gap-6" data-sp-value='[{"date":"2024-04-17","value":56.4},{"date":"2024-04-18","value":55.1},{"date":"2024-04-19","value":54.7},{"date":"2024-04-20","value":55.6},{"date":"2024-04-21","value":56.1},{"date":"2024-04-22","value":54.9},{"date":"2024-04-23","value":54.2},{"date":"2024-04-24","value":53.5},{"date":"2024-04-25","value":53.8},{"date":"2024-04-26","value":54.3},{"date":"2024-04-27","value":54.1},{"date":"2024-04-28","value":54.6},{"date":"2024-04-29","value":53.2},{"date":"2024-04-30","value":52.1}]'>
+      <div class="card-header">
+        <h3 class="card-title">Avg. order value</h3>
+        <p class="card-description chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}' data-sp-fallback="Last 14 days">Last 14 days</p>
+      </div>
+      <div class="card-content flex items-end justify-between gap-4">
+        <div class="grid gap-1">
+          <p class="chart-value text-2xl font-medium tabular-nums" data-sp-field="value" data-sp-format='{"style":"currency","currency":"USD"}' data-sp-fallback="$54.47">$54.47</p>
+          <p class="flex items-center gap-1 text-xs text-muted-foreground">down 4.1% <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3 text-red-500"><path d="m7 7 10 10" /><path d="M17 7v10H7" /></svg></p>
+        </div>
+        <div class="chart-viewport h-14 max-w-32 flex-1">
+          <svg class="chart-svg" data-sp-gutter="4 0 0" aria-label="Average order value per day">
+            <defs>
+              <linearGradient id="order-value-fill" class="text-red-500" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="currentColor" stop-opacity="0.3"></stop>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <path class="chart-area fill-[url(#order-value-fill)] [fill-opacity:1]" data-sp-field="value" aria-label="Average order value"></path>
+            <path class="chart-line stroke-[1.5] text-red-500" data-sp-field="value"></path>
+            <circle class="chart-point fill-background stroke-[1.5] opacity-0 data-active:opacity-100 text-red-500" data-sp-field="value" r="3"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Bar chart card
+
+Put the chart in a `card-content`, with the totals and trend in the `card-footer`.
+
+```html preview preset=base
+<div class="card w-full max-w-md">
+  <div class="card-header">
+    <h3 class="card-title">Visitors</h3>
+    <p class="card-description">January - June 2024</p>
+  </div>
+  <div class="card-content">
+    <div class="chart aspect-video" data-sp-value='[{"month":"2024-01-01","desktop":186,"mobile":80},{"month":"2024-02-01","desktop":305,"mobile":200},{"month":"2024-03-01","desktop":237,"mobile":120},{"month":"2024-04-01","desktop":73,"mobile":190},{"month":"2024-05-01","desktop":209,"mobile":130},{"month":"2024-06-01","desktop":214,"mobile":140}]'>
+      <svg class="chart-svg" aria-label="Desktop visitors per month">
+        <path class="chart-bar text-chart-2" data-sp-field="desktop" data-sp-radius="8" aria-label="Desktop"></path>
+        <g class="chart-axis" data-sp-axis="x" data-sp-field="month" data-sp-format='{"month":"short"}'>
+          <text class="chart-axis-tick"></text>
+        </g>
+        <g class="chart-axis" data-sp-axis="y">
+          <line class="chart-axis-grid"></line>
+        </g>
+        <rect class="chart-cursor" data-sp-type="area"></rect>
+      </svg>
+      <div class="chart-tooltip">
+        <div class="chart-tooltip-heading chart-value" data-sp-field="month" data-sp-format='{"month":"long"}'></div>
+        <div class="chart-tooltip-item">
+          <span class="chart-tooltip-indicator text-chart-2"></span>Desktop
+          <span class="chart-value" data-sp-field="desktop"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer flex-col items-start gap-2">
+    <div class="flex items-center gap-2 leading-none font-medium">Trending up by 5.2% this month <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></svg></div>
+    <div class="leading-none text-muted-foreground">Showing total visitors for the last 6 months</div>
+  </div>
+</div>
+```
+
+### Area chart card with a legend
+
+Pin a legend to the top corner with `card-action`.
+
+```html preview preset=base
+<div class="card w-full max-w-md">
+  <div class="card-header">
+    <h3 class="card-title">Visitors</h3>
+    <p class="card-description">January - June 2024</p>
+    <div class="card-action flex gap-4 text-xs text-muted-foreground">
+      <span class="chart-legend"><span class="chart-legend-indicator text-chart-2"></span>Desktop</span>
+      <span class="chart-legend"><span class="chart-legend-indicator text-chart-4"></span>Mobile</span>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="chart aspect-video" data-sp-value='[{"month":"2024-01-01","desktop":186,"mobile":80},{"month":"2024-02-01","desktop":305,"mobile":200},{"month":"2024-03-01","desktop":237,"mobile":120},{"month":"2024-04-01","desktop":73,"mobile":190},{"month":"2024-05-01","desktop":209,"mobile":130},{"month":"2024-06-01","desktop":214,"mobile":140}]'>
+      <svg class="chart-svg" aria-label="Visitors per month by device">
+        <g class="chart-stack">
+          <path class="chart-area text-chart-4 [fill-opacity:0.3]" data-sp-field="mobile" aria-label="Mobile"></path>
+          <path class="chart-line stroke-[1.5] text-chart-4" data-sp-field="mobile"></path>
+          <path class="chart-area text-chart-2 [fill-opacity:0.3]" data-sp-field="desktop" aria-label="Desktop"></path>
+          <path class="chart-line stroke-[1.5] text-chart-2" data-sp-field="desktop"></path>
+        </g>
+        <g class="chart-axis" data-sp-axis="x" data-sp-field="month" data-sp-format='{"month":"short"}'>
+          <text class="chart-axis-tick"></text>
+        </g>
+        <g class="chart-axis" data-sp-axis="y">
+          <line class="chart-axis-grid"></line>
+        </g>
+        <line class="chart-cursor"></line>
+      </svg>
+      <div class="chart-tooltip">
+        <div class="chart-tooltip-heading chart-value" data-sp-field="month" data-sp-format='{"month":"long"}'></div>
+        <div class="chart-tooltip-item">
+          <span class="chart-tooltip-indicator text-chart-2"></span>Desktop
+          <span class="chart-value" data-sp-field="desktop"></span>
+        </div>
+        <div class="chart-tooltip-item">
+          <span class="chart-tooltip-indicator text-chart-4"></span>Mobile
+          <span class="chart-value" data-sp-field="mobile"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer flex-col items-start gap-2">
+    <div class="flex items-center gap-2 leading-none font-medium">Trending up by 5.2% this month <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></svg></div>
+    <div class="leading-none text-muted-foreground">Showing total visitors for the last 6 months</div>
+  </div>
+</div>
+```
+
+### Donut chart card
+
+Center the chart in the `card-content` with `mx-auto` and a fixed width. The `chart-value`s in the hole follow the hovered slice.
+
+```html preview preset=base
+<div class="card w-full max-w-sm">
+  <div class="card-header text-center">
+    <h3 class="card-title">Visitors by browser</h3>
+    <p class="card-description">January - June 2024</p>
+  </div>
+  <div class="card-content">
+    <div class="chart mx-auto aspect-square w-full max-w-56" data-sp-value='[{"label":"Chrome","visitors":275},{"label":"Safari","visitors":200},{"label":"Firefox","visitors":187},{"label":"Edge","visitors":173},{"label":"Other","visitors":90}]'>
+      <svg class="chart-svg" aria-label="Visitors by browser">
+        <path class="chart-pie transition-opacity data-inactive:opacity-40" data-sp-field="visitors" data-sp-label-field="label" data-sp-inner-radius="60%" aria-label="Visitors"></path>
+      </svg>
+      <div class="pointer-events-none absolute inset-0 grid place-items-center text-center">
+        <div>
+          <div class="chart-value text-3xl font-bold tabular-nums" data-sp-field="visitors" data-sp-fallback="925">925</div>
+          <div class="chart-value text-muted-foreground" data-sp-field="label" data-sp-fallback="Visitors">Visitors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer flex-col gap-2">
+    <div class="flex items-center gap-2 leading-none font-medium">Trending up by 5.2% this month <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></svg></div>
+    <div class="leading-none text-muted-foreground">Showing total visitors for the last 6 months</div>
+  </div>
+</div>
+```
+
+### Chart card with tabs
+
+Put a chart in each [tab](/components/tabs) panel to switch between views. A chart in a hidden panel draws when it's shown.
+
+```html preview preset=base
+<div class="card w-full max-w-2xl">
+  <div class="card-header">
+    <h3 class="card-title">Visitors</h3>
+    <p class="card-description">June 2024</p>
+    <div class="card-action tab-list">
+      <button class="tab active" data-sp-toggle="#visitors-bars" aria-label="Bar chart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg></button>
+      <button class="tab" data-sp-toggle="#visitors-line" aria-label="Line chart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="m19 9-5 5-4-4-3 3" /></svg></button>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="tab-content active" id="visitors-bars">
+      <div class="chart aspect-[5/2]" data-sp-value='[{"date":"2024-06-01","desktop":178},{"date":"2024-06-02","desktop":470},{"date":"2024-06-03","desktop":103},{"date":"2024-06-04","desktop":439},{"date":"2024-06-05","desktop":88},{"date":"2024-06-06","desktop":294},{"date":"2024-06-07","desktop":323},{"date":"2024-06-08","desktop":385},{"date":"2024-06-09","desktop":438},{"date":"2024-06-10","desktop":155},{"date":"2024-06-11","desktop":92},{"date":"2024-06-12","desktop":492},{"date":"2024-06-13","desktop":81},{"date":"2024-06-14","desktop":426},{"date":"2024-06-15","desktop":307},{"date":"2024-06-16","desktop":371},{"date":"2024-06-17","desktop":475},{"date":"2024-06-18","desktop":107},{"date":"2024-06-19","desktop":341},{"date":"2024-06-20","desktop":408},{"date":"2024-06-21","desktop":169},{"date":"2024-06-22","desktop":317},{"date":"2024-06-23","desktop":480},{"date":"2024-06-24","desktop":132},{"date":"2024-06-25","desktop":141},{"date":"2024-06-26","desktop":434},{"date":"2024-06-27","desktop":448},{"date":"2024-06-28","desktop":149},{"date":"2024-06-29","desktop":103},{"date":"2024-06-30","desktop":446}]'>
+        <svg class="chart-svg" aria-label="Visitors per day">
+          <path class="chart-bar text-chart-2" data-sp-field="desktop" data-sp-radius="2" aria-label="Visitors"></path>
+          <g class="chart-axis" data-sp-axis="x" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'>
+            <text class="chart-axis-tick"></text>
+          </g>
+          <g class="chart-axis" data-sp-axis="y">
+            <line class="chart-axis-grid"></line>
+            <text class="chart-axis-tick"></text>
+          </g>
+          <rect class="chart-cursor" data-sp-type="area"></rect>
+        </svg>
+        <div class="chart-tooltip">
+          <div class="chart-tooltip-heading chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></div>
+          <div class="chart-tooltip-item">
+            <span class="chart-tooltip-indicator text-chart-2"></span>Visitors
+            <span class="chart-value" data-sp-field="desktop"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="visitors-line">
+      <div class="chart aspect-[5/2]" data-sp-value='[{"date":"2024-06-01","desktop":178},{"date":"2024-06-02","desktop":470},{"date":"2024-06-03","desktop":103},{"date":"2024-06-04","desktop":439},{"date":"2024-06-05","desktop":88},{"date":"2024-06-06","desktop":294},{"date":"2024-06-07","desktop":323},{"date":"2024-06-08","desktop":385},{"date":"2024-06-09","desktop":438},{"date":"2024-06-10","desktop":155},{"date":"2024-06-11","desktop":92},{"date":"2024-06-12","desktop":492},{"date":"2024-06-13","desktop":81},{"date":"2024-06-14","desktop":426},{"date":"2024-06-15","desktop":307},{"date":"2024-06-16","desktop":371},{"date":"2024-06-17","desktop":475},{"date":"2024-06-18","desktop":107},{"date":"2024-06-19","desktop":341},{"date":"2024-06-20","desktop":408},{"date":"2024-06-21","desktop":169},{"date":"2024-06-22","desktop":317},{"date":"2024-06-23","desktop":480},{"date":"2024-06-24","desktop":132},{"date":"2024-06-25","desktop":141},{"date":"2024-06-26","desktop":434},{"date":"2024-06-27","desktop":448},{"date":"2024-06-28","desktop":149},{"date":"2024-06-29","desktop":103},{"date":"2024-06-30","desktop":446}]'>
+        <svg class="chart-svg" aria-label="Visitors per day">
+          <path class="chart-line text-chart-2" data-sp-field="desktop" aria-label="Visitors"></path>
+          <g class="chart-axis" data-sp-axis="x" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'>
+            <text class="chart-axis-tick"></text>
+          </g>
+          <g class="chart-axis" data-sp-axis="y">
+            <line class="chart-axis-grid"></line>
+            <text class="chart-axis-tick"></text>
+          </g>
+          <line class="chart-cursor"></line>
+        </svg>
+        <div class="chart-tooltip">
+          <div class="chart-tooltip-heading chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></div>
+          <div class="chart-tooltip-item">
+            <span class="chart-tooltip-indicator text-chart-2"></span>Visitors
+            <span class="chart-value" data-sp-field="desktop"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Chart with a range picker
+
+Change `data-sp-value` and the chart draws the new rows. Here a script slices the data when the range changes, where a server could render the new value instead.
+
+```html preview preset=base
+<div class="card w-full max-w-2xl" id="visitors-range">
+  <div class="card-header">
+    <h3 class="card-title">Total visitors</h3>
+    <p class="card-description">Desktop and mobile</p>
+    <div class="card-action btn-group" role="radiogroup" aria-label="Range">
+      <label class="btn btn-outline btn-sm has-checked:bg-muted has-focus-visible:border-ring has-focus-visible:ring-3 has-focus-visible:ring-ring/50">
+        <input type="radio" class="sr-only" name="visitors-range" value="91" checked />Last 3 months
+      </label>
+      <label class="btn btn-outline btn-sm has-checked:bg-muted has-focus-visible:border-ring has-focus-visible:ring-3 has-focus-visible:ring-ring/50">
+        <input type="radio" class="sr-only" name="visitors-range" value="30" />Last 30 days
+      </label>
+      <label class="btn btn-outline btn-sm has-checked:bg-muted has-focus-visible:border-ring has-focus-visible:ring-3 has-focus-visible:ring-ring/50">
+        <input type="radio" class="sr-only" name="visitors-range" value="7" />Last 7 days
+      </label>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="chart aspect-[5/2]" data-sp-value='[{"date":"2024-04-01","desktop":222,"mobile":150},{"date":"2024-04-02","desktop":97,"mobile":180},{"date":"2024-04-03","desktop":167,"mobile":120},{"date":"2024-04-04","desktop":242,"mobile":260},{"date":"2024-04-05","desktop":373,"mobile":290},{"date":"2024-04-06","desktop":301,"mobile":340},{"date":"2024-04-07","desktop":245,"mobile":180},{"date":"2024-04-08","desktop":409,"mobile":320},{"date":"2024-04-09","desktop":59,"mobile":110},{"date":"2024-04-10","desktop":261,"mobile":190},{"date":"2024-04-11","desktop":327,"mobile":350},{"date":"2024-04-12","desktop":292,"mobile":210},{"date":"2024-04-13","desktop":342,"mobile":380},{"date":"2024-04-14","desktop":137,"mobile":220},{"date":"2024-04-15","desktop":120,"mobile":170},{"date":"2024-04-16","desktop":138,"mobile":190},{"date":"2024-04-17","desktop":446,"mobile":360},{"date":"2024-04-18","desktop":364,"mobile":410},{"date":"2024-04-19","desktop":243,"mobile":180},{"date":"2024-04-20","desktop":89,"mobile":150},{"date":"2024-04-21","desktop":137,"mobile":200},{"date":"2024-04-22","desktop":224,"mobile":170},{"date":"2024-04-23","desktop":138,"mobile":230},{"date":"2024-04-24","desktop":387,"mobile":290},{"date":"2024-04-25","desktop":215,"mobile":250},{"date":"2024-04-26","desktop":75,"mobile":130},{"date":"2024-04-27","desktop":383,"mobile":420},{"date":"2024-04-28","desktop":122,"mobile":180},{"date":"2024-04-29","desktop":315,"mobile":240},{"date":"2024-04-30","desktop":454,"mobile":380},{"date":"2024-05-01","desktop":165,"mobile":220},{"date":"2024-05-02","desktop":293,"mobile":310},{"date":"2024-05-03","desktop":247,"mobile":190},{"date":"2024-05-04","desktop":385,"mobile":420},{"date":"2024-05-05","desktop":481,"mobile":390},{"date":"2024-05-06","desktop":498,"mobile":520},{"date":"2024-05-07","desktop":388,"mobile":300},{"date":"2024-05-08","desktop":149,"mobile":210},{"date":"2024-05-09","desktop":227,"mobile":180},{"date":"2024-05-10","desktop":293,"mobile":330},{"date":"2024-05-11","desktop":335,"mobile":270},{"date":"2024-05-12","desktop":197,"mobile":240},{"date":"2024-05-13","desktop":197,"mobile":160},{"date":"2024-05-14","desktop":448,"mobile":490},{"date":"2024-05-15","desktop":473,"mobile":380},{"date":"2024-05-16","desktop":338,"mobile":400},{"date":"2024-05-17","desktop":499,"mobile":420},{"date":"2024-05-18","desktop":315,"mobile":350},{"date":"2024-05-19","desktop":235,"mobile":180},{"date":"2024-05-20","desktop":177,"mobile":230},{"date":"2024-05-21","desktop":82,"mobile":140},{"date":"2024-05-22","desktop":81,"mobile":120},{"date":"2024-05-23","desktop":252,"mobile":290},{"date":"2024-05-24","desktop":294,"mobile":220},{"date":"2024-05-25","desktop":201,"mobile":250},{"date":"2024-05-26","desktop":213,"mobile":170},{"date":"2024-05-27","desktop":420,"mobile":460},{"date":"2024-05-28","desktop":233,"mobile":190},{"date":"2024-05-29","desktop":78,"mobile":130},{"date":"2024-05-30","desktop":340,"mobile":280},{"date":"2024-05-31","desktop":178,"mobile":230},{"date":"2024-06-01","desktop":178,"mobile":200},{"date":"2024-06-02","desktop":470,"mobile":410},{"date":"2024-06-03","desktop":103,"mobile":160},{"date":"2024-06-04","desktop":439,"mobile":380},{"date":"2024-06-05","desktop":88,"mobile":140},{"date":"2024-06-06","desktop":294,"mobile":250},{"date":"2024-06-07","desktop":323,"mobile":370},{"date":"2024-06-08","desktop":385,"mobile":320},{"date":"2024-06-09","desktop":438,"mobile":480},{"date":"2024-06-10","desktop":155,"mobile":200},{"date":"2024-06-11","desktop":92,"mobile":150},{"date":"2024-06-12","desktop":492,"mobile":420},{"date":"2024-06-13","desktop":81,"mobile":130},{"date":"2024-06-14","desktop":426,"mobile":380},{"date":"2024-06-15","desktop":307,"mobile":350},{"date":"2024-06-16","desktop":371,"mobile":310},{"date":"2024-06-17","desktop":475,"mobile":520},{"date":"2024-06-18","desktop":107,"mobile":170},{"date":"2024-06-19","desktop":341,"mobile":290},{"date":"2024-06-20","desktop":408,"mobile":450},{"date":"2024-06-21","desktop":169,"mobile":210},{"date":"2024-06-22","desktop":317,"mobile":270},{"date":"2024-06-23","desktop":480,"mobile":530},{"date":"2024-06-24","desktop":132,"mobile":180},{"date":"2024-06-25","desktop":141,"mobile":190},{"date":"2024-06-26","desktop":434,"mobile":380},{"date":"2024-06-27","desktop":448,"mobile":490},{"date":"2024-06-28","desktop":149,"mobile":200},{"date":"2024-06-29","desktop":103,"mobile":160},{"date":"2024-06-30","desktop":446,"mobile":400}]'>
+      <svg class="chart-svg" aria-label="Visitors per day by device">
+        <defs>
+            <linearGradient id="range-mobile" class="text-chart-4" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="currentColor" stop-opacity="0.6"></stop>
+              <stop offset="1" stop-color="currentColor" stop-opacity="0.05"></stop>
+            </linearGradient>
+            <linearGradient id="range-desktop" class="text-chart-2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="currentColor" stop-opacity="0.6"></stop>
+              <stop offset="1" stop-color="currentColor" stop-opacity="0.05"></stop>
+            </linearGradient>
+        </defs>
+        <g class="chart-stack">
+          <path class="chart-area fill-[url(#range-mobile)] [fill-opacity:1]" data-sp-field="mobile" aria-label="Mobile"></path>
+          <path class="chart-line stroke-[1.5] text-chart-4" data-sp-field="mobile"></path>
+          <path class="chart-area fill-[url(#range-desktop)] [fill-opacity:1]" data-sp-field="desktop" aria-label="Desktop"></path>
+          <path class="chart-line stroke-[1.5] text-chart-2" data-sp-field="desktop"></path>
+        </g>
+        <g class="chart-axis" data-sp-axis="x" data-sp-field="date">
+          <text class="chart-axis-tick"></text>
+        </g>
+        <g class="chart-axis" data-sp-axis="y">
+          <line class="chart-axis-grid"></line>
+        </g>
+        <line class="chart-cursor"></line>
+      </svg>
+      <div class="chart-tooltip">
+        <div class="chart-tooltip-heading chart-value" data-sp-field="date" data-sp-format='{"month":"short","day":"numeric"}'></div>
+        <div class="chart-tooltip-item">
+          <span class="chart-tooltip-indicator text-chart-2"></span>Desktop
+          <span class="chart-value" data-sp-field="desktop"></span>
+        </div>
+        <div class="chart-tooltip-item">
+          <span class="chart-tooltip-indicator text-chart-4"></span>Mobile
+          <span class="chart-value" data-sp-field="mobile"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const range = document.querySelector("#visitors-range");
+  const chart = range.querySelector(".chart");
+  const rows = JSON.parse(chart.dataset.spValue);
+  range.addEventListener("change", (e) => {
+    chart.dataset.spValue = JSON.stringify(rows.slice(-e.target.value));
+  });
+</script>
+```
+
+### Sparkline chart
+
+A plain array of numbers in `data-sp-value` plots on its own, and without a y axis lines and areas span their own range, while bars still start at zero. Leave a sparkline that only decorates a row unnamed, so screen readers skip it.
+
+```html preview preset=base
+<div class="table-container w-full max-w-2xl">
+  <table class="table">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head">Stock</th>
+        <th class="table-head">Price</th>
+        <th class="table-head">Change</th>
+        <th class="table-head">Trend</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell text-muted-foreground">ACME</td>
+        <td class="table-cell font-medium tabular-nums">$193.45</td>
+        <td class="table-cell"><span class="badge badge-square tabular-nums bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">+2.4%</span></td>
+        <td class="table-cell">
+          <div class="chart h-8 w-24" data-sp-value="[15,18,16,19,22,25,28,25,29,28,32,35]">
+            <svg class="chart-svg">
+              <path class="chart-line stroke-[1.5] text-emerald-500"></path>
+            </svg>
+          </div>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell text-muted-foreground">GLBX</td>
+        <td class="table-cell font-medium tabular-nums">$338.12</td>
+        <td class="table-cell"><span class="badge badge-square tabular-nums bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">+1.8%</span></td>
+        <td class="table-cell">
+          <div class="chart h-8 w-24" data-sp-value="[20,22,21,24,23,26,25,28,27,30,29,31]">
+            <svg class="chart-svg">
+              <path class="chart-line stroke-[1.5] text-emerald-500"></path>
+            </svg>
+          </div>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell text-muted-foreground">INIT</td>
+        <td class="table-cell font-medium tabular-nums">$242.68</td>
+        <td class="table-cell"><span class="badge badge-square tabular-nums bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300">-3.2%</span></td>
+        <td class="table-cell">
+          <div class="chart h-8 w-24" data-sp-value="[35,32,34,30,28,29,25,27,22,24,20,18]">
+            <svg class="chart-svg">
+              <path class="chart-line stroke-[1.5] text-red-500"></path>
+            </svg>
+          </div>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell text-muted-foreground">UMBR</td>
+        <td class="table-cell font-medium tabular-nums">$129.87</td>
+        <td class="table-cell"><span class="badge badge-square tabular-nums bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">+0.9%</span></td>
+        <td class="table-cell">
+          <div class="chart h-8 w-24" data-sp-value="[20,21,20,22,21,23,22,22,24,23,24,25]">
+            <svg class="chart-svg">
+              <path class="chart-line stroke-[1.5] text-emerald-500"></path>
+            </svg>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+### Chart colors
+
+The `chart-1` to `chart-5` tokens color marks through `text-*` classes, and any color utility works the same way. A pie row takes its own color from a `color` field.
+
+```html preview preset=base
+<div class="chart mx-auto aspect-square w-full max-w-64" data-sp-value='[{"label":"Chrome","visitors":275,"color":"var(--color-emerald-500)"},{"label":"Safari","visitors":200,"color":"var(--color-sky-500)"},{"label":"Firefox","visitors":187,"color":"var(--color-amber-500)"}]'>
+  <svg class="chart-svg" aria-label="Visitors by browser">
+    <path class="chart-pie" data-sp-field="visitors" data-sp-label-field="label" data-sp-inner-radius="60%" aria-label="Visitors"></path>
+  </svg>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. The rows run from the right and the y axis moves to the right side. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=base dir=rtl
+<div id="chart-rtl-demo" class="w-full max-w-xl" dir="rtl" lang="ar">
+  <div class="chart" data-sp-value='[{"month":"يناير","desktop":186,"mobile":80},{"month":"فبراير","desktop":305,"mobile":200},{"month":"مارس","desktop":237,"mobile":120},{"month":"أبريل","desktop":73,"mobile":190},{"month":"مايو","desktop":209,"mobile":130},{"month":"يونيو","desktop":214,"mobile":140}]'>
+    <div class="chart-viewport aspect-video">
+      <svg class="chart-svg" aria-label="الزوار حسب الجهاز">
+        <g class="chart-group">
+          <path class="chart-bar text-chart-2" data-sp-field="desktop"></path>
+          <path class="chart-bar text-chart-1" data-sp-field="mobile"></path>
+        </g>
+        <g class="chart-axis" data-sp-axis="x" data-sp-field="month">
+          <text class="chart-axis-tick"></text>
+        </g>
+        <g class="chart-axis" data-sp-axis="y">
+          <line class="chart-axis-grid"></line>
+        </g>
+        <rect class="chart-cursor" data-sp-type="area"></rect>
+      </svg>
+      <div class="chart-tooltip">
+        <div class="chart-tooltip-heading chart-value" data-sp-field="month"></div>
+        <div class="chart-tooltip-item">
+          <span class="chart-tooltip-indicator text-chart-2"></span><span data-i18n="desktop">سطح المكتب</span>
+          <span class="chart-value" data-sp-field="desktop"></span>
+        </div>
+        <div class="chart-tooltip-item">
+          <span class="chart-tooltip-indicator text-chart-1"></span><span data-i18n="mobile">الجوال</span>
+          <span class="chart-value" data-sp-field="mobile"></span>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center gap-4 pt-3">
+      <div class="chart-legend"><span class="chart-legend-indicator text-chart-2"></span><span data-i18n="desktop">سطح المكتب</span></div>
+      <div class="chart-legend"><span class="chart-legend-indicator text-chart-1"></span><span data-i18n="mobile">الجوال</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const demo = document.getElementById("chart-rtl-demo");
+  const chart = demo.querySelector(".chart");
+  const rows = JSON.parse(chart.dataset.spValue);
+  const translations = {
+    ar: { dir: "rtl", label: "الزوار حسب الجهاز", desktop: "سطح المكتب", mobile: "الجوال", months: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو"] },
+    he: { dir: "rtl", label: "מבקרים לפי מכשיר", desktop: "מחשב", mobile: "נייד", months: ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני"] },
+    en: { dir: "ltr", label: "Visitors by device", desktop: "Desktop", mobile: "Mobile", months: ["January", "February", "March", "April", "May", "June"] },
+  };
+  window.addEventListener("message", (e) => {
+    const t = translations[e.data?.lang];
+    if (e.data?.type !== "sp-language" || !t) return;
+    demo.dir = t.dir;
+    demo.lang = e.data.lang;
+    demo.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t[el.dataset.i18n]));
+    demo.querySelector(".chart-svg").setAttribute("aria-label", t.label);
+    chart.dataset.spValue = JSON.stringify(rows.map((row, i) => ({ ...row, month: t.months[i] })));
+  });
+</script>
+```
+
+## Options
+
+### Chart
+
+Set each option with its own `data-sp-*` attribute on the `chart` element.
+
+| Attribute            | Values                            | Default            |
+| -------------------- | --------------------------------- | ------------------ |
+| `data-sp-value`      | JSON array of rows, or of numbers | `[]`               |
+| `data-sp-horizontal` | Boolean                           | `false`            |
+| `data-sp-locale`     | BCP 47 locale                     | The nearest `lang` |
+
+```html
+<div class="chart" data-sp-horizontal data-sp-locale="de-DE" data-sp-value='[{"month":"January","desktop":186}]'></div>
+```
+
+### Svg
+
+| Attribute        | Values                                         | Default |
+| ---------------- | ---------------------------------------------- | ------- |
+| `data-sp-gutter` | Padding in pixels, one to four values like CSS | `0`     |
+
+### Marks
+
+Set these on `chart-line`, `chart-area`, `chart-point`, and `chart-bar`.
+
+| Attribute        | Values                                           | Default                |
+| ---------------- | ------------------------------------------------ | ---------------------- |
+| `data-sp-field`  | Field to plot                                    | `value`                |
+| `data-sp-curve`  | `smooth` or `none`, on lines and areas           | `smooth`               |
+| `data-sp-radius` | Corner radius of a bar, its end then its base    | `4`, or `0` in a stack |
+| `data-sp-width`  | Bar thickness, a percentage of the row or pixels | `80%`                  |
+
+Set `data-sp-width` on a `chart-group` or `chart-stack` to size its bars together, and `data-sp-offset="expand"` on a `chart-stack` to fill every row to 100%.
+
+### Label
+
+Set these on a `chart-label`.
+
+| Attribute             | Values                                                       | Default |
+| --------------------- | ------------------------------------------------------------ | ------- |
+| `data-sp-field`       | Field of the bar or point to label                           | `value` |
+| `data-sp-label-field` | Field to show instead of the value                           | None    |
+| `data-sp-position`    | `end`, `inside-end`, or `inside-start`                       | `end`   |
+| `data-sp-format`      | JSON of `Intl.NumberFormat` or `Intl.DateTimeFormat` options | None    |
+| `data-sp-prefix`      | Text before the value                                        | None    |
+| `data-sp-suffix`      | Text after the value                                         | None    |
+
+### Pie
+
+| Attribute              | Values                                | Default |
+| ---------------------- | ------------------------------------- | ------- |
+| `data-sp-field`        | Field that sets each slice's size     | `value` |
+| `data-sp-label-field`  | Field that names each slice           | None    |
+| `data-sp-inner-radius` | Donut hole, in pixels or a percentage | `0`     |
+
+### Axis
+
+| Attribute             | Values                                                                               | Default                              |
+| --------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ |
+| `data-sp-axis`        | `x` or `y`                                                                           | `x`                                  |
+| `data-sp-field`       | Field that labels the rows                                                           | The row number                       |
+| `data-sp-position`    | `top`, `bottom`, `start`, `end`, `left`, or `right`                                  | `bottom` for x, `start` for y        |
+| `data-sp-scale`       | `categorical`, `time`, or `linear`                                                   | `time` for dates, else `categorical` |
+| `data-sp-tick-count`  | Number of ticks to aim for, or `2` for only the two ends, with the data edge to edge | Fits the space                       |
+| `data-sp-tick-start`  | `min` or a number                                                                    | `0`, or below negative values        |
+| `data-sp-tick-end`    | `max` or a number                                                                    | The first tick at or above the max   |
+| `data-sp-tick-values` | JSON array of numbers                                                                | None                                 |
+| `data-sp-tick-prefix` | Text before each label                                                               | None                                 |
+| `data-sp-tick-suffix` | Text after each label                                                                | None                                 |
+| `data-sp-format`      | JSON of `Intl.NumberFormat` or `Intl.DateTimeFormat` options                         | None                                 |
+
+```html
+<g class="chart-axis" data-sp-axis="y" data-sp-tick-prefix="$" data-sp-format='{"notation":"compact"}'>
+  <text class="chart-axis-tick"></text>
+</g>
+```
+
+### Cursor
+
+| Attribute      | Values           | Default |
+| -------------- | ---------------- | ------- |
+| `data-sp-type` | `line` or `area` | `line`  |
+
+### Value
+
+Set these on a `chart-value`.
+
+| Attribute          | Values                                                       | Default      |
+| ------------------ | ------------------------------------------------------------ | ------------ |
+| `data-sp-field`    | Field to show                                                | `value`      |
+| `data-sp-format`   | JSON of `Intl.NumberFormat` or `Intl.DateTimeFormat` options | None         |
+| `data-sp-prefix`   | Text before the value                                        | None         |
+| `data-sp-suffix`   | Text after the value                                         | None         |
+| `data-sp-fallback` | Text to show while no row is hovered                         | The last row |
+
+## JavaScript
+
+### Methods
+
+Get the instance with `sp.chart(el)`, then call its methods:
+
+| Method              | Description                                       |
+| ------------------- | ------------------------------------------------- |
+| `setValue(rows)`    | Replace the data and draw the chart again          |
+| `setActive(index)`  | Point the chart at a row, or at none with `null`  |
+
+```js
+const chart = sp.chart(document.querySelector("#my-chart"));
+
+chart.setValue([{ month: "July", desktop: 214 }]);
+```
+
+Changing `data-sp-value` draws the chart again too, so data swapped in by the server needs no script.

@@ -14,6 +14,7 @@ import { Tooltip } from "./tooltip";
 import { Dropdown } from "./dropdown";
 import { ContextMenu } from "./context-menu";
 import { Calendar } from "./calendar";
+import { Chart } from "./chart";
 import { DatePicker } from "./date-picker";
 import { Resizable } from "./resizable";
 import { Combobox } from "./combobox";
@@ -44,6 +45,7 @@ const components: ComponentFactory[] = [
   Dropdown,
   ContextMenu,
   Calendar,
+  Chart,
   DatePicker,
   Resizable,
   Combobox,
@@ -75,6 +77,7 @@ const tooltip = (el: HTMLElement): SpInstance | null => getInstance(el, Tooltip)
 const dropdown = (el: HTMLElement): SpInstance | null => getInstance(el, Dropdown);
 const contextMenu = (el: HTMLElement): SpInstance | null => getInstance(el, ContextMenu);
 const calendar = (el: HTMLElement): SpInstance | null => getInstance(el, Calendar);
+const chart = (el: HTMLElement): SpInstance | null => getInstance(el, Chart);
 const datePicker = (el: HTMLElement): SpInstance | null => getInstance(el, DatePicker);
 const resizable = (el: HTMLElement): SpInstance | null => getInstance(el, Resizable);
 const combobox = (el: HTMLElement): SpInstance | null => getInstance(el, Combobox);
@@ -106,6 +109,7 @@ export {
   Dropdown,
   ContextMenu,
   Calendar,
+  Chart,
   DatePicker,
   Resizable,
   Combobox,
@@ -130,6 +134,7 @@ export {
   dropdown,
   contextMenu,
   calendar,
+  chart,
   datePicker,
   resizable,
   combobox,
@@ -165,6 +170,7 @@ declare global {
       dropdown: typeof dropdown;
       contextMenu: typeof contextMenu;
       calendar: typeof calendar;
+      chart: typeof chart;
       datePicker: typeof datePicker;
       resizable: typeof resizable;
       combobox: typeof combobox;
@@ -199,6 +205,7 @@ if (typeof document !== "undefined") {
     dropdown,
     contextMenu,
     calendar,
+    chart,
     datePicker,
     resizable,
     combobox,
