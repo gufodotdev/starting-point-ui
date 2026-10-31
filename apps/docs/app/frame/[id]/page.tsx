@@ -44,6 +44,7 @@ export default async function FramePage({
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: html }}
       />
+      <script type="module" src="/sp.js" />
       <script dangerouslySetInnerHTML={{ __html: frameScript() }} />
     </>
   );
