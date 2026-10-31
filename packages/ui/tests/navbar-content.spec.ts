@@ -437,6 +437,16 @@ test.describe("moving across columns", () => {
     expect(await press(page, "d", "ArrowLeft")).toBe("f");
   });
 
+  test("a feature column's link is one of the items, reached across and in order", async ({ page }) => {
+    await open(page, `<div style="display: grid; grid-template-columns: 120px 160px; gap: 8px">
+      <div>${link("a")}${link("b")}</div>
+      <div class="navbar-feature"><p>New</p><a id="f" href="#">Read story</a></div>
+    </div>`);
+    expect(await press(page, "a", "ArrowRight")).toBe("f");
+    expect(await press(page, "b", "ArrowDown")).toBe("f");
+    expect(await press(page, "f", "ArrowLeft")).toBe("b");
+  });
+
   test("CSS columns work too", async ({ page }) => {
     await open(page, `<div style="columns: 2; column-gap: 8px; width: 260px">${link("a")}${link("b")}${link("c")}${link("d")}</div>`);
     expect(await press(page, "a", "ArrowRight")).toBe("c");

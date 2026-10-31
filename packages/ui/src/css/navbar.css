@@ -136,13 +136,50 @@
 
 @utility navbar-link-description {
   @layer l1.l2 {
-    @apply line-clamp-2 text-[13px] font-normal text-muted-foreground;
+    @apply text-[13px] font-normal text-muted-foreground;
   }
 }
 
 @utility navbar-label {
   @layer l1.l2 {
     @apply sidebar-group-label;
+  }
+}
+
+@utility navbar-feature {
+  @layer l1.l2 {
+    @apply flex flex-col gap-3 rounded-md bg-muted/50 p-3;
+
+    /* A leading label keeps its row height, so it lines up with the labels of
+       the columns beside it, and gives back the space under its text. The
+       bottom matches the tighter top. */
+    &:has(> .navbar-label:first-child) {
+      @apply pt-0 pb-2;
+    }
+    & > .navbar-label {
+      @apply -mb-2 px-0;
+    }
+
+    /* Important, so layout utilities on the feature cannot bring it back. */
+    .navbar-collapse & {
+      @apply max-navbar:hidden!;
+    }
+  }
+}
+
+@utility navbar-feature-title {
+  @layer l1.l2 {
+    @apply text-sm font-medium;
+  }
+}
+
+@utility navbar-feature-description {
+  @layer l1.l2 {
+    @apply text-[13px] leading-5 text-muted-foreground;
+
+    .navbar-feature-title + & {
+      @apply -mt-2;
+    }
   }
 }
 
@@ -192,7 +229,7 @@
       &.shown {
         @apply max-navbar:visible max-navbar:h-auto max-navbar:overflow-visible;
       }
-      & :not(.navbar-link, .navbar-link *, .navbar-label) {
+      & :not(.navbar-link, .navbar-link *, .navbar-label, .navbar-feature, .navbar-feature *) {
         @apply max-navbar:contents!;
       }
       & :is(.navbar-label, .navbar-link-description) {

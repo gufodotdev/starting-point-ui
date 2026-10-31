@@ -22,15 +22,56 @@ Use the navbar component to put your brand, links and actions across the top of 
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <div class="navbar-content" data-sp-toggle="#navbar-demo-products">
-          <div class="grid w-sm grid-cols-2 gap-2">
+          <div class="grid w-2xl grid-cols-[1fr_1fr_14rem] gap-2">
             <div>
-              <a href="#" class="navbar-link">Platform</a>
-              <a href="#" class="navbar-link">Voice agents</a>
-              <a href="#" class="navbar-link">Chat agents</a>
+              <div class="navbar-label">Platform</div>
+              <a href="#" class="navbar-link">
+                Analytics
+                <span class="navbar-link-description">Dashboards and reports</span>
+              </a>
+              <a href="#" class="navbar-link">
+                Automations
+                <span class="navbar-link-description">Workflows that run themselves</span>
+              </a>
+              <a href="#" class="navbar-link">
+                Integrations
+                <span class="navbar-link-description">Connect the tools you use</span>
+              </a>
+              <a href="#" class="navbar-link">
+                Security
+                <span class="navbar-link-description">Roles, SSO and audit logs</span>
+              </a>
             </div>
             <div>
-              <a href="#" class="navbar-link">Analytics</a>
-              <a href="#" class="navbar-link">Integrations</a>
+              <div class="navbar-label">Agents</div>
+              <a href="#" class="navbar-link">
+                Voice agents
+                <span class="navbar-link-description">Answer every call</span>
+              </a>
+              <a href="#" class="navbar-link">
+                Chat agents
+                <span class="navbar-link-description">Support around the clock</span>
+              </a>
+              <a href="#" class="navbar-link">
+                Email agents
+                <span class="navbar-link-description">Inbox zero, every day</span>
+              </a>
+              <a href="#" class="navbar-link">
+                SMS agents
+                <span class="navbar-link-description">Replies in seconds</span>
+              </a>
+            </div>
+            <div class="navbar-feature">
+              <div class="navbar-label">New</div>
+              <div class="flex aspect-video items-center justify-center rounded-md bg-linear-to-br from-violet-300 via-rose-200 to-amber-100 text-white dark:from-violet-800 dark:via-rose-900 dark:to-amber-900">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-10" aria-hidden="true"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="17" r="2.5"/></svg>
+              </div>
+              <p class="navbar-feature-title">Workflows 2.0 is here</p>
+              <p class="navbar-feature-description">Branching, retries and a visual editor for every flow.</p>
+              <a href="#" class="btn btn-link btn-sm h-auto self-start p-0">
+                Learn more
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -60,35 +101,25 @@ Use the navbar component to put your brand, links and actions across the top of 
             </div>
           </div>
         </div>
-        <a href="#" class="navbar-link">Customers</a>
         <button id="navbar-demo-resources" class="navbar-link">
           Resources
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <div class="navbar-content" data-sp-toggle="#navbar-demo-resources">
-          <div class="grid w-md grid-cols-2 gap-2">
-            <div>
-              <a href="#" class="navbar-link">
-                Blog
-                <span class="navbar-link-description">Product news and stories</span>
-              </a>
-              <a href="#" class="navbar-link">
-                Documentation
-                <span class="navbar-link-description">Guides and API reference</span>
-              </a>
-            </div>
-            <div>
-              <a href="#" class="navbar-link">
-                Changelog
-                <span class="navbar-link-description">Recent features and fixes</span>
-              </a>
-              <a href="#" class="navbar-link">
-                Help center
-                <span class="navbar-link-description">Answers to common questions</span>
-              </a>
-            </div>
-          </div>
+          <a href="#" class="navbar-link">
+            Blog
+            <span class="navbar-link-description">Product news and stories</span>
+          </a>
+          <a href="#" class="navbar-link">
+            Documentation
+            <span class="navbar-link-description">Guides and API reference</span>
+          </a>
+          <a href="#" class="navbar-link">
+            Changelog
+            <span class="navbar-link-description">Recent features and fixes</span>
+          </a>
         </div>
+        <a href="#" class="navbar-link">Customers</a>
       </nav>
       <div class="navbar-actions">
         <a href="#" class="btn btn-outline">Log in</a>
@@ -104,30 +135,33 @@ Use the navbar component to put your brand, links and actions across the top of 
 
 Add the `navbar` class to a `<header>` element and fill it with what your site needs: your logo in a [brand](/components/brand), the links in a `navbar-nav`, each with `navbar-link` and `active` on the current page, and the buttons in a `navbar-actions` group. Wrap any logo in a brand, whether an image or your own svg, so the drawer can show it at the top.
 
-For a dropdown or a mega menu, put a `navbar-content` panel right after a `navbar-link` button and point it at the button with `data-sp-toggle`. Fill it with `navbar-link` rows and add a `navbar-link-description` inside a row for a line under its title. For a mega menu, lay the rows out in columns with a `grid` inside the panel, and start a column with a `navbar-label` to name it.
+For a dropdown or a mega menu, put a `navbar-content` panel right after a `navbar-link` button and point it at the button with `data-sp-toggle`. Fill it with `navbar-link` rows and add a `navbar-link-description` inside a row for a line under its title. For a mega menu, lay the rows out in columns with a `grid` inside the panel, and start a column with a `navbar-label` to name it. Add a `navbar-feature` column for an announcement or a featured story, with a `navbar-feature-title` and a `navbar-feature-description` inside.
 
 To fold the menu away on small screens, wrap the `navbar-nav` and the actions in a `navbar-collapse`, and point that at an empty `navbar-toggle` button with an `aria-label`. Below the `md` breakpoint, or your own [`--breakpoint-navbar`](#css-variables), the wrapper becomes a drawer in the style of the [sidebar](/components/sidebar), with each panel as a sub-menu that shows only the link titles. Leave the `navbar-collapse` out to keep the menu in the bar on every screen size, scrolling sideways when it runs out of room.
 
 The bar has no border of its own. Add `border-b` for one. On a sticky bar, including a sticky overlay, it fades in once the page scrolls.
 
-| Class                     | Description                                                                                   |
-| ------------------------- | --------------------------------------------------------------------------------------------- |
-| `navbar`                  | Add to the `<header>` element                                                                 |
-| `navbar-sticky`           | Add to `navbar` to keep it in view. It gets `scrolled` once content passes under it           |
-| `navbar-overlay`          | Add to `navbar` to lay it see-through over a hero, with `navbar-sticky` to keep it in view    |
-| `navbar-start`            | Add to `navbar` to place the menu after the brand, the default, for example at a breakpoint   |
-| `navbar-center`           | Add to `navbar` to center the menu on the bar, with any extra buttons inside `navbar-actions` |
-| `navbar-end`              | Add to `navbar` to move the menu next to the buttons at the end                               |
-| `navbar-sm`               | Add to `navbar` for a shorter bar with smaller links                                          |
-| `navbar-nav`              | Add to the `<nav>` element holding the links                                                  |
-| `navbar-nav-line`         | Add to `navbar-nav` for muted links and a line under the current one                          |
-| `navbar-link`             | Add to each link or button, with `active` on the current page                                 |
-| `navbar-link-description` | Add to a `<span>` inside a panel link for a line under its title                              |
-| `navbar-content`          | Add to the panel, which carries `data-sp-toggle`                                              |
-| `navbar-label`            | Add to the heading of a column in a panel                                                     |
-| `navbar-collapse`         | Add to a wrapper around the links and the actions that folds on small screens                 |
-| `navbar-toggle`           | Add to the empty button that opens the drawer                                                 |
-| `navbar-actions`          | Add to the group of buttons at the end of the bar                                             |
+| Class                        | Description                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------- |
+| `navbar`                     | Add to the `<header>` element                                                                 |
+| `navbar-sticky`              | Add to `navbar` to keep it in view. It gets `scrolled` once content passes under it           |
+| `navbar-overlay`             | Add to `navbar` to lay it see-through over a hero, with `navbar-sticky` to keep it in view    |
+| `navbar-start`               | Add to `navbar` to place the menu after the brand, the default, for example at a breakpoint   |
+| `navbar-center`              | Add to `navbar` to center the menu on the bar, with any extra buttons inside `navbar-actions` |
+| `navbar-end`                 | Add to `navbar` to move the menu next to the buttons at the end                               |
+| `navbar-sm`                  | Add to `navbar` for a shorter bar with smaller links                                          |
+| `navbar-nav`                 | Add to the `<nav>` element holding the links                                                  |
+| `navbar-nav-line`            | Add to `navbar-nav` for muted links and a line under the current one                          |
+| `navbar-link`                | Add to each link or button, with `active` on the current page                                 |
+| `navbar-link-description`    | Add to a `<span>` inside a panel link for a line under its title                              |
+| `navbar-content`             | Add to the panel, which carries `data-sp-toggle`                                              |
+| `navbar-label`               | Add to the heading of a column in a panel                                                     |
+| `navbar-feature`             | Add to a column in a panel for featured content, which the drawer leaves out                  |
+| `navbar-feature-title`       | Add to the title in a `navbar-feature`                                                        |
+| `navbar-feature-description` | Add to a line of supporting text in a `navbar-feature`                                        |
+| `navbar-collapse`            | Add to a wrapper around the links and the actions that folds on small screens                 |
+| `navbar-toggle`              | Add to the empty button that opens the drawer                                                 |
+| `navbar-actions`             | Add to the group of buttons at the end of the bar                                             |
 
 ```html
 <header class="navbar">
@@ -408,6 +442,83 @@ Put a `navbar-content` panel right after its `navbar-link` button. Use a single 
           </div>
         </div>
       </div>
+    </nav>
+    <div class="navbar-actions">
+      <a href="#" class="btn btn-outline">Log in</a>
+      <a href="#" class="btn">Sign up</a>
+    </div>
+  </div>
+</header>
+<div class="mx-4 mb-4 flex-1 rounded-xl bg-muted/50"></div>
+```
+
+### Mega menu with a feature
+
+Add a `navbar-feature` column beside the links for an announcement or a featured story. The drawer on small screens leaves it out.
+
+```html preview preset=navbar
+<header class="navbar">
+  <a href="#" class="brand me-2">
+    <span class="brand-logo">
+      <i class="font-serif font-bold not-italic">A</i>
+    </span>
+    <span class="brand-name">Acme Inc.</span>
+  </a>
+  <button id="navbar-feature-toggle" class="btn btn-ghost btn-icon navbar-toggle ms-auto -me-2" aria-label="Toggle menu"></button>
+  <div class="navbar-collapse" data-sp-toggle="#navbar-feature-toggle">
+    <nav class="navbar-nav" aria-label="Main">
+      <button id="navbar-feature-resources" class="navbar-link">
+        Resources
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="navbar-content" data-sp-toggle="#navbar-feature-resources">
+        <div class="grid w-2xl grid-cols-[1fr_1fr_14rem] gap-2">
+          <div>
+            <div class="navbar-label">Learn</div>
+            <a href="#" class="navbar-link">
+              Blog
+              <span class="navbar-link-description">Product news and stories</span>
+            </a>
+            <a href="#" class="navbar-link">
+              Guides
+              <span class="navbar-link-description">Learn as you build</span>
+            </a>
+            <a href="#" class="navbar-link">
+              Templates
+              <span class="navbar-link-description">Start from a working setup</span>
+            </a>
+          </div>
+          <div>
+            <div class="navbar-label">Help</div>
+            <a href="#" class="navbar-link">
+              Documentation
+              <span class="navbar-link-description">Guides and API reference</span>
+            </a>
+            <a href="#" class="navbar-link">
+              Help center
+              <span class="navbar-link-description">Answers to common questions</span>
+            </a>
+            <a href="#" class="navbar-link">
+              Community
+              <span class="navbar-link-description">Ask other builders</span>
+            </a>
+          </div>
+          <div class="navbar-feature">
+            <div class="navbar-label">Announcement</div>
+            <div class="flex aspect-video items-center justify-center rounded-md bg-linear-to-br from-violet-300 via-rose-200 to-amber-100 text-white dark:from-violet-800 dark:via-rose-900 dark:to-amber-900">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-10" aria-hidden="true"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="17" r="2.5"/></svg>
+            </div>
+            <p class="navbar-feature-title">Workflows 2.0 is here</p>
+            <p class="navbar-feature-description">Branching, retries and a visual editor for every flow.</p>
+            <a href="#" class="btn btn-link btn-sm h-auto self-start p-0">
+              Learn more
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="navbar-link">Customers</a>
+      <a href="#" class="navbar-link">Pricing</a>
     </nav>
     <div class="navbar-actions">
       <a href="#" class="btn btn-outline">Log in</a>
@@ -885,15 +996,56 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <div class="navbar-content" data-sp-toggle="#navbar-rtl-products">
-          <div class="grid w-sm grid-cols-2 gap-2">
+          <div class="grid w-2xl grid-cols-[1fr_1fr_14rem] gap-2">
             <div>
-              <a href="#" class="navbar-link" data-i18n="platform">المنصة</a>
-              <a href="#" class="navbar-link" data-i18n="voiceAgents">وكلاء الصوت</a>
-              <a href="#" class="navbar-link" data-i18n="chatAgents">وكلاء الدردشة</a>
+              <div class="navbar-label" data-i18n="platform">المنصة</div>
+              <a href="#" class="navbar-link">
+                <span data-i18n="analytics">التحليلات</span>
+                <span class="navbar-link-description" data-i18n="analyticsDesc">لوحات المعلومات والتقارير</span>
+              </a>
+              <a href="#" class="navbar-link">
+                <span data-i18n="automations">الأتمتة</span>
+                <span class="navbar-link-description" data-i18n="automationsDesc">مهام تعمل من تلقاء نفسها</span>
+              </a>
+              <a href="#" class="navbar-link">
+                <span data-i18n="integrations">التكاملات</span>
+                <span class="navbar-link-description" data-i18n="integrationsDesc">اربط الأدوات التي تستخدمها</span>
+              </a>
+              <a href="#" class="navbar-link">
+                <span data-i18n="security">الأمان</span>
+                <span class="navbar-link-description" data-i18n="securityDesc">الأدوار وتسجيل الدخول الموحد وسجلات التدقيق</span>
+              </a>
             </div>
             <div>
-              <a href="#" class="navbar-link" data-i18n="analytics">التحليلات</a>
-              <a href="#" class="navbar-link" data-i18n="integrations">التكاملات</a>
+              <div class="navbar-label" data-i18n="agents">الوكلاء</div>
+              <a href="#" class="navbar-link">
+                <span data-i18n="voiceAgents">وكلاء الصوت</span>
+                <span class="navbar-link-description" data-i18n="voiceAgentsDesc">الرد على كل مكالمة</span>
+              </a>
+              <a href="#" class="navbar-link">
+                <span data-i18n="chatAgents">وكلاء الدردشة</span>
+                <span class="navbar-link-description" data-i18n="chatAgentsDesc">دعم على مدار الساعة</span>
+              </a>
+              <a href="#" class="navbar-link">
+                <span data-i18n="emailAgents">وكلاء البريد الإلكتروني</span>
+                <span class="navbar-link-description" data-i18n="emailAgentsDesc">صندوق وارد فارغ كل يوم</span>
+              </a>
+              <a href="#" class="navbar-link">
+                <span data-i18n="smsAgents">وكلاء الرسائل النصية</span>
+                <span class="navbar-link-description" data-i18n="smsAgentsDesc">ردود في ثوانٍ</span>
+              </a>
+            </div>
+            <div class="navbar-feature">
+              <div class="navbar-label" data-i18n="new">جديد</div>
+              <div class="flex aspect-video items-center justify-center rounded-md bg-linear-to-br from-violet-300 via-rose-200 to-amber-100 text-white dark:from-violet-800 dark:via-rose-900 dark:to-amber-900">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-10" aria-hidden="true"><path d="M6.5 16.5 16.5 6.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="17" r="2.5"/></svg>
+              </div>
+              <p class="navbar-feature-title" data-i18n="featureTitle">وصل Workflows 2.0</p>
+              <p class="navbar-feature-description" data-i18n="featureDesc">تفرعات وإعادة محاولات ومحرر مرئي لكل مسار.</p>
+              <a href="#" class="btn btn-link btn-sm h-auto self-start p-0">
+                <span data-i18n="learnMore">اعرف المزيد</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end rtl:-scale-x-100"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -923,36 +1075,25 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
             </div>
           </div>
         </div>
-        <a href="#" class="navbar-link" data-i18n="customers">العملاء</a>
         <button id="navbar-rtl-resources" class="navbar-link">
           <span data-i18n="resources">الموارد</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <div class="navbar-content" data-sp-toggle="#navbar-rtl-resources">
-          <div class="grid w-md grid-cols-2 gap-2">
-            <div>
-              <a href="#" class="navbar-link">
-                <span data-i18n="blog">المدونة</span>
-                <span class="navbar-link-description" data-i18n="blogDesc">أخبار المنتج والقصص</span>
-              </a>
-              <a href="#" class="navbar-link">
-                <span data-i18n="docs">التوثيق</span>
-                <span class="navbar-link-description" data-i18n="docsDesc">أدلة ومرجع واجهة البرمجة</span>
-              </a>
-            </div>
-            <div>
-              <a href="#" class="navbar-link">
-                <span data-i18n="changelog">سجل التغييرات</span>
-                <span class="navbar-link-description" data-i18n="changelogDesc">أحدث الميزات والإصلاحات</span>
-              </a>
-              <a href="#" class="navbar-link">
-                <span data-i18n="help">مركز المساعدة</span>
-                <span class="navbar-link-description" data-i18n="helpDesc">إجابات للأسئلة الشائعة</span>
-              </a>
-            </div>
-          </div>
+          <a href="#" class="navbar-link">
+            <span data-i18n="blog">المدونة</span>
+            <span class="navbar-link-description" data-i18n="blogDesc">أخبار المنتج والقصص</span>
+          </a>
+          <a href="#" class="navbar-link">
+            <span data-i18n="docs">التوثيق</span>
+            <span class="navbar-link-description" data-i18n="docsDesc">أدلة ومرجع واجهة البرمجة</span>
+          </a>
+          <a href="#" class="navbar-link">
+            <span data-i18n="changelog">سجل التغييرات</span>
+            <span class="navbar-link-description" data-i18n="changelogDesc">أحدث الميزات والإصلاحات</span>
+          </a>
         </div>
-        <a href="#" class="navbar-link" data-i18n="pricing">الأسعار</a>
+        <a href="#" class="navbar-link" data-i18n="customers">العملاء</a>
       </nav>
       <div class="navbar-actions">
         <a href="#" class="btn btn-outline" data-i18n="logIn">تسجيل الدخول</a>
@@ -965,9 +1106,9 @@ Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-le
 
 <script>
   const translations = {
-    ar: { dir: "rtl", brand: "شركة أكمي", products: "المنتجات", platform: "المنصة", voiceAgents: "وكلاء الصوت", chatAgents: "وكلاء الدردشة", analytics: "التحليلات", integrations: "التكاملات", solutions: "الحلول", industries: "القطاعات", telecom: "الاتصالات", finance: "الخدمات المالية", healthcare: "الرعاية الصحية", retail: "التجزئة والتجارة الإلكترونية", useCases: "حالات الاستخدام", support: "دعم العملاء", leads: "تأهيل العملاء المحتملين", outbound: "التواصل الصادر", companySize: "حجم الشركة", enterprise: "المؤسسات", startups: "الشركات الناشئة", customers: "العملاء", resources: "الموارد", blog: "المدونة", blogDesc: "أخبار المنتج والقصص", docs: "التوثيق", docsDesc: "أدلة ومرجع واجهة البرمجة", changelog: "سجل التغييرات", changelogDesc: "أحدث الميزات والإصلاحات", help: "مركز المساعدة", helpDesc: "إجابات للأسئلة الشائعة", pricing: "الأسعار", logIn: "تسجيل الدخول", signUp: "إنشاء حساب" },
-    he: { dir: "rtl", brand: "אקמי בע״מ", products: "מוצרים", platform: "פלטפורמה", voiceAgents: "סוכנים קוליים", chatAgents: "סוכני צ׳אט", analytics: "אנליטיקה", integrations: "אינטגרציות", solutions: "פתרונות", industries: "תעשיות", telecom: "תקשורת", finance: "שירותים פיננסיים", healthcare: "בריאות", retail: "קמעונאות ומסחר מקוון", useCases: "תרחישי שימוש", support: "תמיכת לקוחות", leads: "סינון לידים", outbound: "פניות יוצאות", companySize: "גודל חברה", enterprise: "ארגונים", startups: "סטארטאפים", customers: "לקוחות", resources: "משאבים", blog: "בלוג", blogDesc: "חדשות מוצר וסיפורים", docs: "תיעוד", docsDesc: "מדריכים ותיעוד API", changelog: "יומן שינויים", changelogDesc: "תכונות ותיקונים אחרונים", help: "מרכז עזרה", helpDesc: "תשובות לשאלות נפוצות", pricing: "מחירים", logIn: "התחברות", signUp: "הרשמה" },
-    en: { dir: "ltr", brand: "Acme Inc.", products: "Products", platform: "Platform", voiceAgents: "Voice agents", chatAgents: "Chat agents", analytics: "Analytics", integrations: "Integrations", solutions: "Solutions", industries: "Industries", telecom: "Telecommunications", finance: "Financial services", healthcare: "Healthcare", retail: "Retail and e-commerce", useCases: "Use cases", support: "Customer support", leads: "Lead qualification", outbound: "Outbound", companySize: "Company size", enterprise: "Enterprise", startups: "Startups", customers: "Customers", resources: "Resources", blog: "Blog", blogDesc: "Product news and stories", docs: "Documentation", docsDesc: "Guides and API reference", changelog: "Changelog", changelogDesc: "Recent features and fixes", help: "Help center", helpDesc: "Answers to common questions", pricing: "Pricing", logIn: "Log in", signUp: "Sign up" },
+    ar: { dir: "rtl", brand: "شركة أكمي", products: "المنتجات", platform: "المنصة", analytics: "التحليلات", analyticsDesc: "لوحات المعلومات والتقارير", automations: "الأتمتة", automationsDesc: "مهام تعمل من تلقاء نفسها", integrations: "التكاملات", integrationsDesc: "اربط الأدوات التي تستخدمها", security: "الأمان", securityDesc: "الأدوار وتسجيل الدخول الموحد وسجلات التدقيق", agents: "الوكلاء", voiceAgents: "وكلاء الصوت", voiceAgentsDesc: "الرد على كل مكالمة", chatAgents: "وكلاء الدردشة", chatAgentsDesc: "دعم على مدار الساعة", emailAgents: "وكلاء البريد الإلكتروني", emailAgentsDesc: "صندوق وارد فارغ كل يوم", smsAgents: "وكلاء الرسائل النصية", smsAgentsDesc: "ردود في ثوانٍ", new: "جديد", featureTitle: "وصل Workflows 2.0", featureDesc: "تفرعات وإعادة محاولات ومحرر مرئي لكل مسار.", learnMore: "اعرف المزيد", solutions: "الحلول", industries: "القطاعات", telecom: "الاتصالات", finance: "الخدمات المالية", healthcare: "الرعاية الصحية", retail: "التجزئة والتجارة الإلكترونية", useCases: "حالات الاستخدام", support: "دعم العملاء", leads: "تأهيل العملاء المحتملين", outbound: "التواصل الصادر", companySize: "حجم الشركة", enterprise: "المؤسسات", startups: "الشركات الناشئة", resources: "الموارد", blog: "المدونة", blogDesc: "أخبار المنتج والقصص", docs: "التوثيق", docsDesc: "أدلة ومرجع واجهة البرمجة", changelog: "سجل التغييرات", changelogDesc: "أحدث الميزات والإصلاحات", customers: "العملاء", logIn: "تسجيل الدخول", signUp: "إنشاء حساب" },
+    he: { dir: "rtl", brand: "אקמי בע״מ", products: "מוצרים", platform: "פלטפורמה", analytics: "אנליטיקה", analyticsDesc: "לוחות מחוונים ודוחות", automations: "אוטומציות", automationsDesc: "תהליכים שרצים מעצמם", integrations: "אינטגרציות", integrationsDesc: "חיבור הכלים שבהם אתם משתמשים", security: "אבטחה", securityDesc: "הרשאות, SSO ויומני ביקורת", agents: "סוכנים", voiceAgents: "סוכנים קוליים", voiceAgentsDesc: "מענה לכל שיחה", chatAgents: "סוכני צ׳אט", chatAgentsDesc: "תמיכה מסביב לשעון", emailAgents: "סוכני אימייל", emailAgentsDesc: "תיבת דואר ריקה, כל יום", smsAgents: "סוכני SMS", smsAgentsDesc: "מענה תוך שניות", new: "חדש", featureTitle: "Workflows 2.0 כבר כאן", featureDesc: "הסתעפויות, ניסיונות חוזרים ועורך חזותי לכל תהליך.", learnMore: "למידע נוסף", solutions: "פתרונות", industries: "תעשיות", telecom: "תקשורת", finance: "שירותים פיננסיים", healthcare: "בריאות", retail: "קמעונאות ומסחר מקוון", useCases: "תרחישי שימוש", support: "תמיכת לקוחות", leads: "סינון לידים", outbound: "פניות יוצאות", companySize: "גודל חברה", enterprise: "ארגונים", startups: "סטארטאפים", resources: "משאבים", blog: "בלוג", blogDesc: "חדשות מוצר וסיפורים", docs: "תיעוד", docsDesc: "מדריכים ותיעוד API", changelog: "יומן שינויים", changelogDesc: "תכונות ותיקונים אחרונים", customers: "לקוחות", logIn: "התחברות", signUp: "הרשמה" },
+    en: { dir: "ltr", brand: "Acme Inc.", products: "Products", platform: "Platform", analytics: "Analytics", analyticsDesc: "Dashboards and reports", automations: "Automations", automationsDesc: "Workflows that run themselves", integrations: "Integrations", integrationsDesc: "Connect the tools you use", security: "Security", securityDesc: "Roles, SSO and audit logs", agents: "Agents", voiceAgents: "Voice agents", voiceAgentsDesc: "Answer every call", chatAgents: "Chat agents", chatAgentsDesc: "Support around the clock", emailAgents: "Email agents", emailAgentsDesc: "Inbox zero, every day", smsAgents: "SMS agents", smsAgentsDesc: "Replies in seconds", new: "New", featureTitle: "Workflows 2.0 is here", featureDesc: "Branching, retries and a visual editor for every flow.", learnMore: "Learn more", solutions: "Solutions", industries: "Industries", telecom: "Telecommunications", finance: "Financial services", healthcare: "Healthcare", retail: "Retail and e-commerce", useCases: "Use cases", support: "Customer support", leads: "Lead qualification", outbound: "Outbound", companySize: "Company size", enterprise: "Enterprise", startups: "Startups", resources: "Resources", blog: "Blog", blogDesc: "Product news and stories", docs: "Documentation", docsDesc: "Guides and API reference", changelog: "Changelog", changelogDesc: "Recent features and fixes", customers: "Customers", logIn: "Log in", signUp: "Sign up" },
   };
   window.addEventListener("message", (e) => {
     const t = translations[e.data?.lang];
@@ -1003,14 +1144,14 @@ The menu folds below the `navbar` breakpoint, `md` by default. Move it with `--b
 
 Set each option with its own `data-sp-*` attribute on the `navbar-content` panel. The `navbar-collapse` takes `data-sp-toggle` the same way.
 
-| Attribute              | Values                | Default        |
-| ---------------------- | --------------------- | -------------- |
-| `data-sp-toggle`       | CSS selector          | None           |
-| `data-sp-placement`    | Floating UI placement | `bottom-start` |
-| `data-sp-offset`       | Number                | `8`            |
-| `data-sp-align-offset` | Number                | `0`            |
-| `data-sp-mode`         | `hover` \| `click`    | `hover`        |
-| `data-sp-item`         | CSS selector          | `.navbar-link` |
+| Attribute              | Values                | Default                                                         |
+| ---------------------- | --------------------- | --------------------------------------------------------------- |
+| `data-sp-toggle`       | CSS selector          | None                                                            |
+| `data-sp-placement`    | Floating UI placement | `bottom-start`                                                  |
+| `data-sp-offset`       | Number                | `8`                                                             |
+| `data-sp-align-offset` | Number                | `0`                                                             |
+| `data-sp-mode`         | `hover` \| `click`    | `hover`                                                         |
+| `data-sp-item`         | CSS selector          | `.navbar-link`, and the links and buttons in a `navbar-feature` |
 
 ```html
 <div class="navbar-content" data-sp-toggle="#products" data-sp-placement="bottom"></div>

@@ -20,7 +20,7 @@ export const NavbarContent = define({
 
   props: {
     offset: { type: Number, default: 8 },
-    item: { type: String, default: ".navbar-link" },
+    item: { type: String, default: ".navbar-link, .navbar-feature :is(a[href], button)" },
     orientation: { type: String, default: "both" },
     mode: { type: String, default: "hover" },
   },
