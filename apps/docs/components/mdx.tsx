@@ -119,7 +119,18 @@ function ComponentsList() {
 }
 
 function ExamplesList() {
-  return <NavGroupList group="Examples" />;
+  return (
+    <>
+      {docsNav
+        .filter((group) => group.title.endsWith(" Examples"))
+        .map((group) => (
+          <section key={group.title} className="mt-10">
+            <h2 className="text-xl font-medium tracking-tight">{group.title}</h2>
+            <NavGroupList group={group.title} />
+          </section>
+        ))}
+    </>
+  );
 }
 
 function ResourcesList() {
