@@ -106,4 +106,16 @@ export const docsNav: NavGroup[] = [
       { title: "Tables", href: "/examples/tables" },
     ],
   },
+  {
+    title: "Auth Examples",
+    items: [
+      { title: "Login", href: "/examples/login" },
+      { title: "Sign Up", href: "/examples/sign-up" },
+      { title: "Forgot Password", href: "/examples/forgot-password" },
+      { title: "Reset Password", href: "/examples/reset-password" },
+      { title: "Verify Email", href: "/examples/verify-email" },
+      { title: "Confirm Password", href: "/examples/confirm-password" },
+      { title: "Two-Factor", href: "/examples/two-factor" },
+    ],
+  },
 ];
