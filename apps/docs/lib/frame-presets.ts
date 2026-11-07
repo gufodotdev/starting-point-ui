@@ -251,6 +251,9 @@ export const framePresets: Record<string, CSSProperties> = {
   sidebar: {
     minHeight: "667px",
   },
+  page: {
+    minHeight: "1000px",
+  },
   navbar: {
     display: "flex",
     flexDirection: "column",

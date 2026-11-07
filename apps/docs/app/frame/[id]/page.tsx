@@ -25,7 +25,7 @@ export default async function FramePage({
   const example = await getPreviewExample(id);
   if (!example) notFound();
 
-  const html = await compilePreviewStyles(example.html);
+  const html = await compilePreviewStyles(example.html.replace(/\sautofocus(="[^"]*")?/gi, ""));
 
   return (
     <>
