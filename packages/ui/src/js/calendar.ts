@@ -89,7 +89,12 @@ export const Calendar = define({
   },
 
   init(this: SpInstance) {
-    this._inputs = [...this.el.querySelectorAll<HTMLInputElement>(':scope > input[type="date"]')];
+    // A date picker keeps its inputs in its root, around the popover that holds the calendar.
+    const host = this.el.closest(".date-picker-popover")?.closest<HTMLElement>(".date-picker") ?? this.el;
+    this._host = host;
+    // A copy of a drawn calendar, like a page cache snapshot, still holds its grid.
+    for (const el of this.el.querySelectorAll(":scope > [data-sp-clone]")) el.remove();
+    this._inputs = [...host.querySelectorAll<HTMLInputElement>(':scope > input[type="date"]')];
     const first = this._inputs[0] as HTMLInputElement | undefined;
     this._mode = (
       first?.multiple ? "multiple" : this._inputs.length >= 2 ? "range" : "single"
@@ -100,9 +105,16 @@ export const Calendar = define({
       this._name = first.name;
       this._required = first.required;
       first.removeAttribute("name");
-      const authored = [...this.el.querySelectorAll<HTMLInputElement>(`input[type="hidden"][name="${CSS.escape(this._name as string)}"]`)];
+      // Authored prefills stay put as the reset value and stop submitting; the
+      // picked dates are generated inputs, kept when the calendar starts over.
+      const authored = [...host.querySelectorAll<HTMLInputElement>(`input[type="hidden"][name="${CSS.escape(this._name as string)}"]:not([data-sp-clone])`)];
       this._authored = authored.map((c) => c.value);
-      this._setClones(this._authored as string[]);
+      const fresh = authored.some((input) => !input.hasAttribute("data-sp-prefill"));
+      for (const input of authored) {
+        input.setAttribute("data-sp-prefill", "");
+        input.disabled = true;
+      }
+      this._setClones(fresh ? (this._authored as string[]) : (this._clones() as HTMLInputElement[]).map((c) => c.value));
     }
     this._locale = (this.config.locale as string) || document.documentElement.lang || undefined;
     this._isDisabled = parseDisabled((this.config.disabled as string) ?? "");
@@ -120,6 +132,7 @@ export const Calendar = define({
 
     this._body = document.createElement("div");
     this._body.className = "calendar-months";
+    this._body.setAttribute("data-sp-clone", "");
     this.el.appendChild(this._body);
 
     this.on(this._body, "click", (e) => this._onClick(e as MouseEvent));
@@ -141,7 +154,7 @@ export const Calendar = define({
     });
 
     // Value changes made by scripts (or a form reset) re-render from the inputs.
-    this.on(this.el, "change", (e) => {
+    this.on(host, "change", (e) => {
       if (this._writing || !(e.target as HTMLElement).matches?.("input")) return;
       const iso = this._anchorDate();
       if (iso) this.goTo(iso.slice(0, 7));
@@ -165,7 +178,10 @@ export const Calendar = define({
   destroy(this: SpInstance) {
     (this._body as HTMLElement | undefined)?.remove();
     const first = (this._inputs as HTMLInputElement[])[0];
-    if (this._mode === "multiple" && first) first.name = this._name as string;
+    if (this._mode === "multiple" && first) {
+      first.name = this._name as string;
+      first.required = this._required as boolean;
+    }
   },
 
   methods: {
@@ -177,7 +193,7 @@ export const Calendar = define({
 
     _clones(this: SpInstance): HTMLInputElement[] {
       const name = CSS.escape((this._name as string) ?? "");
-      return [...this.el.querySelectorAll<HTMLInputElement>(`input[type="hidden"][name="${name}"]`)];
+      return [...(this._host as HTMLElement).querySelectorAll<HTMLInputElement>(`:scope > input[type="hidden"][name="${name}"][data-sp-clone]`)];
     },
 
     _setClones(this: SpInstance, values: string[]): void {
@@ -187,6 +203,7 @@ export const Calendar = define({
       for (const iso of values) {
         const clone = document.createElement("input");
         clone.type = "hidden";
+        clone.setAttribute("data-sp-clone", "");
         clone.name = this._name as string;
         clone.value = iso;
         after.insertAdjacentElement("afterend", clone);

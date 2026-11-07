@@ -83,7 +83,7 @@
     @apply flex min-h-9 flex-wrap items-center gap-1.5 rounded-md border border-input bg-transparent bg-clip-padding px-2.5 py-1.5 text-sm shadow-xs transition-[color,box-shadow];
     @apply focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50;
     @apply has-[[aria-invalid="true"]]:border-destructive has-[[aria-invalid="true"]]:ring-3 has-[[aria-invalid="true"]]:ring-destructive/20 dark:has-[[aria-invalid="true"]]:border-destructive/50 dark:has-[[aria-invalid="true"]]:ring-destructive/40;
-    @apply has-[.combobox-chip]:px-1.5 dark:bg-input/30;
+    @apply has-[.combobox-chip:not([hidden])]:px-1.5 dark:bg-input/30;
 
     /* The chips input needs no class: a bare input inside works as the
        query field. Once something is selected, the chips speak for it. */
@@ -92,7 +92,7 @@
       @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
     }
 
-    &:has(> .combobox-chip) > input::placeholder {
+    &:has(> .combobox-chip:not([hidden])) > input::placeholder {
       @apply text-transparent;
     }
 

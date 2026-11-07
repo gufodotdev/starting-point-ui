@@ -178,7 +178,7 @@ test("promise shows loading, then swaps to the settled state", async ({ page }) 
   expect(await page.locator(".toast-close").count()).toBe(1);
 });
 
-test("a [data-sp-toast] element fires as a toast and removes itself", async ({ page }) => {
+test("a [data-sp-toast] element fires as a toast", async ({ page }) => {
   await page.evaluate(() => {
     const el = document.createElement("div");
     el.id = "flash";
@@ -191,7 +191,7 @@ test("a [data-sp-toast] element fires as a toast and removes itself", async ({ p
   await expect(toasts(page)).toHaveCount(1);
   await expect(page.locator(".toast-title")).toHaveText("Post created");
   await expect(toasts(page)).toHaveClass(/toast-success/);
-  await expect(page.locator("#flash")).toHaveCount(0);
+  await expect(page.locator("#flash")).not.toHaveAttribute("data-sp-toast");
 });
 
 test("a plain string [data-sp-toast] works too", async ({ page }) => {
@@ -201,4 +201,50 @@ test("a plain string [data-sp-toast] works too", async ({ page }) => {
     document.body.appendChild(el);
   });
   await expect(page.locator(".toast-title")).toHaveText("Changes saved");
+});
+
+// A framework that rendered the trigger still owns it, and may update its
+// value or remove it later.
+test.describe("framework rendering", () => {
+  test("a fired [data-sp-toast] stays for the framework that rendered it", async ({ page }) => {
+    const error = await page.evaluate(async () => {
+      const parent = document.createElement("div");
+      document.body.appendChild(parent);
+      const el = document.createElement("div");
+      el.setAttribute("data-sp-toast", "Saved");
+      parent.appendChild(el);
+      await new Promise((r) => setTimeout(r, 50));
+      try {
+        parent.removeChild(el);
+        return null;
+      } catch (e) {
+        return (e as Error).name;
+      }
+    });
+    expect(error).toBe(null);
+    await expect(page.locator(".toast-title")).toHaveText("Saved");
+  });
+
+  test("a page snapshot restored with a fired [data-sp-toast] does not fire it again", async ({ page }) => {
+    await page.evaluate(async () => {
+      document.body.innerHTML = '<main><div data-sp-toast="Saved"></div></main>';
+      await new Promise((r) => setTimeout(r, 50));
+      const snapshot = document.querySelector("main")!.cloneNode(true);
+      document.querySelector("main")!.replaceWith(snapshot);
+      await new Promise((r) => setTimeout(r, 50));
+    });
+    await expect(page.locator(".toast-title")).toHaveCount(1);
+  });
+
+  test("a new value on the same element fires again", async ({ page }) => {
+    await page.evaluate(async () => {
+      const el = document.createElement("div");
+      el.id = "flash";
+      el.setAttribute("data-sp-toast", "Saved");
+      document.body.appendChild(el);
+      await new Promise((r) => setTimeout(r, 50));
+      el.setAttribute("data-sp-toast", "Deleted");
+    });
+    await expect(page.locator(".toast-title")).toHaveText(["Saved", "Deleted"]);
+  });
 });

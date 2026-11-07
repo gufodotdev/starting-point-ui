@@ -146,3 +146,64 @@ test("remount cycle x3: exactly one working instance, no doubled listeners", asy
   await page.click("#trigger");
   await expect(page.locator("#pop")).toHaveClass(/shown/);
 });
+
+// Frameworks often keep a node and patch its class, like React swapping a
+// skeleton for the real component in the same spot. These tests avoid the
+// sp.* accessors, which create an instance on demand and would hide a miss.
+test.describe("element reuse (class swap)", () => {
+  async function body(page: Page, html: string, patch: string) {
+    await page.evaluate(
+      async ([markup, script]) => {
+        document.body.innerHTML = markup;
+        await new Promise((r) => requestAnimationFrame(() => r(null)));
+        new Function(script)();
+        await new Promise((r) => setTimeout(r, 30));
+      },
+      [html, patch],
+    );
+  }
+
+  test("an element that gains a component class becomes that component", async ({ page }) => {
+    await body(
+      page,
+      `<label id="otp"><span></span><span></span><input id="code" maxlength="2" /></label>`,
+      `document.getElementById("otp").className = "input-otp";`,
+    );
+    await page.focus("#code");
+    await expect(page.locator("#otp > span.active")).toHaveCount(1);
+  });
+
+  test("an element that loses its component class is disposed", async ({ page }) => {
+    await body(
+      page,
+      `<label id="otp" class="input-otp"><span></span><span></span><input id="code" maxlength="2" /></label>`,
+      `document.getElementById("otp").className = "";`,
+    );
+    await page.focus("#code");
+    await expect(page.locator("#otp > span.active")).toHaveCount(0);
+  });
+
+  test("a skeleton patched into a chart draws", async ({ page }) => {
+    await body(
+      page,
+      `<div id="box" class="skeleton"></div>`,
+      `const box = document.getElementById("box");
+       box.innerHTML = '<svg class="chart-svg" style="width:300px;height:100px" aria-label="Sales"><path class="chart-line" aria-label="Sales"></path></svg>';
+       box.className = "chart";
+       box.setAttribute("data-sp-value", "[1,3,2]");`,
+    );
+    await page.waitForFunction(() => !!document.querySelector("#box svg")?.getAttribute("viewBox"));
+  });
+
+  test("a chart patched back into a skeleton removes what the chart added", async ({ page }) => {
+    await body(
+      page,
+      `<div id="box" class="chart" data-sp-value="[1,3,2]"><svg class="chart-svg" style="width:300px;height:100px" aria-label="Sales"><path class="chart-line" aria-label="Sales"></path></svg></div>`,
+      `const box = document.getElementById("box");
+       box.querySelector("svg").remove();
+       box.className = "skeleton";
+       box.removeAttribute("data-sp-value");`,
+    );
+    await expect(page.locator("#box > *")).toHaveCount(0);
+  });
+});

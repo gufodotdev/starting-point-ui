@@ -108,9 +108,12 @@ export const MessageScroller = define({
     resizeObserver.observe(content);
     this._resizeObserver = resizeObserver;
 
-    const mutationObserver = new MutationObserver(() =>
-      this._handleContentChange(),
-    );
+    // Frameworks append new messages after the spacer, which belongs last.
+    // Moving it back observes the change again.
+    const mutationObserver = new MutationObserver(() => {
+      if (content.lastElementChild !== spacer) content.append(spacer);
+      else this._handleContentChange();
+    });
     mutationObserver.observe(content, { childList: true });
     this._mutationObserver = mutationObserver;
 

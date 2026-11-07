@@ -194,6 +194,22 @@ test.describe("WAI-ARIA compliance", () => {
     }
   });
 
+  test("items rendered after mount get the same semantics", async ({ page }) => {
+    await mount(page, BASIC);
+    await page.evaluate(() => {
+      document.getElementById("menu")!.insertAdjacentHTML(
+        "beforeend",
+        '<div id="sep2" class="dropdown-separator"></div><button id="i4" class="dropdown-item">Four</button><div id="c1" class="dropdown-item dropdown-item-checkbox"><input type="checkbox" checked /> Pinned</div>',
+      );
+    });
+    await expect(page.locator("#i4")).toHaveAttribute("role", "menuitem");
+    await expect(page.locator("#i4")).toHaveAttribute("tabindex", "-1");
+    await expect(page.locator("#sep2")).toHaveAttribute("role", "separator");
+    await expect(page.locator("#c1")).toHaveRole("menuitemcheckbox");
+    await expect(page.locator("#c1")).toHaveAttribute("aria-checked", "true");
+    await expect(page.locator("#c1 input")).toHaveAttribute("tabindex", "-1");
+  });
+
   test("Enter on the trigger opens the menu and focuses the first item", async ({ page }) => {
     await mount(page, BASIC);
     await page.focus("#trigger");

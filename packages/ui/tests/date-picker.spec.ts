@@ -479,6 +479,33 @@ test("submitting with a required empty date opens the popover so the browser can
   await expect(page.locator("#trigger")).not.toHaveAttribute("aria-invalid");
 });
 
+test("a picker opened to report an invalid date still closes on Escape and outside clicks", async ({ page }) => {
+  const html = SINGLE.replace('name="date" />', 'name="date" required />') + '<div id="blank" style="height:40px">Blank</div>';
+  const report = () =>
+    page.evaluate(() => {
+      const form = document.querySelector("form")!;
+      form.addEventListener("submit", (e) => e.preventDefault(), { once: true });
+      form.requestSubmit();
+    });
+  await mount(page, html);
+  await report();
+  await expect(page.locator(".date-picker-popover")).toHaveClass(/shown/);
+  await page.keyboard.press("Escape");
+  await expect(page.locator(".date-picker-popover")).not.toHaveClass(/show/);
+  await report();
+  await expect(page.locator(".date-picker-popover")).toHaveClass(/shown/);
+  await page.mouse.click(5, (await page.locator("#blank").boundingBox())!.y + 20);
+  await expect(page.locator(".date-picker-popover")).not.toHaveClass(/show/);
+});
+
+test("the native inputs stay out of the tab order", async ({ page }) => {
+  await mount(page, '<button id="before">Before</button>' + SINGLE);
+  await page.focus("#trigger");
+  await page.keyboard.press("Shift+Tab");
+  await expect(page.locator("#date")).not.toBeFocused();
+  await expect(page.locator("#trigger")).not.toBeFocused();
+});
+
 test("a form reset returns the picker to its authored state", async ({ page }) => {
   await mount(page, PRESET);
   await open(page);
@@ -487,4 +514,69 @@ test("a form reset returns the picker to its authored state", async ({ page }) =
   await page.evaluate(() => document.querySelector<HTMLFormElement>("#form")!.reset());
   await expect(page.locator("#date")).toHaveValue("2026-09-12");
   await expect(value(page)).toHaveText("September 12, 2026");
+});
+
+// Frameworks own the authored inputs and remove or reorder them on their
+// original parent, so the picker must leave them where they were written.
+test.describe("framework rendering", () => {
+  test("keeps its inputs in the root they were authored in", async ({ page }) => {
+    await mount(page, RANGE);
+    const parents = await page.evaluate(() => ["from", "to"].map((id) => document.getElementById(id)!.parentElement!.id));
+    expect(parents).toEqual(["picker", "picker"]);
+  });
+
+  test("prefilled hidden inputs stay where they were authored", async ({ page }) => {
+    await mount(page, MULTIPLE.replace('multiple />', 'multiple />\n      <input id="prefill" type="hidden" name="dates" value="2026-09-04" />'));
+    const error = await page.evaluate(() => {
+      try {
+        document.getElementById("picker")!.removeChild(document.getElementById("prefill")!);
+        return null;
+      } catch (e) {
+        return (e as Error).name;
+      }
+    });
+    expect(error).toBe(null);
+  });
+
+  test("prefilled hidden inputs submit once, and not after the date is unpicked", async ({ page }) => {
+    await mount(page, MULTIPLE.replace('multiple />', 'multiple />\n      <input type="hidden" name="dates" value="2026-09-04" />'));
+    expect(await formData(page, "dates")).toEqual(["2026-09-04"]);
+    await open(page);
+    await day(page, "2026-09-04").click();
+    expect(await formData(page, "dates")).toEqual([]);
+  });
+
+  test("a prefill wrapped in another element is picked up too", async ({ page }) => {
+    await mount(page, MULTIPLE.replace('multiple />', 'multiple />\n      <div><input type="hidden" name="dates" value="2026-09-04" /></div>'));
+    expect(await formData(page, "dates")).toEqual(["2026-09-04"]);
+    await open(page);
+    await day(page, "2026-09-04").click();
+    expect(await formData(page, "dates")).toEqual([]);
+  });
+
+  test("a copy of a drawn picker, like a page cache snapshot, builds one calendar", async ({ page }) => {
+    await mount(page, MULTIPLE.replace('multiple />', 'multiple />\n      <input type="hidden" name="dates" value="2026-09-04" />'));
+    await page.evaluate(async () => {
+      const form = document.getElementById("form")!;
+      const copy = form.cloneNode(true) as HTMLElement;
+      form.remove();
+      document.body.append(copy);
+      await new Promise((r) => setTimeout(r, 50));
+    });
+    await expect(page.locator(".calendar-months")).toHaveCount(1);
+    expect(await formData(page, "dates")).toEqual(["2026-09-04"]);
+  });
+
+  test("an input removed with removeChild doesn't throw", async ({ page }) => {
+    await mount(page, SINGLE);
+    const error = await page.evaluate(() => {
+      try {
+        document.getElementById("picker")!.removeChild(document.getElementById("date")!);
+        return null;
+      } catch (e) {
+        return (e as Error).name;
+      }
+    });
+    expect(error).toBe(null);
+  });
 });

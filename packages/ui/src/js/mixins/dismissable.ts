@@ -2,10 +2,17 @@
 
 import type { Mixin, SpInstance } from "../define";
 
+const handled = new WeakSet<Event>();
+
 export const Dismissable: Mixin = {
   init(this: SpInstance) {
-    this.el.querySelectorAll<HTMLElement>("[data-sp-dismiss]").forEach((btn) => {
-      this.on(btn, "click", () => this.hide());
+    // Delegated so buttons rendered later work too. Only the innermost
+    // overlay acts, as the click bubbles through every one around it.
+    this.on(this.el, "click", (e) => {
+      const btn = (e.target as Element).closest("[data-sp-dismiss]");
+      if (!btn || !this.el.contains(btn) || handled.has(e)) return;
+      handled.add(e);
+      this.hide();
     });
   },
 };

@@ -333,3 +333,21 @@ test("sp-change reports the scrollable edges", async ({ page }) => {
     )
     .toEqual({ start: true, end: true });
 });
+
+// Frameworks append new messages with appendChild, after anything already in
+// the list, so the spacer has to move back to the end.
+test.describe("framework rendering", () => {
+  test("a message appended after mount lands before the spacer", async ({ page }) => {
+    await mount(page, fixture({ items: 3 }));
+    await page.evaluate(async () => {
+      const item = document.createElement("div");
+      item.className = "message-scroller-item";
+      item.id = "m4";
+      item.style.height = "80px";
+      document.querySelector(".message-scroller-content")!.appendChild(item);
+      await new Promise((r) => setTimeout(r, 50));
+    });
+    const last = await page.evaluate(() => document.querySelector(".message-scroller-content")!.lastElementChild!.id === "m4");
+    expect(last).toBe(false);
+  });
+});

@@ -26,31 +26,41 @@ export const Tabs = define({
       this.el.setAttribute("aria-orientation", "vertical");
     }
 
-    const tabs: HTMLElement[] = this._tabs();
-    tabs.forEach((tab) => {
-      if (!tab.hasAttribute("role")) tab.setAttribute("role", "tab");
-      const panel = this._panel(tab);
-      if (!panel) return;
-      if (!panel.hasAttribute("role")) panel.setAttribute("role", "tabpanel");
-      tab.setAttribute("aria-controls", ensureId(panel));
-      panel.setAttribute("aria-labelledby", ensureId(tab));
-      // Tab from the tablist lands on the panel even when its content
-      // holds nothing focusable.
-      if (!panel.hasAttribute("tabindex")) panel.tabIndex = 0;
-    });
-
-    const initial =
-      tabs.find((tab) => tab.classList.contains("active")) ??
-      tabs.find((tab) => !isDisabled(tab));
-    if (initial) this._sync(initial);
+    this._wire();
+    this._observer = new MutationObserver(() => this._wire());
+    this._observer.observe(this.el, { childList: true, subtree: true });
 
     this.on(this.el, "click", (e) => {
       const tab = (e.target as HTMLElement).closest<HTMLElement>(TAB);
-      if (tab && tabs.includes(tab)) this.select(tab);
+      if (tab) this.select(tab);
     });
   },
 
+  destroy(this: SpInstance) {
+    (this._observer as MutationObserver | undefined)?.disconnect();
+  },
+
   methods: {
+    _wire(this: SpInstance): void {
+      const tabs: HTMLElement[] = this._tabs();
+      tabs.forEach((tab) => {
+        if (!tab.hasAttribute("role")) tab.setAttribute("role", "tab");
+        const panel = this._panel(tab);
+        if (!panel) return;
+        if (!panel.hasAttribute("role")) panel.setAttribute("role", "tabpanel");
+        tab.setAttribute("aria-controls", ensureId(panel));
+        panel.setAttribute("aria-labelledby", ensureId(tab));
+        // Tab from the tablist lands on the panel even when its content
+        // holds nothing focusable.
+        if (!panel.hasAttribute("tabindex")) panel.tabIndex = 0;
+      });
+
+      const selected =
+        tabs.find((tab) => tab.classList.contains("active")) ??
+        tabs.find((tab) => !isDisabled(tab));
+      if (selected) this._sync(selected);
+    },
+
     // Nested tab-lists own their own tabs.
     _tabs(this: SpInstance): HTMLElement[] {
       return [...this.el.querySelectorAll<HTMLElement>(TAB)].filter(

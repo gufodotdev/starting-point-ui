@@ -145,6 +145,21 @@ test("nested tabs stay independent", async ({ page }) => {
   await expect(page.locator("#n2")).toHaveClass(/active/);
 });
 
+test("a tab added after mount is wired and selectable", async ({ page }) => {
+  await mount(page, PRESELECTED);
+  await page.evaluate(() => {
+    document.getElementById("root")!.insertAdjacentHTML("beforeend", '<button id="t3" class="tab" data-sp-toggle="#p3">Three</button>');
+    document.body.insertAdjacentHTML("beforeend", '<div id="p3" class="tab-content">Panel three</div>');
+  });
+  await expect(page.locator("#t3")).toHaveAttribute("role", "tab");
+  await expect(page.locator("#t3")).toHaveAttribute("aria-selected", "false");
+  await expect(page.locator("#t3")).toHaveAttribute("aria-controls", "p3");
+  await expect(page.locator("#p3")).toHaveAttribute("role", "tabpanel");
+  await page.click("#t3");
+  await expect(page.locator("#p3")).toHaveClass(/active/);
+  await expect(page.locator("#p2")).not.toHaveClass(/active/);
+});
+
 test("sp.tabs(el) returns the instance with the public API", async ({ page }) => {
   await mount(page, BASIC);
   const api = await page.evaluate(() => {

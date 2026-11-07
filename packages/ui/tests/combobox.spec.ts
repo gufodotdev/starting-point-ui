@@ -235,10 +235,10 @@ test.describe("input-anchored", () => {
 test.describe("chips multi-select", () => {
   test("adopts an authored chip on init without duplicating it", async ({ page }) => {
     await mount(page, CHIPS);
-    await expect(page.locator("#chips .combobox-chip")).toHaveCount(1);
-    await expect(page.locator("#chips .combobox-chip")).toContainText("Next.js");
-    await page.click("#chips .combobox-chip-remove");
-    await expect(page.locator("#chips .combobox-chip")).toHaveCount(0);
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(1);
+    await expect(page.locator("#chips .combobox-chip:visible")).toContainText("Next.js");
+    await page.click("#chips .combobox-chip:visible .combobox-chip-remove");
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(0);
     await expect(page.locator("#i1 input")).not.toBeChecked();
   });
 
@@ -249,7 +249,7 @@ test.describe("chips multi-select", () => {
     await page.fill("#chin", "as");
     await expect(page.locator("#i2")).toBeVisible();
     await page.click("#i2");
-    await expect(page.locator("#chips .combobox-chip")).toHaveCount(2);
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(2);
     await expect(panel(page)).toHaveClass(/shown/);
     await expect(page.locator("#chin")).toHaveValue("");
     expect(
@@ -262,8 +262,8 @@ test.describe("chips multi-select", () => {
   test("a chip's remove button unchecks its option and fires change", async ({ page }) => {
     await mount(page, CHIPS);
     await trackChanges(page);
-    await page.click("#chips .combobox-chip-remove");
-    await expect(page.locator("#chips .combobox-chip")).toHaveCount(0);
+    await page.click("#chips .combobox-chip:visible .combobox-chip-remove");
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(0);
     await expect(page.locator("#i1 input")).not.toBeChecked();
     expect(await changes(page)).toEqual(["next:false"]);
   });
@@ -272,10 +272,10 @@ test.describe("chips multi-select", () => {
     await mount(page, CHIPS);
     await page.click("#chips");
     await page.click("#i2");
-    await expect(page.locator("#chips .combobox-chip")).toHaveCount(2);
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(2);
     await page.focus("#chin");
     await page.keyboard.press("Backspace");
-    await expect(page.locator("#chips .combobox-chip")).toHaveCount(1);
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(1);
     await expect(page.locator("#i2 input")).not.toBeChecked();
   });
 
@@ -283,7 +283,63 @@ test.describe("chips multi-select", () => {
     await mount(page, CHIPS);
     await page.click("#chips");
     await page.click("#i1");
-    await expect(page.locator("#chips .combobox-chip")).toHaveCount(0);
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(0);
     await expect(panel(page)).toHaveClass(/shown/);
+  });
+});
+
+// Server or framework rendered chips paint before JS; a framework still owns
+// them afterwards and removes them from their original parent.
+test.describe("framework rendering", () => {
+  test("an authored chip removed with removeChild doesn't throw", async ({ page }) => {
+    await mount(page, CHIPS.replace('<span class="combobox-chip">', '<span id="authored" class="combobox-chip">'));
+    const error = await page.evaluate(() => {
+      try {
+        document.getElementById("chips")!.removeChild(document.getElementById("authored")!);
+        return null;
+      } catch (e) {
+        return (e as Error).name;
+      }
+    });
+    expect(error).toBe(null);
+  });
+
+  test("shows one chip per checked option, authored ones included", async ({ page }) => {
+    await mount(page, CHIPS);
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(1);
+  });
+
+  test("a chip the framework renders after a pick shows once", async ({ page }) => {
+    await mount(page, CHIPS);
+    await page.evaluate(() => {
+      document.querySelector("#cb")!.addEventListener("change", (e) => {
+        const input = e.target as HTMLInputElement;
+        if (!input.checked) return;
+        const chip = document.createElement("span");
+        chip.className = "combobox-chip";
+        chip.textContent = input.value;
+        document.getElementById("chin")!.before(chip);
+      });
+    });
+    await page.click("#chin");
+    await page.click("#i2");
+    await expect(page.locator("#chips .combobox-chip:visible")).toHaveCount(2);
+  });
+
+  test("options a server search swaps in are wired and pickable", async ({ page }) => {
+    await mount(page, INPUT_ANCHORED);
+    await page.focus("#fw");
+    await page.keyboard.press("ArrowDown");
+    await page.evaluate((hide) => {
+      document.querySelector("#cb .combobox-list")!.innerHTML =
+        `<div id="s1" class="combobox-item"><input type="radio" ${hide} name="fw" value="svelte" /> Svelte</div>`;
+    }, HIDE);
+    await expect(page.locator("#s1")).toHaveRole("option");
+    await expect(page.locator("#s1")).toHaveAttribute("aria-selected", "false");
+    await page.keyboard.press("ArrowDown");
+    expect(await highlighted(page)).toBe("s1");
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#fw")).toHaveValue("Svelte");
+    await expect(page.locator("#s1")).toHaveAttribute("aria-selected", "true");
   });
 });

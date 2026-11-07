@@ -31,6 +31,8 @@ export const Carousel = define({
     const content = this.el.querySelector<HTMLElement>(".carousel-content");
     if (!content) return;
     this._content = content;
+    // A copy of a looping carousel, like a page cache snapshot, still holds its clones.
+    for (const el of content.querySelectorAll(":scope > [data-sp-clone]")) el.remove();
     this._index = 0;
     this._pendingIndex = 0;
     this._fade = this.el.classList.contains("carousel-fade");

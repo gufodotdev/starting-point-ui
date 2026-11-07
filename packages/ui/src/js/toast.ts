@@ -70,7 +70,8 @@ function emit(el: HTMLElement, type: string) {
 
 function getContainer(position: string) {
   let entry = containers.get(position);
-  if (entry) return entry;
+  // A page that swaps <body>, like Turbo or htmx boost, takes the container with it.
+  if (entry?.element.isConnected) return entry;
 
   const container = document.createElement("ol");
   container.classList.add("toaster", `toaster-${position}`);
@@ -388,7 +389,8 @@ if (skipFlash && typeof document !== "undefined") {
 }
 
 // Flash trigger: an element carrying a toast as a plain string or JSON config,
-// fired and removed on sight. Lets server-rendered redirects queue toasts.
+// fired on sight. Lets server-rendered redirects queue toasts. Removing the
+// attribute rather than the element leaves the element to whatever rendered it.
 export const ToastTrigger = define({
   name: "toast-trigger",
   selector: "[data-sp-toast]",
@@ -402,7 +404,7 @@ export const ToastTrigger = define({
     } catch {
       toast(value);
     }
-    this.el.remove();
+    this.el.removeAttribute("data-sp-toast");
   },
 });
 

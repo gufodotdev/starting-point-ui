@@ -2,6 +2,7 @@
 
 import { define } from "./define";
 import type { SpInstance } from "./define";
+import { reinit } from "./observer";
 import { INTERVALS, arcPath, intervalMs, linePath, linearTicks, roundedRect, tickFormat, timeTicks, toTime } from "./chart-math";
 import type { Point } from "./chart-math";
 
@@ -15,6 +16,7 @@ interface Layer {
   proto: SVGElement;
   host: SVGGElement;
   next: SVGGElement;
+  display: string;
 }
 
 interface Mark {
@@ -87,12 +89,24 @@ function extent(values: number[]): [number, number] {
 
 const generated = <T extends Element>(el: T) => (el.setAttribute("data-sp-clone", ""), el);
 
-function take(proto: Element): Layer {
-  const defs = generated(svgEl("defs"));
+// The template stays where it was authored, hidden, so a framework that
+// rendered it can still update or remove it.
+function take(proto: Element, into?: Element): Layer {
+  const el = proto as SVGElement;
   const host = generated(svgEl<SVGGElement>("g"));
-  proto.replaceWith(defs, host);
-  defs.append(proto);
-  return { proto: proto as SVGElement, host, next: host };
+  if (into) into.append(host);
+  else el.after(host);
+  const display = el.style.display;
+  el.setAttribute("data-sp-template", "");
+  el.style.display = "none";
+  return { proto: el, host, next: host, display };
+}
+
+function release(layer: Layer): void {
+  layer.host.remove();
+  layer.proto.removeAttribute("data-sp-template");
+  layer.proto.style.display = layer.display;
+  if (!layer.proto.getAttribute("style")) layer.proto.removeAttribute("style");
 }
 
 function make(layer: Layer, tag: string, attrs: Record<string, string | number> = {}): SVGElement {
@@ -103,6 +117,9 @@ function make(layer: Layer, tag: string, attrs: Record<string, string | number> 
     el = svgEl(tag);
     for (const a of layer.proto.attributes) el.setAttribute(a.name, a.value);
   }
+  el.removeAttribute("data-sp-template");
+  el.style.display = layer.display;
+  if (!el.getAttribute("style")) el.removeAttribute("style");
   for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, String(v));
   return el;
 }
@@ -113,7 +130,7 @@ function measure(svg: SVGSVGElement, layer: Layer | undefined, labels: string[])
   if (!layer || !labels.length) return { width: 0, height: 0 };
   const longest = [...new Set(labels)].sort((a, b) => b.length - a.length).slice(0, 12);
   const texts = longest.map((label) => {
-    const text = make(layer, "text") as SVGTextElement;
+    const text = generated(make(layer, "text") as SVGTextElement);
     text.textContent = label;
     return svg.appendChild(text);
   });
@@ -739,9 +756,10 @@ export const Chart = define({
 
   init(this: SpInstance) {
     // Resets a copy of a drawn chart, like a page cache snapshot.
-    for (const el of this.el.querySelectorAll("[data-sp-clone]")) {
-      if (el.localName === "defs") el.replaceWith(...el.childNodes);
-      else el.remove();
+    for (const el of this.el.querySelectorAll("[data-sp-clone]")) el.remove();
+    for (const el of this.el.querySelectorAll<SVGElement>("[data-sp-template]")) {
+      el.removeAttribute("data-sp-template");
+      el.style.removeProperty("display");
     }
 
     const svg = this.el.querySelector<SVGSVGElement>(".chart-svg");
@@ -781,17 +799,22 @@ export const Chart = define({
       const [group, stack] = [el.closest(".chart-group"), el.closest(".chart-stack")];
       this._marks.push({ kind, layer: track(take(el)), field: attr(el, "field") ?? "value", group, stack });
     }
+    // Axes draw into a copy of their group at the start of the svg, under the marks.
+    const shells: Element[] = [];
     for (const el of svg.querySelectorAll(".chart-axis")) {
+      const shell = generated(el.cloneNode(false) as Element);
+      shell.removeAttribute("id");
+      shells.push(shell);
       const axis: Axis = { el, dir: attr(el, "axis") === "y" ? "y" : "x", parts: {} };
       for (const part of ["grid", "line", "mark", "tick"] as const) {
         const proto = el.querySelector(`.chart-axis-${part}`);
-        if (proto) axis.parts[part] = track(take(proto));
+        if (proto) axis.parts[part] = track(take(proto, shell));
       }
       this._axes.push(axis);
     }
     const cursor = svg.querySelector(".chart-cursor");
     if (cursor) this._cursor = track(take(cursor));
-    svg.prepend(...this._axes.map((a: Axis) => a.el), ...(this._cursor ? [this._cursor.host] : []));
+    svg.prepend(...shells, ...(this._cursor ? [this._cursor.host] : []));
     const zero = svg.querySelector(".chart-zero-line");
     if (zero) this._zero = track(take(zero));
 
@@ -826,6 +849,16 @@ export const Chart = define({
     });
     resize.observe(svg);
     this._observers.push(resize);
+
+    // A framework adding or removing declared svg parts, like a series toggled
+    // off, starts the chart over.
+    const part = '[class^="chart-"], [class*=" chart-"]';
+    const declared = (node: Node) => node instanceof Element && !node.hasAttribute("data-sp-clone") && (node.matches(part) || !!node.querySelector(part));
+    const structure = new MutationObserver((records) => {
+      if (records.some((r) => !(r.target as Element).closest("[data-sp-clone]") && [...r.addedNodes, ...r.removedNodes].some(declared))) reinit(this.el, Chart);
+    });
+    structure.observe(svg, { childList: true, subtree: true });
+    this._observers.push(structure);
     charts.add(this);
     locale?.observe(document.documentElement, { attributes: true, subtree: true, attributeFilter: ["dir", "lang"] });
     if (document.fonts && document.fonts.status !== "loaded") document.fonts.ready.then(() => charts.has(this) && this._redraw());
@@ -899,10 +932,8 @@ export const Chart = define({
     this._cancel();
     for (const observer of this._observers) observer.disconnect();
     charts.delete(this);
-    for (const layer of this._layers as Layer[]) {
-      layer.proto.parentElement?.replaceWith(layer.proto);
-      layer.host.remove();
-    }
+    for (const layer of this._layers as Layer[]) release(layer);
+    for (const el of this._svg?.querySelectorAll("[data-sp-clone]") ?? []) el.remove();
     this._table?.remove();
     this._live?.remove();
     for (const name of this._added) this._svg?.removeAttribute(name);

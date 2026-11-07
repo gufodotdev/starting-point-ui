@@ -66,6 +66,30 @@ test("closes from a dismiss button", async ({ page }) => {
   expect(await dialog(page).evaluate((el: HTMLDialogElement) => el.open)).toBe(false);
 });
 
+test("closes from a dismiss button rendered after it opened", async ({ page }) => {
+  await mount(page, BASIC.replace('<button id="dismiss" data-sp-dismiss>Close</button>', '<div id="body">Loading</div>'));
+  await page.click("#trigger");
+  await page.evaluate(() => {
+    document.getElementById("body")!.innerHTML = '<button id="dismiss" data-sp-dismiss>Close</button>';
+  });
+  await page.click("#dismiss");
+  await expect(dialog(page)).not.toHaveClass(/shown/);
+});
+
+test("a dismiss button closes only the dialog it sits in", async ({ page }) => {
+  await mount(page, `
+    <button id="trigger" class="btn">Open</button>
+    <dialog id="outer" class="dialog" data-sp-toggle="#trigger">
+      <button id="inner-trigger">More</button>
+      <dialog id="inner" class="dialog" data-sp-toggle="#inner-trigger"><button id="dismiss" data-sp-dismiss>Close</button></dialog>
+    </dialog>`);
+  await page.click("#trigger");
+  await page.click("#inner-trigger");
+  await page.click("#dismiss");
+  await expect(page.locator("#inner")).not.toHaveClass(/shown/);
+  await expect(page.locator("#outer")).toHaveClass(/shown/);
+});
+
 test("closes on Escape", async ({ page }) => {
   await mount(page, BASIC);
   await page.click("#trigger");

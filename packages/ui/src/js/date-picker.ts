@@ -1,6 +1,7 @@
 // A calendar in a popover behind a trigger, bound to the native date inputs
-// inside the root. The picker builds the popover and calendar itself; the
-// trigger shows the selection formatted for the locale.
+// inside the root. The picker builds the popover and calendar itself and leaves
+// the inputs where they were authored; the trigger shows the selection
+// formatted for the locale.
 
 import { define } from "./define";
 import type { SpInstance } from "./define";
@@ -24,7 +25,7 @@ export const DatePicker = define({
     // A node that left the DOM and came back still holds the popover it built.
     const popover = (this.el.querySelector<HTMLElement>(":scope > .date-picker-popover") ?? this._build(trigger)) as HTMLElement;
     const calendar = popover.querySelector<HTMLElement>(".calendar") as HTMLElement;
-    const inputs = [...calendar.querySelectorAll<HTMLInputElement>(':scope > input[type="date"]')];
+    const inputs = [...this.el.querySelectorAll<HTMLInputElement>(':scope > input[type="date"]')];
     if (!inputs.length) return;
 
     this._popover = getInstance(popover, Popover);
@@ -39,7 +40,7 @@ export const DatePicker = define({
       if (this._calendar._mode === "single") this._popover.hide();
     });
     // Script edits and form resets reach the inputs directly.
-    this.on(calendar, "change", (e) => {
+    this.on(this.el, "change", (e) => {
       if ((e.target as HTMLElement).matches("input")) this._syncLabel();
     });
     const form = inputs[0].form;
@@ -54,6 +55,19 @@ export const DatePicker = define({
         this.show();
       });
     }
+    // The inputs stay visually hidden in the root, so only the browser's
+    // validation reaches them. That focus sits outside the popover and must
+    // not close it.
+    for (const input of inputs) {
+      input.tabIndex = -1;
+      this.on(input, "focus", () => {
+        this._focusing = true;
+        setTimeout(() => (this._focusing = false));
+      });
+    }
+    this.on(popover, "sp-beforehide", (e) => {
+      if (e.target === popover && this._focusing) e.preventDefault();
+    });
     this.on(popover, "sp-shown", (e) => {
       if (e.target !== popover) return;
       // Keep the input focused when the browser is reporting it invalid, so its
@@ -79,8 +93,6 @@ export const DatePicker = define({
         const option = name.slice("data-sp-".length);
         (POPOVER_OPTIONS.includes(option) ? popover : calendar).setAttribute(name, value);
       }
-      // The calendar owns the inputs, hidden prefills included.
-      this.el.querySelectorAll<HTMLInputElement>(":scope > input").forEach((input) => calendar.appendChild(input));
       popover.appendChild(calendar);
       this.el.appendChild(popover);
       return popover;

@@ -17,31 +17,10 @@ export function Menu(prefix: string, self: () => ComponentFactory): Mixin {
       if (trigger && !this.el.hasAttribute("aria-label") && !this.el.hasAttribute("aria-labelledby")) {
         this.el.setAttribute("aria-labelledby", ensureId(trigger));
       }
-      // Checkable items hold their state in a hidden native input (combobox-
-      // style), so change events, form data, and :checked queries all work; the
-      // item carries the menu role and mirrors the input onto aria-checked.
-      // Their roles resolve first so the generic menuitem fallback below leaves
-      // them alone.
-      this.el
-        .querySelectorAll<HTMLElement>(`.${prefix}-item-checkbox, .${prefix}-item-radio`)
-        .forEach((item) => {
-          if (!item.hasAttribute("role")) {
-            const radio = item.classList.contains(`${prefix}-item-radio`);
-            item.setAttribute("role", radio ? "menuitemradio" : "menuitemcheckbox");
-          }
-          const input = item.querySelector<HTMLInputElement>("input");
-          if (input) input.tabIndex = -1;
-          item.setAttribute("aria-checked", String(input?.checked ?? false));
-        });
+      this._wireItems();
+      this._itemObserver = new MutationObserver(() => this._wireItems());
+      this._itemObserver.observe(this.el, { childList: true, subtree: true });
       this.on(this.el, "change", () => this._syncChecked());
-      this.el.querySelectorAll<HTMLElement>(this.config.item as string).forEach((item) => {
-        if (!item.hasAttribute("role")) item.setAttribute("role", "menuitem");
-        // Roving tabindex: arrows navigate the menu, Tab leaves and closes it.
-        item.tabIndex = -1;
-      });
-      this.el.querySelectorAll<HTMLElement>(`.${prefix}-separator`).forEach((sep) => {
-        if (!sep.hasAttribute("role")) sep.setAttribute("role", "separator");
-      });
 
       // Enter/Space activate the focused item; one synthesized click covers both
       // link items (no native Space activation) and button items (no doubling).
@@ -115,7 +94,38 @@ export function Menu(prefix: string, self: () => ComponentFactory): Mixin {
       });
     },
 
+    destroy(this: SpInstance) {
+      (this._itemObserver as MutationObserver | undefined)?.disconnect();
+    },
+
     methods: {
+      // Checkable items hold their state in a hidden native input (combobox-
+      // style), so change events, form data, and :checked queries all work; the
+      // item carries the menu role and mirrors the input onto aria-checked.
+      // Their roles resolve first so the generic menuitem fallback below leaves
+      // them alone.
+      _wireItems(this: SpInstance): void {
+        this.el
+          .querySelectorAll<HTMLElement>(`.${prefix}-item-checkbox, .${prefix}-item-radio`)
+          .forEach((item) => {
+            if (!item.hasAttribute("role")) {
+              const radio = item.classList.contains(`${prefix}-item-radio`);
+              item.setAttribute("role", radio ? "menuitemradio" : "menuitemcheckbox");
+            }
+            const input = item.querySelector<HTMLInputElement>("input");
+            if (input) input.tabIndex = -1;
+            item.setAttribute("aria-checked", String(input?.checked ?? false));
+          });
+        this.el.querySelectorAll<HTMLElement>(this.config.item as string).forEach((item) => {
+          if (!item.hasAttribute("role")) item.setAttribute("role", "menuitem");
+          // Roving tabindex: arrows navigate the menu, Tab leaves and closes it.
+          item.tabIndex = -1;
+        });
+        this.el.querySelectorAll<HTMLElement>(`.${prefix}-separator`).forEach((sep) => {
+          if (!sep.hasAttribute("role")) sep.setAttribute("role", "separator");
+        });
+      },
+
       // Opens the submenu anchored to `item` and moves focus into it. A no-op
       // show when it's already open still refocuses the first item.
       _openSub(this: SpInstance, item: HTMLElement): void {

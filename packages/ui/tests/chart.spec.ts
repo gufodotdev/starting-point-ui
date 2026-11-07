@@ -884,3 +884,80 @@ test.describe("labels", () => {
     }
   });
 });
+
+// Frameworks own the declared markup: React removes a series it stops rendering
+// with removeChild on the element's original parent, and adds it back with
+// insertBefore. The chart must leave declared elements where they were authored.
+test.describe("framework rendering", () => {
+  const TWO = `
+    <div id="chart" class="chart" ${data([{ m: "Jan", a: 1, b: 4 }, { m: "Feb", a: 3, b: 2 }, { m: "Mar", a: 2, b: 5 }])}>
+      <svg id="svg" ${SVG} aria-label="Sales">
+        <path id="a" class="chart-line" data-sp-field="a" aria-label="A"></path>
+        <path id="b" class="chart-line" data-sp-field="b" aria-label="B"></path>
+        <g id="x" class="chart-axis" data-sp-axis="x" data-sp-field="m"><text class="chart-axis-tick"></text></g>
+      </svg>
+    </div>`;
+  const drawn = (page: Page, field: string) => page.locator(`g[data-sp-clone] > .chart-line[data-sp-field="${field}"]`).count();
+
+  test("an unrelated element rendered inside a chart card leaves the chart drawn", async ({ page }) => {
+    await mount(page, TWO);
+    const same = await page.evaluate(async () => {
+      const host = document.querySelector("g[data-sp-clone] > .chart-line")!.parentElement;
+      document.getElementById("chart")!.insertAdjacentHTML("afterbegin", '<span class="badge">Live</span>');
+      await new Promise((r) => setTimeout(r, 50));
+      return host!.isConnected;
+    });
+    expect(same).toBe(true);
+  });
+
+  test("legend rows a framework renders again leave the chart drawn", async ({ page }) => {
+    await mount(page, TWO.replace("</svg>", '</svg><div id="legend" class="chart-legend"></div>'));
+    const same = await page.evaluate(async () => {
+      const host = document.querySelector("g[data-sp-clone] > .chart-line")!.parentElement;
+      document.getElementById("legend")!.innerHTML = '<span class="chart-legend-indicator"></span> A';
+      await new Promise((r) => setTimeout(r, 50));
+      return host!.isConnected;
+    });
+    expect(same).toBe(true);
+  });
+
+  test("declared marks and axes stay in the parent they were authored in", async ({ page }) => {
+    await mount(page, TWO);
+    const parents = await page.evaluate(() => ["a", "b", "x"].map((id) => document.getElementById(id)!.parentElement!.id));
+    expect(parents).toEqual(["svg", "svg", "svg"]);
+  });
+
+  test("axes still draw under the marks", async ({ page }) => {
+    await mount(page, TWO);
+    const first = await page.evaluate(() => document.getElementById("svg")!.firstElementChild!.matches(".chart-axis[data-sp-clone]"));
+    expect(first).toBe(true);
+  });
+
+  test("a series removed with removeChild redraws without it", async ({ page }) => {
+    await mount(page, TWO);
+    await page.evaluate(() => document.getElementById("svg")!.removeChild(document.getElementById("b")!));
+    await settle(page);
+    expect(await drawn(page, "a")).toBe(1);
+    expect(await drawn(page, "b")).toBe(0);
+  });
+
+  test("a series added back with insertBefore is drawn", async ({ page }) => {
+    await mount(page, TWO);
+    await page.evaluate(() => {
+      const svg = document.getElementById("svg")!;
+      const b = document.getElementById("b")!;
+      svg.removeChild(b);
+      svg.insertBefore(b, document.getElementById("x"));
+    });
+    await settle(page);
+    expect(await drawn(page, "b")).toBe(1);
+  });
+
+  test("an axis removed with removeChild redraws without it", async ({ page }) => {
+    await mount(page, TWO);
+    await page.evaluate(() => document.getElementById("svg")!.removeChild(document.getElementById("x")!));
+    await settle(page);
+    await expect(page.locator(".chart-axis-tick:not([data-sp-template])")).toHaveCount(0);
+    expect(await drawn(page, "a")).toBe(1);
+  });
+});

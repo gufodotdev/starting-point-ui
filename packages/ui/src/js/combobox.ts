@@ -67,18 +67,9 @@ export const Combobox = define({
       }
     }
 
-    this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
-      if (!item.hasAttribute("role")) item.setAttribute("role", "option");
-      // Options are highlighted via aria-activedescendant, never focused; the
-      // state-holding input stays out of the tab order too.
-      item.tabIndex = -1;
-      const input = item.querySelector<HTMLInputElement>("input");
-      if (input) {
-        input.tabIndex = -1;
-        // aria-selected follows the input's checked state; authors only set checked.
-        item.setAttribute("aria-selected", String(input.checked));
-      }
-    });
+    this._wireItems();
+    this._observer = new MutationObserver(() => this._wireItems());
+    this._observer.observe(list ?? this.el, { childList: true, subtree: true });
 
     // Pressing an item must not blur the input: on mobile the blur dismisses
     // the keyboard and the resulting layout shift moves the item away before
@@ -167,11 +158,37 @@ export const Combobox = define({
     });
 
     this._renderChips();
+    if (chips) {
+      this._chipObserver = new MutationObserver(() => this._hideAuthoredChips());
+      this._chipObserver.observe(chips, { childList: true });
+    }
     this._syncClear();
     if (anchorInput && !chips) anchorInput.value = this._selectedLabel();
   },
 
+  destroy(this: SpInstance) {
+    (this._observer as MutationObserver | undefined)?.disconnect();
+    this._chipObserver?.disconnect();
+    (this._chips as HTMLElement | null)?.querySelectorAll(".combobox-chip[data-sp-clone]").forEach((chip) => chip.remove());
+    for (const chip of (this._authoredChips as Set<HTMLElement> | undefined) ?? []) chip.hidden = false;
+  },
+
   methods: {
+    _wireItems(this: SpInstance): void {
+      this.el.querySelectorAll<HTMLElement>(ITEM).forEach((item) => {
+        if (!item.hasAttribute("role")) item.setAttribute("role", "option");
+        // Options are highlighted via aria-activedescendant, never focused; the
+        // state-holding input stays out of the tab order too.
+        item.tabIndex = -1;
+        const input = item.querySelector<HTMLInputElement>("input");
+        if (input) {
+          input.tabIndex = -1;
+          // aria-selected follows the input's checked state; authors only set checked.
+          item.setAttribute("aria-selected", String(input.checked));
+        }
+      });
+    },
+
     filter(this: SpInstance, query: string): void {
       const normalized = query.trim().toLowerCase();
       let visibleCount = 0;
@@ -317,17 +334,30 @@ export const Combobox = define({
         .filter((item): item is HTMLElement => item !== null);
     },
 
+    // Chips rendered by the server or a framework stay for whatever rendered
+    // them, hidden behind the generated ones, which follow the selection.
+    _hideAuthoredChips(this: SpInstance): void {
+      const chips = this._chips as HTMLElement;
+      this._authoredChips ??= new Set<HTMLElement>();
+      for (const chip of chips.querySelectorAll<HTMLElement>(".combobox-chip:not([data-sp-clone]):not([hidden])")) {
+        chip.hidden = true;
+        this._authoredChips.add(chip);
+      }
+    },
+
     // One chip per checked option, rendered before the chips input; the chip
     // keeps a reference to its option so the remove button can uncheck it.
     _renderChips(this: SpInstance): void {
       const chips = this._chips as HTMLElement | null;
       if (!chips) return;
-      chips.querySelectorAll(".combobox-chip").forEach((chip) => chip.remove());
+      chips.querySelectorAll(".combobox-chip[data-sp-clone]").forEach((chip) => chip.remove());
+      this._hideAuthoredChips();
       const input = chips.querySelector<HTMLElement>("input");
 
       for (const item of this._checkedItems()) {
         const chip = document.createElement("span");
         chip.className = "combobox-chip";
+        chip.setAttribute("data-sp-clone", "");
         chip.append(itemLabel(item));
         const remove = document.createElement("button");
         remove.type = "button";
