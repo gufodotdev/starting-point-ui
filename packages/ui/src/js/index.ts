@@ -22,6 +22,7 @@ import { Tabs } from "./tabs";
 import { Collapsible } from "./collapsible";
 import { Accordion } from "./accordion";
 import { ActionBar } from "./action-bar";
+import { InputOtp } from "./input-otp";
 
 import { toast, ToastTrigger } from "./toast";
 import { Slider, SliderRange } from "./slider";
@@ -53,6 +54,7 @@ const components: ComponentFactory[] = [
   Collapsible,
   Accordion,
   ActionBar,
+  InputOtp,
   ToastTrigger,
   Avatar,
   Breadcrumb,
@@ -85,6 +87,7 @@ const tabs = (el: HTMLElement): SpInstance | null => getInstance(el, Tabs);
 const collapsible = (el: HTMLElement): SpInstance | null => getInstance(el, Collapsible);
 const accordion = (el: HTMLElement): SpInstance | null => getInstance(el, Accordion);
 const actionBar = (el: HTMLElement): SpInstance | null => getInstance(el, ActionBar);
+const inputOtp = (el: HTMLElement): SpInstance | null => getInstance(el, InputOtp);
 const slider = (el: HTMLElement): SpInstance | null => getInstance(el, Slider);
 const sliderRange = (el: HTMLElement): SpInstance | null => getInstance(el, SliderRange);
 const avatar = (el: HTMLElement): SpInstance | null => getInstance(el, Avatar);
@@ -117,6 +120,7 @@ export {
   Collapsible,
   Accordion,
   ActionBar,
+  InputOtp,
   Slider,
   SliderRange,
   Sidebar,
@@ -142,6 +146,7 @@ export {
   collapsible,
   accordion,
   actionBar,
+  inputOtp,
   slider,
   sliderRange,
   avatar,
@@ -178,6 +183,7 @@ declare global {
       collapsible: typeof collapsible;
       accordion: typeof accordion;
       actionBar: typeof actionBar;
+      inputOtp: typeof inputOtp;
       slider: typeof slider;
       sliderRange: typeof sliderRange;
       avatar: typeof avatar;
@@ -213,6 +219,7 @@ if (typeof document !== "undefined") {
     collapsible,
     accordion,
     actionBar,
+    inputOtp,
     slider,
   sliderRange,
     avatar,

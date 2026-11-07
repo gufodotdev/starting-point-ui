@@ -1,157 +1,67 @@
-/* Registered so its ch resolves on the label, not in the last span's font size. */
-@property --sp-input-otp-pad {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-
 @utility input-otp {
   @layer l1.l2 {
-    /* Letter spacing steps each character into its box. The last span fills the
-       space after the text, so its ::before lands on the next empty box and its
-       width tells which box that is. */
+    /* Letter spacing steps each typed character into its box. */
     --input-otp-size: --spacing(9);
     --input-otp-gap: 0px;
     --sp-input-otp-ch: 1ch;
     --sp-input-otp-stride: calc(var(--input-otp-size) + var(--input-otp-gap));
-    --sp-input-otp-pad: calc((var(--input-otp-size) - var(--sp-input-otp-ch)) / 2);
-    @apply relative inline-flex shrink-0 items-center rounded-md font-mono text-sm;
+    @apply relative inline-flex shrink-0 rounded-md font-mono text-sm;
     @apply has-disabled:cursor-not-allowed has-disabled:opacity-50;
     direction: ltr;
-    width: var(--sp-input-otp-width);
-    height: var(--input-otp-size);
+    gap: var(--input-otp-gap);
 
     /* WebKit's ch doesn't match the advance it renders mono digits with. */
     @supports (font: -apple-system-body) {
       --sp-input-otp-ch: 0.6em;
     }
 
-    &:has(> span:nth-of-type(1)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 1 - var(--input-otp-gap));
+    & > span {
+      @apply relative size-(--input-otp-size) shrink-0 border-y border-e border-input shadow-xs dark:bg-input/30;
+      @apply first-of-type:rounded-s-md first-of-type:border-s last-of-type:rounded-e-md;
     }
-    &:has(> span:nth-of-type(2)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 2 - var(--input-otp-gap));
+    & > span.active {
+      @apply z-10 border-ring ring-3 ring-ring/50;
     }
-    &:has(> span:nth-of-type(3)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 3 - var(--input-otp-gap));
+    & > span.caret::after {
+      @apply absolute inset-0 m-auto h-4 w-px bg-foreground content-[''];
+      animation: input-otp-caret 1.25s ease-out infinite;
     }
-    &:has(> span:nth-of-type(4)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 4 - var(--input-otp-gap));
+    &:not(:has(> span.active)):focus-within {
+      @apply ring-3 ring-ring/50;
     }
-    &:has(> span:nth-of-type(5)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 5 - var(--input-otp-gap));
-    }
-    &:has(> span:nth-of-type(6)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 6 - var(--input-otp-gap));
-    }
-    &:has(> span:nth-of-type(7)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 7 - var(--input-otp-gap));
-    }
-    &:has(> span:nth-of-type(8)) {
-      --sp-input-otp-width: calc(var(--sp-input-otp-stride) * 8 - var(--input-otp-gap));
-    }
-
-    & > span:not(:last-of-type),
-    &::before {
-      @apply absolute top-0 border-y border-e border-input shadow-xs dark:bg-input/30;
-      width: var(--input-otp-size);
-      height: var(--input-otp-size);
-    }
-    & > span:first-of-type {
-      @apply rounded-s-md border-s;
-    }
-    &::before {
-      @apply end-0 rounded-e-md content-[''];
-    }
-    & > span:nth-of-type(2) {
-      inset-inline-start: calc(var(--sp-input-otp-stride) * 1);
-    }
-    & > span:nth-of-type(3) {
-      inset-inline-start: calc(var(--sp-input-otp-stride) * 2);
-    }
-    & > span:nth-of-type(4) {
-      inset-inline-start: calc(var(--sp-input-otp-stride) * 3);
-    }
-    & > span:nth-of-type(5) {
-      inset-inline-start: calc(var(--sp-input-otp-stride) * 4);
-    }
-    & > span:nth-of-type(6) {
-      inset-inline-start: calc(var(--sp-input-otp-stride) * 5);
-    }
-    & > span:nth-of-type(7) {
-      inset-inline-start: calc(var(--sp-input-otp-stride) * 6);
+    &:has(> span.active) > input {
+      @apply caret-transparent;
     }
 
     & > input {
-      @apply pointer-events-none relative z-20 m-0 shrink-0 appearance-none border-0 bg-transparent p-0 text-foreground shadow-none outline-none selection:bg-transparent;
-      field-sizing: content;
-      height: var(--input-otp-size);
-      padding-inline-start: var(--sp-input-otp-pad);
+      @apply pointer-events-none absolute inset-y-0 start-0 z-20 m-0 appearance-none border-0 bg-transparent p-0 text-foreground shadow-none outline-none;
+      @apply selection:bg-transparent placeholder:text-muted-foreground;
+      width: calc(100% + var(--sp-input-otp-stride));
+      padding-inline-start: calc((var(--input-otp-size) - var(--sp-input-otp-ch)) / 2);
       letter-spacing: calc(var(--sp-input-otp-stride) - var(--sp-input-otp-ch));
-      clip-path: inset(0 max(0px, 100% - var(--sp-input-otp-width)) 0 0);
-    }
+      clip-path: inset(0 var(--sp-input-otp-stride) 0 0);
 
-    /* 1em is one box and 1lh the whole group, for the queries below. */
-    & > span:last-of-type {
-      @apply relative order-last flex-1 self-stretch;
-      container: sp-input-otp / inline-size;
-      inset-inline-start: auto;
-      font-size: var(--sp-input-otp-stride);
-      line-height: var(--sp-input-otp-width);
-
-      &::before {
-        @apply pointer-events-none absolute top-0 z-10 border border-transparent content-[''];
-        width: calc(var(--input-otp-size) + 1px);
-        height: var(--input-otp-size);
-        inset-inline-start: calc(var(--sp-input-otp-pad) * -1 - 1px);
+      /* Holds off the browser's autofill background, which would cover the boxes. */
+      &:autofill {
+        -webkit-text-fill-color: var(--color-foreground);
+        transition: background-color 0s 600000s;
       }
-    }
-    @container sp-input-otp (width > calc(1lh - 0.5em)) {
-      & > span:last-of-type::before {
-        @apply rounded-s-md;
-      }
-    }
-    @container sp-input-otp (width < 1em) {
-      & > span:last-of-type::before {
-        @apply rounded-e-md;
-      }
-    }
-    @container sp-input-otp (width < 1px) {
-      & > span:last-of-type::before {
-        @apply invisible;
-      }
-    }
-    &:has(> input:focus) > span:last-of-type::before {
-      @apply border-ring ring-3 ring-ring/50;
-    }
-    &:has(> input:focus[required][pattern]:valid) > span:last-of-type::before {
-      @apply visible rounded-e-md;
-      inset-inline-start: calc(var(--sp-input-otp-pad) * -1 - 1px - var(--sp-input-otp-stride));
     }
 
     &:has(> input[aria-invalid="true"]) {
       @apply ring-3 ring-destructive/20 dark:ring-destructive/40;
-      & > span:not(:last-of-type),
-      &::before {
+      & > span {
         @apply border-destructive;
       }
-      & > span:last-of-type::before {
-        @apply border-destructive ring-destructive/20 dark:ring-destructive/40;
+      & > span.active {
+        @apply ring-destructive/20 dark:ring-destructive/40;
       }
     }
+  }
 
-    @supports not (field-sizing: content) {
-      & > input {
-        @apply absolute inset-y-0 start-0;
-        width: calc(var(--sp-input-otp-width) + var(--sp-input-otp-stride));
-      }
-      & > span:last-of-type::before {
-        @apply hidden;
-      }
-      &:focus-within {
-        @apply ring-3 ring-ring/50;
-      }
-    }
+  /* In l1 so a field stretching its children doesn't widen the group. */
+  @layer l1 {
+    @apply w-fit;
   }
 }
 
@@ -159,24 +69,26 @@
   @layer l1 {
     --input-otp-gap: --spacing(2);
 
-    & > span:not(:last-of-type),
-    &::before {
+    & > span {
       @apply rounded-md border-s;
-    }
-    & > span:last-of-type::before {
-      @apply rounded-md;
-      width: var(--input-otp-size);
-      inset-inline-start: calc(var(--sp-input-otp-pad) * -1);
-    }
-    &:has(> input:focus[required][pattern]:valid) > span:last-of-type::before {
-      inset-inline-start: calc(var(--sp-input-otp-pad) * -1 - var(--sp-input-otp-stride));
     }
     &:has(> input[aria-invalid="true"]) {
       @apply ring-0;
-      & > span:not(:last-of-type),
-      &::before {
+      & > span {
         @apply ring-3 ring-destructive/20 dark:ring-destructive/40;
       }
     }
+  }
+}
+
+@keyframes input-otp-caret {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  50% {
+    opacity: 0;
   }
 }
