@@ -189,9 +189,20 @@ function DeviceButtons({
   );
 }
 
+// Matches rehype-slug, so example anchors and the old example URLs that
+// redirect to them keep working.
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export function PreviewBlock({
   children,
   code,
+  heading,
   frameId,
   frameDir,
   framePreset,
@@ -199,6 +210,7 @@ export function PreviewBlock({
 }: {
   children: React.ReactNode;
   code: string;
+  heading?: string;
   frameId: string;
   frameDir?: string;
   framePreset?: string;
@@ -212,23 +224,35 @@ export function PreviewBlock({
   const codeId = `code-${frameId}-${uid}`;
 
   return (
-    <div className="@container my-6">
+    <div className={`@container ${heading ? "mt-12 mb-12 md:mb-24" : "my-6"}`}>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="tab-list h-8 rounded-md">
-          <button
-            type="button"
-            className="tab active px-3"
-            data-sp-toggle={`#${previewId}`}
-          >
-            Preview
-          </button>
-          <button
-            type="button"
-            className="tab px-3"
-            data-sp-toggle={`#${codeId}`}
-          >
-            Code
-          </button>
+        <div className="flex min-w-0 items-center gap-2">
+          <div className="tab-list h-8 shrink-0 rounded-md">
+            <button
+              type="button"
+              className="tab active px-3"
+              data-sp-toggle={`#${previewId}`}
+            >
+              Preview
+            </button>
+            <button
+              type="button"
+              className="tab px-3"
+              data-sp-toggle={`#${codeId}`}
+            >
+              Code
+            </button>
+          </div>
+          {heading && (
+            <>
+              <div className="separator separator-vertical mx-2 h-4 self-center" />
+              <h2 id={slugify(heading)} className="min-w-0 scroll-mt-24 truncate text-sm font-medium">
+                <a href={`#${slugify(heading)}`} className="underline-offset-2 hover:underline">
+                  {heading}
+                </a>
+              </h2>
+            </>
+          )}
         </div>
 
         <div className="flex items-center gap-2">

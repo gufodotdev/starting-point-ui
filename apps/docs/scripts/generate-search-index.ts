@@ -41,6 +41,9 @@ function extractHeadings(content: string): string[] {
   while ((match = headingRegex.exec(content)) !== null) {
     headings.push(match[1].trim());
   }
+  for (const preview of content.matchAll(/^```html preview heading="([^"]+)"/gm)) {
+    headings.push(preview[1]);
+  }
 
   return headings;
 }

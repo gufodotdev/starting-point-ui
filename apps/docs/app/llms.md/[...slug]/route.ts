@@ -13,7 +13,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
     return new Response("Not found", { status: 404 });
   }
 
-  const content = doc.content.replace(/^```(\w+) .*$/gm, "```$1");
+  const content = doc.content
+    .replace(/^```(\w+) .*heading="([^"]+)".*$/gm, "## $2\n\n```$1")
+    .replace(/^```(\w+) .*$/gm, "```$1");
 
   const body = [
     `# ${doc.metadata.title}`,

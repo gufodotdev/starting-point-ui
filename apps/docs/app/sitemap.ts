@@ -31,8 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const docsDir = getDocsDirectory();
 
   const docUrls = (await getAllDocSlugs()).map((slug) => {
-    // Example subpages are sections of their hub file.
-    const file = path.join(docsDir, ...slug.slice(0, 2)) + ".mdx";
+    const file = path.join(docsDir, ...slug) + ".mdx";
     return {
       url: `${baseUrl}/${slug.join("/")}`,
       lastModified: lastCommitDate(file),

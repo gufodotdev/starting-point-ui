@@ -16,19 +16,10 @@ await fs.rm(out, { recursive: true, force: true });
 for (const { category, slug } of index) {
   const example = await fetch(`${PLUS_URL}/api/examples/${category}/${slug}`);
   if (!example.ok) throw new Error(`Plus example ${category}/${slug} responded ${example.status}`);
-  const { title, description, builtWith, related, html } = (await example.json()) as {
-    title: string;
-    description: string;
-    builtWith: string[];
-    related?: string[];
-    html: string;
-  };
+  const { title, html } = (await example.json()) as { title: string; html: string };
   await fs.mkdir(path.join(out, category), { recursive: true });
   await fs.writeFile(path.join(out, category, `${slug}.html`), html);
-  await fs.writeFile(
-    path.join(out, category, `${slug}.json`),
-    JSON.stringify({ title, description, builtWith, related }),
-  );
+  await fs.writeFile(path.join(out, category, `${slug}.json`), JSON.stringify({ title }));
 }
 
 console.log(`fetched ${index.length} plus examples`);

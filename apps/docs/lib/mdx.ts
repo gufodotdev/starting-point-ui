@@ -63,18 +63,15 @@ async function formatInclude(html: string): Promise<string> {
   return (await format(clean, { parser: "html" })).trim();
 }
 
-// A line like %plus tables/user-table preset=lg align=top% expands to a whole
-// example section from the Plus app: the heading, the description with its
-// built-with links, and the preview fence with the rendered markup. The build
-// reads .plus, filled by the prebuild fetch so Tailwind scans the markup; in
-// dev a missing or changed example is fetched from the api and mirrored there.
+// A line like %plus tables/user-table preset=lg align=top% expands to an
+// example from the Plus app: a preview fence with the title as its heading
+// and the rendered markup. The build reads .plus, filled by the prebuild fetch
+// so Tailwind scans the markup; in dev a missing or changed example is fetched
+// from the api and mirrored there.
 const PLUS_URL = process.env.PLUS_URL ?? "http://localhost:8000";
 
 type PlusExample = {
   title: string;
-  description: string;
-  builtWith: string[];
-  related?: string[];
   html: string;
 };
 
@@ -92,8 +89,8 @@ async function readPlusExample(id: string): Promise<PlusExample> {
 
   const res = await fetch(`${PLUS_URL}/api/examples/${id}`);
   if (!res.ok) throw new Error(`Plus example ${id} responded ${res.status}`);
-  const { title, description, builtWith, related, html } = (await res.json()) as PlusExample;
-  const meta = JSON.stringify({ title, description, builtWith, related });
+  const { title, html } = (await res.json()) as PlusExample;
+  const meta = JSON.stringify({ title });
   // The mirror is a Tailwind source, so an unchanged write would trigger a
   // recompile, a re-render, and this function again.
   const same =
@@ -105,58 +102,16 @@ async function readPlusExample(id: string): Promise<PlusExample> {
     await fs.promises.writeFile(htmlFile, html);
     await fs.promises.writeFile(metaFile, meta);
   }
-  return { title, description, builtWith, related, html };
-}
-
-// The same content often exists as a card and as a dialog; each page points
-// at the other so a reader who wants the other container finds it.
-async function relatedSentence(ids: string[]): Promise<string> {
-  const sentences = await Promise.all(
-    ids.map(async (id) => {
-      const { title } = await readPlusExample(id);
-      const kind = id.split("/")[0].replace(/s$/, "");
-      return `Prefer a ${kind} instead? See the [${title.toLowerCase()}](/examples/${id}).`;
-    }),
-  );
-  return sentences.join(" ");
-}
-
-// The subpage lists the components an example is built from, one link each.
-function builtWithList(slugs: string[]): string {
-  return slugs
-    .map((slug) => {
-      const name = slug.replaceAll("-", " ");
-      return `- [${name[0].toUpperCase()}${name.slice(1)}](/components/${slug})`;
-    })
-    .join("\n");
-}
-
-// The plus example behind a hub section, matched on the heading slug.
-async function plusExampleFor(content: string, slug: string): Promise<PlusExample | null> {
-  for (const match of content.matchAll(/^%plus ([\w-]+\/[\w-]+)/gm)) {
-    const example = await readPlusExample(match[1]);
-    if (slugifyHeading(example.title) === slug) return example;
-  }
-  return null;
+  return { title, html };
 }
 
 async function plusSection(id: string, options: string): Promise<string> {
   const example = await readPlusExample(id);
-  const fence = ["```html preview", options.trim()].filter(Boolean).join(" ");
-  const related = example.related?.length ? ` ${await relatedSentence(example.related)}` : "";
-  return [
-    `## ${example.title}`,
-    "",
-    `${example.description}${related}`,
-    "",
-    fence,
-    await formatInclude(example.html),
-    "```",
-  ].join("\n");
+  const fence = ["```html preview", `heading="${example.title}"`, options.trim()].filter(Boolean).join(" ");
+  return [fence, await formatInclude(example.html), "```"].join("\n");
 }
 
-// Plus directives expand to whole sections, so they run before anything that
-// reads the hub's headings: slugs, sibling lists, and the local includes.
+// Plus directives expand before the local includes.
 async function expandPlus(content: string): Promise<string> {
   let out = content;
   for (const match of content.matchAll(/^%plus ([\w-]+\/[\w-]+)([^%\n]*)%$/gm)) {
@@ -180,120 +135,17 @@ async function expandIncludes(content: string): Promise<string> {
   return out;
 }
 
-export type ExampleSection = {
-  slug: string;
-  title: string;
-  body: string;
-};
-
-// Must match the ids rehype-slug generates, so hub anchors and routes agree.
-function slugifyHeading(heading: string): string {
-  return heading
-    .toLowerCase()
-    .replace(/['’]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-export function parseExampleSections(content: string): ExampleSection[] {
-  const headings = [...content.matchAll(/^## (.+)$/gm)];
-  return headings.map((match, i) => {
-    const start = (match.index ?? 0) + match[0].length;
-    const end = i + 1 < headings.length ? headings[i + 1].index : content.length;
-    const title = match[1].trim();
-    return {
-      slug: slugifyHeading(title),
-      title,
-      body: content.slice(start, end).trim(),
-    };
-  });
-}
-
-function splitSectionBody(body: string): { description: string; rest: string } {
-  const fenceStart = body.search(/^```/m);
-  if (fenceStart === -1) return { description: body.trim(), rest: "" };
-  const fenceEnd = body.indexOf("\n```", fenceStart) + "\n```".length;
-  return {
-    description: body.slice(0, fenceStart).trim(),
-    rest: body.slice(fenceStart, fenceEnd).trim(),
-  };
-}
-
-function plainText(markdown: string): string {
-  return markdown.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/`/g, "");
-}
-
-function stripSectionIntros(content: string): string {
-  const headings = [...content.matchAll(/^## .+$/gm)];
-  if (!headings.length) return content;
-
-  let out = content.slice(0, headings[0].index);
-  headings.forEach((match, i) => {
-    const start = (match.index ?? 0) + match[0].length;
-    const end = i + 1 < headings.length ? headings[i + 1].index : content.length;
-    const { description, rest } = splitSectionBody(content.slice(start, end));
-    out += `${match[0]}\n\n${description}\n\n${rest}\n\n`;
-  });
-  return out;
-}
-
-async function getExampleSectionDoc(slug: string[]): Promise<DocFile | null> {
-  const hubPath = path.join(getDocsDirectory(), slug[0], slug[1]) + ".mdx";
-  if (!fs.existsSync(hubPath)) return null;
-
-  const { content } = matter(fs.readFileSync(hubPath, "utf-8"));
-  const sections = parseExampleSections(await expandPlus(content));
-  const section = sections.find((s) => s.slug === slug[2]);
-  if (!section) return null;
-
-  const { description, rest } = splitSectionBody(section.body);
-  const kind = slug[1].replace(/s$/, "");
-  const plus = await plusExampleFor(content, section.slug);
-  const siblings = sections
-    .filter((s) => s.slug !== section.slug)
-    .map((s) => `- [${s.title}](/${slug[0]}/${slug[1]}/${s.slug})`);
-  const parts = [
-    description,
-    rest,
-    plus ? `## Built with\n\n${builtWithList(plus.builtWith)}` : "",
-    `## More ${kind} examples`,
-    [...siblings, `- [All ${kind} examples](/${slug[0]}/${slug[1]})`].join("\n"),
-  ];
-
-  return {
-    metadata: {
-      title: `Tailwind CSS ${section.title}`,
-      description: plainText(description),
-    },
-    content: (await expandIncludes(parts.filter(Boolean).join("\n\n"))).replaceAll(
-      "%VERSION%",
-      version,
-    ),
-    slug,
-  };
-}
-
 export async function getDocBySlug(slug: string[]): Promise<DocFile | null> {
   const docsDir = getDocsDirectory();
   const filePath = path.join(docsDir, ...slug) + ".mdx";
-
-  if (!fs.existsSync(filePath)) {
-    if (slug.length === 3 && slug[0] === "examples") {
-      return getExampleSectionDoc(slug);
-    }
-    return null;
-  }
+  if (!fs.existsSync(filePath)) return null;
 
   const rawContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(rawContent);
-  const source =
-    slug.length === 2 && slug[0] === "examples"
-      ? stripSectionIntros(await expandPlus(content))
-      : content;
 
   return {
     metadata: data as DocMetadata,
-    content: (await expandIncludes(source)).replaceAll("%VERSION%", version),
+    content: (await expandIncludes(content)).replaceAll("%VERSION%", version),
     slug,
   };
 }
@@ -322,19 +174,9 @@ export async function getAllDocSlugs(): Promise<string[][]> {
   const docsDir = getDocsDirectory();
   if (!fs.existsSync(docsDir)) return [];
 
-  const slugs = getMDXFiles(docsDir).map((filePath) =>
+  return getMDXFiles(docsDir).map((filePath) =>
     path
       .relative(docsDir, filePath)
       .replace(/\.mdx$/, "")
       .split(path.sep));
-
-  for (const slug of slugs.filter((s) => s.length === 2 && s[0] === "examples")) {
-    const raw = fs.readFileSync(path.join(docsDir, ...slug) + ".mdx", "utf-8");
-    const { content } = matter(raw);
-    for (const section of parseExampleSections(await expandPlus(content))) {
-      slugs.push([...slug, section.slug]);
-    }
-  }
-
-  return slugs;
 }

@@ -60,6 +60,11 @@ const prettyCodeOptions = {
           if (dir) node.properties["data-frame-dir"] = dir;
         }
 
+        const headingMatch = meta.match(/heading="([^"]+)"/);
+        if (headingMatch) {
+          node.properties["data-heading"] = headingMatch[1];
+        }
+
         const labelMatch = meta.match(/label="([^"]+)"/);
         if (labelMatch) {
           node.properties["data-label"] = labelMatch[1];
@@ -198,6 +203,7 @@ const components = {
     "data-code": code = "",
     "data-preview": preview,
     "data-label": label,
+    "data-heading": heading,
     "data-frame-id": frameId,
     "data-frame-dir": frameDir,
     "data-frame-preset": framePreset,
@@ -206,6 +212,7 @@ const components = {
     "data-code"?: string;
     "data-preview"?: string;
     "data-label"?: string;
+    "data-heading"?: string;
     "data-frame-id"?: string;
     "data-frame-dir"?: string;
     "data-frame-preset"?: string;
@@ -216,6 +223,7 @@ const components = {
         <CodeBlock
           code={code}
           header="preview"
+          heading={heading}
           frameId={frameId}
           frameDir={frameDir}
           framePreset={framePreset}
@@ -255,26 +263,6 @@ const components = {
 type CustomMDXProps = Omit<MDXRemoteProps, "components"> & {
   components?: Partial<typeof components>;
 };
-
-export function exampleHubHeadings(base: string): Partial<typeof components> {
-  return {
-    h2: ({ children, id, ...props }: React.ComponentProps<"h2">) => (
-      <h2
-        id={id}
-        className="mt-10 lg:mt-12 first:mt-0 scroll-mt-18 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"
-        {...props}
-      >
-        {id ? (
-          <Link href={`${base}/${id}`} className="hover:underline underline-offset-4">
-            {children}
-          </Link>
-        ) : (
-          children
-        )}
-      </h2>
-    ),
-  };
-}
 
 export function CustomMDX(props: CustomMDXProps) {
   return (
