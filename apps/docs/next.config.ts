@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   staticPageGenerationTimeout: 300,
   serverExternalPackages: ["@tailwindcss/node", "@tailwindcss/oxide", "lightningcss"],
+  async headers() {
+    return [{ source: "/frame/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex" }] }];
+  },
   async rewrites() {
     return [{ source: "/:path*.md", destination: "/llms.md/:path*" }];
   },
