@@ -143,16 +143,18 @@ export const Command = define({
         .querySelector<HTMLElement>(".command-empty")
         ?.classList.toggle("visible", visible.length === 0);
 
-      // Keep a still-valid highlight so an authored .active
-      // survives init; _setActive adds the aria wiring markup can't.
+      // Keep a still-valid highlight the markup or the user set; one picked
+      // here moves to the new first item when the list changes. _setActive
+      // adds the aria wiring markup can't.
       const current = this.el.querySelector<HTMLElement>(`${ITEM}.active`);
-      if (current && visible.includes(current) && !isDisabled(current)) {
+      if (current && !this._autoActive && visible.includes(current) && !isDisabled(current)) {
         this._setActive(current);
         return;
       }
       const target = visible.find((item) => !isDisabled(item)) ?? null;
       if (target) this._setActive(target);
       else this._clearActive();
+      this._autoActive = true;
     },
 
     _sync(this: SpInstance): void {
@@ -178,6 +180,7 @@ export const Command = define({
 
     // A pointer-set highlight must not scroll the list under the cursor.
     _setActive(this: SpInstance, item: HTMLElement, scroll = true): void {
+      this._autoActive = false;
       this.el.querySelectorAll(`${ITEM}.active`).forEach((prev) => {
         prev.classList.remove("active");
         prev.removeAttribute("aria-selected");

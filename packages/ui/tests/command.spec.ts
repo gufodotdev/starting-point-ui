@@ -221,6 +221,93 @@ test("dynamically swapped items get wired, highlighted, and toggle the empty sta
   await expect(page.locator(".command-empty")).not.toHaveClass(/visible/);
 });
 
+const ABOVE = `
+  <div class="command">
+    <div class="input-group"><input class="input" placeholder="Search..." /></div>
+    <div class="command-list" style="max-height: 120px; overflow-y: auto">
+      <div class="command-group" id="dynamic"></div>
+      <div class="command-group">
+        <button class="command-item" id="home">Home</button>
+        <button class="command-item" id="settings">Settings</button>
+      </div>
+    </div>
+  </div>`;
+
+async function fillAbove(page: Page) {
+  await page.evaluate(() => {
+    const group = document.querySelector("#dynamic")!;
+    for (let i = 1; i <= 12; i++) {
+      const item = document.createElement("button");
+      item.className = "command-item";
+      item.id = `item-${i}`;
+      item.textContent = `Item ${i}`;
+      group.append(item);
+    }
+  });
+}
+
+test("items added above an automatic highlight move it to the new first item", async ({ page }) => {
+  await mount(page, ABOVE);
+  await expect(page.locator("#home")).toHaveClass(/\bactive\b/);
+  await fillAbove(page);
+  await input(page).focus();
+  await expect(page.locator("#item-1")).toHaveClass(/\bactive\b/);
+  await expect(page.locator("#home")).not.toHaveClass(/\bactive\b/);
+  expect(await page.locator(".command-list").evaluate((list) => list.scrollTop)).toBe(0);
+});
+
+test("a palette filled on open highlights its first item, scrolled to the top", async ({ page }) => {
+  await mount(
+    page,
+    `<button id="trigger">Open</button>
+    <dialog class="dialog" data-sp-toggle="#trigger"><div class="dialog-panel">${ABOVE}</div></dialog>`,
+  );
+  await page.evaluate(() => {
+    document.querySelector(".dialog")!.addEventListener("sp-show", () => {
+      const group = document.querySelector("#dynamic")!;
+      group.replaceChildren();
+      for (let i = 1; i <= 12; i++) {
+        const item = document.createElement("button");
+        item.className = "command-item";
+        item.id = `item-${i}`;
+        item.textContent = `Item ${i}`;
+        group.append(item);
+      }
+      type Command = { refresh(): void; filter(query: string): void };
+      const { sp } = window as never as { sp: { command(el: Element): Command } };
+      const command = sp.command(document.querySelector(".command")!);
+      command.refresh();
+      command.filter("");
+    });
+  });
+  for (let open = 0; open < 2; open++) {
+    await page.locator("#trigger").click();
+    await expect(input(page)).toBeFocused();
+    await expect(page.locator("#item-1")).toHaveClass(/\bactive\b/);
+    expect(await page.locator(".command-list").evaluate((list) => list.scrollTop)).toBe(0);
+    await page.keyboard.press("Escape");
+    await expect(page.locator(".dialog")).not.toHaveAttribute("open");
+  }
+});
+
+test("items added above keep a highlight the user moved", async ({ page }) => {
+  await mount(page, ABOVE);
+  await input(page).focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator("#settings")).toHaveClass(/\bactive\b/);
+  await fillAbove(page);
+  await expect(page.locator("#item-1")).toHaveAttribute("role", "option");
+  await expect(page.locator("#settings")).toHaveClass(/\bactive\b/);
+});
+
+test("items added above keep an authored highlight", async ({ page }) => {
+  await mount(page, ABOVE.replace('class="command-item" id="settings"', 'class="command-item active" id="settings"'));
+  await expect(page.locator("#settings")).toHaveClass(/\bactive\b/);
+  await fillAbove(page);
+  await expect(page.locator("#item-1")).toHaveAttribute("role", "option");
+  await expect(page.locator("#settings")).toHaveClass(/\bactive\b/);
+});
+
 test("clicking an item keeps focus in the input", async ({ page }) => {
   await mount(page, BASIC);
   await input(page).focus();
