@@ -33,4 +33,9 @@ export const HoverToShow: Mixin = {
       this._preventClick = (e as PointerEvent).pointerType === "touch" ? true : null;
     });
   },
+
+  // Shared with HoverOutHide, so this clears a pending hide too.
+  destroy(this: SpInstance) {
+    clearTimeout(this._hoverT as ReturnType<typeof setTimeout>);
+  },
 };

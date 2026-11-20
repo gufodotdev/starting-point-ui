@@ -85,3 +85,29 @@ test("removes aria-describedby from the trigger on dispose", async ({ page }) =>
   await page.waitForTimeout(50);
   await expect(page.locator("#trigger")).not.toHaveAttribute("aria-describedby", /.*/);
 });
+
+test("removing the tooltip during the hover delay does not throw", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await mount(page, BASIC);
+  await page.evaluate(() => {
+    document.getElementById("trigger")!.dispatchEvent(new PointerEvent("pointerenter"));
+    document.getElementById("tip")!.remove();
+  });
+  await page.waitForTimeout(150);
+  expect(errors).toEqual([]);
+});
+
+test("a disconnected tooltip ignores show()", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await mount(page, BASIC);
+  await page.evaluate(() => {
+    const tip = document.getElementById("tip")!;
+    const instance = (window as any).sp.tooltip(tip);
+    tip.remove();
+    instance.show();
+  });
+  await page.waitForTimeout(50);
+  expect(errors).toEqual([]);
+});

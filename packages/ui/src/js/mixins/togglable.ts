@@ -22,6 +22,8 @@ export const Togglable: Mixin = {
     },
 
     show(this: SpInstance, { animate = true, trigger = null }: OpenOptions = {}): void {
+      // showPopover and showModal throw on an element that left the page.
+      if (!this.el.isConnected) return;
       if (this._isShown() && this._isMounted()) return;
       if (this.el.classList.contains("show")) return;
       if (!this.emit("beforeshow")) return;
