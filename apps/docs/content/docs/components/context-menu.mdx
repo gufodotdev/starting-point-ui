@@ -557,7 +557,7 @@ A submenu sets `data-sp-mode="hover"` so it opens from its item instead of a rig
 
 ### Events
 
-Lifecycle events fire on the context menu element. The `before*` events are cancelable.
+Lifecycle events fire on the context menu element and bubble, so a submenu inside the menu reaches the same listener. Check `e.target` to handle only the context menu. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
@@ -569,7 +569,8 @@ Lifecycle events fire on the context menu element. The `before*` events are canc
 | `sp-hidden`     | Closed                      |
 
 ```js
-menu.addEventListener("sp-show", () => {
+menu.addEventListener("sp-show", (e) => {
+  if (e.target !== menu) return;
   console.log("context menu opened");
 });
 ```

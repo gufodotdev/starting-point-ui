@@ -188,7 +188,7 @@ Set each option with its own `data-sp-*` attribute on the `action-bar` element.
 
 ### Events
 
-Lifecycle events fire on the action bar element. The `before*` events are cancelable.
+Lifecycle events fire on the action bar element and bubble, so a tooltip or menu inside the bar reaches the same listener. Check `e.target` to handle only the action bar. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
@@ -200,7 +200,8 @@ Lifecycle events fire on the action bar element. The `before*` events are cancel
 | `sp-hidden`     | Hidden                      |
 
 ```js
-el.addEventListener("sp-hide", () => {
+el.addEventListener("sp-hide", (e) => {
+  if (e.target !== el) return;
   clearSelection();
 });
 ```

@@ -453,7 +453,7 @@ Set each option with its own `data-sp-*` attribute on the `drawer` element.
 
 ### Events
 
-Lifecycle events fire on the drawer element. The `before*` events are cancelable.
+Lifecycle events fire on the drawer element and bubble, so a tooltip or menu inside the drawer reaches the same listener. Check `e.target` to handle only the drawer. The `before*` events are cancelable.
 
 | Event              | When                                       |
 | ------------------ | ------------------------------------------ |
@@ -467,6 +467,7 @@ Lifecycle events fire on the drawer element. The `before*` events are cancelable
 
 ```js
 el.addEventListener("sp-beforeshow", (e) => {
+  if (e.target !== el) return;
   if (!ready) e.preventDefault(); // veto the open
 });
 ```

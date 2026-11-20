@@ -531,7 +531,7 @@ Set each option with its own `data-sp-*` attribute on the `dropdown` element.
 
 ### Events
 
-Lifecycle events fire on the dropdown element. The `before*` events are cancelable.
+Lifecycle events fire on the dropdown element and bubble, so a submenu inside the dropdown reaches the same listener. Check `e.target` to handle only the dropdown. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
@@ -544,6 +544,7 @@ Lifecycle events fire on the dropdown element. The `before*` events are cancelab
 
 ```js
 el.addEventListener("sp-beforehide", (e) => {
+  if (e.target !== el) return;
   if (unsavedChanges) e.preventDefault(); // veto the close
 });
 ```

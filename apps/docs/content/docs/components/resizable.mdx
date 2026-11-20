@@ -231,7 +231,7 @@ A collapsed panel carries the `collapsed` class. A disabled panel keeps its size
 
 ### Events
 
-Events fire on the `resizable` element. `sp-resize` fires on every change, `sp-resized` once a drag ends or a key press lands, both with `{ layout }` as percentages. The collapse events carry `{ panel, index }`.
+Events fire on the `resizable` element and bubble, so a group nested inside a panel reaches the same listener. Check `e.target` to handle only the outer group. `sp-resize` fires on every change, `sp-resized` once a drag ends or a key press lands, both with `{ layout }` as percentages. The collapse events carry `{ panel, index }`.
 
 | Event         | When                              |
 | ------------- | --------------------------------- |
@@ -242,6 +242,7 @@ Events fire on the `resizable` element. `sp-resize` fires on every change, `sp-r
 
 ```js
 el.addEventListener("sp-resized", (e) => {
+  if (e.target !== el) return;
   console.log(e.detail.layout);
 });
 ```

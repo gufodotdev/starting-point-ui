@@ -254,7 +254,7 @@ With `data-sp-static` the popover skips anchored positioning entirely and you po
 
 ### Events
 
-Lifecycle events fire on the popover element. The `before*` events are cancelable.
+Lifecycle events fire on the popover element and bubble, so a tooltip or menu inside the popover reaches the same listener. Check `e.target` to handle only the popover. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
@@ -267,6 +267,7 @@ Lifecycle events fire on the popover element. The `before*` events are cancelabl
 
 ```js
 el.addEventListener("sp-beforeshow", (e) => {
+  if (e.target !== el) return;
   if (!ready) e.preventDefault(); // veto the open
 });
 ```

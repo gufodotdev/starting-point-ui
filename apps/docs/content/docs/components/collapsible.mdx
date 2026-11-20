@@ -303,7 +303,7 @@ Set each option with its own `data-sp-*` attribute on the `collapsible` element.
 
 ### Events
 
-Lifecycle events fire on the panel. The `before*` events are cancelable.
+Lifecycle events fire on the panel and bubble, so a collapsible nested inside the panel reaches the same listener. Check `e.target` to handle only the panel. The `before*` events are cancelable.
 
 | Event               | When                           |
 | ------------------- | ------------------------------ |
@@ -317,6 +317,7 @@ Lifecycle events fire on the panel. The `before*` events are cancelable.
 ```js
 // Veto collapsing, e.g. while a form inside has unsaved changes.
 panel.addEventListener("sp-beforecollapse", (e) => {
+  if (e.target !== panel) return;
   if (unsavedChanges) e.preventDefault();
 });
 ```

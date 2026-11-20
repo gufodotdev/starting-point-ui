@@ -1175,7 +1175,7 @@ In `hover` mode a panel opens while the pointer rests on its button and closes o
 
 ### Events
 
-Lifecycle events fire on a panel and on the drawer. The `before*` events are cancelable.
+Lifecycle events fire on a panel and on the drawer. They bubble, so the panels inside the drawer reach a listener on the drawer too. Check `e.target` to handle only the drawer. The `before*` events are cancelable.
 
 | Event           | When                        |
 | --------------- | --------------------------- |
@@ -1189,7 +1189,8 @@ Lifecycle events fire on a panel and on the drawer. The `before*` events are can
 ```js
 const menu = document.querySelector(".navbar-collapse");
 
-menu.addEventListener("sp-shown", () => {
+menu.addEventListener("sp-shown", (e) => {
+  if (e.target !== menu) return;
   // The drawer is open
 });
 ```

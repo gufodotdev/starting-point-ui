@@ -276,7 +276,7 @@ Set each option with its own `data-sp-*` attribute on the `sheet` element.
 
 ### Events
 
-Lifecycle events fire on the sheet element. The `before*` events are cancelable.
+Lifecycle events fire on the sheet element and bubble, so a tooltip or menu inside the sheet reaches the same listener. Check `e.target` to handle only the sheet. The `before*` events are cancelable.
 
 | Event              | When                                      |
 | ------------------ | ----------------------------------------- |
@@ -290,6 +290,7 @@ Lifecycle events fire on the sheet element. The `before*` events are cancelable.
 
 ```js
 el.addEventListener("sp-beforeshow", (e) => {
+  if (e.target !== el) return;
   if (!ready) e.preventDefault(); // veto the open
 });
 ```

@@ -1865,7 +1865,7 @@ Set each option with its own `data-sp-*` attribute on the `sidebar` element.
 
 ### Events
 
-All events fire on the panel. The `before*` events are cancelable. The mobile drawer fires the show/hide lifecycle, the desktop column fires the collapse/expand lifecycle.
+All events fire on the panel and bubble, so the collapsibles and tooltips inside the sidebar reach the same listeners. Check `e.target` to handle only the sidebar. The `before*` events are cancelable. The mobile drawer fires the show/hide lifecycle, the desktop column fires the collapse/expand lifecycle.
 
 | Event               | When                                     |
 | ------------------- | ---------------------------------------- |
@@ -1884,8 +1884,12 @@ All events fire on the panel. The `before*` events are cancelable. The mobile dr
 
 ```js
 // Persist the desktop state, e.g. into a cookie the server can render from.
-panel.addEventListener("sp-collapse", () => saveState("collapsed"));
-panel.addEventListener("sp-expand", () => saveState("expanded"));
+panel.addEventListener("sp-collapse", (e) => {
+  if (e.target === panel) saveState("collapsed");
+});
+panel.addEventListener("sp-expand", (e) => {
+  if (e.target === panel) saveState("expanded");
+});
 ```
 
 ### Methods

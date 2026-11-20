@@ -51,7 +51,7 @@ Add `data-sp-on-<event>` to any element, where `<event>` is a component event na
 
 Whatever an event carries is on `event.detail`, and the `sp` global works inside expressions too. The hero above uses both, reading the selected item from `event.detail.value` and closing its own dialog with `sp.dialog(el).hide()`.
 
-Events bubble, so the attribute works on the component itself or on any ancestor: the hero's `data-sp-on-select` sits on the dialog while the event comes from the command inside it. Markup added to the page later works without any extra wiring.
+Events bubble, so the attribute works on the component itself or on any ancestor: the hero's `data-sp-on-select` sits on the dialog while the event comes from the command inside it. An ancestor also hears every component nested inside it, so compare `event.target` with `el` to handle only the element carrying the attribute. Markup added to the page later works without any extra wiring.
 
 ## Security
 
