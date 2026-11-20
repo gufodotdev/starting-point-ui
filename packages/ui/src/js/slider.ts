@@ -2,6 +2,7 @@
 
 import { define } from "./define";
 import type { SpInstance } from "./define";
+import { getInstance } from "./observer";
 
 export const Slider = define({
   name: "slider",
@@ -42,23 +43,76 @@ export const SliderRange = define({
     this._inputs = [...this.el.querySelectorAll<HTMLInputElement>('input[type="range"]')];
     this.update();
     for (const input of this._inputs) {
+      this.on(input, "pointerdown", () => this._grab(input));
+      this.on(input, "keydown", () => (this._grabbed = null));
       this.on(input, "input", () => {
-        this._clamp(input);
+        if (this._grabbed === input) this._push(input);
+        else this._clamp(input);
         this.update();
       });
     }
+    this.on(document, "pointerup", () => this._release());
+    this.on(document, "pointercancel", () => this._release());
   },
 
   methods: {
-    // Thumbs may meet but never cross their neighbors.
+    // Outside a drag, a thumb stops at its neighbors.
     _clamp(this: SpInstance, moved: HTMLInputElement): void {
       const inputs = this._inputs as HTMLInputElement[];
       const i = inputs.indexOf(moved);
-      const value = Number(moved.value);
-      const prev = inputs[i - 1];
-      const next = inputs[i + 1];
-      if (prev && value < Number(prev.value)) moved.value = prev.value;
-      if (next && value > Number(next.value)) moved.value = next.value;
+      const values = inputs.map((el) => Number(el.value));
+      if (i > 0) values[i] = Math.max(values[i], values[i - 1]);
+      if (i < values.length - 1) values[i] = Math.min(values[i], values[i + 1]);
+      this._write(values);
+    },
+
+    // Values set in code fire no input event, so each slider repaints here.
+    _write(this: SpInstance, values: number[]): void {
+      (this._inputs as HTMLInputElement[]).forEach((el, i) => {
+        if (Number(el.value) === values[i]) return;
+        el.value = String(values[i]);
+        getInstance(el, Slider)?.update();
+      });
+    },
+
+    _grab(this: SpInstance, input: HTMLInputElement): void {
+      const inputs = this._inputs as HTMLInputElement[];
+      const values = inputs.map((el) => Number(el.value));
+      const max = input.max === "" ? 100 : Number(input.max);
+      let active = inputs.indexOf(input);
+      // Thumbs stacked at the max can only move down, so the lowest takes the drag.
+      while (active > 0 && values[active] === max && values[active - 1] === max) active--;
+      this._grabbed = input;
+      this._active = active;
+      this._values = values;
+      this._start = inputs.map((el) => el.value);
+    },
+
+    // The dragged thumb pushes its neighbors along, and they stay where
+    // they were pushed. The browser moves the grabbed input even when a
+    // lower thumb took the drag, so every value is written back.
+    _push(this: SpInstance, grabbed: HTMLInputElement): void {
+      const values = (this._values as number[]).slice();
+      const active = this._active as number;
+      values[active] = Number(grabbed.value);
+      for (let i = active + 1; i < values.length; i++) values[i] = Math.max(values[i], values[i - 1]);
+      for (let i = active - 1; i >= 0; i--) values[i] = Math.min(values[i], values[i + 1]);
+      this._values = values;
+      this._write(values);
+    },
+
+    // The browser fires change only on the grabbed input, so the thumbs the
+    // drag moved fire their own.
+    _release(this: SpInstance): void {
+      const grabbed = this._grabbed as HTMLInputElement | null;
+      if (!grabbed) return;
+      this._grabbed = null;
+      const start = this._start as string[];
+      (this._inputs as HTMLInputElement[]).forEach((el, i) => {
+        if (el !== grabbed && el.value !== start[i]) {
+          el.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+      });
     },
 
     // Also the public refresh for programmatic value changes.

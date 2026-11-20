@@ -108,4 +108,84 @@ test.describe("slider range", () => {
     });
     expect(value).toBe("75");
   });
+
+  const MET = `
+    <div id="range" class="slider-range">
+      <input id="lo" type="range" class="slider" step="10" value="50" />
+      <input id="hi" type="range" class="slider" step="10" value="50" />
+    </div>`;
+
+  const values = (page: Page) =>
+    page.evaluate(() =>
+      ["#lo", "#hi"].map((id) => (document.querySelector(id) as HTMLInputElement).value),
+    );
+
+  async function press(page: Page, id: string, from: number) {
+    const box = (await page.locator(id).boundingBox())!;
+    const y = box.y + box.height / 2;
+    const to = (pct: number) => page.mouse.move(box.x + (box.width * pct) / 100, y, { steps: 10 });
+    await to(from);
+    await page.mouse.down();
+    return to;
+  }
+
+  async function drag(page: Page, id: string, from: number, to: number[]) {
+    const move = await press(page, id, from);
+    for (const pct of to) await move(pct);
+    await page.mouse.up();
+  }
+
+  const AT_MAX = MET.replaceAll('value="50"', 'value="100"');
+
+  test("a dragged thumb pushes the one it meets", async ({ page }) => {
+    await mount(page, MET);
+    await drag(page, "#hi", 50, [-20]);
+    expect(await values(page)).toEqual(["0", "0"]);
+  });
+
+  test("a pushed thumb stays when the drag turns back", async ({ page }) => {
+    await mount(page, MET);
+    const move = await press(page, "#hi", 50);
+    await move(20);
+    expect(await values(page)).toEqual(["20", "20"]);
+    await move(120);
+    await page.mouse.up();
+    expect(await values(page)).toEqual(["20", "100"]);
+  });
+
+  test("thumbs stacked at the max part when the top one is dragged down", async ({ page }) => {
+    await mount(page, AT_MAX);
+    await drag(page, "#hi", 98, [20]);
+    expect(await values(page)).toEqual(["20", "100"]);
+  });
+
+  test("a drag that moves another thumb fires change on it", async ({ page }) => {
+    await mount(page, AT_MAX);
+    await page.evaluate(() => {
+      (window as any).changed = [];
+      document.querySelector("#range")!.addEventListener("change", (e) => {
+        (window as any).changed.push((e.target as HTMLElement).id);
+      });
+    });
+    await drag(page, "#hi", 98, [20]);
+    expect(await page.evaluate(() => (window as any).changed)).toEqual(["lo"]);
+  });
+
+  test("value targets follow thumbs the drag moved", async ({ page }) => {
+    await mount(
+      page,
+      AT_MAX +
+        '<span id="lo-out" data-sp-slider-value="lo"></span><span id="hi-out" data-sp-slider-value="hi"></span>',
+    );
+    await drag(page, "#hi", 98, [20]);
+    await expect(page.locator("#lo-out")).toHaveText("20");
+    await expect(page.locator("#hi-out")).toHaveText("100");
+  });
+
+  test("the keyboard stops a thumb at its neighbor", async ({ page }) => {
+    await mount(page, MET);
+    await page.locator("#hi").focus();
+    await page.keyboard.press("ArrowLeft");
+    expect(await values(page)).toEqual(["50", "50"]);
+  });
 });
