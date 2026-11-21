@@ -3,7 +3,7 @@ title: Installation
 description: Learn how to install Starting Point UI in your Tailwind CSS project, with or without a bundler, and set up the optional JavaScript, fonts, and icons.
 ---
 
-Getting started takes two steps: install the package and import the styles. All you need is a project running Tailwind CSS v4 or later. The JavaScript, fonts, and icons below are optional.
+Getting started takes two steps: install the package and import the styles. All you need is a project running Tailwind CSS v4 or later. No build setup? You can also [load everything from a CDN](#use-it-without-a-build-step).
 
 ## Install the package
 
@@ -119,6 +119,68 @@ Components automatically style SVG icons placed inside them, so you can drop in 
 ```
 
 The examples on this site use icons from [Lucide](https://lucide.dev/), but any SVG-based icon library works. Lucide ships official packages for most frameworks, as static SVGs, or as a plain script. See the [Lucide guide](https://lucide.dev/guide/) for all the options.
+
+## Use it without a build step
+
+To use Starting Point UI in a plain HTML file, with nothing to install or build, load it from a CDN together with [Tailwind's browser build](https://tailwindcss.com/docs/installation/play-cdn). Add both scripts to the `<head>`, Starting Point UI first:
+
+```html label="index.html"
+<script src="https://cdn.jsdelivr.net/npm/starting-point-ui@%VERSION%/dist/cdn.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.5"></script>
+```
+
+Every component class and Tailwind utility now works, and the JavaScript is included.
+
+Write your own CSS in a `<style type="text/tailwindcss">` tag. It works like the main CSS file of a build setup, so everything in the [Customization](/guides/customization) guide applies. This page sets the Inter font, a blue primary color, and rounder corners, with a button that opens a dialog:
+
+```html label="index.html"
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/starting-point-ui@%VERSION%/dist/cdn.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.5"></script>
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=inter:400,500,600,700"
+      rel="stylesheet"
+    />
+    <style type="text/tailwindcss">
+      :root {
+        --font-sans: "Inter", sans-serif;
+        --primary: oklch(0.55 0.2 250);
+        --primary-foreground: oklch(1 0 0);
+        --ring: oklch(0.55 0.2 250);
+        --radius: 0.75rem;
+      }
+    </style>
+  </head>
+  <body class="grid min-h-screen place-items-center">
+    <button id="my-trigger" class="btn">Open Dialog</button>
+
+    <dialog class="dialog" data-sp-toggle="#my-trigger">
+      <div class="dialog-panel">
+        <div class="dialog-header">
+          <h2 class="dialog-title">Hello from a CDN</h2>
+          <p class="dialog-description">No install and no build, just HTML.</p>
+        </div>
+        <div class="dialog-footer">
+          <button class="btn btn-outline" data-sp-dismiss>Close</button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
+```
+
+A few things to keep in mind:
+
+- Load Starting Point UI before Tailwind, as a plain script without `async` or `defer`. If Tailwind loads first, CSS that uses the theme variables can fail to compile and leave the page unstyled.
+- Load fonts with a `<link>` tag. A font `@import` inside the style tag is ignored.
+- Leave out `@import "starting-point-ui"`. The script already includes the styles, and the import stops the page from compiling.
+- The JavaScript API is ready as soon as the script runs, so any script after it can call component methods, like `sp.dialog(el).show()` to open a dialog.
+- The browser build compiles the CSS in each visitor's browser, which suits prototypes and demos. For production, compile the CSS ahead of time with your build tool, as described [at the top of this page](#install-the-package).
 
 ## You're all set
 
