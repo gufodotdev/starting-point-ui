@@ -333,7 +333,7 @@
         }
       }
       .navbar-collapse .navbar-actions {
-        @apply sidebar-footer ms-0 items-stretch gap-1;
+        @apply sidebar-footer ms-0 items-stretch gap-1 p-4;
 
         & .btn {
           @apply btn-sm;
