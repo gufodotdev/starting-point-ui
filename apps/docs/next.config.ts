@@ -14,7 +14,11 @@ const nextConfig: NextConfig = {
       { source: "/docs", destination: "/guides/introduction", permanent: true },
       { source: "/docs/:path*", destination: "/:path*", permanent: true },
       { source: "/guides/theming", destination: "/guides/customization", permanent: true },
-      { source: "/examples/:type/:category/:variant", destination: "/examples", permanent: true },
+      { source: "/examples/cards/:path*", destination: "/components/card", permanent: true },
+      { source: "/examples/dialogs/:path*", destination: "/components/dialog", permanent: true },
+      { source: "/examples/dropdowns/:path*", destination: "/components/dropdown", permanent: true },
+      { source: "/examples/tables/:path*", destination: "/components/table", permanent: true },
+      { source: "/examples/:path*", destination: "/components", permanent: true },
     ];
   },
 };

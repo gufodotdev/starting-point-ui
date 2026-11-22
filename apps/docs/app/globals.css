@@ -2,7 +2,6 @@
 @import "starting-point-ui";
 
 @source "../content/docs";
-@source "../.plus";
 
 @theme inline {
   --breakpoint-xxs: 400px;

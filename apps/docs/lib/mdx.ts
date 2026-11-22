@@ -63,71 +63,12 @@ async function formatInclude(html: string): Promise<string> {
   return (await format(clean, { parser: "html" })).trim();
 }
 
-// A line like %plus tables/user-table preset=lg align=top% expands to an
-// example from the Plus app: a preview fence with the title as its heading
-// and the rendered markup. The build reads .plus, filled by the prebuild fetch
-// so Tailwind scans the markup; in dev a missing or changed example is fetched
-// from the api and mirrored there.
-const PLUS_URL = process.env.PLUS_URL ?? "http://localhost:8000";
-
-type PlusExample = {
-  title: string;
-  html: string;
-};
-
-async function readPlusExample(id: string): Promise<PlusExample> {
-  const dir = path.join(process.cwd(), ".plus");
-  const htmlFile = path.join(dir, `${id}.html`);
-  const metaFile = path.join(dir, `${id}.json`);
-  const mirrored = fs.existsSync(htmlFile) && fs.existsSync(metaFile);
-  if (process.env.NODE_ENV === "production" && mirrored) {
-    return {
-      ...JSON.parse(await fs.promises.readFile(metaFile, "utf-8")),
-      html: await fs.promises.readFile(htmlFile, "utf-8"),
-    };
-  }
-
-  const res = await fetch(`${PLUS_URL}/api/examples/${id}`);
-  if (!res.ok) throw new Error(`Plus example ${id} responded ${res.status}`);
-  const { title, html } = (await res.json()) as PlusExample;
-  const meta = JSON.stringify({ title });
-  // The mirror is a Tailwind source, so an unchanged write would trigger a
-  // recompile, a re-render, and this function again.
-  const same =
-    mirrored &&
-    (await fs.promises.readFile(htmlFile, "utf-8")) === html &&
-    (await fs.promises.readFile(metaFile, "utf-8")) === meta;
-  if (!same) {
-    await fs.promises.mkdir(path.dirname(htmlFile), { recursive: true });
-    await fs.promises.writeFile(htmlFile, html);
-    await fs.promises.writeFile(metaFile, meta);
-  }
-  return { title, html };
-}
-
-async function plusSection(id: string, options: string): Promise<string> {
-  const example = await readPlusExample(id);
-  const fence = ["```html preview", `heading="${example.title}"`, options.trim()].filter(Boolean).join(" ");
-  return [fence, await formatInclude(example.html), "```"].join("\n");
-}
-
-// Plus directives expand before the local includes.
-async function expandPlus(content: string): Promise<string> {
-  let out = content;
-  for (const match of content.matchAll(/^%plus ([\w-]+\/[\w-]+)([^%\n]*)%$/gm)) {
-    const section = await plusSection(match[1], match[2]);
-    out = out.replace(match[0], () => section);
-  }
-  return out;
-}
-
 async function expandIncludes(content: string): Promise<string> {
-  const expanded = await expandPlus(content);
-  const includes = [...expanded.matchAll(/^%include ([\w./-]+)%$/gm)];
-  if (includes.length === 0) return expanded;
+  const includes = [...content.matchAll(/^%include ([\w./-]+)%$/gm)];
+  if (includes.length === 0) return content;
 
   const rendered = await renderIncludes([...new Set(includes.map((m) => m[1]))]);
-  let out = expanded;
+  let out = content;
   for (const match of includes) {
     const include = await formatInclude(rendered[match[1]]);
     out = out.replace(match[0], () => include);

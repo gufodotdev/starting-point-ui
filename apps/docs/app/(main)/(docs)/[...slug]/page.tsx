@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = doc.metadata.seoTitle ?? doc.metadata.title;
   const description = doc.metadata.description;
   const url = `/${slug.join("/")}`;
-  const cardTitle = ["components", "examples"].includes(slug[0])
+  const cardTitle = slug[0] === "components"
     ? title.replace(/^Tailwind CSS /, "")
     : title;
   const cardDescription = description.replace(/\s*Easily customizable\.$/, "");

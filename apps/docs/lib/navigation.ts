@@ -12,7 +12,6 @@ export const discordUrl = "https://discord.gg/EFqGKyQ3tQ";
 
 export const mainNav: NavItem[] = [
   { title: "Documentation", href: "/guides/introduction" },
-  { title: "Examples", href: "/examples" },
 ];
 
 export const docsNav: NavGroup[] = [
@@ -95,27 +94,6 @@ export const docsNav: NavGroup[] = [
       { title: "Textarea", href: "/components/textarea" },
       { title: "Toast", href: "/components/toast" },
       { title: "Tooltip", href: "/components/tooltip" },
-    ],
-  },
-  {
-    title: "Component Examples",
-    items: [
-      { title: "Cards", href: "/examples/cards" },
-      { title: "Dialogs", href: "/examples/dialogs" },
-      { title: "Dropdowns", href: "/examples/dropdowns" },
-      { title: "Tables", href: "/examples/tables" },
-    ],
-  },
-  {
-    title: "Auth Examples",
-    items: [
-      { title: "Login", href: "/examples/login" },
-      { title: "Sign Up", href: "/examples/sign-up" },
-      { title: "Forgot Password", href: "/examples/forgot-password" },
-      { title: "Reset Password", href: "/examples/reset-password" },
-      { title: "Verify Email", href: "/examples/verify-email" },
-      { title: "Confirm Password", href: "/examples/confirm-password" },
-      { title: "Two-Factor", href: "/examples/two-factor" },
     ],
   },
 ];
