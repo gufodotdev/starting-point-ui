@@ -45,7 +45,7 @@
 
 @utility tray-icon {
   @layer l1.l2 {
-    @apply flex size-6 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground [&_svg:not([class*='size-'])]:size-3.5;
+    @apply flex size-6 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground dark:border-input dark:bg-muted [&_svg:not([class*='size-'])]:size-3.5;
   }
 }
 
