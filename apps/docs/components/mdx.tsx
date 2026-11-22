@@ -5,7 +5,6 @@ import { getDocBySlug } from "@/lib/mdx";
 import { CodeBlock } from "@/components/code-block";
 import { Callout } from "@/components/callout";
 import { AvatarsList } from "@/components/avatars-list";
-import { UnsplashEditor } from "@/components/unsplash-editor";
 import { codeThemeDark, codeThemeLight } from "@/lib/code-theme";
 import {
   alignFromMeta,
@@ -127,7 +126,6 @@ const components = {
   ComponentsList,
   ResourcesList,
   AvatarsList,
-  UnsplashEditor,
   h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
     <h2
       className="mt-10 lg:mt-12 first:mt-0 scroll-mt-18 text-xl font-medium tracking-tight [&+h3]:mt-6! [&+p]:mt-4!"

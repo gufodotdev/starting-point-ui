@@ -32,7 +32,6 @@ export const docsNav: NavGroup[] = [
     title: "Resources",
     items: [
       { title: "Avatars", href: "/resources/avatars" },
-      { title: "Unsplash Editor", href: "/resources/unsplash-editor" },
     ],
   },
   {
