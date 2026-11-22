@@ -1,0 +1,132 @@
+@utility tray {
+  @layer l1.l2 {
+    --sp-tray-padding: var(--tray-padding, --spacing(1.5));
+    --sp-tray-gap: var(--tray-gap, --spacing(1.5));
+    --sp-tray-ring: var(--tray-ring, color-mix(in oklab, var(--foreground) 10%, transparent));
+    --sp-tray-shadow: var(--tray-shadow, 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05));
+    @apply grid content-start gap-(--sp-tray-gap) rounded-[calc(var(--radius-xl)+var(--sp-tray-padding))] border border-border/70 bg-muted/50 p-(--sp-tray-padding) text-sm;
+
+    .dialog > & {
+      @apply max-h-full w-full max-w-sm overflow-y-auto;
+      @apply in-[.dialog.show]:animate-in in-[.dialog.show]:fade-in-0 in-[.dialog.show]:zoom-in-95 in-[.dialog.show]:duration-100 in-[.dialog.show]:[animation-fill-mode:forwards];
+      @apply in-[.dialog.hide]:animate-out in-[.dialog.hide]:fade-out-0 in-[.dialog.hide]:zoom-out-95 in-[.dialog.hide]:duration-100 in-[.dialog.hide]:[animation-fill-mode:forwards];
+    }
+  }
+}
+
+@utility tray-sm {
+  @layer l1 {
+    & > :is(.tray-header, .tray-footer) {
+      @apply min-h-8 py-0.5;
+    }
+    & .tray-title {
+      @apply text-sm;
+    }
+  }
+}
+
+@utility tray-header {
+  @layer l1.l2 {
+    @apply flex min-h-9 items-center justify-between gap-4 px-2 py-1;
+  }
+}
+
+@utility tray-title {
+  @layer l1.l2 {
+    @apply flex items-center gap-2.5 text-base font-medium;
+  }
+}
+
+@utility tray-description {
+  @layer l1.l2 {
+    @apply text-sm text-muted-foreground;
+  }
+}
+
+@utility tray-icon {
+  @layer l1.l2 {
+    @apply flex size-6 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground [&_svg:not([class*='size-'])]:size-3.5;
+  }
+}
+
+@utility tray-content {
+  @layer l1.l2 {
+    @apply grid min-w-0 gap-(--sp-tray-gap);
+
+    & > :is(.card, .item-group, .dialog-panel) {
+      @apply rounded-xl shadow-(--sp-tray-shadow) ring-1 ring-(--sp-tray-ring);
+    }
+
+    & > .dialog-panel {
+      @apply max-w-none animate-none;
+    }
+
+    & > .item-group {
+      @apply gap-0 overflow-hidden bg-card;
+
+      & > .item {
+        @apply rounded-none;
+      }
+      & > .item ~ .item {
+        @apply border-t-border;
+      }
+      & > .item-separator {
+        @apply hidden;
+      }
+    }
+
+    & > .table-container > .table,
+    & > .table {
+      @apply border-separate border-spacing-0;
+
+      & .table-row {
+        @apply border-0 hover:bg-transparent;
+      }
+      & .table-head {
+        @apply font-normal text-muted-foreground;
+      }
+      & :is(.table-head, .table-cell):first-child {
+        @apply ps-4;
+      }
+      & :is(.table-head, .table-cell):last-child {
+        @apply pe-4;
+      }
+      & .table-body .table-cell {
+        @apply border-t bg-card transition-colors;
+      }
+      & .table-body .table-row:hover .table-cell {
+        @apply bg-muted/50;
+      }
+      & .table-body .table-row:has(input[type="checkbox"]:checked):not(:has(input[data-sp-toggle-all])) .table-cell {
+        @apply bg-muted;
+      }
+      & .table-body .table-cell:first-child {
+        @apply border-s;
+      }
+      & .table-body .table-cell:last-child {
+        @apply border-e;
+      }
+      & .table-body .table-row:last-child .table-cell {
+        @apply border-b;
+      }
+      & .table-body .table-row:first-child .table-cell:first-child {
+        @apply rounded-ss-xl;
+      }
+      & .table-body .table-row:first-child .table-cell:last-child {
+        @apply rounded-se-xl;
+      }
+      & .table-body .table-row:last-child .table-cell:first-child {
+        @apply rounded-es-xl;
+      }
+      & .table-body .table-row:last-child .table-cell:last-child {
+        @apply rounded-ee-xl;
+      }
+    }
+  }
+}
+
+@utility tray-footer {
+  @layer l1.l2 {
+    @apply flex min-h-9 items-center justify-between gap-4 px-3 py-1 text-muted-foreground;
+  }
+}

@@ -1,0 +1,530 @@
+---
+title: Tailwind CSS Tray
+description: Beautiful, modern tray component for Tailwind CSS. Use it to group related content on a tinted surface, like a dashboard section or a settings list. Easily customizable.
+---
+
+Use the tray component to group related content on a tinted surface, like a dashboard section, a settings list, or a table. For a single surface with its own header and footer, use a [card](/components/card).
+
+```html preview preset=lg
+<div class="tray w-full max-w-3xl">
+  <div class="tray-header">
+    <h3 class="tray-title">
+      <span class="tray-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+      </span>
+      Sales
+    </h3>
+    <a href="#" class="btn btn-outline btn-sm">
+      View report
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-end"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+    </a>
+  </div>
+  <div class="tray-content sm:grid-cols-2">
+    <div class="card pb-0">
+      <div
+        class="chart grid gap-4"
+        data-sp-value='[{"date":"2026-11-09","revenue":3200},{"date":"2026-11-10","revenue":3837},{"date":"2026-11-11","revenue":3990},{"date":"2026-11-12","revenue":3599},{"date":"2026-11-13","revenue":3977},{"date":"2026-11-14","revenue":3510},{"date":"2026-11-15","revenue":3682},{"date":"2026-11-16","revenue":3870},{"date":"2026-11-17","revenue":3917},{"date":"2026-11-18","revenue":4121},{"date":"2026-11-19","revenue":3985},{"date":"2026-11-20","revenue":4302},{"date":"2026-11-21","revenue":4190},{"date":"2026-11-22","revenue":4456}]'
+      >
+        <div class="card-header">
+          <p class="card-description">Revenue</p>
+          <h4
+            class="card-title chart-value text-2xl tabular-nums"
+            data-sp-field="revenue"
+            data-sp-format='{"style":"currency","currency":"USD","maximumFractionDigits":0}'
+            data-sp-fallback="$54,636"
+          ></h4>
+          <p
+            class="chart-value text-xs text-muted-foreground"
+            data-sp-field="date"
+            data-sp-format='{"month":"short","day":"numeric"}'
+            data-sp-fallback="Last 14 days"
+          ></p>
+        </div>
+        <div class="chart-viewport h-20">
+          <svg class="chart-svg" data-sp-gutter="4 0 0" aria-label="Revenue per day"><path class="chart-area text-chart-2 [fill-opacity:0.15]" data-sp-field="revenue" aria-label="Revenue"></path><path class="chart-line stroke-[1.5] text-chart-2" data-sp-field="revenue"></path><line class="chart-cursor"></line></svg>
+        </div>
+      </div>
+    </div>
+    <div class="card pb-0">
+      <div
+        class="chart grid gap-4"
+        data-sp-value='[{"date":"2026-11-09","orders":38},{"date":"2026-11-10","orders":71},{"date":"2026-11-11","orders":29},{"date":"2026-11-12","orders":55},{"date":"2026-11-13","orders":84},{"date":"2026-11-14","orders":26},{"date":"2026-11-15","orders":22},{"date":"2026-11-16","orders":73},{"date":"2026-11-17","orders":92},{"date":"2026-11-18","orders":58},{"date":"2026-11-19","orders":96},{"date":"2026-11-20","orders":67},{"date":"2026-11-21","orders":40},{"date":"2026-11-22","orders":88}]'
+      >
+        <div class="card-header">
+          <p class="card-description">Orders</p>
+          <h4
+            class="card-title chart-value text-2xl tabular-nums"
+            data-sp-field="orders"
+            data-sp-fallback="839"
+          ></h4>
+          <p
+            class="chart-value text-xs text-muted-foreground"
+            data-sp-field="date"
+            data-sp-format='{"month":"short","day":"numeric"}'
+            data-sp-fallback="Last 14 days"
+          ></p>
+        </div>
+        <div class="chart-viewport h-20">
+          <svg class="chart-svg" data-sp-gutter="4 0 0" aria-label="Orders per day"><path class="chart-bar text-chart-2 transition-opacity data-inactive:opacity-40" data-sp-field="orders" data-sp-radius="2" data-sp-width="60%" aria-label="Orders"></path></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+## Usage
+
+Add the `tray` class to a wrapper and put the cards, list, or table you want to group in a `tray-content`. Add a `tray-header` above it for a title and actions, and a `tray-footer` below it for a note or a link.
+
+| Class              | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| `tray`             | Add to the wrapper, a tinted surface                                        |
+| `tray-sm`          | Add to `tray` for a smaller title and a tighter header and footer           |
+| `tray-header`      | Add to the row above the content, holding a title and actions               |
+| `tray-title`       | Add to a heading in the header                                              |
+| `tray-description` | Add to a paragraph under the title                                          |
+| `tray-icon`        | Add to an element before the title text to frame an icon                    |
+| `tray-content`     | Add to the section holding cards, an item group, a table, or a dialog panel |
+| `tray-footer`      | Add to the row below the content, for a note or a link                      |
+
+```html
+<div class="tray">
+  <div class="tray-header">
+    <h3 class="tray-title">Title</h3>
+  </div>
+  <div class="tray-content">
+    <div class="card">...</div>
+  </div>
+  <div class="tray-footer">Footer</div>
+</div>
+```
+
+## Examples
+
+### Tray with a list
+
+Put an `item-group` in the `tray-content` to join its items into one surface with a line between each, like a settings section.
+
+```html preview preset=base
+<div class="tray w-full max-w-2xl">
+  <div class="tray-header">
+    <div class="grid gap-0.5">
+      <h3 class="tray-title">General</h3>
+      <p class="tray-description">Settings for your organization.</p>
+    </div>
+  </div>
+  <div class="tray-content">
+    <div class="item-group" role="list">
+      <div class="item" role="listitem">
+        <div class="item-content">
+          <div class="item-title">Organization name</div>
+          <div class="item-description">The name your team sees.</div>
+        </div>
+        <div class="item-actions">
+          <input
+            class="input w-56"
+            value="Starting Point"
+            aria-label="Organization name"
+          />
+        </div>
+      </div>
+      <div class="item" role="listitem">
+        <div class="item-content">
+          <div class="item-title">Two-factor authentication</div>
+          <div class="item-description">Require a code on every sign in.</div>
+        </div>
+        <div class="item-actions">
+          <input
+            type="checkbox"
+            role="switch"
+            class="switch"
+            aria-label="Two-factor authentication"
+          />
+        </div>
+      </div>
+      <div class="item" role="listitem">
+        <div class="item-content">
+          <div class="item-title">Delete organization</div>
+          <div class="item-description">
+            Remove the organization and all of its data.
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="btn btn-outline btn-sm text-destructive">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Tray with a card
+
+Put a card in the `tray-content` to lift it. Add a `tray-footer` below for a note or a link, like a sign up link under a sign in form.
+
+```html preview preset=base
+<div class="tray w-full max-w-sm">
+  <div class="tray-content">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Sign in</h3>
+        <p class="card-description">Welcome back. Sign in to continue.</p>
+      </div>
+      <div class="card-content">
+        <form class="field-group">
+          <div class="field">
+            <label class="label" for="tray-signin-email">Email</label>
+            <input
+              class="input"
+              id="tray-signin-email"
+              type="email"
+              placeholder="m@example.com"
+            />
+          </div>
+          <div class="field">
+            <div class="flex items-center">
+              <label class="label" for="tray-signin-password">Password</label>
+              <a
+                href="#"
+                class="ms-auto text-sm underline-offset-4 hover:underline"
+              >
+                Forgot password?
+              </a>
+            </div>
+            <input class="input" id="tray-signin-password" type="password" />
+          </div>
+          <button type="submit" class="btn w-full">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="tray-footer justify-center">
+    <span>
+      Don't have an account?
+      <a
+        href="#"
+        class="font-medium text-foreground underline underline-offset-4"
+      >
+        Sign up
+      </a>
+    </span>
+  </div>
+</div>
+```
+
+### Tray sizes
+
+Add `tray-sm` for a smaller title and a tighter header and footer. Pair it with `card-sm` for compact stats.
+
+```html preview preset=base
+<div class="grid w-full max-w-3xl gap-4 sm:grid-cols-3">
+  <div class="tray tray-sm">
+    <div class="tray-header">
+      <h3 class="tray-title">Signups</h3>
+    </div>
+    <div class="tray-content">
+      <div class="card card-sm">
+        <div class="card-content grid gap-1">
+          <span class="text-2xl font-semibold tabular-nums">1,769</span>
+          <span class="text-muted-foreground">
+            <span class="font-medium text-emerald-600 dark:text-emerald-400">
+              +12.4%
+            </span>
+            vs last month
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tray tray-sm">
+    <div class="tray-header">
+      <h3 class="tray-title">Orders</h3>
+    </div>
+    <div class="tray-content">
+      <div class="card card-sm">
+        <div class="card-content grid gap-1">
+          <span class="text-2xl font-semibold tabular-nums">839</span>
+          <span class="text-muted-foreground">
+            <span class="font-medium text-emerald-600 dark:text-emerald-400">
+              +8.1%
+            </span>
+            vs last month
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tray tray-sm">
+    <div class="tray-header">
+      <h3 class="tray-title">Refunds</h3>
+    </div>
+    <div class="tray-content">
+      <div class="card card-sm">
+        <div class="card-content grid gap-1">
+          <span class="text-2xl font-semibold tabular-nums">12</span>
+          <span class="text-muted-foreground">
+            <span class="font-medium text-red-600 dark:text-red-400">
+              -2.1%
+            </span>
+            vs last month
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Tray with a table
+
+Put a table in the `tray-content` and its rows lift onto one surface while the headings stay on the tint.
+
+```html preview preset=base
+<div class="tray w-full max-w-2xl">
+  <div class="tray-content">
+    <div class="table-container">
+      <table class="table table-lg">
+        <thead class="table-header">
+          <tr class="table-row">
+            <th class="table-head">Customer</th>
+            <th class="table-head">Status</th>
+            <th class="table-head text-end">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <tr class="table-row">
+            <td class="table-cell">
+              <div class="flex items-center gap-3">
+                <span class="avatar">
+                  <img
+                    class="avatar-image"
+                    src="https://images.unsplash.com/photo-1750390200282-bf7f669a9946?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+                    alt=""
+                  />
+                  <span class="avatar-fallback">LN</span>
+                </span>
+                <div class="grid">
+                  <span class="font-medium">Leila Navarro</span>
+                  <span class="text-muted-foreground">leila@example.com</span>
+                </div>
+              </div>
+            </td>
+            <td class="table-cell">
+              <span class="badge badge-outline">
+                <span class="badge-dot bg-emerald-500"></span>
+                Paid
+              </span>
+            </td>
+            <td class="table-cell text-end tabular-nums">$588.00</td>
+          </tr>
+          <tr class="table-row">
+            <td class="table-cell">
+              <div class="flex items-center gap-3">
+                <span class="avatar">
+                  <img
+                    class="avatar-image"
+                    src="https://images.unsplash.com/photo-1750390200293-92d5a788d3a2?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+                    alt=""
+                  />
+                  <span class="avatar-fallback">TM</span>
+                </span>
+                <div class="grid">
+                  <span class="font-medium">Theo Marchetti</span>
+                  <span class="text-muted-foreground">theo@example.com</span>
+                </div>
+              </div>
+            </td>
+            <td class="table-cell">
+              <span class="badge badge-outline">
+                <span class="badge-dot bg-emerald-500"></span>
+                Paid
+              </span>
+            </td>
+            <td class="table-cell text-end tabular-nums">$228.00</td>
+          </tr>
+          <tr class="table-row">
+            <td class="table-cell">
+              <div class="flex items-center gap-3">
+                <span class="avatar">
+                  <img
+                    class="avatar-image"
+                    src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=640&h=640&fit=facearea&facepad=3.2&auto=format&q=100&bg-remove=true&bg=e5e5e5"
+                    alt=""
+                  />
+                  <span class="avatar-fallback">MS</span>
+                </span>
+                <div class="grid">
+                  <span class="font-medium">Maya Santoso</span>
+                  <span class="text-muted-foreground">maya@example.com</span>
+                </div>
+              </div>
+            </td>
+            <td class="table-cell">
+              <span class="badge badge-outline">
+                <span class="badge-dot bg-amber-500"></span>
+                Pending
+              </span>
+            </td>
+            <td class="table-cell text-end tabular-nums">$96.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tray-footer">
+    <span class="flex items-center gap-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Updated just now
+    </span>
+    <a
+      href="#"
+      class="flex items-center gap-1 font-medium text-foreground underline-offset-4 hover:underline"
+    >
+      View all
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+```
+
+### Tray in a dialog
+
+Put a tray in the `dialog` and the `dialog-panel` in its `tray-content` to frame the dialog.
+
+```html preview preset=lg open=.dialog
+<button id="tray-dialog-trigger" class="btn btn-outline">Delete project</button>
+
+<dialog class="dialog" data-sp-toggle="#tray-dialog-trigger">
+  <div class="tray max-w-md">
+    <div class="tray-content">
+      <div class="dialog-panel">
+        <div class="dialog-header">
+          <h2 class="dialog-title">Delete project</h2>
+          <p class="dialog-description">
+            This permanently deletes the project and all of its data. This
+            cannot be undone.
+          </p>
+        </div>
+        <div class="dialog-footer">
+          <button class="btn btn-outline" data-sp-dismiss>Cancel</button>
+          <button class="btn btn-destructive" data-sp-dismiss>
+            Delete project
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+```
+
+### Customize the tray
+
+Change the background and border with utilities, and the spacing, ring, and shadow with the `--tray-*` variables. A translucent white frame suits a light gray page, and a tint without a border gives a flatter look.
+
+```html preview preset=base
+<div class="grid w-full max-w-3xl gap-6 md:grid-cols-2">
+  <div class="p-6">
+    <div
+      class="tray tray-sm bg-background/50 [--tray-ring:var(--border)] [--tray-gap:--spacing(2)]"
+    >
+      <div class="tray-header">
+        <h3 class="tray-title">Frame</h3>
+      </div>
+      <div class="tray-content">
+        <div class="card card-sm">
+          <div class="card-header">
+            <p class="card-description">Active customers</p>
+            <h4 class="card-title text-2xl tabular-nums">842</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-6">
+    <div
+      class="tray tray-sm border-transparent [--tray-padding:--spacing(1)] [--tray-gap:--spacing(1)] [--tray-shadow:var(--shadow-xs)]"
+    >
+      <div class="tray-header">
+        <h3 class="tray-title">Flat</h3>
+      </div>
+      <div class="tray-content">
+        <div class="card card-sm">
+          <div class="card-header">
+            <p class="card-description">Active customers</p>
+            <h4 class="card-title text-2xl tabular-nums">842</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### RTL
+
+Add `dir="rtl"` to any parent element, typically `<html>`, to render right-to-left. See the [RTL guide](/guides/rtl) for details.
+
+```html preview preset=sm dir=rtl
+<div id="tray-rtl-demo" class="tray w-full max-w-xs" dir="rtl">
+  <div class="tray-header">
+    <h3 class="tray-title" data-i18n="label">التسجيلات</h3>
+    <button
+      class="btn btn-ghost btn-icon btn-xs text-muted-foreground"
+      aria-label="More"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    </button>
+  </div>
+  <div class="tray-content">
+    <div class="card">
+      <div class="card-content grid gap-1">
+        <span class="text-3xl font-semibold tabular-nums">1,769</span>
+        <span class="flex items-center gap-1.5 text-muted-foreground">
+          <span class="font-medium text-emerald-600 dark:text-emerald-400">
+            12.4%
+          </span>
+          <span data-i18n="compare">مقارنة بالشهر الماضي</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+  ar: { dir: "rtl", label: "التسجيلات", compare: "مقارنة بالشهر الماضي" },
+  he: { dir: "rtl", label: "הרשמות", compare: "לעומת החודש שעבר" },
+  en: { dir: "ltr", label: "Signups", compare: "vs last month" },
+};
+window.addEventListener("message", (e) => {
+  const t = translations[e.data?.lang];
+  if (e.data?.type !== "sp-language" || !t) return;
+  document.getElementById("tray-rtl-demo").dir = t.dir;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t[el.dataset.i18n];
+  });
+});
+</script>
+```
+
+## CSS variables
+
+Four variables set the spacing of the tray and the ring and shadow of what sits inside. Override them per tray with an arbitrary property, or for the whole app with a CSS rule.
+
+| Variable         | Default               | Description                                                    |
+| ---------------- | --------------------- | -------------------------------------------------------------- |
+| `--tray-padding` | `0.375rem`            | Gap between the tray edge and what sits inside                 |
+| `--tray-gap`     | `0.375rem`            | Gap between the parts and items inside                         |
+| `--tray-ring`    | `--foreground` at 10% | Ring color of the cards, item groups, and dialog panels inside |
+| `--tray-shadow`  | A soft shadow         | Shadow of the cards, item groups, and dialog panels inside     |
+
+```css
+.tray {
+  border-color: transparent;
+  --tray-padding: --spacing(1);
+  --tray-shadow: var(--shadow-xs);
+}
+```

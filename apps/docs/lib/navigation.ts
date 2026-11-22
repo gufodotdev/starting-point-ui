@@ -93,6 +93,7 @@ export const docsNav: NavGroup[] = [
       { title: "Textarea", href: "/components/textarea" },
       { title: "Toast", href: "/components/toast" },
       { title: "Tooltip", href: "/components/tooltip" },
+      { title: "Tray", href: "/components/tray" },
     ],
   },
 ];

@@ -58,6 +58,7 @@
 @import "./textarea.css";
 @import "./toast.css";
 @import "./tooltip.css";
+@import "./tray.css";
 
 @custom-variant dark (&:is(.dark, .dark *));
 
