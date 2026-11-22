@@ -75,17 +75,18 @@ Use the table component to present tabular data on native table elements, like i
 
 Add the classes to their native table elements, and wrap the table in a `table-container` so wide tables scroll horizontally instead of breaking the layout. A `<caption>` needs no class.
 
-| Class             | Description                                       |
-| ----------------- | ------------------------------------------------- |
-| `table-container` | Add to a wrapper `<div>` for horizontal scrolling |
-| `table`           | Add to the `<table>`                              |
-| `table-lg`        | Add to `table` for taller rows                    |
-| `table-header`    | Add to the `<thead>`                              |
-| `table-body`      | Add to the `<tbody>`                              |
-| `table-footer`    | Add to the `<tfoot>`                              |
-| `table-row`       | Add to each `<tr>`                                |
-| `table-head`      | Add to each `<th>`                                |
-| `table-cell`      | Add to each `<td>`                                |
+| Class             | Description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| `table-container` | Add to a wrapper `<div>` for horizontal scrolling            |
+| `table`           | Add to the `<table>`                                         |
+| `table-lg`        | Add to `table` for taller rows                               |
+| `table-detached`  | Add to `table` to split every row into its own rounded strip |
+| `table-header`    | Add to the `<thead>`                                         |
+| `table-body`      | Add to the `<tbody>`                                         |
+| `table-footer`    | Add to the `<tfoot>`                                         |
+| `table-row`       | Add to each `<tr>`                                           |
+| `table-head`      | Add to each `<th>`                                           |
+| `table-cell`      | Add to each `<td>`                                           |
 
 ```html
 <div class="table-container">
@@ -334,6 +335,51 @@ Stripe alternating rows with an `odd:` utility.
         <td class="table-cell">Paid</td>
         <td class="table-cell">PayPal</td>
         <td class="table-cell text-right">$550.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+### Detached table rows
+
+Add `table-detached` to split every row, the header row included, into its own rounded strip.
+
+```html preview preset=base
+<div class="table-container">
+  <table class="table table-lg table-detached">
+    <thead class="table-header">
+      <tr class="table-row">
+        <th class="table-head w-[100px]">Invoice</th>
+        <th class="table-head">Status</th>
+        <th class="table-head">Method</th>
+        <th class="table-head text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV001</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$250.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV002</td>
+        <td class="table-cell">Pending</td>
+        <td class="table-cell">PayPal</td>
+        <td class="table-cell text-right">$150.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV003</td>
+        <td class="table-cell">Unpaid</td>
+        <td class="table-cell">Bank Transfer</td>
+        <td class="table-cell text-right">$350.00</td>
+      </tr>
+      <tr class="table-row">
+        <td class="table-cell font-medium">INV004</td>
+        <td class="table-cell">Paid</td>
+        <td class="table-cell">Credit Card</td>
+        <td class="table-cell text-right">$450.00</td>
       </tr>
     </tbody>
   </table>

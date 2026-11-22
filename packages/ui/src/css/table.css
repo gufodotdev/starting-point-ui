@@ -1,6 +1,6 @@
 @utility table-container {
   @layer l1.l2 {
-    @apply relative w-full overflow-x-auto;
+    @apply relative w-full overflow-x-auto has-[>.table-detached]:overflow-y-hidden;
   }
 }
 
@@ -10,6 +10,34 @@
 
     & > caption {
       @apply mt-4 text-sm text-muted-foreground;
+    }
+  }
+}
+
+@utility table-detached {
+  @layer l1 {
+    @apply -my-1.5 border-separate border-spacing-y-1.5;
+
+    & .table-row {
+      @apply border-0 hover:bg-transparent;
+    }
+    & .table-head {
+      @apply font-normal text-muted-foreground;
+    }
+    & :is(.table-head, .table-cell) {
+      @apply border-y bg-card transition-colors;
+    }
+    & :is(.table-head, .table-cell):first-child {
+      @apply rounded-s-lg border-s ps-4;
+    }
+    & :is(.table-head, .table-cell):last-child {
+      @apply rounded-e-lg border-e pe-4;
+    }
+    & .table-body .table-row:hover .table-cell {
+      @apply bg-muted/50;
+    }
+    & .table-body .table-row:has(input[type="checkbox"]:checked):not(:has(input[data-sp-toggle-all])) .table-cell {
+      @apply bg-muted;
     }
   }
 }
